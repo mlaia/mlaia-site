@@ -355,16 +355,16 @@ footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
 .tb-strip-title::before,.tb-strip-title::after{content:'';display:block;width:48px;height:1px;background:rgba(0,180,216,.35)}
 /* Primary tier — large logo cards */
 .tb-primary{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:12px;max-width:1040px;margin:0 auto 20px}
-.tb-logo-item{display:flex;align-items:center;justify-content:center;padding:22px 28px;flex:1;min-width:120px;max-width:160px;background:rgba(255,255,255,.97);border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.25),0 1px 4px rgba(0,0,0,.15);transition:transform .25s,box-shadow .25s;cursor:default}
+.tb-logo-item{display:flex;align-items:center;justify-content:center;padding:22px 28px;flex:1;min-width:120px;max-width:160px;background:rgba(255,255,255,.97)!important;border-radius:12px!important;box-shadow:0 4px 24px rgba(0,0,0,.25),0 1px 4px rgba(0,0,0,.15);transition:transform .25s,box-shadow .25s;cursor:default}
 .tb-logo-item:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
-.tb-logo-item img{height:64px;width:auto;max-width:120px;object-fit:contain;display:block}
+.tb-logo-item img,.tb-strip .tb-primary .tb-logo-item img{height:64px!important;width:auto!important;max-width:120px!important;object-fit:contain!important;display:block!important;filter:none!important;opacity:1!important}
 /* Secondary tier — smaller color cards */
 .tb-secondary{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:8px;max-width:1040px;margin:0 auto}
-.tb-logo-sm{display:flex;align-items:center;justify-content:center;padding:14px 18px;flex:1;min-width:80px;max-width:110px;background:rgba(255,255,255,.88);border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.2);transition:transform .25s,box-shadow .25s,background .25s;cursor:default}
-.tb-logo-sm:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.28);background:rgba(255,255,255,.98)}
-.tb-logo-sm img{height:32px;width:auto;max-width:80px;object-fit:contain;display:block}
+.tb-logo-sm{display:flex;align-items:center;justify-content:center;padding:14px 18px;flex:1;min-width:80px;max-width:110px;background:rgba(255,255,255,.88)!important;border-radius:8px!important;box-shadow:0 2px 12px rgba(0,0,0,.2);transition:transform .25s,box-shadow .25s,background .25s;cursor:default}
+.tb-logo-sm:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.28);background:rgba(255,255,255,.98)!important}
+.tb-logo-sm img,.tb-strip .tb-secondary .tb-logo-sm img{height:32px!important;width:auto!important;max-width:80px!important;object-fit:contain!important;display:block!important;filter:none!important;opacity:1!important}
 @media(max-width:1200px){.tb-strip{padding:48px 40px 40px}.tb-logo-item{padding:18px 22px;min-width:100px}.tb-logo-sm{padding:12px 14px;min-width:70px}}
-@media(max-width:768px){.tb-strip{padding:36px 20px 32px}.tb-primary{gap:8px}.tb-secondary{gap:6px}.tb-logo-item{flex:0 0 calc(33.333% - 8px);max-width:none;min-width:0;padding:16px 14px;border-radius:10px}.tb-logo-item img{height:48px;max-width:90px}.tb-logo-sm{flex:0 0 calc(25% - 6px);max-width:none;min-width:0;padding:10px 8px}.tb-logo-sm img{height:24px;max-width:64px}}
+@media(max-width:768px){.tb-strip{padding:36px 20px 32px}.tb-primary{gap:8px}.tb-secondary{gap:6px}.tb-logo-item{flex:0 0 calc(33.333% - 8px);max-width:none;min-width:0;padding:16px 14px;border-radius:10px}.tb-logo-item img{height:48px!important;max-width:90px!important}.tb-logo-sm{flex:0 0 calc(25% - 6px);max-width:none;min-width:0;padding:10px 8px}.tb-logo-sm img{height:24px!important;max-width:64px!important}}
 
 /* ── ANIMATION FIXES ── */
 .hero-kicker,.hero-stock-chart{animation-delay:0s!important}
@@ -425,7 +425,7 @@ h1{animation-delay:.05s!important}
     <h1>Your Data,<br><em>Our</em> Expertise</h1>
     <p class="hero-sub">From raw signals to enterprise decisions — we transform complex data into production-ready intelligence that drives real outcomes.</p>
     <div class="hero-actions">
-      <a href="#services" class="btn-p">
+      <a href="#domains" class="btn-p">
         Explore Solutions
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -461,13 +461,13 @@ h1{animation-delay:.05s!important}
   </div>
   <!-- Primary tier: major enterprise clients -->
   <div class="tb-primary">
-    <div class="tb-logo-item"><img src="assets/logos/google.jpg" alt="Google" loading="lazy"></div>
-    <div class="tb-logo-item"><img src="assets/logos/elal.png" alt="EL AL" loading="lazy"></div>
-    <div class="tb-logo-item"><img src="assets/logos/nice.webp" alt="NICE" loading="lazy"></div>
-    <div class="tb-logo-item"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod" loading="lazy"></div>
-    <div class="tb-logo-item"><img src="assets/logos/commit.png" alt="Commit" loading="lazy"></div>
-    <div class="tb-logo-item"><img src="assets/logos/mod.png" alt="Ministry of Defense" loading="lazy"></div>
-    <div class="tb-logo-item"><img src="assets/logos/partner.png" alt="Partner" loading="lazy"></div>
+    <div class="tb-logo-item"><img src="assets/logos/google.jpg" alt="Google"></div>
+    <div class="tb-logo-item"><img src="assets/logos/elal.png" alt="EL AL"></div>
+    <div class="tb-logo-item"><img src="assets/logos/nice.webp" alt="NICE"></div>
+    <div class="tb-logo-item"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod"></div>
+    <div class="tb-logo-item"><img src="assets/logos/commit.png" alt="Commit"></div>
+    <div class="tb-logo-item"><img src="assets/logos/mod.png" alt="Ministry of Defense"></div>
+    <div class="tb-logo-item"><img src="assets/logos/partner.png" alt="Partner"></div>
   </div>
   <!-- Secondary tier: other clients -->
   <div class="tb-secondary">
