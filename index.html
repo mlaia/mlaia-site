@@ -216,19 +216,27 @@ h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weight:
 /* ── BLOG ── */
 .blog{padding:110px 64px;background:var(--bg)}
 .bl-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
-.bl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.bl-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column;text-decoration:none}
-.bl-card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(10,22,40,.09);border-color:transparent}
-.bl-img{height:148px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:flex-end;padding:14px}
-.bl-viz{width:100%;height:100%;position:absolute;inset:0;display:flex;align-items:flex-end;gap:2px;padding:12px}
-.bl-bar{border-radius:2px 2px 0 0;flex:1;transition:height .5s ease}
-.bl-body{padding:24px 24px 20px;flex:1;display:flex;flex-direction:column}
-.bl-tag{font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:9px;display:flex;align-items:center;gap:7px}
-.bl-tag::before{content:'';display:block;width:12px;height:2px;background:var(--accent);border-radius:2px}
-.bl-card h3{font-family:'Syne',sans-serif;font-size:.93rem;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:9px}
-.bl-card p{font-size:.8rem;line-height:1.64;color:var(--muted);font-weight:300;flex:1}
-.bl-rm{margin-top:16px;font-size:.74rem;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:gap .2s}
-.bl-card:hover .bl-rm{gap:9px}
+.bl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.bl-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .35s,box-shadow .35s,border-color .35s;display:flex;flex-direction:column;text-decoration:none;position:relative}
+.bl-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .35s;z-index:2}
+.bl-card:hover{transform:translateY(-6px);box-shadow:0 22px 52px rgba(10,22,40,.11);border-color:transparent}
+.bl-card:hover::before{opacity:1}
+.bl-card.bc-infra::before{background:linear-gradient(90deg,#0057ff,#00b4d8)}
+.bl-card.bc-sales::before{background:linear-gradient(90deg,#00b4d8,#0057ff)}
+.bl-card.bc-llm::before{background:linear-gradient(90deg,#7c3aed,#ec4899)}
+.bl-card.bc-sig::before{background:linear-gradient(90deg,#0057ff,#00b4d8)}
+.bl-card.bc-med::before{background:linear-gradient(90deg,#10b981,#00b4d8)}
+.bl-card.bc-bi::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.bl-img{height:160px;position:relative;overflow:hidden;flex-shrink:0}
+.bl-canvas{width:100%;height:100%;display:block;position:absolute;inset:0}
+.bl-img-label{position:absolute;bottom:12px;left:14px;font-family:'Syne',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);z-index:1;pointer-events:none}
+.bl-body{padding:22px 22px 18px;flex:1;display:flex;flex-direction:column}
+.bl-tag{font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.bl-tag::before{content:'';display:block;width:12px;height:2px;background:currentColor;border-radius:2px}
+.bl-card h3{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy);line-height:1.42;margin-bottom:8px}
+.bl-card p{font-size:.79rem;line-height:1.66;color:var(--muted);font-weight:300;flex:1}
+.bl-rm{margin-top:14px;font-size:.72rem;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:gap .25s,color .25s}
+.bl-card:hover .bl-rm{gap:10px}
 
 /* ── TESTIMONIALS ── */
 .testi{padding:110px 64px;background:var(--white)}
@@ -341,19 +349,29 @@ footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
 /* ── ABOUT RIGHT LAYOUT ── */
 
 /* ── TRUSTED BY STRIP ── */
-.tb-strip{background:var(--navy);padding:0;border-bottom:1px solid rgba(255,255,255,.07)}
-.tb-strip-inner{display:flex;align-items:stretch;padding:0 64px}
-.tb-strip-label{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);font-weight:700;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;padding:0 28px 0 0;margin-right:28px;border-right:1px solid rgba(255,255,255,.08)}
-.tb-strip-logos{display:flex;align-items:stretch;flex:1;justify-content:space-between}
-.tb-logo-item{display:flex;align-items:center;justify-content:center;padding:18px 16px;flex:1;position:relative;transition:background .2s;cursor:default}
-.tb-logo-item::after{content:'';position:absolute;right:0;top:20%;height:60%;width:1px;background:rgba(255,255,255,.07)}
-.tb-logo-item:last-child::after{display:none}
-.tb-logo-item:hover{background:rgba(255,255,255,.03)}
-.tb-logo-text{font-family:'Syne',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);white-space:nowrap;text-align:center;line-height:1.2;transition:color .2s}
-.tb-logo-item:hover .tb-logo-text{color:rgba(255,255,255,.55)}
-.tb-logo-sub{display:block;font-family:'DM Sans',sans-serif;font-size:.52rem;letter-spacing:.08em;color:rgba(255,255,255,.14);font-weight:400;margin-top:2px;text-transform:uppercase}
-@media(max-width:1200px){.tb-logo-item{padding:14px 10px}.tb-logo-text{font-size:.6rem;letter-spacing:.07em}}
-@media(max-width:768px){.tb-strip-inner{flex-direction:column;padding:16px 24px;gap:12px}.tb-strip-label{border-right:none;border-bottom:1px solid rgba(255,255,255,.08);padding:0 0 10px;margin-right:0;margin-bottom:0;justify-content:center}.tb-strip-logos{flex-wrap:wrap;gap:0}.tb-logo-item{flex:0 0 33.333%;padding:10px 8px}.tb-logo-item::after{display:none}.tb-logo-text{font-size:.58rem}}
+.tb-strip{background:var(--navy);padding:56px 64px 48px;border-bottom:1px solid rgba(255,255,255,.07)}
+.tb-strip-head{text-align:center;margin-bottom:40px}
+.tb-strip-title{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--accent2);font-weight:700;display:flex;align-items:center;justify-content:center;gap:14px}
+.tb-strip-title::before,.tb-strip-title::after{content:'';display:block;width:40px;height:1px;background:rgba(0,180,216,.3)}
+/* Primary tier */
+.tb-primary{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;max-width:960px;margin:0 auto 1px}
+.tb-logo-item{display:flex;align-items:center;justify-content:center;padding:22px 28px;flex:1;min-width:120px;position:relative;transition:background .25s;cursor:default;border-right:1px solid rgba(255,255,255,.06)}
+.tb-logo-item:last-child{border-right:none}
+.tb-logo-item:hover{background:rgba(255,255,255,.04)}
+.tb-logo-item img{height:34px;width:auto;max-width:110px;object-fit:contain;filter:grayscale(1) brightness(1.8) invert(0);opacity:.45;transition:opacity .3s,filter .3s}
+.tb-logo-item:hover img{opacity:1;filter:grayscale(0) brightness(1)}
+/* Secondary tier */
+.tb-secondary{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;border:1px solid rgba(255,255,255,.05);border-top:none;border-radius:0 0 10px 10px;overflow:hidden;max-width:960px;margin:0 auto;background:rgba(255,255,255,.015)}
+.tb-logo-sm{display:flex;align-items:center;justify-content:center;padding:16px 20px;flex:1;min-width:90px;position:relative;transition:background .25s;cursor:default;border-right:1px solid rgba(255,255,255,.05)}
+.tb-logo-sm:last-child{border-right:none}
+.tb-logo-sm:hover{background:rgba(255,255,255,.03)}
+.tb-logo-sm img{height:24px;width:auto;max-width:80px;object-fit:contain;filter:grayscale(1) brightness(1.8);opacity:.3;transition:opacity .3s,filter .3s}
+.tb-logo-sm:hover img{opacity:.8;filter:grayscale(0) brightness(1)}
+/* Special treatment for dark logos that need inversion */
+.tb-invert img{filter:grayscale(1) brightness(10) !important;opacity:.35 !important}
+.tb-invert:hover img{filter:grayscale(0) brightness(1) invert(0) !important;opacity:.9 !important}
+@media(max-width:1200px){.tb-strip{padding:40px 40px 32px}.tb-logo-item{padding:18px 20px;min-width:100px}.tb-logo-sm{padding:12px 14px;min-width:70px}}
+@media(max-width:768px){.tb-strip{padding:32px 20px}.tb-primary{border-radius:8px}.tb-secondary{border-radius:0 0 8px 8px}.tb-logo-item{flex:0 0 33.333%;padding:16px 12px;min-width:0;border-right:1px solid rgba(255,255,255,.06)}.tb-logo-item img{height:26px;max-width:80px}.tb-logo-sm{flex:0 0 25%;padding:12px 8px;min-width:0}.tb-logo-sm img{height:18px;max-width:60px}}
 
 /* ── ANIMATION FIXES ── */
 .hero-kicker,.hero-stock-chart{animation-delay:0s!important}
@@ -445,54 +463,35 @@ h1{animation-delay:.05s!important}
 
 <!-- TRUSTED BY -->
 <section class="tb-strip" aria-label="Trusted by clients">
-  <div class="tb-strip-inner">
-    <span class="tb-strip-label">Trusted By</span>
-    <div class="tb-strip-logos">
-      <div class="tb-logo-item">
-        <svg width="64" height="28" viewBox="0 0 64 28" aria-label="Google" role="img">
-          <text x="32" y="19" font-family="Syne,sans-serif" font-size="13" font-weight="700" fill="rgba(255,255,255,0.28)" text-anchor="middle" letter-spacing="1.5">GOOGLE</text>
-        </svg>
-      </div>
-      <div class="tb-logo-item">
-        <svg width="52" height="28" viewBox="0 0 52 28" aria-label="EL AL" role="img">
-          <text x="26" y="19" font-family="Syne,sans-serif" font-size="13" font-weight="700" fill="rgba(255,255,255,0.28)" text-anchor="middle" letter-spacing="2">EL AL</text>
-        </svg>
-      </div>
-      <div class="tb-logo-item">
-        <svg width="96" height="32" viewBox="0 0 96 32" aria-label="Ministry of Defense" role="img">
-          <text x="48" y="14" font-family="Syne,sans-serif" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.28)" text-anchor="middle" letter-spacing="1">MINISTRY OF</text>
-          <text x="48" y="26" font-family="Syne,sans-serif" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.28)" text-anchor="middle" letter-spacing="1">DEFENSE</text>
-        </svg>
-      </div>
-      <div class="tb-logo-item">
-        <svg width="96" height="32" viewBox="0 0 96 32" aria-label="Assuta Ashdod" role="img">
-          <text x="48" y="14" font-family="Syne,sans-serif" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.28)" text-anchor="middle" letter-spacing="1">ASSUTA</text>
-          <text x="48" y="26" font-family="Syne,sans-serif" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.28)" text-anchor="middle" letter-spacing="1">ASHDOD</text>
-        </svg>
-      </div>
-      <div class="tb-logo-item">
-        <svg width="72" height="28" viewBox="0 0 72 28" aria-label="RETISPEC" role="img">
-          <text x="36" y="19" font-family="Syne,sans-serif" font-size="12" font-weight="700" fill="rgba(255,255,255,0.28)" text-anchor="middle" letter-spacing="1.5">RETISPEC</text>
-        </svg>
-      </div>
-      <div class="tb-logo-item">
-        <svg width="76" height="28" viewBox="0 0 76 28" aria-label="Silentium" role="img">
-          <text x="38" y="19" font-family="Syne,sans-serif" font-size="12" font-weight="700" fill="rgba(255,255,255,0.28)" text-anchor="middle" letter-spacing="1.5">SILENTIUM</text>
-        </svg>
-      </div>
-      <div class="tb-logo-item">
-        <svg width="72" height="32" viewBox="0 0 72 32" aria-label="NICE Systems" role="img">
-          <text x="36" y="14" font-family="Syne,sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,0.28)" text-anchor="middle" letter-spacing="2">NICE</text>
-          <text x="36" y="27" font-family="Syne,sans-serif" font-size="8" font-weight="400" fill="rgba(255,255,255,0.18)" text-anchor="middle" letter-spacing="1">SYSTEMS</text>
-        </svg>
-      </div>
-      <div class="tb-logo-item">
-        <svg width="80" height="32" viewBox="0 0 80 32" aria-label="Partner Telecom" role="img">
-          <text x="40" y="14" font-family="Syne,sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.28)" text-anchor="middle" letter-spacing="1">PARTNER</text>
-          <text x="40" y="27" font-family="Syne,sans-serif" font-size="8" font-weight="400" fill="rgba(255,255,255,0.18)" text-anchor="middle" letter-spacing="1">TELECOM</text>
-        </svg>
-      </div>
-    </div>
+  <div class="tb-strip-head">
+    <div class="tb-strip-title">Trusted By</div>
+  </div>
+  <!-- Primary tier: major enterprise clients -->
+  <div class="tb-primary">
+    <div class="tb-logo-item"><img src="assets/logos/google.jpg" alt="Google" loading="lazy"></div>
+    <div class="tb-logo-item"><img src="assets/logos/elal.png" alt="EL AL" loading="lazy"></div>
+    <div class="tb-logo-item"><img src="assets/logos/nice.webp" alt="NICE" loading="lazy"></div>
+    <div class="tb-logo-item"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod" loading="lazy"></div>
+    <div class="tb-logo-item"><img src="assets/logos/commit.png" alt="Commit" loading="lazy"></div>
+    <div class="tb-logo-item"><img src="assets/logos/mod.png" alt="Ministry of Defense" loading="lazy"></div>
+    <div class="tb-logo-item"><img src="assets/logos/partner.png" alt="Partner" loading="lazy"></div>
+  </div>
+  <!-- Secondary tier: other clients -->
+  <div class="tb-secondary">
+    <div class="tb-logo-sm"><img src="assets/logos/seegnal.png" alt="Seegnal" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/lendlord.png" alt="Lendlord" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/patensee.webp" alt="PatenSee" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/walnut.png" alt="Walnut" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/appscent.jpg" alt="OffRa Health" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/dquality.png" alt="DQuality" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/effie.png" alt="Effie" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/ibtikar.jpg" alt="Ibtikar BaseCamp" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/innoccu.jpg" alt="Innoccu" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/medx.jpg" alt="MedX Xelerator" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/swiftduct.jpg" alt="SwiftDuct" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/alut.png" alt="ALUT" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/akim.png" alt="Akim" loading="lazy"></div>
+    <div class="tb-logo-sm"><img src="assets/logos/offra.jpg" alt="OffRa Health" loading="lazy"></div>
   </div>
 </section>
 
@@ -650,29 +649,29 @@ h1{animation-delay:.05s!important}
 <section class="blog" id="blog">
   <div class="bl-hdr rv"><div><div class="sl">Insights</div><h2>From Our Blog</h2></div><a href="blog.html" class="btn-p" style="background:var(--navy)">All Posts →</a></div>
   <div class="bl-grid">
-    <a href="blog-slurm.html" class="bl-card rv">
-      <div class="bl-img" style="background:linear-gradient(135deg,#0a1628,#0057ff22)"><div class="bl-viz" id="bv1"></div></div>
+    <a href="blog-slurm.html" class="bl-card bc-infra rv">
+      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)"><canvas class="bl-canvas" id="bv1"></canvas><span class="bl-img-label">Infrastructure</span></div>
       <div class="bl-body"><div class="bl-tag">Infrastructure</div><h3>Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?</h3><p>A deep dive into the job scheduler powering the world's most advanced AI compute clusters.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
-    <a href="blog-sales-ai.html" class="bl-card rv d1">
-      <div class="bl-img" style="background:linear-gradient(135deg,#0a1e1e,#10b98122)"><div class="bl-viz" id="bv2"></div></div>
+    <a href="blog-sales-ai.html" class="bl-card bc-sales rv d1">
+      <div class="bl-img" style="background:linear-gradient(160deg,#071818 0%,#0a1e1e 60%,#0d2828 100%)"><canvas class="bl-canvas" id="bv2"></canvas><span class="bl-img-label">Case Study</span></div>
       <div class="bl-body"><div class="bl-tag">Case Study</div><h3>Transforming Sales with AI: A Success Story with Israel's Leading Telecom</h3><p>Machine learning applied to the full sales pipeline, driving measurable ROI.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
-    <a href="blog-llms.html" class="bl-card rv d2">
-      <div class="bl-img" style="background:linear-gradient(135deg,#1a0a28,#ec489922)"><div class="bl-viz" id="bv3"></div></div>
-      <div class="bl-body"><div class="bl-tag">LLMs &amp; GenAI</div><h3>Harness Your Data's Potential with Large Language Models</h3><p>How LLMs unlock value from unstructured text, documents and knowledge bases.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <a href="blog-llms.html" class="bl-card bc-llm rv d2">
+      <div class="bl-img" style="background:linear-gradient(160deg,#120820 0%,#1a0a28 60%,#200d30 100%)"><canvas class="bl-canvas" id="bv3"></canvas><span class="bl-img-label">LLMs &amp; GenAI</span></div>
+      <div class="bl-body"><div class="bl-tag" style="color:#7c3aed">LLMs &amp; GenAI</div><h3>Harness Your Data's Potential with Large Language Models</h3><p>How LLMs unlock value from unstructured text, documents and knowledge bases.</p><div class="bl-rm" style="color:#7c3aed">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
-    <a href="blog-signal.html" class="bl-card rv d3">
-      <div class="bl-img" style="background:linear-gradient(135deg,#0a1628,#0057ff33)"><div class="bl-viz" id="bv4"></div></div>
+    <a href="blog-signal.html" class="bl-card bc-sig rv d3">
+      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)"><canvas class="bl-canvas" id="bv4"></canvas><span class="bl-img-label">Signal &amp; Audio</span></div>
       <div class="bl-body"><div class="bl-tag" style="color:var(--accent)">Signal &amp; Audio</div><h3>From Waveforms to Intelligence: Real-Time Signal Processing with Neural DSP</h3><p>How we combine classical DSP with deep learning for real-time signal intelligence.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
-    <a href="blog-medical.html" class="bl-card rv d3">
-      <div class="bl-img" style="background:linear-gradient(135deg,#0a1e1e,#10b98133)"><div class="bl-viz" id="bv5"></div></div>
-      <div class="bl-body"><div class="bl-tag" style="color:var(--c-medical)">Healthcare AI</div><h3>Building HIPAA-Compliant AI for Clinical Environments</h3><p>Lessons from deploying production AI systems for hospitals and medical device companies.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <a href="blog-medical.html" class="bl-card bc-med rv d3">
+      <div class="bl-img" style="background:linear-gradient(160deg,#071812 0%,#0a1e16 60%,#0d2a1e 100%)"><canvas class="bl-canvas" id="bv5"></canvas><span class="bl-img-label">Healthcare AI</span></div>
+      <div class="bl-body"><div class="bl-tag" style="color:var(--c-medical)">Healthcare AI</div><h3>Building HIPAA-Compliant AI for Clinical Environments</h3><p>Lessons from deploying production AI systems for hospitals and medical device companies.</p><div class="bl-rm" style="color:var(--c-medical)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
-    <a href="blog-bi.html" class="bl-card rv d3">
-      <div class="bl-img" style="background:linear-gradient(135deg,#1e1400,#f59e0b33)"><div class="bl-viz" id="bv6"></div></div>
-      <div class="bl-body"><div class="bl-tag" style="color:var(--c-bi)">Business Intelligence</div><h3>Enterprise BI Meets ML: Beyond Dashboards to Decision Intelligence</h3><p>From descriptive to prescriptive analytics — unlocking real ROI from your data.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <a href="blog-bi.html" class="bl-card bc-bi rv d3">
+      <div class="bl-img" style="background:linear-gradient(160deg,#181000 0%,#1e1400 60%,#281800 100%)"><canvas class="bl-canvas" id="bv6"></canvas><span class="bl-img-label">Business Intelligence</span></div>
+      <div class="bl-body"><div class="bl-tag" style="color:var(--c-bi)">Business Intelligence</div><h3>Enterprise BI Meets ML: Beyond Dashboards to Decision Intelligence</h3><p>From descriptive to prescriptive analytics — unlocking real ROI from your data.</p><div class="bl-rm" style="color:var(--c-bi)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
   </div>
 </section>
@@ -1244,18 +1243,267 @@ makeEQ('c-sig','rgba(0,180,216,.9)','rgba(0,87,255,.65)','rgba(0,220,255,.8)');
 })();
 
 /* Blog mini viz */
-function makeBV(id,pal){
-  const el=document.getElementById(id);if(!el)return;
-  const N=20;
-  const bars=Array.from({length:N},(_,i)=>{const b=document.createElement('div');b.className='bl-bar';b.style.cssText=`height:${14+Math.random()*58}%;background:${pal[i%pal.length]};`;el.appendChild(b);return b});
-  setInterval(()=>bars.forEach(b=>b.style.height=(12+Math.random()*62)+'%'),650);
-}
-makeBV('bv1',['rgba(0,87,255,.65)','rgba(0,87,255,.38)','rgba(0,180,216,.55)']);
-makeBV('bv2',['rgba(0,180,216,.65)','rgba(0,180,216,.38)','rgba(0,87,255,.48)']);
-makeBV('bv3',['rgba(124,58,237,.65)','rgba(0,87,255,.45)','rgba(236,72,153,.45)']);
-makeBV('bv4',['rgba(0,87,255,.65)','rgba(0,180,216,.55)','rgba(0,87,255,.35)']);
-makeBV('bv5',['rgba(16,185,129,.65)','rgba(0,180,216,.45)','rgba(16,185,129,.35)']);
-makeBV('bv6',['rgba(245,158,11,.65)','rgba(251,191,36,.55)','rgba(245,158,11,.35)']);
+/* ══ BLOG CARD CANVAS ANIMATIONS ══ */
+(function(){
+  function initBlogCanvas(id,drawFn){
+    const c=document.getElementById(id);if(!c)return;
+    function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight}
+    rs();addEventListener('resize',rs);
+    let t=0;
+    (function loop(){t+=.016;drawFn(c,c.getContext('2d'),t);requestAnimationFrame(loop)})();
+  }
+
+  /* bv1 — Slurm: compute node grid with job scheduling */
+  initBlogCanvas('bv1',function(c,ctx,t){
+    const W=c.width,H=c.height;
+    ctx.clearRect(0,0,W,H);
+    const cols=8,rows=4,nw=18,nh=12,gx=(W-(cols*nw))/(cols+1),gy=(H-(rows*nh))/(rows+1);
+    // Grid lines
+    ctx.strokeStyle='rgba(0,87,255,.06)';ctx.lineWidth=.5;
+    for(let x=0;x<W;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    for(let y=0;y<H;y+=14){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    // Nodes
+    for(let r=0;r<rows;r++)for(let cl=0;cl<cols;cl++){
+      const nx=gx+(cl*(nw+gx))+nw/2,ny=gy+(r*(nh+gy))+nh/2;
+      const phase=(r*cols+cl)*.38+t*1.1;
+      const busy=Math.sin(phase)>.2;
+      const alpha=busy?.85:.28;
+      const col=busy?'rgba(0,180,216,':'rgba(0,87,255,';
+      ctx.beginPath();ctx.roundRect(nx-nw/2,ny-nh/2,nw,nh,2);
+      ctx.fillStyle=col+alpha+')';ctx.fill();
+      if(busy){ctx.strokeStyle='rgba(0,180,216,.5)';ctx.lineWidth=1;ctx.stroke();}
+    }
+    // Flowing job packet
+    const jp=((t*.18)%1)*W;
+    const jy=H*.5;
+    const jg=ctx.createRadialGradient(jp,jy,0,jp,jy,10);
+    jg.addColorStop(0,'rgba(0,180,216,.9)');jg.addColorStop(1,'rgba(0,180,216,0)');
+    ctx.beginPath();ctx.arc(jp,jy,4,0,Math.PI*2);ctx.fillStyle='rgba(0,180,216,.95)';ctx.fill();
+    ctx.beginPath();ctx.arc(jp,jy,10,0,Math.PI*2);ctx.fillStyle=jg;ctx.fill();
+    // Label
+    ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='rgba(0,180,216,.6)';ctx.textAlign='left';
+    ctx.fillText('SLURM scheduler · '+Math.floor(rows*cols*(.5+.5*Math.sin(t*.4)))+' nodes active',8,H-8);
+  });
+
+  /* bv2 — Sales AI: upward trend with forecast shading */
+  initBlogCanvas('bv2',function(c,ctx,t){
+    const W=c.width,H=c.height;
+    ctx.clearRect(0,0,W,H);
+    const pts=12;
+    const data=Array.from({length:pts},(_,i)=>{
+      const trend=.12+i/pts*.6;
+      const noise=Math.sin(i*1.3+t*.18)*.06+Math.cos(i*.8+t*.12)*.04;
+      return Math.max(.08,Math.min(.88,trend+noise));
+    });
+    // Grid
+    ctx.strokeStyle='rgba(0,180,216,.07)';ctx.lineWidth=.5;
+    for(let y=0;y<H;y+=16){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    // Forecast zone (last 3 pts)
+    const fStart=pts-3;
+    ctx.beginPath();
+    ctx.moveTo(fStart/(pts-1)*W,H-data[fStart]*H);
+    for(let i=fStart;i<pts;i++)ctx.lineTo(i/(pts-1)*W,H-data[i]*H);
+    ctx.lineTo(W,H);ctx.lineTo(fStart/(pts-1)*W,H);ctx.closePath();
+    ctx.fillStyle='rgba(0,180,216,.08)';ctx.fill();
+    // Area fill
+    const ag=ctx.createLinearGradient(0,0,0,H);
+    ag.addColorStop(0,'rgba(0,180,216,.25)');ag.addColorStop(1,'rgba(0,180,216,.02)');
+    ctx.beginPath();ctx.moveTo(0,H);
+    for(let i=0;i<pts;i++)ctx.lineTo(i/(pts-1)*W,H-data[i]*H);
+    ctx.lineTo(W,H);ctx.closePath();ctx.fillStyle=ag;ctx.fill();
+    // Line
+    ctx.beginPath();ctx.strokeStyle='rgba(0,180,216,.9)';ctx.lineWidth=2;ctx.lineJoin='round';
+    for(let i=0;i<fStart+1;i++){const x=i/(pts-1)*W,y=H-data[i]*H;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+    ctx.stroke();
+    // Dashed forecast line
+    ctx.setLineDash([4,3]);ctx.strokeStyle='rgba(0,180,216,.5)';ctx.lineWidth=1.5;
+    ctx.beginPath();
+    for(let i=fStart;i<pts;i++){const x=i/(pts-1)*W,y=H-data[i]*H;i===fStart?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+    ctx.stroke();ctx.setLineDash([]);
+    // Tip dot
+    const lx=W,ly=H-data[pts-1]*H;
+    ctx.beginPath();ctx.arc(lx,ly,3.5,0,Math.PI*2);ctx.fillStyle='rgba(0,180,216,.95)';ctx.fill();
+    ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='rgba(0,180,216,.75)';ctx.textAlign='right';
+    ctx.fillText('+' + (data[pts-1]*120+30).toFixed(0)+'% ROI',W-6,ly-6);
+    ctx.textAlign='left';ctx.fillStyle='rgba(0,180,216,.45)';
+    ctx.fillText('Sales forecast · AI-driven pipeline',8,H-8);
+  });
+
+  /* bv3 — LLMs: token embedding network */
+  initBlogCanvas('bv3',function(c,ctx,t){
+    const W=c.width,H=c.height;
+    ctx.clearRect(0,0,W,H);
+    const nodes=[
+      {x:.15,y:.3,lbl:'Input'},{x:.15,y:.7,lbl:'Query'},
+      {x:.42,y:.2,lbl:'Attn'},{x:.42,y:.5,lbl:'FFN'},{x:.42,y:.8,lbl:'Embed'},
+      {x:.70,y:.35,lbl:'Layer'},{x:.70,y:.65,lbl:'MLP'},
+      {x:.90,y:.5,lbl:'Output'},
+    ];
+    const edges=[[0,2],[0,3],[1,3],[1,4],[2,5],[3,5],[3,6],[4,6],[5,7],[6,7]];
+    // Edges
+    edges.forEach(([a,b])=>{
+      const ax=nodes[a].x*W,ay=nodes[a].y*H,bx=nodes[b].x*W,by=nodes[b].y*H;
+      const pulse=(Math.sin(t*1.8+(a+b)*.7)+1)/2;
+      const eg=ctx.createLinearGradient(ax,ay,bx,by);
+      eg.addColorStop(0,'rgba(124,58,237,'+(0.1+pulse*.2)+')');
+      eg.addColorStop(1,'rgba(236,72,153,'+(0.1+pulse*.2)+')');
+      ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);
+      ctx.strokeStyle=eg;ctx.lineWidth=1+pulse*.6;ctx.stroke();
+      // Traveling dot
+      const dp=(t*.4+(a+b)*.3)%1;
+      const dx=ax+(bx-ax)*dp,dy=ay+(by-ay)*dp;
+      ctx.beginPath();ctx.arc(dx,dy,2,0,Math.PI*2);
+      ctx.fillStyle='rgba(236,72,153,'+(0.4+pulse*.5)+')';ctx.fill();
+    });
+    // Nodes
+    nodes.forEach((n,i)=>{
+      const x=n.x*W,y=n.y*H;
+      const glow=(Math.sin(t*1.3+i*.9)+1)/2;
+      const ng=ctx.createRadialGradient(x,y,0,x,y,12);
+      ng.addColorStop(0,'rgba(124,58,237,'+(0.5+glow*.4)+')');
+      ng.addColorStop(1,'rgba(124,58,237,0)');
+      ctx.beginPath();ctx.arc(x,y,12,0,Math.PI*2);ctx.fillStyle=ng;ctx.fill();
+      ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);
+      ctx.fillStyle='rgba(200,160,255,'+(0.6+glow*.35)+')';ctx.fill();
+      ctx.font='bold 7px DM Sans,sans-serif';ctx.fillStyle='rgba(200,160,255,.55)';ctx.textAlign='center';
+      ctx.fillText(n.lbl,x,y+16);
+    });
+    ctx.textAlign='left';ctx.font='bold 9px DM Sans,sans-serif';
+    ctx.fillStyle='rgba(200,100,255,.5)';ctx.fillText('Transformer · attention flow',8,H-8);
+  });
+
+  /* bv4 — Signal: oscilloscope waveform with FFT bars */
+  initBlogCanvas('bv4',function(c,ctx,t){
+    const W=c.width,H=c.height;
+    ctx.clearRect(0,0,W,H);
+    const mid=H*.45;
+    // Oscilloscope grid
+    ctx.strokeStyle='rgba(0,87,255,.08)';ctx.lineWidth=.5;
+    for(let y=0;y<H;y+=16){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    for(let x=0;x<W;x+=24){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    // Center line
+    ctx.strokeStyle='rgba(0,87,255,.12)';ctx.lineWidth=.5;
+    ctx.beginPath();ctx.moveTo(0,mid);ctx.lineTo(W,mid);ctx.stroke();
+    // FFT bars at bottom
+    const nbars=18,bw=W/nbars*.65;
+    for(let i=0;i<nbars;i++){
+      const amp=(Math.sin(i*.6+t*2.2)*0.5+0.5)*(Math.sin(i*.28+t*.9)*0.4+0.6);
+      const bh=amp*(H*.3);
+      const hue=200+i*3;
+      ctx.fillStyle=`hsla(${hue},100%,65%,${0.3+amp*.4})`;
+      ctx.fillRect(i*(W/nbars)+(W/nbars-bw)/2,H-bh,bw,bh);
+    }
+    // Waveform — multi-component
+    const wg=ctx.createLinearGradient(0,0,W,0);
+    wg.addColorStop(0,'rgba(0,87,255,.9)');wg.addColorStop(.5,'rgba(0,180,216,.9)');wg.addColorStop(1,'rgba(0,87,255,.6)');
+    ctx.beginPath();ctx.strokeStyle=wg;ctx.lineWidth=1.8;ctx.lineJoin='round';
+    for(let x=0;x<=W;x+=2){
+      const phase=x*.035+t*2;
+      const y=mid+Math.sin(phase)*18+Math.sin(phase*2.3+t)*8+Math.sin(phase*.5+t*.7)*5;
+      x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+    // Glow dot
+    const gx=((t*30)%W);
+    const gy=mid+Math.sin(gx*.035+t*2)*18+Math.sin(gx*.035*2.3+t)*8;
+    const gg=ctx.createRadialGradient(gx,gy,0,gx,gy,8);
+    gg.addColorStop(0,'rgba(0,180,216,.9)');gg.addColorStop(1,'rgba(0,180,216,0)');
+    ctx.beginPath();ctx.arc(gx,gy,3.5,0,Math.PI*2);ctx.fillStyle='rgba(0,180,216,.95)';ctx.fill();
+    ctx.beginPath();ctx.arc(gx,gy,8,0,Math.PI*2);ctx.fillStyle=gg;ctx.fill();
+    ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='rgba(0,180,216,.55)';ctx.textAlign='left';
+    ctx.fillText('Neural DSP · real-time waveform',8,H-8);
+  });
+
+  /* bv5 — Healthcare: ECG pulse */
+  initBlogCanvas('bv5',function(c,ctx,t){
+    const W=c.width,H=c.height;
+    ctx.clearRect(0,0,W,H);
+    const mid=H*.52;
+    // Grid — medical green
+    ctx.strokeStyle='rgba(16,185,129,.07)';ctx.lineWidth=.5;
+    for(let y=0;y<H;y+=16){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    for(let x=0;x<W;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    // ECG shape function
+    function ecgY(x,offset){
+      const pos=((x/W+offset)%1)*Math.PI*2*3;
+      const cycle=pos%(Math.PI*2);
+      if(cycle<.3)return mid+2;
+      if(cycle<.45)return mid-4;
+      if(cycle<.55)return mid+3;
+      if(cycle<.62)return mid-H*.34;// R peak
+      if(cycle<.70)return mid+H*.18;// S wave
+      if(cycle<.80)return mid+2;
+      if(cycle<1.1)return mid-8;// T wave
+      if(cycle<1.3)return mid+2;
+      return mid;
+    }
+    // Scrolling ECG — two beats visible
+    const offset=-(t*.04)%1;
+    // Glow trail
+    const tg=ctx.createLinearGradient(0,0,W,0);
+    tg.addColorStop(0,'rgba(16,185,129,.05)');
+    tg.addColorStop(.7,'rgba(16,185,129,.15)');
+    tg.addColorStop(1,'rgba(16,185,129,.5)');
+    ctx.beginPath();ctx.strokeStyle=tg;ctx.lineWidth=3;ctx.lineJoin='round';
+    for(let x=0;x<=W;x+=2){const y=ecgY(x,offset);x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+    ctx.stroke();
+    ctx.beginPath();ctx.strokeStyle='rgba(16,185,129,.9)';ctx.lineWidth=1.5;
+    for(let x=0;x<=W;x+=2){const y=ecgY(x,offset);x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+    ctx.stroke();
+    // Moving dot at front
+    const fx=W*.98,fy=ecgY(W*.98,offset);
+    const fg=ctx.createRadialGradient(fx,fy,0,fx,fy,9);
+    fg.addColorStop(0,'rgba(16,185,129,.9)');fg.addColorStop(1,'rgba(16,185,129,0)');
+    ctx.beginPath();ctx.arc(fx,fy,3.5,0,Math.PI*2);ctx.fillStyle='rgba(16,185,129,.95)';ctx.fill();
+    ctx.beginPath();ctx.arc(fx,fy,9,0,Math.PI*2);ctx.fillStyle=fg;ctx.fill();
+    // BPM label
+    const bpm=60+Math.floor(Math.sin(t*.3)*4);
+    ctx.font='bold 11px Syne,sans-serif';ctx.fillStyle='rgba(16,185,129,.7)';ctx.textAlign='right';
+    ctx.fillText(bpm+' BPM',W-8,18);
+    ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='rgba(16,185,129,.45)';ctx.textAlign='left';
+    ctx.fillText('HIPAA-compliant · clinical AI',8,H-8);
+  });
+
+  /* bv6 — Business BI: multi-metric dashboard */
+  initBlogCanvas('bv6',function(c,ctx,t){
+    const W=c.width,H=c.height;
+    ctx.clearRect(0,0,W,H);
+    // Grid
+    ctx.strokeStyle='rgba(245,158,11,.07)';ctx.lineWidth=.5;
+    for(let y=0;y<H;y+=18){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    const metrics=[
+      {pts:10,col:'rgba(245,158,11',seed:1.0,lbl:'Revenue'},
+      {pts:10,col:'rgba(251,191,36',seed:2.3,lbl:'Leads'},
+      {pts:10,col:'rgba(234,88,12',seed:3.7,lbl:'Churn'},
+    ];
+    metrics.forEach((m,mi)=>{
+      const data=Array.from({length:m.pts},(_,i)=>{
+        const trend=.15+i/m.pts*.55+(mi===2?-.2:0);
+        return Math.max(.08,Math.min(.85,trend+Math.sin(i*.9+m.seed+t*.15)*.1));
+      });
+      // Area
+      const ag=ctx.createLinearGradient(0,0,0,H);
+      ag.addColorStop(0,m.col+',.18)');ag.addColorStop(1,m.col+',.01)');
+      ctx.beginPath();ctx.moveTo(0,H);
+      data.forEach((v,i)=>ctx.lineTo(i/(m.pts-1)*W,H-v*H));
+      ctx.lineTo(W,H);ctx.closePath();ctx.fillStyle=ag;ctx.fill();
+      // Line
+      ctx.beginPath();ctx.strokeStyle=m.col+',.85)';ctx.lineWidth=1.6;ctx.lineJoin='round';
+      data.forEach((v,i)=>{const x=i/(m.pts-1)*W,y=H-v*H;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+      ctx.stroke();
+      // Dot
+      const lv=data[m.pts-1];
+      ctx.beginPath();ctx.arc(W,H-lv*H,3,0,Math.PI*2);ctx.fillStyle=m.col+',.9)';ctx.fill();
+    });
+    // Legend
+    metrics.forEach((m,i)=>{
+      ctx.fillStyle=m.col+',.7)';
+      ctx.fillRect(8+i*60,H-16,8,3);
+      ctx.font='bold 8px DM Sans,sans-serif';ctx.fillStyle=m.col+',.55)';ctx.textAlign='left';
+      ctx.fillText(m.lbl,20+i*60,H-8);
+    });
+  });
+})();
 
 /* Nav + scroll reveal */
 
