@@ -420,6 +420,31 @@ h1{animation-delay:.05s!important}
 .hero-stock-chart{height:46px!important;margin-bottom:8px!important}
 /* ── ANIMATION FIXES ── */
 
+/* ── LOGO STRIP (compact, after hero) ── */
+.logo-strip{padding:44px 64px 36px;background:var(--white);border-bottom:1px solid var(--border)}
+.ls-head{text-align:center;margin-bottom:24px}
+.ls-label{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);font-weight:700;display:flex;align-items:center;justify-content:center;gap:16px}
+.ls-label::before,.ls-label::after{content:'';display:block;width:48px;height:1px;background:rgba(0,87,255,.25)}
+.logo-strip .logo-pill img{height:32px}
+.logo-strip .logo-pill.sm img{height:22px}
+
+/* ── WHAT WE DO ── */
+.what-we-do{padding:72px 64px 68px;background:var(--bg);text-align:center}
+.wwd-inner{max-width:720px;margin:0 auto}
+.wwd-text{font-size:1.05rem;font-weight:300;line-height:1.88;color:var(--muted);margin-top:16px}
+
+/* ── TESTIMONIALS SECTION ── */
+.testi-section{padding:100px 64px;background:var(--white);overflow:hidden}
+.testi-section .testi-hdr{text-align:center;margin-bottom:56px}
+
+/* ── MID-PAGE CTA BANNER ── */
+.mid-cta{padding:72px 64px;background:linear-gradient(135deg,var(--navy) 0%,#0046d4 55%,var(--accent2) 100%);text-align:center;position:relative;overflow:hidden}
+.mid-cta::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+.mid-cta-label{font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:14px;position:relative;z-index:1}
+.mid-cta-heading{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:30px;position:relative;z-index:1;line-height:1.15}
+.mid-cta .mid-cta-btn{position:relative;z-index:1;background:#fff;color:var(--accent);padding:14px 36px;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:none;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:background .2s,transform .2s,box-shadow .2s}
+.mid-cta .mid-cta-btn:hover{background:var(--navy);color:#fff;transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.3)}
+
 /* ── WIDE-SCREEN MAX-WIDTH ──
    On viewports wider than ~1530px the horizontal padding grows so that
    the content area never exceeds 1400px. The section backgrounds still
@@ -429,11 +454,14 @@ h1{animation-delay:.05s!important}
 @media(min-width:1530px){
   nav{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
   .hero{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
-  .about,.services,.domains,.blog,.customers,.cta,footer{
+  .about,.services,.domains,.blog,.customers,.cta,footer,.logo-strip,.what-we-do,.testi-section,.mid-cta{
     padding-left:calc((100% - 1400px) / 2)!important;
     padding-right:calc((100% - 1400px) / 2)!important
   }
   .hero-scroll{right:calc((100% - 1400px) / 2)!important}
+}
+@media(max-width:768px){
+  .logo-strip,.what-we-do,.testi-section,.mid-cta{padding-left:24px!important;padding-right:24px!important}
 }
 </style>
 </head>
@@ -510,6 +538,70 @@ h1{animation-delay:.05s!important}
   </div>
 
   <div class="hero-scroll"><div class="hscroll-line"></div>Scroll</div>
+</section>
+
+<!-- LOGO STRIP (compact, right after hero) -->
+<section class="logo-strip" aria-label="Some of Our Customers">
+  <div class="ls-head rv">
+    <div class="ls-label">Some of Our Customers</div>
+  </div>
+  <div class="logo-banner rv">
+    <div class="logo-banner-track">
+      <a class="logo-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/google.jpg" alt="Google"></a>
+      <a class="logo-pill" href="https://www.elal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/elal.png" alt="EL AL"></a>
+      <a class="logo-pill" href="https://www.nice.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/nice.webp" alt="NICE"></a>
+      <a class="logo-pill" href="https://www.assutaashdod.co.il/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod"></a>
+      <a class="logo-pill" href="https://www.comm-it.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/commit.png" alt="Comm-It"></a>
+      <a class="logo-pill" href="https://www.mod.gov.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/mod.png" alt="Ministry of Defense"></a>
+      <a class="logo-pill" href="https://www.partner.co.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/partner.png" alt="Partner"></a>
+      <a class="logo-pill sm" href="https://www.seegnal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/seegnal.png" alt="Seegnal"></a>
+      <a class="logo-pill sm" href="https://www.lendlord.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/lendlord.png" alt="Lendlord"></a>
+      <a class="logo-pill sm" href="https://www.walnut.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/walnut.png" alt="Walnut"></a>
+      <a class="logo-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/google.jpg" alt="Google"></a>
+      <a class="logo-pill" href="https://www.elal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/elal.png" alt="EL AL"></a>
+      <a class="logo-pill" href="https://www.nice.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/nice.webp" alt="NICE"></a>
+      <a class="logo-pill" href="https://www.assutaashdod.co.il/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod"></a>
+      <a class="logo-pill" href="https://www.comm-it.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/commit.png" alt="Comm-It"></a>
+      <a class="logo-pill" href="https://www.mod.gov.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/mod.png" alt="Ministry of Defense"></a>
+      <a class="logo-pill" href="https://www.partner.co.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/partner.png" alt="Partner"></a>
+      <a class="logo-pill sm" href="https://www.seegnal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/seegnal.png" alt="Seegnal"></a>
+      <a class="logo-pill sm" href="https://www.lendlord.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/lendlord.png" alt="Lendlord"></a>
+      <a class="logo-pill sm" href="https://www.walnut.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/walnut.png" alt="Walnut"></a>
+    </div>
+  </div>
+  <div class="logo-banner rv" style="margin-top:10px">
+    <div class="logo-banner-track rev">
+      <a class="logo-pill sm" href="https://www.patensee.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/patensee.webp" alt="PatenSee"></a>
+      <a class="logo-pill sm" href="https://www.linkedin.com/company/offra-health/?originalSubdomain=il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/appscent.jpg" alt="Offra Health"></a>
+      <a class="logo-pill sm" href="https://www.dquality.net/about" target="_blank" rel="noopener noreferrer"><img src="assets/logos/dquality.png" alt="DQuality"></a>
+      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/effie.png" alt="Effie / ALUT"></a>
+      <a class="logo-pill sm" href="https://ibtikar-bc.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/ibtikar.jpg" alt="Ibtikar BaseCamp"></a>
+      <a class="logo-pill sm" href="https://www.innoccu.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/innoccu.jpg" alt="Innoccu"></a>
+      <a class="logo-pill sm" href="https://medxelerator.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/medx.jpg" alt="MedX Xelerator"></a>
+      <a class="logo-pill sm" href="https://www.swiftduct.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/swiftduct.jpg" alt="SwiftDuct"></a>
+      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/alut.png" alt="ALUT"></a>
+      <a class="logo-pill sm" href="https://www.akim.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/akim.png" alt="Akim"></a>
+      <a class="logo-pill sm" href="https://www.patensee.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/patensee.webp" alt="PatenSee"></a>
+      <a class="logo-pill sm" href="https://www.linkedin.com/company/offra-health/?originalSubdomain=il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/appscent.jpg" alt="Offra Health"></a>
+      <a class="logo-pill sm" href="https://www.dquality.net/about" target="_blank" rel="noopener noreferrer"><img src="assets/logos/dquality.png" alt="DQuality"></a>
+      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/effie.png" alt="Effie / ALUT"></a>
+      <a class="logo-pill sm" href="https://ibtikar-bc.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/ibtikar.jpg" alt="Ibtikar BaseCamp"></a>
+      <a class="logo-pill sm" href="https://www.innoccu.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/innoccu.jpg" alt="Innoccu"></a>
+      <a class="logo-pill sm" href="https://medxelerator.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/medx.jpg" alt="MedX Xelerator"></a>
+      <a class="logo-pill sm" href="https://www.swiftduct.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/swiftduct.jpg" alt="SwiftDuct"></a>
+      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/alut.png" alt="ALUT"></a>
+      <a class="logo-pill sm" href="https://www.akim.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/akim.png" alt="Akim"></a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what-we-do">
+  <div class="wwd-inner rv">
+    <div class="sl" style="justify-content:center">What We Do</div>
+    <h2>End-to-End AI, Built for Production</h2>
+    <p class="wwd-text">MLAIA delivers end-to-end machine learning and AI solutions — from research and prototyping to production-grade systems. We partner with enterprises, startups, and research institutions to turn complex data into real business outcomes.</p>
+  </div>
 </section>
 
 <!-- ABOUT -->
@@ -657,70 +749,12 @@ h1{animation-delay:.05s!important}
   </div>
 </section>
 
-<!-- CUSTOMERS -->
-<section class="customers" id="customers" aria-label="Some of Our Customers">
-  <div class="rv">
-    <div class="sl">Our Clients</div>
-    <h2>Some of Our Customers</h2>
-    <p class="cust-sub">Trusted by enterprises, medical institutions, defense agencies and fast-growing startups across five domains.</p>
+<!-- TESTIMONIALS -->
+<section class="testi-section" id="customers">
+  <div class="testi-hdr rv">
+    <div class="sl" style="justify-content:center">What Clients Say</div>
+    <h2>Trusted by Industry Leaders</h2>
   </div>
-
-  <!-- Row 1: primary logos -->
-  <div class="logo-banner rv d1">
-    <div class="logo-banner-track">
-      <a class="logo-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/google.jpg" alt="Google"></a>
-      <a class="logo-pill" href="https://www.elal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/elal.png" alt="EL AL"></a>
-      <a class="logo-pill" href="https://www.nice.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/nice.webp" alt="NICE"></a>
-      <a class="logo-pill" href="https://www.assutaashdod.co.il/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod"></a>
-      <a class="logo-pill" href="https://www.comm-it.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/commit.png" alt="Comm-It"></a>
-      <a class="logo-pill" href="https://www.mod.gov.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/mod.png" alt="Ministry of Defense"></a>
-      <a class="logo-pill" href="https://www.partner.co.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/partner.png" alt="Partner"></a>
-      <a class="logo-pill sm" href="https://www.seegnal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/seegnal.png" alt="Seegnal"></a>
-      <a class="logo-pill sm" href="https://www.lendlord.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/lendlord.png" alt="Lendlord"></a>
-      <a class="logo-pill sm" href="https://www.walnut.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/walnut.png" alt="Walnut"></a>
-      <!-- duplicate for seamless loop -->
-      <a class="logo-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/google.jpg" alt="Google"></a>
-      <a class="logo-pill" href="https://www.elal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/elal.png" alt="EL AL"></a>
-      <a class="logo-pill" href="https://www.nice.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/nice.webp" alt="NICE"></a>
-      <a class="logo-pill" href="https://www.assutaashdod.co.il/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod"></a>
-      <a class="logo-pill" href="https://www.comm-it.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/commit.png" alt="Comm-It"></a>
-      <a class="logo-pill" href="https://www.mod.gov.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/mod.png" alt="Ministry of Defense"></a>
-      <a class="logo-pill" href="https://www.partner.co.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/partner.png" alt="Partner"></a>
-      <a class="logo-pill sm" href="https://www.seegnal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/seegnal.png" alt="Seegnal"></a>
-      <a class="logo-pill sm" href="https://www.lendlord.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/lendlord.png" alt="Lendlord"></a>
-      <a class="logo-pill sm" href="https://www.walnut.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/walnut.png" alt="Walnut"></a>
-    </div>
-  </div>
-
-  <!-- Row 2: secondary logos, reverse direction -->
-  <div class="logo-banner rv d1">
-    <div class="logo-banner-track rev">
-      <a class="logo-pill sm" href="https://www.patensee.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/patensee.webp" alt="PatenSee"></a>
-      <a class="logo-pill sm" href="https://www.linkedin.com/company/offra-health/?originalSubdomain=il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/appscent.jpg" alt="Offra Health"></a>
-      <a class="logo-pill sm" href="https://www.dquality.net/about" target="_blank" rel="noopener noreferrer"><img src="assets/logos/dquality.png" alt="DQuality"></a>
-      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/effie.png" alt="Effie / ALUT"></a>
-      <a class="logo-pill sm" href="https://ibtikar-bc.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/ibtikar.jpg" alt="Ibtikar BaseCamp"></a>
-      <a class="logo-pill sm" href="https://www.innoccu.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/innoccu.jpg" alt="Innoccu"></a>
-      <a class="logo-pill sm" href="https://medxelerator.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/medx.jpg" alt="MedX Xelerator"></a>
-      <a class="logo-pill sm" href="https://www.swiftduct.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/swiftduct.jpg" alt="SwiftDuct"></a>
-      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/alut.png" alt="ALUT"></a>
-      <a class="logo-pill sm" href="https://www.akim.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/akim.png" alt="Akim"></a>
-      <!-- duplicate for seamless loop -->
-      <a class="logo-pill sm" href="https://www.patensee.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/patensee.webp" alt="PatenSee"></a>
-      <a class="logo-pill sm" href="https://www.linkedin.com/company/offra-health/?originalSubdomain=il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/appscent.jpg" alt="Offra Health"></a>
-      <a class="logo-pill sm" href="https://www.dquality.net/about" target="_blank" rel="noopener noreferrer"><img src="assets/logos/dquality.png" alt="DQuality"></a>
-      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/effie.png" alt="Effie / ALUT"></a>
-      <a class="logo-pill sm" href="https://ibtikar-bc.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/ibtikar.jpg" alt="Ibtikar BaseCamp"></a>
-      <a class="logo-pill sm" href="https://www.innoccu.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/innoccu.jpg" alt="Innoccu"></a>
-      <a class="logo-pill sm" href="https://medxelerator.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/medx.jpg" alt="MedX Xelerator"></a>
-      <a class="logo-pill sm" href="https://www.swiftduct.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/swiftduct.jpg" alt="SwiftDuct"></a>
-      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/alut.png" alt="ALUT"></a>
-      <a class="logo-pill sm" href="https://www.akim.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/akim.png" alt="Akim"></a>
-    </div>
-  </div>
-
-  <!-- Testimonials carousel -->
-  <div class="testi-hdr rv" style="margin-top:72px"><div class="sl" style="justify-content:center;color:var(--accent2)">What Clients Say</div><h2 style="color:#fff">Trusted by Industry Leaders</h2></div>
   <div class="tc-wrap rv d1">
     <div class="tc-track" id="tc-track">
       <div class="tm tc-active" data-index="0">
@@ -755,6 +789,15 @@ h1{animation-delay:.05s!important}
   </div>
 </section>
 
+<!-- MID-PAGE CTA BANNER -->
+<section class="mid-cta">
+  <div class="mid-cta-label rv">Let's Build Something</div>
+  <h2 class="mid-cta-heading rv">Ready to transform your data?<br>Let's talk.</h2>
+  <a href="#contact" class="mid-cta-btn rv">Start a Conversation
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
 <!-- BLOG -->
 <section class="blog" id="blog">
   <div class="bl-hdr rv"><div><div class="sl">Insights</div><h2>From Our Blog</h2></div><a href="blog.html" class="btn-p" style="background:var(--navy)">All Posts →</a></div>
@@ -770,18 +813,6 @@ h1{animation-delay:.05s!important}
     <a href="blog-llms.html" class="bl-card bc-llm rv d2">
       <div class="bl-img" style="background:linear-gradient(160deg,#120820 0%,#1a0a28 60%,#200d30 100%)"><canvas class="bl-canvas" id="bv3"></canvas><span class="bl-img-label">LLMs &amp; GenAI</span></div>
       <div class="bl-body"><div class="bl-tag" style="color:#7c3aed">LLMs &amp; GenAI</div><h3>Harness Your Data's Potential with Large Language Models</h3><p>How LLMs unlock value from unstructured text, documents and knowledge bases.</p><div class="bl-rm" style="color:#7c3aed">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    </a>
-    <a href="blog-signal.html" class="bl-card bc-sig rv d3">
-      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)"><canvas class="bl-canvas" id="bv4"></canvas><span class="bl-img-label">Signal &amp; Audio</span></div>
-      <div class="bl-body"><div class="bl-tag" style="color:var(--accent)">Signal &amp; Audio</div><h3>Supercharging Machine Learning Models with Classical Digital Signal Processing</h3><p>How Fourier transforms, filters, and Nyquist sampling can be the make-or-break factor in ML success.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    </a>
-    <a href="blog-medical.html" class="bl-card bc-med rv d3">
-      <div class="bl-img" style="background:linear-gradient(160deg,#071812 0%,#0a1e16 60%,#0d2a1e 100%)"><canvas class="bl-canvas" id="bv5"></canvas><span class="bl-img-label">Healthcare AI</span></div>
-      <div class="bl-body"><div class="bl-tag" style="color:var(--c-medical)">ML Research</div><h3>Unleashing the Power of Graphs for Machine Learning</h3><p>Graph neural networks — GCNs, GATs, and GraphSAGE — applied to fraud detection, bioinformatics, and beyond.</p><div class="bl-rm" style="color:var(--c-medical)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    </a>
-    <a href="blog-bi.html" class="bl-card bc-bi rv d3">
-      <div class="bl-img" style="background:linear-gradient(160deg,#181000 0%,#1e1400 60%,#281800 100%)"><canvas class="bl-canvas" id="bv6"></canvas><span class="bl-img-label">Business Intelligence</span></div>
-      <div class="bl-body"><div class="bl-tag" style="color:var(--c-bi)">AI Strategy</div><h3>Expertise Without Boundaries: Affordable AI and ML Development</h3><p>How MLAIA delivers production-grade AI capabilities to startups and enterprises without the in-house team overhead.</p><div class="bl-rm" style="color:var(--c-bi)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
   </div>
 </section>
