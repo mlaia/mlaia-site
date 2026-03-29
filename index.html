@@ -365,12 +365,12 @@ footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
 .tb-strip-title::before,.tb-strip-title::after{content:'';display:block;width:48px;height:1px;background:rgba(0,180,216,.35)}
 /* Primary tier — large logo cards */
 .tb-primary{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:12px;max-width:1040px;margin:0 auto 20px}
-.tb-logo-item{display:flex;align-items:center;justify-content:center;padding:22px 28px;flex:1;min-width:120px;max-width:160px;background:rgba(255,255,255,.97)!important;border-radius:12px!important;box-shadow:0 4px 24px rgba(0,0,0,.25),0 1px 4px rgba(0,0,0,.15);transition:transform .25s,box-shadow .25s;cursor:default}
+.tb-logo-item{display:flex;align-items:center;justify-content:center;padding:22px 28px;flex:1;min-width:120px;max-width:160px;background:rgba(255,255,255,.97)!important;border-radius:12px!important;box-shadow:0 4px 24px rgba(0,0,0,.25),0 1px 4px rgba(0,0,0,.15);transition:transform .25s,box-shadow .25s;cursor:pointer;text-decoration:none}
 .tb-logo-item:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
 .tb-logo-item img,.tb-strip .tb-primary .tb-logo-item img{height:64px!important;width:auto!important;max-width:120px!important;object-fit:contain!important;display:block!important;filter:none!important;opacity:1!important}
 /* Secondary tier — smaller color cards */
 .tb-secondary{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:8px;max-width:1040px;margin:0 auto}
-.tb-logo-sm{display:flex;align-items:center;justify-content:center;padding:14px 18px;flex:1;min-width:80px;max-width:110px;background:rgba(255,255,255,.88)!important;border-radius:8px!important;box-shadow:0 2px 12px rgba(0,0,0,.2);transition:transform .25s,box-shadow .25s,background .25s;cursor:default}
+.tb-logo-sm{display:flex;align-items:center;justify-content:center;padding:14px 18px;flex:1;min-width:80px;max-width:110px;background:rgba(255,255,255,.88)!important;border-radius:8px!important;box-shadow:0 2px 12px rgba(0,0,0,.2);transition:transform .25s,box-shadow .25s,background .25s;cursor:pointer;text-decoration:none}
 .tb-logo-sm:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.28);background:rgba(255,255,255,.98)!important}
 .tb-logo-sm img,.tb-strip .tb-secondary .tb-logo-sm img{height:32px!important;width:auto!important;max-width:80px!important;object-fit:contain!important;display:block!important;filter:none!important;opacity:1!important}
 @media(max-width:1200px){.tb-strip{padding:48px 40px 40px}.tb-logo-item{padding:18px 22px;min-width:100px}.tb-logo-sm{padding:12px 14px;min-width:70px}}
@@ -471,29 +471,29 @@ h1{animation-delay:.05s!important}
   </div>
   <!-- Primary tier: major enterprise clients -->
   <div class="tb-primary">
-    <div class="tb-logo-item"><img src="assets/logos/google.jpg" alt="Google"></div>
-    <div class="tb-logo-item"><img src="assets/logos/elal.png" alt="EL AL"></div>
-    <div class="tb-logo-item"><img src="assets/logos/nice.webp" alt="NICE"></div>
-    <div class="tb-logo-item"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod"></div>
-    <div class="tb-logo-item"><img src="assets/logos/commit.png" alt="Commit"></div>
-    <div class="tb-logo-item"><img src="assets/logos/mod.png" alt="Ministry of Defense"></div>
-    <div class="tb-logo-item"><img src="assets/logos/partner.png" alt="Partner"></div>
+    <a class="tb-logo-item" href="https://www.google.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/google.jpg" alt="Google"></a>
+    <a class="tb-logo-item" href="https://www.elal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/elal.png" alt="EL AL"></a>
+    <a class="tb-logo-item" href="https://www.nice.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/nice.webp" alt="NICE"></a>
+    <a class="tb-logo-item" href="https://www.assuta.co.il/ashdod/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod"></a>
+    <a class="tb-logo-item" href="https://www.commit.dev" target="_blank" rel="noopener noreferrer"><img src="assets/logos/commit.png" alt="Commit"></a>
+    <a class="tb-logo-item" href="https://www.mod.gov.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/mod.png" alt="Ministry of Defense"></a>
+    <a class="tb-logo-item" href="https://www.partner.co.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/partner.png" alt="Partner"></a>
   </div>
   <!-- Secondary tier: other clients -->
   <div class="tb-secondary">
-    <div class="tb-logo-sm"><img src="assets/logos/seegnal.png" alt="Seegnal" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/lendlord.png" alt="Lendlord" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/patensee.webp" alt="PatenSee" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/walnut.png" alt="Walnut" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/appscent.jpg" alt="OffRa Health" loading="lazy"></div>
+    <a class="tb-logo-sm" href="https://www.seegnal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/seegnal.png" alt="Seegnal" loading="lazy"></a>
+    <a class="tb-logo-sm" href="https://www.lendlord.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/lendlord.png" alt="Lendlord" loading="lazy"></a>
+    <a class="tb-logo-sm" href="https://www.patensee.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/patensee.webp" alt="PatenSee" loading="lazy"></a>
+    <a class="tb-logo-sm" href="https://www.walnut.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/walnut.png" alt="Walnut" loading="lazy"></a>
+    <a class="tb-logo-sm" href="https://www.appscent.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/appscent.jpg" alt="Appscent" loading="lazy"></a>
     <div class="tb-logo-sm"><img src="assets/logos/dquality.png" alt="DQuality" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/effie.png" alt="Effie" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/ibtikar.jpg" alt="Ibtikar BaseCamp" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/innoccu.jpg" alt="Innoccu" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/medx.jpg" alt="MedX Xelerator" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/swiftduct.jpg" alt="SwiftDuct" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/alut.png" alt="ALUT" loading="lazy"></div>
-    <div class="tb-logo-sm"><img src="assets/logos/akim.png" alt="Akim" loading="lazy"></div>
+    <a class="tb-logo-sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/effie.png" alt="Effie / ALUT" loading="lazy"></a>
+    <a class="tb-logo-sm" href="https://www.ibtikarfund.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/ibtikar.jpg" alt="Ibtikar BaseCamp" loading="lazy"></a>
+    <a class="tb-logo-sm" href="https://www.innoccu.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/innoccu.jpg" alt="Innoccu" loading="lazy"></a>
+    <a class="tb-logo-sm" href="https://www.medx-xelerator.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/medx.jpg" alt="MedX Xelerator" loading="lazy"></a>
+    <a class="tb-logo-sm" href="https://www.swiftduct.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/swiftduct.jpg" alt="SwiftDuct" loading="lazy"></a>
+    <a class="tb-logo-sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/alut.png" alt="ALUT" loading="lazy"></a>
+    <a class="tb-logo-sm" href="https://www.akim.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/akim.png" alt="Akim" loading="lazy"></a>
     <div class="tb-logo-sm"><img src="assets/logos/offra.jpg" alt="OffRa Health" loading="lazy"></div>
   </div>
 </section>
