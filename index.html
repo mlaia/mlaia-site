@@ -387,6 +387,22 @@ h1{animation-delay:.05s!important}
 .hero-right{animation-delay:.2s!important}
 .hero-stock-chart{height:46px!important;margin-bottom:8px!important}
 /* ── ANIMATION FIXES ── */
+
+/* ── WIDE-SCREEN MAX-WIDTH ──
+   On viewports wider than ~1530px the horizontal padding grows so that
+   the content area never exceeds 1400px. The section backgrounds still
+   span the full viewport; only the inner padding expands.
+   At exactly 1530px: calc((1530-1400)/2) = 65px ≈ current 64px — no jump.
+   Mobile overrides in the 768px media query are unaffected (they come after). */
+@media(min-width:1530px){
+  nav{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
+  .hero{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
+  .about,.services,.domains,.blog,.testi,.cta,.clients,.tb-strip,footer{
+    padding-left:calc((100% - 1400px) / 2)!important;
+    padding-right:calc((100% - 1400px) / 2)!important
+  }
+  .hero-scroll{right:calc((100% - 1400px) / 2)!important}
+}
 </style>
 </head>
 <body>
