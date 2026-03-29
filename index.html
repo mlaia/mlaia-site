@@ -20,7 +20,7 @@
   --bg:#f4f6fb;--white:#fff;--navy:#0a1628;--navy2:#0f2044;
   --accent:#0057ff;--accent2:#00b4d8;--border:#dce3f0;
   --muted:#6b7a99;--text:#2d3a55;
-  --c-medical:#10b981;--c-bi:#f59e0b;--c-vision:#7c3aed;--c-genai:#ec4899;
+  --c-medical:#0891b2;--c-bi:#f59e0b;--c-vision:#7c3aed;--c-genai:#ec4899;
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
@@ -113,7 +113,27 @@ section{position:relative;z-index:1}
 h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weight:800;letter-spacing:-.03em;color:var(--navy);line-height:1.05}
 
 /* ── ABOUT ── */
-.about{padding:56px 64px;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+.about{padding:72px 64px;background:var(--white);display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:start}
+.about-photo-col{position:sticky;top:100px}
+.about-photo{width:100%;border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(10,22,40,.18);aspect-ratio:3/4;background:var(--bg)}
+.about-photo img{width:100%;height:100%;object-fit:cover;display:block;object-position:center top}
+.about-photo-creds{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.cred-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:.78rem;color:var(--text);line-height:1.4;transition:border-color .25s}
+.cred-item:hover{border-color:var(--accent)}
+.cred-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.about-bio{min-width:0}
+.about-bio .sl{margin-bottom:10px}
+.about-bio h2{font-size:clamp(1.8rem,2.6vw,2.8rem);line-height:1.1;margin-bottom:4px}
+.about-bio .founder-title{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:28px;display:flex;align-items:center;gap:8px}
+.about-bio .founder-title::before{content:'';display:block;width:18px;height:2px;background:var(--accent);border-radius:2px}
+.about-bio-para{font-size:.97rem;font-weight:300;line-height:1.84;color:var(--muted);margin-bottom:16px}
+.about-bio-para strong{color:var(--text);font-weight:500}
+.about-achievements{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:28px}
+.ach-item{display:flex;align-items:flex-start;gap:10px;padding:13px 15px;background:var(--bg);border:1px solid var(--border);border-radius:10px;transition:border-color .25s,transform .25s}
+.ach-item:hover{border-color:var(--accent);transform:translateY(-2px)}
+.ach-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:5px}
+.ach-text{font-size:.8rem;line-height:1.5;color:var(--text);font-weight:400}
+.ach-text em{font-style:normal;color:var(--accent);font-weight:600}
 .about-left h2{font-size:clamp(1.8rem,2.5vw,2.5rem);line-height:1.2}
 
 
@@ -177,7 +197,7 @@ h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weight:
 .dv-panel{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--white);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
 .dv-panel:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(10,22,40,.09)}
 .dv-hd{padding:22px 22px 0}
-.dv-lbl{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.dv-lbl{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
 .dv-lbl::before{content:'';display:block;width:14px;height:2px;border-radius:2px}
 .dv-panel h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;color:var(--navy);line-height:1.25;margin-bottom:6px}
 .dv-panel > p,.dv-hd > p{font-size:.76rem;color:var(--muted);line-height:1.55;padding-bottom:14px}
@@ -192,21 +212,26 @@ h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weight:
 
 /* domain colours */
 .dv-panel.sig .dv-lbl{color:var(--accent)}.dv-panel.sig .dv-lbl::before{background:var(--accent)}.dvt.sig{background:rgba(0,87,255,.07);color:var(--accent)}
-.dv-panel.med .dv-lbl{color:var(--c-medical)}.dv-panel.med .dv-lbl::before{background:var(--c-medical)}.dvt.med{background:rgba(16,185,129,.08);color:var(--c-medical)}
+.dv-panel.med .dv-lbl{color:var(--c-medical)}.dv-panel.med .dv-lbl::before{background:var(--c-medical)}.dvt.med{background:rgba(8,145,178,.08);color:var(--c-medical)}
 .dv-panel.bi  .dv-lbl{color:var(--c-bi)}.dv-panel.bi  .dv-lbl::before{background:var(--c-bi)}.dvt.bi{background:rgba(245,158,11,.08);color:var(--c-bi)}
 .dv-panel.vis .dv-lbl{color:var(--c-vision)}.dv-panel.vis .dv-lbl::before{background:var(--c-vision)}.dvt.vis{background:rgba(124,58,237,.08);color:var(--c-vision)}
 .dv-panel.gen .dv-lbl{color:var(--c-genai)}.dv-panel.gen .dv-lbl::before{background:var(--c-genai)}.dvt.gen{background:rgba(236,72,153,.08);color:var(--c-genai)}
 
-/* ── CLIENTS ── */
-.clients{padding:100px 64px;background:var(--navy);text-align:center}
-.clients .sl{justify-content:center;color:var(--accent2)}.clients .sl::before{background:var(--accent2)}
-.clients h2{color:#fff;margin-bottom:12px}
-.cl-sub{font-size:.97rem;color:rgba(255,255,255,.4);margin-bottom:52px;font-weight:300}
-.cl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;max-width:1000px;margin:0 auto}
-.cl-cell{background:rgba(255,255,255,.03);padding:24px 12px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.cl-cell::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,87,255,.1),rgba(0,180,216,.06));opacity:0;transition:opacity .3s}
-
-.cl-nm{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.35);text-transform:uppercase;transition:color .25s;line-height:1.4;text-align:center;position:relative}
+/* ── CUSTOMERS ── */
+.customers{padding:90px 64px;background:var(--navy);text-align:center;overflow:hidden}
+.customers .sl{justify-content:center;color:var(--accent2)}.customers .sl::before{background:var(--accent2)}
+.customers h2{color:#fff;margin-bottom:12px}
+.cust-sub{font-size:.97rem;color:rgba(255,255,255,.4);margin-bottom:48px;font-weight:300}
+/* Scrolling logo banner */
+.logo-banner{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,black 8%,black 92%,transparent);mask-image:linear-gradient(90deg,transparent,black 8%,black 92%,transparent);margin-bottom:12px;padding:6px 0}
+.logo-banner-track{display:flex;gap:14px;animation:logo-scroll 40s linear infinite;white-space:nowrap;width:max-content;align-items:center}
+.logo-banner-track.rev{animation-direction:reverse;animation-duration:50s}
+.logo-banner-track:hover{animation-play-state:paused}
+.logo-pill{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;background:rgba(255,255,255,.95);border-radius:10px;box-shadow:0 2px 14px rgba(0,0,0,.25);flex-shrink:0;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.logo-pill:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(0,0,0,.35)}
+.logo-pill img{height:40px;width:auto;max-width:110px;object-fit:contain;display:block}
+.logo-pill.sm img{height:28px;max-width:80px}
+@keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 
 /* ── BLOG ── */
@@ -221,14 +246,14 @@ h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weight:
 .bl-card.bc-sales::before{background:linear-gradient(90deg,#00b4d8,#0057ff)}
 .bl-card.bc-llm::before{background:linear-gradient(90deg,#7c3aed,#ec4899)}
 .bl-card.bc-sig::before{background:linear-gradient(90deg,#0057ff,#00b4d8)}
-.bl-card.bc-med::before{background:linear-gradient(90deg,#10b981,#00b4d8)}
+.bl-card.bc-med::before{background:linear-gradient(90deg,#0891b2,#00b4d8)}
 .bl-card.bc-bi::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
 .bl-img{height:160px;position:relative;overflow:hidden;flex-shrink:0}
 .bl-canvas{width:100%;height:100%;display:block;position:absolute;inset:0}
 .bl-img-label{position:absolute;bottom:12px;left:14px;font-family:'Syne',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);z-index:1;pointer-events:none}
 .bl-body{padding:22px 22px 18px;flex:1;display:flex;flex-direction:column}
-.bl-tag{font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:7px}
-.bl-tag::before{content:'';display:block;width:12px;height:2px;background:currentColor;border-radius:2px}
+.bl-tag{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(0,87,255,.07);padding:4px 10px 4px 8px;border-radius:100px;width:fit-content}
+.bl-tag::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
 .bl-card h3{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy);line-height:1.42;margin-bottom:8px}
 .bl-card p{font-size:.79rem;line-height:1.66;color:var(--muted);font-weight:300;flex:1}
 .bl-rm{margin-top:14px;font-size:.72rem;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:gap .25s,color .25s}
@@ -297,7 +322,7 @@ h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weight:
 .cta-or{font-size:.82rem;color:rgba(255,255,255,.35);margin-top:8px;position:relative;z-index:2}
 .cta-em-inline{color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(0,180,216,.3);transition:color .2s}
 .cta-em-inline:hover{color:#fff}
-.cf-success{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);border-radius:8px;padding:20px;color:#10b981;font-weight:500;font-size:.95rem;max-width:520px;margin:0 auto}
+.cf-success{background:rgba(0,87,255,.08);border:1px solid rgba(0,87,255,.25);border-radius:8px;padding:20px;color:var(--accent);font-weight:500;font-size:.95rem;max-width:520px;margin:0 auto}
 
 
 
@@ -337,8 +362,9 @@ footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
 
 /* ── RESPONSIVE ── */
-@media(max-width:1200px){.dv-grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr;gap:0}.hero-right{height:320px;margin-top:32px}.hero-stats-row{position:static;margin-top:32px;padding:16px 0 0;border-top:1px solid rgba(255,255,255,.08)}}
-@media(max-width:768px){.about{grid-template-columns:1fr;gap:32px}.sv-grid{grid-template-columns:1fr 1fr}.dv-grid{grid-template-columns:1fr}.bl-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.hero,.about,.services,.domains,.blog,.testi,.cta,.clients{padding-left:24px;padding-right:24px}nav{padding:0 24px}.hero-actions{flex-direction:column;align-items:flex-start;gap:16px}h1{font-size:clamp(2rem,8vw,3.5rem);word-break:break-word}.cl-grid{grid-template-columns:repeat(2,1fr)}body{cursor:auto}#cd,#cr,#tc{display:none}.cf-row{grid-template-columns:1fr}footer{flex-direction:column;gap:16px;text-align:center}.hamburger{display:flex}nav ul.nav-links{display:none}nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:103px;left:0;right:0;height:calc(100vh - 103px)!important;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center;overflow-y:auto;animation:navSlideDown .3s ease}nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}nav ul.nav-links.open li a:hover{color:var(--accent2)!important}nav ul.nav-links.open li:last-child{border-bottom:none}nav ul.nav-links.open .nav-cta{background:var(--accent)!important;color:#fff!important;border-radius:6px;padding:14px 28px!important;margin-top:8px;display:inline-block;font-size:1rem!important}}
+@media(max-width:1200px){.dv-grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr;gap:0}.hero-right{height:320px;margin-top:32px}.hero-stats-row{position:static;margin-top:32px;padding:16px 0 0;border-top:1px solid rgba(255,255,255,.08)}.about{grid-template-columns:240px 1fr;gap:40px}}
+@media(max-width:900px){.about{grid-template-columns:1fr;gap:36px}.about-photo-col{position:static;display:flex;gap:28px;align-items:flex-start}.about-photo{width:180px;flex-shrink:0;aspect-ratio:3/4}.about-photo-creds{flex:1;margin-top:0}}
+@media(max-width:768px){.about{grid-template-columns:1fr;gap:32px}.sv-grid{grid-template-columns:1fr 1fr}.dv-grid{grid-template-columns:1fr}.bl-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.hero,.about,.services,.domains,.blog,.customers,.cta{padding-left:24px;padding-right:24px}nav{padding:0 24px}.hero-actions{flex-direction:column;align-items:flex-start;gap:16px}h1{font-size:clamp(2rem,8vw,3.5rem);word-break:break-word}.about-photo-col{display:block}.about-photo{width:120px;float:left;margin-right:20px;margin-bottom:12px;aspect-ratio:3/4}.about-achievements{grid-template-columns:1fr}.about-photo-creds{clear:left}body{cursor:auto}#cd,#cr,#tc{display:none}.cf-row{grid-template-columns:1fr}footer{flex-direction:column;gap:16px;text-align:center}.hamburger{display:flex}nav ul.nav-links{display:none}nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:103px;left:0;right:0;height:calc(100vh - 103px)!important;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center;overflow-y:auto;animation:navSlideDown .3s ease}nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}nav ul.nav-links.open li a:hover{color:var(--accent2)!important}nav ul.nav-links.open li:last-child{border-bottom:none}nav ul.nav-links.open .nav-cta{background:var(--accent)!important;color:#fff!important;border-radius:6px;padding:14px 28px!important;margin-top:8px;display:inline-block;font-size:1rem!important}}
 
 @media(max-width:768px){.hero{padding:80px 20px 40px!important;overflow:hidden;grid-template-columns:1fr!important;min-height:auto!important}.hero-sub{font-size:.95rem}.hero-stats-row{flex-wrap:wrap;gap:12px;justify-content:flex-start}.hero-stats{flex-wrap:wrap;gap:12px;justify-content:flex-start}.hero-stats .stat{font-size:.75rem}.hero-right{display:none!important}.mq{overflow:hidden}}
 /* ── ABOUT RIGHT LAYOUT ── */
@@ -397,7 +423,7 @@ h1{animation-delay:.05s!important}
 @media(min-width:1530px){
   nav{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
   .hero{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
-  .about,.services,.domains,.blog,.testi,.cta,.clients,.tb-strip,footer{
+  .about,.services,.domains,.blog,.customers,.cta,footer{
     padding-left:calc((100% - 1400px) / 2)!important;
     padding-right:calc((100% - 1400px) / 2)!important
   }
@@ -480,83 +506,51 @@ h1{animation-delay:.05s!important}
   <div class="hero-scroll"><div class="hscroll-line"></div>Scroll</div>
 </section>
 
-<!-- TRUSTED BY -->
-<section class="tb-strip" aria-label="Trusted by clients">
-  <div class="tb-strip-head">
-    <div class="tb-strip-title">Trusted By</div>
-  </div>
-  <!-- Primary tier: major enterprise clients -->
-  <div class="tb-primary">
-    <a class="tb-logo-item" href="https://www.google.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/google.jpg" alt="Google"></a>
-    <a class="tb-logo-item" href="https://www.elal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/elal.png" alt="EL AL"></a>
-    <a class="tb-logo-item" href="https://www.nice.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/nice.webp" alt="NICE"></a>
-    <a class="tb-logo-item" href="https://www.assutaashdod.co.il/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod"></a>
-    <a class="tb-logo-item" href="https://www.comm-it.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/commit.png" alt="Commit"></a>
-    <a class="tb-logo-item" href="https://www.mod.gov.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/mod.png" alt="Ministry of Defense"></a>
-    <a class="tb-logo-item" href="https://www.partner.co.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/partner.png" alt="Partner"></a>
-  </div>
-  <!-- Secondary tier: other clients -->
-  <div class="tb-secondary">
-    <a class="tb-logo-sm" href="https://www.seegnal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/seegnal.png" alt="Seegnal" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://www.lendlord.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/lendlord.png" alt="Lendlord" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://www.patensee.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/patensee.webp" alt="PatenSee" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://www.walnut.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/walnut.png" alt="Walnut" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://www.linkedin.com/company/offra-health/?originalSubdomain=il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/appscent.jpg" alt="Offra Health" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://www.dquality.net/about" target="_blank" rel="noopener noreferrer"><img src="assets/logos/dquality.png" alt="DQuality" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/effie.png" alt="Effie / ALUT" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://ibtikar-bc.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/ibtikar.jpg" alt="Ibtikar BaseCamp" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://www.innoccu.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/innoccu.jpg" alt="Innoccu" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://medxelerator.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/medx.jpg" alt="MedX Xelerator" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://www.swiftduct.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/swiftduct.jpg" alt="SwiftDuct" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/alut.png" alt="ALUT" loading="lazy"></a>
-    <a class="tb-logo-sm" href="https://www.akim.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/akim.png" alt="Akim" loading="lazy"></a>
-  </div>
-</section>
-
 <!-- ABOUT -->
 <section class="about" id="about">
-  <div class="about-left rv">
-    <div class="sl">Who We Are</div>
-    <h2>Advanced AI for Real-Time Signals &amp; Data-Driven Decisions</h2>
-    <div class="about-leader"><div class="al-av">YE</div><div><strong>Dr. Yochai Edlitz</strong><span>Founder &amp; CEO — Ph.D. (Weizmann Institute) with 20+ years in R&amp;D, specializing in ML, signal processing, and healthcare AI. Published in eLife, holds multiple patents, and has led data science initiatives across defense, telecom, and medical innovation.</span></div></div>
-    <p>We specialize in audio and signal processing, real-time AI, medical data, and enterprise BI — delivering end-to-end solutions that turn complex data into reliable, production-ready intelligence.</p>
-    <div class="about-acronym-inline">
-      <span class="aai-item"><em>ML</em> Machine Learning</span>
-      <span class="aai-sep">·</span>
-      <span class="aai-item"><em>AI</em> Artificial Intelligence</span>
-      <span class="aai-sep">·</span>
-      <span class="aai-item" style="--c:#10b981"><em style="color:#10b981">A</em> Approach</span>
+  <!-- Photo column -->
+  <div class="about-photo-col rv">
+    <div class="about-photo">
+      <img src="assets/yochai-headshot.jpg" alt="Dr. Yochai Edlitz — Founder &amp; CEO, MLAIA" loading="eager">
+    </div>
+    <div class="about-photo-creds">
+      <div class="cred-item"><span class="cred-dot"></span>Ph.D. — Weizmann Institute of Science</div>
+      <div class="cred-item"><span class="cred-dot"></span>20+ years R&amp;D leadership</div>
+      <div class="cred-item"><span class="cred-dot"></span>IDF Elite Intelligence &amp; Tech Units</div>
+      <div class="cred-item"><span class="cred-dot"></span>Published in <em>eLife</em> &amp; top-tier journals</div>
+      <div class="cred-item"><span class="cred-dot"></span>Multiple patents in signal processing &amp; ML</div>
     </div>
   </div>
-  <div class="about-right rv d2">
-    <div class="about-cards-grid">
-      <div class="ac"><div class="ac-ic"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M9 3v6l-3.5 7a2 2 0 0 0 1.8 2.9h9.4a2 2 0 0 0 1.8-2.9L15 9V3"/><path d="M6.8 15.5h10.4"/></svg></div><h4>Scientific Rigor</h4><p>Every model grounded in robust methodology, peer-reviewed techniques and reproducible experiments.</p></div>
-      <div class="ac"><div class="ac-ic"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div><h4>Production-Ready</h4><p>Scalable, maintainable systems that operate in real-world environments.</p></div>
-      <div class="ac"><div class="ac-ic"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div><h4>Compliance-First</h4><p>Medical &amp; enterprise-grade data with full HIPAA compliance.</p></div>
-    </div>
-    <div class="about-clients-inline">
-      <div class="aci-header">
-        <span class="aci-label">Trusted By</span>
-        <span class="aci-count">20+ clients</span>
-      </div>
-      <div class="aci-marquee-wrap">
-        <div class="aci-marquee-track">
-          <span>Google</span><span>EL AL</span><span>Ministry of Defense</span>
-          <span>NICE Systems</span><span>Partner Telecom</span><span>Assuta Ashdod</span>
-          <span>RETISPEC</span><span>Silentium</span><span>Comm-It</span>
-          <span>MedX Incubator</span><span>Lendlord</span><span>Walnut</span>
-          <span>Quago</span><span>Essence</span><span>Tailorpath</span>
-          <span>Offra</span><span>Geometrix</span><span>Will-I-AM</span>
-          <span>PatenSee</span><span>Appscent</span>
-          <span>Google</span><span>EL AL</span><span>Ministry of Defense</span>
-          <span>NICE Systems</span><span>Partner Telecom</span><span>Assuta Ashdod</span>
-          <span>RETISPEC</span><span>Silentium</span><span>Comm-It</span>
-          <span>MedX Incubator</span><span>Lendlord</span><span>Walnut</span>
-          <span>Quago</span><span>Essence</span><span>Tailorpath</span>
-          <span>Offra</span><span>Geometrix</span><span>Will-I-AM</span>
-          <span>PatenSee</span><span>Appscent</span>
-        </div>
-      </div>
+
+  <!-- Bio column -->
+  <div class="about-bio rv d1">
+    <div class="sl">About the Founder</div>
+    <h2>Dr. Yochai Edlitz</h2>
+    <div class="founder-title">Founder &amp; CEO, MLAIA</div>
+
+    <p class="about-bio-para">
+      Dr. Yochai Edlitz brings over <strong>20 years of hands-on R&amp;D</strong> to every engagement — spanning defense intelligence, academic research, and large-scale enterprise AI. He earned his <strong>Ph.D. from the Weizmann Institute of Science</strong>, one of the world's premier research institutions, and has published original research in top-tier journals including <strong><em>eLife</em></strong>. He holds multiple patents in signal processing and machine learning.
+    </p>
+
+    <p class="about-bio-para">
+      Before founding MLAIA, Yochai served in <strong>elite IDF intelligence and technology units</strong>, developing real-time signal classification and processing systems under demanding operational conditions. That experience instilled an engineering discipline that has defined his work ever since: rigorous, production-grade systems that perform when it matters most.
+    </p>
+
+    <p class="about-bio-para">
+      His doctoral research in computational signal processing, combined with years of applied R&amp;D across <strong>healthcare, defense, telecom, and enterprise</strong>, gave him a rare ability to bridge cutting-edge science and deployable technology. At MLAIA, this means clients get both the scientific depth to solve hard problems and the pragmatism to ship solutions that work in production.
+    </p>
+
+    <p class="about-bio-para">
+      Over two decades, Yochai has led AI initiatives for organizations ranging from the <strong>Ministry of Defense and Google</strong> to EL AL, Assuta Medical Center, and 20+ enterprises across five domains. MLAIA — which he founded to make this caliber of expertise accessible — transforms complex data challenges into measurable outcomes.
+    </p>
+
+    <div class="about-achievements">
+      <div class="ach-item"><span class="ach-dot"></span><span class="ach-text"><em>20+</em> enterprise clients across defense, healthcare &amp; telecom</span></div>
+      <div class="ach-item"><span class="ach-dot"></span><span class="ach-text"><em>5 domains</em> — signal, medical, BI, vision, GenAI</span></div>
+      <div class="ach-item"><span class="ach-dot"></span><span class="ach-text">Published in <em>eLife</em> &amp; peer-reviewed journals</span></div>
+      <div class="ach-item"><span class="ach-dot"></span><span class="ach-text"><em>Multiple patents</em> in signal processing &amp; ML</span></div>
+      <div class="ach-item"><span class="ach-dot"></span><span class="ach-text">IDF elite intelligence &amp; <em>tech units</em></span></div>
+      <div class="ach-item"><span class="ach-dot"></span><span class="ach-text"><em>100% production-grade</em> — every model ships</span></div>
     </div>
   </div>
 </section>
@@ -657,43 +651,71 @@ h1{animation-delay:.05s!important}
   </div>
 </section>
 
-<!-- clients moved to about section -->
-
-<!-- BLOG -->
-<section class="blog" id="blog">
-  <div class="bl-hdr rv"><div><div class="sl">Insights</div><h2>From Our Blog</h2></div><a href="blog.html" class="btn-p" style="background:var(--navy)">All Posts →</a></div>
-  <div class="bl-grid">
-    <a href="blog-slurm.html" class="bl-card bc-infra rv">
-      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)"><canvas class="bl-canvas" id="bv1"></canvas><span class="bl-img-label">Infrastructure</span></div>
-      <div class="bl-body"><div class="bl-tag">Infrastructure</div><h3>Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?</h3><p>A deep dive into the job scheduler powering the world's most advanced AI compute clusters.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    </a>
-    <a href="blog-sales-ai.html" class="bl-card bc-sales rv d1">
-      <div class="bl-img" style="background:linear-gradient(160deg,#071818 0%,#0a1e1e 60%,#0d2828 100%)"><canvas class="bl-canvas" id="bv2"></canvas><span class="bl-img-label">Case Study</span></div>
-      <div class="bl-body"><div class="bl-tag">Case Study</div><h3>Transforming Sales with AI: A Success Story with Israel's Leading Telecom</h3><p>Machine learning applied to the full sales pipeline, driving measurable ROI.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    </a>
-    <a href="blog-llms.html" class="bl-card bc-llm rv d2">
-      <div class="bl-img" style="background:linear-gradient(160deg,#120820 0%,#1a0a28 60%,#200d30 100%)"><canvas class="bl-canvas" id="bv3"></canvas><span class="bl-img-label">LLMs &amp; GenAI</span></div>
-      <div class="bl-body"><div class="bl-tag" style="color:#7c3aed">LLMs &amp; GenAI</div><h3>Harness Your Data's Potential with Large Language Models</h3><p>How LLMs unlock value from unstructured text, documents and knowledge bases.</p><div class="bl-rm" style="color:#7c3aed">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    </a>
-    <a href="blog-signal.html" class="bl-card bc-sig rv d3">
-      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)"><canvas class="bl-canvas" id="bv4"></canvas><span class="bl-img-label">Signal &amp; Audio</span></div>
-      <div class="bl-body"><div class="bl-tag" style="color:var(--accent)">Signal &amp; Audio</div><h3>Supercharging Machine Learning Models with Classical Digital Signal Processing</h3><p>How Fourier transforms, filters, and Nyquist sampling can be the make-or-break factor in ML success.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    </a>
-    <a href="blog-medical.html" class="bl-card bc-med rv d3">
-      <div class="bl-img" style="background:linear-gradient(160deg,#071812 0%,#0a1e16 60%,#0d2a1e 100%)"><canvas class="bl-canvas" id="bv5"></canvas><span class="bl-img-label">Healthcare AI</span></div>
-      <div class="bl-body"><div class="bl-tag" style="color:var(--c-medical)">ML Research</div><h3>Unleashing the Power of Graphs for Machine Learning</h3><p>Graph neural networks — GCNs, GATs, and GraphSAGE — applied to fraud detection, bioinformatics, and beyond.</p><div class="bl-rm" style="color:var(--c-medical)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    </a>
-    <a href="blog-bi.html" class="bl-card bc-bi rv d3">
-      <div class="bl-img" style="background:linear-gradient(160deg,#181000 0%,#1e1400 60%,#281800 100%)"><canvas class="bl-canvas" id="bv6"></canvas><span class="bl-img-label">Business Intelligence</span></div>
-      <div class="bl-body"><div class="bl-tag" style="color:var(--c-bi)">AI Strategy</div><h3>Expertise Without Boundaries: Affordable AI and ML Development</h3><p>How MLAIA delivers production-grade AI capabilities to startups and enterprises without the in-house team overhead.</p><div class="bl-rm" style="color:var(--c-bi)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    </a>
+<!-- CUSTOMERS -->
+<section class="customers" id="customers" aria-label="Some of Our Customers">
+  <div class="rv">
+    <div class="sl">Our Clients</div>
+    <h2>Some of Our Customers</h2>
+    <p class="cust-sub">Trusted by enterprises, medical institutions, defense agencies and fast-growing startups across five domains.</p>
   </div>
-</section>
 
-<!-- TESTIMONIALS -->
-<section class="testi" id="testi">
-  <div class="testi-hdr rv"><div class="sl" style="justify-content:center">What Clients Say</div><h2>Trusted by Industry Leaders</h2></div>
-  <div class="tc-wrap">
+  <!-- Row 1: primary logos -->
+  <div class="logo-banner rv d1">
+    <div class="logo-banner-track">
+      <a class="logo-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/google.jpg" alt="Google"></a>
+      <a class="logo-pill" href="https://www.elal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/elal.png" alt="EL AL"></a>
+      <a class="logo-pill" href="https://www.nice.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/nice.webp" alt="NICE"></a>
+      <a class="logo-pill" href="https://www.assutaashdod.co.il/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod"></a>
+      <a class="logo-pill" href="https://www.comm-it.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/commit.png" alt="Comm-It"></a>
+      <a class="logo-pill" href="https://www.mod.gov.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/mod.png" alt="Ministry of Defense"></a>
+      <a class="logo-pill" href="https://www.partner.co.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/partner.png" alt="Partner"></a>
+      <a class="logo-pill sm" href="https://www.seegnal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/seegnal.png" alt="Seegnal"></a>
+      <a class="logo-pill sm" href="https://www.lendlord.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/lendlord.png" alt="Lendlord"></a>
+      <a class="logo-pill sm" href="https://www.walnut.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/walnut.png" alt="Walnut"></a>
+      <!-- duplicate for seamless loop -->
+      <a class="logo-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/google.jpg" alt="Google"></a>
+      <a class="logo-pill" href="https://www.elal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/elal.png" alt="EL AL"></a>
+      <a class="logo-pill" href="https://www.nice.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/nice.webp" alt="NICE"></a>
+      <a class="logo-pill" href="https://www.assutaashdod.co.il/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/assuta.jpg" alt="Assuta Ashdod"></a>
+      <a class="logo-pill" href="https://www.comm-it.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/commit.png" alt="Comm-It"></a>
+      <a class="logo-pill" href="https://www.mod.gov.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/mod.png" alt="Ministry of Defense"></a>
+      <a class="logo-pill" href="https://www.partner.co.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/partner.png" alt="Partner"></a>
+      <a class="logo-pill sm" href="https://www.seegnal.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/seegnal.png" alt="Seegnal"></a>
+      <a class="logo-pill sm" href="https://www.lendlord.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/lendlord.png" alt="Lendlord"></a>
+      <a class="logo-pill sm" href="https://www.walnut.io" target="_blank" rel="noopener noreferrer"><img src="assets/logos/walnut.png" alt="Walnut"></a>
+    </div>
+  </div>
+
+  <!-- Row 2: secondary logos, reverse direction -->
+  <div class="logo-banner rv d1">
+    <div class="logo-banner-track rev">
+      <a class="logo-pill sm" href="https://www.patensee.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/patensee.webp" alt="PatenSee"></a>
+      <a class="logo-pill sm" href="https://www.linkedin.com/company/offra-health/?originalSubdomain=il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/appscent.jpg" alt="Offra Health"></a>
+      <a class="logo-pill sm" href="https://www.dquality.net/about" target="_blank" rel="noopener noreferrer"><img src="assets/logos/dquality.png" alt="DQuality"></a>
+      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/effie.png" alt="Effie / ALUT"></a>
+      <a class="logo-pill sm" href="https://ibtikar-bc.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/ibtikar.jpg" alt="Ibtikar BaseCamp"></a>
+      <a class="logo-pill sm" href="https://www.innoccu.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/innoccu.jpg" alt="Innoccu"></a>
+      <a class="logo-pill sm" href="https://medxelerator.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/medx.jpg" alt="MedX Xelerator"></a>
+      <a class="logo-pill sm" href="https://www.swiftduct.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/swiftduct.jpg" alt="SwiftDuct"></a>
+      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/alut.png" alt="ALUT"></a>
+      <a class="logo-pill sm" href="https://www.akim.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/akim.png" alt="Akim"></a>
+      <!-- duplicate for seamless loop -->
+      <a class="logo-pill sm" href="https://www.patensee.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/patensee.webp" alt="PatenSee"></a>
+      <a class="logo-pill sm" href="https://www.linkedin.com/company/offra-health/?originalSubdomain=il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/appscent.jpg" alt="Offra Health"></a>
+      <a class="logo-pill sm" href="https://www.dquality.net/about" target="_blank" rel="noopener noreferrer"><img src="assets/logos/dquality.png" alt="DQuality"></a>
+      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/effie.png" alt="Effie / ALUT"></a>
+      <a class="logo-pill sm" href="https://ibtikar-bc.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/ibtikar.jpg" alt="Ibtikar BaseCamp"></a>
+      <a class="logo-pill sm" href="https://www.innoccu.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/innoccu.jpg" alt="Innoccu"></a>
+      <a class="logo-pill sm" href="https://medxelerator.com/" target="_blank" rel="noopener noreferrer"><img src="assets/logos/medx.jpg" alt="MedX Xelerator"></a>
+      <a class="logo-pill sm" href="https://www.swiftduct.com" target="_blank" rel="noopener noreferrer"><img src="assets/logos/swiftduct.jpg" alt="SwiftDuct"></a>
+      <a class="logo-pill sm" href="https://www.alut.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/alut.png" alt="ALUT"></a>
+      <a class="logo-pill sm" href="https://www.akim.org.il" target="_blank" rel="noopener noreferrer"><img src="assets/logos/akim.png" alt="Akim"></a>
+    </div>
+  </div>
+
+  <!-- Testimonials carousel -->
+  <div class="testi-hdr rv" style="margin-top:72px"><div class="sl" style="justify-content:center;color:var(--accent2)">What Clients Say</div><h2 style="color:#fff">Trusted by Industry Leaders</h2></div>
+  <div class="tc-wrap rv d1">
     <div class="tc-track" id="tc-track">
       <div class="tm tc-active" data-index="0">
         <p>"I wanted to take a moment to recognize your exceptional work on managing the 'Sand box' project. Your leadership, strategic thinking, and excellent communication skills were instrumental in successfully executing this project."</p>
@@ -727,10 +749,41 @@ h1{animation-delay:.05s!important}
   </div>
 </section>
 
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="bl-hdr rv"><div><div class="sl">Insights</div><h2>From Our Blog</h2></div><a href="blog.html" class="btn-p" style="background:var(--navy)">All Posts →</a></div>
+  <div class="bl-grid">
+    <a href="blog-slurm.html" class="bl-card bc-infra rv">
+      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)"><canvas class="bl-canvas" id="bv1"></canvas><span class="bl-img-label">Infrastructure</span></div>
+      <div class="bl-body"><div class="bl-tag">Infrastructure</div><h3>Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?</h3><p>A deep dive into the job scheduler powering the world's most advanced AI compute clusters.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    </a>
+    <a href="blog-sales-ai.html" class="bl-card bc-sales rv d1">
+      <div class="bl-img" style="background:linear-gradient(160deg,#071818 0%,#0a1e1e 60%,#0d2828 100%)"><canvas class="bl-canvas" id="bv2"></canvas><span class="bl-img-label">Case Study</span></div>
+      <div class="bl-body"><div class="bl-tag">Case Study</div><h3>Transforming Sales with AI: A Success Story with Israel's Leading Telecom</h3><p>Machine learning applied to the full sales pipeline, driving measurable ROI.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    </a>
+    <a href="blog-llms.html" class="bl-card bc-llm rv d2">
+      <div class="bl-img" style="background:linear-gradient(160deg,#120820 0%,#1a0a28 60%,#200d30 100%)"><canvas class="bl-canvas" id="bv3"></canvas><span class="bl-img-label">LLMs &amp; GenAI</span></div>
+      <div class="bl-body"><div class="bl-tag" style="color:#7c3aed">LLMs &amp; GenAI</div><h3>Harness Your Data's Potential with Large Language Models</h3><p>How LLMs unlock value from unstructured text, documents and knowledge bases.</p><div class="bl-rm" style="color:#7c3aed">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    </a>
+    <a href="blog-signal.html" class="bl-card bc-sig rv d3">
+      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)"><canvas class="bl-canvas" id="bv4"></canvas><span class="bl-img-label">Signal &amp; Audio</span></div>
+      <div class="bl-body"><div class="bl-tag" style="color:var(--accent)">Signal &amp; Audio</div><h3>Supercharging Machine Learning Models with Classical Digital Signal Processing</h3><p>How Fourier transforms, filters, and Nyquist sampling can be the make-or-break factor in ML success.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    </a>
+    <a href="blog-medical.html" class="bl-card bc-med rv d3">
+      <div class="bl-img" style="background:linear-gradient(160deg,#071812 0%,#0a1e16 60%,#0d2a1e 100%)"><canvas class="bl-canvas" id="bv5"></canvas><span class="bl-img-label">Healthcare AI</span></div>
+      <div class="bl-body"><div class="bl-tag" style="color:var(--c-medical)">ML Research</div><h3>Unleashing the Power of Graphs for Machine Learning</h3><p>Graph neural networks — GCNs, GATs, and GraphSAGE — applied to fraud detection, bioinformatics, and beyond.</p><div class="bl-rm" style="color:var(--c-medical)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    </a>
+    <a href="blog-bi.html" class="bl-card bc-bi rv d3">
+      <div class="bl-img" style="background:linear-gradient(160deg,#181000 0%,#1e1400 60%,#281800 100%)"><canvas class="bl-canvas" id="bv6"></canvas><span class="bl-img-label">Business Intelligence</span></div>
+      <div class="bl-body"><div class="bl-tag" style="color:var(--c-bi)">AI Strategy</div><h3>Expertise Without Boundaries: Affordable AI and ML Development</h3><p>How MLAIA delivers production-grade AI capabilities to startups and enterprises without the in-house team overhead.</p><div class="bl-rm" style="color:var(--c-bi)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    </a>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta" id="contact">
   <div class="sl rv">Ready to Start?</div>
-  <h2 class="rv" style="color:#fff">Let's Build Something<br>Extraordinary Together</h2>
+  <h2 class="rv" style="color:#fff">Let's Take Your Data<br>from Insight to Impact</h2>
   <p class="rv d1">Tell us about your data challenge. MLAIA — Machine Learning &amp; AI Approach — will design the solution.</p>
   <!-- To activate Formspree: replace YOUR_FORMSPREE_ID with the ID from formspree.io/f/xxxxxxxx -->
   <form class="cta-form rv d2" id="contact-form"
@@ -744,7 +797,6 @@ h1{animation-delay:.05s!important}
     <textarea name="message" placeholder="Tell us about your project..." rows="3"></textarea>
     <div class="cf-bottom-row">
       <button type="submit" class="cf-btn">Send Message →</button>
-      <span class="cta-or">or: <a href="mailto:yochai@mlaia.com" class="cta-em-inline">yochai@mlaia.com</a></span>
     </div>
   </form>
 </section>
@@ -838,7 +890,7 @@ let mx=300,my=300,rx=300,ry=300;const pts=[];
 function rsTC(){TC.width=innerWidth;TC.height=innerHeight}rsTC();addEventListener('resize',rsTC);
 
 // Dark-section detection: check bg color of element under cursor
-const DARK_SECTIONS=['.hero','.clients','.cta'];
+const DARK_SECTIONS=['.hero','.customers','.cta'];
 function isDarkUnderCursor(x,y){
   const el=document.elementFromPoint(x,y);
   if(!el)return false;
@@ -857,7 +909,7 @@ addEventListener('mousemove',e=>{
   const light=document.body.classList.contains('cur-light');
   if(Math.random()>.32)pts.push({x:mx,y:my,vx:(Math.random()-.5)*1.3,vy:(Math.random()-.5)*1.3,l:1,d:.036+Math.random()*.038,s:1.4+Math.random()*2.8,h:light?185:214});
 });
-document.querySelectorAll('a,button,.sc-card,.ac,.cl-cell,.tm,.bl-card,.dvt,.dv-panel,.aa-pill').forEach(el=>{
+document.querySelectorAll('a,button,.sc-card,.ac,.tm,.bl-card,.dvt,.dv-panel,.aa-pill,.logo-pill').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
 });
@@ -903,11 +955,11 @@ function rsSC(){sW=SC.width=SC.offsetWidth;sH=SC.height=120}rsSC();addEventListe
   // Domain nodes — 8 nodes total (center + 7 satellites)
   const domains=[
     {lbl:'DSP',      x:.13,y:.22,col:'rgba(0,87,255',   r:30},
-    {lbl:'Medical',  x:.70,y:.15,col:'rgba(16,185,129',  r:28},
+    {lbl:'Medical',  x:.70,y:.15,col:'rgba(8,145,178',   r:28},
     {lbl:'BI',       x:.88,y:.55,col:'rgba(245,158,11',  r:26},
     {lbl:'Vision',   x:.68,y:.82,col:'rgba(124,58,237',  r:28},
     {lbl:'GenAI',    x:.18,y:.78,col:'rgba(236,72,153',  r:30},
-    {lbl:'Audio',    x:.42,y:.12,col:'rgba(0,210,150',   r:26},
+    {lbl:'Audio',    x:.42,y:.12,col:'rgba(0,180,216',   r:26},
     {lbl:'Growth',   x:.88,y:.25,col:'rgba(251,146,60',  r:26},
     {lbl:'MLAIA',    x:.52,y:.44,col:'rgba(0,180,216',   r:46},
   ];
@@ -1163,18 +1215,18 @@ makeEQ('c-sig','rgba(0,180,216,.9)','rgba(0,87,255,.65)','rgba(0,220,255,.8)');
   }
   (function draw(){
     t+=.004;const W=c.width,H=c.height;ctx.clearRect(0,0,W,H);
-    ctx.strokeStyle='rgba(16,185,129,.07)';ctx.lineWidth=1;
+    ctx.strokeStyle='rgba(8,145,178,.07)';ctx.lineWidth=1;
     for(let x=0;x<W;x+=28){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
     for(let y=0;y<H;y+=18){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
-    [[0,'rgba(16,185,129,.88)',1.6],[.5,'rgba(0,180,216,.45)',.8]].forEach(([off,col,lw])=>{
+    [[0,'rgba(8,145,178,.88)',1.6],[.5,'rgba(0,180,216,.45)',.8]].forEach(([off,col,lw])=>{
       ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=lw;
       for(let x=0;x<=W;x+=1.5){const y=ecgY(x/W,t+off,H);x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
       ctx.stroke();
     });
     const sx=(t*110)%W,sy=ecgY(sx/W,t,H);
-    const g=ctx.createRadialGradient(sx,sy,0,sx,sy,7);g.addColorStop(0,'rgba(16,185,129,.88)');g.addColorStop(1,'rgba(16,185,129,0)');
+    const g=ctx.createRadialGradient(sx,sy,0,sx,sy,7);g.addColorStop(0,'rgba(8,145,178,.88)');g.addColorStop(1,'rgba(8,145,178,0)');
     ctx.beginPath();ctx.arc(sx,sy,3.5,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
-    ctx.font='bold 9px Syne,sans-serif';ctx.fillStyle='rgba(16,185,129,.6)';ctx.fillText('72 BPM  ♥',10,H-8);
+    ctx.font='bold 9px Syne,sans-serif';ctx.fillStyle='rgba(8,145,178,.6)';ctx.fillText('72 BPM  ♥',10,H-8);
     requestAnimationFrame(draw);
   })();
 })();
@@ -1463,7 +1515,7 @@ makeEQ('c-sig','rgba(0,180,216,.9)','rgba(0,87,255,.65)','rgba(0,220,255,.8)');
     ctx.clearRect(0,0,W,H);
     const mid=H*.52;
     // Grid — medical green
-    ctx.strokeStyle='rgba(16,185,129,.07)';ctx.lineWidth=.5;
+    ctx.strokeStyle='rgba(8,145,178,.07)';ctx.lineWidth=.5;
     for(let y=0;y<H;y+=16){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
     for(let x=0;x<W;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
     // ECG shape function
@@ -1484,26 +1536,26 @@ makeEQ('c-sig','rgba(0,180,216,.9)','rgba(0,87,255,.65)','rgba(0,220,255,.8)');
     const offset=-(t*.04)%1;
     // Glow trail
     const tg=ctx.createLinearGradient(0,0,W,0);
-    tg.addColorStop(0,'rgba(16,185,129,.05)');
-    tg.addColorStop(.7,'rgba(16,185,129,.15)');
-    tg.addColorStop(1,'rgba(16,185,129,.5)');
+    tg.addColorStop(0,'rgba(8,145,178,.05)');
+    tg.addColorStop(.7,'rgba(8,145,178,.15)');
+    tg.addColorStop(1,'rgba(8,145,178,.5)');
     ctx.beginPath();ctx.strokeStyle=tg;ctx.lineWidth=3;ctx.lineJoin='round';
     for(let x=0;x<=W;x+=2){const y=ecgY(x,offset);x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
     ctx.stroke();
-    ctx.beginPath();ctx.strokeStyle='rgba(16,185,129,.9)';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.strokeStyle='rgba(8,145,178,.9)';ctx.lineWidth=1.5;
     for(let x=0;x<=W;x+=2){const y=ecgY(x,offset);x===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
     ctx.stroke();
     // Moving dot at front
     const fx=W*.98,fy=ecgY(W*.98,offset);
     const fg=ctx.createRadialGradient(fx,fy,0,fx,fy,9);
-    fg.addColorStop(0,'rgba(16,185,129,.9)');fg.addColorStop(1,'rgba(16,185,129,0)');
-    ctx.beginPath();ctx.arc(fx,fy,3.5,0,Math.PI*2);ctx.fillStyle='rgba(16,185,129,.95)';ctx.fill();
+    fg.addColorStop(0,'rgba(8,145,178,.9)');fg.addColorStop(1,'rgba(8,145,178,0)');
+    ctx.beginPath();ctx.arc(fx,fy,3.5,0,Math.PI*2);ctx.fillStyle='rgba(8,145,178,.95)';ctx.fill();
     ctx.beginPath();ctx.arc(fx,fy,9,0,Math.PI*2);ctx.fillStyle=fg;ctx.fill();
     // BPM label
     const bpm=60+Math.floor(Math.sin(t*.3)*4);
-    ctx.font='bold 11px Syne,sans-serif';ctx.fillStyle='rgba(16,185,129,.7)';ctx.textAlign='right';
+    ctx.font='bold 11px Syne,sans-serif';ctx.fillStyle='rgba(8,145,178,.7)';ctx.textAlign='right';
     ctx.fillText(bpm+' BPM',W-8,18);
-    ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='rgba(16,185,129,.45)';ctx.textAlign='left';
+    ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='rgba(8,145,178,.45)';ctx.textAlign='left';
     ctx.fillText('HIPAA-compliant · clinical AI',8,H-8);
   });
 
