@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — MLAIA | Machine Learning & AI Insights</title>
+<meta name="description" content="Insights on machine learning, AI, signal processing, LLMs, and data science from the MLAIA team.">
+<link rel="canonical" href="https://www.mlaia.com/blog">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f4f6fb;--white:#fff;--navy:#0a1628;--navy2:#0f2044;
+  --accent:#0057ff;--accent2:#00b4d8;--border:#dce3f0;
+  --muted:#6b7a99;--text:#2d3a55;
+  --c-medical:#10b981;--c-bi:#f59e0b;--c-vision:#7c3aed;--c-genai:#ec4899;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+#cd{width:7px;height:7px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .18s,height .18s,background .2s}
+#cr{width:36px;height:36px;border:1.5px solid rgba(0,87,255,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .28s,height .28s,border-color .25s,background .25s}
+body.ch #cd{width:13px;height:13px;background:var(--accent2)}
+body.ch #cr{width:54px;height:54px;border-color:rgba(0,180,216,.55)}
+body.ck #cd{width:5px;height:5px}
+body.ck #cr{width:22px;height:22px}
+@media(max-width:768px){body{cursor:auto}#cd,#cr{display:none}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 64px;height:66px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.sc{box-shadow:0 2px 20px rgba(10,22,40,.07)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--navy);letter-spacing:-.02em;text-decoration:none}
+.logo span{color:var(--accent)}
+.logo-tagline{font-size:.55rem;letter-spacing:.08em;color:var(--muted);font-weight:400;text-transform:uppercase;display:inline-block;margin-left:6px;vertical-align:middle;line-height:1;opacity:.8}
+nav ul{list-style:none;display:flex;gap:32px;align-items:center}
+nav a{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+nav a:hover,nav a.active{color:var(--navy)}
+nav a.active{color:var(--accent)!important}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:9px 22px;border-radius:6px;font-size:.8rem!important;font-weight:600!important;transition:background .2s,transform .2s!important}
+.nav-cta:hover{background:var(--navy)!important;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px 4px;z-index:1002}
+.hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* PAGE HERO */
+.page-hero{background:var(--navy);padding:120px 64px 72px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,87,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,87,255,.055) 1px,transparent 1px);background-size:54px 54px;pointer-events:none}
+.page-hero-orb{position:absolute;top:-10%;right:-10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(0,87,255,.18) 0%,transparent 60%);pointer-events:none}
+.page-hero-inner{position:relative;z-index:2;max-width:900px}
+.page-kicker{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.page-kicker::before{content:'';display:block;width:22px;height:1px;background:var(--accent2)}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.0;letter-spacing:-.03em;color:#fff;margin-bottom:20px}
+.page-hero p{font-size:1rem;font-weight:300;line-height:1.78;color:rgba(255,255,255,.52);max-width:520px}
+
+/* BLOG LISTING */
+.blog-listing{padding:72px 64px 110px;background:var(--bg)}
+.bl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+
+/* Cards */
+.bl-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .35s,box-shadow .35s,border-color .35s;display:flex;flex-direction:column;text-decoration:none;position:relative}
+.bl-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .35s;z-index:2}
+.bl-card:hover{transform:translateY(-6px);box-shadow:0 22px 52px rgba(10,22,40,.11);border-color:transparent}
+.bl-card:hover::before{opacity:1}
+.bl-card.bc-infra::before{background:linear-gradient(90deg,#0057ff,#00b4d8)}
+.bl-card.bc-sales::before{background:linear-gradient(90deg,#00b4d8,#0057ff)}
+.bl-card.bc-llm::before{background:linear-gradient(90deg,#7c3aed,#ec4899)}
+.bl-card.bc-sig::before{background:linear-gradient(90deg,#0057ff,#00b4d8)}
+.bl-card.bc-med::before{background:linear-gradient(90deg,#10b981,#00b4d8)}
+.bl-card.bc-bi::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+
+.bl-img{height:160px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:flex-end}
+.bl-img-label{position:absolute;bottom:12px;left:14px;font-family:'Syne',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);z-index:1}
+.bl-body{padding:22px 22px 18px;flex:1;display:flex;flex-direction:column}
+.bl-tag{font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.bl-tag::before{content:'';display:block;width:12px;height:2px;background:currentColor;border-radius:2px}
+.bl-card h2{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy);line-height:1.42;margin-bottom:8px}
+.bl-card p{font-size:.79rem;line-height:1.66;color:var(--muted);font-weight:300;flex:1}
+.bl-date{font-size:.7rem;color:var(--muted);margin-top:10px;font-weight:300;opacity:.7}
+.bl-rm{margin-top:14px;font-size:.72rem;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:gap .25s,color .25s}
+.bl-card:hover .bl-rm{gap:10px}
+
+/* FOOTER */
+footer{padding:36px 64px;background:var(--navy);border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+.ft-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;text-decoration:none}
+.ft-logo span{color:var(--accent2)}
+.ft-tag{font-size:.62rem;color:rgba(255,255,255,.28);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.ft-links{display:flex;gap:24px;list-style:none}
+.ft-links a{text-decoration:none;color:rgba(255,255,255,.35);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.ft-links a:hover{color:#fff}
+footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.bl-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  nav{padding:0 24px}
+  .page-hero{padding:90px 24px 52px}
+  .blog-listing{padding:48px 24px 72px}
+  .bl-grid{grid-template-columns:1fr}
+  .hamburger{display:flex}
+  nav ul.nav-links{display:none}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:28px 24px}
+  nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center}
+  nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}
+  nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase}
+  nav ul.nav-links.open .nav-cta{background:var(--accent)!important;border-radius:6px;padding:14px 28px!important;margin-top:8px;display:inline-block}
+}
+</style>
+</head>
+<body>
+<div id="cd"></div>
+<div id="cr"></div>
+
+<nav id="nav">
+  <a href="index.html" class="logo">ML<span>AI</span>A <span class="logo-tagline">Machine Learning &amp; AI Approach</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#domains">Domains</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-orb"></div>
+  <div class="page-hero-inner">
+    <div class="page-kicker">Insights</div>
+    <h1>From Our Blog</h1>
+    <p>Perspectives on machine learning, AI engineering, signal processing, and building production-grade systems that create real impact.</p>
+  </div>
+</section>
+
+<section class="blog-listing">
+  <div class="bl-grid">
+
+    <!-- Post 1: Slurm -->
+    <a href="blog-slurm.html" class="bl-card bc-infra">
+      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)">
+        <span class="bl-img-label">Infrastructure</span>
+      </div>
+      <div class="bl-body">
+        <div class="bl-tag">Infrastructure</div>
+        <h2>Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?</h2>
+        <p>A deep dive into the job scheduler powering the world's most advanced AI compute clusters — from exascale Frontier to enterprise on-prem HPC.</p>
+        <div class="bl-date">February 27, 2026 · 5 min read</div>
+        <div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+
+    <!-- Post 2: Sales AI -->
+    <a href="blog-sales-ai.html" class="bl-card bc-sales">
+      <div class="bl-img" style="background:linear-gradient(160deg,#071818 0%,#0a1e1e 60%,#0d2828 100%)">
+        <span class="bl-img-label">Case Study</span>
+      </div>
+      <div class="bl-body">
+        <div class="bl-tag" style="color:var(--accent2)">Case Study</div>
+        <h2>Transforming Sales with AI: A Success Story with Israel's Leading Communication Company</h2>
+        <p>Machine learning applied to the full sales pipeline — how predictive lead scoring drove measurable ROI for a major telecom.</p>
+        <div class="bl-date">November 18, 2024 · 2 min read</div>
+        <div class="bl-rm" style="color:var(--accent2)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+
+    <!-- Post 3: LLMs -->
+    <a href="blog-llms.html" class="bl-card bc-llm">
+      <div class="bl-img" style="background:linear-gradient(160deg,#120820 0%,#1a0a28 60%,#200d30 100%)">
+        <span class="bl-img-label">LLMs &amp; GenAI</span>
+      </div>
+      <div class="bl-body">
+        <div class="bl-tag" style="color:#7c3aed">LLMs &amp; GenAI</div>
+        <h2>Harness Your Data's Potential with Large Language Models (LLMs)</h2>
+        <p>How fine-tuning and RAG unlock value from unstructured text, internal documents, and enterprise knowledge bases.</p>
+        <div class="bl-date">September 5, 2023 · 2 min read</div>
+        <div class="bl-rm" style="color:#7c3aed">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+
+    <!-- Post 4: Signal Processing -->
+    <a href="blog-signal.html" class="bl-card bc-sig">
+      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)">
+        <span class="bl-img-label">Signal &amp; Audio</span>
+      </div>
+      <div class="bl-body">
+        <div class="bl-tag" style="color:var(--accent)">Signal &amp; Audio</div>
+        <h2>Supercharging Machine Learning Models with Classical Digital Signal Processing</h2>
+        <p>How classical DSP techniques — Fourier transforms, filters, and Nyquist sampling — can be the make-or-break factor in ML success.</p>
+        <div class="bl-date">May 24, 2023 · 3 min read</div>
+        <div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+
+    <!-- Post 5: Graphs for ML -->
+    <a href="blog-medical.html" class="bl-card bc-med">
+      <div class="bl-img" style="background:linear-gradient(160deg,#071812 0%,#0a1e16 60%,#0d2a1e 100%)">
+        <span class="bl-img-label">ML Research</span>
+      </div>
+      <div class="bl-body">
+        <div class="bl-tag" style="color:var(--c-medical)">ML Research</div>
+        <h2>Unleashing the Power of Graphs for Machine Learning</h2>
+        <p>A comprehensive look at graph neural networks — from GCNs and GATs to applications in fraud detection, bioinformatics, and recommender systems.</p>
+        <div class="bl-date">2023 · 4 min read</div>
+        <div class="bl-rm" style="color:var(--c-medical)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+
+    <!-- Post 6: Outsourcing AI -->
+    <a href="blog-bi.html" class="bl-card bc-bi">
+      <div class="bl-img" style="background:linear-gradient(160deg,#181000 0%,#1e1400 60%,#281800 100%)">
+        <span class="bl-img-label">AI Strategy</span>
+      </div>
+      <div class="bl-body">
+        <div class="bl-tag" style="color:var(--c-bi)">AI Strategy</div>
+        <h2>Expertise Without Boundaries: Affordable AI and ML Development</h2>
+        <p>How MLAIA delivers production-grade AI and ML capabilities to startups and enterprises — without the overhead of building an in-house team.</p>
+        <div class="bl-date">July 30, 2023 · 2 min read</div>
+        <div class="bl-rm" style="color:var(--c-bi)">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <div><a href="index.html" class="ft-logo">ML<span>AI</span>A</a><div class="ft-tag">Machine Learning &amp; AI Approach</div></div>
+  <ul class="ft-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#domains">Domains</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <p>© 2025 MLAIA — Machine Learning &amp; AI Approach</p>
+</footer>
+
+<script>
+// Cursor
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+  el.addEventListener('mousedown',()=>document.body.classList.add('ck'));
+  el.addEventListener('mouseup',()=>document.body.classList.remove('ck'));
+});
+
+// Nav scroll shadow
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('sc',scrollY>10)},{passive:true});
+
+// Hamburger
+const ham=document.querySelector('.hamburger');
+const ul=document.querySelector('.nav-links');
+ham.addEventListener('click',()=>{
+  const open=ham.classList.toggle('open');
+  ul.classList.toggle('open',open);
+  ham.setAttribute('aria-expanded',open);
+});
+</script>
+</body>
+</html>

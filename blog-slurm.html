@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"? — MLAIA</title>
+<meta name="description" content="A deep dive into the job scheduler powering the world's most advanced AI compute clusters.">
+<link rel="canonical" href="https://www.mlaia.com/blog-slurm.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f4f6fb;--white:#fff;--navy:#0a1628;--navy2:#0f2044;
+  --accent:#0057ff;--accent2:#00b4d8;--border:#dce3f0;
+  --muted:#6b7a99;--text:#2d3a55;
+  --tag-color: var(--accent);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+#cd{width:7px;height:7px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .18s,height .18s,background .2s}
+#cr{width:36px;height:36px;border:1.5px solid rgba(0,87,255,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .28s,height .28s,border-color .25s,background .25s}
+body.ch #cd{width:13px;height:13px;background:var(--accent2)}
+body.ch #cr{width:54px;height:54px;border-color:rgba(0,180,216,.55)}
+body.ck #cd{width:5px;height:5px}
+body.ck #cr{width:22px;height:22px}
+@media(max-width:768px){body{cursor:auto}#cd,#cr{display:none}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 64px;height:66px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.sc{box-shadow:0 2px 20px rgba(10,22,40,.07)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--navy);letter-spacing:-.02em;text-decoration:none}
+.logo span{color:var(--accent)}
+.logo-tagline{font-size:.55rem;letter-spacing:.08em;color:var(--muted);font-weight:400;text-transform:uppercase;display:inline-block;margin-left:6px;vertical-align:middle;line-height:1;opacity:.8}
+nav ul{list-style:none;display:flex;gap:32px;align-items:center}
+nav a{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+nav a:hover{color:var(--navy)}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:9px 22px;border-radius:6px;font-size:.8rem!important;font-weight:600!important;transition:background .2s,transform .2s!important}
+.nav-cta:hover{background:var(--navy)!important;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px 4px;z-index:1002}
+.hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* POST HERO */
+.post-hero{background:var(--navy);padding:120px 64px 72px;position:relative;overflow:hidden}
+.post-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,87,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,87,255,.055) 1px,transparent 1px);background-size:54px 54px;pointer-events:none}
+.post-hero-orb{position:absolute;top:-10%;right:-10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(0,87,255,.18) 0%,transparent 60%);pointer-events:none}
+.post-hero-inner{position:relative;z-index:2;max-width:800px}
+.post-category-tag{display:inline-flex;align-items:center;gap:8px;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--tag-color);margin-bottom:20px}
+.post-category-tag::before{content:'';display:block;width:18px;height:2px;background:currentColor;border-radius:2px}
+.post-hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:#fff;margin-bottom:24px}
+.post-meta{display:flex;align-items:center;gap:20px;font-size:.78rem;color:rgba(255,255,255,.42);font-weight:300}
+.post-meta span{display:flex;align-items:center;gap:6px}
+.post-meta-sep{color:rgba(255,255,255,.18)}
+
+/* ARTICLE BODY */
+.post-body{background:var(--white);padding:0}
+.post-container{max-width:780px;margin:0 auto;padding:64px 40px 100px}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;margin-bottom:48px}
+.back-link:hover{color:var(--accent)}
+.back-link svg{transition:transform .2s}
+.back-link:hover svg{transform:translateX(-3px)}
+
+/* Article typography */
+.post-content{line-height:1;color:var(--text)}
+.post-content p{font-size:1.05rem;line-height:1.82;color:var(--text);font-weight:300;margin-bottom:24px}
+.post-content h2{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;color:var(--navy);letter-spacing:-.02em;margin:52px 0 18px;line-height:1.15}
+.post-content h3{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:700;color:var(--navy);margin:40px 0 14px;line-height:1.2}
+.post-content h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);margin:28px 0 10px}
+.post-content ul,.post-content ol{margin:0 0 24px 0;padding-left:0;list-style:none}
+.post-content ul li,.post-content ol li{font-size:1.02rem;line-height:1.78;color:var(--text);font-weight:300;padding:6px 0 6px 28px;position:relative;border-bottom:1px solid var(--border)}
+.post-content ul li:last-child,.post-content ol li:last-child{border-bottom:none}
+.post-content ul li::before{content:'';position:absolute;left:0;top:16px;width:8px;height:2px;background:var(--tag-color);border-radius:2px}
+.post-content ol{counter-reset:ol-counter}
+.post-content ol li{counter-increment:ol-counter}
+.post-content ol li::before{content:counter(ol-counter);position:absolute;left:0;top:6px;font-family:'Syne',sans-serif;font-size:.75rem;font-weight:800;color:var(--tag-color)}
+.post-content blockquote{margin:36px 0;padding:24px 28px;border-left:3px solid var(--tag-color);background:linear-gradient(135deg,rgba(0,87,255,.03),rgba(0,180,216,.02));border-radius:0 8px 8px 0}
+.post-content blockquote p{font-size:1.05rem;font-style:italic;color:var(--navy);font-weight:400;margin:0;line-height:1.72}
+.post-content hr{border:none;border-top:1px solid var(--border);margin:48px 0}
+.post-content code{font-family:'SF Mono',Monaco,Inconsolata,monospace;font-size:.88rem;background:rgba(0,87,255,.06);color:var(--navy);padding:2px 7px;border-radius:4px;border:1px solid rgba(0,87,255,.1)}
+.post-content pre{background:var(--navy);border-radius:10px;padding:24px 28px;overflow-x:auto;margin:28px 0}
+.post-content pre code{background:none;border:none;color:rgba(255,255,255,.88);font-size:.9rem;padding:0}
+.post-content strong,.post-content b{font-weight:600;color:var(--navy)}
+.post-content a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(0,87,255,.25);transition:border-color .2s,color .2s}
+.post-content a:hover{color:#0046d4;border-color:var(--accent)}
+
+/* Post footer */
+.post-footer-nav{margin-top:72px;padding-top:36px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.post-cta-box{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:14px;padding:40px;margin-top:56px;text-align:center}
+.post-cta-box h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:10px}
+.post-cta-box p{font-size:.92rem;color:rgba(255,255,255,.5);font-weight:300;line-height:1.65;margin-bottom:24px}
+.btn-p{background:var(--accent);color:#fff;padding:13px 28px;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:none;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:background .2s,transform .2s,box-shadow .2s}
+.btn-p:hover{background:#0046d4;transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,87,255,.38)}
+
+/* FOOTER */
+footer{padding:36px 64px;background:var(--navy);border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+.ft-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;text-decoration:none}
+.ft-logo span{color:var(--accent2)}
+.ft-tag{font-size:.62rem;color:rgba(255,255,255,.28);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.ft-links{display:flex;gap:24px;list-style:none}
+.ft-links a{text-decoration:none;color:rgba(255,255,255,.35);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.ft-links a:hover{color:#fff}
+footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:0 24px}
+  .post-hero{padding:90px 24px 52px}
+  .post-container{padding:48px 24px 72px}
+  .hamburger{display:flex}
+  nav ul.nav-links{display:none}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:28px 24px}
+  nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:66px;left:0;right:0;height:calc(100vh - 66px)!important;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center;overflow-y:auto}
+  nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}
+  nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+  nav ul.nav-links.open .nav-cta{background:var(--accent)!important;border-radius:6px;padding:14px 28px!important;margin-top:8px;display:inline-block}
+}
+</style>
+</head>
+<body>
+<div id="cd"></div>
+<div id="cr"></div>
+
+<nav id="nav">
+  <a href="index.html" class="logo">ML<span>AI</span>A <span class="logo-tagline">Machine Learning &amp; AI Approach</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#domains">Domains</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="post-hero">
+  <div class="post-hero-orb"></div>
+  <div class="post-hero-inner">
+    <div class="post-category-tag">Infrastructure</div>
+    <h1>Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?</h1>
+    <div class="post-meta">
+      <span>February 27, 2026</span>
+      <span class="post-meta-sep">·</span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</section>
+
+<div class="post-body">
+  <div class="post-container">
+    <a href="blog.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to all posts
+    </a>
+
+    <div class="post-content">
+      <p>In the current era of AI, the tech world is hyper-focused on foundational models, immense neural networks, and the skyrocketing costs of cloud computing. As organizations scramble to train and deploy these massive AI models, many are realizing that relying solely on the cloud is financially unsustainable. This has sparked a massive resurgence in on-premise, high-performance computing (HPC) clusters packed with GPUs.</p>
+      <p>What brought this back to top-of-mind for me was a recent project we took on with a large enterprise client. They had to utilize a vast amount of on-prem computing power to keep their AI pipelines running efficiently. Watching their infrastructure teams grapple with allocating thousands of processors, monitoring hardware health, and arbitrating between competing research teams in real-time reminded me of the unsung hero of the AI hardware revolution.</p>
+      <p>Managing a modern supercomputer is an exercise in taming overwhelming complexity. Behind the scenes of the world's most powerful machines, the workload manager isn't just a utility; it's the central nervous system.</p>
+      <p>That orchestrator is <strong>Slurm</strong>.</p>
+      <p>Originally born in 2002 at Lawrence Livermore National Laboratory, its name was an acronym for the "Simple Linux Utility for Resource Management." While the code base has since ballooned to over 600,000 lines of C, the irony remains: the tool that started as a "simple" resource manager has evolved into the backbone of exascale computing.</p>
+      <p>Here are five surprising truths about how Slurm manages the transition from small Linux clusters to the most massive AI and HPC machines on Earth.</p>
+
+      <hr>
+
+      <h3>1. The 13-Second Exascale Feat</h3>
+      <p>Scalability is the ultimate test of any workload manager. When the <strong>Frontier</strong> system at Oak Ridge National Laboratory (ORNL) became the world's first exascale supercomputer, it relied on Slurm to manage its unprecedented scale.</p>
+      <p>From an architectural standpoint, the efficiency of the <code>slurmctld</code> (the central management daemon) is the secret sauce. Slurm handles tens of thousands of jobs without requiring custom, system-specific code. On Frontier, a full system application — from the moment of job submission to the termination of all processes and the final release of resources — can be completed in under <strong>13 seconds</strong>.</p>
+      <blockquote>
+        <p>"The first exascale system — Frontier at Oak Ridge National Laboratory (ORNL) — runs Slurm, and required no system- or scale-specific modifications to the code at installation."</p>
+      </blockquote>
+      <p>This performance is a testament to Slurm's highly concurrent, C-based modular kernel. Because the <code>slurmctld</code> uses sophisticated locking mechanisms on its core data structures and leverages fault-tolerant hierarchical communications via the <code>slurmd</code> (compute node daemons), the system remains future-proof, even at the exascale threshold.</p>
+
+      <hr>
+
+      <h3>2. Efficiency at Scale: The Magic of Job Arrays</h3>
+      <p>For researchers running massive Monte Carlo simulations or processing endless iterations of training data, submitting thousands of individual jobs can create "scheduler bloat," overwhelming the system's memory. Slurm solves this through a specific entity called a <strong>Job Array</strong>.</p>
+      <p>When a user submits a 9,000-element job array, Slurm does not initially create 9,000 separate entries. Instead, it manages the entire array as a <strong>single record</strong> in its internal job table. A new job record is created for an element only when it is actually ready to begin execution. This drastically minimizes the memory footprint of the central daemon.</p>
+      <p>Users can access this power with a simple command: <code>$ sbatch --array=1-9000 -i my_in_%a -o my_out_%a -N1 my.bash</code></p>
+      <p><strong>Architect's Tip:</strong> If specific elements fail, you don't need to re-run the whole array. You can resubmit specific IDs using the same logic (e.g., <code>$ sbatch --array=5,28</code>). Furthermore, for those managing large-scale AI budgets, Slurm uses <strong>TRES (Trackable RESources)</strong> billing weights to ensure that these massive arrays are accounted for accurately across CPUs, GPUs, and memory.</p>
+
+      <hr>
+
+      <h3>3. The "Fair-share" Misconception: It's Not a Quota</h3>
+      <p>One of the most misunderstood components of Slurm is the <strong>Fair-share Factor</strong> within the Multifactor Priority Plugin. Many users mistake fair-share for a hard quota or a cutoff point. In reality, fair-share is a floating-point number between 0.0 and 1.0 that acts as an arbitration logic.</p>
+      <p>As of the 19.05 release, the <strong>"Fair Tree" algorithm</strong> is the default over "Classic" fair-share. This is a critical distinction for architects because Fair Tree provides a more logical calculation of the factor across hierarchical accounts (e.g., divisions, groups, and individual users). It ensures the machine never sits idle; if no under-serviced accounts have work, over-serviced accounts can still utilize the compute cycles.</p>
+      <p>This Fair-share Factor is blended with other metrics to determine a job's final priority:</p>
+      <ul>
+        <li><strong>Age:</strong> Length of time in the queue.</li>
+        <li><strong>Job Size:</strong> Number of CPUs or nodes requested.</li>
+        <li><strong>Partition:</strong> Factors tied to the specific queue.</li>
+        <li><strong>Quality of Service (QOS):</strong> Tied to service levels like "standby" or "expedite."</li>
+        <li><strong>TRES:</strong> Factors based on requested resources like GPUs or expensive software licenses.</li>
+      </ul>
+
+      <hr>
+
+      <h3>4. Sibling Jobs and the "Stay-at-Home" Origin Cluster</h3>
+      <p>Modern HPC environments often use a <strong>Federated Cluster</strong> model. In this setup, Slurm uses "Sibling Jobs" to distribute work. When a job is submitted, it is sent to a local cluster, but Slurm also submits "sibling" versions to other viable clusters in the federation.</p>
+      <p>To prevent bottlenecks and avoid constant <code>slurmdbd</code> (database daemon) lookups, Slurm uses a 32-bit Job ID as the job's "DNA." Specifically, bits 26 through 31 are reserved for the <strong>Cluster ID</strong>. A key architectural insight here is that using 6 bits for the Cluster ID limits a single federation to <strong>63 unique clusters</strong>.</p>
+      <p>What is counter-intuitive is that even if a job runs on a remote sibling, the <strong>origin cluster</strong> stays active. It is the only cluster that can "revoke" the remaining sibling jobs once one starts, preventing the "double-start" bottleneck that would otherwise plague a decentralized federation.</p>
+
+      <hr>
+
+      <h3>5. Backfill Scheduling: The Art of "Cutting in Line" (Respectfully)</h3>
+      <p>Strict First In, First Out (FIFO) scheduling is the enemy of utilization. Large jobs would sit at the front of the line, leaving nodes empty while waiting for a full-system allocation. The <strong>Backfill Scheduler</strong> plugin solves this by allowing lower-priority jobs to "cut in line," provided they don't delay higher-priority jobs.</p>
+      <p>When the backfill scheduler finds a gap, it places nodes into a <strong>"Planned" state</strong> and sets an expected start time. I always advise engineering teams to check this via <code>squeue --start</code>. This visibility into the scheduler's intent is only possible if users provide reasonably accurate time limits for their jobs.</p>
+      <p>Combined with <strong>MUNGE</strong> for secure, credential-based authentication between nodes, backfill scheduling is what allows a high-performance cluster to maintain maximum utilization without compromising organizational fairness.</p>
+
+      <hr>
+
+      <h3>Conclusion: The Road to Cross-Cluster Synergy</h3>
+      <p>As we look toward the future of AI and big data, Slurm is evolving to support even deeper integration. The roadmap includes cross-cluster job dependencies and job arrays that span the entire federation rather than being locked to a single local machine.</p>
+      <p>This evolution raises a fundamental question for the next decade of compute: Will the future of discovery be driven by single, massive machines, or by the seamless federation of global resources working as one? Given Slurm's ability to orchestrate exascale power across thousands of nodes in seconds, the answer is likely a hybrid of both.</p>
+    </div>
+
+    <div class="post-cta-box">
+      <h3>Ready to leverage AI for your business?</h3>
+      <p>Talk to us about how MLAIA can transform your data into actionable intelligence.</p>
+      <a href="index.html#contact" class="btn-p">Get in Touch →</a>
+    </div>
+
+    <div class="post-footer-nav">
+      <a href="blog.html" class="back-link" style="margin-bottom:0">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to all posts
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div><a href="index.html" class="ft-logo">ML<span>AI</span>A</a><div class="ft-tag">Machine Learning &amp; AI Approach</div></div>
+  <ul class="ft-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#domains">Domains</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <p>© 2025 MLAIA — Machine Learning &amp; AI Approach</p>
+</footer>
+
+<script>
+// Cursor
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+  el.addEventListener('mousedown',()=>document.body.classList.add('ck'));
+  el.addEventListener('mouseup',()=>document.body.classList.remove('ck'));
+});
+
+// Nav scroll shadow
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('sc',scrollY>10)},{passive:true});
+
+// Hamburger
+const ham=document.querySelector('.hamburger');
+const ul=document.querySelector('.nav-links');
+ham.addEventListener('click',()=>{
+  const open=ham.classList.toggle('open');
+  ul.classList.toggle('open',open);
+  ham.setAttribute('aria-expanded',open);
+});
+</script>
+</body>
+</html>
