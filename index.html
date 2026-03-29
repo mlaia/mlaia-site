@@ -349,29 +349,22 @@ footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
 /* ── ABOUT RIGHT LAYOUT ── */
 
 /* ── TRUSTED BY STRIP ── */
-.tb-strip{background:var(--navy);padding:56px 64px 48px;border-bottom:1px solid rgba(255,255,255,.07)}
-.tb-strip-head{text-align:center;margin-bottom:40px}
-.tb-strip-title{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--accent2);font-weight:700;display:flex;align-items:center;justify-content:center;gap:14px}
-.tb-strip-title::before,.tb-strip-title::after{content:'';display:block;width:40px;height:1px;background:rgba(0,180,216,.3)}
-/* Primary tier */
-.tb-primary{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;max-width:960px;margin:0 auto 1px}
-.tb-logo-item{display:flex;align-items:center;justify-content:center;padding:22px 28px;flex:1;min-width:120px;position:relative;transition:background .25s;cursor:default;border-right:1px solid rgba(255,255,255,.06)}
-.tb-logo-item:last-child{border-right:none}
-.tb-logo-item:hover{background:rgba(255,255,255,.04)}
-.tb-logo-item img{height:34px;width:auto;max-width:110px;object-fit:contain;filter:grayscale(1) brightness(1.8) invert(0);opacity:.45;transition:opacity .3s,filter .3s}
-.tb-logo-item:hover img{opacity:1;filter:grayscale(0) brightness(1)}
-/* Secondary tier */
-.tb-secondary{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;border:1px solid rgba(255,255,255,.05);border-top:none;border-radius:0 0 10px 10px;overflow:hidden;max-width:960px;margin:0 auto;background:rgba(255,255,255,.015)}
-.tb-logo-sm{display:flex;align-items:center;justify-content:center;padding:16px 20px;flex:1;min-width:90px;position:relative;transition:background .25s;cursor:default;border-right:1px solid rgba(255,255,255,.05)}
-.tb-logo-sm:last-child{border-right:none}
-.tb-logo-sm:hover{background:rgba(255,255,255,.03)}
-.tb-logo-sm img{height:24px;width:auto;max-width:80px;object-fit:contain;filter:grayscale(1) brightness(1.8);opacity:.3;transition:opacity .3s,filter .3s}
-.tb-logo-sm:hover img{opacity:.8;filter:grayscale(0) brightness(1)}
-/* Special treatment for dark logos that need inversion */
-.tb-invert img{filter:grayscale(1) brightness(10) !important;opacity:.35 !important}
-.tb-invert:hover img{filter:grayscale(0) brightness(1) invert(0) !important;opacity:.9 !important}
-@media(max-width:1200px){.tb-strip{padding:40px 40px 32px}.tb-logo-item{padding:18px 20px;min-width:100px}.tb-logo-sm{padding:12px 14px;min-width:70px}}
-@media(max-width:768px){.tb-strip{padding:32px 20px}.tb-primary{border-radius:8px}.tb-secondary{border-radius:0 0 8px 8px}.tb-logo-item{flex:0 0 33.333%;padding:16px 12px;min-width:0;border-right:1px solid rgba(255,255,255,.06)}.tb-logo-item img{height:26px;max-width:80px}.tb-logo-sm{flex:0 0 25%;padding:12px 8px;min-width:0}.tb-logo-sm img{height:18px;max-width:60px}}
+.tb-strip{background:var(--navy);padding:64px 64px 56px;border-bottom:1px solid rgba(255,255,255,.07)}
+.tb-strip-head{text-align:center;margin-bottom:48px}
+.tb-strip-title{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent2);font-weight:700;display:flex;align-items:center;justify-content:center;gap:16px}
+.tb-strip-title::before,.tb-strip-title::after{content:'';display:block;width:48px;height:1px;background:rgba(0,180,216,.35)}
+/* Primary tier — large logo cards */
+.tb-primary{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:12px;max-width:1040px;margin:0 auto 20px}
+.tb-logo-item{display:flex;align-items:center;justify-content:center;padding:22px 28px;flex:1;min-width:120px;max-width:160px;background:rgba(255,255,255,.97);border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.25),0 1px 4px rgba(0,0,0,.15);transition:transform .25s,box-shadow .25s;cursor:default}
+.tb-logo-item:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
+.tb-logo-item img{height:64px;width:auto;max-width:120px;object-fit:contain;display:block}
+/* Secondary tier — smaller color cards */
+.tb-secondary{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:8px;max-width:1040px;margin:0 auto}
+.tb-logo-sm{display:flex;align-items:center;justify-content:center;padding:14px 18px;flex:1;min-width:80px;max-width:110px;background:rgba(255,255,255,.88);border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.2);transition:transform .25s,box-shadow .25s,background .25s;cursor:default}
+.tb-logo-sm:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.28);background:rgba(255,255,255,.98)}
+.tb-logo-sm img{height:32px;width:auto;max-width:80px;object-fit:contain;display:block}
+@media(max-width:1200px){.tb-strip{padding:48px 40px 40px}.tb-logo-item{padding:18px 22px;min-width:100px}.tb-logo-sm{padding:12px 14px;min-width:70px}}
+@media(max-width:768px){.tb-strip{padding:36px 20px 32px}.tb-primary{gap:8px}.tb-secondary{gap:6px}.tb-logo-item{flex:0 0 calc(33.333% - 8px);max-width:none;min-width:0;padding:16px 14px;border-radius:10px}.tb-logo-item img{height:48px;max-width:90px}.tb-logo-sm{flex:0 0 calc(25% - 6px);max-width:none;min-width:0;padding:10px 8px}.tb-logo-sm img{height:24px;max-width:64px}}
 
 /* ── ANIMATION FIXES ── */
 .hero-kicker,.hero-stock-chart{animation-delay:0s!important}
