@@ -1,0 +1,56 @@
+# MLAIA — Machine Learning & AI Approach
+
+> B2B AI and data science consultancy delivering production-grade AI solutions. Founded by Dr. Yochai Edlitz, MLAIA specializes in signal processing, medical AI, large language models (LLMs/NLP), business intelligence, and computer vision. Trusted by Google, EL AL, Israel Ministry of Defense, and 20+ leading enterprises worldwide.
+
+## Company
+
+- **Name**: MLAIA (Machine Learning & AI Approach)
+- **Website**: https://www.mlaia.com
+- **Type**: B2B AI & Data Science Consultancy
+- **Founded by**: Dr. Yochai Edlitz (PhD, Founder & CEO)
+- **Location**: Israel (serving clients worldwide)
+- **Contact**: yochai@mlaia.com | +972-52-484-6282
+
+## What We Do
+
+MLAIA delivers end-to-end AI solutions — from research and prototyping through to production deployment. We work as a strategic partner embedded in your team, providing senior-level data science expertise without the overhead of full-time hiring.
+
+## Services & Expertise Domains
+
+### 1. Real-Time Signal Processing & AI
+End-to-end signal processing pipelines combining classical DSP with deep learning. Capabilities include FFT, wavelet transforms, digital filters, anomaly detection, predictive maintenance, and real-time signal intelligence for industrial, defense, and healthcare applications.
+
+### 2. Medical AI & Clinical Data Science
+AI for healthcare: EHR analysis, medical imaging (classification, segmentation), clinical outcome prediction, survival analysis, and graph neural networks for bioinformatics and patient relationship modeling.
+
+### 3. Large Language Models (LLMs), NLP & AI Agents
+Enterprise LLM integration: fine-tuning, retrieval-augmented generation (RAG), NLP pipelines, document intelligence, chatbots, and autonomous AI agents for knowledge management, customer support, and sales automation.
+
+### 4. Enterprise BI & Predictive Analytics
+Business intelligence with embedded ML: churn prediction, sales forecasting, customer segmentation, demand planning, revenue modeling, and executive dashboards that go beyond standard BI.
+
+### 5. Vision AI & Image Intelligence
+Computer vision solutions: object detection (YOLO, DETR), semantic segmentation, video analytics, parking/retail analytics, industrial visual inspection, and real-time video intelligence pipelines.
+
+## Notable Clients
+
+Google, EL AL Airlines, Israel Ministry of Defense, NICE Systems, Assuta Medical Center, Partner Communications, Walnut.io, Lendlord, Seegnal, PatenSee, MedX Xelerator, SwiftDuct, and 20+ additional enterprises and startups.
+
+## Founder
+
+**Dr. Yochai Edlitz** — PhD, Founder & CEO of MLAIA. Deep expertise spanning signal processing, machine learning, medical AI, natural language processing, and business intelligence. Combines academic rigor with hands-on production AI engineering. Available for consulting engagements worldwide.
+
+## Blog Posts & Technical Content
+
+- [Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?](https://www.mlaia.com/blog-slurm.html) — Deep dive into Slurm job scheduling for AI/HPC clusters (February 2026)
+- [Transforming Sales with AI: A Success Story with Israel's Leading Telecom](https://www.mlaia.com/blog-sales-ai.html) — ML applied to the full sales pipeline with measurable ROI (November 2024)
+- [Harness Your Data's Potential with Large Language Models (LLMs)](https://www.mlaia.com/blog-llms.html) — LLM integration, RAG, and fine-tuning for enterprise use cases (September 2023)
+- [Supercharging Machine Learning Models with Classical Digital Signal Processing](https://www.mlaia.com/blog-signal.html) — Hybrid DSP + deep learning architectures in practice (May 2023)
+- [Unleashing the Power of Graphs for Machine Learning](https://www.mlaia.com/blog-medical.html) — Graph neural networks for bioinformatics, social networks, and fraud detection (2023)
+- [Expertise Without Boundaries: Affordable AI and ML Development](https://www.mlaia.com/blog-bi.html) — How outsourced AI consulting delivers senior expertise at startup speed (July 2023)
+
+## Key Pages
+
+- Homepage: https://www.mlaia.com
+- Blog: https://www.mlaia.com/blog.html
+- Contact: https://www.mlaia.com/#contact

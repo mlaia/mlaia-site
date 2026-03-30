@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+
+  <channel>
+    <title>MLAIA Blog — AI &amp; Data Science Insights</title>
+    <link>https://www.mlaia.com/blog.html</link>
+    <description>Technical insights on machine learning, signal processing, medical AI, LLMs, and business intelligence from the MLAIA team.</description>
+    <language>en</language>
+    <managingEditor>yochai@mlaia.com (Dr. Yochai Edlitz)</managingEditor>
+    <webMaster>yochai@mlaia.com (Dr. Yochai Edlitz)</webMaster>
+    <lastBuildDate>Thu, 27 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.mlaia.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://www.mlaia.com/assets/og-image.png</url>
+      <title>MLAIA Blog</title>
+      <link>https://www.mlaia.com/blog.html</link>
+    </image>
+
+    <item>
+      <title>Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?</title>
+      <link>https://www.mlaia.com/blog-slurm.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-slurm.html</guid>
+      <pubDate>Thu, 27 Feb 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Infrastructure</category>
+      <description><![CDATA[A deep dive into Slurm — the Simple Linux Utility for Resource Management — the job scheduler powering the world's most advanced AI compute clusters including those at OpenAI, Meta, Google, and leading national labs.]]></description>
+    </item>
+
+    <item>
+      <title>Transforming Sales with AI: A Success Story with Israel's Leading Communication Company</title>
+      <link>https://www.mlaia.com/blog-sales-ai.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-sales-ai.html</guid>
+      <pubDate>Mon, 18 Nov 2024 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Case Study</category>
+      <description><![CDATA[How MLAIA applied machine learning across the full sales pipeline for Israel's leading telecom company — from lead scoring and churn prediction to AI-assisted call center optimization — driving measurable ROI.]]></description>
+    </item>
+
+    <item>
+      <title>Harness Your Data's Potential with Large Language Models (LLMs)</title>
+      <link>https://www.mlaia.com/blog-llms.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-llms.html</guid>
+      <pubDate>Tue, 05 Sep 2023 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>LLMs &amp; GenAI</category>
+      <description><![CDATA[How large language models unlock hidden value from unstructured text, documents, and knowledge bases. A practical look at fine-tuning, retrieval-augmented generation (RAG), and enterprise LLM deployment for customer support, sales intelligence, and business automation.]]></description>
+    </item>
+
+    <item>
+      <title>Supercharging Machine Learning Models with Classical Digital Signal Processing</title>
+      <link>https://www.mlaia.com/blog-signal.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-signal.html</guid>
+      <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Signal Processing</category>
+      <description><![CDATA[Why combining classical DSP (Fourier transforms, digital filters, wavelets) with modern deep learning produces superior real-time signal intelligence. Practical hybrid DSP-ML architectures applied to industrial, defense, and healthcare sensor data.]]></description>
+    </item>
+
+    <item>
+      <title>Unleashing the Power of Graphs for Machine Learning</title>
+      <link>https://www.mlaia.com/blog-medical.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-medical.html</guid>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Medical AI</category>
+      <description><![CDATA[Graph neural networks (GNNs) are transforming machine learning across social network analysis, bioinformatics, fraud detection, and drug discovery. An exploration of how graph-based models reveal structure in complex, interconnected data.]]></description>
+    </item>
+
+    <item>
+      <title>Expertise Without Boundaries: Affordable AI and ML Development</title>
+      <link>https://www.mlaia.com/blog-bi.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-bi.html</guid>
+      <pubDate>Sun, 30 Jul 2023 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Business Intelligence</category>
+      <description><![CDATA[How the outsourced AI consulting model delivers senior ML expertise to startups and enterprises without the cost and timeline of full-time hiring. Why MLAIA's approach enables faster iteration, lower overhead, and access to PhD-level talent on demand.]]></description>
+    </item>
+
+  </channel>
+</rss>

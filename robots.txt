@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# AI crawlers — welcome to index our content
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap
+Sitemap: https://www.mlaia.com/sitemap.xml
+
+# llms.txt for AI discoverability
+# https://www.mlaia.com/llms.txt
