@@ -128,9 +128,6 @@ h2{font-family:'DM Sans',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weig
 .about-bio .founder-title::before{content:'';display:block;width:18px;height:2px;background:var(--accent);border-radius:2px}
 .about-bio-para{font-size:.97rem;font-weight:300;line-height:1.84;color:var(--muted);margin-bottom:16px}
 .about-bio-para strong{color:var(--text);font-weight:500}
-.about-left h2{font-size:clamp(1.8rem,2.5vw,2.5rem);line-height:1.2}
-
-
 
 .about-clients-inline{padding-top:14px;border-top:1px solid var(--border)}
 .aci-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
@@ -146,7 +143,6 @@ h2{font-family:'DM Sans',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weig
 .al-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;color:#fff;font-size:.85rem;flex-shrink:0}
 .about-leader strong{display:block;font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;color:var(--navy)}
 .about-leader span{font-size:.78rem;line-height:1.55;color:var(--muted);margin-top:2px;display:block}
-.about-left p{margin-top:22px;font-size:1.02rem;font-weight:300;line-height:1.8;color:var(--muted);max-width:480px}
 
 /* Inline acronym */
 .about-acronym-inline{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
@@ -365,14 +361,9 @@ footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
 /* ── RESPONSIVE ── */
 @media(max-width:1200px){.dv-grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr;gap:0}.hero-right{height:320px;margin-top:32px}.hero-stats-row{position:static;margin-top:32px;padding:16px 0 0;border-top:1px solid rgba(255,255,255,.08)}.about{grid-template-columns:240px 1fr;gap:40px}}
 @media(max-width:900px){.about{grid-template-columns:1fr;gap:36px}.about-photo-col{position:static;display:flex;gap:28px;align-items:flex-start}.about-photo{width:180px;flex-shrink:0;aspect-ratio:3/4}.about-photo-creds{flex:1;margin-top:0}}
-@media(max-width:768px){.about{grid-template-columns:1fr;gap:32px}.sv-grid{grid-template-columns:1fr 1fr}.dv-grid{grid-template-columns:1fr}.bl-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.hero,.about,.services,.domains,.blog,.customers,.cta{padding-left:24px;padding-right:24px}nav{padding:0 24px}.hero-actions{flex-direction:column;align-items:flex-start;gap:16px}h1{font-size:clamp(2rem,8vw,3.5rem);word-break:break-word}.about-photo-col{display:block}.about-photo{width:120px;float:left;margin-right:20px;margin-bottom:12px;aspect-ratio:3/4}.about-achievements{grid-template-columns:1fr}.about-photo-creds{clear:left}body{cursor:auto}#cd,#cr,#tc{display:none}.cf-row{grid-template-columns:1fr}footer{flex-direction:column;gap:16px;text-align:center}.hamburger{display:flex}nav ul.nav-links{display:none}nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:103px;left:0;right:0;height:calc(100vh - 103px)!important;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center;overflow-y:auto;animation:navSlideDown .3s ease}nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}nav ul.nav-links.open li a:hover{color:var(--accent2)!important}nav ul.nav-links.open li:last-child{border-bottom:none}nav ul.nav-links.open .nav-cta{background:var(--accent)!important;color:#fff!important;border-radius:6px;padding:14px 28px!important;margin-top:8px;display:inline-block;font-size:1rem!important}}
+@media(max-width:768px){.about{grid-template-columns:1fr;gap:32px}.sv-grid{grid-template-columns:1fr 1fr}.dv-grid{grid-template-columns:1fr}.bl-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.hero,.about,.services,.domains,.blog,.customers,.cta{padding-left:24px;padding-right:24px}nav{padding:0 24px}.hero-actions{flex-direction:column;align-items:flex-start;gap:16px}h1{font-size:clamp(2rem,8vw,3.5rem);word-break:break-word}.about-photo-col{display:block}.about-photo{width:120px;float:left;margin-right:20px;margin-bottom:12px;aspect-ratio:3/4}.about-photo-creds{clear:left}body{cursor:auto}#cd,#cr,#tc{display:none}.cf-row{grid-template-columns:1fr}footer{flex-direction:column;gap:16px;text-align:center}.hamburger{display:flex}nav ul.nav-links{display:none}nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:103px;left:0;right:0;height:calc(100vh - 103px)!important;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center;overflow-y:auto;animation:navSlideDown .3s ease}nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}nav ul.nav-links.open li a:hover{color:var(--accent2)!important}nav ul.nav-links.open li:last-child{border-bottom:none}nav ul.nav-links.open .nav-cta{background:var(--accent)!important;color:#fff!important;border-radius:6px;padding:14px 28px!important;margin-top:8px;display:inline-block;font-size:1rem!important}}
 
 @media(max-width:768px){.hero{padding:80px 20px 40px!important;overflow:hidden;grid-template-columns:1fr!important;min-height:auto!important}.hero-sub{font-size:.95rem}.hero-stats-row{flex-wrap:wrap;gap:12px;justify-content:flex-start}.hero-stats{flex-wrap:wrap;gap:12px;justify-content:flex-start}.hero-stats .stat{font-size:.75rem}.hero-right{display:block!important;height:280px;margin-top:24px;justify-self:center;align-self:center}.mq{overflow:hidden}}
-/* ── ABOUT RIGHT LAYOUT ── */
-.about-left,.about-right{min-width:0}
-.about-right{display:flex;flex-direction:column;gap:14px}
-.about-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.about-cards-grid .ac:first-child{grid-column:1 / -1}
 .about-clients-inline{padding-top:14px;border-top:1px solid var(--border)}
 .aci-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .aci-label{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--accent)}
@@ -624,6 +615,14 @@ h1{animation-delay:.05s!important}
 
     <p class="about-bio-para">
       Dr. Yochai Edlitz brings <strong>20+ years of R&amp;D leadership</strong> across defense intelligence, academic research, and enterprise AI. With a <strong>Ph.D. from the Weizmann Institute</strong> and experience leading elite IDF technology units, he founded MLAIA to bridge the gap between cutting-edge research and production-ready AI systems.
+    </p>
+
+    <p class="about-bio-para">
+      MLAIA operates across five signal domains — real-time signal processing, medical data &amp; clinical AI, enterprise business intelligence, computer vision, and generative AI. Every engagement is designed from day one for production: models that ship, scale, and deliver measurable results in the field, not just in the lab.
+    </p>
+
+    <p class="about-bio-para">
+      Clients include leading defense contractors, hospital systems, fintech platforms, and global retail analytics firms — united by the need for AI that works under real-world constraints. <strong>Every model MLAIA builds goes to production.</strong>
     </p>
 
   </div>
