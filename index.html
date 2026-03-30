@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://www.mlaia.com/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"MLAIA — Machine Learning & AI Approach","alternateName":"MLAIA","url":"https://www.mlaia.com","description":"Machine Learning & AI Approach — production-grade AI consulting.","founder":{"@type":"Person","name":"Dr. Yochai Edlitz","jobTitle":"CEO"},"email":"yochai@mlaia.com","areaServed":"Worldwide"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -450,6 +450,33 @@ h1{animation-delay:.05s!important}
 @media(max-width:768px){
   .logo-strip,.what-we-do,.testi-section,.mid-cta{padding-left:24px!important;padding-right:24px!important}
 }
+
+/* ── LANGUAGE TOGGLE BUTTON ── */
+.nav-lang-btn{background:none;border:1px solid var(--border);border-radius:4px;padding:5px 12px;font-size:.78rem;font-weight:600;color:var(--muted);cursor:none;letter-spacing:.04em;font-family:inherit;transition:color .2s,border-color .2s;text-transform:none;line-height:1}
+.nav-lang-btn:hover{color:var(--navy);border-color:var(--navy)}
+@media(max-width:768px){.nav-lang-btn{color:#fff!important;border-color:rgba(255,255,255,.3)!important;font-size:1.1rem!important;padding:14px 24px!important;cursor:pointer!important}}
+
+/* ── HEBREW / RTL ── */
+html[lang="he"] body{font-family:'Heebo',sans-serif}
+html[lang="he"] nav a{letter-spacing:0}
+html[lang="he"] .logo-tagline{letter-spacing:0}
+html[lang="he"] .hero-kicker{letter-spacing:0}
+html[lang="he"] .sl{letter-spacing:0}
+html[lang="he"] .hstat-lbl{letter-spacing:0}
+html[lang="he"] .hstat{text-align:right}
+html[lang="he"] .bl-tag{letter-spacing:0}
+html[lang="he"] .dv-lbl{letter-spacing:0}
+/* Flip testimonial nav arrows in RTL */
+html[lang="he"] .tc-prev{left:auto;right:-60px}
+html[lang="he"] .tc-next{right:auto;left:-60px}
+@media(max-width:1100px){html[lang="he"] .tc-prev{left:auto;right:-44px}html[lang="he"] .tc-next{right:auto;left:-44px}}
+/* Quote mark on right in RTL */
+html[lang="he"] .tm::before{left:auto;right:32px;content:'\201D'}
+/* RTL: top-border slide from right */
+html[lang="he"] .sc-card::after{transform-origin:right}
+/* Logo banners: reverse scroll in RTL for natural feel */
+html[lang="he"] .logo-banner-track:not(.rev){animation-direction:reverse}
+html[lang="he"] .logo-banner-track.rev{animation-direction:normal}
 </style>
 </head>
 <body>
@@ -476,10 +503,11 @@ h1{animation-delay:.05s!important}
 <nav id="nav">
   <a href="#" class="logo">ML<span>AI</span>A <span class="logo-tagline">Machine Learning &amp; AI Approach</span></a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#domains">Domains</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    <li><a href="#about" data-en="About" data-he="אודות">About</a></li>
+    <li><a href="#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
+    <li><a href="#blog" data-en="Blog" data-he="בלוג">Blog</a></li>
+    <li><a href="#contact" class="nav-cta" data-en="Contact Us" data-he="צור קשר">Contact Us</a></li>
+    <li><button class="nav-lang-btn" id="lang-toggle" onclick="setLang(currentLang==='he'?'en':'he')">עברית</button></li>
   </ul>
   <button class="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -494,28 +522,28 @@ h1{animation-delay:.05s!important}
 
   <div class="hero-left">
     <canvas id="stock-chart" class="hero-stock-chart"></canvas>
-    <div class="hero-kicker">Machine Learning &amp; AI Approach</div>
-    <h1>Your Data,<br><em>Our</em> Expertise</h1>
-    <p class="hero-sub">From raw signals to enterprise decisions — we transform complex data into production-ready intelligence that drives real outcomes.</p>
+    <div class="hero-kicker" data-en="Machine Learning &amp; AI Approach" data-he="למידת מכונה וגישת בינה מלאכותית">Machine Learning &amp; AI Approach</div>
+    <h1 id="hero-h1">Your Data,<br><em>Our</em> Expertise</h1>
+    <p class="hero-sub" data-en="From raw signals to enterprise decisions — we transform complex data into production-ready intelligence that drives real outcomes." data-he="מאותות גולמיים להחלטות ארגוניות — אנחנו הופכים נתונים מורכבים לאינטליגנציה מוכנה לייצור שמניעה תוצאות אמיתיות.">From raw signals to enterprise decisions — we transform complex data into production-ready intelligence that drives real outcomes.</p>
     <div class="hero-actions">
       <a href="#domains" class="btn-p">
-        Explore Solutions
+        <span data-en="Explore Solutions" data-he="גלו פתרונות">Explore Solutions</span>
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="#about" class="btn-o">What is MLAIA?</a>
+      <a href="#about" class="btn-o" data-en="What is MLAIA?" data-he="מה זה MLAIA?">What is MLAIA?</a>
     </div>
 
     <!-- Subtle acronym — inline, minimal -->
     <div class="hero-acronym">
-      <div class="hero-acronym-row"><span class="ha-letters">ML</span><span class="ha-dot"></span><span class="ha-text">Machine Learning</span></div>
-      <div class="hero-acronym-row"><span class="ha-letters">AI</span><span class="ha-dot"></span><span class="ha-text">Artificial Intelligence</span></div>
-      <div class="hero-acronym-row"><span class="ha-letters">A</span><span class="ha-dot"></span><span class="ha-text">Approach</span></div>
+      <div class="hero-acronym-row"><span class="ha-letters">ML</span><span class="ha-dot"></span><span class="ha-text" data-en="Machine Learning" data-he="למידת מכונה">Machine Learning</span></div>
+      <div class="hero-acronym-row"><span class="ha-letters">AI</span><span class="ha-dot"></span><span class="ha-text" data-en="Artificial Intelligence" data-he="בינה מלאכותית">Artificial Intelligence</span></div>
+      <div class="hero-acronym-row"><span class="ha-letters">A</span><span class="ha-dot"></span><span class="ha-text" data-en="Approach" data-he="גישה">Approach</span></div>
     </div>
     <div class="hero-stats-row">
-      <div class="hstat"><span class="hstat-num">20+</span><span class="hstat-lbl">Clients Served</span></div>
-      <div class="hstat"><span class="hstat-num">5</span><span class="hstat-lbl">Core Domains</span></div>
-      <div class="hstat"><span class="hstat-num">100%</span><span class="hstat-lbl">Production Grade</span></div>
-      <div class="hstat"><span class="hstat-num">10y+</span><span class="hstat-lbl">AI Experience</span></div>
+      <div class="hstat"><span class="hstat-num">20+</span><span class="hstat-lbl" data-en="Clients Served" data-he="לקוחות">Clients Served</span></div>
+      <div class="hstat"><span class="hstat-num">5</span><span class="hstat-lbl" data-en="Core Domains" data-he="תחומי ליבה">Core Domains</span></div>
+      <div class="hstat"><span class="hstat-num">100%</span><span class="hstat-lbl" data-en="Production Grade" data-he="ייצור מלא">Production Grade</span></div>
+      <div class="hstat"><span class="hstat-num">10y+</span><span class="hstat-lbl" data-en="AI Experience" data-he="ניסיון AI">AI Experience</span></div>
     </div>
   </div>
 
@@ -524,13 +552,13 @@ h1{animation-delay:.05s!important}
     <canvas id="hero-canvas"></canvas>
   </div>
 
-  <div class="hero-scroll"><div class="hscroll-line"></div>Scroll</div>
+  <div class="hero-scroll"><div class="hscroll-line"></div><span data-en="Scroll" data-he="גלול">Scroll</span></div>
 </section>
 
 <!-- LOGO STRIP (compact, right after hero) -->
 <section class="logo-strip" aria-label="Some of Our Customers">
   <div class="ls-head rv">
-    <div class="ls-label">Some of Our Customers</div>
+    <div class="ls-label" data-en="Some of Our Customers" data-he="חלק מלקוחותינו">Some of Our Customers</div>
   </div>
   <div class="logo-banner rv">
     <div class="logo-banner-track">
@@ -589,9 +617,9 @@ h1{animation-delay:.05s!important}
 <!-- WHAT WE DO -->
 <section class="what-we-do">
   <div class="wwd-inner rv">
-    <div class="sl" style="justify-content:center">What We Do</div>
-    <h2>End-to-End AI, Built for Production</h2>
-    <p class="wwd-text">MLAIA delivers end-to-end machine learning and AI solutions — from research and prototyping to production-grade systems. We partner with enterprises, startups, and research institutions to turn complex data into real business outcomes.</p>
+    <div class="sl" style="justify-content:center" data-en="What We Do" data-he="מה אנחנו עושים">What We Do</div>
+    <h2 data-en="End-to-End AI, Built for Production" data-he="AI מקצה לקצה, בנוי לייצור">End-to-End AI, Built for Production</h2>
+    <p class="wwd-text" data-en="MLAIA delivers end-to-end machine learning and AI solutions — from research and prototyping to production-grade systems. We partner with enterprises, startups, and research institutions to turn complex data into real business outcomes." data-he="MLAIA מספקת פתרונות AI ולמידת מכונה מקצה לקצה — ממחקר ואב-טיפוס ועד מערכות בדרגת ייצור. אנחנו משתפים פעולה עם ארגונים, סטארטאפים ומוסדות מחקר להפוך נתונים מורכבים לתוצאות עסקיות אמיתיות.">MLAIA delivers end-to-end machine learning and AI solutions — from research and prototyping to production-grade systems. We partner with enterprises, startups, and research institutions to turn complex data into real business outcomes.</p>
   </div>
 </section>
 
@@ -607,94 +635,94 @@ h1{animation-delay:.05s!important}
   <!-- Bio column -->
   <div class="about-bio rv d1">
     <h2>Dr. Yochai Edlitz</h2>
-    <div class="founder-title">Founder &amp; CEO, MLAIA</div>
+    <div class="founder-title" data-en="Founder &amp; CEO, MLAIA" data-he="מייסד ומנכ״ל, MLAIA">Founder &amp; CEO, MLAIA</div>
 
-    <p class="about-bio-para">
+    <p class="about-bio-para" id="about-para-1">
       Dr. Yochai Edlitz brings <strong>20+ years of R&amp;D leadership</strong> across defense intelligence, academic research, and enterprise AI. With a <strong>Ph.D. from the Weizmann Institute</strong> and experience leading elite IDF technology units, he founded MLAIA to bridge the gap between cutting-edge research and production-ready AI systems.
     </p>
 
-    <p class="about-bio-para">
+    <p class="about-bio-para" id="about-para-2">
       MLAIA operates across five signal domains — real-time signal processing, medical data &amp; clinical AI, enterprise business intelligence, computer vision, and generative AI. Every engagement is designed from day one for production: models that ship, scale, and deliver measurable results in the field, not just in the lab.
     </p>
 
-    <p class="about-bio-para">
+    <p class="about-bio-para" id="about-para-3">
       Clients include leading defense contractors, hospital systems, fintech platforms, and global retail analytics firms — united by the need for AI that works under real-world constraints. <strong>Every model MLAIA builds goes to production.</strong>
     </p>
   </div>
 
   <!-- Full-width credentials row -->
   <div class="about-creds-row rv">
-    <div class="cred-item"><span class="cred-dot"></span>Ph.D. — Weizmann Institute of Science</div>
-    <div class="cred-item"><span class="cred-dot"></span>20+ years R&amp;D leadership</div>
-    <div class="cred-item"><span class="cred-dot"></span>IDF Elite Intelligence &amp; Tech Units</div>
-    <div class="cred-item"><span class="cred-dot"></span>Published patents &amp; papers in top-tier journals</div>
-    <div class="cred-item"><span class="cred-dot"></span>Multiple patents in signal processing &amp; ML</div>
+    <div class="cred-item"><span class="cred-dot"></span><span data-en="Ph.D. — Weizmann Institute of Science" data-he="דוקטורט — מכון ויצמן למדע">Ph.D. — Weizmann Institute of Science</span></div>
+    <div class="cred-item"><span class="cred-dot"></span><span data-en="20+ years R&amp;D leadership" data-he="20+ שנות ניהול מו״פ">20+ years R&amp;D leadership</span></div>
+    <div class="cred-item"><span class="cred-dot"></span><span data-en="IDF Elite Intelligence &amp; Tech Units" data-he="יחידות מובחרות מודיעין וטכנולוגיה, צה״ל">IDF Elite Intelligence &amp; Tech Units</span></div>
+    <div class="cred-item"><span class="cred-dot"></span><span data-en="Published patents &amp; papers in top-tier journals" data-he="פטנטים ומאמרים בכתבי עת מובילים">Published patents &amp; papers in top-tier journals</span></div>
+    <div class="cred-item"><span class="cred-dot"></span><span data-en="Multiple patents in signal processing &amp; ML" data-he="פטנטים מרובים בעיבוד אותות ולמידת מכונה">Multiple patents in signal processing &amp; ML</span></div>
   </div>
 </section>
 
 <!-- DOMAIN VISUALIZERS — 5 panels -->
 <section class="domains" id="domains">
   <div class="dv-hdr rv">
-    <div class="sl" style="justify-content:center">Technical Depth</div>
-    <h2>Five Signature Domains</h2>
-    <p>Each domain has its own language and toolchain. We speak all five fluently.</p>
+    <div class="sl" style="justify-content:center" data-en="Technical Depth" data-he="עומק טכני">Technical Depth</div>
+    <h2 data-en="Five Signature Domains" data-he="חמישה תחומי מומחיות">Five Signature Domains</h2>
+    <p data-en="Each domain has its own language and toolchain. We speak all five fluently." data-he="לכל תחום שפה וכלים משלו. אנחנו דוברים את כולם ברהיטות.">Each domain has its own language and toolchain. We speak all five fluently.</p>
   </div>
   <div class="dv-grid">
 
     <!-- Signal -->
     <div class="dv-panel sig rv">
       <div class="dv-hd">
-        <div class="dv-lbl">Signal &amp; Audio</div>
-        <h3>Real-Time Signal Processing</h3>
-        <p>Waveforms → intelligent decisions via neural DSP and spectral AI.</p>
+        <div class="dv-lbl" data-en="Signal &amp; Audio" data-he="אות ואודיו">Signal &amp; Audio</div>
+        <h3 data-en="Real-Time Signal Processing" data-he="עיבוד אותות בזמן אמת">Real-Time Signal Processing</h3>
+        <p data-en="Waveforms → intelligent decisions via neural DSP and spectral AI." data-he="צורות גל ← החלטות חכמות דרך DSP נוירוני ו-AI ספקטרלי.">Waveforms → intelligent decisions via neural DSP and spectral AI.</p>
       </div>
       <div class="dv-cw"><canvas id="c-sig"></canvas></div>
       <div class="dv-tags">
-        <span class="dvt sig">FFT</span><span class="dvt sig">Neural Audio</span>
-        <span class="dvt sig">Radar AI</span><span class="dvt sig">Noise Cancel</span>
-        <span class="dvt sig">Edge DSP</span>
+        <span class="dvt sig">FFT</span><span class="dvt sig" data-en="Neural Audio" data-he="אודיו נוירוני">Neural Audio</span>
+        <span class="dvt sig" data-en="Radar AI" data-he="רדאר AI">Radar AI</span><span class="dvt sig" data-en="Noise Cancel" data-he="ביטול רעש">Noise Cancel</span>
+        <span class="dvt sig" data-en="Edge DSP" data-he="DSP קצה">Edge DSP</span>
       </div>
-      <a href="blog-signal.html" class="dv-readmore">Deep dive →</a>
+      <a href="blog-signal.html" class="dv-readmore" data-en="Deep dive →" data-he="← צלילה עמוקה">Deep dive →</a>
     </div>
 
     <!-- Medical -->
     <div class="dv-panel med rv d1">
       <div class="dv-hd">
-        <div class="dv-lbl">Healthcare AI</div>
-        <h3>Medical Data &amp; Clinical AI</h3>
-        <p>HIPAA-compliant AI for biosignals, imaging and clinical NLP.</p>
+        <div class="dv-lbl" data-en="Healthcare AI" data-he="AI רפואי">Healthcare AI</div>
+        <h3 data-en="Medical Data &amp; Clinical AI" data-he="נתונים רפואיים ו-AI קליני">Medical Data &amp; Clinical AI</h3>
+        <p data-en="HIPAA-compliant AI for biosignals, imaging and clinical NLP." data-he="AI תואם HIPAA לאותות ביולוגיים, הדמיה ועיבוד שפה קלינית.">HIPAA-compliant AI for biosignals, imaging and clinical NLP.</p>
       </div>
       <div class="dv-cw"><canvas id="c-med"></canvas></div>
       <div class="dv-tags">
-        <span class="dvt med">ECG / EEG</span><span class="dvt med">Retinal AI</span>
-        <span class="dvt med">Sleep Apnea</span><span class="dvt med">HIPAA</span>
-        <span class="dvt med">Survival</span>
+        <span class="dvt med">ECG / EEG</span><span class="dvt med" data-en="Retinal AI" data-he="AI רשתית">Retinal AI</span>
+        <span class="dvt med" data-en="Sleep Apnea" data-he="דום נשימה">Sleep Apnea</span><span class="dvt med">HIPAA</span>
+        <span class="dvt med" data-en="Survival" data-he="הישרדות">Survival</span>
       </div>
-      <a href="blog-medical.html" class="dv-readmore" style="color:var(--c-medical)">Deep dive →</a>
+      <a href="blog-medical.html" class="dv-readmore" style="color:var(--c-medical)" data-en="Deep dive →" data-he="← צלילה עמוקה">Deep dive →</a>
     </div>
 
     <!-- BI -->
     <div class="dv-panel bi rv d2">
       <div class="dv-hd">
-        <div class="dv-lbl">Business Intelligence</div>
-        <h3>Enterprise BI &amp; Analytics</h3>
-        <p>Raw enterprise data → actionable forecasts and decision pipelines.</p>
+        <div class="dv-lbl" data-en="Business Intelligence" data-he="מודיעין עסקי">Business Intelligence</div>
+        <h3 data-en="Enterprise BI &amp; Analytics" data-he="BI וניתוח ארגוני">Enterprise BI &amp; Analytics</h3>
+        <p data-en="Raw enterprise data → actionable forecasts and decision pipelines." data-he="נתוני ארגון גולמיים ← תחזיות ניתנות לפעולה וצינורות החלטה.">Raw enterprise data → actionable forecasts and decision pipelines.</p>
       </div>
       <div class="dv-cw"><canvas id="c-bi"></canvas></div>
       <div class="dv-tags">
-        <span class="dvt bi">Sales Forecast</span><span class="dvt bi">Churn</span>
-        <span class="dvt bi">KPI Dash</span><span class="dvt bi">Anomaly</span>
-        <span class="dvt bi">Pipelines</span><span class="dvt bi">Ads &amp; Bids</span>
+        <span class="dvt bi" data-en="Sales Forecast" data-he="תחזית מכירות">Sales Forecast</span><span class="dvt bi" data-en="Churn" data-he="נטישה">Churn</span>
+        <span class="dvt bi" data-en="KPI Dash" data-he="דשבורד KPI">KPI Dash</span><span class="dvt bi" data-en="Anomaly" data-he="חריגות">Anomaly</span>
+        <span class="dvt bi" data-en="Pipelines" data-he="צינורות">Pipelines</span><span class="dvt bi" data-en="Ads &amp; Bids" data-he="מודעות והצעות">Ads &amp; Bids</span>
       </div>
-      <a href="blog-bi.html" class="dv-readmore" style="color:var(--c-bi)">Deep dive →</a>
+      <a href="blog-bi.html" class="dv-readmore" style="color:var(--c-bi)" data-en="Deep dive →" data-he="← צלילה עמוקה">Deep dive →</a>
     </div>
 
     <!-- Vision -->
     <div class="dv-panel vis rv d3">
       <div class="dv-hd">
-        <div class="dv-lbl">Computer Vision</div>
-        <h3>Vision AI &amp; Image Intelligence</h3>
-        <p>Detection, segmentation and classification from pixels to production.</p>
+        <div class="dv-lbl" data-en="Computer Vision" data-he="ראייה ממוחשבת">Computer Vision</div>
+        <h3 data-en="Vision AI &amp; Image Intelligence" data-he="AI ראייה ואינטליגנציה תמונתית">Vision AI &amp; Image Intelligence</h3>
+        <p data-en="Detection, segmentation and classification from pixels to production." data-he="זיהוי, פילוח וסיווג מפיקסלים לייצור.">Detection, segmentation and classification from pixels to production.</p>
       </div>
       <div class="dv-cw dv-cw-vis">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Shopping_Center_with_Parking_Lot.jpg/320px-Shopping_Center_with_Parking_Lot.jpg"
@@ -702,27 +730,27 @@ h1{animation-delay:.05s!important}
         <canvas id="c-vis"></canvas>
       </div>
       <div class="dv-tags">
-        <span class="dvt vis">Object Detection</span><span class="dvt vis">Segmentation</span>
-        <span class="dvt vis">OCR</span><span class="dvt vis">Video AI</span>
-        <span class="dvt vis">Edge Vision</span>
+        <span class="dvt vis" data-en="Object Detection" data-he="זיהוי עצמים">Object Detection</span><span class="dvt vis" data-en="Segmentation" data-he="פילוח">Segmentation</span>
+        <span class="dvt vis">OCR</span><span class="dvt vis" data-en="Video AI" data-he="AI וידאו">Video AI</span>
+        <span class="dvt vis" data-en="Edge Vision" data-he="ראייה בקצה">Edge Vision</span>
       </div>
-      <a href="blog.html" class="dv-readmore" style="color:var(--c-vision)">Deep dive →</a>
+      <a href="blog.html" class="dv-readmore" style="color:var(--c-vision)" data-en="Deep dive →" data-he="← צלילה עמוקה">Deep dive →</a>
     </div>
 
     <!-- GenAI -->
     <div class="dv-panel gen rv d3">
       <div class="dv-hd">
-        <div class="dv-lbl">GenAI &amp; LLMs</div>
-        <h3>Large Language Models &amp; Agents</h3>
-        <p>Custom LLMs, RAG pipelines and AI agents for real enterprise tasks.</p>
+        <div class="dv-lbl" data-en="GenAI &amp; LLMs" data-he="GenAI ומודלי שפה">GenAI &amp; LLMs</div>
+        <h3 data-en="Large Language Models &amp; Agents" data-he="מודלי שפה גדולים וסוכנים">Large Language Models &amp; Agents</h3>
+        <p data-en="Custom LLMs, RAG pipelines and AI agents for real enterprise tasks." data-he="מודלי LLM מותאמים, צינורות RAG וסוכני AI למשימות ארגוניות אמיתיות.">Custom LLMs, RAG pipelines and AI agents for real enterprise tasks.</p>
       </div>
       <div class="dv-cw"><canvas id="c-gen"></canvas></div>
       <div class="dv-tags">
-        <span class="dvt gen">RAG</span><span class="dvt gen">Fine-Tuning</span>
-        <span class="dvt gen">Agents</span><span class="dvt gen">On-Prem LLM</span>
-        <span class="dvt gen">Embeddings</span>
+        <span class="dvt gen">RAG</span><span class="dvt gen" data-en="Fine-Tuning" data-he="כיוונון עדין">Fine-Tuning</span>
+        <span class="dvt gen" data-en="Agents" data-he="סוכנים">Agents</span><span class="dvt gen" data-en="On-Prem LLM" data-he="LLM מקומי">On-Prem LLM</span>
+        <span class="dvt gen" data-en="Embeddings" data-he="הטמעות">Embeddings</span>
       </div>
-      <a href="blog-llms.html" class="dv-readmore" style="color:var(--c-genai)">Deep dive →</a>
+      <a href="blog-llms.html" class="dv-readmore" style="color:var(--c-genai)" data-en="Deep dive →" data-he="← צלילה עמוקה">Deep dive →</a>
     </div>
 
   </div>
@@ -731,34 +759,34 @@ h1{animation-delay:.05s!important}
 <!-- TESTIMONIALS -->
 <section class="testi-section" id="customers">
   <div class="testi-hdr rv">
-    <div class="sl" style="justify-content:center">What Clients Say</div>
-    <h2>Trusted by Industry Leaders</h2>
+    <div class="sl" style="justify-content:center" data-en="What Clients Say" data-he="מה אומרים הלקוחות">What Clients Say</div>
+    <h2 data-en="Trusted by Industry Leaders" data-he="אמון של מובילי תעשייה">Trusted by Industry Leaders</h2>
   </div>
   <div class="tc-wrap rv d1">
     <div class="tc-track" id="tc-track">
       <div class="tm tc-active" data-index="0">
-        <p>"I wanted to take a moment to recognize your exceptional work on managing the 'Sand box' project. Your leadership, strategic thinking, and excellent communication skills were instrumental in successfully executing this project."</p>
-        <div class="tm-auth"><div class="tm-av">GL</div><div class="tm-info"><strong>Dr. Gil Levy</strong><span>Head of Innovation, Assuta Ashdod Medical Center</span></div></div>
+        <p data-en="&quot;I wanted to take a moment to recognize your exceptional work on managing the &#39;Sand box&#39; project. Your leadership, strategic thinking, and excellent communication skills were instrumental in successfully executing this project.&quot;" data-he="&quot;רציתי לקחת רגע להכיר בעבודתכם יוצאת הדופן בניהול פרויקט ה-Sandbox. המנהיגות, החשיבה האסטרטגית ויכולות התקשורת המצוינות שלכם היו גורם מכריע בהצלחת הפרויקט הזה.&quot;">"I wanted to take a moment to recognize your exceptional work on managing the 'Sand box' project. Your leadership, strategic thinking, and excellent communication skills were instrumental in successfully executing this project."</p>
+        <div class="tm-auth"><div class="tm-av">GL</div><div class="tm-info"><strong>Dr. Gil Levy</strong><span data-en="Head of Innovation, Assuta Ashdod Medical Center" data-he="ראש חדשנות, המרכז הרפואי אסותא אשדוד">Head of Innovation, Assuta Ashdod Medical Center</span></div></div>
       </div>
       <div class="tm" data-index="1">
-        <p>"I am truly impressed by the innovative ideas and rapid progress your team has made while collaborating with our great team here at RETISPEC. Your collaboration, fresh insights, scientific rigor, and efficient work methods have significantly contributed to our advancements in such a short time. I am excited to see how our partnership continues to flourish, and I am grateful for the expertise you bring to our projects."</p>
+        <p data-en="&quot;I am truly impressed by the innovative ideas and rapid progress your team has made while collaborating with our great team here at RETISPEC. Your collaboration, fresh insights, scientific rigor, and efficient work methods have significantly contributed to our advancements in such a short time. I am excited to see how our partnership continues to flourish, and I am grateful for the expertise you bring to our projects.&quot;" data-he="&quot;אני מרשים מאוד מהרעיונות החדשניים ומהקצב המהיר שהצוות שלכם עשה תוך שיתוף פעולה עם הצוות המצוין שלנו ב-RETISPEC. שיתוף הפעולה, התובנות הרעננות, הדיוק המדעי ושיטות העבודה היעילות תרמו משמעותית להתקדמותנו בזמן קצר כל כך. אני נרגש לראות כיצד השותפות שלנו ממשיכה לפרוח, ואני אסיר תודה על המומחיות שאתם מביאים לפרויקטים שלנו.&quot;">"I am truly impressed by the innovative ideas and rapid progress your team has made while collaborating with our great team here at RETISPEC. Your collaboration, fresh insights, scientific rigor, and efficient work methods have significantly contributed to our advancements in such a short time. I am excited to see how our partnership continues to flourish, and I am grateful for the expertise you bring to our projects."</p>
         <div class="tm-auth"><div class="tm-av">ES</div><div class="tm-info"><strong>Eliav Shaked</strong><span>CEO, RETISPEC</span></div></div>
       </div>
       <div class="tm" data-index="2">
-        <p>"I would like to express my sincere gratitude for your valuable contributions to Silentium, specifically in the fields of digital signal processing, audio, machine learning, and data science. Your expertise and vast knowledge have been instrumental in establishing our AI infrastructure. We look forward to continued engagement and collaboration towards promoting our innovative AI technologies."</p>
+        <p data-en="&quot;I would like to express my sincere gratitude for your valuable contributions to Silentium, specifically in the fields of digital signal processing, audio, machine learning, and data science. Your expertise and vast knowledge have been instrumental in establishing our AI infrastructure. We look forward to continued engagement and collaboration towards promoting our innovative AI technologies.&quot;" data-he="&quot;ברצוני להביע את הכרת תודתי הכנה על תרומתכם לסיליינטיום, ובפרט בתחומי עיבוד אותות דיגיטלי, אודיו, למידת מכונה ומדעי נתונים. המומחיות והידע הרחב שלכם היו גורם מרכזי בביסוס תשתית ה-AI שלנו. אנו מצפים להמשך מעורבות ושיתוף פעולה לקידום הטכנולוגיות החדשניות שלנו.&quot;">"I would like to express my sincere gratitude for your valuable contributions to Silentium, specifically in the fields of digital signal processing, audio, machine learning, and data science. Your expertise and vast knowledge have been instrumental in establishing our AI infrastructure. We look forward to continued engagement and collaboration towards promoting our innovative AI technologies."</p>
         <div class="tm-auth"><div class="tm-av">TF</div><div class="tm-info"><strong>Tzvika Fridman</strong><span>CTO, Silentium</span></div></div>
       </div>
       <div class="tm" data-index="3">
-        <p>"I wanted to express my deep appreciation for your contribution to success of our R&amp;D. The ability to contribute great value in short and long-term endeavors, along with your extensive scientific knowledge in general and in particular in machine learning and data science methods are a great contribution to our success. Wishing to continue this fruitful journey."</p>
+        <p data-en="&quot;I wanted to express my deep appreciation for your contribution to success of our R&amp;D. The ability to contribute great value in short and long-term endeavors, along with your extensive scientific knowledge in general and in particular in machine learning and data science methods are a great contribution to our success. Wishing to continue this fruitful journey.&quot;" data-he="&quot;רציתי להביע את הערכתי העמוקה לתרומתכם להצלחת המו״פ שלנו. היכולת לתרום ערך רב במאמצים לטווח קצר וארוך, יחד עם הידע המדעי הנרחב שלכם בכלל ובפרט בשיטות למידת מכונה ומדעי נתונים, הם תרומה גדולה להצלחתנו. בתקווה להמשיך את המסע הפורה הזה.&quot;">"I wanted to express my deep appreciation for your contribution to success of our R&amp;D. The ability to contribute great value in short and long-term endeavors, along with your extensive scientific knowledge in general and in particular in machine learning and data science methods are a great contribution to our success. Wishing to continue this fruitful journey."</p>
         <div class="tm-auth"><div class="tm-av">YA</div><div class="tm-info"><strong>Yossi Azulai</strong><span>CEO, APPSCENT Ltd.</span></div></div>
       </div>
       <div class="tm" data-index="4">
-        <p>"Professionalism builds infrastructure, creativity gives it unique value, and when you add to that a commitment to the value and meaning of Will-I-Am, it boils down to one word - MLAIA! Thank you!"</p>
+        <p data-en="&quot;Professionalism builds infrastructure, creativity gives it unique value, and when you add to that a commitment to the value and meaning of Will-I-Am, it boils down to one word - MLAIA! Thank you!&quot;" data-he="&quot;מקצועיות בונה תשתית, יצירתיות מעניקה לה ערך ייחודי, וכשמוסיפים לכך מחויבות לערך ולמשמעות של Will-I-Am, זה מסתכם במילה אחת — MLAIA! תודה!&quot;">"Professionalism builds infrastructure, creativity gives it unique value, and when you add to that a commitment to the value and meaning of Will-I-Am, it boils down to one word - MLAIA! Thank you!"</p>
         <div class="tm-auth"><div class="tm-av">EB</div><div class="tm-info"><strong>Efrat Bar-Or</strong><span>CEO, Will-IAm</span></div></div>
       </div>
       <div class="tm" data-index="5">
-        <p>"It's so hard to find data professionals who truly understand the data in depth, across all its layers. Until we met Yohai, who not only met but exceeded all expectations. From understanding the business problem, through deep analysis involving complex analytics, and all the way to top-level data science, resulting in outstanding models that actually solve real-world problems. All of this was done with excellent and enjoyable communication, creativity, flexibility in thinking, and a true sense of partnership along the way."</p>
-        <div class="tm-auth"><div class="tm-av">RG</div><div class="tm-info"><strong>Roy Green</strong><span>VP R&amp;D, Quago</span></div></div>
+        <p data-en="&quot;It's so hard to find data professionals who truly understand the data in depth, across all its layers. Until we met Yohai, who not only met but exceeded all expectations. From understanding the business problem, through deep analysis involving complex analytics, and all the way to top-level data science, resulting in outstanding models that actually solve real-world problems. All of this was done with excellent and enjoyable communication, creativity, flexibility in thinking, and a true sense of partnership along the way.&quot;" data-he="&quot;כל כך קשה למצוא אנשי נתונים שמבינים באמת את הנתונים לעומק, בכל שכבותיהם. עד שפגשנו את יוחאי, שלא רק עמד אלא עלה על כל הציפיות. מהבנת הבעיה העסקית, דרך ניתוח עמוק הכולל אנליטיקה מורכבת, ועד למדעי נתונים ברמה גבוהה — שהניב מודלים יוצאי דופן שפותרים בעיות אמיתיות. כל זה נעשה עם תקשורת מצוינת ומהנה, יצירתיות, גמישות בחשיבה ותחושת שותפות אמיתית לאורך הדרך.&quot;">"It's so hard to find data professionals who truly understand the data in depth, across all its layers. Until we met Yohai, who not only met but exceeded all expectations. From understanding the business problem, through deep analysis involving complex analytics, and all the way to top-level data science, resulting in outstanding models that actually solve real-world problems. All of this was done with excellent and enjoyable communication, creativity, flexibility in thinking, and a true sense of partnership along the way."</p>
+        <div class="tm-auth"><div class="tm-av">RG</div><div class="tm-info"><strong>Roy Green</strong><span data-en="VP R&amp;D, Quago" data-he="סמנכ״ל מו״פ, Quago">VP R&amp;D, Quago</span></div></div>
       </div>
     </div>
     <button class="tc-btn tc-prev" aria-label="Previous testimonial">
@@ -780,49 +808,50 @@ h1{animation-delay:.05s!important}
 
 <!-- MID-PAGE CTA BANNER -->
 <section class="mid-cta">
-  <div class="mid-cta-label rv">Let's Build Something</div>
-  <h2 class="mid-cta-heading rv">Ready to transform your data?<br>Let's talk.</h2>
-  <a href="#contact" class="mid-cta-btn rv">Start a Conversation
+  <div class="mid-cta-label rv" data-en="Let's Build Something" data-he="בואו נבנה משהו">Let's Build Something</div>
+  <h2 class="mid-cta-heading rv" id="mid-cta-h2">Ready to transform your data?<br>Let's talk.</h2>
+  <a href="#contact" class="mid-cta-btn rv">
+    <span data-en="Start a Conversation" data-he="פתחו שיחה">Start a Conversation</span>
     <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
 </section>
 
 <!-- BLOG -->
 <section class="blog" id="blog">
-  <div class="bl-hdr rv"><div><div class="sl">Insights</div><h2>From Our Blog</h2></div><a href="blog.html" class="btn-p" style="background:var(--navy)">All Posts →</a></div>
+  <div class="bl-hdr rv"><div><div class="sl" data-en="Insights" data-he="תובנות">Insights</div><h2 data-en="From Our Blog" data-he="מהבלוג שלנו">From Our Blog</h2></div><a href="blog.html" class="btn-p" style="background:var(--navy)" data-en="All Posts →" data-he="← כל הפוסטים">All Posts →</a></div>
   <div class="bl-grid">
     <a href="blog-slurm.html" class="bl-card bc-infra rv">
-      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)"><canvas class="bl-canvas" id="bv1"></canvas><span class="bl-img-label">Infrastructure</span></div>
-      <div class="bl-body"><div class="bl-tag">Infrastructure</div><h3>Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?</h3><p>A deep dive into the job scheduler powering the world's most advanced AI compute clusters.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)"><canvas class="bl-canvas" id="bv1"></canvas><span class="bl-img-label" data-en="Infrastructure" data-he="תשתיות">Infrastructure</span></div>
+      <div class="bl-body"><div class="bl-tag" data-en="Infrastructure" data-he="תשתיות">Infrastructure</div><h3 data-en="Wait, The World's Fastest AI Supercomputers Run on Something Called &quot;Slurm&quot;?" data-he="רגע, מחשבי-העל המהירים ביותר לAI בעולם רצים על משהו שנקרא &quot;Slurm&quot;?">Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?</h3><p data-en="A deep dive into the job scheduler powering the world's most advanced AI compute clusters." data-he="צלילה עמוקה לתוך מתזמן המשימות המניע את אשכולות המחשוב המתקדמים ביותר בעולם לAI.">A deep dive into the job scheduler powering the world's most advanced AI compute clusters.</p><div class="bl-rm"><span data-en="Read More" data-he="קרא עוד">Read More</span> <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
     <a href="blog-sales-ai.html" class="bl-card bc-sales rv d1">
-      <div class="bl-img" style="background:linear-gradient(160deg,#071818 0%,#0a1e1e 60%,#0d2828 100%)"><canvas class="bl-canvas" id="bv2"></canvas><span class="bl-img-label">Case Study</span></div>
-      <div class="bl-body"><div class="bl-tag">Case Study</div><h3>Transforming Sales with AI: A Success Story with Israel's Leading Telecom</h3><p>Machine learning applied to the full sales pipeline, driving measurable ROI.</p><div class="bl-rm">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div class="bl-img" style="background:linear-gradient(160deg,#071818 0%,#0a1e1e 60%,#0d2828 100%)"><canvas class="bl-canvas" id="bv2"></canvas><span class="bl-img-label" data-en="Case Study" data-he="מקרה מבחן">Case Study</span></div>
+      <div class="bl-body"><div class="bl-tag" data-en="Case Study" data-he="מקרה מבחן">Case Study</div><h3 data-en="Transforming Sales with AI: A Success Story with Israel's Leading Telecom" data-he="שינוי המכירות עם AI: סיפור הצלחה עם חברת הסלולר המובילה בישראל">Transforming Sales with AI: A Success Story with Israel's Leading Telecom</h3><p data-en="Machine learning applied to the full sales pipeline, driving measurable ROI." data-he="למידת מכונה מיושמת על צינור המכירות המלא, להנעת ROI מדיד.">Machine learning applied to the full sales pipeline, driving measurable ROI.</p><div class="bl-rm"><span data-en="Read More" data-he="קרא עוד">Read More</span> <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
     <a href="blog-llms.html" class="bl-card bc-llm rv d2">
       <div class="bl-img" style="background:linear-gradient(160deg,#120820 0%,#1a0a28 60%,#200d30 100%)"><canvas class="bl-canvas" id="bv3"></canvas><span class="bl-img-label">LLMs &amp; GenAI</span></div>
-      <div class="bl-body"><div class="bl-tag" style="color:#7c3aed">LLMs &amp; GenAI</div><h3>Harness Your Data's Potential with Large Language Models</h3><p>How LLMs unlock value from unstructured text, documents and knowledge bases.</p><div class="bl-rm" style="color:#7c3aed">Read More <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div class="bl-body"><div class="bl-tag" style="color:#7c3aed" data-en="LLMs &amp; GenAI" data-he="LLMs וGenAI">LLMs &amp; GenAI</div><h3 data-en="Harness Your Data's Potential with Large Language Models" data-he="נצלו את הפוטנציאל של הנתונים שלכם עם מודלי שפה גדולים">Harness Your Data's Potential with Large Language Models</h3><p data-en="How LLMs unlock value from unstructured text, documents and knowledge bases." data-he="כיצד מודלי LLM פותחים ערך מטקסט לא מובנה, מסמכים ובסיסי ידע.">How LLMs unlock value from unstructured text, documents and knowledge bases.</p><div class="bl-rm" style="color:#7c3aed"><span data-en="Read More" data-he="קרא עוד">Read More</span> <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta" id="contact">
-  <div class="sl rv">Ready to Start?</div>
-  <h2 class="rv" style="color:#fff">Let's Take Your Data<br>from Insight to Impact</h2>
-  <p class="rv d1">Tell us about your data challenge. MLAIA — Machine Learning &amp; AI Approach — will design the solution.</p>
+  <div class="sl rv" data-en="Ready to Start?" data-he="מוכנים להתחיל?">Ready to Start?</div>
+  <h2 class="rv" id="contact-h2" style="color:#fff">Let's Take Your Data<br>from Insight to Impact</h2>
+  <p class="rv d1" data-en="Tell us about your data challenge. MLAIA — Machine Learning &amp; AI Approach — will design the solution." data-he="ספרו לנו על האתגר שלכם בתחום הנתונים. MLAIA — למידת מכונה וגישת AI — תתכנן את הפתרון.">Tell us about your data challenge. MLAIA — Machine Learning &amp; AI Approach — will design the solution.</p>
   <!-- To activate Formspree: replace YOUR_FORMSPREE_ID with the ID from formspree.io/f/xxxxxxxx -->
   <form class="cta-form rv d2" id="contact-form"
         action="https://formspree.io/f/YOUR_FORMSPREE_ID"
         method="POST" onsubmit="handleForm(event)">
     <div class="cf-row">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="text" name="company" placeholder="Company">
+      <input type="text" name="name" data-ph-en="Your Name" data-ph-he="שמך" placeholder="Your Name" required>
+      <input type="text" name="company" data-ph-en="Company" data-ph-he="חברה" placeholder="Company">
     </div>
-    <input type="email" name="email" placeholder="Email Address" required>
-    <textarea name="message" placeholder="Tell us about your project..." rows="3"></textarea>
+    <input type="email" name="email" data-ph-en="Email Address" data-ph-he='כתובת דוא"ל' placeholder="Email Address" required>
+    <textarea name="message" data-ph-en="Tell us about your project..." data-ph-he="ספרו לנו על הפרויקט שלכם..." placeholder="Tell us about your project..." rows="3"></textarea>
     <div class="cf-bottom-row">
-      <button type="submit" class="cf-btn">Send Message →</button>
+      <button type="submit" class="cf-btn" data-en="Send Message →" data-he="שלח הודעה ←">Send Message →</button>
     </div>
   </form>
   <div class="cta-phones rv d3">
@@ -840,14 +869,14 @@ h1{animation-delay:.05s!important}
 
 <!-- FOOTER -->
 <footer>
-  <div><a href="#" class="ft-logo">ML<span>AI</span>A</a><div class="ft-tag">Machine Learning &amp; AI Approach</div></div>
+  <div><a href="#" class="ft-logo">ML<span>AI</span>A</a><div class="ft-tag" data-en="Machine Learning &amp; AI Approach" data-he="למידת מכונה וגישת בינה מלאכותית">Machine Learning &amp; AI Approach</div></div>
   <ul class="ft-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#domains">Domains</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about" data-en="About" data-he="אודות">About</a></li>
+    <li><a href="#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
+    <li><a href="blog.html" data-en="Blog" data-he="בלוג">Blog</a></li>
+    <li><a href="#contact" data-en="Contact" data-he="צור קשר">Contact</a></li>
   </ul>
-  <p>© 2025 MLAIA — Machine Learning &amp; AI Approach</p>
+  <p data-en="© 2025 MLAIA — Machine Learning &amp; AI Approach" data-he="© 2025 MLAIA — למידת מכונה וגישת בינה מלאכותית">© 2025 MLAIA — Machine Learning &amp; AI Approach</p>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
@@ -1772,6 +1801,59 @@ const NAV=document.getElementById('nav');
 addEventListener('scroll',()=>NAV.classList.toggle('sc',scrollY>36));
 const IO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vi');e.target.style.opacity='1';e.target.style.transform='translateY(0)';IO.unobserve(e.target)}})},{threshold:.07});
 document.querySelectorAll('.rv').forEach(el=>IO.observe(el));
+
+/* ══ LANGUAGE TOGGLE ══ */
+let currentLang='en';
+
+// Rich-HTML translations (elements containing <br>, <em>, <strong>)
+const RICH_TRANS=[
+  {id:'hero-h1',
+   en:'Your Data,<br><em>Our</em> Expertise',
+   he:'הנתונים שלך,<br><em>המומחיות</em> שלנו'},
+  {id:'mid-cta-h2',
+   en:'Ready to transform your data?<br>Let\'s talk.',
+   he:'מוכנים להפוך את הנתונים שלכם?<br>בואו נדבר.'},
+  {id:'contact-h2',
+   en:"Let's Take Your Data<br>from Insight to Impact",
+   he:'נהפוך את הנתונים שלכם<br>מתובנה להשפעה'},
+  {id:'about-para-1',
+   en:'Dr. Yochai Edlitz brings <strong>20+ years of R&amp;D leadership</strong> across defense intelligence, academic research, and enterprise AI. With a <strong>Ph.D. from the Weizmann Institute</strong> and experience leading elite IDF technology units, he founded MLAIA to bridge the gap between cutting-edge research and production-ready AI systems.',
+   he:'ד\u05f4ר יוחאי עדלית מביא <strong>20+ שנות ניהול מו\u05f4פ</strong> בתחומי המודיעין הביטחוני, המחקר האקדמי ו-AI ארגוני. עם <strong>דוקטורט ממכון ויצמן למדע</strong> וניסיון בהובלת יחידות טכנולוגיה מובחרות בצה\u05f4ל, הוא ייסד את MLAIA לגשר בין מחקר חדשני למערכות AI מוכנות לייצור.'},
+  {id:'about-para-2',
+   en:'MLAIA operates across five signal domains \u2014 real-time signal processing, medical data &amp; clinical AI, enterprise business intelligence, computer vision, and generative AI. Every engagement is designed from day one for production: models that ship, scale, and deliver measurable results in the field, not just in the lab.',
+   he:'MLAIA \u05e4\u05d5\u05e2\u05dc\u05ea \u05d1\u05d7\u05de\u05d9\u05e9\u05d4 \u05ea\u05d7\u05d5\u05de\u05d9 \u05d0\u05d5\u05ea \u2014 \u05e2\u05d9\u05d1\u05d5\u05d3 \u05d0\u05d5\u05ea\u05d5\u05ea \u05d1\u05d6\u05de\u05df \u05d0\u05de\u05ea, \u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05e8\u05e4\u05d5\u05d0\u05d9\u05d9\u05dd \u05d5-AI \u05e7\u05dc\u05d9\u05e0\u05d9, \u05de\u05d5\u05d3\u05d9\u05e2\u05d9\u05df \u05e2\u05e1\u05e7\u05d9 \u05d0\u05e8\u05d2\u05d5\u05e0\u05d9, \u05e8\u05d0\u05d9\u05d9\u05d4 \u05de\u05de\u05d5\u05d7\u05e9\u05d1\u05ea \u05d5-AI \u05d2\u05e0\u05e8\u05d8\u05d9\u05d1\u05d9. \u05db\u05dc \u05de\u05e2\u05d5\u05e8\u05d1\u05d5\u05ea \u05de\u05ea\u05d5\u05db\u05e0\u05e0\u05ea \u05de\u05d4\u05d9\u05d5\u05dd \u05d4\u05e8\u05d0\u05e9\u05d5\u05df \u05dc\u05d9\u05d9\u05e6\u05d5\u05e8: \u05de\u05d5\u05d3\u05dc\u05d9\u05dd \u05e9\u05de\u05d2\u05d9\u05e2\u05d9\u05dd \u05dc\u05e9\u05d5\u05e7, \u05de\u05ea\u05e8\u05d7\u05d1\u05d9\u05dd \u05d5\u05de\u05e1\u05e4\u05e7\u05d9\u05dd \u05ea\u05d5\u05e6\u05d0\u05d5\u05ea \u05de\u05d3\u05d9\u05d3\u05d5\u05ea \u05d1\u05e9\u05d8\u05d7, \u05dc\u05d0 \u05e8\u05e7 \u05d1\u05de\u05e2\u05d1\u05d3\u05d4.'},
+  {id:'about-para-3',
+   en:'Clients include leading defense contractors, hospital systems, fintech platforms, and global retail analytics firms \u2014 united by the need for AI that works under real-world constraints. <strong>Every model MLAIA builds goes to production.</strong>',
+   he:'\u05d4\u05dc\u05e7\u05d5\u05d7\u05d5\u05ea \u05db\u05d5\u05dc\u05dc\u05d9\u05dd \u05e7\u05d1\u05dc\u05e0\u05d9 \u05d1\u05d9\u05d8\u05d7\u05d5\u05df \u05de\u05d5\u05d1\u05d9\u05dc\u05d9\u05dd, \u05de\u05e2\u05e8\u05db\u05d5\u05ea \u05d1\u05ea\u05d9 \u05d7\u05d5\u05dc\u05d9\u05dd, \u05e4\u05dc\u05d8\u05e4\u05d5\u05e8\u05de\u05d5\u05ea \u05e4\u05d9\u05e0\u05d8\u05e7 \u05d5\u05d7\u05d1\u05e8\u05d5\u05ea \u05d0\u05e0\u05dc\u05d9\u05d8\u05d9\u05e7\u05d4 \u05e7\u05de\u05e2\u05d5\u05e0\u05d0\u05d9\u05ea \u05e2\u05d5\u05dc\u05de\u05d9\u05d5\u05ea \u2014 \u05db\u05d5\u05dc\u05dd \u05de\u05d0\u05d5\u05d7\u05d3\u05d9\u05dd \u05d1\u05e6\u05d5\u05e8\u05da \u05d1-AI \u05e9\u05e2\u05d5\u05d1\u05d3 \u05ea\u05d7\u05ea \u05d0\u05d9\u05dc\u05d5\u05e6\u05d9\u05dd \u05e9\u05dc \u05d4\u05e2\u05d5\u05dc\u05dd \u05d4\u05d0\u05de\u05d9\u05ea\u05d9. <strong>\u05db\u05dc \u05de\u05d5\u05d3\u05dc \u05e9\u05d1\u05d5\u05e0\u05d4 MLAIA \u05de\u05d2\u05d9\u05e2 \u05dc\u05d9\u05d9\u05e6\u05d5\u05e8.</strong>'},
+];
+
+function setLang(lang){
+  currentLang=lang;
+  const isHe=lang==='he';
+  const htmlEl=document.documentElement;
+  htmlEl.lang=lang;
+  htmlEl.dir=isHe?'rtl':'ltr';
+
+  // All [data-en]/[data-he] elements — innerHTML handles plain text + simple tags
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    el.innerHTML=isHe?el.dataset.he:el.dataset.en;
+  });
+
+  // Input/textarea placeholders
+  document.querySelectorAll('[data-ph-en]').forEach(el=>{
+    el.placeholder=isHe?el.dataset.phHe:el.dataset.phEn;
+  });
+
+  // Rich-HTML elements (bio paragraphs, hero h1, contact heading)
+  RICH_TRANS.forEach(({id,en,he})=>{
+    const el=document.getElementById(id);
+    if(el)el.innerHTML=isHe?he:en;
+  });
+
+  // Update lang toggle button label
+  const btn=document.getElementById('lang-toggle');
+  if(btn)btn.textContent=isHe?'English':'\u05e2\u05d1\u05e8\u05d9\u05ea';
+}
 </script>
 </body>
 </html>
