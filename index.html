@@ -500,6 +500,47 @@ html[lang="he"] .sc-card::after{transform-origin:right}
 /* Logo banners: reverse scroll in RTL for natural feel */
 html[lang="he"] .logo-banner-track:not(.rev){animation-name:logo-scroll-rtl;animation-direction:normal}
 html[lang="he"] .logo-banner-track.rev{animation-name:logo-scroll-rtl;animation-direction:reverse}
+
+/* ── ACCESSIBILITY WIDGET ── */
+#a11y-btn{position:fixed;bottom:24px;left:24px;z-index:99995;width:52px;height:52px;border-radius:50%;background:var(--navy);border:2px solid rgba(0,87,255,.4);color:#fff;font-size:1.5rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 24px rgba(0,0,0,.4);line-height:1;padding:0}
+#a11y-btn:hover,#a11y-btn:focus{background:var(--accent);outline:3px solid var(--accent2);outline-offset:2px;transform:scale(1.08);box-shadow:0 8px 28px rgba(0,87,255,.5)}
+#a11y-btn[aria-expanded="true"]{background:var(--accent)}
+#a11y-panel{position:fixed;bottom:84px;left:24px;z-index:99994;width:300px;max-height:80vh;overflow-y:auto;background:var(--navy);border:1px solid rgba(255,255,255,.1);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.55);padding:20px;opacity:0;transform:translateY(12px) scale(.97);pointer-events:none;transition:opacity .22s ease,transform .22s ease}
+#a11y-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+html[dir="rtl"] #a11y-btn{left:auto;right:24px}
+html[dir="rtl"] #a11y-panel{left:auto;right:24px}
+.a11y-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.a11y-title{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;color:#fff;letter-spacing:.04em}
+.a11y-close{background:none;border:none;color:rgba(255,255,255,.4);font-size:1.2rem;cursor:pointer;padding:2px 6px;border-radius:4px;transition:color .15s;line-height:1}
+.a11y-close:hover,.a11y-close:focus{color:#fff;outline:1px solid rgba(255,255,255,.3)}
+.a11y-controls{display:flex;flex-direction:column;gap:6px}
+.a11y-control{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.04);transition:background .15s,border-color .15s;cursor:pointer}
+.a11y-control:hover,.a11y-control:focus-within{background:rgba(255,255,255,.08);border-color:rgba(0,87,255,.35)}
+.a11y-control-label{font-size:.8rem;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:9px;pointer-events:none;flex:1}
+.a11y-ic{font-size:.95rem;flex-shrink:0}
+.a11y-toggle{appearance:none;-webkit-appearance:none;width:36px;height:20px;background:rgba(255,255,255,.15);border-radius:10px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;margin:0}
+.a11y-toggle::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s,background .2s}
+.a11y-toggle:checked{background:var(--accent)}
+.a11y-toggle:checked::after{transform:translateX(16px)}
+.a11y-toggle:focus{outline:2px solid var(--accent2);outline-offset:2px}
+.a11y-stepper{display:flex;align-items:center;gap:6px}
+.a11y-step-btn{width:28px;height:28px;border-radius:6px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;flex-shrink:0;line-height:1;padding:0}
+.a11y-step-btn:hover,.a11y-step-btn:focus{background:var(--accent);border-color:var(--accent);outline:none}
+.a11y-step-val{font-size:.75rem;color:rgba(255,255,255,.6);min-width:30px;text-align:center}
+.a11y-reset-btn{width:100%;margin-top:10px;padding:9px;border-radius:8px;border:1px solid rgba(255,87,87,.25);background:rgba(255,87,87,.08);color:rgba(255,110,110,.9);font-size:.78rem;font-weight:600;cursor:pointer;letter-spacing:.04em;transition:background .15s,border-color .15s;font-family:'DM Sans',sans-serif}
+.a11y-reset-btn:hover,.a11y-reset-btn:focus{background:rgba(255,87,87,.2);border-color:rgba(255,87,87,.5);outline:none}
+.a11y-stmt-link{display:block;text-align:center;margin-top:10px;font-size:.72rem;color:rgba(0,180,216,.75);text-decoration:underline;transition:color .15s;padding:4px}
+.a11y-stmt-link:hover,.a11y-stmt-link:focus{color:var(--accent2);outline:none}
+/* Applied accessibility body-states */
+body.a11y-hc{filter:contrast(1.6) brightness(.9)}
+body.a11y-gs{filter:grayscale(1)}
+body.a11y-hc.a11y-gs{filter:contrast(1.6) brightness(.9) grayscale(1)}
+body.a11y-hl a{background:rgba(255,255,0,.22)!important;text-decoration:underline!important;outline:1px solid rgba(255,220,0,.45);text-underline-offset:2px}
+body.a11y-font *{font-family:'Courier New',Courier,monospace!important}
+body.a11y-no-anim *,body.a11y-no-anim *::before,body.a11y-no-anim *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+body.a11y-spacing{letter-spacing:.12em;word-spacing:.16em;line-height:2}
+body.a11y-bigcursor,body.a11y-bigcursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpolygon points='8,2 8,32 15,24 21,38 25,36 19,22 28,22' fill='%23000' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E") 2 2,pointer!important}
+body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </style>
 <script type="application/ld+json">
 {
@@ -1950,6 +1991,53 @@ function setLang(lang){
   if(btn)btn.textContent=isHe?'English':'\u05e2\u05d1\u05e8\u05d9\u05ea';
 }
 
+/* ══ ACCESSIBILITY WIDGET ══ */
+document.addEventListener('DOMContentLoaded',function(){
+  const STORE_KEY='mlaia-a11y';
+  const btn=document.getElementById('a11y-btn');
+  const panel=document.getElementById('a11y-panel');
+  const closeBtn=document.getElementById('a11y-close');
+  const resetBtn=document.getElementById('a11y-reset');
+  const fontValEl=document.getElementById('a11y-font-val');
+  const fontInc=document.getElementById('a11y-font-inc');
+  const fontDec=document.getElementById('a11y-font-dec');
+  const DEFAULTS={fs:100,hc:false,gs:false,hl:false,rfont:false,noAnim:false,spacing:false,bigcursor:false};
+  let state=Object.assign({},DEFAULTS);
+  try{const s=localStorage.getItem(STORE_KEY);if(s)Object.assign(state,JSON.parse(s))}catch(e){}
+  const CLASS_MAP={hc:'a11y-hc',gs:'a11y-gs',hl:'a11y-hl',rfont:'a11y-font',noAnim:'a11y-no-anim',spacing:'a11y-spacing',bigcursor:'a11y-bigcursor'};
+  function save(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state))}catch(e){}}
+  function applyAll(){
+    document.documentElement.style.fontSize=state.fs+'%';
+    if(fontValEl)fontValEl.textContent=state.fs+'%';
+    Object.entries(CLASS_MAP).forEach(([k,cls])=>document.body.classList.toggle(cls,!!state[k]));
+    document.querySelectorAll('.a11y-toggle[data-key]').forEach(cb=>{cb.checked=!!state[cb.dataset.key]});
+  }
+  applyAll();
+  function openPanel(){panel.classList.add('open');btn.setAttribute('aria-expanded','true');setTimeout(()=>panel.focus(),50)}
+  function closePanel(){panel.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.focus()}
+  btn.addEventListener('click',()=>panel.classList.contains('open')?closePanel():openPanel());
+  if(closeBtn)closeBtn.addEventListener('click',closePanel);
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&panel.classList.contains('open')){closePanel();return}
+    if(e.key==='Tab'&&panel.classList.contains('open')){
+      const focusable=[...panel.querySelectorAll('button,input[type="checkbox"],[href]')];
+      if(!focusable.length)return;
+      const first=focusable[0],last=focusable[focusable.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+    }
+  });
+  document.addEventListener('click',e=>{
+    if(panel.classList.contains('open')&&!panel.contains(e.target)&&e.target!==btn)closePanel();
+  });
+  if(fontInc)fontInc.addEventListener('click',()=>{if(state.fs<150){state.fs+=10;applyAll();save()}});
+  if(fontDec)fontDec.addEventListener('click',()=>{if(state.fs>70){state.fs-=10;applyAll();save()}});
+  document.querySelectorAll('.a11y-toggle[data-key]').forEach(cb=>{
+    cb.addEventListener('change',function(){state[this.dataset.key]=this.checked;applyAll();save()});
+  });
+  if(resetBtn)resetBtn.addEventListener('click',()=>{state=Object.assign({},DEFAULTS);applyAll();save()});
+});
+
 // ── COOKIE CONSENT ──
 (function(){
   const COOKIE_KEY='mlaia-cookie-consent';
@@ -1970,5 +2058,54 @@ function setLang(lang){
   });
 })();
 </script>
+
+<!-- ── ACCESSIBILITY WIDGET ── -->
+<button id="a11y-btn" aria-label="Accessibility tools / כלי נגישות" aria-expanded="false" aria-controls="a11y-panel">♿</button>
+<div id="a11y-panel" role="dialog" aria-label="Accessibility options" tabindex="-1">
+  <div class="a11y-header">
+    <span class="a11y-title" data-en="Accessibility Tools" data-he="כלי נגישות">Accessibility Tools</span>
+    <button class="a11y-close" id="a11y-close" aria-label="Close accessibility panel">✕</button>
+  </div>
+  <div class="a11y-controls">
+    <div class="a11y-control" style="cursor:default">
+      <span class="a11y-control-label"><span class="a11y-ic">🔤</span><span data-en="Font Size" data-he="גודל גופן">Font Size</span></span>
+      <div class="a11y-stepper">
+        <button class="a11y-step-btn" id="a11y-font-dec" aria-label="Decrease font size">−</button>
+        <span class="a11y-step-val" id="a11y-font-val">100%</span>
+        <button class="a11y-step-btn" id="a11y-font-inc" aria-label="Increase font size">+</button>
+      </div>
+    </div>
+    <label class="a11y-control">
+      <span class="a11y-control-label"><span class="a11y-ic">🔳</span><span data-en="High Contrast" data-he="ניגודיות גבוהה">High Contrast</span></span>
+      <input type="checkbox" class="a11y-toggle" id="a11y-hc" data-key="hc" aria-label="High contrast mode">
+    </label>
+    <label class="a11y-control">
+      <span class="a11y-control-label"><span class="a11y-ic">🌫️</span><span data-en="Grayscale" data-he="גווני אפור">Grayscale</span></span>
+      <input type="checkbox" class="a11y-toggle" id="a11y-gs" data-key="gs" aria-label="Grayscale mode">
+    </label>
+    <label class="a11y-control">
+      <span class="a11y-control-label"><span class="a11y-ic">🔗</span><span data-en="Highlight Links" data-he="הדגשת קישורים">Highlight Links</span></span>
+      <input type="checkbox" class="a11y-toggle" id="a11y-hl" data-key="hl" aria-label="Highlight all links">
+    </label>
+    <label class="a11y-control">
+      <span class="a11y-control-label"><span class="a11y-ic">📖</span><span data-en="Readable Font" data-he="גופן קריא">Readable Font</span></span>
+      <input type="checkbox" class="a11y-toggle" id="a11y-rfont" data-key="rfont" aria-label="Switch to readable font">
+    </label>
+    <label class="a11y-control">
+      <span class="a11y-control-label"><span class="a11y-ic">⏸️</span><span data-en="Stop Animations" data-he="עצירת אנימציות">Stop Animations</span></span>
+      <input type="checkbox" class="a11y-toggle" id="a11y-noAnim" data-key="noAnim" aria-label="Stop all animations">
+    </label>
+    <label class="a11y-control">
+      <span class="a11y-control-label"><span class="a11y-ic">↔️</span><span data-en="Text Spacing" data-he="מרווח טקסט">Text Spacing</span></span>
+      <input type="checkbox" class="a11y-toggle" id="a11y-spacing" data-key="spacing" aria-label="Increase text spacing">
+    </label>
+    <label class="a11y-control">
+      <span class="a11y-control-label"><span class="a11y-ic">🖱️</span><span data-en="Large Cursor" data-he="סמן גדול">Large Cursor</span></span>
+      <input type="checkbox" class="a11y-toggle" id="a11y-bigcursor" data-key="bigcursor" aria-label="Show large cursor">
+    </label>
+  </div>
+  <button class="a11y-reset-btn" id="a11y-reset" data-en="↺ Reset All Settings" data-he="↺ איפוס הגדרות">↺ Reset All Settings</button>
+  <a class="a11y-stmt-link" href="accessibility.html" data-en="Accessibility Statement →" data-he="← הצהרת נגישות">Accessibility Statement →</a>
+</div>
 </body>
 </html>
