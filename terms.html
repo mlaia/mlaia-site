@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use — MLAIA</title>
+<meta name="description" content="MLAIA website terms of use — governing conditions for access to and use of mlaia.com.">
+<link rel="canonical" href="https://www.mlaia.com/terms">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f4f6fb;--white:#fff;--navy:#0a1628;--navy2:#0f2044;
+  --accent:#0057ff;--accent2:#00b4d8;--border:#dce3f0;
+  --muted:#6b7a99;--text:#2d3a55;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
+body.rtl{font-family:'Heebo',sans-serif}
+
+/* CURSOR */
+#cd{width:7px;height:7px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .18s,height .18s,background .2s}
+#cr{width:36px;height:36px;border:1.5px solid rgba(0,87,255,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .28s,height .28s,border-color .25s,background .25s}
+body.ch #cd{width:13px;height:13px;background:var(--accent2)}
+body.ch #cr{width:54px;height:54px;border-color:rgba(0,180,216,.55)}
+body.ck #cd{width:5px;height:5px}
+body.ck #cr{width:22px;height:22px}
+@media(max-width:768px){body{cursor:auto}#cd,#cr{display:none}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 64px;height:66px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.sc{box-shadow:0 2px 20px rgba(10,22,40,.07)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--navy);letter-spacing:-.02em;text-decoration:none}
+.logo span{color:var(--accent)}
+nav ul{list-style:none;display:flex;gap:32px;align-items:center}
+nav a{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+nav a:hover{color:var(--navy)}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:9px 22px;border-radius:6px;font-size:.8rem!important;font-weight:600!important;transition:background .2s,transform .2s!important}
+.nav-cta:hover{background:var(--navy)!important;transform:translateY(-1px)}
+.nav-lang-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:5px;font-size:.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;letter-spacing:.06em;transition:color .2s,border-color .2s}
+.nav-lang-btn:hover{color:var(--navy);border-color:var(--navy)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px 4px;z-index:1002}
+.hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:transform .3s,opacity .3s}
+
+/* PAGE HERO */
+.page-hero{background:var(--navy);padding:120px 64px 72px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,87,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,87,255,.055) 1px,transparent 1px);background-size:54px 54px;pointer-events:none}
+.page-hero-orb{position:absolute;top:-10%;right:-10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(0,87,255,.18) 0%,transparent 60%);pointer-events:none}
+.page-hero-inner{position:relative;z-index:2;max-width:900px}
+.page-kicker{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.page-kicker::before{content:'';display:block;width:22px;height:1px;background:var(--accent2)}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:20px}
+.page-hero p{font-size:1rem;font-weight:300;line-height:1.78;color:rgba(255,255,255,.52);max-width:540px}
+
+/* CONTENT */
+.legal-body{padding:72px 64px 110px;background:var(--bg)}
+.legal-inner{max-width:900px;margin:0 auto}
+.legal-inner h2{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:700;color:var(--navy);margin:48px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--accent);display:inline-block}
+.legal-inner p{font-size:.95rem;line-height:1.8;color:var(--text);margin-bottom:14px}
+.legal-inner ul{margin:10px 0 14px 24px}
+.legal-inner li{font-size:.95rem;line-height:1.75;color:var(--text);margin-bottom:6px}
+.legal-inner a{color:var(--accent);text-decoration:none}
+.legal-inner a:hover{text-decoration:underline}
+.legal-meta{display:flex;gap:32px;flex-wrap:wrap;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin-bottom:48px}
+.legal-meta-item{display:flex;flex-direction:column;gap:3px}
+.legal-meta-label{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.legal-meta-value{font-size:.88rem;color:var(--navy);font-weight:500}
+.notice-box{background:rgba(0,87,255,.05);border:1px solid rgba(0,87,255,.15);border-radius:10px;padding:18px 22px;margin-bottom:36px}
+.notice-box p{margin:0;font-size:.88rem;color:var(--navy);line-height:1.72}
+
+/* FOOTER */
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:28px 64px}
+.ft-main{display:flex;justify-content:space-between;align-items:center}
+.ft-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;text-decoration:none}
+.ft-logo span{color:var(--accent2)}
+.ft-tag{font-size:.62rem;color:rgba(255,255,255,.28);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.ft-links{display:flex;gap:24px;list-style:none}
+.ft-links a{text-decoration:none;color:rgba(255,255,255,.35);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.ft-links a:hover{color:#fff}
+footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
+.ft-legal{display:flex;gap:20px;list-style:none;justify-content:center;padding-top:16px;margin-top:16px;border-top:1px solid rgba(255,255,255,.05)}
+.ft-legal a{text-decoration:none;color:rgba(255,255,255,.25);font-size:.7rem;letter-spacing:.05em;transition:color .2s}
+.ft-legal a:hover{color:rgba(255,255,255,.7)}
+
+@media(max-width:768px){
+  nav{padding:0 24px}
+  .page-hero{padding:90px 24px 52px}
+  .legal-body{padding:48px 24px 72px}
+  .hamburger{display:flex}
+  nav ul.nav-links{display:none}
+  footer{padding:28px 24px}
+  .ft-main{flex-direction:column;gap:16px;text-align:center}
+  .ft-legal{flex-wrap:wrap;gap:14px}
+  nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center}
+  nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}
+  nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase}
+}
+</style>
+</head>
+<body>
+<div id="cd"></div>
+<div id="cr"></div>
+
+<nav id="nav">
+  <a href="index.html" class="logo">ML<span>AI</span>A</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');document.getElementById('nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#about" data-en="About" data-he="אודות">About</a></li>
+    <li><a href="index.html#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
+    <li><a href="blog.html" data-en="Blog" data-he="בלוג">Blog</a></li>
+    <li><a href="index.html#contact" class="nav-cta" data-en="Contact Us" data-he="צור קשר">Contact Us</a></li>
+    <li><button class="nav-lang-btn" id="lang-toggle" onclick="setLang(currentLang==='he'?'en':'he')">עברית</button></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-orb"></div>
+  <div class="page-hero-inner">
+    <div class="page-kicker" data-en="Legal &amp; Compliance" data-he="משפטי ורגולציה">Legal &amp; Compliance</div>
+    <h1 data-en="Terms of Use" data-he="תנאי שימוש">Terms of Use</h1>
+    <p data-en="Please read these terms carefully before using the MLAIA website. By accessing mlaia.com you agree to be bound by these terms." data-he="אנא קראו תנאים אלה בקפידה לפני השימוש באתר MLAIA. בגישה ל-mlaia.com אתם מסכימים לתנאים אלה.">Please read these terms carefully before using the MLAIA website. By accessing mlaia.com you agree to be bound by these terms.</p>
+  </div>
+</div>
+
+<div class="legal-body">
+<div class="legal-inner">
+
+<div class="legal-meta">
+  <div class="legal-meta-item">
+    <span class="legal-meta-label" data-en="Effective Date" data-he="תאריך כניסה לתוקף">Effective Date</span>
+    <span class="legal-meta-value">March 2025</span>
+  </div>
+  <div class="legal-meta-item">
+    <span class="legal-meta-label" data-en="Governing Law" data-he="דין החל">Governing Law</span>
+    <span class="legal-meta-value" data-en="State of Israel" data-he="מדינת ישראל">State of Israel</span>
+  </div>
+  <div class="legal-meta-item">
+    <span class="legal-meta-label" data-en="Contact" data-he="יצירת קשר">Contact</span>
+    <span class="legal-meta-value"><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></span>
+  </div>
+</div>
+
+<div class="notice-box">
+  <p data-en="These terms govern your use of the MLAIA website (mlaia.com) operated by MLAIA, Israel. The site provides informational content about AI and data science consulting services — it does not constitute a contractual offer or professional advice." data-he="תנאים אלה חלים על השימוש שלכם באתר MLAIA (mlaia.com), המופעל על ידי MLAIA, ישראל. האתר מספק תוכן מידע על שירותי ייעוץ AI ומדעי נתונים — הוא אינו מהווה הצעה חוזית או ייעוץ מקצועי.">These terms govern your use of the MLAIA website (mlaia.com) operated by MLAIA, Israel. The site provides informational content about AI and data science consulting services — it does not constitute a contractual offer or professional advice.</p>
+</div>
+
+<h2 data-en="1. Acceptance of Terms" data-he="1. קבלת התנאים">1. Acceptance of Terms</h2>
+<p data-en="By accessing or using this website, you confirm that you have read, understood and agree to be bound by these Terms of Use and our Privacy Policy. If you do not agree, please do not use this site." data-he="בגישה לאתר או בשימוש בו, אתם מאשרים כי קראתם, הבנתם ואתם מסכימים להיות כבולים בתנאי שימוש אלה ובמדיניות הפרטיות שלנו. אם אינכם מסכימים, אנא אל תשתמשו באתר זה.">By accessing or using this website, you confirm that you have read, understood and agree to be bound by these Terms of Use and our Privacy Policy. If you do not agree, please do not use this site.</p>
+
+<h2 data-en="2. Permitted Use" data-he="2. שימוש מותר">2. Permitted Use</h2>
+<p data-en="You may use this site solely for lawful purposes and in a manner consistent with these terms. Permitted uses include:" data-he="מותר להשתמש באתר זה אך ורק למטרות חוקיות ובאופן העולה בקנה אחד עם תנאים אלה. שימושים מותרים כוללים:">You may use this site solely for lawful purposes and in a manner consistent with these terms. Permitted uses include:</p>
+<ul>
+  <li data-en="Browsing informational content about MLAIA's services." data-he="עיון בתוכן מידעי על שירותי MLAIA.">Browsing informational content about MLAIA's services.</li>
+  <li data-en="Submitting a contact inquiry via the contact form." data-he="הגשת פנייה דרך טופס יצירת קשר.">Submitting a contact inquiry via the contact form.</li>
+  <li data-en="Reading blog articles for informational and educational purposes." data-he="קריאת מאמרי בלוג למטרות מידע וחינוך.">Reading blog articles for informational and educational purposes.</li>
+</ul>
+
+<h2 data-en="3. Prohibited Use" data-he="3. שימוש אסור">3. Prohibited Use</h2>
+<p data-en="You may not:" data-he="אינכם רשאים:">You may not:</p>
+<ul>
+  <li data-en="Use this site in any way that violates applicable Israeli or international laws or regulations." data-he="להשתמש באתר בכל דרך שמפרה חוקים או תקנות ישראליים או בינלאומיים חלים.">Use this site in any way that violates applicable Israeli or international laws or regulations.</li>
+  <li data-en="Attempt to gain unauthorised access to any part of the site or its infrastructure." data-he="לנסות לקבל גישה בלתי מורשית לכל חלק של האתר או לתשתיתו.">Attempt to gain unauthorised access to any part of the site or its infrastructure.</li>
+  <li data-en="Scrape, crawl or systematically extract data from this site without prior written permission." data-he="לבצע סריקה, כריסום או חילוץ שיטתי של נתונים מאתר זה ללא אישור מראש בכתב.">Scrape, crawl or systematically extract data from this site without prior written permission.</li>
+  <li data-en="Transmit any unsolicited or unauthorised advertising, spam or promotional materials." data-he="להעביר כל פרסום, ספאם או חומרים קידום מכירות לא מבוקשים או לא מורשים.">Transmit any unsolicited or unauthorised advertising, spam or promotional materials.</li>
+  <li data-en="Impersonate MLAIA, its employees or any other person or entity." data-he="להתחזות ל-MLAIA, לעובדיה, לכל אדם אחר או לישות.">Impersonate MLAIA, its employees or any other person or entity.</li>
+  <li data-en="Engage in any conduct that restricts or inhibits anyone's use or enjoyment of the site." data-he="לעסוק בכל התנהלות שמגבילה או מעכבת את השימוש או ההנאה של אחרים מהאתר.">Engage in any conduct that restricts or inhibits anyone's use or enjoyment of the site.</li>
+</ul>
+
+<h2 data-en="4. Intellectual Property" data-he="4. קניין רוחני">4. Intellectual Property</h2>
+<p data-en="All content on this site — including text, graphics, logos, images, animations, code and design — is the property of MLAIA or its licensors and is protected by Israeli and international intellectual property laws." data-he="כל התוכן באתר זה — לרבות טקסט, גרפיקה, לוגואים, תמונות, אנימציות, קוד ועיצוב — הוא רכושה של MLAIA או של מעניקי הרישיון שלה ומוגן על ידי חוקי קניין רוחני ישראליים ובינלאומיים.">All content on this site — including text, graphics, logos, images, animations, code and design — is the property of MLAIA or its licensors and is protected by Israeli and international intellectual property laws.</p>
+<p data-en="You may not reproduce, distribute, modify or create derivative works from any content on this site without MLAIA's prior written consent." data-he="אינכם רשאים לשכפל, להפיץ, לשנות או ליצור יצירות נגזרות מכל תוכן באתר זה ללא הסכמה מראש ובכתב של MLAIA.">You may not reproduce, distribute, modify or create derivative works from any content on this site without MLAIA's prior written consent.</p>
+
+<h2 data-en="5. Disclaimer of Warranties" data-he="5. הגבלת אחריות">5. Disclaimer of Warranties</h2>
+<p data-en="This website and its content are provided on an 'as is' and 'as available' basis without any warranty of any kind, express or implied. MLAIA does not warrant that:" data-he="אתר זה ותכניו מסופקים &quot;כמות שהם&quot; ו&quot;כפי שזמינים&quot; ללא כל אחריות מכל סוג שהוא, מפורשת או משתמעת. MLAIA אינה מתחייבת כי:">This website and its content are provided on an 'as is' and 'as available' basis without any warranty of any kind, express or implied. MLAIA does not warrant that:</p>
+<ul>
+  <li data-en="The site will be uninterrupted, error-free or free of viruses or other harmful components." data-he="האתר יפעל ללא הפרעה, ללא שגיאות או ללא וירוסים ורכיבים מזיקים אחרים.">The site will be uninterrupted, error-free or free of viruses or other harmful components.</li>
+  <li data-en="The information on this site is complete, accurate or current." data-he="המידע באתר זה שלם, מדויק או עדכני.">The information on this site is complete, accurate or current.</li>
+</ul>
+<p data-en="Content on this site is for general informational purposes only and does not constitute professional, legal, financial or technical advice." data-he="התוכן באתר זה הוא למטרות מידע כלליות בלבד ואינו מהווה ייעוץ מקצועי, משפטי, פיננסי או טכני.">Content on this site is for general informational purposes only and does not constitute professional, legal, financial or technical advice.</p>
+
+<h2 data-en="6. Limitation of Liability" data-he="6. הגבלת חבות">6. Limitation of Liability</h2>
+<p data-en="To the fullest extent permitted by Israeli law, MLAIA shall not be liable for any indirect, incidental, special, consequential or punitive damages arising from your use of, or inability to use, this website or its content." data-he="במידה המרבית המותרת על פי הדין הישראלי, MLAIA לא תהיה אחראית לכל נזק עקיף, מקרי, מיוחד, תוצאתי או עונשי הנובע מהשימוש שלכם באתר זה או בתכניו, או מחוסר יכולת להשתמש בהם.">To the fullest extent permitted by Israeli law, MLAIA shall not be liable for any indirect, incidental, special, consequential or punitive damages arising from your use of, or inability to use, this website or its content.</p>
+
+<h2 data-en="7. External Links" data-he="7. קישורים חיצוניים">7. External Links</h2>
+<p data-en="This site may contain links to third-party websites. MLAIA has no control over the content or practices of those sites and accepts no responsibility for them. Linking to a third-party site does not imply endorsement." data-he="אתר זה עשוי להכיל קישורים לאתרי צד שלישי. ל-MLAIA אין שליטה על התוכן או הנהלים של אתרים אלה והיא אינה מקבלת כל אחריות עליהם. קישור לאתר צד שלישי אינו מהווה המלצה עליו.">This site may contain links to third-party websites. MLAIA has no control over the content or practices of those sites and accepts no responsibility for them. Linking to a third-party site does not imply endorsement.</p>
+
+<h2 data-en="8. Governing Law &amp; Jurisdiction" data-he="8. דין החל ושיפוט">8. Governing Law &amp; Jurisdiction</h2>
+<p data-en="These Terms of Use shall be governed by and construed in accordance with the laws of the State of Israel. Any dispute arising from these terms shall be subject to the exclusive jurisdiction of the competent courts in Israel." data-he="תנאי שימוש אלה יחולו ויתפרשו בהתאם לחוקי מדינת ישראל. כל סכסוך הנובע מתנאים אלה יהיה כפוף לסמכות השיפוט הבלעדית של בתי המשפט המוסמכים בישראל.">These Terms of Use shall be governed by and construed in accordance with the laws of the State of Israel. Any dispute arising from these terms shall be subject to the exclusive jurisdiction of the competent courts in Israel.</p>
+
+<h2 data-en="9. Changes to These Terms" data-he="9. שינויים בתנאים">9. Changes to These Terms</h2>
+<p data-en="MLAIA reserves the right to modify these Terms of Use at any time. Changes take effect upon posting to this page. Continued use of the site after changes are posted constitutes acceptance of the revised terms." data-he="MLAIA שומרת לעצמה את הזכות לשנות תנאי שימוש אלה בכל עת. השינויים נכנסים לתוקף עם פרסומם בדף זה. המשך השימוש באתר לאחר פרסום שינויים מהווה קבלה של התנאים המתוקנים.">MLAIA reserves the right to modify these Terms of Use at any time. Changes take effect upon posting to this page. Continued use of the site after changes are posted constitutes acceptance of the revised terms.</p>
+
+<h2 data-en="10. Contact" data-he="10. יצירת קשר">10. Contact</h2>
+<p data-en="For questions about these Terms of Use, contact:" data-he="לשאלות בנוגע לתנאי שימוש אלה, פנו אל:">For questions about these Terms of Use, contact:</p>
+<ul>
+  <li><strong>MLAIA</strong> — <a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer>
+  <div class="ft-main">
+    <div>
+      <a href="index.html" class="ft-logo">ML<span>AI</span>A</a>
+      <div class="ft-tag" data-en="Machine Learning &amp; AI Approach" data-he="למידת מכונה וגישת בינה מלאכותית">Machine Learning &amp; AI Approach</div>
+    </div>
+    <ul class="ft-links">
+      <li><a href="index.html#about" data-en="About" data-he="אודות">About</a></li>
+      <li><a href="index.html#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
+      <li><a href="blog.html" data-en="Blog" data-he="בלוג">Blog</a></li>
+      <li><a href="index.html#contact" data-en="Contact" data-he="צור קשר">Contact</a></li>
+    </ul>
+    <p data-en="© 2025 MLAIA" data-he="© 2025 MLAIA">© 2025 MLAIA</p>
+  </div>
+  <ul class="ft-legal">
+    <li><a href="accessibility.html" data-en="Accessibility Statement" data-he="הצהרת נגישות">Accessibility Statement</a></li>
+    <li><a href="privacy.html" data-en="Privacy Policy" data-he="מדיניות פרטיות">Privacy Policy</a></li>
+    <li><a href="terms.html" data-en="Terms of Use" data-he="תנאי שימוש">Terms of Use</a></li>
+  </ul>
+</footer>
+
+<script>
+let currentLang = localStorage.getItem('mlaia-lang') || 'en';
+(function init(){
+  const saved = localStorage.getItem('mlaia-lang');
+  if(saved) setLang(saved);
+})();
+
+function setLang(lang){
+  currentLang = lang;
+  localStorage.setItem('mlaia-lang', lang);
+  const isHe = lang === 'he';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isHe ? 'rtl' : 'ltr';
+  document.body.classList.toggle('rtl', isHe);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = isHe ? el.dataset.he : el.dataset.en;
+  });
+  const btn = document.getElementById('lang-toggle');
+  if(btn) btn.textContent = isHe ? 'English' : 'עברית';
+}
+
+// Cursor
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+if(cd&&cr){
+  document.addEventListener('mousemove',e=>{
+    cd.style.left=e.clientX+'px';cd.style.top=e.clientY+'px';
+    cr.style.left=e.clientX+'px';cr.style.top=e.clientY+'px';
+  });
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+  });
+  document.addEventListener('mousedown',()=>document.body.classList.add('ck'));
+  document.addEventListener('mouseup',()=>document.body.classList.remove('ck'));
+}
+// Nav scroll
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>30));
+</script>
+</body>
+</html>

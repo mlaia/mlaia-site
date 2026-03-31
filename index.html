@@ -343,7 +343,8 @@ h2{font-family:'DM Sans',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weig
 .cta-form input:focus,.cta-form textarea:focus{border-color:var(--accent)}
 .cf-bottom-row{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:6px;flex-wrap:wrap}
 .cta-or{font-size:.8rem;color:rgba(255,255,255,.42);position:relative;z-index:2}
-footer{padding:36px 64px;background:var(--navy);border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:28px 64px}
+.ft-main{display:flex;justify-content:space-between;align-items:center}
 .ft-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;text-decoration:none}
 .ft-logo span{color:var(--accent2)}
 .ft-tag{font-size:.62rem;color:rgba(255,255,255,.28);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
@@ -351,6 +352,21 @@ footer{padding:36px 64px;background:var(--navy);border-top:1px solid rgba(255,25
 .ft-links a{text-decoration:none;color:rgba(255,255,255,.35);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
 .ft-links a:hover{color:#fff}
 footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
+.ft-legal{display:flex;gap:20px;list-style:none;justify-content:center;padding-top:14px;margin-top:14px;border-top:1px solid rgba(255,255,255,.05)}
+.ft-legal a{text-decoration:none;color:rgba(255,255,255,.25);font-size:.7rem;letter-spacing:.05em;transition:color .2s}
+.ft-legal a:hover{color:rgba(255,255,255,.7)}
+
+/* ── COOKIE BANNER ── */
+#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:99990;background:rgba(10,22,40,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.08);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+#cookie-banner.show{transform:translateY(0)}
+.cb-text{font-size:.82rem;line-height:1.65;color:rgba(255,255,255,.62);max-width:640px}
+.cb-text a{color:var(--accent2);text-decoration:none}
+.cb-text a:hover{text-decoration:underline}
+.cb-actions{display:flex;gap:10px;flex-shrink:0}
+.cb-accept{background:var(--accent);color:#fff;border:none;padding:9px 22px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:background .2s}
+.cb-accept:hover{background:#0046d4}
+.cb-decline{background:transparent;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.15);padding:9px 18px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.82rem;cursor:pointer;transition:border-color .2s,color .2s}
+.cb-decline:hover{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.8)}
 
 /* ── HAMBURGER ── */
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px 4px;z-index:1002}
@@ -369,7 +385,7 @@ footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
 /* ── RESPONSIVE ── */
 @media(max-width:1200px){.dv-grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr;gap:0}.hero-right{height:320px;margin-top:32px}.hero-stats-row{position:static;margin-top:32px;padding:16px 0 0;border-top:1px solid rgba(255,255,255,.08)}.about{grid-template-columns:240px 1fr;gap:40px}}
 @media(max-width:900px){.about{grid-template-columns:1fr;gap:36px}.about-photo-col{position:static}.about-photo{width:180px;aspect-ratio:3/4}}
-@media(max-width:768px){.about{grid-template-columns:1fr;gap:32px}.sv-grid{grid-template-columns:1fr 1fr}.dv-grid{grid-template-columns:1fr}.bl-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.hero,.about,.services,.domains,.blog,.customers,.cta{padding-left:24px;padding-right:24px}nav{padding:0 24px}.hero-actions{flex-direction:column;align-items:flex-start;gap:16px}h1{font-size:clamp(2rem,8vw,3.5rem);word-break:break-word}.about-photo-col{display:block}.about-photo{width:120px;float:left;margin-right:20px;margin-bottom:12px;aspect-ratio:3/4}.about-photo-creds{clear:left}body{cursor:auto}#cd,#cr,#tc{display:none}.cf-row{grid-template-columns:1fr}footer{flex-direction:column;gap:16px;text-align:center}.hamburger{display:flex}nav ul.nav-links{display:none}nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:103px;left:0;right:0;height:calc(100vh - 103px)!important;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center;overflow-y:auto;animation:navSlideDown .3s ease}nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}nav ul.nav-links.open li a:hover{color:var(--accent2)!important}nav ul.nav-links.open li:last-child{border-bottom:none}nav ul.nav-links.open .nav-cta{background:var(--accent)!important;color:#fff!important;border-radius:6px;padding:14px 28px!important;margin-top:8px;display:inline-block;font-size:1rem!important}}
+@media(max-width:768px){.about{grid-template-columns:1fr;gap:32px}.sv-grid{grid-template-columns:1fr 1fr}.dv-grid{grid-template-columns:1fr}.bl-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.hero,.about,.services,.domains,.blog,.customers,.cta{padding-left:24px;padding-right:24px}nav{padding:0 24px}.hero-actions{flex-direction:column;align-items:flex-start;gap:16px}h1{font-size:clamp(2rem,8vw,3.5rem);word-break:break-word}.about-photo-col{display:block}.about-photo{width:120px;float:left;margin-right:20px;margin-bottom:12px;aspect-ratio:3/4}.about-photo-creds{clear:left}body{cursor:auto}#cd,#cr,#tc{display:none}.cf-row{grid-template-columns:1fr}footer{padding:24px}.ft-main{flex-direction:column;gap:14px;text-align:center}.ft-legal{flex-wrap:wrap;gap:14px}#cookie-banner{padding:16px 20px;flex-direction:column;gap:14px;align-items:flex-start}.hamburger{display:flex}nav ul.nav-links{display:none}nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:103px;left:0;right:0;height:calc(100vh - 103px)!important;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center;overflow-y:auto;animation:navSlideDown .3s ease}nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}nav ul.nav-links.open li a:hover{color:var(--accent2)!important}nav ul.nav-links.open li:last-child{border-bottom:none}nav ul.nav-links.open .nav-cta{background:var(--accent)!important;color:#fff!important;border-radius:6px;padding:14px 28px!important;margin-top:8px;display:inline-block;font-size:1rem!important}}
 
 @media(max-width:768px){.hero{padding:80px 20px 40px!important;overflow:hidden;grid-template-columns:1fr!important;min-height:auto!important}.hero-sub{font-size:.95rem}.hero-stats-row{flex-wrap:wrap;gap:12px;justify-content:flex-start}.hero-stats{flex-wrap:wrap;gap:12px;justify-content:flex-start}.hero-stats .stat{font-size:.75rem}.hero-right{display:block!important;height:280px;margin-top:24px;justify-self:center;align-self:center}.mq{overflow:hidden}}
 .about-clients-inline{padding-top:14px;border-top:1px solid var(--border)}
@@ -931,15 +947,31 @@ html[lang="he"] .logo-banner-track.rev{animation-name:logo-scroll-rtl;animation-
 
 <!-- FOOTER -->
 <footer>
-  <div><a href="#" class="ft-logo">ML<span>AI</span>A</a><div class="ft-tag" data-en="Machine Learning &amp; AI Approach" data-he="למידת מכונה וגישת בינה מלאכותית">Machine Learning &amp; AI Approach</div></div>
-  <ul class="ft-links">
-    <li><a href="#about" data-en="About" data-he="אודות">About</a></li>
-    <li><a href="#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
-    <li><a href="blog.html" data-en="Blog" data-he="בלוג">Blog</a></li>
-    <li><a href="#contact" data-en="Contact" data-he="צור קשר">Contact</a></li>
+  <div class="ft-main">
+    <div><a href="#" class="ft-logo">ML<span>AI</span>A</a><div class="ft-tag" data-en="Machine Learning &amp; AI Approach" data-he="למידת מכונה וגישת בינה מלאכותית">Machine Learning &amp; AI Approach</div></div>
+    <ul class="ft-links">
+      <li><a href="#about" data-en="About" data-he="אודות">About</a></li>
+      <li><a href="#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
+      <li><a href="blog.html" data-en="Blog" data-he="בלוג">Blog</a></li>
+      <li><a href="#contact" data-en="Contact" data-he="צור קשר">Contact</a></li>
+    </ul>
+    <p data-en="© 2025 MLAIA — Machine Learning &amp; AI Approach" data-he="© 2025 MLAIA — למידת מכונה וגישת בינה מלאכותית">© 2025 MLAIA — Machine Learning &amp; AI Approach</p>
+  </div>
+  <ul class="ft-legal">
+    <li><a href="accessibility.html" data-en="Accessibility Statement" data-he="הצהרת נגישות">Accessibility Statement</a></li>
+    <li><a href="privacy.html" data-en="Privacy Policy" data-he="מדיניות פרטיות">Privacy Policy</a></li>
+    <li><a href="terms.html" data-en="Terms of Use" data-he="תנאי שימוש">Terms of Use</a></li>
   </ul>
-  <p data-en="© 2025 MLAIA — Machine Learning &amp; AI Approach" data-he="© 2025 MLAIA — למידת מכונה וגישת בינה מלאכותית">© 2025 MLAIA — Machine Learning &amp; AI Approach</p>
 </footer>
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-banner" role="dialog" aria-label="Cookie consent">
+  <p class="cb-text" id="cb-text" data-en='This site uses cookies for analytics to help us improve your experience. See our <a href="privacy.html">Privacy Policy</a> for details.' data-he='אתר זה משתמש בעוגיות לצורכי אנליטיקה לשיפור חוויתכם. ראו את <a href="privacy.html">מדיניות הפרטיות</a> שלנו לפרטים.'>This site uses cookies for analytics to help us improve your experience. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
+  <div class="cb-actions">
+    <button class="cb-accept" id="cb-accept" data-en="Accept" data-he="קבל">Accept</button>
+    <button class="cb-decline" id="cb-decline" data-en="Decline" data-he="דחה">Decline</button>
+  </div>
+</div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
@@ -1891,6 +1923,7 @@ const RICH_TRANS=[
 
 function setLang(lang){
   currentLang=lang;
+  localStorage.setItem('mlaia-lang',lang);
   const isHe=lang==='he';
   const htmlEl=document.documentElement;
   htmlEl.lang=lang;
@@ -1916,6 +1949,26 @@ function setLang(lang){
   const btn=document.getElementById('lang-toggle');
   if(btn)btn.textContent=isHe?'English':'\u05e2\u05d1\u05e8\u05d9\u05ea';
 }
+
+// ── COOKIE CONSENT ──
+(function(){
+  const COOKIE_KEY='mlaia-cookie-consent';
+  const banner=document.getElementById('cookie-banner');
+  if(!banner)return;
+  const choice=localStorage.getItem(COOKIE_KEY);
+  if(!choice){
+    // Show after short delay so page renders first
+    setTimeout(()=>banner.classList.add('show'),800);
+  }
+  document.getElementById('cb-accept').addEventListener('click',()=>{
+    localStorage.setItem(COOKIE_KEY,'accepted');
+    banner.classList.remove('show');
+  });
+  document.getElementById('cb-decline').addEventListener('click',()=>{
+    localStorage.setItem(COOKIE_KEY,'declined');
+    banner.classList.remove('show');
+  });
+})();
 </script>
 </body>
 </html>

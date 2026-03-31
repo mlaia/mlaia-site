@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessibility Statement — MLAIA</title>
+<meta name="description" content="MLAIA accessibility statement — our commitment to IS 5568 and WCAG 2.0 Level AA compliance.">
+<link rel="canonical" href="https://www.mlaia.com/accessibility">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f4f6fb;--white:#fff;--navy:#0a1628;--navy2:#0f2044;
+  --accent:#0057ff;--accent2:#00b4d8;--border:#dce3f0;
+  --muted:#6b7a99;--text:#2d3a55;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
+body.rtl{font-family:'Heebo',sans-serif}
+
+/* CURSOR */
+#cd{width:7px;height:7px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .18s,height .18s,background .2s}
+#cr{width:36px;height:36px;border:1.5px solid rgba(0,87,255,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .28s,height .28s,border-color .25s,background .25s}
+body.ch #cd{width:13px;height:13px;background:var(--accent2)}
+body.ch #cr{width:54px;height:54px;border-color:rgba(0,180,216,.55)}
+body.ck #cd{width:5px;height:5px}
+body.ck #cr{width:22px;height:22px}
+@media(max-width:768px){body{cursor:auto}#cd,#cr{display:none}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 64px;height:66px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.sc{box-shadow:0 2px 20px rgba(10,22,40,.07)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--navy);letter-spacing:-.02em;text-decoration:none}
+.logo span{color:var(--accent)}
+nav ul{list-style:none;display:flex;gap:32px;align-items:center}
+nav a{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+nav a:hover{color:var(--navy)}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:9px 22px;border-radius:6px;font-size:.8rem!important;font-weight:600!important;transition:background .2s,transform .2s!important}
+.nav-cta:hover{background:var(--navy)!important;transform:translateY(-1px)}
+.nav-lang-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:5px;font-size:.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;letter-spacing:.06em;transition:color .2s,border-color .2s}
+.nav-lang-btn:hover{color:var(--navy);border-color:var(--navy)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px 4px;z-index:1002}
+.hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:transform .3s,opacity .3s}
+
+/* PAGE HERO */
+.page-hero{background:var(--navy);padding:120px 64px 72px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,87,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,87,255,.055) 1px,transparent 1px);background-size:54px 54px;pointer-events:none}
+.page-hero-orb{position:absolute;top:-10%;right:-10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(0,87,255,.18) 0%,transparent 60%);pointer-events:none}
+.page-hero-inner{position:relative;z-index:2;max-width:900px}
+.page-kicker{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.page-kicker::before{content:'';display:block;width:22px;height:1px;background:var(--accent2)}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:20px}
+.page-hero p{font-size:1rem;font-weight:300;line-height:1.78;color:rgba(255,255,255,.52);max-width:540px}
+
+/* CONTENT */
+.legal-content{padding:72px 64px 110px;background:var(--bg);max-width:900px;margin:0 auto}
+.legal-content h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:700;color:var(--navy);margin:48px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--accent);display:inline-block}
+.legal-content h2:first-child{margin-top:0}
+.legal-content p{font-size:.95rem;line-height:1.8;color:var(--text);margin-bottom:14px}
+.legal-content ul{margin:10px 0 14px 24px}
+.legal-content li{font-size:.95rem;line-height:1.75;color:var(--text);margin-bottom:6px}
+.legal-content a{color:var(--accent);text-decoration:none}
+.legal-content a:hover{text-decoration:underline}
+.legal-meta{display:flex;gap:32px;flex-wrap:wrap;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin-bottom:48px}
+.legal-meta-item{display:flex;flex-direction:column;gap:3px}
+.legal-meta-label{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.legal-meta-value{font-size:.88rem;color:var(--navy);font-weight:500}
+.badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,87,255,.07);border:1px solid rgba(0,87,255,.18);border-radius:6px;padding:5px 12px;font-size:.76rem;font-weight:600;color:var(--accent);margin-bottom:32px}
+.badge::before{content:'✓';font-size:.8rem}
+
+/* FOOTER */
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:28px 64px}
+.ft-main{display:flex;justify-content:space-between;align-items:center}
+.ft-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;text-decoration:none}
+.ft-logo span{color:var(--accent2)}
+.ft-tag{font-size:.62rem;color:rgba(255,255,255,.28);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.ft-links{display:flex;gap:24px;list-style:none}
+.ft-links a{text-decoration:none;color:rgba(255,255,255,.35);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.ft-links a:hover{color:#fff}
+footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
+.ft-legal{display:flex;gap:20px;list-style:none;justify-content:center;padding-top:16px;margin-top:16px;border-top:1px solid rgba(255,255,255,.05)}
+.ft-legal a{text-decoration:none;color:rgba(255,255,255,.25);font-size:.7rem;letter-spacing:.05em;transition:color .2s}
+.ft-legal a:hover{color:rgba(255,255,255,.7)}
+
+@media(max-width:768px){
+  nav{padding:0 24px}
+  .page-hero{padding:90px 24px 52px}
+  .legal-content{padding:48px 24px 72px}
+  .hamburger{display:flex}
+  nav ul.nav-links{display:none}
+  footer{padding:28px 24px}
+  .ft-main{flex-direction:column;gap:16px;text-align:center}
+  .ft-legal{flex-wrap:wrap;gap:14px}
+  nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center}
+  nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}
+  nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase}
+}
+</style>
+</head>
+<body>
+<div id="cd"></div>
+<div id="cr"></div>
+
+<nav id="nav">
+  <a href="index.html" class="logo">ML<span>AI</span>A</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');document.getElementById('nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#about" data-en="About" data-he="אודות">About</a></li>
+    <li><a href="index.html#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
+    <li><a href="blog.html" data-en="Blog" data-he="בלוג">Blog</a></li>
+    <li><a href="index.html#contact" class="nav-cta" data-en="Contact Us" data-he="צור קשר">Contact Us</a></li>
+    <li><button class="nav-lang-btn" id="lang-toggle" onclick="setLang(currentLang==='he'?'en':'he')">עברית</button></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-orb"></div>
+  <div class="page-hero-inner">
+    <div class="page-kicker" data-en="Legal &amp; Compliance" data-he="משפטי ורגולציה">Legal &amp; Compliance</div>
+    <h1 data-en="Accessibility Statement" data-he="הצהרת נגישות">Accessibility Statement</h1>
+    <p data-en="MLAIA is committed to making its website accessible to all users, including people with disabilities, in accordance with Israeli Standard IS 5568 and WCAG 2.0 Level AA." data-he="MLAIA מחויבת להנגשת האתר לכלל המשתמשים, לרבות אנשים עם מוגבלות, בהתאם לתקן הישראלי IS 5568 ו-WCAG 2.0 ברמת AA.">MLAIA is committed to making its website accessible to all users, including people with disabilities, in accordance with Israeli Standard IS 5568 and WCAG 2.0 Level AA.</p>
+  </div>
+</div>
+
+<div style="padding:0 64px;background:var(--bg)">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="padding-top:48px">
+
+<div class="badge" data-en="IS 5568 / WCAG 2.0 Level AA — Committed" data-he="תקן IS 5568 / WCAG 2.0 רמת AA — מחויבים">IS 5568 / WCAG 2.0 Level AA — Committed</div>
+
+<div class="legal-meta">
+  <div class="legal-meta-item">
+    <span class="legal-meta-label" data-en="Last Review" data-he="סקירה אחרונה">Last Review</span>
+    <span class="legal-meta-value">March 2025</span>
+  </div>
+  <div class="legal-meta-item">
+    <span class="legal-meta-label" data-en="Standard" data-he="תקן">Standard</span>
+    <span class="legal-meta-value">IS 5568 / WCAG 2.0 AA</span>
+  </div>
+  <div class="legal-meta-item">
+    <span class="legal-meta-label" data-en="Contact" data-he="איש קשר">Contact</span>
+    <span class="legal-meta-value"><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></span>
+  </div>
+</div>
+
+<h2 data-en="Our Commitment" data-he="המחויבות שלנו">Our Commitment</h2>
+<p data-en="MLAIA (mlaia.com) strives to ensure that its website is accessible to people with disabilities. We are working to improve the user experience for everyone and applying the relevant accessibility standards." data-he="MLAIA (mlaia.com) שואפת להבטיח כי האתר נגיש לאנשים עם מוגבלות. אנו פועלים לשיפור חוויית המשתמש עבור כולם ומיישמים את תקני הנגישות הרלוונטיים.">MLAIA (mlaia.com) strives to ensure that its website is accessible to people with disabilities. We are working to improve the user experience for everyone and applying the relevant accessibility standards.</p>
+<p data-en="This site aims to conform to Israeli Standard IS 5568 (Web Content Accessibility) and Web Content Accessibility Guidelines (WCAG) 2.0 at Level AA, as required by Israeli law (Equal Rights for Persons with Disabilities Regulations, 2013)." data-he="האתר שואף לעמוד בתקן הישראלי IS 5568 (נגישות תכני אינטרנט) ובהנחיות WCAG 2.0 ברמת AA, כנדרש בחוק שוויון זכויות לאנשים עם מוגבלות (תשנ״ח-1998) ותקנותיו.">This site aims to conform to Israeli Standard IS 5568 (Web Content Accessibility) and Web Content Accessibility Guidelines (WCAG) 2.0 at Level AA, as required by Israeli law (Equal Rights for Persons with Disabilities Regulations, 2013).</p>
+
+<h2 data-en="Measures Taken" data-he="צעדים שננקטו">Measures Taken</h2>
+<p data-en="To support accessibility, MLAIA has implemented the following measures:" data-he="לתמיכה בנגישות, MLAIA נקטה בצעדים הבאים:">To support accessibility, MLAIA has implemented the following measures:</p>
+<ul>
+  <li data-en="Semantic HTML markup with ARIA roles and labels where applicable" data-he="סימון HTML סמנטי עם תפקידי ותוויות ARIA היכן שרלוונטי">Semantic HTML markup with ARIA roles and labels where applicable</li>
+  <li data-en="Sufficient color contrast ratios meeting WCAG 2.0 AA requirements" data-he="יחסי ניגוד צבע מספיקים העומדים בדרישות WCAG 2.0 AA">Sufficient color contrast ratios meeting WCAG 2.0 AA requirements</li>
+  <li data-en="Keyboard navigation support for all interactive elements" data-he="תמיכה בניווט מקלדת לכל האלמנטים האינטראקטיביים">Keyboard navigation support for all interactive elements</li>
+  <li data-en="Text alternatives for non-text content" data-he="חלופות טקסט לתכנים שאינם טקסט">Text alternatives for non-text content</li>
+  <li data-en="Full bilingual support (Hebrew RTL / English LTR) with proper dir attributes" data-he="תמיכה דו-לשונית מלאה (עברית RTL / אנגלית LTR) עם תכונות dir מתאימות">Full bilingual support (Hebrew RTL / English LTR) with proper dir attributes</li>
+  <li data-en="Responsive design supporting zoom up to 200% without loss of content" data-he="עיצוב רספונסיבי התומך בזום עד 200% ללא אובדן תוכן">Responsive design supporting zoom up to 200% without loss of content</li>
+  <li data-en="Skip-to-content links for screen reader users" data-he="קישורי מעבר לתוכן למשתמשי קוראי מסך">Skip-to-content links for screen reader users</li>
+</ul>
+
+<h2 data-en="Known Limitations" data-he="מגבלות ידועות">Known Limitations</h2>
+<p data-en="Despite our best efforts, some content may not yet fully comply with all accessibility guidelines. Known limitations include:" data-he="למרות מאמצינו הטובים ביותר, ייתכן שחלק מהתוכן אינו עומד עדיין במלוא הנחיות הנגישות. מגבלות ידועות כוללות:">Despite our best efforts, some content may not yet fully comply with all accessibility guidelines. Known limitations include:</p>
+<ul>
+  <li data-en="Some data visualizations and interactive canvas elements (e.g., real-time charts) may have limited screen reader support; we provide text summaries where possible." data-he="לחלק מהמיזורים הגרפיים ואלמנטי הקנבס האינטראקטיביים (כגון תרשימים בזמן אמת) עשויה להיות תמיכה מוגבלת בקוראי מסך; אנו מספקים סיכומי טקסט היכן שניתן.">Some data visualizations and interactive canvas elements (e.g., real-time charts) may have limited screen reader support; we provide text summaries where possible.</li>
+  <li data-en="Third-party embedded content (analytics scripts, fonts) may not meet the same accessibility standards. We are working to mitigate this." data-he="תוכן מוטמע של צד שלישי (סקריפטים של אנליטיקה, גופנים) עשוי שלא לעמוד באותם תקני נגישות. אנו פועלים לצמצום בעיה זו.">Third-party embedded content (analytics scripts, fonts) may not meet the same accessibility standards. We are working to mitigate this.</li>
+</ul>
+<p data-en="We are continuously working to improve accessibility and resolve these limitations." data-he="אנו פועלים ברציפות לשיפור הנגישות ולפתרון מגבלות אלה.">We are continuously working to improve accessibility and resolve these limitations.</p>
+
+<h2 data-en="Feedback &amp; Contact" data-he="משוב ויצירת קשר">Feedback &amp; Contact</h2>
+<p data-en="We welcome your feedback on the accessibility of MLAIA's website. If you experience any accessibility barriers, please contact us:" data-he="אנו מעריכים את משובכם בנושא נגישות אתר MLAIA. אם נתקלתם בחסמי נגישות כלשהם, אנא צרו קשר:">We welcome your feedback on the accessibility of MLAIA's website. If you experience any accessibility barriers, please contact us:</p>
+<ul>
+  <li data-en="Email: yochai@mlaia.com" data-he="אימייל: yochai@mlaia.com">Email: <a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></li>
+  <li data-en="We aim to respond to accessibility inquiries within 5 business days." data-he="אנו שואפים להגיב לפניות נגישות תוך 5 ימי עסקים.">We aim to respond to accessibility inquiries within 5 business days.</li>
+</ul>
+<p data-en="This statement was last updated in March 2025." data-he="הצהרה זו עודכנה לאחרונה במרץ 2025.">This statement was last updated in March 2025.</p>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-main">
+    <div>
+      <a href="index.html" class="ft-logo">ML<span>AI</span>A</a>
+      <div class="ft-tag" data-en="Machine Learning &amp; AI Approach" data-he="למידת מכונה וגישת בינה מלאכותית">Machine Learning &amp; AI Approach</div>
+    </div>
+    <ul class="ft-links">
+      <li><a href="index.html#about" data-en="About" data-he="אודות">About</a></li>
+      <li><a href="index.html#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
+      <li><a href="blog.html" data-en="Blog" data-he="בלוג">Blog</a></li>
+      <li><a href="index.html#contact" data-en="Contact" data-he="צור קשר">Contact</a></li>
+    </ul>
+    <p data-en="© 2025 MLAIA" data-he="© 2025 MLAIA">© 2025 MLAIA</p>
+  </div>
+  <ul class="ft-legal">
+    <li><a href="accessibility.html" data-en="Accessibility Statement" data-he="הצהרת נגישות">Accessibility Statement</a></li>
+    <li><a href="privacy.html" data-en="Privacy Policy" data-he="מדיניות פרטיות">Privacy Policy</a></li>
+    <li><a href="terms.html" data-en="Terms of Use" data-he="תנאי שימוש">Terms of Use</a></li>
+  </ul>
+</footer>
+
+<script>
+let currentLang = localStorage.getItem('mlaia-lang') || 'en';
+(function init(){
+  const saved = localStorage.getItem('mlaia-lang');
+  if(saved) setLang(saved);
+})();
+
+function setLang(lang){
+  currentLang = lang;
+  localStorage.setItem('mlaia-lang', lang);
+  const isHe = lang === 'he';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isHe ? 'rtl' : 'ltr';
+  document.body.classList.toggle('rtl', isHe);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = isHe ? el.dataset.he : el.dataset.en;
+  });
+  document.querySelectorAll('[data-ph-en]').forEach(el => {
+    el.placeholder = isHe ? el.dataset.phHe : el.dataset.phEn;
+  });
+  const btn = document.getElementById('lang-toggle');
+  if(btn) btn.textContent = isHe ? 'English' : 'עברית';
+}
+
+// Cursor
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+if(cd&&cr){
+  document.addEventListener('mousemove',e=>{
+    cd.style.left=e.clientX+'px';cd.style.top=e.clientY+'px';
+    cr.style.left=e.clientX+'px';cr.style.top=e.clientY+'px';
+  });
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+  });
+  document.addEventListener('mousedown',()=>document.body.classList.add('ck'));
+  document.addEventListener('mouseup',()=>document.body.classList.remove('ck'));
+}
+// Nav scroll
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>30));
+</script>
+</body>
+</html>
