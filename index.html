@@ -26,7 +26,7 @@
 :root{
   --bg:#f4f6fb;--white:#fff;--navy:#0a1628;--navy2:#0f2044;
   --accent:#0057ff;--accent2:#00b4d8;--border:#dce3f0;
-  --muted:#6b7a99;--text:#2d3a55;
+  --muted:#556070;--text:#2d3a55;
   --c-medical:#0891b2;--c-bi:#f59e0b;--c-vision:#7c3aed;--c-genai:#ec4899;
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
@@ -352,21 +352,42 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
 .ft-links a{text-decoration:none;color:rgba(255,255,255,.35);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
 .ft-links a:hover{color:#fff}
 footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
+.ft-reg{font-size:.7rem;color:rgba(255,255,255,.22);text-align:center;margin-top:10px;letter-spacing:.02em}
 .ft-legal{display:flex;gap:20px;list-style:none;justify-content:center;padding-top:14px;margin-top:14px;border-top:1px solid rgba(255,255,255,.05)}
 .ft-legal a{text-decoration:none;color:rgba(255,255,255,.25);font-size:.7rem;letter-spacing:.05em;transition:color .2s}
 .ft-legal a:hover{color:rgba(255,255,255,.7)}
 
 /* ── COOKIE BANNER ── */
-#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:99990;background:rgba(10,22,40,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.08);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:99990;background:rgba(10,22,40,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.08);padding:20px 32px;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
 #cookie-banner.show{transform:translateY(0)}
-.cb-text{font-size:.82rem;line-height:1.65;color:rgba(255,255,255,.62);max-width:640px}
-.cb-text a{color:var(--accent2);text-decoration:none}
-.cb-text a:hover{text-decoration:underline}
-.cb-actions{display:flex;gap:10px;flex-shrink:0}
+.cb-inner{max-width:920px;margin:0 auto}
+.cb-top{margin-bottom:14px}
+.cb-title{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;color:#fff;margin-bottom:5px}
+.cb-text{font-size:.79rem;line-height:1.6;color:rgba(255,255,255,.52)}
+.cb-text a{color:var(--accent2);text-decoration:none}.cb-text a:hover{text-decoration:underline}
+.cb-categories{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.cb-cat{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:8px;border:1px solid rgba(255,255,255,.08);flex:1;min-width:180px}
+.cb-cat:has(input:not([disabled])):hover{border-color:rgba(0,87,255,.45)}
+.cb-cat-text{display:flex;flex-direction:column;gap:2px;flex:1}
+.cb-cat-text strong{font-size:.8rem;color:#fff;font-weight:600}
+.cb-cat-text span{font-size:.7rem;color:rgba(255,255,255,.4)}
+.cb-cat input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:34px;height:19px;background:rgba(255,255,255,.15);border-radius:10px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;margin:0}
+.cb-cat input[type="checkbox"]::after{content:'';position:absolute;top:3px;left:3px;width:13px;height:13px;border-radius:50%;background:#fff;transition:transform .2s}
+.cb-cat input[type="checkbox"]:checked{background:var(--accent)}.cb-cat input[type="checkbox"]:checked::after{transform:translateX(15px)}
+.cb-cat input[type="checkbox"]:disabled{opacity:.5;cursor:not-allowed}
+.cb-cat input[type="checkbox"]:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+.cb-cat-badge{font-size:.65rem;font-weight:700;color:rgba(0,180,216,.75);letter-spacing:.05em;flex-shrink:0}
+.cb-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.cb-reject-all{background:transparent;color:rgba(255,255,255,.48);border:1px solid rgba(255,255,255,.12);padding:9px 18px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.82rem;cursor:pointer;transition:border-color .2s,color .2s}
+.cb-reject-all:hover{border-color:rgba(255,255,255,.35);color:rgba(255,255,255,.75)}
+.cb-reject-all:focus-visible{outline:3px solid var(--accent2);outline-offset:2px}
+.cb-save-pref{background:transparent;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.25);padding:9px 18px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.82rem;cursor:pointer;transition:border-color .2s,color .2s}
+.cb-save-pref:hover{border-color:rgba(255,255,255,.6);color:#fff}
+.cb-save-pref:focus-visible{outline:3px solid var(--accent2);outline-offset:2px}
 .cb-accept{background:var(--accent);color:#fff;border:none;padding:9px 22px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:background .2s}
 .cb-accept:hover{background:#0046d4}
-.cb-decline{background:transparent;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.15);padding:9px 18px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.82rem;cursor:pointer;transition:border-color .2s,color .2s}
-.cb-decline:hover{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.8)}
+.cb-accept:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media(max-width:640px){#cookie-banner{padding:16px 16px}.cb-categories{flex-direction:column}.cb-actions{justify-content:stretch}.cb-actions button{flex:1}}
 
 /* ── HAMBURGER ── */
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px 4px;z-index:1002}
@@ -541,6 +562,15 @@ body.a11y-no-anim *,body.a11y-no-anim *::before,body.a11y-no-anim *::after{anima
 body.a11y-spacing{letter-spacing:.12em;word-spacing:.16em;line-height:2}
 body.a11y-bigcursor,body.a11y-bigcursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpolygon points='8,2 8,32 15,24 21,38 25,36 19,22 28,22' fill='%23000' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E") 2 2,pointer!important}
 body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
+/* ── SKIP NAVIGATION LINK (WCAG 2.4.1) ── */
+.skip-link{position:absolute;left:-9999px;top:6px;z-index:999999;background:var(--accent);color:#fff;padding:10px 22px;border-radius:0 0 8px 8px;font-size:.88rem;font-weight:600;text-decoration:none;letter-spacing:.03em;white-space:nowrap}
+.skip-link:focus,.skip-link:focus-visible{left:6px;outline:3px solid var(--accent2);outline-offset:2px}
+/* ── GLOBAL VISIBLE FOCUS INDICATORS (WCAG 2.4.7) ── */
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:3px}
+:focus:not(:focus-visible){outline:none}
+.hero :focus-visible,.customers :focus-visible,.cta :focus-visible,.mid-cta :focus-visible,#a11y-panel :focus-visible,#cookie-banner :focus-visible{outline-color:rgba(255,255,255,.9)}
+nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.nav-lang-btn:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
 </style>
 <script type="application/ld+json">
 {
@@ -600,6 +630,9 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </head>
 <body>
 
+<!-- SKIP NAVIGATION (WCAG 2.4.1) -->
+<a href="#main-content" class="skip-link" data-en="Skip to main content" data-he="דלג לתוכן הראשי">Skip to main content</a>
+
 <!-- MARQUEE -->
 <div class="mq" aria-hidden="true">
   <div class="mq-track">
@@ -619,14 +652,14 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 <canvas id="tc"></canvas>
 
 <!-- NAV -->
-<nav id="nav">
+<nav id="nav" role="navigation" aria-label="Main navigation">
   <a href="#" class="logo">ML<span>AI</span>A <span class="logo-tagline">Machine Learning &amp; AI Approach</span></a>
-  <ul class="nav-links">
+  <ul class="nav-links" role="list" aria-label="Site navigation links">
     <li><a href="#about" data-en="About" data-he="אודות">About</a></li>
     <li><a href="#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
     <li><a href="#blog" data-en="Blog" data-he="בלוג">Blog</a></li>
     <li><a href="#contact" class="nav-cta" data-en="Contact Us" data-he="צור קשר">Contact Us</a></li>
-    <li><button class="nav-lang-btn" id="lang-toggle" onclick="setLang(currentLang==='he'?'en':'he')">עברית</button></li>
+    <li><button class="nav-lang-btn" id="lang-toggle" onclick="setLang(currentLang==='he'?'en':'he')" aria-label="Switch language to Hebrew" aria-live="polite">עברית</button></li>
   </ul>
   <button class="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -634,7 +667,8 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<main id="main-content">
+<section class="hero" aria-label="MLAIA — AI &amp; Data Science Consulting">
   <div class="hero-orb1"></div>
   <div class="hero-orb2"></div>
   <canvas id="sc2"></canvas>
@@ -734,7 +768,7 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </section>
 
 <!-- WHAT WE DO -->
-<section class="what-we-do">
+<section class="what-we-do" aria-label="About our services">
   <div class="wwd-inner rv">
     <div class="sl" style="justify-content:center" data-en="What We Do" data-he="מה אנחנו עושים">What We Do</div>
     <h2 data-en="End-to-End AI, Built for Production" data-he="AI מקצה לקצה, בנוי לייצור">End-to-End AI, Built for Production</h2>
@@ -743,7 +777,7 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </section>
 
 <!-- ABOUT -->
-<section class="about" id="about">
+<section class="about" id="about" aria-labelledby="about-heading">
   <!-- Photo column -->
   <div class="about-photo-col rv">
     <div class="about-photo">
@@ -753,7 +787,7 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 
   <!-- Bio column -->
   <div class="about-bio rv d1">
-    <h2>Dr. Yochai Edlitz</h2>
+    <h2 id="about-heading">Dr. Yochai Edlitz</h2>
     <div class="founder-title" data-en="Founder &amp; CEO, MLAIA" data-he="מייסד ומנכ״ל, MLAIA">Founder &amp; CEO, MLAIA</div>
 
     <p class="about-bio-para" id="about-para-1">
@@ -780,10 +814,10 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </section>
 
 <!-- DOMAIN VISUALIZERS — 5 panels -->
-<section class="domains" id="domains">
+<section class="domains" id="domains" aria-labelledby="domains-heading">
   <div class="dv-hdr rv">
     <div class="sl" style="justify-content:center" data-en="Technical Depth" data-he="עומק טכני">Technical Depth</div>
-    <h2 data-en="Five Signature Domains" data-he="חמישה תחומי מומחיות">Five Signature Domains</h2>
+    <h2 id="domains-heading" data-en="Five Signature Domains" data-he="חמישה תחומי מומחיות">Five Signature Domains</h2>
     <p data-en="Each domain has its own language and toolchain. We speak all five fluently." data-he="לכל תחום שפה וכלים משלו. אנחנו דוברים את כולם ברהיטות.">Each domain has its own language and toolchain. We speak all five fluently.</p>
   </div>
   <div class="dv-grid">
@@ -876,13 +910,13 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testi-section" id="customers">
+<section class="testi-section" id="customers" aria-labelledby="testi-heading">
   <div class="testi-hdr rv">
     <div class="sl" style="justify-content:center" data-en="What Clients Say" data-he="מה אומרים הלקוחות">What Clients Say</div>
-    <h2 data-en="Trusted by Industry Leaders" data-he="אמון של מובילי תעשייה">Trusted by Industry Leaders</h2>
+    <h2 id="testi-heading" data-en="Trusted by Industry Leaders" data-he="אמון של מובילי תעשייה">Trusted by Industry Leaders</h2>
   </div>
   <div class="tc-wrap rv d1">
-    <div class="tc-track" id="tc-track">
+    <div class="tc-track" id="tc-track" aria-live="polite" aria-atomic="true">
       <div class="tm tc-active" data-index="0">
         <p data-en="&quot;I wanted to take a moment to recognize your exceptional work on managing the &#39;Sand box&#39; project. Your leadership, strategic thinking, and excellent communication skills were instrumental in successfully executing this project.&quot;" data-he="&quot;רציתי לקחת רגע להכיר בעבודתכם יוצאת הדופן בניהול פרויקט ה-Sandbox. המנהיגות, החשיבה האסטרטגית ויכולות התקשורת המצוינות שלכם היו גורם מכריע בהצלחת הפרויקט הזה.&quot;">"I wanted to take a moment to recognize your exceptional work on managing the 'Sand box' project. Your leadership, strategic thinking, and excellent communication skills were instrumental in successfully executing this project."</p>
         <div class="tm-auth"><div class="tm-av">GL</div><div class="tm-info"><strong>Dr. Gil Levy</strong><span data-en="Head of Innovation, Assuta Ashdod Medical Center" data-he="ראש חדשנות, המרכז הרפואי אסותא אשדוד">Head of Innovation, Assuta Ashdod Medical Center</span></div></div>
@@ -926,7 +960,7 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </section>
 
 <!-- MID-PAGE CTA BANNER -->
-<section class="mid-cta">
+<section class="mid-cta" aria-labelledby="mid-cta-h2">
   <div class="mid-cta-label rv" data-en="Let's Build Something" data-he="בואו נבנה משהו">Let's Build Something</div>
   <h2 class="mid-cta-heading rv" id="mid-cta-h2">Ready to transform your data?<br>Let's talk.</h2>
   <a href="#contact" class="mid-cta-btn rv">
@@ -936,8 +970,8 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </section>
 
 <!-- BLOG -->
-<section class="blog" id="blog">
-  <div class="bl-hdr rv"><div><div class="sl" data-en="Insights" data-he="תובנות">Insights</div><h2 data-en="From Our Blog" data-he="מהבלוג שלנו">From Our Blog</h2></div><a href="blog.html" class="btn-p" style="background:var(--navy)" data-en="All Posts →" data-he="← כל הפוסטים">All Posts →</a></div>
+<section class="blog" id="blog" aria-labelledby="blog-heading">
+  <div class="bl-hdr rv"><div><div class="sl" data-en="Insights" data-he="תובנות">Insights</div><h2 id="blog-heading" data-en="From Our Blog" data-he="מהבלוג שלנו">From Our Blog</h2></div><a href="blog.html" class="btn-p" style="background:var(--navy)" data-en="All Posts →" data-he="← כל הפוסטים">All Posts →</a></div>
   <div class="bl-grid">
     <a href="blog-slurm.html" class="bl-card bc-infra rv">
       <div class="bl-img" style="background:linear-gradient(160deg,#070f1f 0%,#0a1628 60%,#0d1f3c 100%)"><canvas class="bl-canvas" id="bv1"></canvas><span class="bl-img-label" data-en="Infrastructure" data-he="תשתיות">Infrastructure</span></div>
@@ -955,20 +989,20 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </section>
 
 <!-- CTA -->
-<section class="cta" id="contact">
+<section class="cta" id="contact" aria-labelledby="contact-h2">
   <div class="sl rv" data-en="Ready to Start?" data-he="מוכנים להתחיל?">Ready to Start?</div>
   <h2 class="rv" id="contact-h2" style="color:#fff">Let's Take Your Data<br>from Insight to Impact</h2>
   <p class="rv d1" data-en="Tell us about your data challenge. MLAIA — Machine Learning &amp; AI Approach — will design the solution." data-he="ספרו לנו על האתגר שלכם בתחום הנתונים. MLAIA — למידת מכונה וגישת AI — תתכנן את הפתרון.">Tell us about your data challenge. MLAIA — Machine Learning &amp; AI Approach — will design the solution.</p>
   <!-- To activate Formspree: replace YOUR_FORMSPREE_ID with the ID from formspree.io/f/xxxxxxxx -->
   <form class="cta-form rv d2" id="contact-form"
         action="https://formspree.io/f/YOUR_FORMSPREE_ID"
-        method="POST" onsubmit="handleForm(event)">
+        method="POST" onsubmit="handleForm(event)" aria-label="Contact us form" novalidate>
     <div class="cf-row">
-      <input type="text" name="name" data-ph-en="Your Name" data-ph-he="שמך" placeholder="Your Name" required>
-      <input type="text" name="company" data-ph-en="Company" data-ph-he="חברה" placeholder="Company">
+      <input type="text" name="name" data-ph-en="Your Name" data-ph-he="שמך" placeholder="Your Name" aria-label="Your name (required)" required>
+      <input type="text" name="company" data-ph-en="Company" data-ph-he="חברה" placeholder="Company" aria-label="Company name">
     </div>
-    <input type="email" name="email" data-ph-en="Email Address" data-ph-he='כתובת דוא"ל' placeholder="Email Address" required>
-    <textarea name="message" data-ph-en="Tell us about your project..." data-ph-he="ספרו לנו על הפרויקט שלכם..." placeholder="Tell us about your project..." rows="3"></textarea>
+    <input type="email" name="email" data-ph-en="Email Address" data-ph-he='כתובת דוא"ל' placeholder="Email Address" aria-label="Email address (required)" required>
+    <textarea name="message" data-ph-en="Tell us about your project..." data-ph-he="ספרו לנו על הפרויקט שלכם..." placeholder="Tell us about your project..." aria-label="Your message" rows="3"></textarea>
     <div class="cf-bottom-row">
       <button type="submit" class="cf-btn" data-en="Send Message →" data-he="שלח הודעה ←">Send Message →</button>
     </div>
@@ -986,11 +1020,13 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
   </div>
 </section>
 
+</main><!-- /main -->
+
 <!-- FOOTER -->
-<footer>
+<footer role="contentinfo">
   <div class="ft-main">
     <div><a href="#" class="ft-logo">ML<span>AI</span>A</a><div class="ft-tag" data-en="Machine Learning &amp; AI Approach" data-he="למידת מכונה וגישת בינה מלאכותית">Machine Learning &amp; AI Approach</div></div>
-    <ul class="ft-links">
+    <ul class="ft-links" role="list" aria-label="Footer navigation">
       <li><a href="#about" data-en="About" data-he="אודות">About</a></li>
       <li><a href="#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
       <li><a href="blog.html" data-en="Blog" data-he="בלוג">Blog</a></li>
@@ -998,6 +1034,7 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
     </ul>
     <p data-en="© 2025 MLAIA — Machine Learning &amp; AI Approach" data-he="© 2025 MLAIA — למידת מכונה וגישת בינה מלאכותית">© 2025 MLAIA — Machine Learning &amp; AI Approach</p>
   </div>
+  <p class="ft-reg" data-en="ח.פ. XXXXXXXXX | P.O. Box XXXX, Israel" data-he="ח.פ. XXXXXXXXX | ת.ד. XXXX, ישראל">ח.פ. XXXXXXXXX | P.O. Box XXXX, Israel</p>
   <ul class="ft-legal">
     <li><a href="accessibility.html" data-en="Accessibility Statement" data-he="הצהרת נגישות">Accessibility Statement</a></li>
     <li><a href="privacy.html" data-en="Privacy Policy" data-he="מדיניות פרטיות">Privacy Policy</a></li>
@@ -1006,11 +1043,41 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 </footer>
 
 <!-- COOKIE CONSENT BANNER -->
-<div id="cookie-banner" role="dialog" aria-label="Cookie consent">
-  <p class="cb-text" id="cb-text" data-en='This site uses cookies for analytics to help us improve your experience. See our <a href="privacy.html">Privacy Policy</a> for details.' data-he='אתר זה משתמש בעוגיות לצורכי אנליטיקה לשיפור חוויתכם. ראו את <a href="privacy.html">מדיניות הפרטיות</a> שלנו לפרטים.'>This site uses cookies for analytics to help us improve your experience. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
-  <div class="cb-actions">
-    <button class="cb-accept" id="cb-accept" data-en="Accept" data-he="קבל">Accept</button>
-    <button class="cb-decline" id="cb-decline" data-en="Decline" data-he="דחה">Decline</button>
+<div id="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cb-heading" aria-describedby="cb-desc">
+  <div class="cb-inner">
+    <div class="cb-top">
+      <p class="cb-title" id="cb-heading" data-en="Cookie Preferences" data-he="העדפות עוגיות">Cookie Preferences</p>
+      <p class="cb-text" id="cb-desc" data-en='We use cookies to improve your experience. Essential cookies are always active. See our <a href="privacy.html">Privacy Policy</a>.' data-he='אנו משתמשים בעוגיות לשיפור חוויתכם. עוגיות חיוניות תמיד פעילות. ראו את <a href="privacy.html">מדיניות הפרטיות</a>.'>We use cookies to improve your experience. Essential cookies are always active. See our <a href="privacy.html">Privacy Policy</a>.</p>
+    </div>
+    <div class="cb-categories" role="group" aria-labelledby="cb-heading">
+      <label class="cb-cat">
+        <span class="cb-cat-text">
+          <strong data-en="Essential" data-he="חיוניות">Essential</strong>
+          <span data-en="Required for the site to function" data-he="נדרשות לתפקוד האתר">Required for the site to function</span>
+        </span>
+        <input type="checkbox" id="cb-essential" checked disabled aria-label="Essential cookies — always active">
+        <span class="cb-cat-badge" data-en="Always On" data-he="תמיד פעיל">Always On</span>
+      </label>
+      <label class="cb-cat">
+        <span class="cb-cat-text">
+          <strong data-en="Analytics" data-he="אנליטיקה">Analytics</strong>
+          <span data-en="Help us understand how visitors use the site" data-he="עוזרות להבין כיצד מבקרים משתמשים באתר">Help us understand how visitors use the site</span>
+        </span>
+        <input type="checkbox" id="cb-analytics" aria-label="Analytics cookies">
+      </label>
+      <label class="cb-cat">
+        <span class="cb-cat-text">
+          <strong data-en="Marketing" data-he="שיווק">Marketing</strong>
+          <span data-en="Used for targeted advertising" data-he="משמשות לפרסום ממוקד">Used for targeted advertising</span>
+        </span>
+        <input type="checkbox" id="cb-marketing" aria-label="Marketing cookies">
+      </label>
+    </div>
+    <div class="cb-actions">
+      <button class="cb-reject-all" id="cb-decline" data-en="Reject All" data-he="דחה הכל">Reject All</button>
+      <button class="cb-save-pref" id="cb-save" data-en="Save Preferences" data-he="שמור העדפות">Save Preferences</button>
+      <button class="cb-accept" id="cb-accept" data-en="Accept All" data-he="קבל הכל">Accept All</button>
+    </div>
   </div>
 </div>
 
@@ -1918,18 +1985,30 @@ function handleForm(e){
   const btn=document.querySelector('.hamburger');
   const links=document.querySelector('.nav-links');
   if(!btn||!links)return;
-  btn.addEventListener('click',()=>{
-    const isOpen=links.classList.toggle('open');
-    btn.classList.toggle('open');
-    btn.setAttribute('aria-expanded',isOpen);
-    document.body.style.overflow=isOpen?'hidden':'';
+  function openMenu(){
+    links.classList.add('open');btn.classList.add('open');
+    btn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';
+    const first=links.querySelector('a,button');
+    if(first)setTimeout(()=>first.focus(),50);
+  }
+  function closeMenu(){
+    links.classList.remove('open');btn.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');document.body.style.overflow='';
+    btn.focus();
+  }
+  btn.addEventListener('click',()=>links.classList.contains('open')?closeMenu():openMenu());
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&links.classList.contains('open'))closeMenu();
   });
-  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-    links.classList.remove('open');
-    btn.classList.remove('open');
-    btn.setAttribute('aria-expanded','false');
-    document.body.style.overflow='';
-  }));
+  links.addEventListener('keydown',function(e){
+    if(e.key!=='Tab'||!links.classList.contains('open'))return;
+    const focusable=[...links.querySelectorAll('a,button')].filter(el=>el.offsetParent!==null);
+    if(!focusable.length)return;
+    const first=focusable[0],last=focusable[focusable.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  });
 })();
 
 const NAV=document.getElementById('nav');
@@ -1988,7 +2067,7 @@ function setLang(lang){
 
   // Update lang toggle button label
   const btn=document.getElementById('lang-toggle');
-  if(btn)btn.textContent=isHe?'English':'\u05e2\u05d1\u05e8\u05d9\u05ea';
+  if(btn){btn.textContent=isHe?'English':'\u05e2\u05d1\u05e8\u05d9\u05ea';btn.setAttribute('aria-label',isHe?'Switch language to English':'Switch language to Hebrew');}
 }
 
 /* ══ ACCESSIBILITY WIDGET ══ */
@@ -2043,18 +2122,51 @@ document.addEventListener('DOMContentLoaded',function(){
   const COOKIE_KEY='mlaia-cookie-consent';
   const banner=document.getElementById('cookie-banner');
   if(!banner)return;
-  const choice=localStorage.getItem(COOKIE_KEY);
-  if(!choice){
-    // Show after short delay so page renders first
-    setTimeout(()=>banner.classList.add('show'),800);
+  const analyticsChk=document.getElementById('cb-analytics');
+  const marketingChk=document.getElementById('cb-marketing');
+  function savePrefs(prefs){
+    localStorage.setItem(COOKIE_KEY,JSON.stringify(prefs));
+    banner.classList.remove('show');
+    document.dispatchEvent(new CustomEvent('mlaia-cookie-consent',{detail:prefs}));
+  }
+  // Restore previous preference state
+  const stored=localStorage.getItem(COOKIE_KEY);
+  if(stored){
+    try{
+      const p=JSON.parse(stored);
+      if(analyticsChk)analyticsChk.checked=!!p.analytics;
+      if(marketingChk)marketingChk.checked=!!p.marketing;
+    }catch(e){}
+  } else {
+    setTimeout(()=>{
+      banner.classList.add('show');
+      const firstBtn=banner.querySelector('button:not([disabled])');
+      if(firstBtn)firstBtn.focus();
+    },900);
   }
   document.getElementById('cb-accept').addEventListener('click',()=>{
-    localStorage.setItem(COOKIE_KEY,'accepted');
-    banner.classList.remove('show');
+    if(analyticsChk)analyticsChk.checked=true;
+    if(marketingChk)marketingChk.checked=true;
+    savePrefs({essential:true,analytics:true,marketing:true});
   });
   document.getElementById('cb-decline').addEventListener('click',()=>{
-    localStorage.setItem(COOKIE_KEY,'declined');
-    banner.classList.remove('show');
+    if(analyticsChk)analyticsChk.checked=false;
+    if(marketingChk)marketingChk.checked=false;
+    savePrefs({essential:true,analytics:false,marketing:false});
+  });
+  const saveBtn=document.getElementById('cb-save');
+  if(saveBtn)saveBtn.addEventListener('click',()=>{
+    savePrefs({essential:true,analytics:analyticsChk?analyticsChk.checked:false,marketing:marketingChk?marketingChk.checked:false});
+  });
+  // Keyboard trap inside banner
+  banner.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){savePrefs({essential:true,analytics:false,marketing:false});return;}
+    if(e.key!=='Tab')return;
+    const focusable=[...banner.querySelectorAll('button:not([disabled]),input:not([disabled])')].filter(el=>el.offsetParent!==null);
+    if(!focusable.length)return;
+    const first=focusable[0],last=focusable[focusable.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
   });
 })();
 </script>
