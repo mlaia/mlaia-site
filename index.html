@@ -995,10 +995,12 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
   <div class="sl rv" data-en="Ready to Start?" data-he="מוכנים להתחיל?">Ready to Start?</div>
   <h2 class="rv" id="contact-h2" style="color:#fff">Let's Take Your Data<br>from Insight to Impact</h2>
   <p class="rv d1" data-en="Tell us about your data challenge. MLAIA — Machine Learning &amp; AI Approach — will design the solution." data-he="ספרו לנו על האתגר שלכם בתחום הנתונים. MLAIA — למידת מכונה וגישת AI — תתכנן את הפתרון.">Tell us about your data challenge. MLAIA — Machine Learning &amp; AI Approach — will design the solution.</p>
-  <!-- To activate Formspree: replace YOUR_FORMSPREE_ID with the ID from formspree.io/f/xxxxxxxx -->
   <form class="cta-form rv d2" id="contact-form"
-        action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+        action="https://formsubmit.co/yochai@mlaia.com"
         method="POST" onsubmit="handleForm(event)" aria-label="Contact us form" novalidate>
+    <input type="hidden" name="_next" value="https://www.mlaia.com/">
+    <input type="hidden" name="_honey" style="display:none">
+    <input type="hidden" name="_captcha" value="false">
     <div class="cf-row">
       <input type="text" name="name" data-ph-en="Your Name" data-ph-he="שמך" placeholder="Your Name" aria-label="Your name (required)" required>
       <input type="text" name="company" data-ph-en="Company" data-ph-he="חברה" placeholder="Company" aria-label="Company name">
@@ -1955,25 +1957,16 @@ function handleProjectForm(e){e.preventDefault();const f=e.target;f.innerHTML='<
 function handleForm(e){
   e.preventDefault();
   const form=e.target;
-  const action=form.getAttribute('action');
-  // If no real Formspree ID configured, fall back to mailto
-  if(!action||action.includes('YOUR_FORMSPREE_ID')){
-    const name=form.name.value,email=form.email.value,company=form.company?form.company.value:'',msg=form.message.value;
-    const body=encodeURIComponent('Name: '+name+'\nCompany: '+company+'\nEmail: '+email+'\n\n'+msg);
-    window.location.href='mailto:yochai@mlaia.com?subject='+encodeURIComponent('Project Inquiry from '+name)+'&body='+body;
-    return;
-  }
   const btn=form.querySelector('.cf-btn');
   btn.textContent='Sending…';btn.disabled=true;
-  fetch(action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}})
-    .then(r=>{
-      if(r.ok){
+  fetch('https://formsubmit.co/ajax/yochai@mlaia.com',{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}})
+    .then(r=>r.json())
+    .then(d=>{
+      if(d.success==='true'||d.success===true){
         form.innerHTML='<div class="cf-success">✓ Message sent! We\'ll be in touch within 24 hours.</div>';
       } else {
-        r.json().then(d=>{
-          btn.textContent='Send Message →';btn.disabled=false;
-          alert(d.errors?d.errors.map(x=>x.message).join(', '):'Something went wrong. Please email yochai@mlaia.com directly.');
-        });
+        btn.textContent='Send Message →';btn.disabled=false;
+        alert('Something went wrong. Please email yochai@mlaia.com directly.');
       }
     })
     .catch(()=>{
