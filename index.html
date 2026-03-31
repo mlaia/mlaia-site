@@ -229,7 +229,7 @@ h2{font-family:'DM Sans',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weig
 .logo-pill:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(0,0,0,.35)}
 .logo-pill img{height:40px;width:auto;max-width:110px;object-fit:contain;display:block}
 .logo-pill.sm img{height:28px;max-width:80px}
-@keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}@keyframes logo-scroll-rtl{from{transform:translateX(0)}to{transform:translateX(50%)}}
 
 
 /* ── BLOG ── */
@@ -482,8 +482,8 @@ html[lang="he"] .tm::before{left:auto;right:32px;content:'\201D'}
 /* RTL: top-border slide from right */
 html[lang="he"] .sc-card::after{transform-origin:right}
 /* Logo banners: reverse scroll in RTL for natural feel */
-html[lang="he"] .logo-banner-track:not(.rev){animation-direction:reverse}
-html[lang="he"] .logo-banner-track.rev{animation-direction:normal}
+html[lang="he"] .logo-banner-track:not(.rev){animation-name:logo-scroll-rtl;animation-direction:normal}
+html[lang="he"] .logo-banner-track.rev{animation-name:logo-scroll-rtl;animation-direction:reverse}
 </style>
 <script type="application/ld+json">
 {
