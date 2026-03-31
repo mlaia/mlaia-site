@@ -489,14 +489,14 @@ h1{animation-delay:.05s!important}
 @media(min-width:1530px){
   nav{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
   .hero{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
-  .services,.domains,.blog,.customers,.cta,footer,.logo-strip,.what-we-do,.testi-section,.mid-cta{
+  .services,.domains,.blog,.customers,.cta,footer,.logo-strip,.what-we-do,.testi-section,.mid-cta,.case-studies,.cta-strip{
     padding-left:calc((100% - 1400px) / 2)!important;
     padding-right:calc((100% - 1400px) / 2)!important
   }
   .hero-scroll{right:calc((100% - 1400px) / 2)!important}
 }
 @media(max-width:768px){
-  .logo-strip,.what-we-do,.testi-section,.mid-cta{padding-left:24px!important;padding-right:24px!important}
+  .logo-strip,.what-we-do,.testi-section,.mid-cta,.case-studies,.cta-strip{padding-left:24px!important;padding-right:24px!important}
 }
 
 /* ── LANGUAGE TOGGLE BUTTON ── */
@@ -575,6 +575,31 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 .hero :focus-visible,.customers :focus-visible,.cta :focus-visible,.mid-cta :focus-visible,#a11y-panel :focus-visible,#cookie-banner :focus-visible{outline-color:rgba(255,255,255,.9)}
 nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .nav-lang-btn:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+
+/* ── CASE STUDIES ── */
+.case-studies{padding:100px 64px;background:var(--bg)}
+.cs-hdr{text-align:center;margin-bottom:56px}
+.cs-hdr p{color:var(--muted);font-size:1rem;font-weight:300;max-width:520px;margin:14px auto 0;line-height:1.75}
+.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.cs-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:32px 28px;transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column;gap:14px}
+.cs-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(10,22,40,.1);border-color:var(--accent)}
+.cs-tag{display:inline-block;font-size:1rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(0,87,255,.07);color:var(--accent);width:fit-content}
+.cs-card h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--navy);line-height:1.35;margin:0}
+.cs-block{display:flex;flex-direction:column;gap:3px}
+.cs-block-label{font-size:1rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cs-block-text{font-size:1rem;line-height:1.7;color:var(--muted);margin:0}
+.cs-impact{margin-top:auto;padding-top:16px;border-top:1px solid var(--border)}
+.cs-impact-text{font-family:'Syne',sans-serif;font-size:1.12rem;font-weight:700;color:var(--accent);line-height:1.35}
+@media(max-width:900px){.cs-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.cs-grid{grid-template-columns:1fr}.case-studies{padding:72px 24px}}
+
+/* ── INLINE CTA STRIP ── */
+.cta-strip{padding:3rem 64px;background:#0a1628;text-align:center;position:relative;overflow:hidden}
+.cta-strip::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,87,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,87,255,.055) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+.cta-strip-heading{font-family:'DM Sans',sans-serif;font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:700;color:#fff;margin-bottom:24px;letter-spacing:-.02em;position:relative;z-index:1}
+.cta-strip-btn{display:inline-flex;align-items:center;gap:8px;background:#f97316;color:#fff;padding:14px 32px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:1.1rem;font-weight:600;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;position:relative;z-index:1}
+.cta-strip-btn:hover{background:#ea6d0a;transform:translateY(-2px);box-shadow:0 8px 28px rgba(249,115,22,.35)}
+@media(max-width:768px){.cta-strip{padding:2.5rem 24px}}
 </style>
 <script type="application/ld+json">
 {
@@ -680,11 +705,11 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
   <div class="hero-left">
     <canvas id="stock-chart" class="hero-stock-chart"></canvas>
     <div class="hero-kicker" data-en="Machine Learning &amp; AI Approach" data-he="למידת מכונה וגישת בינה מלאכותית">Machine Learning &amp; AI Approach</div>
-    <h1 id="hero-h1">Your Data,<br><em>Our</em> Expertise</h1>
-    <p class="hero-sub" data-en="From raw signals to enterprise decisions — we transform complex data into production-ready intelligence that drives real outcomes." data-he="מאותות גולמיים להחלטות ארגוניות — אנחנו הופכים נתונים מורכבים לאינטליגנציה מוכנה לייצור שמניעה תוצאות אמיתיות.">From raw signals to enterprise decisions — we transform complex data into production-ready intelligence that drives real outcomes.</p>
+    <h1 id="hero-h1">From Data to Decisions — in Production</h1>
+    <p class="hero-sub" data-en="We build AI systems that ship, scale, and deliver measurable business impact. Not just models — production-grade intelligence." data-he="אנחנו בונים מערכות AI שעובדות בפרודקשן, מתרחבות, ומספקות תוצאות עסקיות מדידות. לא רק מודלים — אינטליגנציה ברמת פרודקשן.">We build AI systems that ship, scale, and deliver measurable business impact. Not just models — production-grade intelligence.</p>
     <div class="hero-actions">
-      <a href="#domains" class="btn-p">
-        <span data-en="Explore Solutions" data-he="גלו פתרונות">Explore Solutions</span>
+      <a href="#contact" class="btn-p">
+        <span data-en="Book a Free AI Consultation" data-he="קבעו ייעוץ AI חינם">Book a Free AI Consultation</span>
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a href="#about" class="btn-o" data-en="What is MLAIA?" data-he="מה זה MLAIA?">What is MLAIA?</a>
@@ -913,6 +938,77 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
   </div>
 </section>
 
+<!-- INLINE CTA STRIP — after Five Signature Domains -->
+<section class="cta-strip" aria-label="CTA after domains">
+  <h2 class="cta-strip-heading rv" data-en="Ready to accelerate with AI?" data-he="מוכנים להאיץ עם AI?">Ready to accelerate with AI?</h2>
+  <a href="#contact" class="cta-strip-btn rv">
+    <span data-en="Get Your Free AI Roadmap →" data-he="קבלו מפת דרכים חינמית ←">Get Your Free AI Roadmap →</span>
+  </a>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="case-studies" id="case-studies" aria-labelledby="cs-heading">
+  <div class="cs-hdr rv">
+    <div class="sl" style="justify-content:center" data-en="Proven Results" data-he="תוצאות מוכחות">Proven Results</div>
+    <h2 id="cs-heading" data-en="Proven Results" data-he="תוצאות מוכחות">Proven Results</h2>
+    <p data-en="Real projects. Real impact. Every model goes to production." data-he="פרויקטים אמיתיים. השפעה אמיתית. כל מודל מגיע לפרודקשן.">Real projects. Real impact. Every model goes to production.</p>
+  </div>
+  <div class="cs-grid">
+
+    <!-- Card 1: Telecom Sales AI -->
+    <div class="cs-card rv">
+      <span class="cs-tag" data-en="Telecom" data-he="תקשורת">Telecom</span>
+      <h3 data-en="AI-Powered Sales Pipeline Optimization" data-he="אופטימיזציית צינור מכירות מבוססת AI">AI-Powered Sales Pipeline Optimization</h3>
+      <div class="cs-block">
+        <span class="cs-block-label" data-en="Problem" data-he="אתגר">Problem</span>
+        <p class="cs-block-text" data-en="Israel&apos;s leading telecom needed to prioritize thousands of daily sales leads across multiple channels." data-he="חברת התקשורת המובילה בישראל נדרשה לתעדף אלפי לידים יומיים במספר ערוצים.">Israel's leading telecom needed to prioritize thousands of daily sales leads across multiple channels.</p>
+      </div>
+      <div class="cs-block">
+        <span class="cs-block-label" data-en="Solution" data-he="פתרון">Solution</span>
+        <p class="cs-block-text" data-en="Built an ML prioritization model integrating CRM, usage patterns, and behavioral signals." data-he="בנינו מודל תיעדוף ML המשלב CRM, דפוסי שימוש ואותות התנהגותיים.">Built an ML prioritization model integrating CRM, usage patterns, and behavioral signals.</p>
+      </div>
+      <div class="cs-impact">
+        <p class="cs-impact-text" data-en="32% increase in sales conversion rate" data-he="עלייה של 32% בשיעור ההמרה במכירות">32% increase in sales conversion rate</p>
+      </div>
+    </div>
+
+    <!-- Card 2: Medical AI -->
+    <div class="cs-card rv d1">
+      <span class="cs-tag" style="background:rgba(8,145,178,.08);color:var(--c-medical)" data-en="Healthcare" data-he="בריאות">Healthcare</span>
+      <h3 data-en="Clinical Decision Support System" data-he="מערכת תמיכה בהחלטות קליניות">Clinical Decision Support System</h3>
+      <div class="cs-block">
+        <span class="cs-block-label" data-en="Problem" data-he="אתגר">Problem</span>
+        <p class="cs-block-text" data-en="A major medical center needed AI-assisted analysis of complex patient data for faster clinical decisions." data-he="מרכז רפואי גדול נדרש לניתוח מבוסס AI של נתוני מטופלים מורכבים להחלטות קליניות מהירות יותר.">A major medical center needed AI-assisted analysis of complex patient data for faster clinical decisions.</p>
+      </div>
+      <div class="cs-block">
+        <span class="cs-block-label" data-en="Solution" data-he="פתרון">Solution</span>
+        <p class="cs-block-text" data-en="Developed HIPAA-compliant AI models for biosignal analysis and clinical pattern recognition." data-he="פיתחנו מודלי AI תואמי HIPAA לניתוח ביו-סיגנלים וזיהוי דפוסים קליניים.">Developed HIPAA-compliant AI models for biosignal analysis and clinical pattern recognition.</p>
+      </div>
+      <div class="cs-impact">
+        <p class="cs-impact-text" style="color:var(--c-medical)" data-en="50% reduction in analysis time, deployed to production" data-he="צמצום של 50% בזמן ניתוח, הושק לפרודקשן">50% reduction in analysis time, deployed to production</p>
+      </div>
+    </div>
+
+    <!-- Card 3: Signal Processing / Silentium -->
+    <div class="cs-card rv d2">
+      <span class="cs-tag" style="background:rgba(0,87,255,.07);color:var(--accent)" data-en="Signal Processing" data-he="עיבוד אותות">Signal Processing</span>
+      <h3 data-en="Real-Time Noise Cancellation AI" data-he="AI לביטול רעשים בזמן אמת">Real-Time Noise Cancellation AI</h3>
+      <div class="cs-block">
+        <span class="cs-block-label" data-en="Problem" data-he="אתגר">Problem</span>
+        <p class="cs-block-text" data-en="An audio-tech company needed to establish AI infrastructure for next-generation active noise cancellation." data-he="חברת אודיו-טכנולוגיה נדרשה להקים תשתית AI לביטול רעשים אקטיבי מהדור הבא.">An audio-tech company needed to establish AI infrastructure for next-generation active noise cancellation.</p>
+      </div>
+      <div class="cs-block">
+        <span class="cs-block-label" data-en="Solution" data-he="פתרון">Solution</span>
+        <p class="cs-block-text" data-en="Built the AI/ML infrastructure from the ground up: DSP pipelines, neural audio models, and edge deployment." data-he="בנינו את תשתית ה-AI/ML מאפס: צינורות DSP, מודלי אודיו ניורוניים, ופריסה על edge.">Built the AI/ML infrastructure from the ground up: DSP pipelines, neural audio models, and edge deployment.</p>
+      </div>
+      <div class="cs-impact">
+        <p class="cs-impact-text" data-en="Full AI infrastructure established, technology integrated into production products" data-he="תשתית AI מלאה הוקמה, הטכנולוגיה שולבה במוצרי פרודקשן">Full AI infrastructure established, technology integrated into production products</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- TESTIMONIALS -->
 <section class="testi-section" id="customers" aria-labelledby="testi-heading">
   <div class="testi-hdr rv">
@@ -961,6 +1057,14 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
       <button class="tc-dot" aria-label="Testimonial 6"></button>
     </div>
   </div>
+</section>
+
+<!-- INLINE CTA STRIP — after Testimonials -->
+<section class="cta-strip" aria-label="CTA after testimonials">
+  <h2 class="cta-strip-heading rv" data-en="Ready to accelerate with AI?" data-he="מוכנים להאיץ עם AI?">Ready to accelerate with AI?</h2>
+  <a href="#contact" class="cta-strip-btn rv">
+    <span data-en="Get Your Free AI Roadmap →" data-he="קבלו מפת דרכים חינמית ←">Get Your Free AI Roadmap →</span>
+  </a>
 </section>
 
 <!-- MID-PAGE CTA BANNER -->
@@ -2026,8 +2130,8 @@ let currentLang='en';
 // Rich-HTML translations (elements containing <br>, <em>, <strong>)
 const RICH_TRANS=[
   {id:'hero-h1',
-   en:'Your Data,<br><em>Our</em> Expertise',
-   he:'הנתונים שלך,<br><em>המומחיות</em> שלנו'},
+   en:'From Data to Decisions — in Production',
+   he:'מנתונים להחלטות — בפרודקשן'},
   {id:'mid-cta-h2',
    en:'Ready to transform your data?<br>Let\'s talk.',
    he:'מוכנים להפוך את הנתונים שלכם?<br>בואו נדבר.'},
