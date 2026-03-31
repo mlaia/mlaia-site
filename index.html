@@ -575,6 +575,22 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 .hero :focus-visible,.customers :focus-visible,.cta :focus-visible,.mid-cta :focus-visible,#a11y-panel :focus-visible,#cookie-banner :focus-visible{outline-color:rgba(255,255,255,.9)}
 nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .nav-lang-btn:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+/* Case Studies */
+.case-studies-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2.5rem; }
+.case-study-card { background: #fff; border-radius: 16px; padding: 2rem; box-shadow: 0 2px 16px rgba(10,22,40,0.08); border: 1px solid #e8ecf2; transition: transform 0.2s, box-shadow 0.2s; }
+.case-study-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(10,22,40,0.13); }
+.case-tag { display: inline-block; background: #eef3ff; color: #1a56db; font-size: 0.85rem; font-weight: 600; padding: 0.3rem 0.9rem; border-radius: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.case-study-card h3 { font-size: 1.3rem; margin-bottom: 1.2rem; color: #0a1628; }
+.case-detail { margin-bottom: 1rem; }
+.case-detail strong { display: block; font-size: 0.9rem; color: #6b7a99; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+.case-detail p { font-size: 1rem; line-height: 1.6; color: #333; margin: 0; }
+.case-impact { background: linear-gradient(135deg, #0a1628, #1a3a5c); color: #fff; padding: 1rem 1.2rem; border-radius: 10px; font-size: 1.1rem; font-weight: 700; text-align: center; margin-top: 1rem; }
+@media (max-width: 900px) { .case-studies-grid { grid-template-columns: 1fr; } }
+/* Mid-page CTA */
+.mid-cta-strip { background: #0a1628; padding: 3rem 0; text-align: center; }
+.mid-cta-strip h3 { color: #fff; font-size: 1.6rem; margin-bottom: 1.2rem; }
+.mid-cta-strip .btn-accent { display: inline-block; background: #e8573a; color: #fff; padding: 0.9rem 2rem; border-radius: 8px; font-weight: 700; font-size: 1.1rem; text-decoration: none; transition: background 0.2s; }
+.mid-cta-strip .btn-accent:hover { background: #d04a2f; }
 </style>
 <script type="application/ld+json">
 {
@@ -913,6 +929,62 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
   </div>
 </section>
 
+<!-- Case Studies -->
+<section id="case-studies" class="section">
+  <div class="container">
+    <span class="section-label" data-he="תוצאות מוכחות">— Proven Results</span>
+    <h2 class="section-title" data-he="פרויקטים שעושים את ההבדל">Projects That Make the Difference</h2>
+    <p class="section-subtitle" data-he="פרויקטים אמיתיים. השפעה אמיתית. כל מודל מגיע לפרודקשן.">Real projects. Real impact. Every model goes to production.</p>
+    <div class="case-studies-grid">
+      <div class="case-study-card">
+        <span class="case-tag">Telecom</span>
+        <h3 data-he="אופטימיזציית צינור מכירות מבוססת AI">AI-Powered Sales Pipeline Optimization</h3>
+        <div class="case-detail">
+          <strong data-he="האתגר">Challenge</strong>
+          <p data-he="חברת התקשורת המובילה בישראל נדרשה לתעדף אלפי לידים יומיים במספר ערוצים.">Israel's leading telecom needed to prioritize thousands of daily sales leads across multiple channels.</p>
+        </div>
+        <div class="case-detail">
+          <strong data-he="הפתרון">Solution</strong>
+          <p data-he="בנינו מודל תיעדוף ML המשלב CRM, דפוסי שימוש ואותות התנהגותיים.">Built an ML prioritization model integrating CRM, usage patterns, and behavioral signals.</p>
+        </div>
+        <div class="case-impact" data-he="עלייה של 32% בשיעור ההמרה במכירות">32% increase in sales conversion rate</div>
+      </div>
+      <div class="case-study-card">
+        <span class="case-tag">Healthcare</span>
+        <h3 data-he="מערכת תמיכה בהחלטות קליניות">Clinical Decision Support System</h3>
+        <div class="case-detail">
+          <strong data-he="האתגר">Challenge</strong>
+          <p data-he="מרכז רפואי גדול נדרש לניתוח מבוסס AI של נתוני מטופלים מורכבים להחלטות קליניות מהירות יותר.">A major medical center needed AI-assisted analysis of complex patient data for faster clinical decisions.</p>
+        </div>
+        <div class="case-detail">
+          <strong data-he="הפתרון">Solution</strong>
+          <p data-he="פיתחנו מודלי AI תואמי HIPAA לניתוח ביו-סיגנלים וזיהוי דפוסים קליניים.">Developed HIPAA-compliant AI models for biosignal analysis and clinical pattern recognition.</p>
+        </div>
+        <div class="case-impact" data-he="צמצום של 50% בזמן ניתוח, הושק לפרודקשן">50% reduction in analysis time, deployed to production</div>
+      </div>
+      <div class="case-study-card">
+        <span class="case-tag" data-he="עיבוד אותות">Signal Processing</span>
+        <h3 data-he="AI לביטול רעשים בזמן אמת">Real-Time Noise Cancellation AI</h3>
+        <div class="case-detail">
+          <strong data-he="האתגר">Challenge</strong>
+          <p data-he="חברת אודיו-טכנולוגיה נדרשה להקים תשתית AI לביטול רעשים אקטיבי מהדור הבא.">An audio-tech company needed to establish AI infrastructure for next-generation active noise cancellation.</p>
+        </div>
+        <div class="case-detail">
+          <strong data-he="הפתרון">Solution</strong>
+          <p data-he="בנינו את תשתית ה-AI/ML מאפס: צינורות DSP, מודלי אודיו נוירוניים, ופריסה על edge.">Built the AI/ML infrastructure from the ground up: DSP pipelines, neural audio models, and edge deployment.</p>
+        </div>
+        <div class="case-impact" data-he="תשתית AI מלאה הוקמה, הטכנולוגיה שולבה במוצרי פרודקשן">Full AI infrastructure established, integrated into production products</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="mid-cta-strip">
+  <div class="container">
+    <h3 data-he="מוכנים להאיץ עם AI?">Ready to accelerate with AI?</h3>
+    <a href="#contact" class="btn btn-accent" data-he="קבלו מפת דרכים חינמית →">Get Your Free AI Roadmap →</a>
+  </div>
+</div>
+
 <!-- TESTIMONIALS -->
 <section class="testi-section" id="customers" aria-labelledby="testi-heading">
   <div class="testi-hdr rv">
@@ -962,6 +1034,13 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
     </div>
   </div>
 </section>
+
+<div class="mid-cta-strip">
+  <div class="container">
+    <h3 data-he="מוכנים להאיץ עם AI?">Ready to accelerate with AI?</h3>
+    <a href="#contact" class="btn btn-accent" data-he="קבלו מפת דרכים חינמית →">Get Your Free AI Roadmap →</a>
+  </div>
+</div>
 
 <!-- MID-PAGE CTA BANNER -->
 <section class="mid-cta" aria-labelledby="mid-cta-h2">
