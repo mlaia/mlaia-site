@@ -489,14 +489,14 @@ h1{animation-delay:.05s!important}
 @media(min-width:1530px){
   nav{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
   .hero{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
-  .services,.domains,.blog,.customers,.cta,footer,.logo-strip,.what-we-do,.testi-section,.mid-cta,.case-studies,.cta-strip{
+  .services,.domains,.blog,.customers,.cta,footer,.logo-strip,.what-we-do,.testi-section,.mid-cta,.cta-strip{
     padding-left:calc((100% - 1400px) / 2)!important;
     padding-right:calc((100% - 1400px) / 2)!important
   }
   .hero-scroll{right:calc((100% - 1400px) / 2)!important}
 }
 @media(max-width:768px){
-  .logo-strip,.what-we-do,.testi-section,.mid-cta,.case-studies,.cta-strip{padding-left:24px!important;padding-right:24px!important}
+  .logo-strip,.what-we-do,.testi-section,.mid-cta,.cta-strip{padding-left:24px!important;padding-right:24px!important}
 }
 
 /* ── LANGUAGE TOGGLE BUTTON ── */
@@ -576,22 +576,6 @@ body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .nav-lang-btn:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
 
-/* ── CASE STUDIES ── */
-.case-studies{padding:100px 64px;background:var(--bg)}
-.cs-hdr{text-align:center;margin-bottom:56px}
-.cs-hdr p{color:var(--muted);font-size:1rem;font-weight:300;max-width:520px;margin:14px auto 0;line-height:1.75}
-.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.cs-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:32px 28px;transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column;gap:14px}
-.cs-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(10,22,40,.1);border-color:var(--accent)}
-.cs-tag{display:inline-block;font-size:1rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(0,87,255,.07);color:var(--accent);width:fit-content}
-.cs-card h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--navy);line-height:1.35;margin:0}
-.cs-block{display:flex;flex-direction:column;gap:3px}
-.cs-block-label{font-size:1rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.cs-block-text{font-size:1rem;line-height:1.7;color:var(--muted);margin:0}
-.cs-impact{margin-top:auto;padding-top:16px;border-top:1px solid var(--border)}
-.cs-impact-text{font-family:'Syne',sans-serif;font-size:1.12rem;font-weight:700;color:var(--accent);line-height:1.35}
-@media(max-width:900px){.cs-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.cs-grid{grid-template-columns:1fr}.case-studies{padding:72px 24px}}
 
 /* ── INLINE CTA STRIP ── */
 .cta-strip{padding:3rem 64px;background:#0a1628;text-align:center;position:relative;overflow:hidden}
@@ -944,69 +928,6 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
   <a href="#contact" class="cta-strip-btn rv">
     <span data-en="Get Your Free AI Roadmap →" data-he="קבלו מפת דרכים חינמית ←">Get Your Free AI Roadmap →</span>
   </a>
-</section>
-
-<!-- CASE STUDIES -->
-<section class="case-studies" id="case-studies" aria-labelledby="cs-heading">
-  <div class="cs-hdr rv">
-    <div class="sl" style="justify-content:center" data-en="Proven Results" data-he="תוצאות מוכחות">Proven Results</div>
-    <h2 id="cs-heading" data-en="Proven Results" data-he="תוצאות מוכחות">Proven Results</h2>
-    <p data-en="Real projects. Real impact. Every model goes to production." data-he="פרויקטים אמיתיים. השפעה אמיתית. כל מודל מגיע לפרודקשן.">Real projects. Real impact. Every model goes to production.</p>
-  </div>
-  <div class="cs-grid">
-
-    <!-- Card 1: Telecom Sales AI -->
-    <div class="cs-card rv">
-      <span class="cs-tag" data-en="Telecom" data-he="תקשורת">Telecom</span>
-      <h3 data-en="AI-Powered Sales Pipeline Optimization" data-he="אופטימיזציית צינור מכירות מבוססת AI">AI-Powered Sales Pipeline Optimization</h3>
-      <div class="cs-block">
-        <span class="cs-block-label" data-en="Problem" data-he="אתגר">Problem</span>
-        <p class="cs-block-text" data-en="Israel&apos;s leading telecom needed to prioritize thousands of daily sales leads across multiple channels." data-he="חברת התקשורת המובילה בישראל נדרשה לתעדף אלפי לידים יומיים במספר ערוצים.">Israel's leading telecom needed to prioritize thousands of daily sales leads across multiple channels.</p>
-      </div>
-      <div class="cs-block">
-        <span class="cs-block-label" data-en="Solution" data-he="פתרון">Solution</span>
-        <p class="cs-block-text" data-en="Built an ML prioritization model integrating CRM, usage patterns, and behavioral signals." data-he="בנינו מודל תיעדוף ML המשלב CRM, דפוסי שימוש ואותות התנהגותיים.">Built an ML prioritization model integrating CRM, usage patterns, and behavioral signals.</p>
-      </div>
-      <div class="cs-impact">
-        <p class="cs-impact-text" data-en="32% increase in sales conversion rate" data-he="עלייה של 32% בשיעור ההמרה במכירות">32% increase in sales conversion rate</p>
-      </div>
-    </div>
-
-    <!-- Card 2: Medical AI -->
-    <div class="cs-card rv d1">
-      <span class="cs-tag" style="background:rgba(8,145,178,.08);color:var(--c-medical)" data-en="Healthcare" data-he="בריאות">Healthcare</span>
-      <h3 data-en="Clinical Decision Support System" data-he="מערכת תמיכה בהחלטות קליניות">Clinical Decision Support System</h3>
-      <div class="cs-block">
-        <span class="cs-block-label" data-en="Problem" data-he="אתגר">Problem</span>
-        <p class="cs-block-text" data-en="A major medical center needed AI-assisted analysis of complex patient data for faster clinical decisions." data-he="מרכז רפואי גדול נדרש לניתוח מבוסס AI של נתוני מטופלים מורכבים להחלטות קליניות מהירות יותר.">A major medical center needed AI-assisted analysis of complex patient data for faster clinical decisions.</p>
-      </div>
-      <div class="cs-block">
-        <span class="cs-block-label" data-en="Solution" data-he="פתרון">Solution</span>
-        <p class="cs-block-text" data-en="Developed HIPAA-compliant AI models for biosignal analysis and clinical pattern recognition." data-he="פיתחנו מודלי AI תואמי HIPAA לניתוח ביו-סיגנלים וזיהוי דפוסים קליניים.">Developed HIPAA-compliant AI models for biosignal analysis and clinical pattern recognition.</p>
-      </div>
-      <div class="cs-impact">
-        <p class="cs-impact-text" style="color:var(--c-medical)" data-en="50% reduction in analysis time, deployed to production" data-he="צמצום של 50% בזמן ניתוח, הושק לפרודקשן">50% reduction in analysis time, deployed to production</p>
-      </div>
-    </div>
-
-    <!-- Card 3: Signal Processing / Silentium -->
-    <div class="cs-card rv d2">
-      <span class="cs-tag" style="background:rgba(0,87,255,.07);color:var(--accent)" data-en="Signal Processing" data-he="עיבוד אותות">Signal Processing</span>
-      <h3 data-en="Real-Time Noise Cancellation AI" data-he="AI לביטול רעשים בזמן אמת">Real-Time Noise Cancellation AI</h3>
-      <div class="cs-block">
-        <span class="cs-block-label" data-en="Problem" data-he="אתגר">Problem</span>
-        <p class="cs-block-text" data-en="An audio-tech company needed to establish AI infrastructure for next-generation active noise cancellation." data-he="חברת אודיו-טכנולוגיה נדרשה להקים תשתית AI לביטול רעשים אקטיבי מהדור הבא.">An audio-tech company needed to establish AI infrastructure for next-generation active noise cancellation.</p>
-      </div>
-      <div class="cs-block">
-        <span class="cs-block-label" data-en="Solution" data-he="פתרון">Solution</span>
-        <p class="cs-block-text" data-en="Built the AI/ML infrastructure from the ground up: DSP pipelines, neural audio models, and edge deployment." data-he="בנינו את תשתית ה-AI/ML מאפס: צינורות DSP, מודלי אודיו ניורוניים, ופריסה על edge.">Built the AI/ML infrastructure from the ground up: DSP pipelines, neural audio models, and edge deployment.</p>
-      </div>
-      <div class="cs-impact">
-        <p class="cs-impact-text" data-en="Full AI infrastructure established, technology integrated into production products" data-he="תשתית AI מלאה הוקמה, הטכנולוגיה שולבה במוצרי פרודקשן">Full AI infrastructure established, technology integrated into production products</p>
-      </div>
-    </div>
-
-  </div>
 </section>
 
 <!-- TESTIMONIALS -->
