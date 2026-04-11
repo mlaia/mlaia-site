@@ -530,6 +530,23 @@ html[lang="he"] .sc-card::after{transform-origin:right}
 html[lang="he"] .logo-banner-track:not(.rev){animation-name:logo-scroll-rtl;animation-direction:normal}
 html[lang="he"] .logo-banner-track.rev{animation-name:logo-scroll-rtl;animation-direction:reverse}
 
+/* ── RTL element-level position corrections ── */
+/* Logo tagline spacing: margin flips to right side in RTL */
+html[dir="rtl"] .logo-tagline{margin-left:0;margin-right:6px}
+/* Decorative card number: move from top-right to top-left in RTL */
+html[dir="rtl"] .sc-num{right:auto;left:18px}
+/* Blog image label: move from bottom-left to bottom-right in RTL */
+html[dir="rtl"] .bl-img-label{left:auto;right:14px}
+/* Modal close button: move from top-right to top-left in RTL */
+html[dir="rtl"] .pm-close{right:auto;left:16px}
+/* Hero scroll indicator: move from right to left in RTL */
+html[dir="rtl"] .hero-scroll{right:auto;left:64px}
+/* About section: on mobile, photo floats right in RTL instead of left */
+@media(max-width:768px){
+  html[dir="rtl"] .about-photo{float:right;margin-right:0;margin-left:20px}
+  html[dir="rtl"] .about-photo-creds{clear:right}
+}
+
 /* ── ACCESSIBILITY WIDGET ── */
 #a11y-btn{position:fixed;bottom:24px;left:24px;z-index:99995;width:52px;height:52px;border-radius:50%;background:var(--navy);border:2px solid rgba(0,87,255,.4);color:#fff;font-size:1.5rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 24px rgba(0,0,0,.4);line-height:1;padding:0}
 #a11y-btn:hover,#a11y-btn:focus{background:var(--accent);outline:3px solid var(--accent2);outline-offset:2px;transform:scale(1.08);box-shadow:0 8px 28px rgba(0,87,255,.5)}
@@ -2134,6 +2151,13 @@ function setLang(lang){
   const btn=document.getElementById('lang-toggle');
   if(btn){btn.textContent=isHe?'English':'\u05e2\u05d1\u05e8\u05d9\u05ea';btn.setAttribute('aria-label',isHe?'Switch language to English':'Switch language to Hebrew');}
 }
+
+/* ── INIT LANGUAGE (restore from localStorage / URL param) ── */
+(function(){
+  const urlLang=new URLSearchParams(location.search).get('lang');
+  const saved=urlLang||localStorage.getItem('mlaia-lang');
+  if(saved==='he')setLang('he');
+})();
 
 /* ══ ACCESSIBILITY WIDGET ══ */
 document.addEventListener('DOMContentLoaded',function(){
