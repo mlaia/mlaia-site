@@ -8,7 +8,9 @@
 <title>MLAIA | AI &amp; Data Science Consulting — Signal Processing, Medical AI, NLP, BI</title>
 <meta name="description" content="MLAIA delivers end-to-end AI solutions: signal processing, medical AI, LLMs/NLP, and business intelligence. Led by Dr. Yochai Edlitz. Based in Israel, serving global clients.">
 <meta name="robots" content="index, follow">
-<meta name="keywords" content="AI consulting, data science, machine learning, signal processing, medical AI, NLP, business intelligence, Israel, predictive analytics">
+<meta name="keywords" content="AI consulting, data science, machine learning, signal processing, audio, acoustics, medical AI, NLP, business intelligence, Ad Tech, digital advertising, Israel, predictive analytics">
+<meta name="description" lang="he" content="המלאיה מדעני נתונים - חברת ייעוץ בינה מלאכותית, למידת מכונה, חיזוי, עיבוד אותות, אודיו ואקוסטיקה, Ad Tech, מידע רפואי, NLP ו-BI. מנתונים להחלטות בפרודקשן.">
+<meta name="keywords" lang="he" content="המלאיה, מדעני נתונים, בינה מלאכותית, למידת מכונה, AI ישראל, חיזוי מכירות, חיזוי ביקוש, BI, עיבוד אותות, אודיו, אקוסטיקה, Ad Tech, פרסום דיגיטלי, מידע רפואי, NLP, עיבוד שפה טבעית, דאטה סיינס, למידה עמוקה, deep learning">
 <link rel="canonical" href="https://www.mlaia.com/">
 <link rel="alternate" hreflang="en" href="https://www.mlaia.com/">
 <link rel="alternate" hreflang="he" href="https://www.mlaia.com/?lang=he">
@@ -18,6 +20,8 @@
 <meta property="og:title" content="MLAIA | AI &amp; Data Science Consulting — Signal Processing, Medical AI, NLP, BI">
 <meta property="og:description" content="MLAIA delivers end-to-end AI solutions: signal processing, medical AI, LLMs/NLP, and business intelligence. Led by Dr. Yochai Edlitz. Based in Israel, serving global clients.">
 <meta property="og:url" content="https://www.mlaia.com/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="he_IL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MLAIA | AI &amp; Data Science Consulting — Signal Processing, Medical AI, NLP, BI">
 <meta name="twitter:description" content="MLAIA delivers end-to-end AI solutions: signal processing, medical AI, LLMs/NLP, and business intelligence. Led by Dr. Yochai Edlitz. Based in Israel, serving global clients.">
@@ -609,13 +613,19 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
       "@type": "Organization",
       "@id": "https://www.mlaia.com/#organization",
       "name": "MLAIA",
-      "alternateName": "Machine Learning & AI Approach",
+      "legalName": "המלאיה מדעני נתונים בע״מ",
+      "alternateName": ["MLAIA", "MLAIA Data Science", "המלאיה", "המלאיה מדעני נתונים", "המלאיה מדעני נתונים בע״מ", "Machine Learning & AI Approach"],
       "url": "https://www.mlaia.com",
       "email": "yochai@mlaia.com",
-      "description": "MLAIA delivers end-to-end AI solutions: signal processing, medical AI, LLMs/NLP, and business intelligence.",
+      "description": "MLAIA delivers end-to-end AI solutions: signal processing, audio & acoustics, medical AI, LLMs/NLP, Ad Tech, and business intelligence. Based in Israel, serving global clients.",
       "founder": {"@type": "Person", "@id": "https://www.mlaia.com/#person-yochai"},
-      "areaServed": "Worldwide",
-      "knowsAbout": ["Signal Processing", "Medical AI", "NLP", "Business Intelligence", "Machine Learning", "Data Science"]
+      "areaServed": [
+        {"@type": "Country", "name": "Israel"},
+        {"@type": "Country", "name": "United States"},
+        "Worldwide"
+      ],
+      "knowsLanguage": ["en", "he"],
+      "knowsAbout": ["Signal Processing", "Audio Processing", "Acoustics", "Medical AI", "NLP", "Business Intelligence", "Machine Learning", "Deep Learning", "Data Science", "Ad Tech", "Digital Advertising"]
     },
     {
       "@type": "WebSite",
@@ -646,10 +656,13 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
         "@type": "OfferCatalog",
         "name": "AI Services",
         "itemListElement": [
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Signal Processing AI"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Medical AI"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "LLMs & NLP"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Business Intelligence"}}
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Signal Processing AI", "alternateName": "עיבוד אותות"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Audio & Acoustics AI", "alternateName": "עיבוד אודיו ואקוסטיקה"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Medical AI", "alternateName": "בינה מלאכותית לרפואה"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "LLMs & NLP", "alternateName": "עיבוד שפה טבעית"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Business Intelligence", "alternateName": "בינה עסקית"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ad Tech & Digital Advertising AI", "alternateName": "פרסום דיגיטלי וטכנולוגיית פרסום"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sales & Demand Forecasting", "alternateName": "חיזוי מכירות וביקוש"}}
         ]
       }
     }
@@ -1130,6 +1143,13 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
 
 </main><!-- /main -->
 
+<!-- SEO: Hebrew company info — visible to crawlers, hidden visually (sr-only pattern, NOT display:none) -->
+<div class="seo-content" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" aria-hidden="true">
+  <h2>המלאיה מדעני נתונים בע״מ - MLAIA Data Science</h2>
+  <p>המלאיה מדעני נתונים היא חברת ייעוץ מובילה בתחום הבינה המלאכותית ומדעי הנתונים בישראל. אנו מתמחים בלמידת מכונה, למידה עמוקה, עיבוד אותות ואודיו, אקוסטיקה, Ad Tech ופרסום דיגיטלי, חיזוי מכירות וביקוש, בינה עסקית (BI), עיבוד מידע רפואי, ועיבוד שפה טבעית (NLP). מנתונים להחלטות — בפרודקשן.</p>
+  <p>MLAIA Data Science is a leading AI and data science consulting company in Israel, specializing in machine learning, deep learning, signal processing, audio and acoustics, Ad Tech and digital advertising, sales and demand forecasting, business intelligence, medical data processing, and natural language processing (NLP). From data to decisions — in production.</p>
+</div>
+
 <!-- FOOTER -->
 <footer role="contentinfo">
   <div class="ft-main">
@@ -1142,6 +1162,7 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
     </ul>
     <p data-en="© 2025 MLAIA — Machine Learning &amp; AI Approach" data-he="© 2025 MLAIA — למידת מכונה וגישת בינה מלאכותית">© 2025 MLAIA — Machine Learning &amp; AI Approach</p>
   </div>
+  <p class="ft-reg">MLAIA Data Science | המלאיה מדעני נתונים בע״מ</p>
   <p class="ft-reg" data-en="ח.פ. 516808078 | Shenef 4, Yavne, Israel 8151139" data-he="ח.פ. 516808078 | שנף 4, יבנה, ישראל 8151139">ח.פ. 516808078 | Shenef 4, Yavne, Israel 8151139</p>
   <ul class="ft-legal">
     <li><a href="accessibility.html" data-en="Accessibility Statement" data-he="הצהרת נגישות">Accessibility Statement</a></li>
