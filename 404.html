@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="3;url=https://www.mlaia.com/">
+<title>Page Not Found — MLAIA</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a1628;
+  --card:#0f2044;
+  --accent:#0057ff;
+  --accent2:#00b4d8;
+  --text:#e8edf8;
+  --muted:#8899bb;
+  --border:rgba(0,87,255,.25);
+}
+html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center}
+
+/* subtle grid bg */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,87,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,87,255,.06) 1px,transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+}
+
+.logo{
+  font-family:'Syne',sans-serif;
+  font-size:1.6rem;font-weight:800;
+  letter-spacing:.05em;
+  color:#fff;
+  margin-bottom:3rem;
+}
+.logo span{color:var(--accent2);}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:1.5rem;
+  padding:3rem 2.5rem;
+  max-width:560px;
+  width:100%;
+  box-shadow:0 0 60px rgba(0,87,255,.08);
+}
+
+.code{
+  font-family:'Syne',sans-serif;
+  font-size:5rem;font-weight:800;
+  line-height:1;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:1.25rem;
+}
+
+.title{
+  font-size:1.35rem;font-weight:500;
+  color:#fff;
+  margin-bottom:.75rem;
+}
+
+.title-he{
+  font-family:'Heebo',sans-serif;
+  font-size:1.1rem;font-weight:400;
+  color:var(--muted);
+  direction:rtl;
+  margin-bottom:2rem;
+}
+
+.msg{
+  font-size:.95rem;font-weight:300;color:var(--muted);
+  line-height:1.65;
+  margin-bottom:.5rem;
+}
+.msg-he{
+  font-family:'Heebo',sans-serif;
+  font-size:.9rem;font-weight:300;color:var(--muted);
+  direction:rtl;line-height:1.65;
+  margin-bottom:2rem;
+}
+
+/* progress bar */
+.progress-wrap{
+  width:100%;
+  height:3px;
+  background:rgba(255,255,255,.08);
+  border-radius:99px;
+  overflow:hidden;
+  margin-bottom:2rem;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  border-radius:99px;
+  animation:fill 3s linear forwards;
+}
+@keyframes fill{from{width:0%}to{width:100%}}
+
+.btn{
+  display:inline-block;
+  padding:.75rem 2rem;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  border-radius:.6rem;
+  font-size:.9rem;font-weight:500;
+  letter-spacing:.02em;
+  transition:background .2s,transform .15s;
+}
+.btn:hover{background:var(--accent2);transform:translateY(-1px)}
+
+.footer{
+  margin-top:2.5rem;
+  font-size:.75rem;
+  color:var(--muted);
+}
+</style>
+</head>
+<body>
+
+<div class="logo">ML<span>AI</span>A</div>
+
+<div class="card">
+  <div class="code">404</div>
+  <div class="title">This page has moved</div>
+  <div class="title-he">הדף הזה עבר לכתובת חדשה</div>
+
+  <p class="msg">Redirecting you to our homepage in a moment…</p>
+  <p class="msg-he">מעביר אותך לדף הבית בעוד שנייה…</p>
+
+  <div class="progress-wrap"><div class="progress-bar"></div></div>
+
+  <a class="btn" href="https://www.mlaia.com/">Go to Homepage &rarr;</a>
+</div>
+
+<div class="footer">www.mlaia.com</div>
+
+<script>
+setTimeout(function(){window.location.replace('https://www.mlaia.com/');},3000);
+</script>
+</body>
+</html>
