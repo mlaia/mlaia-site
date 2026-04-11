@@ -5,7 +5,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.mlaia.com/</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/"/>
@@ -16,7 +16,7 @@
   <!-- Blog index -->
   <url>
     <loc>https://www.mlaia.com/blog.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
