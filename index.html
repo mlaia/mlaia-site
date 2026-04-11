@@ -493,7 +493,7 @@ h1{animation-delay:.05s!important}
 @media(min-width:1530px){
   nav{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
   .hero{padding-left:calc((100% - 1400px) / 2)!important;padding-right:calc((100% - 1400px) / 2)!important}
-  .services,.domains,.blog,.customers,.cta,footer,.logo-strip,.what-we-do,.testi-section,.mid-cta,.cta-strip{
+  .services,.domains,.blog,.customers,.faq,.cta,footer,.logo-strip,.what-we-do,.testi-section,.mid-cta,.cta-strip{
     padding-left:calc((100% - 1400px) / 2)!important;
     padding-right:calc((100% - 1400px) / 2)!important
   }
@@ -598,6 +598,22 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
 .nav-lang-btn:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
 
 
+/* ── FAQ SECTION ── */
+.faq{padding:100px 64px;background:var(--white)}
+.faq-hdr{text-align:center;margin-bottom:56px}
+.faq-grid{max-width:820px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:22px 0;font-family:'DM Sans',sans-serif;font-size:1.12rem;font-weight:600;color:var(--navy);cursor:pointer;list-style:none;gap:16px;transition:color .2s;user-select:none}
+.faq-q:hover{color:var(--accent)}
+.faq-q::marker,.faq-q::-webkit-details-marker{display:none}
+.faq-icon{font-size:1.5rem;font-weight:300;color:var(--accent);flex-shrink:0;transition:transform .25s;line-height:1}
+details[open] .faq-icon{transform:rotate(45deg)}
+.faq-a{padding:0 32px 22px 0;font-size:1rem;font-weight:300;line-height:1.78;color:var(--muted)}
+html[lang="he"] .faq-a{padding:0 0 22px 32px}
+@media(max-width:768px){.faq{padding:64px 24px}.faq-q{font-size:1rem}.faq-a{padding:0 16px 18px 0}}
+html[lang="he"] @media(max-width:768px){.faq-a{padding:0 0 18px 16px}}
+
 /* ── INLINE CTA STRIP ── */
 .cta-strip{padding:3rem 64px;background:#0a1628;text-align:center;position:relative;overflow:hidden}
 .cta-strip::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,87,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,87,255,.055) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
@@ -666,6 +682,83 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
           {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sales & Demand Forecasting", "alternateName": "חיזוי מכירות וביקוש"}}
         ]
       }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.mlaia.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What services does MLAIA provide?",
+          "acceptedAnswer": {"@type": "Answer", "text": "MLAIA provides end-to-end AI and data science consulting services, including machine learning model development, signal processing and audio AI, medical AI, natural language processing (NLP), large language models (LLMs), business intelligence, Ad Tech AI, and predictive analytics. Every engagement is built for production deployment."}
+        },
+        {
+          "@type": "Question",
+          "name": "What industries does MLAIA serve?",
+          "acceptedAnswer": {"@type": "Answer", "text": "MLAIA serves clients across healthcare and medical devices, defense and intelligence, advertising technology (Ad Tech), audio and acoustics, finance and fintech, and retail analytics. Solutions are adapted to each industry's unique data, compliance, and operational requirements."}
+        },
+        {
+          "@type": "Question",
+          "name": "Where is MLAIA located?",
+          "acceptedAnswer": {"@type": "Answer", "text": "MLAIA is based in Yavne, Israel, and serves clients worldwide. The company provides remote and on-site consulting engagements across Israel, the United States, and Europe."}
+        },
+        {
+          "@type": "Question",
+          "name": "What is data science consulting?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Data science consulting means partnering with an expert team to identify AI opportunities in your business, build and deploy machine learning models, and turn raw data into actionable insights. MLAIA acts as an embedded technical partner, from problem definition through production deployment."}
+        },
+        {
+          "@type": "Question",
+          "name": "How can AI help my business?",
+          "acceptedAnswer": {"@type": "Answer", "text": "AI can automate repetitive tasks, predict customer behavior, detect anomalies, personalize experiences, and optimize complex operations. MLAIA helps businesses identify high-value AI applications and implements production-ready solutions that deliver measurable ROI, not just prototypes."}
+        },
+        {
+          "@type": "Question",
+          "name": "Does MLAIA work with startups?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Yes. MLAIA works with companies of all sizes, from early-stage startups to large enterprises. For startups, MLAIA provides senior AI expertise without the cost of full-time hires, helping build scalable ML foundations quickly and efficiently."}
+        },
+        {
+          "@type": "Question",
+          "name": "What makes MLAIA different from other AI consulting firms?",
+          "acceptedAnswer": {"@type": "Answer", "text": "MLAIA combines academic-level research expertise with hands-on production engineering. Every engagement results in deployed models, not just reports. Cross-domain expertise spanning signal processing, medical AI, Ad Tech, and NLP enables solutions that generalist consultants cannot provide."}
+        },
+        {
+          "@type": "Question",
+          "name": "Can MLAIA help with audio and signal processing?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Yes. Audio and signal processing AI is one of MLAIA's core specializations. Services include acoustic event detection, voice analysis, noise reduction, speech recognition adaptation, real-time DSP pipelines, and ML models for industrial, defense, and medical audio applications."}
+        }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.mlaia.com/#localbusiness",
+      "name": "MLAIA",
+      "legalName": "המלאיה מדעני נתונים בע״מ",
+      "description": "MLAIA delivers end-to-end AI solutions: machine learning model development, data science consulting, AI strategy, signal processing and audio AI, Ad Tech AI, predictive analytics, and NLP. Based in Israel, serving global clients.",
+      "url": "https://www.mlaia.com",
+      "email": "hello@mlaia.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Shenef 4",
+        "addressLocality": "Yavne",
+        "postalCode": "8151139",
+        "addressCountry": "IL"
+      },
+      "knowsLanguage": ["en", "he"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI & Data Science Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Machine Learning Model Development"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Data Science Consulting"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Strategy"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Signal Processing & Audio AI"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ad Tech AI"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Predictive Analytics"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "NLP & Large Language Models"}}
+        ]
+      },
+      "sameAs": ["https://www.mlaia.com/#organization"]
     }
   ]
 }
@@ -1059,6 +1152,57 @@ nav a:focus-visible,.nav-cta:focus-visible{outline:3px solid var(--accent);outli
       <div class="bl-img" style="background:linear-gradient(160deg,#120820 0%,#1a0a28 60%,#200d30 100%)"><canvas class="bl-canvas" id="bv3"></canvas><span class="bl-img-label">LLMs &amp; GenAI</span></div>
       <div class="bl-body"><div class="bl-tag" style="color:#7c3aed" data-en="LLMs &amp; GenAI" data-he="LLMs וGenAI">LLMs &amp; GenAI</div><h3 data-en="Harness Your Data's Potential with Large Language Models" data-he="נצלו את הפוטנציאל של הנתונים שלכם עם מודלי שפה גדולים">Harness Your Data's Potential with Large Language Models</h3><p data-en="How LLMs unlock value from unstructured text, documents and knowledge bases." data-he="כיצד מודלי LLM פותחים ערך מטקסט לא מובנה, מסמכים ובסיסי ידע.">How LLMs unlock value from unstructured text, documents and knowledge bases.</p><div class="bl-rm" style="color:#7c3aed"><span data-en="Read More" data-he="קרא עוד">Read More</span> <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq" aria-labelledby="faq-heading">
+  <div class="faq-hdr rv">
+    <div class="sl" data-en="Got Questions?" data-he="יש לכם שאלות?">Got Questions?</div>
+    <h2 id="faq-heading" data-en="Frequently Asked Questions" data-he="שאלות נפוצות">Frequently Asked Questions</h2>
+  </div>
+  <div class="faq-grid">
+
+    <details class="faq-item rv">
+      <summary class="faq-q"><span data-en="What services does MLAIA provide?" data-he="אילו שירותים MLAIA מספקת?">What services does MLAIA provide?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-a"><p data-en="MLAIA provides end-to-end AI and data science consulting services, including machine learning model development, signal processing and audio AI, medical AI, natural language processing (NLP), large language models (LLMs), business intelligence, Ad Tech AI, and predictive analytics. Every engagement is built for production deployment." data-he="המלאיה מספקת שירותי ייעוץ מקצה לקצה בתחום הבינה המלאכותית ומדעי הנתונים, כולל פיתוח מודלי למידת מכונה, עיבוד אותות ו-AI לאודיו, AI רפואי, עיבוד שפה טבעית (NLP), מודלי שפה גדולים (LLMs), בינה עסקית, Ad Tech AI וניתוח חזוי. כל מעורבות בנויה לפריסת ייצור.">MLAIA provides end-to-end AI and data science consulting services, including machine learning model development, signal processing and audio AI, medical AI, natural language processing (NLP), large language models (LLMs), business intelligence, Ad Tech AI, and predictive analytics. Every engagement is built for production deployment.</p></div>
+    </details>
+
+    <details class="faq-item rv d1">
+      <summary class="faq-q"><span data-en="What industries does MLAIA serve?" data-he="אילו תעשיות MLAIA משרתת?">What industries does MLAIA serve?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-a"><p data-en="MLAIA serves clients across healthcare and medical devices, defense and intelligence, advertising technology (Ad Tech), audio and acoustics, finance and fintech, and retail analytics. Solutions are adapted to each industry's unique data, compliance, and operational requirements." data-he="המלאיה משרתת לקוחות בתחומי בריאות ומכשור רפואי, ביטחון ומודיעין, טכנולוגיית פרסום (Ad Tech), אודיו ואקוסטיקה, פיננסים ופינטק, ואנליטיקה קמעונאית. הפתרונות מותאמים לדרישות הייחודיות של כל ענף.">MLAIA serves clients across healthcare and medical devices, defense and intelligence, advertising technology (Ad Tech), audio and acoustics, finance and fintech, and retail analytics. Solutions are adapted to each industry's unique data, compliance, and operational requirements.</p></div>
+    </details>
+
+    <details class="faq-item rv d2">
+      <summary class="faq-q"><span data-en="Where is MLAIA located?" data-he="היכן MLAIA ממוקמת?">Where is MLAIA located?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-a"><p data-en="MLAIA is based in Yavne, Israel, and serves clients worldwide. The company provides remote and on-site consulting engagements across Israel, the United States, and Europe." data-he="המלאיה ממוקמת ביבנה, ישראל, ומשרתת לקוחות ברחבי העולם. החברה מספקת ייעוץ מרחוק ובאתר ברחבי ישראל, ארצות הברית ואירופה.">MLAIA is based in Yavne, Israel, and serves clients worldwide. The company provides remote and on-site consulting engagements across Israel, the United States, and Europe.</p></div>
+    </details>
+
+    <details class="faq-item rv">
+      <summary class="faq-q"><span data-en="What is data science consulting?" data-he="מהו ייעוץ מדעי נתונים?">What is data science consulting?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-a"><p data-en="Data science consulting means partnering with an expert team to identify AI opportunities in your business, build and deploy machine learning models, and turn raw data into actionable insights. MLAIA acts as an embedded technical partner, from problem definition through production deployment." data-he="ייעוץ מדעי נתונים משמעו שיתוף פעולה עם צוות מומחים לזיהוי הזדמנויות AI בעסק שלך, בניית ופריסת מודלי למידת מכונה, והפיכת נתונים גולמיים לתובנות מעשיות. המלאיה פועלת כשותפה טכנולוגית משולבת, מהגדרת הבעיה ועד הפריסה לייצור.">Data science consulting means partnering with an expert team to identify AI opportunities in your business, build and deploy machine learning models, and turn raw data into actionable insights. MLAIA acts as an embedded technical partner, from problem definition through production deployment.</p></div>
+    </details>
+
+    <details class="faq-item rv d1">
+      <summary class="faq-q"><span data-en="How can AI help my business?" data-he="כיצד AI יכול לעזור לעסק שלי?">How can AI help my business?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-a"><p data-en="AI can automate repetitive tasks, predict customer behavior, detect anomalies, personalize experiences, and optimize complex operations. MLAIA helps businesses identify high-value AI applications and implements production-ready solutions that deliver measurable ROI, not just prototypes." data-he="AI יכול לאטומט משימות חוזרות, לחזות התנהגות לקוחות, לזהות חריגות, להתאים אישית חוויות ולמטב פעולות מורכבות. המלאיה עוזרת לעסקים לזהות יישומי AI בעלי ערך גבוה ומיישמת פתרונות מוכנים לייצור שמניבים ROI מדיד, לא רק אבטיפוסים.">AI can automate repetitive tasks, predict customer behavior, detect anomalies, personalize experiences, and optimize complex operations. MLAIA helps businesses identify high-value AI applications and implements production-ready solutions that deliver measurable ROI, not just prototypes.</p></div>
+    </details>
+
+    <details class="faq-item rv d2">
+      <summary class="faq-q"><span data-en="Does MLAIA work with startups?" data-he="האם MLAIA עובדת עם סטארטאפים?">Does MLAIA work with startups?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-a"><p data-en="Yes. MLAIA works with companies of all sizes, from early-stage startups to large enterprises. For startups, MLAIA provides senior AI expertise without the cost of full-time hires, helping build scalable ML foundations quickly and efficiently." data-he="כן. המלאיה עובדת עם חברות בכל הגדלים, מסטארטאפים בשלבים מוקדמים ועד ארגונים גדולים. עבור סטארטאפים, המלאיה מספקת מומחיות AI בכירה ללא עלות גיוס עובדים קבועים, ועוזרת לבנות בסיסי ML ניתנים להרחבה במהירות וביעילות.">Yes. MLAIA works with companies of all sizes, from early-stage startups to large enterprises. For startups, MLAIA provides senior AI expertise without the cost of full-time hires, helping build scalable ML foundations quickly and efficiently.</p></div>
+    </details>
+
+    <details class="faq-item rv">
+      <summary class="faq-q"><span data-en="What makes MLAIA different from other AI consulting firms?" data-he="מה מייחד את MLAIA מחברות ייעוץ AI אחרות?">What makes MLAIA different from other AI consulting firms?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-a"><p data-en="MLAIA combines academic-level research expertise with hands-on production engineering. Every engagement results in deployed models, not just reports. Cross-domain expertise spanning signal processing, medical AI, Ad Tech, and NLP enables solutions that generalist consultants cannot provide." data-he="המלאיה משלבת מומחיות מחקרית ברמה אקדמית עם הנדסת ייצור מעשית. כל מעורבות מסתיימת במודלים פרוסים, לא רק בדוחות. מומחיות רב-תחומית המשתרעת על עיבוד אותות, AI רפואי, Ad Tech ו-NLP מאפשרת פתרונות שיועצים כלליים אינם יכולים לספק.">MLAIA combines academic-level research expertise with hands-on production engineering. Every engagement results in deployed models, not just reports. Cross-domain expertise spanning signal processing, medical AI, Ad Tech, and NLP enables solutions that generalist consultants cannot provide.</p></div>
+    </details>
+
+    <details class="faq-item rv d1">
+      <summary class="faq-q"><span data-en="Can MLAIA help with audio and signal processing?" data-he="האם MLAIA יכולה לעזור בעיבוד אודיו ואותות?">Can MLAIA help with audio and signal processing?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-a"><p data-en="Yes. Audio and signal processing AI is one of MLAIA's core specializations. Services include acoustic event detection, voice analysis, noise reduction, speech recognition adaptation, real-time DSP pipelines, and ML models for industrial, defense, and medical audio applications." data-he="כן. AI לאודיו ועיבוד אותות הוא אחד מתחומי ההתמחות המרכזיים של המלאיה. השירותים כוללים זיהוי אירועים אקוסטיים, ניתוח קול, הפחתת רעש, התאמת זיהוי דיבור, צינורות DSP בזמן אמת, ומודלי ML ליישומי אודיו תעשייתיים, ביטחוניים ורפואיים.">Yes. Audio and signal processing AI is one of MLAIA's core specializations. Services include acoustic event detection, voice analysis, noise reduction, speech recognition adaptation, real-time DSP pipelines, and ML models for industrial, defense, and medical audio applications.</p></div>
+    </details>
+
   </div>
 </section>
 
