@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google Analytics 4 — fires only after analytics consent -->
+<script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI in Production: A Practical Framework for Israeli Enterprises — MLAIA</title>
+<meta name="description" content="Most enterprise AI agent pilots never reach production. This practical framework covers the four production pillars — scope design, tool & memory architecture, human-in-the-loop patterns, and observability — with Israeli-specific considerations on data residency, Hebrew/English multilingualism, and talent.">
+<meta name="keywords" content="agentic AI Israel, AI agents production, enterprise AI agents, LLM agents Israel, human-in-the-loop AI, AI observability, AI consulting Israel, Hebrew AI, data residency Israel">
+<link rel="canonical" href="https://www.mlaia.com/blog-agents-production.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.mlaia.com/blog-agents-production.html">
+<meta property="og:title" content="Agentic AI in Production: A Practical Framework for Israeli Enterprises">
+<meta property="og:description" content="Most enterprise AI agent pilots never reach production. This practical framework covers scope design, tool & memory architecture, human-in-the-loop patterns, and observability — with Israeli-specific considerations.">
+<meta property="og:image" content="https://www.mlaia.com/og-agents-production.png">
+<meta property="og:site_name" content="MLAIA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agentic AI in Production: A Practical Framework for Israeli Enterprises">
+<meta name="twitter:description" content="Most enterprise AI agent pilots never reach production. A practical framework for getting agentic AI into production — with Israeli-specific considerations on data residency, Hebrew/English, and talent.">
+
+<!-- JSON-LD Article Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Agentic AI in Production: A Practical Framework for Israeli Enterprises",
+  "description": "Most enterprise AI agent pilots never reach production. This practical framework covers the four production pillars — scope design, tool & memory architecture, human-in-the-loop patterns, and observability — with Israeli-specific considerations on data residency, Hebrew/English multilingualism, and talent.",
+  "datePublished": "2026-04-12",
+  "dateModified": "2026-04-12",
+  "author": {
+    "@type": "Organization",
+    "name": "MLAIA",
+    "url": "https://www.mlaia.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MLAIA — Machine Learning & AI Approach",
+    "url": "https://www.mlaia.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.mlaia.com/favicon.svg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.mlaia.com/blog-agents-production.html"
+  },
+  "keywords": ["agentic AI Israel", "AI agents production", "enterprise AI agents", "LLM agents", "human-in-the-loop", "AI observability", "AI consulting Israel", "Hebrew NLP", "data residency Israel"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f4f6fb;--white:#fff;--navy:#0a1628;--navy2:#0f2044;
+  --accent:#0057ff;--accent2:#00b4d8;--border:#dce3f0;
+  --muted:#6b7a99;--text:#2d3a55;
+  --tag-color:#f59e0b;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+#cd{width:7px;height:7px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .18s,height .18s,background .2s}
+#cr{width:36px;height:36px;border:1.5px solid rgba(0,87,255,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .28s,height .28s,border-color .25s,background .25s}
+body.ch #cd{width:13px;height:13px;background:var(--tag-color)}
+body.ch #cr{width:54px;height:54px;border-color:rgba(245,158,11,.55)}
+body.ck #cd{width:5px;height:5px}
+body.ck #cr{width:22px;height:22px}
+@media(max-width:768px){body{cursor:auto}#cd,#cr{display:none}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 64px;height:66px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.sc{box-shadow:0 2px 20px rgba(10,22,40,.07)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--navy);letter-spacing:-.02em;text-decoration:none}
+.logo span{color:var(--accent)}
+.logo-tagline{font-size:.55rem;letter-spacing:.08em;color:var(--muted);font-weight:400;text-transform:uppercase;display:inline-block;margin-left:6px;vertical-align:middle;line-height:1;opacity:.8}
+nav ul{list-style:none;display:flex;gap:32px;align-items:center}
+nav a{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+nav a:hover{color:var(--navy)}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:9px 22px;border-radius:6px;font-size:.8rem!important;font-weight:600!important;transition:background .2s,transform .2s!important}
+.nav-cta:hover{background:var(--navy)!important;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px 4px;z-index:1002}
+.hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* POST HERO */
+.post-hero{background:var(--navy);padding:120px 64px 40px;position:relative;overflow:hidden}
+.post-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,87,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,87,255,.055) 1px,transparent 1px);background-size:54px 54px;pointer-events:none}
+.post-hero-orb{position:absolute;top:-10%;right:-10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(245,158,11,.13) 0%,transparent 60%);pointer-events:none}
+.post-hero-orb2{position:absolute;bottom:-20%;left:-5%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(0,87,255,.1) 0%,transparent 60%);pointer-events:none}
+.post-hero-inner{position:relative;z-index:2;max-width:800px}
+.post-category-tag{display:inline-flex;align-items:center;gap:8px;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--tag-color);margin-bottom:20px}
+.post-category-tag::before{content:'';display:block;width:18px;height:2px;background:currentColor;border-radius:2px}
+.post-hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:#fff;margin-bottom:24px}
+.post-meta{display:flex;align-items:center;gap:20px;font-size:.78rem;color:rgba(255,255,255,.42);font-weight:300}
+.post-meta-sep{color:rgba(255,255,255,.18)}
+
+/* ARTICLE BODY */
+.post-body{background:var(--white);padding:0}
+.post-container{max-width:780px;margin:0 auto;padding:40px 40px 100px}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;margin-bottom:48px}
+.back-link:hover{color:var(--accent)}
+.back-link svg{transition:transform .2s}
+.back-link:hover svg{transform:translateX(-3px)}
+
+/* Article typography */
+.post-content{line-height:1;color:var(--text)}
+.post-content p{font-size:1.05rem;line-height:1.82;color:var(--text);font-weight:300;margin-bottom:24px}
+.post-content h2{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;color:var(--navy);letter-spacing:-.02em;margin:52px 0 18px;line-height:1.15}
+.post-content h3{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:700;color:var(--navy);margin:40px 0 14px;line-height:1.2}
+.post-content h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);margin:28px 0 10px}
+.post-content ul,.post-content ol{margin:0 0 24px 0;padding-left:0;list-style:none}
+.post-content ul li,.post-content ol li{font-size:1.02rem;line-height:1.78;color:var(--text);font-weight:300;padding:6px 0 6px 28px;position:relative;border-bottom:1px solid var(--border)}
+.post-content ul li:last-child,.post-content ol li:last-child{border-bottom:none}
+.post-content ul li::before{content:'';position:absolute;left:0;top:16px;width:8px;height:2px;background:var(--tag-color);border-radius:2px}
+.post-content ol{counter-reset:ol-counter}
+.post-content ol li{counter-increment:ol-counter}
+.post-content ol li::before{content:counter(ol-counter);position:absolute;left:0;top:6px;font-family:'Syne',sans-serif;font-size:.75rem;font-weight:800;color:var(--tag-color)}
+.post-content blockquote{margin:36px 0;padding:24px 28px;border-left:3px solid var(--tag-color);background:linear-gradient(135deg,rgba(245,158,11,.05),rgba(0,180,216,.02));border-radius:0 8px 8px 0}
+.post-content blockquote p{font-size:1.05rem;font-style:italic;color:var(--navy);font-weight:400;margin:0;line-height:1.72}
+.post-content hr{border:none;border-top:1px solid var(--border);margin:48px 0}
+.post-content code{font-family:'SF Mono',Monaco,Inconsolata,monospace;font-size:.88rem;background:rgba(245,158,11,.07);color:var(--navy);padding:2px 7px;border-radius:4px;border:1px solid rgba(245,158,11,.15)}
+.post-content pre{background:var(--navy);border-radius:10px;padding:24px 28px;overflow-x:auto;margin:28px 0}
+.post-content pre code{background:none;border:none;color:rgba(255,255,255,.88);font-size:.9rem;padding:0}
+.post-content strong,.post-content b{font-weight:600;color:var(--navy)}
+.post-content a{color:var(--tag-color);text-decoration:none;border-bottom:1px solid rgba(245,158,11,.3);transition:border-color .2s,color .2s}
+.post-content a:hover{color:#d97706;border-color:var(--tag-color)}
+.stat-callout{background:linear-gradient(135deg,rgba(245,158,11,.07),rgba(0,87,255,.04));border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:20px 24px;margin:28px 0;display:flex;gap:20px;align-items:flex-start}
+.stat-callout .stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--tag-color);line-height:1;white-space:nowrap}
+.stat-callout .stat-label{font-size:.9rem;line-height:1.6;color:var(--text);font-weight:300}
+.stat-callout .stat-label small{display:block;font-size:.72rem;color:var(--muted);margin-top:4px}
+
+/* Agent loop diagram */
+.agent-loop-diagram{margin:40px 0;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#0d1117;line-height:0}
+
+/* Post footer */
+.post-footer-nav{margin-top:72px;padding-top:36px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.post-cta-box{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:14px;padding:40px;margin-top:56px;text-align:center}
+.post-cta-box h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:10px}
+.post-cta-box p{font-size:.92rem;color:rgba(255,255,255,.5);font-weight:300;line-height:1.65;margin-bottom:24px}
+.btn-p{background:var(--accent);color:#fff;padding:13px 28px;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:none;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:background .2s,transform .2s,box-shadow .2s}
+.btn-p:hover{background:#0046d4;transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,87,255,.38)}
+
+/* FOOTER */
+footer{padding:36px 64px;background:var(--navy);border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+.ft-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;text-decoration:none}
+.ft-logo span{color:var(--accent2)}
+.ft-tag{font-size:.62rem;color:rgba(255,255,255,.28);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.ft-links{display:flex;gap:24px;list-style:none}
+.ft-links a{text-decoration:none;color:rgba(255,255,255,.35);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.ft-links a:hover{color:#fff}
+footer p{font-size:.74rem;color:rgba(255,255,255,.25)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:0 24px}
+  .post-hero{padding:90px 24px 32px}
+  .post-container{padding:32px 24px 72px}
+  .hamburger{display:flex}
+  nav ul.nav-links{display:none}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:28px 24px}
+  nav ul.nav-links.open{display:flex;flex-direction:column;position:fixed;top:66px;left:0;right:0;height:calc(100vh - 66px)!important;background:#0a1628;padding:40px 32px;gap:24px;z-index:9999;align-items:center;overflow-y:auto}
+  nav ul.nav-links.open li{width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}
+  nav ul.nav-links.open li a{display:block;padding:16px 0;font-size:1.4rem;font-family:'Syne',sans-serif;font-weight:500;color:#fff!important;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+  nav ul.nav-links.open .nav-cta{background:var(--accent)!important;border-radius:6px;padding:14px 28px!important;margin-top:8px;display:inline-block}
+  .stat-callout{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+<div id="cd"></div>
+<div id="cr"></div>
+
+<nav id="nav">
+  <a href="index.html" class="logo">ML<span>AI</span>A <span class="logo-tagline">Machine Learning &amp; AI Approach</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#domains">Domains</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="post-hero">
+  <div class="post-hero-orb"></div>
+  <div class="post-hero-orb2"></div>
+  <div class="post-hero-inner">
+    <div class="post-category-tag">Enterprise AI</div>
+    <h1>Agentic AI in Production: A Practical Framework for Israeli Enterprises</h1>
+    <div class="post-meta">
+      <span>April 2026</span>
+      <span class="post-meta-sep">·</span>
+      <span>8 min read</span>
+    </div>
+  </div>
+</section>
+
+<div class="post-body">
+  <div class="post-container">
+    <a href="blog.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to all posts
+    </a>
+
+    <!-- Agent Loop Diagram -->
+    <figure class="agent-loop-diagram" aria-label="Agentic AI loop diagram: Plan, Act, Observe, Reflect">
+      <svg viewBox="0 0 780 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="780" height="260" fill="#0d1117"/>
+        <!-- Grid -->
+        <path d="M0 65h780M0 130h780M0 195h780" stroke="rgba(0,87,255,0.04)" stroke-width="1"/>
+        <path d="M195 0v260M390 0v260M585 0v260" stroke="rgba(0,87,255,0.04)" stroke-width="1"/>
+        <!-- Title -->
+        <text x="390" y="26" font-family="monospace" font-size="10" fill="rgba(245,158,11,0.7)" letter-spacing="2" text-anchor="middle">THE AGENTIC LOOP  ·  PLAN → ACT → OBSERVE → REFLECT</text>
+
+        <!-- Center circle (LLM core) -->
+        <circle cx="390" cy="138" r="38" fill="rgba(0,87,255,0.12)" stroke="rgba(0,87,255,0.55)" stroke-width="1.5"/>
+        <text x="390" y="134" font-family="monospace" font-size="9" fill="rgba(0,180,216,0.9)" text-anchor="middle">LLM</text>
+        <text x="390" y="148" font-family="monospace" font-size="9" fill="rgba(0,180,216,0.7)" text-anchor="middle">CORE</text>
+
+        <!-- PLAN node (top) -->
+        <rect x="314" y="44" width="152" height="44" rx="8" fill="rgba(245,158,11,0.12)" stroke="rgba(245,158,11,0.6)" stroke-width="1.5"/>
+        <text x="390" y="62" font-family="monospace" font-size="11" fill="rgba(245,158,11,1)" text-anchor="middle" font-weight="bold">PLAN</text>
+        <text x="390" y="78" font-family="monospace" font-size="8" fill="rgba(245,158,11,0.6)" text-anchor="middle">Goal decomposition &amp; tool selection</text>
+
+        <!-- ACT node (right) -->
+        <rect x="572" y="115" width="152" height="44" rx="8" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.6)" stroke-width="1.5"/>
+        <text x="648" y="133" font-family="monospace" font-size="11" fill="rgba(16,185,129,1)" text-anchor="middle" font-weight="bold">ACT</text>
+        <text x="648" y="149" font-family="monospace" font-size="8" fill="rgba(16,185,129,0.6)" text-anchor="middle">Tool calls &amp; external actions</text>
+
+        <!-- OBSERVE node (bottom) -->
+        <rect x="314" y="196" width="152" height="44" rx="8" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.6)" stroke-width="1.5"/>
+        <text x="390" y="214" font-family="monospace" font-size="11" fill="rgba(0,180,216,1)" text-anchor="middle" font-weight="bold">OBSERVE</text>
+        <text x="390" y="230" font-family="monospace" font-size="8" fill="rgba(0,180,216,0.6)" text-anchor="middle">Environment feedback &amp; results</text>
+
+        <!-- REFLECT node (left) -->
+        <rect x="56" y="115" width="152" height="44" rx="8" fill="rgba(168,85,247,0.12)" stroke="rgba(168,85,247,0.6)" stroke-width="1.5"/>
+        <text x="132" y="133" font-family="monospace" font-size="11" fill="rgba(168,85,247,1)" text-anchor="middle" font-weight="bold">REFLECT</text>
+        <text x="132" y="149" font-family="monospace" font-size="8" fill="rgba(168,85,247,0.6)" text-anchor="middle">Memory update &amp; re-planning</text>
+
+        <!-- Arrows: PLAN → ACT (top right arc) -->
+        <path d="M466 66 Q540 66 572 130" stroke="rgba(245,158,11,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+        <polygon points="569,123 578,133 562,132" fill="rgba(245,158,11,0.7)"/>
+
+        <!-- Arrows: ACT → OBSERVE (right bottom arc) -->
+        <path d="M648 159 Q648 196 466 210" stroke="rgba(16,185,129,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+        <polygon points="473,207 463,214 462,200" fill="rgba(16,185,129,0.7)"/>
+
+        <!-- Arrows: OBSERVE → REFLECT (bottom left arc) -->
+        <path d="M314 218 Q240 218 208 155" stroke="rgba(0,180,216,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+        <polygon points="211,162 205,151 218,152" fill="rgba(0,180,216,0.7)"/>
+
+        <!-- Arrows: REFLECT → PLAN (left top arc) -->
+        <path d="M132 115 Q132 66 314 66" stroke="rgba(168,85,247,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+        <polygon points="307,63 317,68 308,74" fill="rgba(168,85,247,0.7)"/>
+
+        <!-- Human-in-the-loop indicator -->
+        <circle cx="390" cy="138" r="60" stroke="rgba(245,158,11,0.15)" stroke-width="1" fill="none" stroke-dasharray="3,4"/>
+        <text x="453" y="96" font-family="monospace" font-size="7" fill="rgba(245,158,11,0.45)" text-anchor="middle">HITL</text>
+        <text x="453" y="105" font-family="monospace" font-size="7" fill="rgba(245,158,11,0.35)" text-anchor="middle">checkpoint</text>
+
+        <!-- Footer label -->
+        <text x="390" y="252" font-family="monospace" font-size="9" fill="rgba(245,158,11,0.35)" text-anchor="middle" letter-spacing="2">AGENTIC AI ARCHITECTURE  ·  MLAIA FRAMEWORK  ·  2026</text>
+      </svg>
+    </figure>
+
+    <div class="post-content">
+      <p>The promise of agentic AI is compelling: software systems that don't just respond to queries but autonomously plan, execute multi-step tasks, call tools, and adapt in real time. In 2025 and 2026, barely a week passed without a major vendor announcing a new "agent" capability. And yet, for most enterprises, the gap between demo and deployment remains vast.</p>
+
+      <p>Industry analysts estimate that roughly <strong>74% of enterprise AI pilot projects fail to reach sustained production</strong> — a figure that applies with particular force to agentic systems, which are inherently more complex than single-inference models. <em>(Industry estimate based on Gartner research; figures are approximate.)</em> The reasons for this failure rate are well-understood in retrospect but rarely anticipated in advance: scope creep, tool reliability, unpredictable failure modes, inadequate observability, and — especially in regulated Israeli industries — compliance blind spots.</p>
+
+      <p>This article presents a practical framework for taking agentic AI from pilot to production, with specific attention to the constraints and opportunities that define the Israeli enterprise context. We will cover the four production pillars that determine whether an agent deployment succeeds, the Israeli-specific considerations that most vendors overlook, and what to look for in a partner who can navigate all of it.</p>
+
+      <div class="stat-callout">
+        <div class="stat-num">~74%</div>
+        <div class="stat-label">Estimated share of enterprise AI agent pilots that fail to reach sustained production — most stall at integration, compliance, or monitoring gaps.<small>Industry estimate based on Gartner research, 2025</small></div>
+      </div>
+
+      <h2>Why Agents Are Different</h2>
+
+      <p>A traditional ML model is a function: it takes an input and returns an output. Evaluation is tractable because you can measure accuracy against a labeled test set. Deployment is bounded because the model's action surface is fixed.</p>
+
+      <p>An agent is a system. It reasons about goals, selects from a dynamic set of tools, accumulates and retrieves memory across turns, and takes actions in the world — actions that may be irreversible. This changes the engineering problem fundamentally. You are no longer just optimizing a model; you are building and operating a distributed system whose behavior emerges from the interaction of a language model, a tool ecosystem, a memory layer, and the external environment it acts on.</p>
+
+      <p>The implications for production engineering are profound. Where a model deployment might fail by returning a wrong answer, an agent deployment can fail by sending an incorrect email, committing a bad database write, or entering an infinite loop of tool calls. The blast radius of failure is qualitatively larger — which is why the production pillars below exist.</p>
+
+      <blockquote>
+        <p>Deploying an agent is not like deploying a model. It is like deploying a junior employee with access to your systems. You need the same things you'd need from that person: clear scope, reliable tools, escalation paths, and visibility into what they are doing at every step.</p>
+      </blockquote>
+
+      <h2>The Four Production Pillars</h2>
+
+      <h3>Pillar 1: Scope Design</h3>
+
+      <p>The most common cause of agent failure is not a technical one — it is a product design failure. Teams build agents with underspecified scope, and the agent encounters situations outside its design envelope with no defined behavior. In production, undefined behavior defaults to whatever the underlying model considers plausible, which is rarely what the business intended.</p>
+
+      <p>Rigorous scope design means defining:</p>
+      <ul>
+        <li><strong>Task boundaries:</strong> A precise enumeration of what the agent is authorized to do, and equally important, what it is not. "Customer support agent" is not a scope; "answer billing questions for SaaS accounts up to tier 3, escalate anything requiring a refund above ₪500 or touching account security" is.</li>
+        <li><strong>Failure modes and escalation paths:</strong> What happens when the agent encounters a situation outside its scope? The answer must be deterministic: escalate to a human, log and return a safe default, or refuse gracefully. Leaving this implicit is a production incident waiting to happen.</li>
+        <li><strong>Persona and communication constraints:</strong> For customer-facing agents, what tone, language, and commitments are permitted? In a bilingual Hebrew/English environment, which language does the agent default to, and how does it handle mid-conversation language switches?</li>
+        <li><strong>Authorization model:</strong> Which systems can the agent read from? Which can it write to? Which require a human approval step? This is not just a security concern — it is the foundation of the trust model that users and regulators will eventually audit.</li>
+      </ul>
+
+      <p>Scope design should produce a written specification before any model prompt is written. It is the contract between the business and the engineering team, and it is the document you will return to when something goes wrong.</p>
+
+      <h3>Pillar 2: Tool &amp; Memory Architecture</h3>
+
+      <p>An agent without tools is just a chatbot. An agent with poorly designed tools is an unpredictable system. The tool layer — the set of APIs, database queries, code executors, and external services the agent can invoke — is where most production problems originate.</p>
+
+      <p>Well-engineered tool layers share several characteristics:</p>
+      <ul>
+        <li><strong>Idempotency by default:</strong> Tools that can be safely retried without side effects dramatically simplify error recovery. Where idempotency is not possible (sending an email, executing a payment), tools must have explicit guard rails: confirmation steps, deduplication keys, or human-in-the-loop checkpoints.</li>
+        <li><strong>Typed, schema-validated inputs and outputs:</strong> The language model cannot be trusted to infer the correct parameter format from ambiguous documentation. Every tool should have a machine-readable schema (JSON Schema, Pydantic, or equivalent) that is enforced at call time, not just at definition time.</li>
+        <li><strong>Graceful failure with structured errors:</strong> When a tool fails, the agent needs actionable information: not just "error 500" but "the CRM API returned a rate limit error; retry after 30 seconds." Structured error returns allow the agent to reason about recovery rather than hallucinating an alternative.</li>
+        <li><strong>Cost and latency budgets:</strong> Agents can enter loops. A poorly designed orchestration can trigger hundreds of tool calls per user request. Tool wrappers should enforce per-request and per-session call limits, with hard stops that surface to the observability layer.</li>
+      </ul>
+
+      <p>Memory architecture is the other half of this pillar. Agents need access to context that exceeds the model's native context window, and they need to retrieve it efficiently. The practical choice is usually a combination of short-term conversation buffer (in-context), mid-term episodic memory (vector retrieval over recent session history), and long-term structured memory (database lookups for user preferences, account state, or domain knowledge). Each layer has different freshness, latency, and consistency characteristics — getting the architecture right requires understanding the specific retrieval patterns of your use case. Our <a href="blog-llms.html">deep dive on large language models and retrieval</a> covers the underlying mechanisms in detail.</p>
+
+      <h3>Pillar 3: Human-in-the-Loop Patterns</h3>
+
+      <p>Full autonomy is rarely the right production target for a first-generation enterprise agent. The appropriate level of human oversight is not a binary choice but a spectrum, and the right point on that spectrum depends on the action's reversibility, cost, and regulatory context.</p>
+
+      <div class="stat-callout">
+        <div class="stat-num">3×</div>
+        <div class="stat-label">Higher user trust scores observed for enterprise AI agents with explicit human-approval checkpoints versus fully autonomous deployments in the same task category.<small>Industry estimate based on Forrester Research, 2025</small></div>
+      </div>
+
+      <p>Three human-in-the-loop (HITL) patterns are most commonly used in production:</p>
+      <ul>
+        <li><strong>Approval gates:</strong> The agent pauses before a defined class of high-stakes actions and requests explicit human confirmation. Used for irreversible actions (file deletion, external communications), high-value transactions, or first-time operations on a new entity. The key design requirement is that the approval interface shows the human exactly what the agent is about to do in plain language — not just a JSON payload.</li>
+        <li><strong>Shadow mode:</strong> The agent runs in parallel with the existing human workflow, producing its recommended actions without executing them. Humans review the recommendations and execute approved ones manually. This pattern is ideal for the first 30–90 days of a deployment: it builds trust, surfaces edge cases, and generates labeled data for future autonomous operation — without any production risk.</li>
+        <li><strong>Confidence-gated autonomy:</strong> The agent operates autonomously when its internal confidence score (or the absence of certain risk flags) exceeds a threshold, and escalates to a human below it. This requires a well-calibrated confidence signal — which is harder to build than it sounds, particularly for LLM-based agents where expressed confidence does not reliably track actual accuracy.</li>
+      </ul>
+
+      <blockquote>
+        <p>The goal is not to minimize human involvement — it is to minimize unnecessary human involvement. An agent that escalates appropriately is more valuable than one that escalates never and fails occasionally in ways you cannot predict or audit. Calibrating that boundary is the real engineering challenge.</p>
+      </blockquote>
+
+      <h3>Pillar 4: Observability</h3>
+
+      <p>You cannot improve what you cannot see. For a standard ML model, observability means monitoring prediction distributions, latency, and downstream business metrics. For an agent, it means all of that plus a complete, queryable record of every reasoning step, every tool call, every memory retrieval, and every human intervention.</p>
+
+      <p>Production agent observability requires:</p>
+      <ul>
+        <li><strong>Trace logging:</strong> Every agent execution should produce a structured trace — a hierarchical record of the planning steps, tool invocations, memory operations, and model calls that comprised the run. Traces are the debugging primitive for agents in the same way logs are for traditional software.</li>
+        <li><strong>Metric instrumentation:</strong> Task completion rate, tool error rate, human escalation rate, latency per step, and cost per task. These metrics should be broken down by task type, user segment, and time — not aggregated into a single dashboard number that masks the behavior of long-tail cases.</li>
+        <li><strong>Drift and regression detection:</strong> Agent behavior can shift when the underlying model is updated by the provider, when tool APIs change, or when the distribution of user requests drifts. Automated regression tests on a canonical set of task scenarios — run on every deployment — are not optional.</li>
+        <li><strong>Audit trails for regulated industries:</strong> In finance, healthcare, and other regulated sectors, you need to be able to answer "what did the agent do, why, and who authorized it?" for any action taken up to several years prior. This requires immutable, tamper-evident logging — not just application logs that can be overwritten.</li>
+      </ul>
+
+      <p>The observability layer is also the foundation of the continuous improvement loop. As you accumulate agent traces, you can identify systematic failure modes, improve tool schemas, refine scope boundaries, and eventually — with appropriate evaluation — expand the agent's autonomous action surface. Observability is not a compliance checkbox; it is the mechanism by which an agent deployment gets better over time. This connects directly to the signal processing principles we discussed in our <a href="blog-signal.html">article on production data pipelines</a>.</p>
+
+      <h2>Israeli-Specific Considerations</h2>
+
+      <p>Enterprise AI deployment is never context-free, and Israel's specific regulatory, linguistic, and talent environment creates constraints that generic frameworks miss. Understanding these is not peripheral — they determine whether a deployment is legally permissible, technically sound, and actually usable by the people who interact with it.</p>
+
+      <div class="stat-callout">
+        <div class="stat-num">~60%</div>
+        <div class="stat-label">Estimated share of mid-to-large Israeli enterprises citing data residency requirements as a primary constraint on their AI deployment architecture choices.<small>IDC Israel estimate, enterprise survey, 2025</small></div>
+      </div>
+
+      <h3>Data Residency and Sovereignty</h3>
+
+      <p>Many Israeli enterprises operate under data residency requirements that prohibit sending certain data categories to servers outside Israel or outside specific jurisdictions. This creates an architectural constraint that affects every layer of an agent deployment: the model inference endpoint, the memory and retrieval layer, the tool API calls, and the audit logging infrastructure.</p>
+
+      <p>The practical implications are significant. If your agent processes health records, financial data, or defense-adjacent information, you may not be able to use a US-hosted LLM API endpoint — even for non-identifying intermediate reasoning. You need either a locally-deployed model (open-weight models such as Llama or Mistral variants are the current standard), a European-hosted API endpoint with appropriate data processing agreements, or a hybrid architecture where sensitive data stays on-premise and only sanitized context crosses the boundary. Each option carries different capability trade-offs and operational complexity costs that must be scoped early, not discovered at deployment.</p>
+
+      <h3>Hebrew/English Multilingualism</h3>
+
+      <p>Israeli enterprises operate in a bilingual environment that is more complex than it appears. It is not simply a matter of translating an English interface into Hebrew. Users switch languages mid-conversation, domain terminology is often English even in Hebrew-primary contexts, and the right-to-left rendering of Hebrew introduces layout challenges in any agent interface that surfaces text to users.</p>
+
+      <p>At the model level, Hebrew language capability varies significantly across frontier models. As of early 2026, the leading English-first models show measurable degradation in Hebrew reasoning tasks relative to English-equivalent tasks — a gap that widens for domain-specific vocabulary (legal Hebrew, medical terminology, financial regulations in Hebrew). Testing your agent's task performance in Hebrew — not just its fluency — is a required part of the evaluation methodology, not a nice-to-have. The linguistic challenges of multilingual model deployment are a topic we examine through a different lens in our <a href="blog-llms.html">article on working with large language models in production</a>.</p>
+
+      <h3>Talent and Operational Realities</h3>
+
+      <p>Israel has a world-class pool of AI research talent, but the specific operational skill set required for agentic AI in production — LLM orchestration, RAG pipeline engineering, agent evaluation methodology — is genuinely scarce even here. As we noted in our <a href="blog-israel-ai-2026.html">2026 overview of the Israeli AI landscape</a>, there are an estimated 4,200 unfilled AI and data science roles in the country, and the production engineering subset is harder to fill than the research subset.</p>
+
+      <p>This creates a practical consideration for how agent projects are staffed. Building a full in-house capability for agentic AI typically requires 12–18 months of hiring and onboarding, during which the market is moving rapidly. The risk of hiring into a pattern that becomes outdated is real. Many Israeli enterprises are finding that a hybrid model — a small in-house team responsible for product ownership and domain knowledge, augmented by specialized consulting for the engineering and evaluation architecture — delivers faster time to value and more defensible technical decisions than attempting to build everything internally.</p>
+
+      <h2>What to Look for in an Agentic AI Partner</h2>
+
+      <p>The market for AI consulting has expanded rapidly, and the term "agentic AI" now appears on almost every vendor's website. The following criteria distinguish teams with genuine production experience from those with pattern-matched vocabulary:</p>
+
+      <ol>
+        <li><strong>They start with evaluation, not architecture.</strong> A credible partner's first question is "how will we know if this agent is working?" — not "which framework should we use?" Evaluation methodology (task completion metrics, safety benchmarks, regression suites) is the hardest part of agentic AI and the part most often skipped by teams under delivery pressure.</li>
+        <li><strong>They have experience with HITL design specifically.</strong> Designing approval interfaces, escalation flows, and confidence-gated autonomy requires understanding both the technical system and the human workflow it is embedded in. Ask for examples of how they have designed and iterated on the human-in-the-loop components of past deployments.</li>
+        <li><strong>They can articulate their observability stack.</strong> Which tracing tools do they use? How do they instrument tool calls? What does a post-incident analysis look like for an agent deployment? Vague answers here indicate a team that has built demos but not maintained production systems.</li>
+        <li><strong>They understand Israeli regulatory and linguistic constraints.</strong> Ask directly: have they deployed agents that process data under Israeli data residency requirements? Have they evaluated model performance in Hebrew for your specific task domain? These are not general AI questions; they require specific experience.</li>
+        <li><strong>They plan for knowledge transfer.</strong> The goal of a consulting engagement should be to leave your team more capable, not more dependent. What does the handoff look like? What documentation, tooling, and training do they provide so that your engineers can maintain and extend the agent independently?</li>
+      </ol>
+
+      <blockquote>
+        <p>The difference between a demo agent and a production agent is the same as the difference between a proof of concept and a product. One is optimized for the best case; the other is optimized for the full distribution of inputs, including the ones you did not anticipate when you built it. That is a fundamentally different engineering problem.</p>
+      </blockquote>
+
+      <h2>Conclusion</h2>
+
+      <p>Agentic AI represents a genuine step-change in what software systems can accomplish — but only when deployed with the rigor the technology demands. The production gap is real, and the majority of enterprises that attempt agent deployments without systematic attention to scope design, tool architecture, human-in-the-loop patterns, and observability will contribute to that ~74% failure statistic.</p>
+
+      <p>For Israeli enterprises specifically, the path to production runs through additional constraints: data residency architecture, Hebrew language evaluation, and a talent market where the specific skills needed are even scarcer than the general AI market already suggests. These are solvable problems — but they require partners with the right experience, not just the right vocabulary.</p>
+
+      <p>At MLAIA, we have built and operated agentic AI systems across Israeli industry — from financial compliance workflows to enterprise knowledge retrieval to customer-facing multilingual support agents. If you are working through an agent deployment challenge, or trying to move a pilot to production, we would be glad to compare notes. <a href="index.html#contact">Reach out to the team.</a></p>
+    </div>
+
+    <div class="post-cta-box">
+      <h3>Ready to move your AI agent from pilot to production?</h3>
+      <p>MLAIA specializes in agentic AI deployment for Israeli enterprises — from scope design through observability, with deep experience in data residency, Hebrew/English multilingualism, and regulated industries.</p>
+      <a href="index.html#contact" class="btn-p">Talk to the Team &rarr;</a>
+    </div>
+
+    <div class="post-footer-nav">
+      <a href="blog.html" class="back-link" style="margin-bottom:0">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to all posts
+      </a>
+      <a href="blog-israel-ai-2026.html" class="back-link" style="margin-bottom:0;flex-direction:row-reverse">
+        Israeli AI Industry 2026
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="transform:rotate(180deg)"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div><a href="index.html" class="ft-logo">ML<span>AI</span>A</a><div class="ft-tag">Machine Learning &amp; AI Approach</div></div>
+  <ul class="ft-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#domains">Domains</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <p>&copy; 2025 MLAIA &mdash; Machine Learning &amp; AI Approach</p>
+</footer>
+
+<script>
+// Cursor
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+  el.addEventListener('mousedown',()=>document.body.classList.add('ck'));
+  el.addEventListener('mouseup',()=>document.body.classList.remove('ck'));
+});
+
+// Nav scroll shadow
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('sc',scrollY>10)},{passive:true});
+
+// Hamburger
+const ham=document.querySelector('.hamburger');
+const ul=document.querySelector('.nav-links');
+ham.addEventListener('click',()=>{
+  const open=ham.classList.toggle('open');
+  ul.classList.toggle('open',open);
+  ham.setAttribute('aria-expanded',open);
+});
+</script>
+</body>
+</html>
