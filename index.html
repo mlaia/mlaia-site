@@ -237,7 +237,7 @@ h2{font-family:'DM Sans',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weig
 .logo-pill:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(0,0,0,.35)}
 .logo-pill img{height:40px;width:auto;max-width:110px;object-fit:contain;display:block}
 .logo-pill.sm img{height:28px;max-width:80px}
-@keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}@keyframes logo-scroll-rtl{from{transform:translateX(0)}to{transform:translateX(50%)}}
+@keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}@keyframes logo-scroll-rtl{from{transform:translateX(-50%)}to{transform:translateX(0%)}}
 
 
 /* ── BLOG ── */
@@ -603,8 +603,8 @@ body.a11y-spacing{letter-spacing:.12em;word-spacing:.16em;line-height:2}
 body.a11y-bigcursor,body.a11y-bigcursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpolygon points='8,2 8,32 15,24 21,38 25,36 19,22 28,22' fill='%23000' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E") 2 2,pointer!important}
 body.a11y-bigcursor #cd,body.a11y-bigcursor #cr{display:none!important}
 /* ── SKIP NAVIGATION LINK (WCAG 2.4.1) ── */
-.skip-link{position:absolute;left:-9999px;top:6px;z-index:999999;background:var(--accent);color:#fff;padding:10px 22px;border-radius:0 0 8px 8px;font-size:1rem;font-weight:600;text-decoration:none;letter-spacing:.03em;white-space:nowrap}
-.skip-link:focus,.skip-link:focus-visible{left:6px;outline:3px solid var(--accent2);outline-offset:2px}
+.skip-link{position:absolute;top:-9999px;left:6px;z-index:999999;background:var(--accent);color:#fff;padding:10px 22px;border-radius:0 0 8px 8px;font-size:1rem;font-weight:600;text-decoration:none;letter-spacing:.03em;white-space:nowrap}
+.skip-link:focus,.skip-link:focus-visible{top:6px;outline:3px solid var(--accent2);outline-offset:2px}
 /* ── GLOBAL VISIBLE FOCUS INDICATORS (WCAG 2.4.7) ── */
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:3px}
 :focus:not(:focus-visible){outline:none}
@@ -2284,6 +2284,11 @@ function setLang(lang){
   const htmlEl=document.documentElement;
   htmlEl.lang=lang;
   htmlEl.dir=isHe?'rtl':'ltr';
+  // Reset horizontal scroll position — prevents RTL Android Chrome from
+  // initialising scrollLeft at the document's right edge, which shifts
+  // all content to appear in the right half of the screen.
+  document.documentElement.scrollLeft=0;
+  document.body.scrollLeft=0;
 
   // All [data-en]/[data-he] elements — innerHTML handles plain text + simple tags
   document.querySelectorAll('[data-en]').forEach(el=>{
@@ -2310,7 +2315,15 @@ function setLang(lang){
 (function(){
   const urlLang=new URLSearchParams(location.search).get('lang');
   const saved=urlLang||localStorage.getItem('mlaia-lang');
-  if(saved==='he')setLang('he');
+  if(saved==='he'){
+    setLang('he');
+    // Belt-and-suspenders: reset scroll after first paint in case browser
+    // defers the RTL scrollLeft initialisation until after layout completes.
+    requestAnimationFrame(function(){
+      document.documentElement.scrollLeft=0;
+      document.body.scrollLeft=0;
+    });
+  }
 })();
 
 /* ══ ACCESSIBILITY WIDGET ══ */
