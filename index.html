@@ -2281,7 +2281,6 @@ const RICH_TRANS=[
 
 function setLang(lang){
   currentLang=lang;
-  localStorage.setItem('mlaia-lang',lang);
   const isHe=lang==='he';
   const htmlEl=document.documentElement;
   htmlEl.lang=lang;
@@ -2313,11 +2312,10 @@ function setLang(lang){
   if(btn){btn.textContent=isHe?'English':'\u05e2\u05d1\u05e8\u05d9\u05ea';btn.setAttribute('aria-label',isHe?'Switch language to English':'Switch language to Hebrew');}
 }
 
-/* ── INIT LANGUAGE (restore from localStorage / URL param) ── */
+/* ── INIT LANGUAGE (URL param only — English is the default for all visitors) ── */
 (function(){
   const urlLang=new URLSearchParams(location.search).get('lang');
-  const saved=urlLang||localStorage.getItem('mlaia-lang');
-  if(saved==='he'){
+  if(urlLang==='he'){
     setLang('he');
     // Belt-and-suspenders: reset scroll after first paint in case browser
     // defers the RTL scrollLeft initialisation until after layout completes.
