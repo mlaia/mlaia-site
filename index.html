@@ -650,16 +650,36 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
       "legalName": "המלאיה מדעני נתונים בע״מ",
       "alternateName": ["MLAIA", "MLAIA Data Science", "המלאיה", "המלאיה מדעני נתונים", "המלאיה מדעני נתונים בע״מ", "Machine Learning & AI Approach"],
       "url": "https://www.mlaia.com",
-      "email": "yochai@mlaia.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.mlaia.com/assets/logo.png",
+        "width": 200,
+        "height": 60
+      },
+      "image": "https://www.mlaia.com/assets/logo.png",
+      "email": "hello@mlaia.com",
       "description": "MLAIA delivers end-to-end AI solutions: signal processing, audio & acoustics, medical AI, LLMs/NLP, Ad Tech, and business intelligence. Based in Israel, serving global clients.",
       "founder": {"@type": "Person", "@id": "https://www.mlaia.com/#person-yochai"},
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Shenef 4",
+        "addressLocality": "Yavne",
+        "postalCode": "8151139",
+        "addressCountry": "IL"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "hello@mlaia.com",
+        "availableLanguage": ["English", "Hebrew"]
+      },
       "areaServed": [
         {"@type": "Country", "name": "Israel"},
         {"@type": "Country", "name": "United States"},
-        "Worldwide"
+        {"@type": "AdministrativeArea", "name": "Europe"}
       ],
       "knowsLanguage": ["en", "he"],
-      "knowsAbout": ["Signal Processing", "Audio Processing", "Acoustics", "Medical AI", "NLP", "Business Intelligence", "Machine Learning", "Deep Learning", "Data Science", "Ad Tech", "Digital Advertising"]
+      "knowsAbout": ["Signal Processing", "Audio Processing", "Acoustics", "Medical AI", "NLP", "Business Intelligence", "Machine Learning", "Deep Learning", "Data Science", "Ad Tech", "Digital Advertising", "AI Strategy", "LLMs", "Generative AI"]
     },
     {
       "@type": "WebSite",
@@ -668,37 +688,91 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
       "name": "MLAIA",
       "description": "AI & Data Science Consulting — Signal Processing, Medical AI, NLP, BI",
       "publisher": {"@id": "https://www.mlaia.com/#organization"},
-      "inLanguage": ["en", "he"]
+      "inLanguage": ["en", "he"],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.mlaia.com/blog.html?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     },
     {
       "@type": "Person",
       "@id": "https://www.mlaia.com/#person-yochai",
       "name": "Dr. Yochai Edlitz",
+      "givenName": "Yochai",
+      "familyName": "Edlitz",
+      "honorificPrefix": "Dr.",
       "jobTitle": "CEO & Founder",
       "worksFor": {"@id": "https://www.mlaia.com/#organization"},
-      "knowsAbout": ["Signal Processing", "Medical AI", "Machine Learning", "Data Science", "NLP"]
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Weizmann Institute of Science"
+      },
+      "description": "PhD from the Weizmann Institute of Science. 20+ years R&D leadership across defense intelligence, academic research, and enterprise AI. Founder & CEO of MLAIA.",
+      "knowsAbout": ["Signal Processing", "Medical AI", "Machine Learning", "Data Science", "NLP", "Deep Learning", "AI Strategy", "LLMs"]
     },
     {
       "@type": "Service",
-      "@id": "https://www.mlaia.com/#service",
-      "name": "AI & Data Science Consulting",
+      "@id": "https://www.mlaia.com/#service-signal",
+      "name": "Real-Time Signal Processing & Audio/Acoustics AI",
+      "alternateName": "עיבוד אותות ואודיו",
       "provider": {"@id": "https://www.mlaia.com/#organization"},
       "serviceType": "AI Consulting",
-      "description": "End-to-end AI solutions including signal processing, medical AI, LLMs/NLP, and business intelligence.",
-      "areaServed": "Worldwide",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "AI Services",
-        "itemListElement": [
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Signal Processing AI", "alternateName": "עיבוד אותות"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Audio & Acoustics AI", "alternateName": "עיבוד אודיו ואקוסטיקה"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Medical AI", "alternateName": "בינה מלאכותית לרפואה"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "LLMs & NLP", "alternateName": "עיבוד שפה טבעית"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Business Intelligence", "alternateName": "בינה עסקית"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ad Tech & Digital Advertising AI", "alternateName": "פרסום דיגיטלי וטכנולוגיית פרסום"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sales & Demand Forecasting", "alternateName": "חיזוי מכירות וביקוש"}}
-        ]
-      }
+      "description": "End-to-end signal processing pipelines combining classical DSP with deep learning. Capabilities include FFT, wavelet transforms, digital filters, anomaly detection, predictive maintenance, acoustic event detection, voice analysis, and real-time signal intelligence.",
+      "areaServed": "Worldwide"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.mlaia.com/#service-medical",
+      "name": "Medical AI & Clinical Data Science",
+      "alternateName": "בינה מלאכותית לרפואה",
+      "provider": {"@id": "https://www.mlaia.com/#organization"},
+      "serviceType": "AI Consulting",
+      "description": "AI for healthcare and medical devices: EHR analysis, medical imaging, clinical outcome prediction, survival analysis, and graph neural networks for bioinformatics.",
+      "areaServed": "Worldwide"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.mlaia.com/#service-llm",
+      "name": "Large Language Models (LLMs), NLP & AI Agents",
+      "alternateName": "עיבוד שפה טבעית ומודלי שפה",
+      "provider": {"@id": "https://www.mlaia.com/#organization"},
+      "serviceType": "AI Consulting",
+      "description": "Enterprise LLM integration: fine-tuning, retrieval-augmented generation (RAG), NLP pipelines, document intelligence, chatbots, and autonomous AI agents for knowledge management and sales automation.",
+      "areaServed": "Worldwide"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.mlaia.com/#service-bi",
+      "name": "Enterprise BI & Predictive Analytics",
+      "alternateName": "בינה עסקית וניתוח חזוי",
+      "provider": {"@id": "https://www.mlaia.com/#organization"},
+      "serviceType": "AI Consulting",
+      "description": "Business intelligence with embedded ML: churn prediction, sales forecasting, customer segmentation, demand planning, revenue modeling, and executive dashboards.",
+      "areaServed": "Worldwide"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.mlaia.com/#service-adtech",
+      "name": "Ad Tech & Digital Advertising AI",
+      "alternateName": "פרסום דיגיטלי וטכנולוגיית פרסום",
+      "provider": {"@id": "https://www.mlaia.com/#organization"},
+      "serviceType": "AI Consulting",
+      "description": "Machine learning for advertising technology: audience targeting optimization, real-time bidding models, attribution modeling, campaign performance prediction, and programmatic advertising intelligence.",
+      "areaServed": "Worldwide"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.mlaia.com/#service-ml",
+      "name": "Machine Learning Model Development & AI Strategy",
+      "alternateName": "פיתוח מודלים ואסטרטגיית AI",
+      "provider": {"@id": "https://www.mlaia.com/#organization"},
+      "serviceType": "AI Consulting",
+      "description": "Custom ML model development, AI strategy consulting, architecture design, and production deployment for organizations at any stage of their AI journey.",
+      "areaServed": "Worldwide"
     },
     {
       "@type": "FAQPage",
@@ -754,6 +828,7 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
       "description": "MLAIA delivers end-to-end AI solutions: machine learning model development, data science consulting, AI strategy, signal processing and audio AI, Ad Tech AI, predictive analytics, and NLP. Based in Israel, serving global clients.",
       "url": "https://www.mlaia.com",
       "email": "hello@mlaia.com",
+      "image": "https://www.mlaia.com/assets/logo.png",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Shenef 4",
@@ -761,7 +836,63 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
         "postalCode": "8151139",
         "addressCountry": "IL"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 31.8833,
+        "longitude": 34.7408
+      },
+      "areaServed": [
+        {"@type": "Country", "name": "Israel"},
+        {"@type": "Country", "name": "United States"},
+        {"@type": "AdministrativeArea", "name": "Europe"}
+      ],
       "knowsLanguage": ["en", "he"],
+      "priceRange": "$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "10",
+        "reviewCount": "10"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "reviewBody": "I wanted to take a moment to recognize your exceptional work on managing the 'Sand box' project. Your leadership, strategic thinking, and excellent communication skills were instrumental in successfully executing this project.",
+          "author": {"@type": "Person", "name": "Dr. Gil Levy"},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "publisher": {"@type": "Organization", "name": "Assuta Ashdod Medical Center"}
+        },
+        {
+          "@type": "Review",
+          "reviewBody": "I am truly impressed by the innovative ideas and rapid progress your team has made while collaborating with our great team here at RETISPEC. Your collaboration, fresh insights, scientific rigor, and efficient work methods have significantly contributed to our advancements in such a short time.",
+          "author": {"@type": "Person", "name": "Eliav Shaked"},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "publisher": {"@type": "Organization", "name": "RETISPEC"}
+        },
+        {
+          "@type": "Review",
+          "reviewBody": "I would like to express my sincere gratitude for your valuable contributions to Silentium, specifically in the fields of digital signal processing, audio, machine learning, and data science. Your expertise and vast knowledge have been instrumental in establishing our AI infrastructure.",
+          "author": {"@type": "Person", "name": "Tzvika Fridman"},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "publisher": {"@type": "Organization", "name": "Silentium"}
+        },
+        {
+          "@type": "Review",
+          "reviewBody": "It's so hard to find data professionals who truly understand the data in depth, across all its layers. Until we met Yohai, who not only met but exceeded all expectations. From understanding the business problem through deep analysis, and all the way to top-level data science, resulting in outstanding models that actually solve real-world problems.",
+          "author": {"@type": "Person", "name": "Roy Green"},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "publisher": {"@type": "Organization", "name": "Quago"}
+        },
+        {
+          "@type": "Review",
+          "reviewBody": "We have been working with MLAIA Data Science on several projects since their establishment, and we highly value the team's professionalism, agility, creativity, and strong sense of ownership. They consistently deliver high-quality, scalable solutions, and their combination of deep technical expertise with strong business acumen has proven to be a significant asset.",
+          "author": {"@type": "Person", "name": "Shai Policker"},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "publisher": {"@type": "Organization", "name": "Edge Medical Venture"}
+        }
+      ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "AI & Data Science Services",

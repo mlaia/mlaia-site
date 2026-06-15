@@ -57,15 +57,19 @@ Google, EL AL Airlines, Israel Ministry of Defense, NICE Systems, Assuta Medical
 
 ## Founder
 
-**Yochai Edlitz** — Founder & CEO of MLAIA. Deep expertise spanning signal processing, machine learning, medical AI, natural language processing, and business intelligence. Combines academic rigor with hands-on production AI engineering. Available for consulting engagements worldwide.
+**Yochai Edlitz** — Founder & CEO of MLAIA. PhD from the Weizmann Institute of Science. 20+ years R&D leadership across defense intelligence, academic research, and enterprise AI. Combines academic rigor with hands-on production AI engineering. Available for consulting engagements worldwide.
 
 ## Blog Posts & Technical Content
 
+- [The Agentic AI Production Gap: Why 89% of Enterprise Pilots Never Ship](https://www.mlaia.com/agentic-ai-production-gap.html) — Why most enterprise agentic AI pilots fail and the architecture decisions that close the gap (June 2026)
+- [The Quiet Revolution: Why Israeli Enterprises Are Bringing AI On-Prem with Small Language Models](https://www.mlaia.com/blog-slm-onprem-israel.html) — Inside the 2026 shift from cloud LLMs to on-prem SLMs — economics, privacy gains, and the production playbook (June 2026)
+- [AWS Bedrock, Vertex AI, and Azure AI: How Cloud Platforms Are Accelerating ML R&D](https://www.mlaia.com/blog-cloud-ml-platforms-rapid-development.html) — Practical comparison of the major cloud ML platforms for production AI development (May 2026)
+- [From Pilot to Production: Why 88% of AI Agent Projects Fail — and How to Beat the Odds](https://www.mlaia.com/blog-ai-agents-pilot-to-production.html) — Five critical factors separating successful AI agent deployments from expensive experiments (May 2026)
 - [Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?](https://www.mlaia.com/blog-slurm.html) — Deep dive into Slurm job scheduling for AI/HPC clusters (February 2026)
 - [Transforming Sales with AI: A Success Story with Israel's Leading Telecom](https://www.mlaia.com/blog-sales-ai.html) — ML applied to the full sales pipeline with measurable ROI (November 2024)
 - [Harness Your Data's Potential with Large Language Models (LLMs)](https://www.mlaia.com/blog-llms.html) — LLM integration, RAG, and fine-tuning for enterprise use cases (September 2023)
 - [Supercharging Machine Learning Models with Classical Digital Signal Processing](https://www.mlaia.com/blog-signal.html) — Hybrid DSP + deep learning architectures in practice (May 2023)
-- [Unleashing the Power of Graphs for Machine Learning](https://www.mlaia.com/blog-medical.html) — Graph neural networks for bioinformatics, social networks, and fraud detection (2023)
+- [Unleashing the Power of Graphs for Machine Learning](https://www.mlaia.com/blog-medical.html) — Graph neural networks for bioinformatics, social networks, and fraud detection (June 2023)
 - [Expertise Without Boundaries: Affordable AI and ML Development](https://www.mlaia.com/blog-bi.html) — How outsourced AI consulting delivers senior expertise at startup speed (July 2023)
 
 ## Key Pages
