@@ -23,6 +23,13 @@
 
   <!-- Blog posts — newest first -->
   <url>
+    <loc>https://www.mlaia.com/blog-audio-ai-production.html</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://www.mlaia.com/agentic-ai-production-gap.html</loc>
     <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>
