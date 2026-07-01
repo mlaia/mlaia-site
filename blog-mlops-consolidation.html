@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google Analytics 4 — fires only after analytics consent -->
+<script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your MLOps Vendor Just Got Acquired — Now What? — MLAIA</title>
+
+<!-- SEO -->
+<meta name="description" content="The MLOps vendor consolidation wave is reshaping the market. Iguazio, Dataloop, Neptune.ai, Seldon — what happens to your ML platform when your vendor gets acquired or shuts down, and what to do next.">
+<meta name="keywords" content="MLOps consolidation, MLOps vendor acquisition, ML platform migration, vendor lock-in, MLOps strategy, ML infrastructure, AI consulting, MLAIA, Iguazio McKinsey, Neptune.ai shutdown, Seldon TrueFoundry">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.mlaia.com/blog-mlops-consolidation.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Your MLOps Vendor Just Got Acquired — Now What?">
+<meta property="og:description" content="The MLOps vendor consolidation wave is reshaping the market. Here's how to assess your lock-in, plan your migration, and build a platform-independent ML stack that survives the next acquisition.">
+<meta property="og:url" content="https://www.mlaia.com/blog-mlops-consolidation.html">
+<meta property="og:site_name" content="MLAIA">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your MLOps Vendor Just Got Acquired — Now What?">
+<meta name="twitter:description" content="The MLOps vendor consolidation wave is reshaping the market. Here's how to assess your lock-in, plan your migration, and build a platform-independent ML stack that survives the next acquisition.">
+
+<!-- Article JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Your MLOps Vendor Just Got Acquired — Now What?",
+  "description": "The MLOps vendor consolidation wave is reshaping the market. Here's how to assess your lock-in, plan your migration, and build a platform-independent ML stack that survives the next acquisition.",
+  "image": "https://www.mlaia.com/assets/yochai-headshot.jpg",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-01",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Yochai Edlitz",
+    "url": "https://www.mlaia.com/about-us/",
+    "jobTitle": "Founder & CEO, MLAIA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MLAIA",
+    "url": "https://www.mlaia.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.mlaia.com/assets/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.mlaia.com/blog-mlops-consolidation.html"
+  },
+  "keywords": "MLOps consolidation, ML platform migration, vendor lock-in, MLOps strategy, AI infrastructure, MLAIA"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mlaia.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.mlaia.com/blog.html"},
+    {"@type": "ListItem", "position": 3, "name": "Your MLOps Vendor Just Got Acquired — Now What?", "item": "https://www.mlaia.com/blog-mlops-consolidation.html"}
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --panel: #111827;
+    --ink: #e6edf3;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-2: #a78bfa;
+    --border: #1f2937;
+    --code-bg: #0f172a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.site {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  header.site a.brand { color: var(--ink); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+  header.site nav a { color: var(--muted); text-decoration: none; margin-left: 1.25rem; font-size: 0.95rem; }
+  header.site nav a:hover { color: var(--accent); }
+  main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .category {
+    display: inline-block;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: clamp(1.85rem, 4vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+    color: #f8fafc;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 2rem;
+  }
+  .back-link a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  article h2 {
+    margin-top: 2.75rem;
+    font-size: 1.45rem;
+    color: #f1f5f9;
+    border-left: 3px solid var(--accent);
+    padding-left: 0.75rem;
+  }
+  article h3 {
+    margin-top: 1.75rem;
+    font-size: 1.15rem;
+    color: #e2e8f0;
+  }
+  article p { margin: 1rem 0; }
+  article a { color: var(--accent); }
+  blockquote {
+    border-left: 4px solid var(--accent-2);
+    background: rgba(167, 139, 250, 0.06);
+    margin: 1.75rem 0;
+    padding: 1rem 1.25rem;
+    color: #e2e8f0;
+    font-style: italic;
+    border-radius: 4px;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .stat .num { font-size: 1.7rem; font-weight: 700; color: var(--accent); }
+  .stat .label { color: var(--muted); font-size: 0.85rem; }
+  .callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    margin: 1.75rem 0;
+  }
+  .callout strong { color: var(--accent); }
+  .acq-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.88rem;
+  }
+  .acq-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .acq-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid rgba(31,41,55,0.6);
+    vertical-align: top;
+  }
+  .acq-table tr:last-child td { border-bottom: none; }
+  .acq-table .vendor { color: #f1f5f9; font-weight: 600; }
+  .acq-table .outcome { color: var(--accent); font-size: 0.82rem; }
+  .acq-table .risk { color: #fbbf24; font-size: 0.82rem; }
+  ul { padding-left: 1.25rem; }
+  ul li { margin: 0.4rem 0; }
+  .cta {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .cta a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: var(--accent);
+    color: #0a0e1a;
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer.site {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="https://www.mlaia.com/index.html">MLAIA · Machine Learning &amp; AI Approach</a>
+  <nav>
+    <a href="https://www.mlaia.com/index.html#about">About</a>
+    <a href="https://www.mlaia.com/index.html#domains">Domains</a>
+    <a href="https://www.mlaia.com/blog.html">Blog</a>
+    <a href="https://www.mlaia.com/index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <span class="category">MLOps &amp; AI Infrastructure</span>
+  <h1>Your MLOps Vendor Just Got Acquired — Now What?</h1>
+  <p class="meta">July 1, 2026 · 8 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
+  <p class="back-link"><a href="https://www.mlaia.com/blog.html">← Back to all posts</a></p>
+
+  <article>
+
+    <p>In the past 18 months, the MLOps vendor landscape has been reshaped faster than most teams had time to plan for. Iguazio — a platform that many Israeli enterprises and global financial institutions had built production ML pipelines on — was acquired by McKinsey. Dataloop, a data annotation and model management platform, was acquired by Dell. Neptune.ai, one of the most widely-used experiment tracking tools among research-oriented teams, announced shutdown. Seldon, a prominent open-core model serving platform, was acquired by TrueFoundry. And with Modular's pending acquisition by Qualcomm, another piece of the ecosystem is about to change hands.</p>
+
+    <p>This is not a transient dip. It is the predictable outcome of a venture-backed tooling market that matured faster than it monetized. The same market forces are still in motion. If your ML stack depends on specialist MLOps platforms — for experiment tracking, feature stores, model serving, data labeling, or pipeline orchestration — the probability that at least one of your vendors undergoes a significant ownership or product change in the next 24 months is not negligible.</p>
+
+    <p>What does that actually mean for your team, and what should you do about it? This post covers the mechanics of the consolidation wave, the real risks to customers, and the practical steps for assessing and reducing your exposure.</p>
+
+    <div class="stat-row">
+      <div class="stat"><div class="num">5+</div><div class="label">major MLOps vendors acquired or shut down since late 2024</div></div>
+      <div class="stat"><div class="num">~60%</div><div class="label">of VC-backed MLOps startups from 2019–2022 vintage no longer independent</div></div>
+      <div class="stat"><div class="num">12–18mo</div><div class="label">typical runway after acquisition before roadmap divergence becomes visible</div></div>
+      <div class="stat"><div class="num">$0</div><div class="label">migration budget most teams allocated before they needed it</div></div>
+    </div>
+
+    <hr>
+
+    <h2>1. Why This Wave Happened</h2>
+
+    <p>The 2019–2022 MLOps investment cycle produced dozens of well-funded companies targeting narrow slices of the ML infrastructure stack: experiment tracking, feature stores, model registries, data versioning, model monitoring, annotation tooling, serving infrastructure. Many of these tools were excellent — genuinely solving real problems — but they were solving problems that turned out to be hard to monetize at scale for three related reasons.</p>
+
+    <p>First, the most sophisticated ML teams — the ones with the highest willingness to pay — had the engineering capacity to build equivalent tooling in-house, and increasingly did. Second, the hyperscalers (AWS, Google Cloud, Azure) systematically absorbed the most successful patterns into their managed ML platforms, pricing them as add-ons rather than standalone products. Third, the GenAI shift starting in 2023 changed what enterprise ML teams prioritized: inference infrastructure, LLM ops, and RAG pipelines became the dominant concerns, and many MLOps platforms that were designed around classical training pipelines found their core value proposition under pressure.</p>
+
+    <p>The result was a market with excellent technology and insufficient standalone revenue, which is precisely the condition that triggers acquisition activity. Strategic buyers — consultancies wanting productized delivery capability (McKinsey/Iguazio), hardware vendors wanting software stickiness (Dell/Dataloop), and cloud-native platforms wanting customer base (TrueFoundry/Seldon) — stepped in to acquire at valuations that reflected the distress rather than the technology quality.</p>
+
+    <div class="callout">
+      <strong>The Surviving Players Have Pivoted:</strong> DataRobot, ClearML, Anyscale, and Valohai — the independent MLOps platforms that have survived this consolidation round — have all visibly repositioned toward "agentic AI infrastructure" or "GenAI orchestration" in their 2025–2026 product messaging. Whether their platforms actually deliver on these pivots is a separate question from whether the pivot was strategically necessary for survival. It was.
+    </div>
+
+    <h2>2. The Acquisition Table: What Happened and What Customers Face</h2>
+
+    <table class="acq-table">
+      <thead>
+        <tr>
+          <th>Vendor</th>
+          <th>Event</th>
+          <th>Core Risk for Customers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="vendor">Iguazio</td>
+          <td class="outcome">Acquired by McKinsey</td>
+          <td class="risk">Roadmap now serves McKinsey delivery priorities, not general-market customers. Enterprise pricing restructure expected.</td>
+        </tr>
+        <tr>
+          <td class="vendor">Dataloop</td>
+          <td class="outcome">Acquired by Dell</td>
+          <td class="risk">Hardware-first acquirer. Annotation-focused customers may find investment in platform slows without Dell hardware alignment.</td>
+        </tr>
+        <tr>
+          <td class="vendor">Neptune.ai</td>
+          <td class="outcome">Shutdown announced</td>
+          <td class="risk">Full migration required. Experiment history, artifact storage, and API integrations all need replacement on a fixed timeline.</td>
+        </tr>
+        <tr>
+          <td class="vendor">Seldon</td>
+          <td class="outcome">Acquired by TrueFoundry</td>
+          <td class="risk">Open-core product may diverge from upstream community. Teams relying on Seldon Core OSS need to track fork risk.</td>
+        </tr>
+        <tr>
+          <td class="vendor">Modular</td>
+          <td class="outcome">Pending acquisition by Qualcomm</td>
+          <td class="risk">Mojo language and MAX inference stack face hardware-vendor alignment pressure. Portability story may narrow toward Qualcomm silicon.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The risks differ in character. A shutdown (Neptune.ai) creates an immediate, deadline-driven migration. An acquisition by a strategic buyer (McKinsey/Iguazio, Dell/Dataloop) creates gradual roadmap drift — the platform continues to function but investment priorities shift toward the acquirer's customer base and use cases, which may not match yours. An open-source platform acquisition (Seldon/TrueFoundry) creates fork risk: the hosted product and the OSS community version may diverge, and the fork you're on may not be the one that gets the security patches.</p>
+
+    <h2>3. Measuring Your Lock-In</h2>
+
+    <p>The first thing to do when your vendor gets acquired — or when you're evaluating a new one — is a systematic lock-in assessment. Lock-in in MLOps is more multidimensional than in traditional software because the data contracts are more complex.</p>
+
+    <h3>Data portability</h3>
+    <p>Can you export your experiment history, model artifacts, feature definitions, and metadata in a standard format without vendor tooling? If your experiment tracking lives only in a proprietary API, you don't own your experimental record — you're leasing it. The practical test: try to export six months of experiment data to files on your own infrastructure. If this requires a support ticket or a premium tier, you have non-trivial lock-in.</p>
+
+    <h3>Pipeline portability</h3>
+    <p>Are your ML pipelines expressed in vendor-native DSLs (Kubeflow Pipelines, ZenML, Metaflow steps, Iguazio's MLRun syntax) or in framework-agnostic code with thin wrappers? The more business logic lives in vendor-specific abstractions, the more expensive a migration becomes. A team that built their entire feature engineering and training pipeline in Iguazio's MLRun syntax faces a substantially harder migration than a team that used MLRun only for scheduling and logging.</p>
+
+    <h3>Serving infrastructure</h3>
+    <p>Model serving is often the highest-lock-in layer because it touches production traffic. If your inference endpoints are Seldon Deployments, BentoML bundles, or platform-native serving primitives, migrating without traffic disruption requires a parallel-run period and explicit traffic-shifting tooling. The teams that built serving on top of generic Kubernetes deployments with a thin sidecar for metrics are in a much better position.</p>
+
+    <h3>Operational knowledge</h3>
+    <p>The least visible form of lock-in is institutional knowledge. Teams that have spent 18 months learning a platform's operational quirks — how it handles restart behavior, what its failure modes look like in monitoring, how to tune its resource allocation — carry that knowledge in their heads, not in transferable skills. When the platform changes, that knowledge becomes a liability rather than an asset.</p>
+
+    <h2>4. What to Do If Your Vendor Got Acquired</h2>
+
+    <p>The right response depends on what kind of acquisition it is and how central the platform is to your stack. Here is a decision framework we use with clients:</p>
+
+    <h3>Immediate actions (first 30 days)</h3>
+    <ul>
+      <li><strong>Get your data out.</strong> Export everything you can in the most portable format available: experiment logs, model artifacts, feature definitions, dataset metadata. Do this now, regardless of what the acquirer says about continuity. Storage is cheap; the ability to act quickly is not.</li>
+      <li><strong>Pin your version.</strong> If you're on a hosted platform, identify and document the exact version you're using. Acquirers sometimes accelerate deprecation cycles as they consolidate codebases.</li>
+      <li><strong>Map your dependencies.</strong> Enumerate every place in your codebase where you import the vendor's SDK, call their API, or rely on their infrastructure. The list is usually longer than teams expect.</li>
+      <li><strong>Read the acquisition announcement carefully.</strong> Specifically, look for what the acquirer says about their existing customers versus their target customer profile. If McKinsey is acquiring Iguazio to serve McKinsey's enterprise consulting customers, and you're a mid-market team without a McKinsey relationship, that is information.</li>
+    </ul>
+
+    <h3>Medium-term planning (30–90 days)</h3>
+    <ul>
+      <li><strong>Evaluate open-source alternatives at the same layer.</strong> MLflow for experiment tracking, DVC for data versioning, Ray Serve or Triton Inference Server for model serving, Feast for feature stores, Airflow or Prefect for pipeline orchestration — the open-source MLOps ecosystem has matured enough that the capability gaps between proprietary platforms and well-implemented OSS stacks have narrowed significantly in most functional areas.</li>
+      <li><strong>Assess the actual migration cost honestly.</strong> Teams consistently underestimate migration cost because they focus on the core platform replacement and ignore the surrounding infrastructure: CI/CD integrations, monitoring dashboards, data lineage tracking, team workflows, and documentation. A realistic migration estimate includes all of these.</li>
+      <li><strong>Talk to the acquirer directly.</strong> Ask specifically about pricing trajectory, EOL timelines for specific features you rely on, and the support model going forward. The answers will tell you more than the press release.</li>
+    </ul>
+
+    <blockquote>The worst migration is the one done in panic. The second worst is the one that never happens because the team convinced itself the acquisition was fine until it demonstrably wasn't. The right posture is planned optionality: keep your migration path warm without committing to it prematurely.</blockquote>
+
+    <h2>5. Migration Patterns That Work</h2>
+
+    <p>When migration is warranted, a few patterns consistently reduce risk:</p>
+
+    <h3>Containerize everything at the model boundary</h3>
+    <p>The most durable serving architecture is a Docker container with a standard API contract (REST or gRPC, with an OpenAPI spec) and no runtime dependency on the MLOps platform that trained the model. If your model can be queried with a curl command against a container image you control, your serving infrastructure is effectively platform-independent. This is the pattern that makes Seldon migrations tractable: replace the Seldon Deployment with a generic Kubernetes Deployment, keep the container.</p>
+
+    <h3>Abstract your feature access layer</h3>
+    <p>Feature stores are the highest lock-in component in most enterprise ML stacks because feature definitions accumulate over time and encode substantial business logic. The abstraction pattern is straightforward: define features in a neutral format (Feast's feature view definitions are reasonably portable) and wrap all feature access behind an internal service interface. Your training code calls <code>feature_store.get_online_features()</code> from your own service, which delegates to the underlying platform. When you migrate, you change one adapter, not every training script.</p>
+
+    <h3>Own your experiment artifacts, not just your metadata</h3>
+    <p>Experiment tracking platforms store two things: metadata (parameters, metrics, tags) and artifacts (model checkpoints, datasets, evaluation outputs). Metadata is usually portable; artifacts are often stored in platform-controlled object storage with platform-controlled access patterns. Ensure your training code always persists artifacts to storage you own (S3, GCS, Azure Blob) in addition to the platform. The platform becomes a metadata index over artifacts that live on your infrastructure.</p>
+
+    <h3>Shadow-run during migration</h3>
+    <p>For serving-layer migrations, run both the old and new serving infrastructure in parallel with duplicated traffic for at least two weeks before cutting over. This is expensive in the short term and nearly always prevents incidents. Teams that skip the parallel-run period because the migration "looks clean" are the ones that find subtle performance regressions in production that weren't visible in offline evaluation.</p>
+
+    <h2>6. The Case for Vendor-Independent Architecture</h2>
+
+    <p>The consolidation wave makes a case that goes beyond "what to do when your vendor gets acquired." The more durable lesson is architectural: ML infrastructure built on top of open standards and open-source primitives is more resilient than ML infrastructure built on top of proprietary platforms, and the engineering overhead of the former has been declining steadily as the OSS ecosystem has matured.</p>
+
+    <p>This doesn't mean avoiding all managed services. Cloud-managed compute (SageMaker Training, Vertex AI Training, Azure ML Compute), managed object storage, and managed Kubernetes are all appropriate building blocks precisely because they are commodity infrastructure with stable APIs, multiple competitive alternatives, and no acquisition risk that matters to your ML workload. The risk is concentrated in the application-layer MLOps platforms that sit above the infrastructure layer — the experiment trackers, feature stores, model registries, and annotation tools where proprietary APIs and data formats create the lock-in.</p>
+
+    <p>The practical architecture guidance: use managed commodity infrastructure at the compute and storage layers, use open-source or open-standard tooling at the ML application layer, and treat any proprietary MLOps platform as a frontend concern (UI, dashboards, scheduling) rather than a backend data contract. Your data and your trained models should be reachable without the platform.</p>
+
+    <h2>7. Why Vertical Expertise Matters More Than Platform Loyalty</h2>
+
+    <p>There is a broader point here about what actually makes ML systems work in production, and it is not the MLOps platform. The teams that have navigated the consolidation wave least painfully are not the teams with the most sophisticated MLOps tooling — they are the teams with the deepest domain knowledge of their problem space.</p>
+
+    <p>A medical imaging team that understands the clinical context of their model's predictions, the failure modes that matter most in practice, and the regulatory constraints on model updates does not need a specific MLOps vendor to maintain production quality. They can operate effectively on top of whatever infrastructure is available because their value is in the model behavior and the clinical integration, not in the tooling around it. The same is true in industrial anomaly detection, financial risk modeling, ad-tech optimization, and signal processing applications.</p>
+
+    <p>Vertical expertise — the knowledge of what good looks like in a specific domain — is not transferable to a competing platform by an acquirer. It lives in your team, your evaluation frameworks, and your production monitoring thresholds. MLOps tooling is a vehicle for that expertise, not a substitute for it. Teams that invested in deep domain competence rather than deep platform competence are demonstrably better positioned as the vendor landscape continues to shift.</p>
+
+    <p>This is the positioning MLAIA operates from: we work across medical AI, signal processing, ad-tech, and defense applications not because we are neutral on tooling — we have opinions on tooling — but because the expertise that makes ML systems reliable in production is domain expertise, and domain expertise outlasts vendor ecosystems.</p>
+
+    <hr>
+
+    <h3>About MLAIA</h3>
+    <p>MLAIA — Machine Learning &amp; AI Approach — is an Israeli AI consulting firm specializing in production-grade ML systems across medical, defense, signal processing, and enterprise domains. Led by Dr. Yochai Edlitz (PhD, Weizmann Institute), MLAIA helps teams build vendor-independent ML infrastructure, execute platform migrations, and design architectures that are resilient to the vendor landscape they actually operate in. Based in Yavne, Israel; serving clients globally.</p>
+
+    <div class="cta">
+      <p><strong>Running on MLOps tooling that just changed hands?</strong></p>
+      <p>We help teams assess their platform lock-in, design migration paths, and build ML infrastructure that doesn't depend on any single vendor's continued existence.</p>
+      <a href="https://www.mlaia.com/index.html#contact">Talk to Our ML Infrastructure Team →</a>
+    </div>
+
+  </article>
+</main>
+
+<footer class="site">
+  © 2026 MLAIA — Machine Learning &amp; AI Approach · Yavne, Israel
+</footer>
+
+</body>
+</html>
