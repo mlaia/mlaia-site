@@ -61,6 +61,7 @@ Google, EL AL Airlines, Israel Ministry of Defense, NICE Systems, Assuta Medical
 
 ## Blog Posts & Technical Content
 
+- [Voice AI Grows Up: Engineering Production Speech Systems in 2026](https://www.mlaia.com/blog-voice-ai-production.html) — Production engineering guide to voice AI: cascaded vs speech-to-speech architectures, sub-500ms latency budget, $0.40-per-call economics, Whisper/Deepgram/Azure STT comparison, Israeli voice AI ecosystem (Verbit, Hyro, Hi Auto, Voiceitt), and Hebrew multilingual challenges (July 2026)
 - [Your MLOps Vendor Just Got Acquired — Now What?](https://www.mlaia.com/blog-mlops-consolidation.html) — The MLOps vendor consolidation wave (Iguazio, Dataloop, Neptune.ai, Seldon) and how to assess lock-in, plan migrations, and build vendor-independent ML infrastructure (July 2026)
 - [Audio AI in Production: From Speech Models to Sound Intelligence](https://www.mlaia.com/blog-audio-ai-production.html) — Practical guide to audio AI in production: ASR, TTS, voice cloning, sound event detection, music generation, and real-time edge deployment (June 2026)
 - [The Agentic AI Production Gap: Why 89% of Enterprise Pilots Never Ship](https://www.mlaia.com/agentic-ai-production-gap.html) — Why most enterprise agentic AI pilots fail and the architecture decisions that close the gap (June 2026)
