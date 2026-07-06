@@ -214,6 +214,20 @@
   }
   ul { padding-left: 1.25rem; }
   ul li { margin: 0.4rem 0; }
+  figure.infographic {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  figure.infographic svg { width: 100%; height: auto; display: block; }
+  figure.infographic figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+  }
   .cta {
     margin-top: 3rem;
     padding: 1.5rem;
@@ -292,6 +306,80 @@
 
     <p>The promise is compelling: sub-200ms response latency, more natural prosody, and the ability to respond to vocal affect rather than just word content. The production reality in 2026 is more nuanced. S2S models are significantly larger and more expensive to serve than cascaded equivalents. They are harder to fine-tune on domain-specific content because there's no text intermediate to adapt. Debugging a failure in an S2S system is substantially harder than debugging a failure in a cascaded pipeline where you can inspect the transcript and text response independently. And hallucination monitoring — critical in regulated applications — requires a text representation that S2S systems don't natively provide.</p>
 
+    <figure class="infographic">
+      <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram comparing the cascaded STT to LLM to TTS pipeline with the end-to-end speech-to-speech architecture">
+        <!-- Cascaded pipeline -->
+        <text x="20" y="30" fill="#f1f5f9" font-size="16" font-weight="700" font-family="sans-serif">Cascaded Pipeline</text>
+        <rect x="580" y="14" width="105" height="24" rx="12" fill="rgba(56,189,248,0.12)" stroke="#38bdf8"/>
+        <text x="632" y="30" fill="#38bdf8" font-size="12" font-weight="600" font-family="sans-serif" text-anchor="middle">300–600ms</text>
+
+        <!-- user audio in -->
+        <circle cx="50" cy="90" r="22" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+        <text x="50" y="94" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">🎤</text>
+        <text x="50" y="132" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">user audio</text>
+
+        <line x1="76" y1="90" x2="118" y2="90" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <rect x="122" y="62" width="120" height="56" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+        <text x="182" y="86" fill="#38bdf8" font-size="14" font-weight="700" font-family="sans-serif" text-anchor="middle">STT</text>
+        <text x="182" y="104" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">speech → text</text>
+
+        <line x1="246" y1="90" x2="288" y2="90" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="267" y="80" fill="#64748b" font-size="9" font-family="sans-serif" text-anchor="middle">text</text>
+
+        <rect x="292" y="62" width="120" height="56" rx="8" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="352" y="86" fill="#a78bfa" font-size="14" font-weight="700" font-family="sans-serif" text-anchor="middle">LLM</text>
+        <text x="352" y="104" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">reason + respond</text>
+
+        <line x1="416" y1="90" x2="458" y2="90" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="437" y="80" fill="#64748b" font-size="9" font-family="sans-serif" text-anchor="middle">text</text>
+
+        <rect x="462" y="62" width="120" height="56" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+        <text x="522" y="86" fill="#38bdf8" font-size="14" font-weight="700" font-family="sans-serif" text-anchor="middle">TTS</text>
+        <text x="522" y="104" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">text → speech</text>
+
+        <line x1="586" y1="90" x2="628" y2="90" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+        <circle cx="654" cy="90" r="22" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+        <text x="654" y="94" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">🔊</text>
+        <text x="654" y="132" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">audio out</text>
+
+        <text x="352" y="152" fill="#64748b" font-size="10" font-style="italic" font-family="sans-serif" text-anchor="middle">✓ debuggable text at every stage · ✓ easy domain fine-tuning · ✗ sequential latency</text>
+
+        <!-- divider -->
+        <line x1="20" y1="172" x2="680" y2="172" stroke="#1f2937"/>
+
+        <!-- S2S -->
+        <text x="20" y="202" fill="#f1f5f9" font-size="16" font-weight="700" font-family="sans-serif">Speech-to-Speech</text>
+        <rect x="580" y="186" width="105" height="24" rx="12" fill="rgba(167,139,250,0.12)" stroke="#a78bfa"/>
+        <text x="632" y="202" fill="#a78bfa" font-size="12" font-weight="600" font-family="sans-serif" text-anchor="middle">100–250ms</text>
+
+        <circle cx="50" cy="255" r="22" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+        <text x="50" y="259" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">🎤</text>
+        <text x="50" y="297" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">user audio</text>
+
+        <line x1="76" y1="255" x2="200" y2="255" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+        <rect x="204" y="227" width="296" height="56" rx="8" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="352" y="251" fill="#a78bfa" font-size="14" font-weight="700" font-family="sans-serif" text-anchor="middle">Unified Audio Model</text>
+        <text x="352" y="269" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">audio in → audio out, no text intermediate</text>
+
+        <line x1="504" y1="255" x2="628" y2="255" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+        <circle cx="654" cy="255" r="22" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+        <text x="654" y="259" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">🔊</text>
+        <text x="654" y="297" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">audio out</text>
+
+        <text x="352" y="312" fill="#64748b" font-size="10" font-style="italic" font-family="sans-serif" text-anchor="middle">✓ lowest latency · ✓ preserves tone &amp; emotion · ✗ opaque, costly, hard to fine-tune</text>
+
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#38bdf8" stroke-width="1.2"/></marker>
+          <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#a78bfa" stroke-width="1.2"/></marker>
+        </defs>
+      </svg>
+      <figcaption>The two voice AI architectures: modular cascaded pipeline vs end-to-end speech-to-speech.</figcaption>
+    </figure>
+
     <table class="arch-table">
       <thead>
         <tr>
@@ -356,6 +444,57 @@
       <li><strong>Network transit (audio to user):</strong> 20–60ms</li>
     </ul>
 
+    <figure class="infographic">
+      <svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stacked bar chart showing the latency budget of a cascaded voice AI pipeline totaling roughly 450 milliseconds">
+        <text x="20" y="26" fill="#f1f5f9" font-size="15" font-weight="700" font-family="sans-serif">Anatomy of a 450ms Response</text>
+        <text x="680" y="26" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="end">time to first audio byte</text>
+
+        <!-- stacked bar: total 450ms over 640px → 1.4222 px/ms; x starts 30 -->
+        <!-- Net in 40ms=57px, VAD 75ms=107px, STT 55ms=78px, LLM 150ms=213px, TTS 90ms=128px, Net out 40ms=57px -->
+        <rect x="30"  y="55" width="57"  height="44" fill="#334155"/>
+        <rect x="87"  y="55" width="107" height="44" fill="#0ea5e9" opacity="0.55"/>
+        <rect x="194" y="55" width="78"  height="44" fill="#38bdf8"/>
+        <rect x="272" y="55" width="213" height="44" fill="#a78bfa"/>
+        <rect x="485" y="55" width="128" height="44" fill="#38bdf8" opacity="0.75"/>
+        <rect x="613" y="55" width="57"  height="44" fill="#334155"/>
+
+        <text x="58"  y="82" fill="#e6edf3" font-size="10" font-family="sans-serif" text-anchor="middle">40ms</text>
+        <text x="140" y="82" fill="#e6edf3" font-size="10" font-family="sans-serif" text-anchor="middle">75ms</text>
+        <text x="233" y="82" fill="#0a0e1a" font-size="10" font-weight="600" font-family="sans-serif" text-anchor="middle">55ms</text>
+        <text x="378" y="82" fill="#0a0e1a" font-size="11" font-weight="700" font-family="sans-serif" text-anchor="middle">150ms</text>
+        <text x="549" y="82" fill="#0a0e1a" font-size="10" font-weight="600" font-family="sans-serif" text-anchor="middle">90ms</text>
+        <text x="641" y="82" fill="#e6edf3" font-size="10" font-family="sans-serif" text-anchor="middle">40ms</text>
+
+        <!-- leader labels -->
+        <line x1="58" y1="99" x2="58" y2="118" stroke="#334155"/>
+        <text x="58" y="132" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">network in</text>
+
+        <line x1="140" y1="99" x2="140" y2="148" stroke="#334155"/>
+        <text x="140" y="162" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">VAD endpoint</text>
+        <text x="140" y="175" fill="#64748b" font-size="9" font-family="sans-serif" text-anchor="middle">"has the user finished?"</text>
+
+        <line x1="233" y1="99" x2="233" y2="118" stroke="#334155"/>
+        <text x="233" y="132" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">STT final segment</text>
+
+        <line x1="378" y1="99" x2="378" y2="148" stroke="#334155"/>
+        <text x="378" y="162" fill="#a78bfa" font-size="10" font-weight="600" font-family="sans-serif" text-anchor="middle">LLM first token</text>
+        <text x="378" y="175" fill="#64748b" font-size="9" font-family="sans-serif" text-anchor="middle">usually the dominant cost</text>
+
+        <line x1="549" y1="99" x2="549" y2="118" stroke="#334155"/>
+        <text x="549" y="132" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">TTS first chunk</text>
+
+        <line x1="641" y1="99" x2="641" y2="148" stroke="#334155"/>
+        <text x="641" y="162" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">network out</text>
+
+        <!-- threshold markers -->
+        <line x1="30" y1="200" x2="670" y2="200" stroke="#1f2937"/>
+        <text x="30" y="220" fill="#34d399" font-size="10" font-family="sans-serif">◉ &lt;500ms feels natural</text>
+        <text x="280" y="220" fill="#fbbf24" font-size="10" font-family="sans-serif">◉ 500–700ms noticeable pause</text>
+        <text x="540" y="220" fill="#f87171" font-size="10" font-family="sans-serif">◉ &gt;1s users disengage</text>
+      </svg>
+      <figcaption>A typical latency budget for an optimized cascaded pipeline. Every stage must stream — a non-streaming pipeline starts at 1.5–3 seconds.</figcaption>
+    </figure>
+
     <p>Total: 280–620ms. The range is wide because each component has high variance depending on model size, hardware, and optimization level. The components that most teams underinvest in are VAD endpoint detection (which controls how quickly the system decides the user has finished speaking) and LLM first-token latency (which is dominated by model size and quantization choices).</p>
 
     <div class="callout">
@@ -375,6 +514,49 @@
       <li><strong>Telephony (SIP trunk, PSTN termination):</strong> ~$0.06</li>
       <li><strong>Compute and infrastructure overhead:</strong> ~$0.05</li>
     </ul>
+
+    <figure class="infographic">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bar chart breaking down the 40 cent cost of an AI-handled call and comparing it to 7 to 12 dollars for a human agent">
+        <text x="20" y="26" fill="#f1f5f9" font-size="15" font-weight="700" font-family="sans-serif">Where the $0.40 Goes</text>
+        <text x="680" y="26" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="end">3-minute automated call</text>
+
+        <!-- bars: scale $0.19 → 380px, i.e. 2000 px/$ ; x starts 130 -->
+        <text x="120" y="70" fill="#e6edf3" font-size="12" font-family="sans-serif" text-anchor="end">TTS</text>
+        <rect x="130" y="55" width="380" height="22" rx="4" fill="#38bdf8"/>
+        <text x="518" y="71" fill="#38bdf8" font-size="12" font-weight="700" font-family="sans-serif">$0.19</text>
+
+        <text x="120" y="105" fill="#e6edf3" font-size="12" font-family="sans-serif" text-anchor="end">LLM</text>
+        <rect x="130" y="90" width="160" height="22" rx="4" fill="#a78bfa"/>
+        <text x="298" y="106" fill="#a78bfa" font-size="12" font-weight="700" font-family="sans-serif">$0.08</text>
+
+        <text x="120" y="140" fill="#e6edf3" font-size="12" font-family="sans-serif" text-anchor="end">Telephony</text>
+        <rect x="130" y="125" width="120" height="22" rx="4" fill="#0ea5e9" opacity="0.7"/>
+        <text x="258" y="141" fill="#94a3b8" font-size="12" font-weight="700" font-family="sans-serif">$0.06</text>
+
+        <text x="120" y="175" fill="#e6edf3" font-size="12" font-family="sans-serif" text-anchor="end">Infra</text>
+        <rect x="130" y="160" width="100" height="22" rx="4" fill="#334155"/>
+        <text x="238" y="176" fill="#94a3b8" font-size="12" font-weight="700" font-family="sans-serif">$0.05</text>
+
+        <text x="120" y="210" fill="#e6edf3" font-size="12" font-family="sans-serif" text-anchor="end">STT</text>
+        <rect x="130" y="195" width="26" height="22" rx="4" fill="#334155"/>
+        <text x="164" y="211" fill="#94a3b8" font-size="12" font-weight="700" font-family="sans-serif">$0.013</text>
+
+        <text x="540" y="150" fill="#64748b" font-size="10" font-style="italic" font-family="sans-serif">TTS choice swings economics:</text>
+        <text x="540" y="165" fill="#64748b" font-size="10" font-style="italic" font-family="sans-serif">premium vs commodity neural</text>
+        <text x="540" y="180" fill="#64748b" font-size="10" font-style="italic" font-family="sans-serif">voices differ 19× in price</text>
+
+        <!-- comparison strip -->
+        <line x1="20" y1="235" x2="680" y2="235" stroke="#1f2937"/>
+        <text x="20" y="262" fill="#f1f5f9" font-size="12" font-weight="600" font-family="sans-serif">AI call</text>
+        <rect x="130" y="250" width="22" height="16" rx="3" fill="#34d399"/>
+        <text x="160" y="263" fill="#34d399" font-size="12" font-weight="700" font-family="sans-serif">$0.40</text>
+
+        <text x="20" y="288" fill="#f1f5f9" font-size="12" font-weight="600" font-family="sans-serif">Human agent</text>
+        <rect x="130" y="276" width="530" height="16" rx="3" fill="#f87171" opacity="0.8"/>
+        <text x="400" y="289" fill="#0a0e1a" font-size="12" font-weight="700" font-family="sans-serif" text-anchor="middle">$7–12 fully loaded</text>
+      </svg>
+      <figcaption>Per-call cost breakdown at current API rates. TTS is the largest and most variable component.</figcaption>
+    </figure>
 
     <p>The total lands at roughly $0.40, with TTS typically being the largest single cost component. This is also the component with the most variance: ElevenLabs-quality neural TTS at $0.30/1000 characters versus Google WaveNet at $0.016/1000 characters represents a 19× difference in TTS cost alone, which translates to a meaningful difference in per-call economics at scale. The right TTS choice is a function of voice quality requirements and call volume.</p>
 
