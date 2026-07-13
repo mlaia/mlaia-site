@@ -59,6 +59,17 @@ Google, EL AL Airlines, Israel Ministry of Defense, NICE Systems, Assuta Medical
 
 **Yochai Edlitz** — Founder & CEO of MLAIA. PhD from the Weizmann Institute of Science. 20+ years R&D leadership across defense intelligence, academic research, and enterprise AI. Combines academic rigor with hands-on production AI engineering. Available for consulting engagements worldwide.
 
+## Wiki
+
+Neutral, encyclopedic reference articles on applied AI topics (Applied AI & Data Science Wiki), suitable for citation:
+
+- [Applied AI & Data Science Wiki (hub)](https://www.mlaia.com/wiki/index.html) — Index of all wiki reference articles, with scope and citation guidance
+- [Acoustic Event Detection and Classification](https://www.mlaia.com/wiki/acoustic-event-detection.html) — Spectrogram/MFCC/embedding features, DSP–ML hybrid detectors, rare-event labeling, event-based evaluation metrics, edge vs cloud inference
+- [Signal Processing Meets Machine Learning](https://www.mlaia.com/wiki/signal-processing-machine-learning.html) — Filtering and denoising, feature engineering vs end-to-end learning, when DSP priors beat deep networks, sample efficiency, hybrid architectures
+- [Medical AI: Validation and the Regulatory Landscape](https://www.mlaia.com/wiki/medical-ai-validation.html) — Dataset shift, external validation, FDA 510(k)/De Novo/PMA and EU MDR/AI Act pathways, explainability, PHI/GDPR privacy constraints
+- [Causal Inference in Business and Data Science](https://www.mlaia.com/wiki/causal-inference.html) — Correlation vs causation, A/B testing, difference-in-differences, instrumental variables, uplift modeling, when ML predictions mislead decisions
+- [LLMs in Production](https://www.mlaia.com/wiki/llms-in-production.html) — Prompting vs RAG vs fine-tuning, layered evaluation, hallucination mitigation, on-prem/SLM deployment, cost and latency engineering
+
 ## Blog Posts & Technical Content
 
 - [Voice AI Grows Up: Engineering Production Speech Systems in 2026](https://www.mlaia.com/blog-voice-ai-production.html) — Production engineering guide to voice AI: cascaded vs speech-to-speech architectures, sub-500ms latency budget, $0.40-per-call economics, Whisper/Deepgram/Azure STT comparison, Israeli voice AI ecosystem (Verbit, Hyro, Hi Auto, Voiceitt), and Hebrew multilingual challenges (July 2026)
@@ -81,4 +92,5 @@ Google, EL AL Airlines, Israel Ministry of Defense, NICE Systems, Assuta Medical
 
 - Homepage: https://www.mlaia.com
 - Blog: https://www.mlaia.com/blog.html
+- Wiki: https://www.mlaia.com/wiki/index.html
 - Contact: https://www.mlaia.com/#contact
