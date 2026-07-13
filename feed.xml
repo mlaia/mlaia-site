@@ -11,13 +11,23 @@
     <language>en</language>
     <managingEditor>yochai@mlaia.com (Dr. Yochai Edlitz)</managingEditor>
     <webMaster>yochai@mlaia.com (Dr. Yochai Edlitz)</webMaster>
-    <lastBuildDate>Thu, 27 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.mlaia.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://www.mlaia.com/assets/og-image.png</url>
       <title>MLAIA Blog</title>
       <link>https://www.mlaia.com/blog.html</link>
     </image>
+
+    <item>
+      <title>Forecasting Spare-Parts Demand: Why Min/Max Rules Fail on Intermittent, Lumpy Movers</title>
+      <link>https://www.mlaia.com/blog-demand-forecasting.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-demand-forecasting.html</guid>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Demand Forecasting &amp; Inventory</category>
+      <description><![CDATA[Spreadsheets and ERP min/max rules break down on intermittent, lumpy spare-parts demand. A practical look at the statistical methods (Croston's method, SBA, TSB, ADI/CV² classification, demand bootstrapping) and machine-learning techniques that produce reliable reorder points, safety stock, and projected stockout dates — and free capital frozen in dead stock. Built into NextDemand, MLAIA's spare-parts demand-forecasting product.]]></description>
+    </item>
 
     <item>
       <title>Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?</title>
