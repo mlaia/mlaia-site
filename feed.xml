@@ -11,7 +11,7 @@
     <language>en</language>
     <managingEditor>yochai@mlaia.com (Dr. Yochai Edlitz)</managingEditor>
     <webMaster>yochai@mlaia.com (Dr. Yochai Edlitz)</webMaster>
-    <lastBuildDate>Mon, 13 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.mlaia.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://www.mlaia.com/assets/og-image.png</url>
@@ -27,6 +27,96 @@
       <dc:creator>Dr. Yochai Edlitz</dc:creator>
       <category>Demand Forecasting &amp; Inventory</category>
       <description><![CDATA[Spreadsheets and ERP min/max rules break down on intermittent, lumpy spare-parts demand. A practical look at the statistical methods (Croston's method, SBA, TSB, ADI/CV² classification, demand bootstrapping) and machine-learning techniques that produce reliable reorder points, safety stock, and projected stockout dates — and free capital frozen in dead stock. Built into NextDemand, MLAIA's spare-parts demand-forecasting product.]]></description>
+    </item>
+
+    <item>
+      <title>Voice AI Grows Up: Engineering Production Speech Systems in 2026</title>
+      <link>https://www.mlaia.com/blog-voice-ai-production.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-voice-ai-production.html</guid>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Signal &amp; Audio AI</category>
+      <description><![CDATA[A production engineering guide to voice AI in 2026: cascaded vs speech-to-speech architectures, the sub-500ms latency budget, $0.40 per-call economics, open-source vs cloud STT, and the Israeli voice AI ecosystem.]]></description>
+    </item>
+
+    <item>
+      <title>Your MLOps Vendor Just Got Acquired — Now What?</title>
+      <link>https://www.mlaia.com/blog-mlops-consolidation.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-mlops-consolidation.html</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>MLOps &amp; AI Infrastructure</category>
+      <description><![CDATA[The MLOps vendor consolidation wave is reshaping the market. Iguazio, Dataloop, Neptune.ai, Seldon — what happens to your ML platform when your vendor gets acquired or shuts down, and what to do next.]]></description>
+    </item>
+
+    <item>
+      <title>Audio AI in Production: From Speech Models to Sound Intelligence</title>
+      <link>https://www.mlaia.com/blog-audio-ai-production.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-audio-ai-production.html</guid>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Signal &amp; Audio AI</category>
+      <description><![CDATA[Speech-to-text, voice synthesis, sound event detection, music generation, and real-time edge deployment — what works in production audio AI, what doesn't, and what it costs in 2026.]]></description>
+    </item>
+
+    <item>
+      <title>The Agentic AI Production Gap: Why 89% of Enterprise Pilots Never Ship</title>
+      <link>https://www.mlaia.com/agentic-ai-production-gap.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/agentic-ai-production-gap.html</guid>
+      <pubDate>Sun, 14 Jun 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>AI Strategy &amp; Business</category>
+      <description><![CDATA[89% of enterprise agentic AI pilots never reach production. What's really causing the gap — and the five engineering disciplines that separate the 11% that ship.]]></description>
+    </item>
+
+    <item>
+      <title>The Quiet Revolution: Why Israeli Enterprises Are Bringing AI On-Prem with Small Language Models</title>
+      <link>https://www.mlaia.com/blog-slm-onprem-israel.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-slm-onprem-israel.html</guid>
+      <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>AI Strategy &amp; Infrastructure</category>
+      <description><![CDATA[Inside the 2026 shift from cloud LLMs to on-prem Small Language Models — the economics, the privacy gains, and the production playbook for Israeli enterprises.]]></description>
+    </item>
+
+    <item>
+      <title>AWS Bedrock, Vertex AI, and Azure AI: How Cloud Platforms Are Accelerating ML R&amp;D</title>
+      <link>https://www.mlaia.com/blog-cloud-ml-platforms-rapid-development.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-cloud-ml-platforms-rapid-development.html</guid>
+      <pubDate>Sun, 24 May 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Cloud &amp; ML Infrastructure</category>
+      <description><![CDATA[How the three major cloud ML platforms are compressing research-to-production timelines — and what enterprise teams should know when choosing between them.]]></description>
+    </item>
+
+    <item>
+      <title>From Pilot to Production: Why 88% of AI Agent Projects Fail — and How to Beat the Odds</title>
+      <link>https://www.mlaia.com/blog-ai-agents-pilot-to-production.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-ai-agents-pilot-to-production.html</guid>
+      <pubDate>Sun, 17 May 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Enterprise AI</category>
+      <description><![CDATA[Nine out of ten enterprise AI agent pilots stall before deployment. The five principles that separate production-grade systems from expensive experiments.]]></description>
+    </item>
+
+    <item>
+      <title>AI Agents in Production: From Prototype to Enterprise Deployment</title>
+      <link>https://www.mlaia.com/blog-agents-production.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-agents-production.html</guid>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>LLMs &amp; Agents</category>
+      <description><![CDATA[What separates a polished demo from a reliable production agent — architecture patterns, failure modes, evaluation frameworks, and guardrails that matter.]]></description>
+    </item>
+
+    <item>
+      <title>The State of AI in Israeli Industry: Trends and Opportunities in 2026</title>
+      <link>https://www.mlaia.com/blog-israel-ai-2026.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-israel-ai-2026.html</guid>
+      <pubDate>Sat, 11 Apr 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>AI Strategy &amp; Industry</category>
+      <description><![CDATA[A research-style overview of AI adoption across Israel's key sectors — healthcare, defense, audio tech, ad tech, and finance — and what companies need from specialized AI consulting partners.]]></description>
     </item>
 
     <item>
