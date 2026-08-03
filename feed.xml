@@ -20,6 +20,16 @@
     </image>
 
     <item>
+      <title>Measuring Ads Without the Cookie: MMM, Incrementality &amp; Causal Marketing Science in 2026</title>
+      <link>https://www.mlaia.com/blog-adtech-measurement-2026.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-adtech-measurement-2026.html</guid>
+      <pubDate>Mon, 27 Jul 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Ad Tech &amp; Marketing Science</category>
+      <description><![CDATA[Signal loss has erased 30–40% of trackable conversions. Inside the 2026 measurement stack: Bayesian Marketing Mix Modeling, incrementality testing, and the triangulation framework — a data science guide from MLAIA.]]></description>
+    </item>
+
+    <item>
       <title>Forecasting Spare-Parts Demand: Why Min/Max Rules Fail on Intermittent, Lumpy Movers</title>
       <link>https://www.mlaia.com/blog-demand-forecasting.html</link>
       <guid isPermaLink="true">https://www.mlaia.com/blog-demand-forecasting.html</guid>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google Analytics 4 — fires only after analytics consent -->
+<script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinical AI That Ships: From FDA Clearance to the Bedside — MLAIA</title>
+
+<!-- SEO -->
+<meta name="description" content="How production clinical AI actually gets from FDA clearance to bedside deployment: shadow mode validation, drift detection, bias auditing, and the $6.5B Israeli digital health market — a practitioner's guide.">
+<meta name="keywords" content="clinical AI production, FDA AI medical device, CE marking AI, clinical AI deployment, shadow mode clinical AI, AI drift detection healthcare, Israeli digital health, medical AI Israel, MLAIA">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.mlaia.com/blog-clinical-ai-production.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Clinical AI That Ships: From FDA Clearance to the Bedside">
+<meta property="og:description" content="1,451 FDA-authorized AI devices, 75% health-system adoption — and most clinical AI still fails to reach the bedside. Here is why, and how production teams close the gap.">
+<meta property="og:url" content="https://www.mlaia.com/blog-clinical-ai-production.html">
+<meta property="og:site_name" content="MLAIA">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Clinical AI That Ships: From FDA Clearance to the Bedside">
+<meta name="twitter:description" content="Shadow mode deployment, drift detection, bias auditing — the production engineering disciplines that turn FDA-cleared clinical AI into working bedside tools.">
+
+<!-- Article JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Clinical AI That Ships: From FDA Clearance to the Bedside",
+  "description": "How production clinical AI actually gets from FDA clearance to bedside deployment: shadow mode validation, drift detection, bias auditing, and the $6.5B Israeli digital health market — a practitioner's guide.",
+  "image": "https://www.mlaia.com/assets/yochai-headshot.jpg",
+  "datePublished": "2026-07-31",
+  "dateModified": "2026-07-31",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Yochai Edlitz",
+    "url": "https://www.mlaia.com/about-us/",
+    "jobTitle": "Founder & CEO, MLAIA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MLAIA",
+    "url": "https://www.mlaia.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.mlaia.com/assets/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.mlaia.com/blog-clinical-ai-production.html"
+  },
+  "keywords": "clinical AI, FDA AI medical device, CE marking, shadow mode clinical AI, drift detection, bias auditing, Israeli digital health, medical AI production, MLAIA"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mlaia.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.mlaia.com/blog.html"},
+    {"@type": "ListItem", "position": 3, "name": "Clinical AI That Ships: From FDA Clearance to the Bedside", "item": "https://www.mlaia.com/blog-clinical-ai-production.html"}
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --panel: #111827;
+    --ink: #e6edf3;
+    --muted: #94a3b8;
+    --accent: #10b981;
+    --accent-2: #38bdf8;
+    --border: #1f2937;
+    --code-bg: #0f172a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.site {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  header.site a.brand { color: var(--ink); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+  header.site nav a { color: var(--muted); text-decoration: none; margin-left: 1.25rem; font-size: 0.95rem; }
+  header.site nav a:hover { color: var(--accent); }
+  main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .category {
+    display: inline-block;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: clamp(1.85rem, 4vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+    color: #f8fafc;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 2rem;
+  }
+  .back-link a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  article h2 {
+    margin-top: 2.75rem;
+    font-size: 1.45rem;
+    color: #f1f5f9;
+    border-left: 3px solid var(--accent);
+    padding-left: 0.75rem;
+  }
+  article h3 {
+    margin-top: 1.75rem;
+    font-size: 1.15rem;
+    color: #e2e8f0;
+  }
+  article p { margin: 1rem 0; }
+  article a { color: var(--accent); }
+  blockquote {
+    border-left: 4px solid var(--accent-2);
+    background: rgba(56, 189, 248, 0.06);
+    margin: 1.75rem 0;
+    padding: 1rem 1.25rem;
+    color: #e2e8f0;
+    font-style: italic;
+    border-radius: 4px;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .stat .num { font-size: 1.7rem; font-weight: 700; color: var(--accent); }
+  .stat .label { color: var(--muted); font-size: 0.85rem; }
+  .callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    margin: 1.75rem 0;
+  }
+  .callout strong { color: var(--accent); }
+  .arch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.88rem;
+  }
+  .arch-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .arch-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid rgba(31,41,55,0.6);
+    vertical-align: top;
+  }
+  .arch-table tr:last-child td { border-bottom: none; }
+  .arch-table .label-col { color: #f1f5f9; font-weight: 600; }
+  .arch-table .pro { color: #34d399; font-size: 0.82rem; }
+  .arch-table .con { color: #f87171; font-size: 0.82rem; }
+  code {
+    background: var(--code-bg);
+    color: var(--accent);
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+  }
+  ul, ol { padding-left: 1.25rem; }
+  ul li, ol li { margin: 0.4rem 0; }
+  figure.infographic {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  figure.infographic svg { width: 100%; height: auto; display: block; }
+  figure.infographic figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+  .cta {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .cta a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: var(--accent);
+    color: #0a0e1a;
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer.site {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="https://www.mlaia.com/index.html">MLAIA · Machine Learning &amp; AI Approach</a>
+  <nav>
+    <a href="https://www.mlaia.com/index.html#about">About</a>
+    <a href="https://www.mlaia.com/index.html#domains">Domains</a>
+    <a href="https://www.mlaia.com/blog.html">Blog</a>
+    <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+    <a href="https://www.mlaia.com/index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <span class="category">Medical AI &amp; Clinical Data Science</span>
+  <h1>Clinical AI That Ships: From FDA Clearance to the Bedside</h1>
+  <p class="meta">July 31, 2026 · 7 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
+  <p class="back-link"><a href="https://www.mlaia.com/blog.html">← Back to all posts</a></p>
+
+  <article>
+
+    <p>The FDA has authorized 1,451 AI and machine learning-based medical devices through the end of 2025 — a number that grew 40% year-over-year and now encompasses tools spanning radiology, pathology, cardiology, ophthalmology, and dermatology. Simultaneously, 75% of major health systems report at least one clinical AI tool in active deployment. On paper, clinical AI has arrived. In practice, a more sobering pattern holds: the majority of FDA-authorized clinical AI tools are either not deployed at scale, not used by the clinicians who nominally have access to them, or showing real-world performance that diverges substantially from the trial data that secured regulatory clearance.</p>
+
+    <p>This gap between cleared and clinically effective is the central challenge for medical AI teams in 2026. It is not primarily a modeling problem — the algorithms are often genuinely capable. It is a deployment, validation, and monitoring problem. This post is a practitioner's guide to closing it, with specific reference to Israel's $6.5 billion digital health market and the regulatory pathways that govern deployment in both the US and EU/Israeli contexts.</p>
+
+    <div class="stat-row">
+      <div class="stat"><div class="num">1,451</div><div class="label">FDA-authorized AI/ML medical devices through 2025</div></div>
+      <div class="stat"><div class="num">75%</div><div class="label">major health systems with at least one clinical AI deployment</div></div>
+      <div class="stat"><div class="num">$6.5B</div><div class="label">Israeli digital health market, 2026</div></div>
+      <div class="stat"><div class="num">40%</div><div class="label">year-over-year growth in FDA AI device authorizations</div></div>
+    </div>
+
+    <hr>
+
+    <h2>1. The Regulatory Landscape: FDA, CE Marking, and Israeli MOH</h2>
+
+    <p>Clinical AI deployment in Israel operates at the intersection of three regulatory frameworks, each with distinct requirements and timelines.</p>
+
+    <h3>FDA pathways for AI/ML medical devices</h3>
+
+    <p>The FDA regulates AI-based medical devices under the existing medical device framework, with most AI diagnostic tools cleared via <strong>510(k)</strong> (substantial equivalence to a predicate device) or authorized via <strong>De Novo</strong> classification for novel device types without a predicate. The more demanding <strong>PMA (Pre-Market Approval)</strong> pathway — requiring clinical trial data demonstrating safety and effectiveness — is reserved for high-risk Class III devices and is relatively rare in the AI space so far, though the FDA has signaled that more novel AI diagnostic tools may face this bar going forward.</p>
+
+    <p>The FDA's 2024 guidance on predetermined change control plans (PCCPs) is particularly important for teams building AI-powered clinical tools. A PCCP allows manufacturers to specify in advance the types of model modifications — retraining on new data, updating thresholds, adapting to new imaging equipment — that can be made post-clearance without a new 510(k) submission. Without a PCCP, any algorithmic change that affects device performance requires a new regulatory submission, which can take 9–18 months. Teams that fail to plan for post-market adaptation are building systems they cannot update without regulatory re-engagement.</p>
+
+    <h3>CE marking under EU MDR and the AI Act</h3>
+
+    <p>Israeli medical device manufacturers targeting the European market face a double regulatory burden. The EU Medical Device Regulation (MDR 2017/745) classifies most AI diagnostic tools as Class IIa or Class IIb devices, requiring conformity assessment by a Notified Body — a process that typically takes 18–36 months and requires clinical evidence demonstrating performance in the intended patient population. The EU AI Act, which came into full force in 2026, additionally classifies AI systems used in medical devices as "high-risk AI" under Annex III, imposing transparency, accountability, human oversight, and data governance requirements on top of the MDR CE marking process.</p>
+
+    <h3>Israeli Ministry of Health</h3>
+
+    <p>The Israeli Ministry of Health (MoH) applies an abbreviated pathway for medical devices already cleared by the FDA or carrying EU CE marking. However, Israeli hospitals deploying AI tools are increasingly required to demonstrate local clinical validation — performance on Israeli patient populations, which may differ from US or European trial cohorts on genetic, demographic, and comorbidity dimensions. The MoH's 2025 circular on AI in clinical practice explicitly requires that AI tools used in clinical decisions be validated on data representative of the Israeli population before routine deployment.</p>
+
+    <h2>2. Shadow Mode: The Missing Step Between Clearance and Deployment</h2>
+
+    <p>The most common failure mode in clinical AI deployment is skipping or rushing shadow mode. Shadow mode — also called silent deployment, parallel running, or prospective validation — is the period during which the AI system runs on live clinical data, generates predictions, but does not surface those predictions to clinicians. The clinical workflow continues as normal; the AI operates in parallel, logging its outputs against the eventual clinical outcome.</p>
+
+    <p>Shadow mode serves several functions that cannot be replicated in retrospective validation studies or simulated environments:</p>
+
+    <ul>
+      <li><strong>Distribution shift detection:</strong> The model encounters the actual distribution of cases arriving at your institution, which may differ from the training data in systematic ways — different imaging equipment, different patient demographics, different case mix driven by referral patterns</li>
+      <li><strong>Integration validation:</strong> The system runs against live EHR data feeds, DICOM image streams, and lab result pipelines — exposing data quality issues, timing problems, and API failures that are invisible in offline evaluation</li>
+      <li><strong>Workflow timing assessment:</strong> Shadow mode reveals whether the AI produces results at the point in the clinical workflow where they would be actionable — a chest X-ray AI that returns results three hours after the radiologist has already read the image is clinically useless regardless of its AUC</li>
+      <li><strong>Ground truth accumulation:</strong> The shadow period builds a local labeled dataset against which the model's real-world performance can be quantified before clinicians are asked to act on its outputs</li>
+    </ul>
+
+    <div class="callout">
+      <strong>How long should shadow mode run?</strong> The right answer depends on the prevalence of the condition being detected. For a high-prevalence condition (e.g., diabetic retinopathy screening), 4–8 weeks of shadow mode on a moderate-volume service may accumulate enough positive cases to assess sensitivity meaningfully. For a rare condition (e.g., incidental finding of aortic aneurysm on chest CT), shadow mode may need to run for 6–12 months to accumulate enough true-positive cases for statistically reliable performance assessment.
+    </div>
+
+    <h2>3. Production Monitoring: What to Measure After Go-Live</h2>
+
+    <p>Regulatory clearance establishes a performance baseline at a point in time on a specific dataset. Production monitoring is the mechanism by which you detect when real-world performance has diverged from that baseline — and respond before patient care is affected. The clinical AI teams that do this well treat monitoring as a clinical safety function, not an MLOps afterthought.</p>
+
+    <h3>Input drift detection</h3>
+
+    <p>Input drift occurs when the statistical properties of the data arriving at the model change relative to the training distribution. In clinical imaging, common causes include software updates to imaging equipment (which can subtly change pixel intensity distributions), changes in imaging protocols (slice thickness, contrast agent concentration), or shifts in patient population (new referral agreements, demographic changes in the catchment area).</p>
+
+    <p>Detection methods include population stability index (PSI) monitoring on input feature distributions, Maximum Mean Discrepancy (MMD) tests comparing recent batches to training distribution, and multivariate anomaly detection on latent representations. For imaging models, monitoring the distribution of key image statistics (mean Hounsfield unit, signal-to-noise ratio, artifact prevalence) provides an early warning system independent of the model internals.</p>
+
+    <h3>Outcome drift and performance degradation</h3>
+
+    <p>Performance monitoring requires outcome labels — which means a ground truth pipeline. For diagnostic AI, this typically means linking model predictions to eventual confirmed diagnoses (from pathology, follow-up imaging, or clinical adjudication). The lag between prediction and ground truth availability can range from days (for lab results) to months (for cancer outcomes requiring biopsy confirmation). This lag must be planned for in the monitoring architecture: you cannot wait for all ground truth to close before assessing performance.</p>
+
+    <p>Statistical process control charts — particularly CUSUM (Cumulative Sum) charts — are well-suited to clinical AI performance monitoring. A CUSUM chart accumulates deviations from the expected performance metric (sensitivity, specificity, PPV) over time and triggers an alert when the cumulative deviation exceeds a threshold. This is more sensitive to gradual drift than threshold-based alerting on rolling windows.</p>
+
+    <h3>Bias auditing: the often-skipped dimension</h3>
+
+    <p>Performance metrics aggregated across a patient population can mask systematic underperformance on subgroups. A skin lesion detection model that achieves 94% sensitivity overall may achieve only 78% sensitivity on darker skin tones — a disparity that trial data stratification requirements may have caught but that routine deployment monitoring frequently misses. Bias auditing — stratified performance analysis across demographic subgroups, imaging equipment types, and clinical subspecialties — should be a scheduled quarterly review function, not a one-time clearance exercise.</p>
+
+    <p>For Israeli deployments, relevant stratification dimensions include: Ashkenazi vs Sephardic vs Arab patient populations (which have different disease prevalence and genetic risk profiles), imaging centers vs hospital radiology departments (which have different equipment and protocol standardization), and Hebrew vs Arabic vs Russian EHR documentation (which affects NLP-based models extracting features from clinical notes).</p>
+
+    <figure class="infographic">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Clinical AI deployment lifecycle showing five stages from model development through continuous monitoring">
+        <text x="20" y="28" fill="#f1f5f9" font-size="15" font-weight="700" font-family="sans-serif">Clinical AI Deployment Lifecycle</text>
+
+        <!-- Stage boxes -->
+        <!-- 1 Development -->
+        <rect x="10" y="50" width="120" height="80" rx="8" fill="#0f172a" stroke="#334155"/>
+        <text x="70" y="78" fill="#94a3b8" font-size="10" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">DEVELOP</text>
+        <text x="70" y="96" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">Model training</text>
+        <text x="70" y="110" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">retrospective</text>
+        <text x="70" y="124" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">validation</text>
+
+        <line x1="134" y1="90" x2="148" y2="90" stroke="#334155" stroke-width="1.5" marker-end="url(#arrC)"/>
+
+        <!-- 2 Regulatory -->
+        <rect x="150" y="50" width="120" height="80" rx="8" fill="#0f172a" stroke="#334155"/>
+        <text x="210" y="78" fill="#94a3b8" font-size="10" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">REGULATE</text>
+        <text x="210" y="96" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">510(k) / De Novo</text>
+        <text x="210" y="110" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">CE marking</text>
+        <text x="210" y="124" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">MoH approval</text>
+
+        <line x1="274" y1="90" x2="288" y2="90" stroke="#334155" stroke-width="1.5" marker-end="url(#arrC)"/>
+
+        <!-- 3 Shadow mode -->
+        <rect x="290" y="50" width="120" height="80" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+        <text x="350" y="78" fill="#10b981" font-size="10" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">SHADOW MODE</text>
+        <text x="350" y="96" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">Parallel running</text>
+        <text x="350" y="110" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">local validation</text>
+        <text x="350" y="124" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">drift detection</text>
+
+        <line x1="414" y1="90" x2="428" y2="90" stroke="#334155" stroke-width="1.5" marker-end="url(#arrC)"/>
+
+        <!-- 4 Go live -->
+        <rect x="430" y="50" width="120" height="80" rx="8" fill="#0f172a" stroke="#334155"/>
+        <text x="490" y="78" fill="#94a3b8" font-size="10" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">GO LIVE</text>
+        <text x="490" y="96" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">Clinician-facing</text>
+        <text x="490" y="110" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">integration</text>
+        <text x="490" y="124" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">change management</text>
+
+        <line x1="554" y1="90" x2="568" y2="90" stroke="#334155" stroke-width="1.5" marker-end="url(#arrC)"/>
+
+        <!-- 5 Monitor -->
+        <rect x="570" y="50" width="120" height="80" rx="8" fill="#0f172a" stroke="#38bdf8"/>
+        <text x="630" y="78" fill="#38bdf8" font-size="10" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">MONITOR</text>
+        <text x="630" y="96" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">CUSUM drift</text>
+        <text x="630" y="110" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">bias auditing</text>
+        <text x="630" y="124" fill="#e2e8f0" font-size="10" font-family="sans-serif" text-anchor="middle">outcome tracking</text>
+
+        <!-- feedback loop -->
+        <path d="M630,134 Q630,200 350,200 Q70,200 70,134" fill="none" stroke="#334155" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arrC)"/>
+        <text x="350" y="192" fill="#64748b" font-size="10" font-family="sans-serif" text-anchor="middle">performance degradation triggers retraining or PCCP update</text>
+
+        <!-- Below: Key metrics row -->
+        <text x="20" y="228" fill="#94a3b8" font-size="11" font-weight="600" font-family="sans-serif">Key monitoring metrics:</text>
+        <text x="20" y="248" fill="#e2e8f0" font-size="10" font-family="sans-serif">AUC / sensitivity / specificity by subgroup</text>
+        <text x="240" y="248" fill="#e2e8f0" font-size="10" font-family="sans-serif">CUSUM alert thresholds</text>
+        <text x="420" y="248" fill="#e2e8f0" font-size="10" font-family="sans-serif">Input distribution PSI</text>
+        <text x="590" y="248" fill="#e2e8f0" font-size="10" font-family="sans-serif">Clinician override rate</text>
+
+        <defs>
+          <marker id="arrC" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#334155" stroke-width="1.2"/></marker>
+        </defs>
+      </svg>
+      <figcaption>The clinical AI deployment lifecycle. Shadow mode is the most commonly skipped step — and the one most likely to prevent a post-go-live failure.</figcaption>
+    </figure>
+
+    <h2>4. The Israeli Digital Health Context</h2>
+
+    <p>Israel's $6.5 billion digital health market is disproportionately large for the country's population size, driven by several structural advantages: near-universal EHR adoption across the four major HMOs (Clalit, Maccabi, Meuhedet, Leumit), decades of longitudinal patient data stored in structured formats, an unusually high density of medical device startups, and a clinical culture that has historically been receptive to technology adoption.</p>
+
+    <p>Clalit Health Services alone covers approximately 4.7 million members and holds one of the world's largest linked clinical-genetic databases. Its AI unit has been active since 2017 and has deployed models for diabetic complication prediction, readmission risk, and early sepsis detection. The Sheba Medical Center's ARC Innovation center has become a leading site for clinical AI validation, providing regulated-industry startups with access to real patient populations for shadow mode and prospective validation studies.</p>
+
+    <p>For AI companies targeting Israel's hospital system, the practical deployment path typically runs through one of the major HMO digital health units or through Sheba ARC — both of which have established frameworks for evaluating and deploying AI tools, including structured shadow mode protocols and ongoing performance monitoring requirements that align with FDA PCCP expectations.</p>
+
+    <table class="arch-table">
+      <thead>
+        <tr>
+          <th>Deployment Consideration</th>
+          <th>What It Requires in Practice</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-col">FDA 510(k) / De Novo clearance</td>
+          <td>Performance data on a representative US cohort; predicate identification (510k) or novel device justification (De Novo); typically 6–18 months</td>
+        </tr>
+        <tr>
+          <td class="label-col">EU CE marking (MDR + AI Act)</td>
+          <td>Notified Body conformity assessment; clinical evidence on EU patient population; technical documentation on data governance and human oversight; 18–36 months</td>
+        </tr>
+        <tr>
+          <td class="label-col">Israeli MoH registration</td>
+          <td>Abbreviated pathway for FDA/CE-cleared devices; local clinical validation on Israeli cohort increasingly required; 3–12 months post-clearance</td>
+        </tr>
+        <tr>
+          <td class="label-col">Shadow mode (institutional)</td>
+          <td>Not regulated, but increasingly required by hospital procurement; 4–12 weeks minimum; must include bias stratification</td>
+        </tr>
+        <tr>
+          <td class="label-col">Post-market surveillance</td>
+          <td>Required under FDA QSR and EU MDR; includes outcome tracking, complaint handling, and periodic performance summary reports</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>5. Change Management: The Human Problem That Sinks Good Algorithms</h2>
+
+    <p>Clinical AI adoption research consistently identifies clinician workflow integration — not algorithmic performance — as the primary predictor of whether a deployed tool is actually used. A chest X-ray AI that displays its output in a separate portal that clinicians must navigate to, rather than embedded in the PACS viewer they already use for image reading, will be used by fewer than 10% of its target user base. A sepsis alert that fires too frequently, producing high alert fatigue, will be overridden reflexively and lose clinical effectiveness even if its underlying sensitivity is excellent.</p>
+
+    <p>Effective clinical AI deployment requires explicit investment in three non-technical areas:</p>
+
+    <ol>
+      <li><strong>Workflow integration:</strong> The AI output must appear at the point in the clinical workflow where it is actionable — in the EHR view the clinician is already looking at, at the time when the decision is being made, without requiring a separate login or navigation step</li>
+      <li><strong>Calibrated communication:</strong> Clinicians need to understand not just what the AI recommends, but how confident the recommendation is, what factors drove it, and when to be skeptical. Unexplained high-confidence alerts create alarm; unexplained low-confidence hedges create dismissiveness</li>
+      <li><strong>Override tracking:</strong> Systematically logging when clinicians override AI recommendations — and following up on those cases — creates a continuous feedback loop for model improvement and identifies systematic failure modes that aggregate metrics miss</li>
+    </ol>
+
+    <hr>
+
+    <p>Clinical AI that ships — that reaches patients, improves outcomes, and sustains clinical adoption — is a systems engineering problem as much as a machine learning problem. The algorithm is necessary but not sufficient. Shadow mode validation, production monitoring, bias auditing, and workflow integration are the disciplines that determine whether FDA clearance translates into clinical impact. For Israel's digital health ecosystem, which has the infrastructure and clinical data richness to be a world leader in clinical AI deployment, mastering these disciplines is the difference between being the country that develops clinical AI and the country that deploys it.</p>
+
+    <div class="cta">
+      <strong>Building or deploying clinical AI in Israel?</strong>
+      <br>
+      <a href="https://www.mlaia.com/index.html#contact">Talk to MLAIA about clinical AI validation and production monitoring →</a>
+    </div>
+
+  </article>
+</main>
+
+<footer class="site">
+  <p>© 2026 MLAIA — Machine Learning &amp; AI Approach · <a href="https://www.mlaia.com/blog.html">Blog</a> · <a href="https://www.mlaia.com/index.html#contact">Contact</a></p>
+</footer>
+
+</body>
+</html>
