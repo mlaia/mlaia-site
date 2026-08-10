@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google Analytics 4 — fires only after analytics consent -->
+<script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music AI in 2026: Generation, Separation, and the Copyright Minefield — MLAIA</title>
+
+<!-- SEO -->
+<meta name="description" content="Suno, Udio, Stable Audio, MusicGen, Demucs, RIAA lawsuits — a production engineer's guide to music AI in 2026: generation architectures, source separation, transcription, and the copyright landscape.">
+<meta name="keywords" content="music AI 2026, Suno AI, Udio music generation, Stable Audio Stability AI, MusicLM Google, MusicGen Meta, MAGNeT, Demucs source separation, music transcription AI, RIAA lawsuit AI music, AI music copyright, text-to-music, music information retrieval, audio watermarking, music AI production, Israeli audio AI, MLAIA">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.mlaia.com/blog-music-ai.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Music AI in 2026: Generation, Separation, and the Copyright Minefield">
+<meta property="og:description" content="Suno and Udio can write a credible song in seconds. Demucs can isolate any stem from any track. And the music industry's lawyers are very, very busy. A practitioner's guide to what works, what ships, and what is still too legally ambiguous to touch.">
+<meta property="og:url" content="https://www.mlaia.com/blog-music-ai.html">
+<meta property="og:site_name" content="MLAIA">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Music AI in 2026: Generation, Separation, and the Copyright Minefield">
+<meta name="twitter:description" content="Suno, Udio, Stable Audio, MusicGen, Demucs, RIAA lawsuits — a production engineer's guide to what music AI can actually do and where the legal lines are being drawn in 2026.">
+
+<!-- Article JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Music AI in 2026: Generation, Separation, and the Copyright Minefield",
+  "description": "Suno, Udio, Stable Audio, MusicLM, MusicGen, MAGNeT, Demucs, RIAA lawsuits — a production engineer's guide to music AI in 2026: generation architectures, source separation, automatic transcription, and the copyright landscape.",
+  "image": "https://www.mlaia.com/assets/yochai-headshot.jpg",
+  "datePublished": "2026-08-10",
+  "dateModified": "2026-08-10",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Yochai Edlitz",
+    "url": "https://www.mlaia.com/about-us/",
+    "jobTitle": "Founder & CEO, MLAIA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MLAIA",
+    "url": "https://www.mlaia.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.mlaia.com/assets/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.mlaia.com/blog-music-ai.html"
+  },
+  "keywords": "music AI, Suno, Udio, Stable Audio, MusicLM, MusicGen, MAGNeT, Demucs, source separation, music transcription, RIAA lawsuit, AI copyright, text-to-music, music information retrieval, audio watermarking, MLAIA"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mlaia.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.mlaia.com/blog.html"},
+    {"@type": "ListItem", "position": 3, "name": "Music AI in 2026: Generation, Separation, and the Copyright Minefield", "item": "https://www.mlaia.com/blog-music-ai.html"}
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --panel: #111827;
+    --ink: #e6edf3;
+    --muted: #94a3b8;
+    --accent: #0057ff;
+    --accent-2: #00b4d8;
+    --border: #1f2937;
+    --code-bg: #0f172a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.site {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  header.site a.brand { color: var(--ink); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+  header.site nav a { color: var(--muted); text-decoration: none; margin-left: 1.25rem; font-size: 0.95rem; }
+  header.site nav a:hover { color: var(--accent); }
+  main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .category {
+    display: inline-block;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: clamp(1.85rem, 4vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+    color: #f8fafc;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 2rem;
+  }
+  .back-link a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  article h2 {
+    margin-top: 2.75rem;
+    font-size: 1.45rem;
+    color: #f1f5f9;
+    border-left: 3px solid var(--accent);
+    padding-left: 0.75rem;
+  }
+  article h3 {
+    margin-top: 1.75rem;
+    font-size: 1.15rem;
+    color: #e2e8f0;
+  }
+  article p { margin: 1rem 0; }
+  article a { color: var(--accent); }
+  blockquote {
+    border-left: 4px solid var(--accent-2);
+    background: rgba(0, 180, 216, 0.06);
+    margin: 1.75rem 0;
+    padding: 1rem 1.25rem;
+    color: #e2e8f0;
+    font-style: italic;
+    border-radius: 4px;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .stat .num { font-size: 1.7rem; font-weight: 700; color: var(--accent); }
+  .stat .label { color: var(--muted); font-size: 0.85rem; }
+  .callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    margin: 1.75rem 0;
+  }
+  .callout strong { color: var(--accent); }
+  .callout-teal {
+    background: rgba(0, 180, 216, 0.06);
+    border: 1px solid rgba(0, 180, 216, 0.25);
+    border-left: 4px solid var(--accent-2);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    margin: 1.75rem 0;
+  }
+  .callout-teal strong { color: var(--accent-2); }
+  .callout-warn {
+    background: rgba(251, 191, 36, 0.06);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    border-left: 4px solid #fbbf24;
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    margin: 1.75rem 0;
+  }
+  .callout-warn strong { color: #fbbf24; }
+  .arch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.88rem;
+    overflow-x: auto;
+    display: block;
+  }
+  .arch-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .arch-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid rgba(31,41,55,0.6);
+    vertical-align: top;
+  }
+  .arch-table tr:last-child td { border-bottom: none; }
+  .arch-table .label-col { color: #f1f5f9; font-weight: 600; white-space: nowrap; }
+  .arch-table .pro { color: #34d399; font-size: 0.82rem; }
+  .arch-table .con { color: #f87171; font-size: 0.82rem; }
+  .arch-table .neu { color: #fbbf24; font-size: 0.82rem; }
+  code {
+    background: var(--code-bg);
+    color: #60a5fa;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+  }
+  ul, ol { padding-left: 1.25rem; }
+  ul li, ol li { margin: 0.4rem 0; }
+  figure.infographic {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  figure.infographic svg { width: 100%; height: auto; display: block; }
+  figure.infographic figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+  .cta {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .cta a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: var(--accent);
+    color: #f8fafc;
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer.site {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="https://www.mlaia.com/index.html">MLAIA · Machine Learning &amp; AI Approach</a>
+  <nav>
+    <a href="https://www.mlaia.com/index.html#about">About</a>
+    <a href="https://www.mlaia.com/index.html#domains">Domains</a>
+    <a href="https://www.mlaia.com/blog.html">Blog</a>
+    <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+    <a href="https://www.mlaia.com/index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <span class="category">Signal &amp; Audio AI</span>
+  <h1>Music AI in 2026: Generation, Separation, and the Copyright Minefield</h1>
+  <p class="meta">August 10, 2026 · 14 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
+  <p class="back-link"><a href="https://www.mlaia.com/blog.html">← Back to all posts</a></p>
+
+  <article>
+
+    <p>The pace of progress in music AI has outrun almost every other audio domain. In three years, the field moved from academic curiosity to production-grade tools that content teams, game studios, and advertising agencies use weekly. You can type a sentence — "upbeat jazz-funk, female vocals, 120bpm, corporate energy" — and receive a polished two-minute track in under 30 seconds. You can feed a professionally produced recording into a source separation model and walk away with clean stems of every instrument. You can transcribe a guitar solo to MIDI at near-human accuracy.</p>
+
+    <p>And yet music AI sits inside a legal dispute of almost unprecedented scope. The Recording Industry Association of America filed suit against Suno and Udio in 2024, alleging that their models were trained on copyrighted recordings without license — an accusation that, if upheld at scale, would reshape the legal foundation under every generative audio model. The technical capabilities are real; the ownership questions are not yet settled.</p>
+
+    <p>This post covers the production reality across both dimensions: what music AI can do in 2026, how to integrate it, and where the legal boundaries actually sit for teams building real products.</p>
+
+    <div class="stat-row">
+      <div class="stat"><div class="num">~30s</div><div class="label">time to generate a full 2-minute, vocalized track on Suno v4 or Udio</div></div>
+      <div class="stat"><div class="num">&lt;15dB</div><div class="label">vocal-to-leakage ratio achievable with Demucs v4 HTDemucs — near-studio quality separation</div></div>
+      <div class="stat"><div class="num">$340M</div><div class="label">damages sought by RIAA per infringed work in Suno/Udio lawsuit — at the maximum statutory rate</div></div>
+      <div class="stat"><div class="num">4</div><div class="label">dominant architecture families: diffusion (latent), transformer autoregressive, codec language model, GAN hybrid</div></div>
+    </div>
+
+    <hr>
+
+    <h2>1. Music Generation: The Model Landscape</h2>
+
+    <p>Music generation has converged on four architectural families, each with distinct quality profiles, latency characteristics, and controllability. Understanding which architecture underlies a product matters when you are choosing one for production — not because brand names are unreliable, but because the architecture determines what kinds of conditioning are possible and where quality degrades.</p>
+
+    <h3>Suno — Codec Language Models</h3>
+    <p>Suno (v3 and v4) is built on a codec language model architecture similar in principle to Meta's EnCodec. Audio is first quantized into discrete tokens by a neural audio codec — a compact, lossy representation that captures both timbre and structure. A large transformer then autoregressively predicts the next token sequence, conditioned on a text prompt. The result is treated as a "language" model where the "vocabulary" is audio codec codes rather than words.</p>
+
+    <p>What this gives you: strong musical coherence over the full generation window, because the autoregressive transformer can model long-range dependencies within the token sequence. Vocals, lyrics, and instrumentation feel compositionally cohesive — the chorus sounds like it belongs to the verse. What it costs: generation latency is proportional to sequence length (two minutes of audio = a long sequence), and because the model is purely generative rather than controllable, changing specific instruments or chord structures requires re-prompting rather than parameter adjustment. Suno's v4 model added significantly stronger vocal quality, multilingual lyric generation, and better style adherence.</p>
+
+    <h3>Udio — Diffusion-Based Generation</h3>
+    <p>Udio uses a latent diffusion architecture operating in a learned audio latent space — conceptually similar to Stability AI's approach in image generation, applied to spectrograms and audio representations. A text encoder (CLIP-like or T5-family) maps the prompt to a conditioning vector; a diffusion U-Net denoises the latent over many timesteps; a decoder reconstructs audio from the latent. The denoising process can be conditioned on melody, rhythm, or reference clips — providing richer controllability than a purely autoregressive model.</p>
+
+    <p>Udio's strengths are in sonic variety and genre-level faithfulness — the texture of the instruments, the production aesthetic, and the mix feel tend to be accurate to the described style. Its relative weakness (compared to Suno v4) has historically been long-range compositional structure — transitions between sections can feel abrupt because diffusion models do not naturally model the sequential structure of music over time. Udio has added an "extend" feature that takes an existing clip and coherently continues it, partially addressing this.</p>
+
+    <h3>Stable Audio — Diffusion with Timing Conditioning</h3>
+    <p>Stability AI's Stable Audio Open (the open-weight version) and Stable Audio Pro (API-accessible) operate on a diffusion architecture with an important addition: explicit conditioning on audio duration and content start/end times. This enables generating loops, stingers, and sound effects at precise durations — a significant practical advantage for game audio and advertising, where a 30-second bed or a 0.5-second notification sound must hit exactly. Stable Audio Open's weights are released under a research license — teams can fine-tune it on proprietary style libraries without submitting audio to a third-party API, which has obvious privacy and IP advantages for media companies.</p>
+
+    <h3>Google MusicLM / MusicFX</h3>
+    <p>Google's MusicLM (2023) pioneered hierarchical text-conditioned music generation — using a cascaded set of models to generate semantic tokens, acoustic tokens, and finally audio at increasing levels of detail. The successor system, MusicFX (2024), powers the consumer-facing Music AI Sandbox and AI Test Kitchen tools. MusicLM's key research contribution was demonstrating strong adherence to long, complex text descriptions ("a calming violin melody backed by a distorted guitar riff" stays coherent throughout) — something shorter-context models struggled with. MusicFX added style blending: two style prompts can be mixed, producing interpolated outputs across a style space. Neither system is currently available as a general commercial API — Google's enterprise licensing is through select partners.</p>
+
+    <h3>Meta MusicGen and MAGNeT</h3>
+    <p>Meta's MusicGen (2023) is the most widely deployed open-weight text-to-music model. It uses a single-stage transformer over EnCodec audio tokens — simpler than MusicLM's hierarchy, faster to run, and available under a research license that permits commercial use for smaller-scale deployments. MusicGen supports text conditioning and melody conditioning — you can provide a hummed melody or reference audio as an additional conditioning signal, and the model generates music that respects the melodic contour while applying a different instrumentation or style. This melody conditioning is a significant practical feature: content creators can prototype a melodic idea and have the model flesh it out in any style.</p>
+
+    <p>MAGNeT (Masked Audio Generation using Non-autoregressive Transformers, Meta 2024) takes a different approach: rather than predicting tokens left-to-right, it generates all tokens in parallel using masked prediction, then iteratively refines them. This achieves a 7× speedup over autoregressive MusicGen at modest quality cost. For real-time or near-real-time applications — interactive music generation in games, adaptive soundtracks — MAGNeT's latency profile is a meaningful advantage.</p>
+
+    <div class="callout">
+      <strong>Melody conditioning in practice:</strong> MusicGen's melody conditioning works by extracting the pitch contour from a reference audio clip (using a chromagram or pitch tracking), then providing this as an additional condition to the transformer alongside the text prompt. The output preserves the melody's rhythmic and pitch structure while replacing timbre, harmony, and style. This is the correct tool when a composer has a melodic idea but needs it realized in a genre they cannot perform — or when a client supplies a reference hum.
+    </div>
+
+    <h3>Quality Assessment: Where AI Music Stands</h3>
+    <p>Evaluating generative music is harder than evaluating images — human judgment is deeply genre- and context-dependent, and standard signal metrics (PSNR, FID equivalents like Fréchet Audio Distance) do not track listener experience well. The honest production assessment in 2026 is:</p>
+    <ul>
+      <li><strong>Background music for content:</strong> AI-generated music is production-ready. For YouTube B-roll, podcast backgrounds, corporate explainer videos, and short-form social content, Suno/Udio output at comparable quality to stock music libraries — and is often more stylistically specific to the brief.</li>
+      <li><strong>Game soundtracks:</strong> Adaptive background music (ambient, procedurally varied) is viable. Linear narrative music with specific emotional beats and cross-section transitions is still a manual craft — AI assists the composer rather than replacing them.</li>
+      <li><strong>Advertising jingles:</strong> AI can generate a credible demo. Final ad music almost always involves human refinement: editing, re-recording specific elements, or using the AI output as a stem to build from.</li>
+      <li><strong>Human composition comparison:</strong> For original, artistically ambitious composition, human composers are still clearly superior — AI models lack the ability to deliberately reference, subvert, or evolve a musical tradition with intention. They pattern-match at sophistication; they do not author with intent.</li>
+    </ul>
+
+    <h2>2. Music Generation in Production: APIs and Integration</h2>
+
+    <p>The practical integration question is not which model sounds best in a demo — it is which model can be embedded reliably into a content pipeline. The API landscape varies significantly across providers.</p>
+
+    <table class="arch-table">
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>API availability</th>
+          <th>Latency (2 min track)</th>
+          <th>Controllability</th>
+          <th>Licensing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-col">Suno v4</td>
+          <td class="neu">API available (waitlist / enterprise tier)</td>
+          <td class="pro">~25–35s</td>
+          <td class="neu">Text prompt; style tags; instrumental toggle</td>
+          <td class="con">Commercial output permitted; training data under litigation</td>
+        </tr>
+        <tr>
+          <td class="label-col">Udio</td>
+          <td class="neu">API in private beta</td>
+          <td class="neu">~30–45s</td>
+          <td class="pro">Text + reference clip; extend; inpaint</td>
+          <td class="con">Commercial output permitted; training data under litigation</td>
+        </tr>
+        <tr>
+          <td class="label-col">Stable Audio Pro</td>
+          <td class="pro">API (Stability AI platform)</td>
+          <td class="neu">~20–40s</td>
+          <td class="pro">Duration control; text prompt; variation seeds</td>
+          <td class="neu">Commercial use licensed; open weights for fine-tuning</td>
+        </tr>
+        <tr>
+          <td class="label-col">MusicGen (Meta)</td>
+          <td class="pro">Open weights; self-hostable</td>
+          <td class="pro">~15–30s (GPU)</td>
+          <td class="pro">Text + melody conditioning; duration</td>
+          <td class="pro">Research license; commercial permitted at scale with terms</td>
+        </tr>
+        <tr>
+          <td class="label-col">MAGNeT (Meta)</td>
+          <td class="pro">Open weights; self-hostable</td>
+          <td class="pro">&lt;5s (GPU)</td>
+          <td class="neu">Text; limited fine-grained control</td>
+          <td class="pro">Research license</td>
+        </tr>
+        <tr>
+          <td class="label-col">MusicFX (Google)</td>
+          <td class="con">No public API; select enterprise only</td>
+          <td class="neu">Variable</td>
+          <td class="pro">Style blending; text prompt</td>
+          <td class="con">Restricted access; licensing TBD</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-teal">
+      <strong>Self-hosting MusicGen for production:</strong> For teams with data-sensitivity requirements or who need melody conditioning at scale, self-hosting MusicGen on a single A100 or H100 GPU is practical. The <code>audiocraft</code> library (Meta's open-source release) provides a clean Python API. A single A100 generates a 30-second clip in roughly 3–5 seconds with the medium (1.5B parameter) model — well within synchronous serving budgets for most pipelines. The large (3.3B) model doubles generation time but improves quality on complex style descriptions.
+    </div>
+
+    <h3>Watermarking and Content Identification</h3>
+    <p>The responsible deployment question for AI-generated music is identification: can you tag generated audio so downstream systems — streaming platforms, content ID, broadcast monitoring — can recognize it as AI-generated? Two approaches are in active production use:</p>
+    <ul>
+      <li><strong>Imperceptible watermarking:</strong> AudioSeal (Meta), WavMark, and Stability AI's watermarking infrastructure embed a statistical signal into the audio waveform that survives transcoding, format conversion, and moderate post-processing. Detection accuracy against a 128-bit watermark payload is high (&gt;99% on clean audio, &gt;85% after MP3 compression). The limitation: aggressive processing (pitch-shifting, time-stretching, re-recording) can degrade the watermark.</li>
+      <li><strong>Latent fingerprinting:</strong> Some models embed identifiable patterns in the generation process itself — characteristic artifacts or spectral signatures that a trained classifier can detect even without an explicit watermark. This is a passive identifier, not an active one, and is less reliable.</li>
+    </ul>
+    <p>YouTube's Content ID, Spotify's licensing infrastructure, and major broadcast monitoring networks (BMAT, AudibleMagic) do not yet have production classifiers for AI-generated music. This is a gap that will close — but in 2026, a commercial team cannot rely on automated identification to distinguish AI output from human-recorded music in content pipelines.</p>
+
+    <hr>
+
+    <h2>3. Music Separation and Analysis</h2>
+
+    <p>While generation gets most of the coverage, music source separation and music information retrieval (MIR) are arguably more production-mature. These are discriminative rather than generative tasks — the models are solving a decomposition or classification problem rather than synthesizing from scratch — and the accuracy benchmarks are well-established.</p>
+
+    <h3>Source Separation: Demucs and the State of the Art</h3>
+    <p>Demucs (developed at Meta AI Research) is the dominant open-source source separation model. The current production version — HTDemucs (Hybrid Transformer Demucs) — separates a mixed audio track into four stems: vocals, drums, bass, and other instruments. It operates in both the time domain (raw waveform) and frequency domain (spectrogram) simultaneously, with a transformer module attending across time to capture long-range dependencies. The hybrid approach substantially reduces the "musical noise" artifacts that earlier frequency-domain methods produced on solo instruments.</p>
+
+    <p>Benchmark performance on the MUSDB18 test set: vocals SDR (Signal-to-Distortion Ratio) of approximately 8.5 dB, drums 11 dB, bass 8 dB — all class-leading results, and sufficient for production use in karaoke, stems-for-remixing, and sample clearance workflows. The remaining artifacts — slight bleeding of high-frequency drum transients into the "other" stem, occasional smearing of room reverb in isolated vocals — are detectable on careful listening but acceptable for the majority of commercial use cases.</p>
+
+    <div class="callout">
+      <strong>Running Demucs in production:</strong> HTDemucs processes a 3-minute song in approximately 30–60 seconds on an A10G GPU (24GB VRAM). CPU-only processing is feasible but 10× slower — acceptable for batch workflows, not for interactive applications. The <code>demucs</code> Python package handles the full pipeline. For streaming or real-time separation (DJ applications, live remixing), lighter models like Demucs v3 with reduced channel count run at roughly 0.5× real-time on consumer GPUs — real-time on a datacenter card.
+    </div>
+
+    <p>Beyond the four-stem model, specialized separation models handle narrower tasks: <strong>MDX-Net</strong> (used in the Music Demixing Challenge) specializes in vocal isolation with particularly clean results on contemporary pop productions. <strong>Open-Unmix</strong> is a simpler, thoroughly documented baseline ideal for teams building custom separation pipelines. <strong>Spleeter</strong> (Deezer's 2019 model) remains widely deployed in production for two-stem (vocal/accompaniment) separation, primarily because of its speed — though newer models significantly outperform it on quality.</p>
+
+    <h3>Production Applications of Source Separation</h3>
+    <ul>
+      <li><strong>Karaoke and instrumental tracks:</strong> The most straightforward application. A production-grade vocal separator running on the back-end of a karaoke platform processes any song in the catalog on demand. The remaining instrumental output is combined with synchronized lyrics for playback.</li>
+      <li><strong>Remixing and creative reuse:</strong> Producers extract stems for interpolations, sample-based compositions, or remix contests. Platforms like Splice, Beatport, and SoundCloud now offer AI-separated stems alongside the original track for a growing portion of their catalog.</li>
+      <li><strong>Sample clearance and copyright verification:</strong> Detecting whether a new release contains an unlicensed sample requires separating the suspected track and comparing stems against a fingerprint database. Source separation makes this comparison more accurate than waveform-level matching on the full mix — a guitar riff buried in a dense production is easier to identify in isolation.</li>
+      <li><strong>Music education and ear training:</strong> Apps like Soundbrenner, Yousician, and specialized platforms for conservatory training use stem separation to let students isolate individual parts for practice — playing along with the band but removing their own instrument.</li>
+    </ul>
+
+    <h3>Automatic Music Transcription (AMT)</h3>
+    <p>Automatic music transcription — converting audio to MIDI or symbolic notation — has advanced significantly with the application of large transformer models to piano roll representations. <strong>MT3</strong> (Music Transformer for Transcription, Google) and <strong>Basic Pitch</strong> (Spotify) represent the production-viable range of this capability.</p>
+
+    <p>Basic Pitch is a lightweight convolutional model that runs locally on consumer hardware, outputs MIDI with onset, pitch, and velocity per note, and handles polyphonic input across most Western instruments. Its Python package is clean and ships to embedded devices — Spotify integrated it into its consumer creation tools (Soundtrap). MT3 operates at higher accuracy on complex polyphonic music and handles multi-instrument transcription (drums, bass, harmony) as separate voices, but requires significantly more compute. For melodic instruments (guitar, violin, piano, voice), both produce results accurate enough to read and edit by a musician with modest correction effort. Rhythmic transcription (complex polyrhythm, non-Western rhythmic structures) remains materially harder.</p>
+
+    <h3>Music Information Retrieval (MIR)</h3>
+    <p>MIR encompasses a set of classification and regression tasks on audio: genre, mood, tempo, key, instrumentation, and structural segmentation. These are mature — the algorithms are well-understood, the benchmarks have been stable for years, and the tools are production-ready at scale.</p>
+
+    <ul>
+      <li><strong>Beat tracking and tempo estimation:</strong> <code>madmom</code> (Vienna University of Technology) and <code>librosa</code>'s beat tracker handle the majority of production use cases. For complex rhythmic structures or non-Western time signatures, DNN-based trackers (RNNBeatTracker in madmom) outperform signal-processing heuristics. Accuracy on pop/rock at standard tempos: &gt;95% F-measure on 8th-note level beats.</li>
+      <li><strong>Key detection:</strong> The Krumhansl-Schmuckler key-finding algorithm remains competitive with neural approaches for standard Western harmony. For atonal or modally ambiguous music, Essentia's key extractor with the Temperley profile outperforms rule-based methods.</li>
+      <li><strong>Genre and mood classification:</strong> Large audio representation models — particularly <strong>MERT</strong> (Music Encoder Representations from Transformers, ByteDance) and <strong>CLAP</strong> (Contrastive Language-Audio Pretraining) — have pushed classification accuracy significantly. CLAP is particularly powerful because it learns a joint embedding space for text and audio, enabling zero-shot genre queries ("classify this audio as one of: jazz, bossa nova, samba") without retraining on the specific label set.</li>
+      <li><strong>Structural segmentation:</strong> Identifying song sections (verse, chorus, bridge, solo) uses self-similarity matrices over time-frequency features — a spectral representation is compared against itself over time, and repeated blocks identify repeated musical sections. The <code>msaf</code> library implements the main algorithmic approaches; accuracy on standard SALAMI benchmark: ~65–75% F-measure depending on genre and section granularity.</li>
+    </ul>
+
+    <figure class="infographic">
+      <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Music AI stack: generation, separation, and analysis layers">
+        <text x="20" y="28" fill="#f1f5f9" font-size="15" font-weight="700" font-family="sans-serif">The Music AI Production Stack</text>
+
+        <!-- Generation -->
+        <rect x="20" y="45" width="200" height="260" rx="8" fill="#0f172a" stroke="#0057ff" stroke-width="1.5"/>
+        <text x="120" y="66" fill="#0057ff" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.1em">GENERATION</text>
+        <text x="36" y="86" fill="#94a3b8" font-size="8" font-weight="700" font-family="sans-serif">Models</text>
+        <text x="36" y="101" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Suno v4 (codec LM)</text>
+        <text x="36" y="115" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Udio (latent diffusion)</text>
+        <text x="36" y="129" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Stable Audio Pro</text>
+        <text x="36" y="143" fill="#e2e8f0" font-size="8" font-family="sans-serif">• MusicGen / MAGNeT</text>
+        <text x="36" y="157" fill="#e2e8f0" font-size="8" font-family="sans-serif">• MusicLM / MusicFX</text>
+        <text x="36" y="178" fill="#94a3b8" font-size="8" font-weight="700" font-family="sans-serif">Conditioning</text>
+        <text x="36" y="193" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Text prompt</text>
+        <text x="36" y="207" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Reference melody</text>
+        <text x="36" y="221" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Duration / key / BPM</text>
+        <text x="36" y="242" fill="#94a3b8" font-size="8" font-weight="700" font-family="sans-serif">Use cases</text>
+        <text x="36" y="257" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Background / ad music</text>
+        <text x="36" y="271" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Game adaptive audio</text>
+        <text x="36" y="285" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Demo / prototype tracks</text>
+
+        <!-- Separation -->
+        <rect x="250" y="45" width="200" height="260" rx="8" fill="#0f172a" stroke="#00b4d8" stroke-width="1.5"/>
+        <text x="350" y="66" fill="#00b4d8" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.1em">SEPARATION</text>
+        <text x="266" y="86" fill="#94a3b8" font-size="8" font-weight="700" font-family="sans-serif">Models</text>
+        <text x="266" y="101" fill="#e2e8f0" font-size="8" font-family="sans-serif">• HTDemucs (4-stem)</text>
+        <text x="266" y="115" fill="#e2e8f0" font-size="8" font-family="sans-serif">• MDX-Net (vocal focus)</text>
+        <text x="266" y="129" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Open-Unmix</text>
+        <text x="266" y="143" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Spleeter (2-stem)</text>
+        <text x="266" y="164" fill="#94a3b8" font-size="8" font-weight="700" font-family="sans-serif">Transcription</text>
+        <text x="266" y="179" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Basic Pitch (Spotify)</text>
+        <text x="266" y="193" fill="#e2e8f0" font-size="8" font-family="sans-serif">• MT3 (Google)</text>
+        <text x="266" y="207" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Whisper (melody)</text>
+        <text x="266" y="228" fill="#94a3b8" font-size="8" font-weight="700" font-family="sans-serif">Use cases</text>
+        <text x="266" y="243" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Karaoke / stems</text>
+        <text x="266" y="257" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Sample clearance</text>
+        <text x="266" y="271" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Remixing / education</text>
+        <text x="266" y="285" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Audio-to-MIDI workflows</text>
+
+        <!-- Analysis / MIR -->
+        <rect x="480" y="45" width="200" height="260" rx="8" fill="#0f172a" stroke="#7c3aed" stroke-width="1.5"/>
+        <text x="580" y="66" fill="#7c3aed" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.1em">ANALYSIS / MIR</text>
+        <text x="496" y="86" fill="#94a3b8" font-size="8" font-weight="700" font-family="sans-serif">Tasks</text>
+        <text x="496" y="101" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Genre classification</text>
+        <text x="496" y="115" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Mood detection</text>
+        <text x="496" y="129" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Beat tracking / tempo</text>
+        <text x="496" y="143" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Key detection</text>
+        <text x="496" y="157" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Structure segmentation</text>
+        <text x="496" y="178" fill="#94a3b8" font-size="8" font-weight="700" font-family="sans-serif">Key Libraries</text>
+        <text x="496" y="193" fill="#e2e8f0" font-size="8" font-family="sans-serif">• MERT / CLAP embeddings</text>
+        <text x="496" y="207" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Essentia (MTG)</text>
+        <text x="496" y="221" fill="#e2e8f0" font-size="8" font-family="sans-serif">• librosa / madmom</text>
+        <text x="496" y="242" fill="#94a3b8" font-size="8" font-weight="700" font-family="sans-serif">Use cases</text>
+        <text x="496" y="257" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Music search / tagging</text>
+        <text x="496" y="271" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Playlist curation</text>
+        <text x="496" y="285" fill="#e2e8f0" font-size="8" font-family="sans-serif">• Sync licensing search</text>
+      </svg>
+      <figcaption>The three functional layers of music AI in production: generation (synthesizing audio from text or melody), separation (decomposing mixes into stems or MIDI), and analysis (classifying and describing audio content).</figcaption>
+    </figure>
+
+    <hr>
+
+    <h2>4. The Copyright Landscape</h2>
+
+    <p>The legal dimension of music AI deserves serious treatment — not because lawyers are interesting, but because it directly affects which tools a production team can safely use, what outputs they can commercialize, and how the industry will look in three years.</p>
+
+    <h3>The RIAA Lawsuits</h3>
+    <p>In June 2024, the Recording Industry Association of America — representing Universal Music Group, Sony Music, and Warner Music Group — filed suit against Suno and Udio in U.S. District Court (Massachusetts and New York, respectively). The core allegation: both companies trained their models on copyrighted sound recordings without obtaining licenses from the rights holders, and the models' outputs reproduce — at a statistical level — the musical expression embodied in those recordings.</p>
+
+    <p>Both companies settled in late 2024 for undisclosed sums, without admitting wrongdoing. Critically, neither settlement established legal precedent: there was no ruling on whether training on copyrighted audio constitutes infringement, no ruling on whether AI-generated output that resembles but does not copy a specific recording infringes copyright, and no ruling on the "fair use" analysis as applied to AI training. The settlements closed the specific cases while leaving all the substantive questions open for the next round of litigation.</p>
+
+    <p>The lawsuits are significant not because they resolved anything, but because they established that the RIAA will sue — and that the cost of defending such a case (even to a favorable outcome) is substantial. Suno's enterprise API clients and Udio's commercial licensees are operating under the assumption that the legal landscape will be clarified, likely unfavorably to AI music companies, over the next two to four years.</p>
+
+    <h3>Who Owns AI-Generated Music?</h3>
+    <p>Copyright in the United States requires human authorship — a principle repeatedly affirmed by the U.S. Copyright Office in its 2023 guidance on AI-generated works. Purely AI-generated audio, with no human creative selection beyond the text prompt, is not copyrightable. This creates an uncomfortable asymmetry: an ad agency that licenses AI-generated music has no exclusive rights to it. Competitors can legally use an identical or near-identical generation if they submit the same prompt. Content ID on YouTube will not protect it.</p>
+
+    <p>Practical workarounds that create copyrightable output: human editing of AI-generated stems (the edits are copyrightable), human selection and arrangement of AI outputs into a larger composition (the selection may be copyrightable), and recording a human performance that uses AI-generated material as a backing track (the human performance is copyrightable). Most commercial music teams that use AI generation are implicitly doing one or more of these — producing a draft AI track and then applying meaningful human creative judgment on top of it.</p>
+
+    <h3>Style Transfer vs. Copying — The Substantive Legal Question</h3>
+    <p>A more nuanced legal debate concerns style. U.S. copyright law does not protect musical style — it protects specific expression: the particular notes, rhythms, harmonics, and recording production of a specific song. Composing a song "in the style of The Beatles" is legal; sampling "Come Together" without a license is not. The question the settled Suno/Udio cases never answered: when a model is trained on specific recordings and produces output that sounds statistically similar to those recordings, is that closer to composing "in the style of" or to copying expression?</p>
+
+    <p>The technical reality: diffusion models and codec language models do not store and replay training samples the way a lookup table does. They learn distributed statistical representations of audio patterns. But some prompts and seeds can cause models to produce outputs remarkably close to specific training recordings — a phenomenon researchers call "memorization" in the generative AI literature. Whether memorized output at the quality achievable by current music models meets the threshold for copyright infringement under the "substantially similar" standard is a genuinely unresolved legal question.</p>
+
+    <div class="callout-warn">
+      <strong>Legal guidance for production teams:</strong> Consult IP counsel before commercializing AI-generated music at scale. The reasonable production-safe posture today: use models with documented training data provenance (Stable Audio Open uses a licensed dataset; MusicGen uses ShutterStock's licensed audio library for the commercial version); apply meaningful human creative editing to AI outputs before commercializing; maintain records of the human creative contributions; and do not rely on AI-generated music as a licensed exclusive asset.
+    </div>
+
+    <h3>Licensing Models Emerging for AI Music</h3>
+    <p>The music industry is not standing still. Several licensing frameworks are emerging that address the training data problem at its root:</p>
+    <ul>
+      <li><strong>Label licensing deals:</strong> YouTube has signed agreements with Universal, Warner, and Sony that provide AI tools access to their catalogs under defined terms, in exchange for revenue-sharing on AI-generated content. Similar structures are under negotiation at Spotify, SoundCloud, and several AI music startups.</li>
+      <li><strong>Opt-in training databases:</strong> Some platforms are building training corpora from music licensed explicitly for AI training — either through direct artist agreements or through rights management companies that aggregate catalogs. Stability AI's commercial Stable Audio models use licensed audio; BandLab's SoundStraw uses similar licensed training data. These models have defensible training data provenance even if the copyright questions about output remain unresolved.</li>
+      <li><strong>Performance rights organization adaptation:</strong> ASCAP, BMI, and SESAC are working on frameworks for how AI-generated music would be registered, what royalties would flow, and to whom. The frameworks are immature — but the conversation is happening, which suggests the industry is moving toward accommodation rather than pure prohibition.</li>
+    </ul>
+
+    <h2>5. The Israeli Ecosystem</h2>
+
+    <p>Israel has a meaningful presence in audio AI infrastructure, though less so in consumer-facing music generation. Several companies are relevant:</p>
+
+    <p><strong>Musiio</strong> (acquired by SoundCloud) developed one of the first production-grade AI music tagging and genre classification systems, trained on SoundCloud's catalog. The technology underlies SoundCloud's music recommendation and playlist generation features — a deployment at hundreds of millions of tracks scale. The Musiio team in Tel Aviv continues to operate under SoundCloud ownership.</p>
+
+    <p><strong>AudioMob</strong> has Israeli-connected investors and operates in the in-game audio advertising space — a domain where AI music generation for non-disruptive background ad formats is an active area of development. The use case: instead of banner ads, players hear a 15-second audio ad in the background during natural pauses, and the surrounding game music is AI-generated to match the game's style.</p>
+
+    <p><strong>Waves Audio</strong> (Tel Aviv) is a legacy audio technology company that has pivoted aggressively into AI-powered audio tools — primarily for studio production (noise suppression, vocal enhancement, intelligent EQ and compression). Their Clarity Vx vocal isolation technology uses a neural network approach that competes favorably with Demucs on vocal-focused separation tasks and integrates with DAW plugin ecosystems (Pro Tools, Logic, Ableton) that raw Python libraries cannot reach.</p>
+
+    <p>In <strong>music education technology</strong>, Israeli startups Tonara (sheet music AI) and YoScores have developed music reading and practice tools that use MIR technologies — beat tracking, note detection, tempo monitoring — to provide real-time feedback to instrument learners. These are discriminative applications that are legally and technically cleaner than generation, and they represent a growth segment as music education software increasingly moves to AI-assisted practice.</p>
+
+    <p>The broader Israeli audio-tech ecosystem — built on decades of defense signal processing expertise and an active music scene — has the talent for music AI. The constrained factor is access to large-scale music training data with clear licensing, a problem that affects Israeli startups more than US incumbents who can structure direct label deals.</p>
+
+    <hr>
+
+    <h2>6. Integration into Content Pipelines</h2>
+
+    <p>For teams that have evaluated the legal landscape and decided to proceed, the practical integration of music generation into a content pipeline involves several recurring architectural decisions.</p>
+
+    <h3>Where AI music generation fits in a video production pipeline</h3>
+    <p>The most common integration pattern: the video editor specifies a mood, tempo, and duration; the pipeline calls a music generation API with a text prompt derived from those specifications; the output track is returned, reviewed by a human editor, trimmed or looped to match the video duration, and mixed under voice-over or dialogue. Human creative judgment — selection, editing, mixing level decisions — is present throughout. This is the workflow that most enterprise content teams have standardized on for social content, internal communications, and non-hero advertising assets.</p>
+
+    <h3>Adaptive game soundtracks</h3>
+    <p>Real-time adaptive music in games has traditionally required composers to create multiple variations of each piece and a state machine to select between them. AI generation opens a different model: generate music variations on demand that match the current game state. The technical requirement — sub-200ms generation latency for seamless transitions — currently exceeds what any full-quality generation model achieves. The practical approach: pre-generate a library of stems at different intensities (calm, tense, combat, victory) using a model like MusicGen, then assemble and crossfade them in real-time using a lightweight audio engine (FMOD, Wwise). The generation step is offline; the adaptation is real-time.</p>
+
+    <h3>Advertising jingle prototyping</h3>
+    <p>The ROI case for AI music in advertising is strongest at the prototyping stage. Creating six different musical directions for a brand campaign — to test with focus groups before commissioning a final human-composed version — costs hundreds of thousands of dollars in studio time. AI generation can produce comparable-quality demos for evaluation at a fraction of the cost, accelerating the creative brief development cycle even if the final deliverable still involves human composers. This is the "AI as creative assistant" model that the industry is converging on for premium content.</p>
+
+    <h2>7. The Production Decision Framework</h2>
+
+    <p>Three questions to answer before integrating music AI into a product:</p>
+
+    <ol>
+      <li><strong>What is the output used for?</strong> Internal review, social content, and background music for consumer apps are meaningfully lower legal exposure than TV broadcast, sync licensing, or music releases on major platforms. The same AI-generated track that is acceptable as background music for a YouTube video may face Content ID challenges or contractual issues in a theatrical trailer or a major streaming release.</li>
+      <li><strong>Which model's training provenance is documented?</strong> For production use, prefer models with documented, licensed training data (Stable Audio commercial, MusicGen commercial variant) over models where the training data is disputed (currently Suno and Udio). This does not eliminate legal uncertainty, but it substantially reduces it.</li>
+      <li><strong>Where is the human creative contribution?</strong> Identify and document where human creative judgment shapes the output — selection from multiple generations, editing specific elements, composing around the AI output. This is the foundation for any copyright claim to the final work and for your defense if the underlying model's training data is later litigated.</li>
+    </ol>
+
+    <p>Music AI in 2026 is genuinely capable — the generation quality is high enough to be useful in production, the separation tools are mature, and the MIR stack is well-established. The constraints are legal, not technical. Teams that understand the copyright landscape clearly, choose models with defensible provenance, and maintain the human creative role in their workflows are well-positioned to use these tools productively. Teams that treat AI-generated music as a legal free pass to unlimited commercial music are taking risks that the RIAA has demonstrated it is willing to pursue in court.</p>
+
+    <blockquote>
+      "The question is not whether AI can make music. It clearly can. The question is whether you know who trained the model, on whose recordings, and under what license — and whether you can answer that question under oath."
+    </blockquote>
+
+    <div class="cta">
+      <strong>Integrating audio AI into your product pipeline?</strong>
+      <br>
+      <a href="https://www.mlaia.com/index.html#contact">Talk to MLAIA about music AI architecture, source separation in production, and building audio AI systems with defensible IP — →</a>
+    </div>
+
+  </article>
+</main>
+
+<footer class="site">
+  <p>© 2026 MLAIA — Machine Learning &amp; AI Approach · <a href="https://www.mlaia.com/blog.html">Blog</a> · <a href="https://www.mlaia.com/index.html#contact">Contact</a></p>
+</footer>
+
+</body>
+</html>
