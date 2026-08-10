@@ -72,6 +72,7 @@ Neutral, encyclopedic reference articles on applied AI topics (Applied AI & Data
 
 ## Blog Posts & Technical Content
 
+- [Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?](https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html) — XGBoost, LightGBM, and CatBoost vs. TabNet, FT-Transformer, TabPFN, and Google's TabFM — benchmarks, production tradeoffs, and a decision framework: when trees still win, when DL finally closes the gap, and the hybrid embedding+GBDT approach (August 2026)
 - [Computer Vision in Production: From Tracking to VLMs to Edge Deployment](https://www.mlaia.com/blog-computer-vision-production.html) — Multi-object tracking (ByteTrack, DeepSORT), RAFT optical flow, Vision Language Models (GPT-4V, LLaVA, Florence) in production pipelines, sensor fusion tradeoffs, and edge AI on Hailo, Jetson, and smartphone NPUs (August 2026)
 - [Sovereign AI in Israel: Running LLMs On-Prem in Regulated Industries](https://www.mlaia.com/blog-sovereign-ai-onprem.html) — Amendment 13 data residency requirements, capability-vs-control tradeoffs, and a reference architecture — vLLM serving, in-perimeter RAG, LoRA fine-tuning, and governance — for regulated Israeli enterprises (August 2026)
 - [Clinical AI That Ships: From FDA Clearance to the Bedside](https://www.mlaia.com/blog-clinical-ai-production.html) — 1,451 FDA-authorized AI devices, 75% health-system adoption, shadow mode deployment, CUSUM drift detection, bias auditing, and the $6.5B Israeli digital health market (July 2026)

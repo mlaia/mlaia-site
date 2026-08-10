@@ -66,6 +66,13 @@
 
   <!-- Blog posts — newest first -->
   <url>
+    <loc>https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://www.mlaia.com/blog-computer-vision-production.html</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>

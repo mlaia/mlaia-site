@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google Analytics 4 — fires only after analytics consent -->
+<script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning? — MLAIA</title>
+
+<!-- SEO -->
+<meta name="description" content="XGBoost, LightGBM, and CatBoost vs TabNet, FT-Transformer, TabPFN, and Google's TabFM — a practitioner's head-to-head on tabular data in 2026: benchmarks, production tradeoffs, and when deep learning finally wins.">
+<meta name="keywords" content="XGBoost vs deep learning tabular, LightGBM, CatBoost, TabNet, FT-Transformer, TabPFN, TabFM Google, gradient boosting tabular data, SAINT tabular, NODE tabular, TabBench, tabular ML 2026, MLAIA, Israel data science">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?">
+<meta property="og:description" content="XGBoost, LightGBM, and CatBoost hold the throne — but TabPFN, FT-Transformer, and Google's TabFM are closing the gap. A production engineer's head-to-head on tabular ML in 2026.">
+<meta property="og:url" content="https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html">
+<meta property="og:site_name" content="MLAIA">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?">
+<meta name="twitter:description" content="XGBoost still wins most Kaggle tabular competitions — but TabPFN does few-shot better than GBDT on small datasets, and FT-Transformer closes the gap on very large ones. The full production comparison.">
+
+<!-- Article JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?",
+  "description": "XGBoost, LightGBM, and CatBoost vs TabNet, FT-Transformer, TabPFN, and Google's TabFM — a practitioner's head-to-head on tabular data benchmarks, production tradeoffs, and when deep learning finally wins.",
+  "image": "https://www.mlaia.com/assets/yochai-headshot.jpg",
+  "datePublished": "2026-08-10",
+  "dateModified": "2026-08-10",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Yochai Edlitz",
+    "url": "https://www.mlaia.com/about-us/",
+    "jobTitle": "Founder & CEO, MLAIA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MLAIA",
+    "url": "https://www.mlaia.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.mlaia.com/assets/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html"
+  },
+  "keywords": "XGBoost deep learning tabular, LightGBM CatBoost, TabNet, FT-Transformer, TabPFN, TabFM Google, SAINT, NODE, gradient boosting tabular, tabular ML benchmarks 2026, MLAIA"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mlaia.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.mlaia.com/blog.html"},
+    {"@type": "ListItem", "position": 3, "name": "Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?", "item": "https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html"}
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --panel: #111827;
+    --ink: #e6edf3;
+    --muted: #94a3b8;
+    --accent: #0057ff;
+    --accent-2: #00b4d8;
+    --border: #1f2937;
+    --code-bg: #0f172a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.site {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  header.site a.brand { color: var(--ink); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+  header.site nav a { color: var(--muted); text-decoration: none; margin-left: 1.25rem; font-size: 0.95rem; }
+  header.site nav a:hover { color: var(--accent); }
+  main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .category {
+    display: inline-block;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: clamp(1.85rem, 4vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+    color: #f8fafc;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 2rem;
+  }
+  .back-link a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  article h2 {
+    margin-top: 2.75rem;
+    font-size: 1.45rem;
+    color: #f1f5f9;
+    border-left: 3px solid var(--accent);
+    padding-left: 0.75rem;
+  }
+  article h3 {
+    margin-top: 1.75rem;
+    font-size: 1.15rem;
+    color: #e2e8f0;
+  }
+  article p { margin: 1rem 0; }
+  article a { color: var(--accent); }
+  blockquote {
+    border-left: 4px solid var(--accent-2);
+    background: rgba(0, 180, 216, 0.06);
+    margin: 1.75rem 0;
+    padding: 1rem 1.25rem;
+    color: #e2e8f0;
+    font-style: italic;
+    border-radius: 4px;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .stat .num { font-size: 1.7rem; font-weight: 700; color: var(--accent); }
+  .stat .label { color: var(--muted); font-size: 0.85rem; }
+  .callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    margin: 1.75rem 0;
+  }
+  .callout strong { color: var(--accent); }
+  .arch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.88rem;
+    overflow-x: auto;
+    display: block;
+  }
+  .arch-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .arch-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid rgba(31,41,55,0.6);
+    vertical-align: top;
+  }
+  .arch-table tr:last-child td { border-bottom: none; }
+  .arch-table .label-col { color: #f1f5f9; font-weight: 600; white-space: nowrap; }
+  .arch-table .pro { color: #34d399; font-size: 0.82rem; }
+  .arch-table .con { color: #f87171; font-size: 0.82rem; }
+  .arch-table .neu { color: #fbbf24; font-size: 0.82rem; }
+  code {
+    background: var(--code-bg);
+    color: #60a5fa;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+  }
+  ul, ol { padding-left: 1.25rem; }
+  ul li, ol li { margin: 0.4rem 0; }
+  figure.infographic {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  figure.infographic svg { width: 100%; height: auto; display: block; }
+  figure.infographic figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+  .cta {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .cta a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: var(--accent);
+    color: #f8fafc;
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer.site {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="https://www.mlaia.com/index.html">MLAIA · Machine Learning &amp; AI Approach</a>
+  <nav>
+    <a href="https://www.mlaia.com/index.html#about">About</a>
+    <a href="https://www.mlaia.com/index.html#domains">Domains</a>
+    <a href="https://www.mlaia.com/blog.html">Blog</a>
+    <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+    <a href="https://www.mlaia.com/index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <span class="category">Machine Learning &amp; Tabular Data</span>
+  <h1>Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?</h1>
+  <p class="meta">August 10, 2026 · 11 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
+  <p class="back-link"><a href="https://www.mlaia.com/blog.html">← Back to all posts</a></p>
+
+  <article>
+
+    <p>If you have been paying attention to ML research over the past three years, you have likely seen a steady stream of papers claiming that some new deep learning architecture finally beats gradient-boosted trees on tabular data. And if you have been running production ML systems over those same three years, you have likely kept shipping XGBoost anyway. Both things are true, and neither is the complete picture. This post is an honest practitioner's head-to-head: when deep learning for tabular data has genuinely arrived, when trees still dominate, and how to make the call on your next project in 2026.</p>
+
+    <div class="stat-row">
+      <div class="stat"><div class="num">~70%</div><div class="label">of Kaggle tabular competitions still won by GBDT ensembles</div></div>
+      <div class="stat"><div class="num">2×–5×</div><div class="label">faster training for GBDT vs. comparable DL on typical tabular datasets</div></div>
+      <div class="stat"><div class="num">&lt;10k</div><div class="label">rows — regime where TabPFN outperforms XGBoost without any hyperparameter tuning</div></div>
+      <div class="stat"><div class="num">$0</div><div class="label">feature engineering needed for TabFM — zero-shot generalization across datasets</div></div>
+    </div>
+
+    <hr>
+
+    <h2>1. The Incumbent Champions: XGBoost, LightGBM, CatBoost</h2>
+
+    <p>Gradient-boosted decision trees (GBDTs) have dominated competitive tabular ML since roughly 2016, when XGBoost won a disproportionate share of Kaggle competitions and the ML community started taking notice. LightGBM (Microsoft, 2017) pushed training speed dramatically further with leaf-wise tree growth and histogram-based splitting. CatBoost (Yandex, 2017) brought native, zero-leakage categorical encoding — ordered target encoding that eliminates the data leakage that plagued earlier approaches. Together, these three form the toolkit that handles the overwhelming majority of production tabular ML today.</p>
+
+    <h3>Why trees have been so hard to dislodge</h3>
+
+    <p>The reasons are structural, not accidental:</p>
+
+    <ul>
+      <li><strong>Robustness to feature scale and distribution:</strong> GBDTs are invariant to monotonic transformations of input features — you do not need to normalize, log-transform, or standardize. They handle mixed feature types (numeric, ordinal, nominal) natively. This alone eliminates a large category of data preparation bugs.</li>
+      <li><strong>Missing value handling:</strong> XGBoost and LightGBM learn optimal default directions for missing values during training — a principled approach that outperforms mean/median imputation in most cases. Neural networks, by contrast, require you to decide an imputation strategy before training, and a wrong choice propagates through all subsequent representations.</li>
+      <li><strong>Small-data efficiency:</strong> A well-regularized XGBoost model can generalize from a few hundred examples. The inductive bias of decision trees — axis-aligned splits that capture interactions through tree structure — matches the piecewise-constant structure that many real-world tabular relationships follow. Deep networks, with millions of parameters and weaker inductive bias, overfit badly on small datasets without heavy regularization and augmentation.</li>
+      <li><strong>Training speed and hyperparameter efficiency:</strong> A LightGBM model on a 1M-row dataset trains in minutes on a single CPU machine and converges reliably with a modest hyperparameter search. An equivalent deep learning model requires GPU resources, careful learning rate scheduling, and far more tuning to reach comparable accuracy.</li>
+      <li><strong>Interpretability:</strong> SHAP (SHapley Additive exPlanations) combined with any GBDT gives you feature-level and observation-level explanations that satisfy regulatory requirements in credit, insurance, and healthcare. TreeSHAP is exact and runs in polynomial time. Explaining deep networks requires approximations (LIME, Integrated Gradients) that are slower, noisier, and harder to audit.</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Production reality check:</strong> CatBoost's native categorical handling is genuinely underused. If your pipeline has high-cardinality categoricals (user IDs, product SKUs, geographic codes) and you are not using CatBoost, you are almost certainly leaving accuracy on the table compared to one-hot or label encoding in XGBoost — and introducing leakage risk if you use target encoding naively.
+    </div>
+
+    <h2>2. The Deep Learning Challengers</h2>
+
+    <p>Neural networks for tabular data are not new — MLPs have been applied to tabular tasks for decades. What is new is a generation of architectures designed specifically to address the reasons trees outperformed them, rather than applying the same image/text architectures to a domain with fundamentally different structure.</p>
+
+    <h3>TabNet (2019) — Attention-based, interpretable</h3>
+
+    <p>Google's <strong>TabNet</strong> was the first serious attempt at an interpretable deep architecture for tabular data. It uses sequential attention to select which features to reason about at each decision step — producing a learned feature mask that provides a form of instance-wise feature importance. In practice, TabNet's interpretability advantage over SHAP-explained GBDTs is less decisive than the paper suggests: the attention masks are not as semantically clean as tree-based importances, and TabNet's training is notoriously finicky. The architecture performs competitively on large datasets (500k+ rows) but rarely beats well-tuned GBDTs on mid-sized tabular benchmarks. It remains a reasonable choice when a deep learning framework is already mandated (e.g., for integration into a TensorFlow serving stack) and interpretability can be demonstrated through the attention mechanism.</p>
+
+    <h3>FT-Transformer / TabTransformer (2021–2022)</h3>
+
+    <p>The <strong>FT-Transformer</strong> (Feature Tokenizer + Transformer, from Gorishniy et al.) takes a different approach: rather than designing a special architecture, it adapts the standard Transformer to tabular data by treating each feature as a token, with a learned embedding per feature value (for categoricals) or per-feature projection (for numerics). This allows the model to learn arbitrary feature interactions via attention — something that decision trees approximate only through higher-order splits. <strong>TabTransformer</strong> (Google Brain) uses a similar idea but applies attention only to categorical features, passing numeric features directly to the MLP head.</p>
+
+    <p>On large tabular datasets with complex feature interactions, FT-Transformer outperforms GBDTs on several benchmark suites. The practical constraint is compute: training FT-Transformer on a 5M-row dataset with 100 features takes GPU hours rather than CPU minutes. For most organizations, this changes the economics of the problem — the question is not just "which model is more accurate" but "how much accuracy gain justifies 10× more training compute and inference latency."</p>
+
+    <h3>TabPFN — Prior-Fitted Networks and In-Context Learning (2022)</h3>
+
+    <p><strong>TabPFN</strong> (Hollmann et al., 2022, from the AutoML group at Freiburg) is the most practically novel of the tabular DL approaches: a small Transformer pretrained on synthetic datasets drawn from a meta-learned prior over Bayesian networks, capable of doing in-context learning on new tabular tasks at inference time — no finetuning required. You pass your training data and test rows as context, and the model returns predictions in a single forward pass.</p>
+
+    <p>The practical implications are striking. On datasets with under 10,000 rows and up to ~100 features, TabPFN matches or outperforms AutoML-optimized XGBoost with zero hyperparameter tuning — it takes seconds rather than hours to "train." For data scientists facing a new tabular task with limited data, TabPFN is now the correct first experiment: the zero-shot baseline. The limitation is scale: the quadratic attention cost of the in-context approach means TabPFN is not viable for large datasets (above ~10k rows the V2 variant handles larger contexts but training still wins at scale). TabPFN v2 (2024) extended coverage to regression, more features, and better calibration while keeping the zero-shot promise.</p>
+
+    <h3>Google's TabFM — Tabular Foundation Model (2024–2025)</h3>
+
+    <p>Google's <strong>TabFM</strong> is the most ambitious entry: a true tabular foundation model trained across thousands of diverse tabular datasets with the goal of learning transferable representations that generalize zero-shot or few-shot to new tasks. Unlike TabPFN (which uses synthetic prior data), TabFM trains on real heterogeneous tabular corpora — creating embeddings that encode both column semantics (via column name and description) and cross-dataset statistical patterns.</p>
+
+    <p>In-house benchmarks show TabFM achieving competitive performance on new datasets with minimal or no labeled data — particularly on tasks where column names carry semantic meaning (customer churn, medical risk scoring) that a pretrained language backbone can leverage. The architecture combines a column-name encoder (effectively a text embedding model applied to feature names) with a tabular transformer that processes the actual values, enabling it to benefit from semantic priors about what features likely mean.</p>
+
+    <p>TabFM is not yet publicly available at the scale reported in the research preview, but the direction is clear: the foundation model paradigm is arriving for tabular data, and it will change the calculus for organizations with limited labeled data.</p>
+
+    <h3>SAINT, NODE, and other approaches</h3>
+
+    <p><strong>SAINT</strong> (Self-Attention and Intersample Attention Transformer) applies attention both across features and across training samples — the inter-sample attention mechanism allows the model to learn from the relationship between training examples rather than just feature-target relationships. It performs well on classification but adds considerable memory overhead. <strong>NODE</strong> (Neural Oblivious Decision Ensembles) differentiably implements an oblivious decision tree ensemble — trees where each level uses the same split feature across all branches — allowing gradient-based optimization while preserving tree-like inductive bias. NODE is particularly effective on mid-sized datasets and often outperforms GBDTs in the 50k–500k row regime.</p>
+
+    <h2>3. Head-to-Head: When Does Deep Learning Actually Win?</h2>
+
+    <figure class="infographic">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Head-to-head comparison: GBDTs vs deep learning for tabular data across dataset size, feature type, and use case">
+        <text x="20" y="28" fill="#f1f5f9" font-size="15" font-weight="700" font-family="sans-serif">GBDT vs. Deep Learning — Decision Map</text>
+
+        <!-- Y axis label -->
+        <text x="14" y="210" fill="#94a3b8" font-size="9" font-family="sans-serif" transform="rotate(-90,14,210)" text-anchor="middle">Dataset size →</text>
+
+        <!-- Small data zone -->
+        <rect x="40" y="55" width="300" height="70" rx="6" fill="#0f172a" stroke="#0057ff" stroke-width="1.5"/>
+        <text x="190" y="76" fill="#0057ff" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">SMALL DATA (&lt;10k rows)</text>
+        <text x="190" y="92" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">TabPFN V2 ✓ — zero-shot, no tuning</text>
+        <text x="190" y="107" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">XGBoost + Optuna ✓ — well-regularized, fast</text>
+        <text x="190" y="120" fill="#f87171" font-size="9" font-family="sans-serif" text-anchor="middle">FT-Transformer ✗ — overfit risk without data aug</text>
+
+        <!-- Mid data zone -->
+        <rect x="40" y="135" width="300" height="70" rx="6" fill="#0f172a" stroke="#334155"/>
+        <text x="190" y="156" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">MID-SIZED (10k–500k rows)</text>
+        <text x="190" y="172" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">XGBoost / LightGBM ✓ — still the safe default</text>
+        <text x="190" y="187" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">NODE / CatBoost competitive on categoricals</text>
+        <text x="190" y="200" fill="#34d399" font-size="9" font-family="sans-serif" text-anchor="middle">FT-Transformer worth evaluating if GPU infra exists</text>
+
+        <!-- Large data zone -->
+        <rect x="40" y="215" width="300" height="70" rx="6" fill="#0f172a" stroke="#00b4d8" stroke-width="1.5"/>
+        <text x="190" y="236" fill="#00b4d8" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">LARGE DATA (&gt;500k rows)</text>
+        <text x="190" y="252" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">FT-Transformer / SAINT — gap vs GBDT narrows</text>
+        <text x="190" y="267" fill="#34d399" font-size="9" font-family="sans-serif" text-anchor="middle">DL wins: multimodal inputs, text+tabular, embeddings</text>
+        <text x="190" y="282" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">LightGBM still competitive on pure numeric tasks</text>
+
+        <!-- Right side — special cases -->
+        <rect x="360" y="55" width="310" height="230" rx="6" fill="#0f172a" stroke="#334155"/>
+        <text x="515" y="76" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">SPECIAL CASES WHERE DL WINS</text>
+
+        <text x="375" y="100" fill="#34d399" font-size="9" font-family="sans-serif">✓</text>
+        <text x="390" y="100" fill="#e2e8f0" font-size="9" font-family="sans-serif">Transfer learning: TabFM / TabPFN zero-shot</text>
+
+        <text x="375" y="120" fill="#34d399" font-size="9" font-family="sans-serif">✓</text>
+        <text x="390" y="120" fill="#e2e8f0" font-size="9" font-family="sans-serif">Text + tabular fusion (description fields, NLP cols)</text>
+
+        <text x="375" y="140" fill="#34d399" font-size="9" font-family="sans-serif">✓</text>
+        <text x="390" y="140" fill="#e2e8f0" font-size="9" font-family="sans-serif">Embedding-heavy categoricals (user IDs, SKUs)</text>
+
+        <text x="375" y="160" fill="#34d399" font-size="9" font-family="sans-serif">✓</text>
+        <text x="390" y="160" fill="#e2e8f0" font-size="9" font-family="sans-serif">Sequential tabular data — temporal dependencies</text>
+
+        <text x="375" y="180" fill="#34d399" font-size="9" font-family="sans-serif">✓</text>
+        <text x="390" y="180" fill="#e2e8f0" font-size="9" font-family="sans-serif">Shared representation with images / audio (multimodal)</text>
+
+        <text x="375" y="210" fill="#f87171" font-size="9" font-family="sans-serif">✗</text>
+        <text x="390" y="210" fill="#e2e8f0" font-size="9" font-family="sans-serif">Pure numeric tabular, small-mid size → trees</text>
+
+        <text x="375" y="230" fill="#f87171" font-size="9" font-family="sans-serif">✗</text>
+        <text x="390" y="230" fill="#e2e8f0" font-size="9" font-family="sans-serif">Interpretability mandate (credit, insurance, health)</text>
+
+        <text x="375" y="250" fill="#f87171" font-size="9" font-family="sans-serif">✗</text>
+        <text x="390" y="250" fill="#e2e8f0" font-size="9" font-family="sans-serif">Production simplicity — no GPU serving required</text>
+
+        <defs>
+          <marker id="arrT" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#334155" stroke-width="1.2"/></marker>
+        </defs>
+      </svg>
+      <figcaption>Decision map for model selection on tabular data in 2026. Dataset size, feature types, and production constraints — not algorithm novelty — should drive the choice.</figcaption>
+    </figure>
+
+    <p>The honest summary from the benchmarks: deep learning closes the gap on large datasets and wins decisively when the problem involves modalities or representations that trees handle poorly. The TabBench benchmark suite (2023–2024) shows FT-Transformer and SAINT outperforming XGBoost on about 30% of datasets overall — concentrated in the large-data and embedding-heavy categories. On the remaining 70%, tuned GBDTs win or tie within noise.</p>
+
+    <h2>4. When Trees Still Win — and Why It Matters</h2>
+
+    <p>The cases where gradient-boosted trees remain the right call in 2026 are not edge cases — they describe the majority of real production tabular ML workloads:</p>
+
+    <h3>Small-to-medium datasets with pure numeric/categorical features</h3>
+    <p>If your dataset has under 500k rows and features that are direct numeric measurements or clean categoricals (not free-text, not image-derived embeddings), a well-tuned LightGBM or CatBoost model will almost certainly outperform any deep tabular architecture. The inductive bias of decision trees — axis-aligned splits that handle interaction effects through tree depth — is well-matched to the piecewise structure of most business data (pricing tiers, age brackets, geographic categories, time-of-day patterns). You can prove this empirically in a day with a cross-validated comparison; you do not need to take it on faith.</p>
+
+    <h3>Interpretability requirements</h3>
+    <p>In regulated industries — consumer credit, insurance underwriting, clinical decision support, HR analytics — explainability is not optional. SHAP values on a GBDT are exact, fast to compute (TreeSHAP runs in O(TLD) time), and produce the feature-attribution format that regulators and compliance teams recognize. More practically: when a model makes a decision that a customer or clinician disputes, you need to explain it in minutes, not run a 20-minute Integrated Gradients computation. The interpretability tooling around GBDTs in 2026 (SHAP, EBMs/GA²Ms, monotone constraints in XGBoost/LightGBM) is mature and production-tested in ways that DL interpretability tools are not.</p>
+
+    <h3>Training speed, iteration velocity, and infrastructure</h3>
+    <p>A data scientist can train, evaluate, and iterate on a LightGBM model on a laptop. The same workflow with an FT-Transformer requires a GPU, CUDA dependencies, a larger codebase, and training times that are 5–50× longer for similar dataset sizes. In a consulting or startup context where model iteration velocity matters more than the last 0.5% AUC, this is a decisive consideration. Production serving of a GBDT is also dramatically simpler: a pickled model or ONNX export runs inference in microseconds on CPU, with no GPU serving infrastructure required.</p>
+
+    <h3>Kaggle as ground truth</h3>
+    <p>Kaggle tabular competitions remain the closest thing to a reproducible benchmark for real-world tabular ML. In 2026, the picture is consistent: GBDT ensembles (usually XGBoost + LightGBM + CatBoost stacked) win or reach the top-3 in approximately 70% of tabular competitions. Deep learning solutions appear in winners' write-ups primarily on competitions with text features, image-derived features, or very large datasets. This is not because Kagglers are conservative — it is because they run exhaustive experiments and the numbers bear it out.</p>
+
+    <h2>5. Practical Benchmarks: What the Research Actually Says</h2>
+
+    <p>The benchmark landscape for tabular DL has matured significantly. Three studies are worth citing for practitioners:</p>
+
+    <ul>
+      <li><strong>Gorishniy et al. (2022) — "Revisiting Deep Learning Models for Tabular Data":</strong> Systematic comparison across 11 datasets showing FT-Transformer is competitive with tuned GBDTs on large datasets but is rarely better on small-to-mid ones. Honest evaluation, no cherry-picking — a useful reference.</li>
+      <li><strong>Grinsztajn et al. (2022) — "Why tree-based models still outperform deep learning on tabular data":</strong> Identifies the structural reasons trees win: better handling of irregular target functions, no need for augmentation, robustness to uninformative features. Synthetic ablations confirm the mechanism, not just the observation.</li>
+      <li><strong>TabBench (2023–2024) — large-scale benchmark across 300+ datasets:</strong> The largest systematic comparison to date. GBDTs win on most datasets under 100k rows; FT-Transformer and SAINT are competitive above 500k rows. TabPFN V2 achieves remarkable results in the zero-shot small-data regime. No single model dominates across all conditions — which is the correct and production-relevant conclusion.</li>
+    </ul>
+
+    <div class="callout">
+      <strong>The Kaggle meta in 2026:</strong> The top solutions in tabular competitions have converged on a pattern: (1) Feature engineering + target encoding + embeddings from CatBoost/LightGBM; (2) Pseudo-labeling on test data; (3) Stacking — multiple GBDTs + optionally one DL model (usually FT-Transformer or MLP) in the second-layer meta-model. DL appears as a diversity source in the ensemble, not as the primary model.
+    </div>
+
+    <h2>6. Production Considerations: The Gap That Papers Don't Cover</h2>
+
+    <p>Most benchmark papers optimize for accuracy on held-out test sets. Production deployments optimize for accuracy + latency + serving cost + monitoring complexity + team maintainability. These additional dimensions strongly favor GBDTs in most organizations:</p>
+
+    <table class="arch-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>GBDT (XGBoost / LightGBM)</th>
+          <th>Deep Tabular (FT-Transformer / TabNet)</th>
+          <th>TabPFN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-col">Inference latency</td>
+          <td class="pro">Microseconds–milliseconds on CPU</td>
+          <td class="con">Milliseconds on GPU; 10–100× slower on CPU</td>
+          <td class="neu">Seconds (context-dependent); not suited for &lt;100ms SLA</td>
+        </tr>
+        <tr>
+          <td class="label-col">Serving infrastructure</td>
+          <td class="pro">CPU-only; any runtime (ONNX, pickle, native)</td>
+          <td class="con">GPU preferred; PyTorch/TF serving stack required</td>
+          <td class="con">GPU required for reasonable latency</td>
+        </tr>
+        <tr>
+          <td class="label-col">Model size</td>
+          <td class="pro">Kilobytes to megabytes</td>
+          <td class="con">Tens to hundreds of MB</td>
+          <td class="neu">~100MB (fixed, pretrained)</td>
+        </tr>
+        <tr>
+          <td class="label-col">Feature drift monitoring</td>
+          <td class="pro">Per-feature importance shifts via SHAP — mature tooling</td>
+          <td class="con">Activation distribution monitoring — less standardized</td>
+          <td class="con">Opacity around what drove the in-context prediction</td>
+        </tr>
+        <tr>
+          <td class="label-col">Retraining on new data</td>
+          <td class="pro">Minutes on CPU; incremental update possible</td>
+          <td class="con">Hours on GPU; full retraining typically required</td>
+          <td class="pro">No retraining — swap context window</td>
+        </tr>
+        <tr>
+          <td class="label-col">Missing values</td>
+          <td class="pro">Native handling; learns optimal direction</td>
+          <td class="con">Requires imputation strategy; wrong strategy hurts</td>
+          <td class="pro">Handled in-context with no preprocessing</td>
+        </tr>
+        <tr>
+          <td class="label-col">Team expertise required</td>
+          <td class="pro">Any ML engineer</td>
+          <td class="con">DL expertise; debugging is harder</td>
+          <td class="pro">Minimal — effectively a library call</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The production gap also manifests in feature engineering. GBDTs benefit enormously from hand-crafted features: ratio features, interaction terms, temporal lag features, binned aggregations. A skilled feature engineer can add 3–5% AUC to a GBDT model that a DL architecture achieves automatically through representation learning — but the DL model then requires more data to generalize and more infrastructure to serve. Neither approach is free.</p>
+
+    <h2>7. The Hybrid Approach: DL Embeddings + Tree Prediction</h2>
+
+    <p>The most pragmatic answer to the GBDT-vs-DL question in production is often: both. The hybrid architecture — use a neural network to learn embeddings, then feed those embeddings to a GBDT for the final prediction — combines the representation power of DL with the reliability and interpretability of trees.</p>
+
+    <h3>How it works in practice</h3>
+    <p>The canonical pattern has three stages:</p>
+    <ol>
+      <li><strong>Entity embeddings:</strong> Train a neural network (a shallow MLP, a pretrained language model for text features, or a dedicated entity embedding layer) to produce dense representations of high-cardinality categorical features (user IDs, product SKUs, geographic entities, free-text columns). These embeddings encode semantic similarity that one-hot or ordinal encoding cannot capture.</li>
+      <li><strong>Feature augmentation:</strong> Concatenate the learned embeddings with the original numeric features to produce an enriched feature matrix. For text-containing columns (product descriptions, support tickets, customer reviews), use a language model encoder to produce a fixed-size representation and include it as additional features.</li>
+      <li><strong>GBDT on augmented features:</strong> Train XGBoost or LightGBM on the combined feature matrix. The GBDT now benefits from the semantic structure captured in the embeddings while retaining all its production advantages: CPU inference, interpretability via SHAP, fast retraining, and robustness to missing values in the original numeric features.</li>
+    </ol>
+
+    <p>This approach consistently outperforms pure GBDT on datasets with high-cardinality categoricals or text features, while matching or exceeding end-to-end DL on everything else. It is particularly effective for recommendation-adjacent tasks (click-through prediction, next-purchase forecasting) where user and item embeddings from collaborative filtering or pre-trained language models encode information that no hand-crafted feature can match.</p>
+
+    <h3>When the hybrid is overkill</h3>
+    <p>The hybrid architecture adds engineering complexity — you now have two training pipelines, two artifacts to version and monitor, and an embedding layer that can drift independently of the GBDT. If your categorical features are low-to-mid cardinality (&lt;1,000 categories) and you have no text columns, CatBoost's native ordered target encoding almost always delivers equivalent or better results without the added complexity. Reserve the hybrid for genuinely high-cardinality or multimodal cases.</p>
+
+    <h2>8. The Israeli Ecosystem: Tabular ML in Production</h2>
+
+    <p>Israel's enterprise AI landscape is heavily tabular. The sectors that drive MLAIA's work — financial services, insurance, telecom, healthcare analytics, AdTech — are all fundamentally tabular data problems. In our experience working with Israeli enterprises in 2025–2026, the dominant production stack remains XGBoost or LightGBM with CatBoost as a categorical specialist, with TabPFN increasingly adopted as a fast zero-shot baseline for new problem scoping. FT-Transformer appears in production primarily at companies with existing GPU infrastructure (generally, R&D arms of larger tech companies) and where the dataset exceeds 200k rows of training data.</p>
+
+    <p>The Israeli financial services sector faces an interesting constraint: the Bank of Israel's model risk management guidelines (aligned with the Basel Committee's SR 11-7 equivalent) require explainability for credit decisions. This effectively mandates GBDTs — or at minimum, SHAP-explainable models — for any decision that affects credit access. The same constraint applies to insurance pricing models regulated by the Commissioner of Capital Markets. Healthcare analytics (working with Clalit, Maccabi, Sheba) operate under similar explainability expectations.</p>
+
+    <p>Where we see deep learning for tabular data gaining genuine production traction in Israel: e-commerce recommendation (embedding-augmented GBDTs for user-item matching), fraud detection at scale (FT-Transformer for large telco and payment transaction datasets), and clinical NLP tasks where patient records combine structured tabular fields with free-text physician notes — a genuinely multimodal problem where the hybrid architecture delivers meaningful gains over trees alone.</p>
+
+    <hr>
+
+    <h2>The 2026 Decision Framework</h2>
+
+    <p>The answer to "do gradient-boosted trees still beat deep learning on tabular data?" in 2026 is: yes, in the majority of cases — but the exceptions are real, well-understood, and increasingly common. The right framework is not algorithm loyalty but problem diagnosis:</p>
+
+    <ul>
+      <li><strong>Under 10k rows, no GPU budget:</strong> Start with TabPFN V2. It will match a tuned XGBoost in seconds and give you a performance ceiling to beat.</li>
+      <li><strong>10k–500k rows, pure numeric/categorical, production simplicity required:</strong> LightGBM or CatBoost with Optuna hyperparameter tuning. Add SHAP. Ship.</li>
+      <li><strong>High-cardinality categoricals or text columns:</strong> Hybrid — entity embeddings or language model features + GBDT. The complexity pays off.</li>
+      <li><strong>Over 500k rows, GPU available, multimodal inputs:</strong> Evaluate FT-Transformer against a tuned GBDT. On &gt;1M rows with text or embedding-heavy features, FT-Transformer or SAINT often wins.</li>
+      <li><strong>Zero labeled data, fast scoping required:</strong> TabFM (when publicly available at scale) or TabPFN V2. The zero-shot result tells you whether the problem is worth investing in.</li>
+      <li><strong>Regulatory explainability required:</strong> GBDTs + SHAP. Full stop. Not a tradeoff — a constraint.</li>
+    </ul>
+
+    <p>Gradient-boosted trees are not losing their throne anytime soon. But the kingdom is being productively challenged, and the challengers are improving fast. The practitioners who win in 2026 are the ones who know exactly when to call in the new guard — and when to keep shipping XGBoost.</p>
+
+    <div class="cta">
+      <strong>Choosing between GBDT and deep learning for your tabular data problem?</strong>
+      <br>
+      <a href="https://www.mlaia.com/index.html#contact">Talk to MLAIA about model selection, production architecture, and what will actually work on your data →</a>
+    </div>
+
+  </article>
+</main>
+
+<footer class="site">
+  <p>© 2026 MLAIA — Machine Learning &amp; AI Approach · <a href="https://www.mlaia.com/blog.html">Blog</a> · <a href="https://www.mlaia.com/index.html#contact">Contact</a></p>
+</footer>
+
+</body>
+</html>
