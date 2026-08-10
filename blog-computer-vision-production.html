@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google Analytics 4 — fires only after analytics consent -->
+<script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer Vision in Production: From Tracking to VLMs to Edge Deployment — MLAIA</title>
+
+<!-- SEO -->
+<meta name="description" content="A practitioner's guide to deploying computer vision in production: multi-object tracking (ByteTrack, DeepSORT), optical flow with RAFT, Vision Language Models (GPT-4V, LLaVA), sensor fusion, and edge AI on Hailo, Jetson, and smartphone NPUs.">
+<meta name="keywords" content="computer vision production, multi-object tracking, ByteTrack, DeepSORT, optical flow, RAFT, VLM vision language model, GPT-4V, LLaVA, Florence, edge AI, Hailo, Jetson, TensorRT, ONNX, quantization, Mobileye, Israel AI, MLAIA">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.mlaia.com/blog-computer-vision-production.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Vision in Production: From Tracking to VLMs to Edge Deployment">
+<meta property="og:description" content="Multi-object tracking, optical flow, Vision Language Models, sensor fusion, and running CV at the edge — a production engineer's field guide to modern computer vision.">
+<meta property="og:url" content="https://www.mlaia.com/blog-computer-vision-production.html">
+<meta property="og:site_name" content="MLAIA">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Computer Vision in Production: From Tracking to VLMs to Edge Deployment">
+<meta name="twitter:description" content="ByteTrack, RAFT optical flow, GPT-4V in pipelines, sensor fusion tradeoffs, INT8 quantization on Hailo and Jetson — the production CV stack explained.">
+
+<!-- Article JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Computer Vision in Production: From Tracking to VLMs to Edge Deployment",
+  "description": "A practitioner's guide to deploying computer vision in production: multi-object tracking, optical flow with RAFT, Vision Language Models, sensor fusion, and edge AI on Hailo, Jetson, and smartphone NPUs.",
+  "image": "https://www.mlaia.com/assets/yochai-headshot.jpg",
+  "datePublished": "2026-08-10",
+  "dateModified": "2026-08-10",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Yochai Edlitz",
+    "url": "https://www.mlaia.com/about-us/",
+    "jobTitle": "Founder & CEO, MLAIA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MLAIA",
+    "url": "https://www.mlaia.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.mlaia.com/assets/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.mlaia.com/blog-computer-vision-production.html"
+  },
+  "keywords": "computer vision production, multi-object tracking, ByteTrack, DeepSORT, optical flow, RAFT, VLM, GPT-4V, LLaVA, edge AI, Hailo, Jetson, TensorRT, quantization, Mobileye, sensor fusion, MLAIA"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mlaia.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.mlaia.com/blog.html"},
+    {"@type": "ListItem", "position": 3, "name": "Computer Vision in Production: From Tracking to VLMs to Edge Deployment", "item": "https://www.mlaia.com/blog-computer-vision-production.html"}
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --panel: #111827;
+    --ink: #e6edf3;
+    --muted: #94a3b8;
+    --accent: #7c3aed;
+    --accent-2: #38bdf8;
+    --border: #1f2937;
+    --code-bg: #0f172a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.site {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  header.site a.brand { color: var(--ink); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+  header.site nav a { color: var(--muted); text-decoration: none; margin-left: 1.25rem; font-size: 0.95rem; }
+  header.site nav a:hover { color: var(--accent); }
+  main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .category {
+    display: inline-block;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: clamp(1.85rem, 4vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+    color: #f8fafc;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 2rem;
+  }
+  .back-link a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  article h2 {
+    margin-top: 2.75rem;
+    font-size: 1.45rem;
+    color: #f1f5f9;
+    border-left: 3px solid var(--accent);
+    padding-left: 0.75rem;
+  }
+  article h3 {
+    margin-top: 1.75rem;
+    font-size: 1.15rem;
+    color: #e2e8f0;
+  }
+  article p { margin: 1rem 0; }
+  article a { color: var(--accent); }
+  blockquote {
+    border-left: 4px solid var(--accent-2);
+    background: rgba(56, 189, 248, 0.06);
+    margin: 1.75rem 0;
+    padding: 1rem 1.25rem;
+    color: #e2e8f0;
+    font-style: italic;
+    border-radius: 4px;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .stat .num { font-size: 1.7rem; font-weight: 700; color: var(--accent); }
+  .stat .label { color: var(--muted); font-size: 0.85rem; }
+  .callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    margin: 1.75rem 0;
+  }
+  .callout strong { color: var(--accent); }
+  .arch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.88rem;
+  }
+  .arch-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .arch-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid rgba(31,41,55,0.6);
+    vertical-align: top;
+  }
+  .arch-table tr:last-child td { border-bottom: none; }
+  .arch-table .label-col { color: #f1f5f9; font-weight: 600; }
+  .arch-table .pro { color: #34d399; font-size: 0.82rem; }
+  .arch-table .con { color: #f87171; font-size: 0.82rem; }
+  code {
+    background: var(--code-bg);
+    color: #a78bfa;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+  }
+  ul, ol { padding-left: 1.25rem; }
+  ul li, ol li { margin: 0.4rem 0; }
+  figure.infographic {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  figure.infographic svg { width: 100%; height: auto; display: block; }
+  figure.infographic figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+  .cta {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .cta a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: var(--accent);
+    color: #f8fafc;
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer.site {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="https://www.mlaia.com/index.html">MLAIA · Machine Learning &amp; AI Approach</a>
+  <nav>
+    <a href="https://www.mlaia.com/index.html#about">About</a>
+    <a href="https://www.mlaia.com/index.html#domains">Domains</a>
+    <a href="https://www.mlaia.com/blog.html">Blog</a>
+    <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+    <a href="https://www.mlaia.com/index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <span class="category">Computer Vision &amp; Edge AI</span>
+  <h1>Computer Vision in Production: From Tracking to VLMs to Edge Deployment</h1>
+  <p class="meta">August 10, 2026 · 10 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
+  <p class="back-link"><a href="https://www.mlaia.com/blog.html">← Back to all posts</a></p>
+
+  <article>
+
+    <p>Computer vision has had a quietly transformative few years. The field that once meant "train a ResNet on ImageNet and call it a day" now spans real-time multi-object tracking at 60 fps, RAFT-based optical flow that beats classical methods at a fraction of the latency, Vision Language Models that answer open-ended questions about what a camera sees, and inference on purpose-built silicon that fits inside a dashcam housing. What hasn't changed is the gap between a working demo and a production system. This post is a practitioner's guide to crossing it — covering the tracking algorithms actually deployed at scale, the state of optical flow in 2026, how VLMs are reshaping CV pipelines, sensor fusion tradeoffs, and what it really takes to ship CV on constrained edge hardware.</p>
+
+    <div class="stat-row">
+      <div class="stat"><div class="num">$22B</div><div class="label">global computer vision market, 2026</div></div>
+      <div class="stat"><div class="num">60 fps</div><div class="label">real-time tracking requirement in most surveillance deployments</div></div>
+      <div class="stat"><div class="num">INT8</div><div class="label">quantization target for most production edge CV models</div></div>
+      <div class="stat"><div class="num">3–5×</div><div class="label">latency reduction achievable via TensorRT vs PyTorch baseline</div></div>
+    </div>
+
+    <hr>
+
+    <h2>1. Multi-Object Tracking: From SORT to ByteTrack</h2>
+
+    <p>Multi-object tracking (MOT) is the problem of assigning consistent identities to detected objects across video frames — keeping track of person #7 as they move through a crowded retail aisle, or vehicle #23 as it merges onto a highway. It sounds simple. In practice, it is one of the harder CV engineering problems to get right at production quality, because it requires real-time performance, robustness to occlusion, and graceful handling of the "ID switch" failure mode where the tracker loses an identity and incorrectly reassigns it.</p>
+
+    <h3>The tracking-by-detection paradigm</h3>
+
+    <p>The dominant production approach remains <strong>tracking-by-detection</strong>: a detector (YOLO, RT-DETR, or similar) runs on each frame and produces a set of bounding boxes, which a separate tracker then links across frames using a combination of motion prediction and appearance features. This decoupled architecture lets you upgrade either component independently and is why most production MOT pipelines are built this way rather than on end-to-end learned approaches.</p>
+
+    <p><strong>SORT</strong> (Simple Online and Realtime Tracking) established the baseline in 2016: Kalman filter for motion prediction, Hungarian algorithm for assignment. It runs at hundreds of frames per second but loses tracks frequently during occlusion. <strong>DeepSORT</strong> added a deep appearance feature extractor (a lightweight ReID network), dramatically reducing ID switches at the cost of higher compute. Both remain widely deployed where hardware is not severely constrained.</p>
+
+    <p>The current production standard for most new deployments is <strong>ByteTrack</strong>, which introduced a key insight: rather than discarding low-confidence detections (as SORT and DeepSORT do), ByteTrack uses them as a second association stage to recover occluded tracks. Low-confidence boxes that overlap strongly with existing predicted track positions are used to extend tracks through occlusion, before being confirmed by high-confidence detections when the object re-emerges. The result is substantially fewer ID switches with minimal additional computation — ByteTrack runs comfortably at real-time on a mid-range GPU and has become the default choice for retail analytics, surveillance, and sports tracking applications.</p>
+
+    <h3>End-to-end trackers: the emerging challenger</h3>
+
+    <p>End-to-end learned trackers — where detection and association are jointly optimized — have made serious progress. <strong>MOTR</strong> and its successors frame tracking as a set prediction problem, eliminating the hand-engineered association logic entirely. The appeal is clear: a single model that is aware of temporal context during training can learn to handle occlusion and reidentification in ways that a post-hoc association algorithm cannot. The barrier has been inference speed: end-to-end trackers based on transformer architectures are significantly heavier than ByteTrack + detector, and the gap matters when you are processing 8 camera streams on a single embedded board. As dedicated vision accelerators become more capable, this tradeoff will shift — but for most production deployments today, ByteTrack remains the pragmatic choice.</p>
+
+    <div class="callout">
+      <strong>Production gotcha:</strong> Tracker hyperparameters (IoU threshold, max age before track deletion, minimum hits before track confirmation) are highly scene-dependent. A surveillance deployment in a crowded station requires very different settings than a warehouse AMR tracking sparse pallets. Always tune on a representative clip from your actual deployment environment, not on MOT benchmark videos — the distributions are rarely the same.
+    </div>
+
+    <h2>2. Optical Flow: Dense, Sparse, and RAFT</h2>
+
+    <p>Optical flow — estimating per-pixel motion between frames — is one of those CV primitives that quietly underpins dozens of production applications. Video stabilization, action recognition, autonomous driving scene understanding, industrial inspection, surgical robotics: all of them use flow estimates, often implicitly.</p>
+
+    <h3>Sparse vs dense flow</h3>
+
+    <p><strong>Sparse optical flow</strong> (Lucas-Kanade, tracked via the Kanade-Lucas-Tomasi feature tracker) computes motion for a set of keypoints rather than every pixel. It is fast, predictable, and still the right choice for camera pose estimation, SLAM front-ends, and video stabilization pipelines where dense coverage is unnecessary and compute is limited. OpenCV's <code>calcOpticalFlowPyrLK</code> remains production-standard for sparse flow.</p>
+
+    <p><strong>Dense optical flow</strong> computes a motion vector for every pixel. Classical approaches (Farneback, TV-L1) produce smooth estimates but struggle with large displacements and fast motion. The deep learning era changed this decisively: <strong>FlowNet</strong> and <strong>PWC-Net</strong> showed that learned flow could outperform classical methods on standard benchmarks. But the real step-change was <strong>RAFT</strong> (Recurrent All-Pairs Field Transforms), introduced by Teed and Deng in 2020 and now refined into several production-oriented variants.</p>
+
+    <h3>RAFT and its descendants in production</h3>
+
+    <p>RAFT works by constructing an all-pairs correlation volume — comparing every patch in one frame against every patch in the other — and then iteratively refining a flow estimate using a GRU-based recurrent unit. This architecture delivers state-of-the-art accuracy on large-motion and fine-structure cases that defeat earlier networks. The tradeoff is memory: the all-pairs correlation volume is O(H×W×H×W), which is prohibitive at high resolution.</p>
+
+    <p>Production deployments that need RAFT-quality flow but can't afford its full memory footprint typically use one of two approaches: <strong>RAFT-Small</strong> (a distilled variant with roughly 5× fewer parameters, adequate for many video understanding tasks) or resolution-adaptive inference (full RAFT at downsampled resolution, with dense upsampling for the final map). For autonomous driving specifically, <strong>FlowFormer</strong> and scene-flow variants (which estimate 3D motion rather than 2D image-plane flow) are becoming the standard, as they integrate naturally with lidar and depth data.</p>
+
+    <p>Key production applications in 2026:</p>
+    <ul>
+      <li><strong>Video stabilization:</strong> Sparse KLT flow for camera motion estimation + warp; deployed in every smartphone camera stack and most broadcast production systems</li>
+      <li><strong>Action recognition:</strong> Two-stream architectures (RGB + optical flow) still outperform pure RGB models on fine-grained actions — surgical gesture recognition, sports analytics, industrial assembly verification</li>
+      <li><strong>Autonomous driving:</strong> Dense flow used for ego-motion compensation, moving object segmentation, and feeding temporal context into downstream perception heads</li>
+      <li><strong>Industrial inspection:</strong> Flow-based anomaly detection catches defects that appear only in motion (vibration patterns, conveyor irregularities, subtle deformations under load)</li>
+    </ul>
+
+    <h2>3. Vision Language Models: How VLMs Are Reshaping CV Pipelines</h2>
+
+    <p>The arrival of production-capable VLMs is the biggest structural shift in computer vision since the deep learning era began. Models like <strong>GPT-4V</strong>, <strong>LLaVA</strong>, <strong>Florence-2</strong>, and <strong>Qwen-VL</strong> can answer open-ended natural language questions about an image, generate descriptions, perform visual grounding (localizing objects described in text), and execute zero-shot classification without any task-specific training data. For production CV teams, this creates both opportunities and new engineering challenges.</p>
+
+    <h3>Where VLMs actually belong in production pipelines</h3>
+
+    <p>VLMs are not, in 2026, a replacement for task-specific CV models in latency-critical pipelines. A VLM adding textual reasoning to a video stream at 30 fps is not feasible with current inference economics — a GPT-4V API call takes hundreds of milliseconds and costs orders of magnitude more per frame than running YOLO locally. What VLMs have changed is the class of tasks that require custom ML development at all:</p>
+
+    <ul>
+      <li><strong>Zero-shot quality inspection:</strong> "Does this product have a visible surface defect?" — asked over representative frames, without labeling a training set. VLMs can reach useful accuracy on many inspection tasks that previously required weeks of data collection and annotation.</li>
+      <li><strong>Alert triage:</strong> Security camera alerts are overwhelmingly false positives. A VLM reviewing flagged frames and providing a natural-language description of what triggered the alert (with a confidence assessment) dramatically reduces human review burden.</li>
+      <li><strong>Visual question answering for field operations:</strong> Maintenance technicians photographing equipment can get instant responses — "Is this valve handle in the open or closed position?" — without task-specific models trained on each piece of machinery.</li>
+      <li><strong>Document and label OCR + understanding:</strong> Florence-2 and similar grounding models handle structured extraction from visually complex documents (pharmaceutical labels, circuit boards, shipping manifests) where classical OCR pipelines struggled.</li>
+    </ul>
+
+    <h3>Grounding and spatial understanding</h3>
+
+    <p>VLM grounding — the ability to localize objects or regions described in text — has matured significantly. <strong>Florence-2</strong>'s phrase grounding and referring expression comprehension capabilities let you ask "where is the fire extinguisher?" and get a bounding box back, without any domain-specific training. <strong>Qwen-VL</strong>'s spatial understanding has proven particularly strong in industrial contexts where precise localization matters. The practical constraint is that grounding accuracy degrades on small objects, cluttered scenes, and domain-specific terminology that wasn't well represented in pretraining — exactly the conditions that characterize many production deployments.</p>
+
+    <figure class="infographic">
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CV pipeline architecture showing camera input flowing through detection, tracking, optical flow, VLM triage, and output stages">
+        <text x="20" y="28" fill="#f1f5f9" font-size="15" font-weight="700" font-family="sans-serif">Modern Production CV Pipeline</text>
+
+        <!-- Camera -->
+        <rect x="10" y="50" width="90" height="70" rx="8" fill="#0f172a" stroke="#334155"/>
+        <text x="55" y="79" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">CAMERA</text>
+        <text x="55" y="94" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">30–120 fps</text>
+        <text x="55" y="108" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">stream</text>
+        <line x1="102" y1="85" x2="116" y2="85" stroke="#334155" stroke-width="1.5" marker-end="url(#arrV)"/>
+
+        <!-- Detect + Track -->
+        <rect x="118" y="50" width="110" height="70" rx="8" fill="#0f172a" stroke="#7c3aed" stroke-width="1.5"/>
+        <text x="173" y="72" fill="#7c3aed" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">DETECT + TRACK</text>
+        <text x="173" y="87" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">YOLO / RT-DETR</text>
+        <text x="173" y="101" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">ByteTrack IDs</text>
+        <text x="173" y="115" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">60 fps real-time</text>
+        <line x1="230" y1="85" x2="244" y2="85" stroke="#334155" stroke-width="1.5" marker-end="url(#arrV)"/>
+
+        <!-- Optical Flow -->
+        <rect x="246" y="50" width="110" height="70" rx="8" fill="#0f172a" stroke="#334155"/>
+        <text x="301" y="72" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">OPTICAL FLOW</text>
+        <text x="301" y="87" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">RAFT-Small</text>
+        <text x="301" y="101" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">motion context</text>
+        <text x="301" y="115" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">for action cls</text>
+        <line x1="358" y1="85" x2="372" y2="85" stroke="#334155" stroke-width="1.5" marker-end="url(#arrV)"/>
+
+        <!-- Alert filter -->
+        <rect x="374" y="50" width="110" height="70" rx="8" fill="#0f172a" stroke="#334155"/>
+        <text x="429" y="72" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">RULE FILTER</text>
+        <text x="429" y="87" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">threshold / zone</text>
+        <text x="429" y="101" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">business logic</text>
+        <text x="429" y="115" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">alert triggers</text>
+        <line x1="486" y1="85" x2="500" y2="85" stroke="#334155" stroke-width="1.5" marker-end="url(#arrV)"/>
+
+        <!-- VLM Triage -->
+        <rect x="502" y="50" width="110" height="70" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+        <text x="557" y="72" fill="#38bdf8" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.08em">VLM TRIAGE</text>
+        <text x="557" y="87" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">GPT-4V / LLaVA</text>
+        <text x="557" y="101" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">async, on alert</text>
+        <text x="557" y="115" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">NL description</text>
+
+        <!-- Labels below -->
+        <text x="20" y="160" fill="#94a3b8" font-size="10" font-weight="600" font-family="sans-serif">Key insight: VLMs sit off the hot path — triggered async on alerts, not on every frame. This keeps latency viable.</text>
+
+        <!-- Sensor fusion row -->
+        <text x="20" y="190" fill="#94a3b8" font-size="10" font-weight="600" font-family="sans-serif">Optional fusion inputs:</text>
+        <rect x="20" y="200" width="80" height="28" rx="5" fill="#0f172a" stroke="#334155"/>
+        <text x="60" y="218" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">Depth / LiDAR</text>
+        <rect x="112" y="200" width="80" height="28" rx="5" fill="#0f172a" stroke="#334155"/>
+        <text x="152" y="218" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">Thermal IR</text>
+        <rect x="204" y="200" width="80" height="28" rx="5" fill="#0f172a" stroke="#334155"/>
+        <text x="244" y="218" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">Audio events</text>
+        <rect x="296" y="200" width="80" height="28" rx="5" fill="#0f172a" stroke="#334155"/>
+        <text x="336" y="218" fill="#e2e8f0" font-size="9" font-family="sans-serif" text-anchor="middle">IMU / GPS</text>
+        <text x="395" y="218" fill="#64748b" font-size="9" font-family="sans-serif">→ late fusion at the rule filter / VLM context stage</text>
+
+        <defs>
+          <marker id="arrV" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#334155" stroke-width="1.2"/></marker>
+        </defs>
+      </svg>
+      <figcaption>A production-realistic CV pipeline. The VLM sits off the real-time hot path — invoked asynchronously on alerts, not on every frame — so latency constraints remain manageable.</figcaption>
+    </figure>
+
+    <h2>4. Multimodal Vision: Sensor Fusion in Practice</h2>
+
+    <p>Pure RGB vision is blind to situations where the information you need isn't visible in the optical spectrum. Night scenes, fog, through-wall detection, material composition, 3D structure — all require additional sensing modalities. Production multimodal CV systems typically combine RGB with one or more of: depth (structured light, stereo, ToF), LiDAR, thermal infrared, radar, or audio. The architectural question is always where in the pipeline to fuse.</p>
+
+    <h3>Early, late, and mid-level fusion</h3>
+
+    <table class="arch-table">
+      <thead>
+        <tr>
+          <th>Fusion Strategy</th>
+          <th>How It Works</th>
+          <th>Pros</th>
+          <th>Cons</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-col">Early fusion</td>
+          <td>Concatenate raw or minimally processed sensor inputs as additional channels before the backbone</td>
+          <td class="pro">Model learns cross-modal features jointly; theoretically highest representational capacity</td>
+          <td class="con">Tight alignment required; if one modality fails, entire model is affected; retraining needed when sensor changes</td>
+        </tr>
+        <tr>
+          <td class="label-col">Late fusion</td>
+          <td>Run separate models per modality; combine predictions (averaging, learned gating, Bayesian combination)</td>
+          <td class="pro">Modality-specific models can be developed/updated independently; graceful degradation if one sensor fails</td>
+          <td class="con">Cross-modal feature interactions not learned; predictions combined at a coarse level</td>
+        </tr>
+        <tr>
+          <td class="label-col">Mid-level (feature) fusion</td>
+          <td>Separate encoders per modality; fuse at an intermediate feature representation (cross-attention, concatenation, gating)</td>
+          <td class="pro">Balances joint learning with modularity; dominant approach in autonomous driving</td>
+          <td class="con">More complex to design and train; cross-attention adds compute cost</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>For most production surveillance, industrial, and logistics deployments, <strong>late fusion</strong> is the practical choice: it is easier to deploy, easier to debug, and allows each modality's model to be updated independently. Mid-level fusion with cross-attention is increasingly used where accuracy is paramount and engineering resources support the added complexity — autonomous vehicles (RGB + LiDAR), robotic surgery (RGB + depth + force), and high-end inspection systems.</p>
+
+    <h3>Thermal + RGB: the security deployment reality</h3>
+
+    <p>Thermal IR cameras are standard in perimeter security, data centers, and industrial facilities where night and adverse-weather detection is required. The practical fusion architecture in 2026 is almost always late fusion: a thermal detector running continuously (it is good at detection in darkness, immune to camouflage, privacy-safe), with an RGB model providing classification and appearance details when the thermal detector fires an alert. Fusing thermal and RGB at the feature level requires calibrated sensor alignment and a paired training dataset — feasible for a large security integrator, impractical for most production deployments.</p>
+
+    <h2>5. Computer Vision at the Edge: Hailo, Jetson, and What Actually Ships</h2>
+
+    <p>Edge CV deployment is where the gap between research and production is widest. Running a YOLOv8 detection model in a Python notebook is a one-hour exercise. Running it at 30 fps on a device that draws under 10 watts, embedded in a housing that reaches 70°C in direct sunlight, is a multi-week engineering project. Here is what the edge CV stack actually looks like in 2026.</p>
+
+    <h3>The hardware landscape</h3>
+
+    <p><strong>NVIDIA Jetson</strong> (Orin NX, Orin Nano) remains the dominant platform for edge CV in research, robotics, and applications where you need flexibility. The full software stack — TensorRT, CUDA, NVIDIA's DeepStream for multi-camera inference pipelines — is mature and well-documented. The tradeoff is power (10–40W depending on module) and cost (the Orin NX starts above $200 at module cost). Most serious edge CV prototypes and mid-to-high-end products ship on Jetson.</p>
+
+    <p><strong>Hailo</strong>, the Tel Aviv-based AI chip company, has carved out a significant position with its Hailo-8 and Hailo-8L NPUs. The Hailo-8 delivers 26 TOPS in a 2.5W envelope — performance per watt that Jetson cannot match. Hailo chips are embedded in Raspberry Pi AI Kit (making them accessible to a huge developer base), industrial cameras, and OEM products across smart cities, retail analytics, and automotive. The constraint is the Dataflow Compiler: you compile your model into a static dataflow graph, which is highly efficient but means dynamic control flow (the kind common in complex multi-stage pipelines) needs to be handled outside the chip. Working within this constraint is a learned skill — teams that have done it once understand which model architectures map cleanly and which require architectural changes.</p>
+
+    <p><strong>Smartphone NPUs</strong> (Apple Neural Engine, Qualcomm Hexagon, MediaTek APU) are the most widely deployed CV inference hardware on earth, even though most CV engineers don't think of phones as edge devices. The Apple Neural Engine in the A17 Pro delivers approximately 35 TOPS; Qualcomm's Snapdragon 8 Elite is in the same range. Every major mobile CV use case — real-time portrait segmentation, scene understanding, augmented reality anchoring, document scanning — runs on these. The path to deployment is Core ML (Apple) or SNPE/QNN (Qualcomm), both of which accept ONNX as an interchange format.</p>
+
+    <h3>The optimization stack: getting your model to run</h3>
+
+    <p>The standard production path for edge CV model optimization follows a predictable sequence:</p>
+
+    <ol>
+      <li><strong>Export to ONNX:</strong> PyTorch → ONNX is now reliable for most standard architectures. Custom ops and dynamic shapes are the common failure points — address these first.</li>
+      <li><strong>Quantization to INT8:</strong> Post-training quantization (PTQ) with a representative calibration dataset typically achieves 80–95% of FP32 accuracy with 2–4× speedup on INT8-capable hardware. For accuracy-sensitive applications (medical imaging, safety-critical detection), quantization-aware training (QAT) closes the remaining gap at the cost of retraining time.</li>
+      <li><strong>TensorRT compilation:</strong> For Jetson, TensorRT compilation on top of the INT8 ONNX model delivers an additional 1.5–3× speedup through kernel fusion, layer optimization, and hardware-specific memory layout. The compiled engine is hardware-specific and must be regenerated for each device variant.</li>
+      <li><strong>Hailo Dataflow Compiler:</strong> Hailo's toolchain ingests ONNX and performs the dataflow compilation step, including automatic quantization with the Hailo Model Zoo as a reference. Models with non-standard layers require manual layer implementation or architectural substitution.</li>
+      <li><strong>Profiling and bottleneck analysis:</strong> NSight Systems (Jetson), Hailo Profiler, or Instruments (Apple) reveals whether bottlenecks are compute-bound or memory-bandwidth-bound — which determines whether further quantization, pruning, or architectural changes are the right lever.</li>
+    </ol>
+
+    <div class="callout">
+      <strong>INT4 quantization in practice:</strong> INT4 (4-bit weight quantization) has become viable for several production use cases following advances in GPTQ-style techniques adapted from the LLM space. For CV models, INT4 delivers another 1.5–2× size reduction with acceptable accuracy loss on detection tasks (typically &lt;1% mAP degradation on well-calibrated models). It is worth evaluating if your target hardware supports it — the Hailo-8L and recent Qualcomm NPUs do — but is not universally applicable; segmentation and depth estimation models tend to degrade more sharply.
+    </div>
+
+    <h3>The Israeli edge AI ecosystem</h3>
+
+    <p>Israel is disproportionately significant in edge computer vision. <strong>Mobileye</strong>, acquired by Intel and then re-listed on NASDAQ, built the automotive CV industry — its EyeQ chips process camera, radar, and lidar data for driver assistance and autonomous driving in over 100 million vehicles. Mobileye's production deployment experience at automotive scale (functional safety certification, operating temperature range, multi-year software update constraints) informs what "production CV at the edge" actually means at its most demanding.</p>
+
+    <p><strong>Hailo's</strong> Hailo-8L is specifically designed for cost-sensitive volume applications — embedded in smart cameras, retail analytics devices, and industrial inspection systems shipping in the hundreds of thousands. The company's partnerships with camera manufacturers like Axis and integration into the Raspberry Pi ecosystem have made it a first-choice option for integrators building new CV-enabled products.</p>
+
+    <p>Other Israeli companies active in edge CV include <strong>Edgify</strong> (federated learning for edge retail), <strong>Sievert</strong> (CV for industrial inspection), and a cluster of defense-adjacent computer vision companies that rarely appear in commercial press but drive significant IP development in tracking, thermal imaging, and sensor fusion.</p>
+
+    <h2>6. Production Considerations: Monitoring, Annotation, and Privacy</h2>
+
+    <p>Getting a CV model to pass offline evaluation metrics is the easy part. Keeping it performing in production — against a world that keeps changing — is the harder engineering discipline. Here are the considerations that most production CV teams learn the hard way.</p>
+
+    <h3>Data drift in visual domains</h3>
+
+    <p>Visual data drift is particularly insidious because it can be invisible to standard statistical tests applied to raw pixel values. Camera hardware upgrades (new lens, sensor, firmware update), seasonal changes in lighting (winter sun angles vs summer), facility changes (new paint color, rearranged fixtures), and even dust accumulation on a lens can shift the input distribution enough to meaningfully degrade model performance — without triggering alerts based on prediction confidence alone.</p>
+
+    <p>Effective visual drift monitoring combines: (1) tracking aggregate statistics of model intermediate activations (not just outputs), (2) periodic human review of randomly sampled hard negatives (frames where the model expressed low confidence), and (3) for production systems with ground truth, performance metric tracking via CUSUM or similar sequential change detection. For systems where ground truth is delayed or unavailable (like surveillance), proxy metrics — tracker ID switch rate, detection confidence distribution, inter-frame bounding box velocity distribution — serve as leading indicators of model degradation.</p>
+
+    <h3>Annotation pipelines and active learning</h3>
+
+    <p>Initial training data is rarely sufficient for production CV. Edge cases, rare object classes, new environmental conditions, and domain adaptation needs all require ongoing annotation. The production-grade annotation workflow for CV looks very different from a research lab's: it involves a labeling platform (Label Studio, Scale AI, CVAT) integrated with a model-in-the-loop, where the current model pre-annotates frames and human reviewers correct errors rather than labeling from scratch.</p>
+
+    <p>Active learning — selecting which frames are most informative to label, rather than labeling at random — is particularly high-value for CV where annotation is expensive and data volume is large. Core sampling strategies include uncertainty sampling (label frames where the model is least confident), diversity sampling (cover the input distribution rather than redundantly labeling similar frames), and error-driven sampling (prioritize frames from deployment scenarios where the model is known to underperform). The combination of these approaches typically achieves within 90% of full-dataset accuracy using 20–30% of the annotation budget — a meaningful economic advantage in production systems that require continuous retraining.</p>
+
+    <h3>Privacy: face detection, blur, and regulatory compliance</h3>
+
+    <p>Any CV deployment that processes video of people — which is most surveillance, retail, and public-space applications — faces privacy obligations that have become substantially more demanding in recent years. GDPR in Europe and Israel's Privacy Protection Regulations impose requirements on biometric data processing; the EU AI Act classifies real-time remote biometric identification in public spaces as prohibited AI (with narrow law enforcement exceptions) and general-purpose emotional recognition as high-risk.</p>
+
+    <p>The practical response in most commercial deployments is privacy-by-design: face blurring or replacement at the camera or edge device level, before any data leaves the physical premises. Production face blurring pipelines use lightweight face detectors (RetinaFace, YuNet) running at full frame rate on edge hardware, with Gaussian or pixelation blur applied to detected bounding boxes before the frame is forwarded to any downstream model or storage. The latency overhead is typically under 5ms on INT8-quantized detectors. For analytics use cases that need body-level tracking without facial identification, skeleton pose estimation (replacing bounding boxes with keypoint representations) has become the privacy-compliant alternative to person tracking with appearance features.</p>
+
+    <hr>
+
+    <p>Computer vision in production is a discipline of tradeoffs: accuracy versus latency, generality versus optimization, rich sensor fusion versus engineering complexity, capability versus privacy compliance. The field has matured to the point where the algorithm questions are largely answerable — ByteTrack for tracking, RAFT variants for flow, VLMs for open-ended understanding, INT8 quantization for edge deployment. The questions that separate successful production deployments from failed ones are operational: how do you detect when your model has drifted, how do you keep your annotation pipeline current with your deployment environment, and how do you design for the privacy obligations that come with any camera-based system. Getting those right is what "making AI work in production" actually means in computer vision.</p>
+
+    <div class="cta">
+      <strong>Deploying computer vision in a production environment?</strong>
+      <br>
+      <a href="https://www.mlaia.com/index.html#contact">Talk to MLAIA about CV system design, edge deployment, and model monitoring →</a>
+    </div>
+
+  </article>
+</main>
+
+<footer class="site">
+  <p>© 2026 MLAIA — Machine Learning &amp; AI Approach · <a href="https://www.mlaia.com/blog.html">Blog</a> · <a href="https://www.mlaia.com/index.html#contact">Contact</a></p>
+</footer>
+
+</body>
+</html>
