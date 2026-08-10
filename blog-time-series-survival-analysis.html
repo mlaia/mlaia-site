@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google Analytics 4 — fires only after analytics consent -->
+<script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Series in Production: From Prophet to Foundation Models — and When Survival Analysis Is What You Actually Need — MLAIA</title>
+
+<!-- SEO -->
+<meta name="description" content="ARIMA, Prophet, TimesFM, Amazon Chronos, MOIRAI, TFT, N-BEATS — and when to reach for Kaplan-Meier or DeepSurv instead. A production engineer's guide to time series forecasting and survival analysis in 2026.">
+<meta name="keywords" content="time series forecasting production, Prophet Facebook, TimesFM Google, Amazon Chronos, MOIRAI Salesforce, Lag-Llama, TFT Temporal Fusion Transformer, N-BEATS, N-HiTS, PatchTST, TiDE, survival analysis machine learning, Kaplan-Meier, Cox proportional hazards, DeepSurv, DeepHit, Random Survival Forests, customer churn survival, predictive maintenance survival, MLAIA Israel">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.mlaia.com/blog-time-series-survival-analysis.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Time Series in Production: From Prophet to Foundation Models — and When Survival Analysis Is What You Actually Need">
+<meta property="og:description" content="Prophet still works. TimesFM is impressive. But if your data has censoring, competing risks, or a time-to-event question underneath it, the right tool is survival analysis — and most teams never consider it.">
+<meta property="og:url" content="https://www.mlaia.com/blog-time-series-survival-analysis.html">
+<meta property="og:site_name" content="MLAIA">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Time Series in Production: From Prophet to Foundation Models — and When Survival Analysis Is What You Actually Need">
+<meta name="twitter:description" content="A practitioner's map: classical TS, foundation models, deep learning architectures — and the survival analysis toolkit most ML teams overlook. When each approach wins and when it fails in production.">
+
+<!-- Article JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Time Series in Production: From Prophet to Foundation Models — and When Survival Analysis Is What You Actually Need",
+  "description": "ARIMA, Prophet, TimesFM, Amazon Chronos, MOIRAI, TFT, N-BEATS — and when to reach for Kaplan-Meier or DeepSurv instead. A production engineer's guide to time series forecasting and survival analysis in 2026.",
+  "image": "https://www.mlaia.com/assets/yochai-headshot.jpg",
+  "datePublished": "2026-08-10",
+  "dateModified": "2026-08-10",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Yochai Edlitz",
+    "url": "https://www.mlaia.com/about-us/",
+    "jobTitle": "Founder & CEO, MLAIA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MLAIA",
+    "url": "https://www.mlaia.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.mlaia.com/assets/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.mlaia.com/blog-time-series-survival-analysis.html"
+  },
+  "keywords": "time series forecasting, Prophet, TimesFM, Amazon Chronos, MOIRAI, Temporal Fusion Transformer, N-BEATS, N-HiTS, survival analysis, Kaplan-Meier, Cox proportional hazards, DeepSurv, DeepHit, Random Survival Forests, customer churn, predictive maintenance, MLAIA"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mlaia.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.mlaia.com/blog.html"},
+    {"@type": "ListItem", "position": 3, "name": "Time Series in Production: From Prophet to Foundation Models — and When Survival Analysis Is What You Actually Need", "item": "https://www.mlaia.com/blog-time-series-survival-analysis.html"}
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --panel: #111827;
+    --ink: #e6edf3;
+    --muted: #94a3b8;
+    --accent: #0057ff;
+    --accent-2: #00b4d8;
+    --border: #1f2937;
+    --code-bg: #0f172a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.site {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  header.site a.brand { color: var(--ink); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+  header.site nav a { color: var(--muted); text-decoration: none; margin-left: 1.25rem; font-size: 0.95rem; }
+  header.site nav a:hover { color: var(--accent); }
+  main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .category {
+    display: inline-block;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: clamp(1.85rem, 4vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+    color: #f8fafc;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 2rem;
+  }
+  .back-link a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  article h2 {
+    margin-top: 2.75rem;
+    font-size: 1.45rem;
+    color: #f1f5f9;
+    border-left: 3px solid var(--accent);
+    padding-left: 0.75rem;
+  }
+  article h3 {
+    margin-top: 1.75rem;
+    font-size: 1.15rem;
+    color: #e2e8f0;
+  }
+  article p { margin: 1rem 0; }
+  article a { color: var(--accent); }
+  blockquote {
+    border-left: 4px solid var(--accent-2);
+    background: rgba(0, 180, 216, 0.06);
+    margin: 1.75rem 0;
+    padding: 1rem 1.25rem;
+    color: #e2e8f0;
+    font-style: italic;
+    border-radius: 4px;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .stat .num { font-size: 1.7rem; font-weight: 700; color: var(--accent); }
+  .stat .label { color: var(--muted); font-size: 0.85rem; }
+  .callout {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    margin: 1.75rem 0;
+  }
+  .callout strong { color: var(--accent); }
+  .callout-teal {
+    background: rgba(0, 180, 216, 0.06);
+    border: 1px solid rgba(0, 180, 216, 0.25);
+    border-left: 4px solid var(--accent-2);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    margin: 1.75rem 0;
+  }
+  .callout-teal strong { color: var(--accent-2); }
+  .arch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.88rem;
+    overflow-x: auto;
+    display: block;
+  }
+  .arch-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .arch-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid rgba(31,41,55,0.6);
+    vertical-align: top;
+  }
+  .arch-table tr:last-child td { border-bottom: none; }
+  .arch-table .label-col { color: #f1f5f9; font-weight: 600; white-space: nowrap; }
+  .arch-table .pro { color: #34d399; font-size: 0.82rem; }
+  .arch-table .con { color: #f87171; font-size: 0.82rem; }
+  .arch-table .neu { color: #fbbf24; font-size: 0.82rem; }
+  code {
+    background: var(--code-bg);
+    color: #60a5fa;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+  }
+  ul, ol { padding-left: 1.25rem; }
+  ul li, ol li { margin: 0.4rem 0; }
+  figure.infographic {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  figure.infographic svg { width: 100%; height: auto; display: block; }
+  figure.infographic figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+  .cta {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .cta a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: var(--accent);
+    color: #f8fafc;
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer.site {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="https://www.mlaia.com/index.html">MLAIA · Machine Learning &amp; AI Approach</a>
+  <nav>
+    <a href="https://www.mlaia.com/index.html#about">About</a>
+    <a href="https://www.mlaia.com/index.html#domains">Domains</a>
+    <a href="https://www.mlaia.com/blog.html">Blog</a>
+    <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+    <a href="https://www.mlaia.com/index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <span class="category">Time Series &amp; Predictive Analytics</span>
+  <h1>Time Series in Production: From Prophet to Foundation Models — and When Survival Analysis Is What You Actually Need</h1>
+  <p class="meta">August 10, 2026 · 13 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
+  <p class="back-link"><a href="https://www.mlaia.com/blog.html">← Back to all posts</a></p>
+
+  <article>
+
+    <p>Two things are true about time series in production in 2026: foundation models like Google's TimesFM and Amazon Chronos genuinely work well out of the box for a broad class of forecasting problems, and Prophet — released by Meta in 2017 — is still the right choice for the majority of business forecasting tasks at most organizations. Both of these are correct simultaneously, and knowing which applies to your problem is the gap between a productive month and an expensive detour.</p>
+
+    <p>But there is a third thing that most ML practitioners miss: a significant fraction of problems that arrive dressed as forecasting questions are actually survival analysis problems in disguise. "How many users will churn next month?" is a forecasting question. "Which users are at risk, given how long they have already been active?" is a survival question. Confusing the two costs precision, interpretability, and sometimes the entire production model.</p>
+
+    <div class="stat-row">
+      <div class="stat"><div class="num">~80%</div><div class="label">of business time series benefit from Prophet or LightGBM feature-engineered models — not foundation models</div></div>
+      <div class="stat"><div class="num">4</div><div class="label">major time series foundation models released 2023–2024: TimesFM, Chronos, MOIRAI, Lag-Llama</div></div>
+      <div class="stat"><div class="num">50%+</div><div class="label">of telecom and SaaS churn data is right-censored — exactly the regime where survival analysis wins</div></div>
+      <div class="stat"><div class="num">15×</div><div class="label">speedup using zero-shot TimesFM vs training a custom ARIMA/ETS model per series at scale</div></div>
+    </div>
+
+    <hr>
+
+    <h2>1. Classical Time Series: ARIMA, ETS, and Prophet — Still the Workhorses</h2>
+
+    <p>The classical toolkit is not legacy software that foundation models have replaced. It is a set of production-tested, auditable, fast-to-deploy methods that outperform deep learning on the majority of real business time series — especially the short, irregular, or low-frequency series that dominate enterprise demand planning, financial reporting, and operational analytics.</p>
+
+    <h3>ARIMA / SARIMA</h3>
+    <p>AutoRegressive Integrated Moving Average models remain the statistical standard for univariate series with clear autocorrelation structure. SARIMA (Seasonal ARIMA) extends this with explicit seasonal components. They excel when the series is relatively stationary after differencing, the dataset is small (hundreds to low thousands of observations), and the forecasting horizon is short (days to weeks). Their key limitations are manual order selection (partially addressed by <code>auto_arima</code> in the <code>pmdarima</code> library), inability to incorporate exogenous covariates cleanly at scale, and poor handling of multiple seasonalities — a weekly pattern nested inside an annual pattern is awkward to express in a single SARIMA model.</p>
+
+    <h3>Exponential Smoothing (ETS)</h3>
+    <p>State Space models for exponential smoothing — Error, Trend, Seasonality — are the backbone of the <code>statsmodels</code> ETS implementation and Holt-Winters. They fit faster than ARIMA, handle seasonality natively, and produce calibrated prediction intervals through state-space formulations. For retail and supply chain demand planning — weekly or monthly series, seasonal patterns, thousands of SKUs — ETS-family models remain extremely competitive and are often the right choice before reaching for anything more complex. The M-Competitions (M4, M5) consistently show ETS and Theta methods beating deep learning on typical business forecasting problems.</p>
+
+    <h3>Prophet</h3>
+    <p>Meta's Prophet (2017) solved a specific and common problem: business analysts needed to forecast daily or sub-daily series with strong weekly seasonality, known holiday effects, and occasional trend changepoints — without having to specify ARIMA orders or debug stationarity. Prophet's additive decomposition (trend + seasonality + holidays + noise) is intuitive, its Python and R APIs are clean, and it handles missing data gracefully. It produces reasonable probabilistic intervals via Bayesian sampling (Stan under the hood).</p>
+
+    <p>Prophet's real-world limitation is that it assumes a single additive decomposition that holds through time. When the relationship between trend and seasonality changes — as it did dramatically during COVID-19 for virtually every consumer time series — Prophet fits a single model to a fundamentally non-stationary process and degrades sharply. Its multiplicative seasonality mode helps when amplitude scales with trend, but it remains a single-series model with no mechanism for cross-series transfer learning. For a handful of series with clean patterns, Prophet is hard to beat on speed-to-production. For thousands of series with heterogeneous behavior, you need something else.</p>
+
+    <div class="callout">
+      <strong>Prophet production tip:</strong> The most common Prophet failure in production is ignoring changepoint sensitivity. The default <code>changepoint_prior_scale=0.05</code> is conservative — good for avoiding overfitting to noise, but can cause underfitting during genuine trend shifts. If your residuals show systematic autocorrelation in the first 20% or last 20% of the series, adjust <code>changepoint_prior_scale</code> upward and add known changepoint dates explicitly.
+    </div>
+
+    <h2>2. ML Approaches: LightGBM and XGBoost for Time Series</h2>
+
+    <p>Gradient-boosted trees are not naturally temporal models — they make i.i.d. assumptions that time series violate. The key is feature engineering: transform a sequential prediction problem into a supervised tabular one, and trees' tabular-data strengths apply directly.</p>
+
+    <h3>The feature engineering recipe</h3>
+    <p>The standard recipe for LightGBM time series:</p>
+    <ul>
+      <li><strong>Lag features:</strong> <code>y(t-1)</code>, <code>y(t-7)</code>, <code>y(t-14)</code>, <code>y(t-28)</code> — the signal's own recent past</li>
+      <li><strong>Rolling statistics:</strong> 7-day mean, 14-day std, 28-day median — local context without look-ahead</li>
+      <li><strong>Calendar features:</strong> day of week, month, is_weekend, is_holiday (critical for retail, AdTech, telecom)</li>
+      <li><strong>Fourier features:</strong> <code>sin(2πt/P)</code> and <code>cos(2πt/P)</code> for period P — encode seasonality without explicit seasonal models</li>
+      <li><strong>Exogenous features:</strong> price, temperature, campaign spend, competitor activity — anything correlated with the target</li>
+    </ul>
+
+    <p>The power of this approach is that any feature available at forecast time can be used — no special treatment needed. A retail chain that knows planned promotions, weather forecasts, and school calendars two weeks in advance can include all of that information as features. ARIMA and Prophet cannot consume arbitrary future covariates this naturally.</p>
+
+    <p>The limitation is the training objective: GBDT models train on point predictions and do not inherently understand temporal dependencies beyond the lags you engineer. Autocorrelation structure that ARIMA captures implicitly must be explicitly encoded. And for long-horizon forecasting (more than a few periods ahead), recursive multi-step prediction through a GBDT accumulates errors — direct multi-output strategies or specialized architectures are needed.</p>
+
+    <h3>When GBDT for time series wins</h3>
+    <p>The regime where LightGBM/XGBoost consistently outperforms classical methods: (1) rich exogenous features exist and matter, (2) multiple related series can share a model (global model across all SKUs or markets), (3) non-linear feature interactions drive the signal (promotional effects that interact with seasonality), or (4) the series have irregular patterns that fit neither ARIMA's autocorrelation structure nor Prophet's additive decomposition. The M5 competition (Walmart sales forecasting) — the most rigorous real-world time series benchmark to date — was dominated by LightGBM-based global models with extensive feature engineering.</p>
+
+    <h2>3. Deep Learning: Foundation Models vs. Architecture-Specific</h2>
+
+    <h3>Foundation models (2023–2024)</h3>
+
+    <p>The last two years produced four significant time series foundation models, each trained on massive corpora of diverse time series to enable zero-shot or few-shot forecasting on new series:</p>
+
+    <ul>
+      <li><strong>TimesFM (Google, 2024):</strong> A 200M parameter decoder-only Transformer trained on 100B time points from Google's internal datasets plus public corpora. Handles arbitrary context lengths via patching (similar to PatchTST). Zero-shot performance competitive with — or better than — task-specific models on M4 and ETT benchmarks. Available as an open-weight model.</li>
+      <li><strong>Amazon Chronos (2024):</strong> Frames time series forecasting as a language modeling problem — tokenizes time series values via quantization, then trains a T5-style seq2seq model on a large corpus of real and synthetic series. Produces probabilistic forecasts naturally (via sampling from the generative model). Open-source under Apache 2.0; scales from Tiny (8M params) to Large (710M params).</li>
+      <li><strong>Salesforce MOIRAI (2024):</strong> Trained on the LOTSA dataset (27B observations across 9 domains), MOIRAI uses a unified training approach with patch-based encoding that handles variable frequencies (hourly, daily, weekly, monthly) natively. Competitive zero-shot performance on M4, ETT, and Weather benchmarks without any finetuning.</li>
+      <li><strong>Lag-Llama (2024):</strong> A decoder-only LLM adapted for time series via lag features as tokens, trained on a diverse mix of public datasets. Produces probabilistic forecasts through autoregressive sampling. Particularly strong on low-frequency (weekly, monthly) series and business data.</li>
+    </ul>
+
+    <div class="callout-teal">
+      <strong>The foundation model payoff:</strong> Zero-shot forecasting from these models eliminates the model-per-series training loop that makes classical methods expensive at scale. For an organization with 10,000 SKUs, training and tuning ARIMA or Prophet per series takes hours and significant infrastructure. A zero-shot TimesFM call takes seconds. At scale, this is a decisive operational advantage — even if the accuracy is 2–3% worse than a well-tuned per-series model.
+    </div>
+
+    <h3>Architecture-specific deep learning models</h3>
+
+    <p>Beyond foundation models, the dedicated deep learning architectures for time series are mature enough to use in production with appropriate investment:</p>
+
+    <ul>
+      <li><strong>Temporal Fusion Transformer (TFT):</strong> Google's interpretable multi-horizon forecasting architecture (2020) handles multi-variate inputs, static covariates, future-known inputs, and past observations in a unified attention-based architecture. The variable selection network and interpretable multi-head attention provide output that resembles feature importance — useful when stakeholders need to understand what the model is using. TFT consistently ranks highly in multivariate long-horizon benchmarks and is available in GluonTS and PyTorch Forecasting.</li>
+      <li><strong>N-BEATS / N-HiTS:</strong> Pure MLP-based architectures (no attention, no recurrence) that decompose the forecast into interpretable trend and seasonality stacks (N-BEATS Interpretable). N-HiTS adds hierarchical interpolation and multi-rate sampling, enabling efficient long-horizon forecasts. Both are fast to train, architecturally simple, and highly competitive on M4 and M5.</li>
+      <li><strong>PatchTST:</strong> Applies the Vision Transformer's patch-based approach to time series — divides the series into non-overlapping patches, treats each as a token, and applies self-attention across patches. Extremely efficient on long sequences and strong on long-horizon univariate forecasting benchmarks (ETT, Weather, Exchange).</li>
+      <li><strong>TiDE (Time-series Dense Encoder):</strong> A dense MLP-based encoder-decoder that matches Transformer performance at a fraction of the compute. Training is fast, inference is cheap, and it handles exogenous features and multiple output horizons natively. Often the right choice when you need DL-level accuracy without Transformer-level serving cost.</li>
+    </ul>
+
+    <h2>4. The Production Comparison: Accuracy, Complexity, and Overhead</h2>
+
+    <table class="arch-table">
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Accuracy (typical)</th>
+          <th>Training effort</th>
+          <th>Serving cost</th>
+          <th>Cold-start</th>
+          <th>Best for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-col">ARIMA / ETS</td>
+          <td class="neu">Moderate — baseline-beating on short series</td>
+          <td class="pro">Minutes per series; CPU-only</td>
+          <td class="pro">Negligible</td>
+          <td class="con">Needs 2–3× seasonal cycles</td>
+          <td>Short univariate series, audit/explainability</td>
+        </tr>
+        <tr>
+          <td class="label-col">Prophet</td>
+          <td class="neu">Good with strong seasonality; degrades on regime shifts</td>
+          <td class="pro">Minutes; CPU</td>
+          <td class="pro">Negligible</td>
+          <td class="con">Needs history for trend estimation</td>
+          <td>Business KPIs with holidays, multiple seasonality</td>
+        </tr>
+        <tr>
+          <td class="label-col">LightGBM global</td>
+          <td class="pro">Strong — M5-winning approach</td>
+          <td class="pro">Fast; CPU; one model for all series</td>
+          <td class="pro">CPU microseconds</td>
+          <td class="pro">Cross-series transfer via global model</td>
+          <td>Many related series; rich exogenous features</td>
+        </tr>
+        <tr>
+          <td class="label-col">TFT / N-HiTS / TiDE</td>
+          <td class="pro">Strong on multivariate, long-horizon</td>
+          <td class="con">GPU; hours to days</td>
+          <td class="neu">GPU preferred; manageable</td>
+          <td class="pro">Global model handles new series</td>
+          <td>Long horizons; multivariate; covariate-rich</td>
+        </tr>
+        <tr>
+          <td class="label-col">TimesFM / Chronos (zero-shot)</td>
+          <td class="neu">Near-SOTA without training; finetunable</td>
+          <td class="pro">Zero training; inference only</td>
+          <td class="neu">GPU needed; API available</td>
+          <td class="pro">Works with as few as 50 observations</td>
+          <td>Scale (&gt;1k series); new series; low-data regime</td>
+        </tr>
+        <tr>
+          <td class="label-col">PatchTST / MOIRAI</td>
+          <td class="pro">Top-tier on long-horizon univariate/multivariate</td>
+          <td class="con">GPU; significant compute</td>
+          <td class="con">GPU serving required</td>
+          <td class="pro">Foundation model inference</td>
+          <td>Long-horizon; energy/weather/financial series</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>5. Production Considerations: Where Forecasting Systems Actually Break</h2>
+
+    <h3>Backtesting without leakage</h3>
+    <p>The most common silent error in time series ML is data leakage during evaluation. Using a random train-test split on a temporal dataset means your model "sees" future data during training — e.g., lag features computed from the test set, or a scaler fitted on the full dataset. The correct approach is walk-forward (expanding window) or rolling-window cross-validation, where the cutoff point is strictly enforced: no feature from time <em>t+1</em> onward may be used when evaluating at time <em>t</em>. The <code>TimeSeriesSplit</code> in scikit-learn implements this; GluonTS's backtest evaluator does so natively for DL models. Kaggle time series competitions are won and lost on leakage detection.</p>
+
+    <h3>Concept drift and model staleness</h3>
+    <p>Time series models trained on historical data degrade as patterns shift — promotional strategies change, competitors enter, macroeconomic conditions shift. Production-grade forecasting systems need drift detection: statistical tests on residual autocorrelation (Ljung-Box), MAPE/WAPE monitoring with alert thresholds, and automatic retraining triggers. For foundation models, the advantage is that zero-shot inference adapts the context window without retraining — the model "sees" recent observations as input and updates its predictions implicitly.</p>
+
+    <h3>Cold-start for new series</h3>
+    <p>Classical models and per-series GBDT models require a minimum history length to produce meaningful forecasts — typically at least two seasonal cycles (two years for annual seasonality). New product launches, new stores, new market entries — all hit this cold-start problem. Global LightGBM models handle cold-start through cross-series transfer: a new SKU from a known category gets predictions informed by all other SKUs the model has seen. Foundation models handle it even more gracefully — a new series with as few as 50 data points is reasonable context for TimesFM or Chronos zero-shot inference.</p>
+
+    <h3>Probabilistic vs. point forecasts</h3>
+    <p>A point forecast is almost always the wrong output for a production decision system. Inventory planning needs a prediction interval — how much safety stock to hold depends on forecast uncertainty, not just the mean. Chronos and Lag-Llama produce probabilistic distributions natively via sampling. TFT produces quantile forecasts. For classical models, bootstrap conformal prediction or direct quantile regression provides calibrated intervals. If your downstream system only consumes point forecasts, you are likely making systematically suboptimal decisions — over- or under-provisioning based on a point estimate that carries no uncertainty information.</p>
+
+    <hr>
+
+    <h2>6. Survival Analysis: The Tool Most ML Teams Never Reach For</h2>
+
+    <p>Survival analysis is a family of statistical and ML methods designed for <em>time-to-event</em> data — problems where the outcome of interest is how long until something happens, and — critically — where you do not always observe the event for every subject. This latter property, called <strong>censoring</strong>, is what distinguishes survival analysis from regression.</p>
+
+    <h3>What censoring means in practice</h3>
+    <p>Consider a telecom company tracking customer churn. You observe customers from their activation date. At the time of analysis, some customers have already churned — you know their exact time-to-event. But many are still active — they have not churned yet, but they might in the future. These customers have <em>right-censored</em> survival times: you know they survived at least until the observation date, but not how much longer. A regression model that treats their current tenure as the "true" outcome discards survival information. A survival model correctly uses their entire observed history as evidence of survival, then estimates the probability of churning at any future time point.</p>
+
+    <blockquote>
+      "The moment you have time-to-event data with any customers still active, you have right-censored data. Fitting logistic regression on a binary 'churned within 90 days' target is answering a different question — and usually the wrong one."
+    </blockquote>
+
+    <h3>Kaplan-Meier and Cox Proportional Hazards — still the workhorses</h3>
+    <p>The <strong>Kaplan-Meier estimator</strong> is the non-parametric, covariate-free survival curve: it gives you the probability of surviving past time <em>t</em>, computed directly from event and censoring counts at each observed time point. Use it first, always — it is the correct descriptive visualization for any survival problem, and it reveals cohort differences (subscribers acquired in month X vs month Y) that aggregate churn metrics obscure.</p>
+
+    <p>The <strong>Cox Proportional Hazards model</strong> extends this to covariates: it estimates how customer features (tenure, plan type, usage level, NPS score) modulate the baseline hazard rate. The proportionality assumption — that the hazard ratio between two covariate values is constant over time — is a genuine constraint, but it holds approximately for most business use cases. Cox PH is implemented in the <code>lifelines</code> Python library with a scikit-learn compatible API, and its coefficients are directly interpretable as log-hazard ratios.</p>
+
+    <h2>7. ML and Deep Learning for Survival Analysis</h2>
+
+    <h3>Random Survival Forests (RSF)</h3>
+    <p>Applying random forests to survival data requires a modified splitting criterion — the log-rank test or concordance index, rather than variance reduction. RSF handles non-proportional hazards (where the Cox assumption fails), non-linear covariate effects, and high-dimensional features without manual variable selection. The <code>scikit-survival</code> library implements RSF with a consistent API. In practice, RSF outperforms Cox PH when: (1) you have many features (&gt;30) and expect non-linear interactions, (2) the proportionality assumption is violated (testable via Schoenfeld residuals), or (3) you have a mix of continuous and categorical covariates with complex structure.</p>
+
+    <h3>DeepSurv</h3>
+    <p>DeepSurv replaces Cox PH's linear predictor with a deep neural network — a multi-layer feedforward network that outputs the risk score, with the Cox partial likelihood as the training objective. It preserves the Cox model's semi-parametric structure (no assumption on the baseline hazard) while gaining expressiveness for non-linear covariate effects. DeepSurv consistently outperforms Cox PH on clinical datasets with heterogeneous patient features (SUPPORT, GBSG, METABRIC). The <code>pycox</code> library provides clean implementations. The limitation is that interpretability degrades: you lose the coefficient-per-feature transparency of Cox PH and must rely on SHAP values applied to the risk score.</p>
+
+    <h3>DeepHit</h3>
+    <p>DeepHit (Lee et al., 2018) takes a fundamentally different approach: rather than modeling the hazard, it directly models the joint distribution of event time and event type using a multi-task learning architecture. This makes it the natural choice for <strong>competing risks</strong> — settings where multiple events can occur and the occurrence of one precludes the other. In healthcare: a patient may experience cancer progression, death from other causes, or be censored — these are competing events, and standard survival models that treat non-primary events as censoring produce biased estimates. In insurance: a policyholder may claim, lapse, or expire — three competing outcomes. DeepHit handles all of them simultaneously.</p>
+
+    <h3>DRSA and Dynamic Survival Models</h3>
+    <p>Dynamic RSA models extend survival analysis to settings with <strong>time-varying covariates</strong> — where a customer's features change over time (usage levels, engagement scores, support ticket frequency). Standard Cox PH handles time-varying covariates through the counting process formulation, but deep learning approaches like Dynamic-DeepHit can learn complex temporal patterns in covariate trajectories. For subscription businesses that capture monthly feature snapshots per customer, this is the correct formulation — and it substantially outperforms static survival models that only use features at subscription start.</p>
+
+    <h2>8. Production Use Cases for Survival Analysis</h2>
+
+    <table class="arch-table">
+      <thead>
+        <tr>
+          <th>Use Case</th>
+          <th>Event</th>
+          <th>Censoring type</th>
+          <th>Recommended model</th>
+          <th>Key output</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-col">SaaS / telecom churn</td>
+          <td>Subscription cancellation</td>
+          <td>Right-censored (still active)</td>
+          <td>Cox PH or DeepSurv</td>
+          <td>Individual survival curve + risk score</td>
+        </tr>
+        <tr>
+          <td class="label-col">Predictive maintenance</td>
+          <td>Equipment failure</td>
+          <td>Right-censored (still running)</td>
+          <td>RSF or Weibull AFT</td>
+          <td>P(failure before time T) per asset</td>
+        </tr>
+        <tr>
+          <td class="label-col">Clinical trials</td>
+          <td>Disease progression / death</td>
+          <td>Right-censored + interval-censored</td>
+          <td>Cox PH / DeepHit</td>
+          <td>Treatment arm survival curves + HR</td>
+        </tr>
+        <tr>
+          <td class="label-col">Insurance lapse</td>
+          <td>Policy lapse, claim, expiry</td>
+          <td>Competing risks</td>
+          <td>DeepHit</td>
+          <td>Cause-specific CIF curves</td>
+        </tr>
+        <tr>
+          <td class="label-col">Credit default</td>
+          <td>Loan default</td>
+          <td>Right-censored (loan still active)</td>
+          <td>Cox PH (regulatory) or RSF</td>
+          <td>Time-to-default distribution per borrower</td>
+        </tr>
+        <tr>
+          <td class="label-col">E-commerce repeat purchase</td>
+          <td>Second purchase</td>
+          <td>Right-censored (no repurchase yet)</td>
+          <td>Cox PH + time-varying features</td>
+          <td>Probability of repurchase in next 30/60/90 days</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>9. Forecasting vs. Survival Analysis: How to Choose</h2>
+
+    <figure class="infographic">
+      <svg viewBox="0 0 700 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Decision diagram: time series forecasting vs survival analysis">
+        <text x="20" y="28" fill="#f1f5f9" font-size="15" font-weight="700" font-family="sans-serif">Forecasting or Survival Analysis? — Decision Map</text>
+
+        <!-- Left: Forecasting -->
+        <rect x="20" y="48" width="310" height="250" rx="8" fill="#0f172a" stroke="#0057ff" stroke-width="1.5"/>
+        <text x="175" y="70" fill="#0057ff" font-size="10" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.1em">TIME SERIES FORECASTING</text>
+
+        <text x="36" y="96" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif">USE WHEN:</text>
+        <text x="36" y="113" fill="#e2e8f0" font-size="9" font-family="sans-serif">✓  Question is "how much / how many at time T?"</text>
+        <text x="36" y="130" fill="#e2e8f0" font-size="9" font-family="sans-serif">✓  Outcome is a quantity, not an event time</text>
+        <text x="36" y="147" fill="#e2e8f0" font-size="9" font-family="sans-serif">✓  All subjects observed for the same duration</text>
+        <text x="36" y="164" fill="#e2e8f0" font-size="9" font-family="sans-serif">✓  Aggregated series (sales, traffic, revenue)</text>
+        <text x="36" y="181" fill="#e2e8f0" font-size="9" font-family="sans-serif">✓  Temporal patterns (seasonality, trend) drive signal</text>
+
+        <text x="36" y="208" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif">TOOLS:</text>
+        <text x="36" y="225" fill="#e2e8f0" font-size="9" font-family="sans-serif">Prophet · ARIMA · LightGBM global · TFT</text>
+        <text x="36" y="242" fill="#e2e8f0" font-size="9" font-family="sans-serif">N-HiTS · TimesFM · Chronos · MOIRAI</text>
+
+        <text x="36" y="270" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif">EXAMPLE:</text>
+        <text x="36" y="287" fill="#e2e8f0" font-size="9" font-family="sans-serif">"Forecast daily active users for next 4 weeks"</text>
+
+        <!-- Right: Survival -->
+        <rect x="370" y="48" width="310" height="250" rx="8" fill="#0f172a" stroke="#00b4d8" stroke-width="1.5"/>
+        <text x="525" y="70" fill="#00b4d8" font-size="10" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.1em">SURVIVAL ANALYSIS</text>
+
+        <text x="386" y="96" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif">USE WHEN:</text>
+        <text x="386" y="113" fill="#e2e8f0" font-size="9" font-family="sans-serif">✓  Question is "when does event X occur?"</text>
+        <text x="386" y="130" fill="#e2e8f0" font-size="9" font-family="sans-serif">✓  Some subjects haven't experienced event yet</text>
+        <text x="386" y="147" fill="#e2e8f0" font-size="9" font-family="sans-serif">✓  Right-censored observations present</text>
+        <text x="386" y="164" fill="#e2e8f0" font-size="9" font-family="sans-serif">✓  Individual-level risk scores needed</text>
+        <text x="386" y="181" fill="#e2e8f0" font-size="9" font-family="sans-serif">✓  Competing risks or time-varying covariates</text>
+
+        <text x="386" y="208" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif">TOOLS:</text>
+        <text x="386" y="225" fill="#e2e8f0" font-size="9" font-family="sans-serif">Kaplan-Meier · Cox PH · RSF · DeepSurv</text>
+        <text x="386" y="242" fill="#e2e8f0" font-size="9" font-family="sans-serif">DeepHit · lifelines · scikit-survival · pycox</text>
+
+        <text x="386" y="270" fill="#94a3b8" font-size="9" font-weight="700" font-family="sans-serif">EXAMPLE:</text>
+        <text x="386" y="287" fill="#e2e8f0" font-size="9" font-family="sans-serif">"Which users are at risk of churning, and when?"</text>
+      </svg>
+      <figcaption>The question structure — "how much at time T?" vs "when does the event occur?" — determines the method family, not the data type.</figcaption>
+    </figure>
+
+    <p>The practical rule of thumb: if your training data contains subjects for whom the event has not yet occurred (still-active customers, still-running machines, still-alive patients), you have right-censored data and should consider survival analysis. Treating censored observations as non-events (binary target = 0) biases the model toward underestimating risk. Dropping them discards information about which subjects are long-surviving — the exact information a churn model should learn from.</p>
+
+    <h2>10. The Israeli Production Context</h2>
+
+    <p>MLAIA's experience deploying time series and survival systems in Israel spans several sectors, and the practical realities differ meaningfully from benchmark comparisons:</p>
+
+    <p>In <strong>telecom and communications</strong> (Partner, Bezeq-adjacent analytics), churn modeling involves massive right-censored subscriber bases — over 50% of the population at any snapshot is still active. We routinely apply Cox PH as a first interpretable baseline, then RSF or DeepSurv for uplift. The challenge is time-varying covariates: Israeli telecom subscribers exhibit strong behavioral shifts around IDF service periods, Jewish holidays, and school year transitions — patterns that neither static Cox PH nor a simple GBDT churn model handles naturally without careful feature engineering around these calendar events.</p>
+
+    <p>In <strong>demand forecasting for retail</strong>, the calendar structure is non-standard relative to Western benchmarks: the weekend is Friday-Saturday (not Saturday-Sunday), major holidays (Passover, Rosh Hashana, Yom Kippur) cause sharp demand spikes and drops on dates that shift annually in the Gregorian calendar, and the year has two peak demand seasons rather than one. Prophet's holiday support handles this, but the date conversion logic (Hebrew-to-Gregorian) must be built explicitly. TimesFM and Chronos, trained primarily on Western data, do not inherently model Hebrew calendar seasonality — few-shot finetuning on Israeli series is required.</p>
+
+    <p>In <strong>medical AI and clinical research</strong> (work with Israeli hospitals and MedTech), survival analysis is the standard — clinical trials for medical devices and pharmaceuticals require Kaplan-Meier curves and hazard ratios by regulatory mandate. DeepHit and RSF are increasingly used for secondary analyses and precision medicine personalization, but primary endpoints in regulatory submissions still require Cox PH or Kaplan-Meier.</p>
+
+    <hr>
+
+    <h2>The 2026 Decision Framework</h2>
+
+    <p>Three questions to ask at the start of any temporal prediction project:</p>
+
+    <ol>
+      <li><strong>Is the question "how much at time T?" or "when does X happen?"</strong> — If the latter, and if some subjects haven't experienced the event yet, start with survival analysis.</li>
+      <li><strong>How many series, and what is your data volume per series?</strong> — Under 10k points per series or under 100 series total: Prophet or ARIMA. Thousands of series or rich exogenous features: global LightGBM. Need zero-shot for new series without training: TimesFM or Chronos.</li>
+      <li><strong>What is the forecasting horizon relative to the series length?</strong> — Short horizon (1–7 periods): classical or GBDT. Long horizon (30+ periods): N-HiTS, PatchTST, TFT, or foundation model. Very long horizon with multivariate dependencies: TFT or MOIRAI.</li>
+    </ol>
+
+    <p>Prophet still ships to production every week at organizations that know what they are doing. TimesFM genuinely eliminates the per-series training loop for large-scale forecasting. And survival analysis solves problems that forecasting cannot — not because it is more sophisticated, but because it is the correct model for the data generating process when censoring is present.</p>
+
+    <p>The practitioners who build reliable temporal prediction systems in production are the ones who ask which tool fits the problem — not which tool is newest.</p>
+
+    <div class="cta">
+      <strong>Deploying time series forecasting or survival analysis in production?</strong>
+      <br>
+      <a href="https://www.mlaia.com/index.html#contact">Talk to MLAIA about model selection, backtesting architecture, and what will actually work on your data →</a>
+    </div>
+
+  </article>
+</main>
+
+<footer class="site">
+  <p>© 2026 MLAIA — Machine Learning &amp; AI Approach · <a href="https://www.mlaia.com/blog.html">Blog</a> · <a href="https://www.mlaia.com/index.html#contact">Contact</a></p>
+</footer>
+
+</body>
+</html>
