@@ -55,7 +55,7 @@
       <guid isPermaLink="true">https://www.mlaia.com/blog-voice-ai-production.html</guid>
       <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
       <dc:creator>Dr. Yochai Edlitz</dc:creator>
-      <category>Signal &amp; Audio AI</category>
+      <category>Audio &amp; Acoustics AI</category>
       <description><![CDATA[A production engineering guide to voice AI in 2026: cascaded vs speech-to-speech architectures, the sub-500ms latency budget, $0.40 per-call economics, open-source vs cloud STT, and the Israeli voice AI ecosystem.]]></description>
     </item>
 
@@ -75,7 +75,7 @@
       <guid isPermaLink="true">https://www.mlaia.com/blog-audio-ai-production.html</guid>
       <pubDate>Tue, 16 Jun 2026 00:00:00 +0000</pubDate>
       <dc:creator>Dr. Yochai Edlitz</dc:creator>
-      <category>Signal &amp; Audio AI</category>
+      <category>Audio &amp; Acoustics AI</category>
       <description><![CDATA[Speech-to-text, voice synthesis, sound event detection, music generation, and real-time edge deployment — what works in production audio AI, what doesn't, and what it costs in 2026.]]></description>
     </item>
 
