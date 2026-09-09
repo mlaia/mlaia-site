@@ -5,8 +5,8 @@
 <!-- Google Analytics 4 — fires only after analytics consent -->
 <script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MLAIA | AI &amp; Data Science Consulting — Signal Processing, Medical AI, NLP, BI</title>
-<meta name="description" content="MLAIA delivers end-to-end AI solutions: signal processing, medical AI, LLMs/NLP, and business intelligence. Led by Dr. Yochai Edlitz. Based in Israel, serving global clients.">
+<title>MLAIA | Audio AI, Medical AI &amp; Business Forecasting</title>
+<meta name="description" content="Specialist AI consulting for audio and acoustics, medical data, bookings, revenue, churn and demand forecasting. Led by Dr. Yochai Edlitz.">
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="AI consulting, data science, machine learning, signal processing, audio, acoustics, medical AI, NLP, business intelligence, Ad Tech, digital advertising, Israel, predictive analytics">
 <meta name="description" lang="he" content="המלאיה מדעני נתונים - חברת ייעוץ בינה מלאכותית, למידת מכונה, חיזוי, עיבוד אותות, אודיו ואקוסטיקה, Ad Tech, מידע רפואי, NLP ו-BI. מנתונים להחלטות בפרודקשן.">
@@ -811,7 +811,7 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
         {
           "@type": "Question",
           "name": "What makes MLAIA different from other AI consulting firms?",
-          "acceptedAnswer": {"@type": "Answer", "text": "MLAIA combines academic-level research expertise with hands-on production engineering. Every engagement results in deployed models, not just reports. Cross-domain expertise spanning signal processing, medical AI, Ad Tech, and NLP enables solutions that generalist consultants cannot provide."}
+          "acceptedAnswer": {"@type": "Answer", "text": "MLAIA combines academic-level research expertise with hands-on production engineering. Engagements span research, evaluation and production engineering. Cross-domain expertise spanning signal processing, medical AI, Ad Tech, and NLP enables solutions that generalist consultants cannot provide."}
         },
         {
           "@type": "Question",
@@ -911,8 +911,12 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
   ]
 }
 </script>
-</head>
-<body>
+<link rel="stylesheet" href="/assets/practices.css">
+<script src="/assets/practice.js" defer></script>
+<link rel="stylesheet" href="/assets/interactive-refresh.css">
+<script defer src="/assets/prediction-data.js"></script><script defer src="/assets/home-experiences.js"></script>
+<link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
+<body class="practice-home" data-site-shell="true"><nav class="site-quick-nav" aria-label="Quick navigation"><a href="/" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">Home</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">Contact us</span></a></nav>
 
 <!-- SKIP NAVIGATION (WCAG 2.4.1) -->
 <a href="#main-content" class="skip-link" data-en="Skip to main content" data-he="דלג לתוכן הראשי">Skip to main content</a>
@@ -939,10 +943,10 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
 <nav id="nav" role="navigation" aria-label="Main navigation">
   <a href="#" class="logo">ML<span>AI</span>A <span class="logo-tagline">Machine Learning &amp; AI Approach</span></a>
   <ul class="nav-links" role="list" aria-label="Site navigation links">
+    <li><a href="/audio-ai/" data-en="Audio" data-he="אודיו">Audio</a></li><li><a href="/medical-ai/" data-en="Medical" data-he="רפואה">Medical</a></li><li><a href="/predictive-intelligence/" data-en="Prediction &amp; Causality" data-he="חיזוי וסיבתיות">Prediction &amp; Causality</a></li><li><a href="/ai-automation/" data-en="AI &amp; Automation" data-he="AI ואוטומציה">AI &amp; Automation</a></li>
+    <li><a href="#interactive-demos" data-en="Interactive demos" data-he="הדגמות אינטראקטיביות">Interactive demos</a></li>
     <li><a href="#about" data-en="About" data-he="אודות">About</a></li>
-    <li><a href="#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
     <li><a href="#blog" data-en="Blog" data-he="בלוג">Blog</a></li>
-    <li><a href="wiki/index.html" data-en="Wiki" data-he="מדריך">Wiki</a></li>
     <li><a href="https://nextdemand.ai/" target="_blank" rel="noopener" data-en="NextDemand ↗" data-he="NextDemand ↗">NextDemand ↗</a></li>
     <li><a href="#contact" class="nav-cta" data-en="Contact Us" data-he="צור קשר">Contact Us</a></li>
     <li><button class="nav-lang-btn" id="lang-toggle" onclick="setLang(currentLang==='he'?'en':'he')" aria-label="Switch language to Hebrew" aria-live="polite">עברית</button></li>
@@ -962,15 +966,10 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
   <div class="hero-left">
     <canvas id="stock-chart" class="hero-stock-chart"></canvas>
     <div class="hero-kicker" data-en="Machine Learning &amp; AI Approach" data-he="למידת מכונה וגישת בינה מלאכותית">Machine Learning &amp; AI Approach</div>
-    <h1 id="hero-h1" data-he="מנתונים להחלטות — בפרודקשן">From Data to Decisions — in Production</h1>
-    <p class="hero-sub" data-en="We build AI systems that ship, scale, and deliver measurable business impact. Not just models — production-grade intelligence." data-he="אנחנו בונים מערכות AI שעובדות בפרודקשן, מתרחבות, ומספקות תוצאות עסקיות מדידות. לא רק מודלים — אינטליגנציה ברמת פרודקשן.">We build AI systems that ship, scale, and deliver measurable business impact. Not just models — production-grade intelligence.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-p">
-        <span data-en="Book a Free AI Consultation" data-he="קבעו ייעוץ AI חינם">Book a Free AI Consultation</span>
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="#about" class="btn-o" data-en="What is MLAIA?" data-he="מה זה MLAIA?">What is MLAIA?</a>
-    </div>
+    <h1 id="hero-h1" data-he="מנתונים להחלטות — בפרודקשן">Deep science.<br>Real-world AI.</h1>
+    <p class="hero-sub" data-en="Audio, medical data, business prediction and AI automation. We combine scientific depth with hands-on engineering—from cloud systems to models running on devices." data-he="אודיו, מידע רפואי, חיזוי עסקי ואוטומציית AI. אנחנו משלבים עומק מדעי עם הנדסה מעשית—ממערכות ענן ועד מודלים שרצים על מכשירים.">Audio, medical data, business prediction and AI automation. We combine scientific depth with hands-on engineering—from cloud systems to models running on devices.</p>
+    <div class="hero-actions hero-demo-actions"><a href="#contact" class="btn-p" data-en="Discuss your project →" data-he="נדבר על הפרויקט שלכם ←">Discuss your project →</a><a href="#interactive-demos" class="btn-o" data-en="Try our interactive experiences ↓" data-he="נסו את ההדגמות האינטראקטיביות ↓">Try our interactive experiences ↓</a></div>
+    <div class="hero-secondary-links"><a href="/predictive-intelligence/explorer/" data-en="Prediction &amp; what-if →" data-he="חיזוי ותרחישי מה-אם ←">Prediction &amp; what-if →</a><a href="/audio-ai/lab/" data-en="Play with sound →" data-he="שחקו עם הצליל ←">Play with sound →</a></div>
 
     <!-- Subtle acronym — inline, minimal -->
     <div class="hero-acronym">
@@ -980,21 +979,24 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
     </div>
     <div class="hero-stats-row">
       <div class="hstat"><span class="hstat-num">20+</span><span class="hstat-lbl" data-en="Clients Served" data-he="לקוחות">Clients Served</span></div>
-      <div class="hstat"><span class="hstat-num">5</span><span class="hstat-lbl" data-en="Core Domains" data-he="תחומי ליבה">Core Domains</span></div>
-      <div class="hstat"><span class="hstat-num">100%</span><span class="hstat-lbl" data-en="Production Grade" data-he="ייצור מלא">Production Grade</span></div>
+      <div class="hstat"><span class="hstat-num">4</span><span class="hstat-lbl" data-en="Specialist Practices" data-he="תחומי התמחות">Specialist Practices</span></div>
+      <div class="hstat"><span class="hstat-num">Ph.D.</span><span class="hstat-lbl" data-en="Scientific leadership" data-he="הובלה מדעית">Scientific leadership</span></div>
       <div class="hstat"><span class="hstat-num">10y+</span><span class="hstat-lbl" data-en="AI Experience" data-he="ניסיון AI">AI Experience</span></div>
     </div>
   </div>
 
   <!-- Dynamic right panel -->
-  <div class="hero-right">
-    <canvas id="hero-canvas"></canvas>
-  </div>
+  <div class="hero-right hero-domain-routes" aria-label="Our four expertise domains"><p class="hero-domain-label" data-en="Four domains. One scientific foundation." data-he="ארבעה תחומים. בסיס מדעי אחד.">Four domains. One scientific foundation.</p><a class="p-route" href="/audio-ai/"><span>01</span><div><strong data-en="Audio &amp; Acoustics" data-he="אודיו ואקוסטיקה">Audio &amp; Acoustics</strong><p data-en="Classical DSP, semantic hearing &amp; on-device audio." data-he="עיבוד אותות קלאסי, הבנת צלילים ואודיו על המכשיר.">Classical DSP, semantic hearing &amp; on-device audio.</p></div><b aria-hidden="true">↗</b></a><a class="p-route" href="/medical-ai/"><span>02</span><div><strong data-en="Medical AI" data-he="בינה מלאכותית רפואית">Medical AI</strong><p data-en="Clinical data, imaging &amp; scientific validation." data-he="נתונים קליניים, דימות ותיקוף מדעי.">Clinical data, imaging &amp; scientific validation.</p></div><b aria-hidden="true">↗</b></a><a class="p-route" href="/predictive-intelligence/"><span>03</span><div><strong data-en="Prediction &amp; Causal Analysis" data-he="חיזוי וניתוח סיבתי">Prediction &amp; Causal Analysis</strong><p data-en="Revenue, sales, churn &amp; demand. Decisions grounded in evidence." data-he="הכנסות, מכירות, נטישה וביקוש. החלטות המבוססות על ראיות.">Revenue, sales, churn &amp; demand. Decisions grounded in evidence.</p></div><b aria-hidden="true">↗</b></a><a class="p-route" href="/ai-automation/"><span>04</span><div><strong data-en="AI Agents &amp; Automation" data-he="סוכני AI ואוטומציה">AI Agents &amp; Automation</strong><p data-en="Chatbots, RAG, multimodal models &amp; connected workflows." data-he="צ׳אטבוטים, RAG, מודלים רב־אופניים ותהליכים מחוברים.">Chatbots, RAG, multimodal models &amp; connected workflows.</p></div><b aria-hidden="true">↗</b></a></div>
 
   <div class="hero-scroll"><div class="hscroll-line"></div><span data-en="Scroll" data-he="גלול">Scroll</span></div>
 </section>
 
-<!-- LOGO STRIP (compact, right after hero) -->
+<section class="home-demos" id="interactive-demos" aria-labelledby="demos-heading"><div class="p-wrap"><div class="home-demos-heading"><div><p class="p-eyebrow" data-en="Experience the expertise" data-he="התנסו במומחיות שלנו">Experience the expertise</p><h2 id="demos-heading" data-en="Explore. Adjust. Understand." data-he="גלו. שנו. הבינו.">Explore. Adjust. Understand.</h2></div><p data-en="Hands-on demonstrations using synthetic data and signals." data-he="הדגמות מעשיות באמצעות נתונים ואותות סינתטיים.">Hands-on demonstrations using synthetic data and signals.</p></div>
+<div class="domain-experiences">
+<section class="hero-experience prediction-teaser" aria-labelledby="quick-prediction-title"><div class="hero-experience-label"><span data-en="Prediction &amp; decision-making" data-he="חיזוי וקבלת החלטות">Prediction &amp; decision-making</span><span data-en="600 synthetic test customers" data-he="600 לקוחות סינתטיים לבדיקה">600 synthetic test customers</span></div><h2 id="quick-prediction-title" data-en="Every threshold is a tradeoff." data-he="לכל סף החלטה יש מחיר.">Every threshold is a tradeoff.</h2><p data-en="Move the threshold. See false alarms and missed churn change." data-he="שנו את הסף. ראו כיצד משתנים התרעות השווא ומקרי הנטישה שהוחמצו.">Move the threshold. See false alarms and missed churn change.</p><label class="hero-slider-label" for="quick-threshold"><span data-en="Flag churn risk at or above" data-he="סמנו סיכון נטישה מסף של">Flag churn risk at or above</span><output id="quick-threshold-value" for="quick-threshold">50%</output></label><input id="quick-threshold" type="range" min="0" max="100" step="1" value="50" aria-controls="quick-matrix"><table class="quick-matrix" id="quick-matrix"><caption data-en="Confusion matrix · positive = churn" data-he="מטריצת בלבול · סיווג חיובי = נטישה">Confusion matrix · positive = churn</caption><thead><tr><td></td><th scope="col" data-en="Predicted stay" data-he="תחזית: נשאר">Predicted stay</th><th scope="col" data-en="Predicted churn" data-he="תחזית: נוטש">Predicted churn</th></tr></thead><tbody><tr><th scope="row" data-en="Actually stayed" data-he="נשאר בפועל">Actually stayed</th><td class="quick-correct"><strong id="quick-tn">—</strong><span data-en="Correct stay" data-he="הישארות שזוהתה">Correct stay</span></td><td class="quick-error"><strong id="quick-fp">—</strong><span data-en="False alarms" data-he="התרעות שווא">False alarms</span></td></tr><tr><th scope="row" data-en="Actually churned" data-he="נטש בפועל">Actually churned</th><td class="quick-error"><strong id="quick-fn">—</strong><span data-en="Missed churn" data-he="נטישה שהוחמצה">Missed churn</span></td><td class="quick-correct"><strong id="quick-tp">—</strong><span data-en="Churn detected" data-he="נטישה שזוהתה">Churn detected</span></td></tr></tbody></table><div class="quick-metrics"><div><span data-en="Precision" data-he="דיוק חיובי">Precision</span><strong id="quick-precision">—</strong></div><div><span data-en="Recall" data-he="רגישות">Recall</span><strong id="quick-recall">—</strong></div><div><span data-en="Flagged for review" data-he="סומנו לבדיקה">Flagged for review</span><strong id="quick-flagged">—</strong></div></div><p class="causal-sr" id="quick-summary" role="status" aria-live="polite"></p><p class="hero-demo-footnote" data-en="The model stays fixed. The threshold changes its classifications." data-he="המודל נשאר קבוע. הסף משנה את הסיווגים שלו.">The model stays fixed. The threshold changes its classifications.</p><a class="hero-experience-cta" href="/predictive-intelligence/explorer/" data-en="Try a prediction &amp; what-if →" data-he="נסו חיזוי ותרחישי מה-אם (באנגלית) ←">Try a prediction &amp; what-if →</a></section>
+<section class="hero-experience audio-teaser" aria-labelledby="quick-audio-title"><div class="hero-experience-label"><span data-en="Audio &amp; acoustics" data-he="אודיו ואקוסטיקה">Audio &amp; acoustics</span><span data-en="Listen. Adjust. Discover." data-he="האזינו. כוונו. גלו.">Listen. Adjust. Discover.</span></div><h2 id="quick-audio-title" data-en="Play with sound." data-he="שחקו עם הצליל.">Play with sound.</h2><p data-en="Explore how sound is shaped, captured and interpreted. Change a signal, focus a listening direction and hear the difference." data-he="גלו כיצד מעצבים, קולטים ומפרשים צליל. שנו אות, כוונו את כיוון ההאזנה ושמעו את ההבדל.">Explore how sound is shaped, captured and interpreted. Change a signal, focus a listening direction and hear the difference.</p><ul class="audio-expertise-list"><li><strong data-en="Classical signal processing" data-he="עיבוד אותות קלאסי">Classical signal processing</strong><span data-en="Understand and transform the signal." data-he="להבין את האות ולעבד אותו.">Understand and transform the signal.</span></li><li><strong data-en="Spatial listening" data-he="האזנה מרחבית">Spatial listening</strong><span data-en="Explore how direction changes what a system hears." data-he="לגלות כיצד הכיוון משנה את מה שהמערכת שומעת.">Explore how direction changes what a system hears.</span></li><li><strong data-en="Semantic hearing" data-he="הבנת משמעות הצלילים">Semantic hearing</strong><span data-en="Identify the sounds that matter for an application." data-he="לזהות את הצלילים החשובים ליישום.">Identify the sounds that matter for an application.</span></li></ul><p class="hero-demo-footnote" data-en="The current lab demonstrates signal-processing principles with synthetic sound." data-he="המעבדה הנוכחית מדגימה עקרונות עיבוד אותות באמצעות צליל סינתטי.">The current lab demonstrates signal-processing principles with synthetic sound.</p><a class="hero-experience-cta" href="/audio-ai/lab/" data-en="Play with sound →" data-he="שחקו עם הצליל (באנגלית) ←">Play with sound →</a><a class="hero-audio-all" href="/audio-ai/#semantic-hearing" data-en="Explore semantic hearing &amp; audio AI →" data-he="גלו הבנת צלילים ובינה מלאכותית לאודיו (באנגלית) ←">Explore semantic hearing &amp; audio AI →</a></section>
+</div><a class="home-causal-link" href="/predictive-intelligence/#causal-ladder" data-en="From prediction to causal reasoning: explore the Ladder of Causation →" data-he="מחיזוי לחשיבה סיבתית: גלו את סולם הסיבתיות (באנגלית) ←">From prediction to causal reasoning: explore the Ladder of Causation →</a></div></section>
+<!-- LOGO STRIP -->
 <section class="logo-strip" aria-label="Some of Our Customers">
   <div class="ls-head rv">
     <div class="ls-label" data-en="Some of Our Customers" data-he="חלק מלקוחותינו">Some of Our Customers</div>
@@ -1053,6 +1055,14 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
   </div>
 </section>
 
+<section class="domains" id="domains" aria-labelledby="domains-heading">
+<div class="dv-hdr"><div class="sl" data-en="Four specialist practices" data-he="ארבעה תחומי התמחות">Four specialist practices</div><h2 id="domains-heading" data-en="Deep expertise. Applied to your world." data-he="מומחיות עמוקה. לעולם שלכם.">Deep expertise. Applied to your world.</h2><p data-en="Choose your challenge. Work with one connected team of scientists and engineers." data-he="בחרו את האתגר שלכם. עבדו עם צוות אחד של מדענים ומהנדסים.">Choose your challenge. Work with one connected team of scientists and engineers.</p></div>
+<div class="p-grid practice-four"><article class="p-practice-card "><span class="p-eyebrow">MLAIA / 01</span><h3 data-en="Audio &amp; Acoustics" data-he="אודיו ואקוסטיקה">Audio &amp; Acoustics</h3><p data-en="Acoustics, classical signal processing and machine learning. From calibrated measurements to reliable algorithms on real devices." data-he="אקוסטיקה, עיבוד אותות קלאסי ולמידת מכונה. ממדידות מכוילות ועד אלגוריתמים אמינים על מכשירים אמיתיים.">Acoustics, classical signal processing and machine learning. From calibrated measurements to reliable algorithms on real devices.</p><ul><li data-en="Acoustics, DSP &amp; vibration sensing" data-he="אקוסטיקה, עיבוד אותות וחישת רעידות">Acoustics, DSP &amp; vibration sensing</li><li data-en="Speech &amp; audio models" data-he="מודלי דיבור ואודיו">Speech &amp; audio models</li><li data-en="Real-time &amp; edge deployment" data-he="פריסה בזמן אמת ובקצה">Real-time &amp; edge deployment</li></ul><a href="/audio-ai/" data-en="Explore the practice →" data-he="לתחום ההתמחות (באנגלית) ←">Explore the practice →</a></article><article class="p-practice-card medical"><span class="p-eyebrow">MLAIA / 02</span><h3 data-en="Medical AI" data-he="בינה מלאכותית רפואית">Medical AI</h3><p data-en="Clinical data, images and biosignals. Scientific rigor from research question to evaluation and integration." data-he="נתונים קליניים, דימות ואותות ביולוגיים. דיוק מדעי משאלת המחקר ועד הערכה ואינטגרציה.">Clinical data, images and biosignals. Scientific rigor from research question to evaluation and integration.</p><ul><li data-en="Clinical data &amp; imaging" data-he="נתונים קליניים ודימות">Clinical data &amp; imaging</li><li data-en="Model validation &amp; bias" data-he="תיקוף מודלים והטיות">Model validation &amp; bias</li><li data-en="Hospital data infrastructure" data-he="תשתיות מידע בבתי חולים">Hospital data infrastructure</li></ul><a href="/medical-ai/" data-en="Explore the practice →" data-he="לתחום ההתמחות (באנגלית) ←">Explore the practice →</a></article><article class="p-practice-card predictive"><span class="p-eyebrow">MLAIA / 03</span><h3 data-en="Prediction &amp; Causal Analysis" data-he="חיזוי וניתוח סיבתי">Prediction &amp; Causal Analysis</h3><p data-en="Forecast bookings, revenue, churn and inventory. Evaluate the impact of actions through causal analysis." data-he="חיזוי הזמנות, הכנסות, נטישה ומלאי. הערכת ההשפעה של פעולות באמצעות ניתוח סיבתי.">Forecast bookings, revenue, churn and inventory. Evaluate the impact of actions through causal analysis.</p><ul><li data-en="Revenue &amp; bookings" data-he="הכנסות והזמנות">Revenue &amp; bookings</li><li data-en="Churn &amp; customer behavior" data-he="נטישה והתנהגות לקוחות">Churn &amp; customer behavior</li><li data-en="Demand &amp; warehouse planning" data-he="ביקוש ותכנון מחסנים">Demand &amp; warehouse planning</li></ul><a href="/predictive-intelligence/" data-en="Explore the practice →" data-he="לתחום ההתמחות (באנגלית) ←">Explore the practice →</a></article><article class="p-practice-card automation"><span class="p-eyebrow">MLAIA / 04</span><h3 data-en="AI Agents &amp; Automation" data-he="סוכני AI ואוטומציה">AI Agents &amp; Automation</h3><p data-en="Connect business knowledge, conversations and systems. Assistants and workflows built around real tasks." data-he="חברו ידע עסקי, שיחות ומערכות. עוזרים ותהליכים המבוססים על משימות אמיתיות.">Connect business knowledge, conversations and systems. Assistants and workflows built around real tasks.</p><ul><li data-en="Chatbots, RAG &amp; enterprise search" data-he="צ׳אטבוטים, RAG וחיפוש ארגוני">Chatbots, RAG &amp; enterprise search</li><li data-en="Multimodal LLMs &amp; fine-tuning" data-he="מודלי שפה רב־אופניים והתאמת מודלים">Multimodal LLMs &amp; fine-tuning</li><li data-en="Workflow automation &amp; integrations" data-he="אוטומציית תהליכים ואינטגרציות">Workflow automation &amp; integrations</li></ul><a href="/ai-automation/" data-en="Explore the practice →" data-he="לתחום ההתמחות (באנגלית) ←">Explore the practice →</a></article></div>
+<div class="p-capabilities" id="services"><strong data-en="Shared engineering capabilities" data-he="יכולות הנדסיות משותפות">Shared engineering capabilities</strong><a href="/ai-automation/">LLMs, agents &amp; automation</a><a href="/audio-ai/#edge-ai">Edge &amp; embedded AI</a><a href="/medical-ai/#deidentification">Data de-identification</a><a href="blog-computer-vision-production.html">Computer vision</a><a href="blog-cloud-ml-platforms-rapid-development.html">Data engineering</a><a href="blog-mlops-consolidation.html">MLOps &amp; cloud</a><a href="/predictive-intelligence/#causal-ladder" data-en="Causal inference" data-he="הסקה סיבתית">Causal inference</a></div>
+<section class="home-edge" aria-labelledby="home-edge-title"><div><p class="p-eyebrow" data-en="Edge &amp; embedded AI" data-he="בינה מלאכותית בקצה ובמערכות משובצות">Edge &amp; embedded AI</p><h2 id="home-edge-title" data-en="Intelligence on the device." data-he="בינה מלאכותית על המכשיר עצמו.">Intelligence on the device.</h2><p data-en="Our project experience includes running machine-learning and deep-learning models on Android, iOS and dedicated controllers—including applications involving drones and earphones." data-he="הניסיון שלנו כולל הרצת מודלי למידת מכונה ולמידה עמוקה על Android, iOS ובקרים ייעודיים, לרבות יישומים הקשורים לרחפנים ולאוזניות.">Our project experience includes running machine-learning and deep-learning models on Android, iOS and dedicated controllers—including applications involving drones and earphones.</p><a href="/audio-ai/#edge-ai" data-en="Explore edge &amp; physical AI →" data-he="גלו AI בקצה ובמערכות פיזיות (באנגלית) ←">Explore edge &amp; physical AI →</a></div><div class="home-device-list"><span>Android &amp; iOS</span><span data-en="Dedicated controllers" data-he="בקרים ייעודיים">Dedicated controllers</span><span data-en="Drones &amp; earphones" data-he="רחפנים ואוזניות">Drones &amp; earphones</span><p data-en="Latency · memory · power · connectivity" data-he="השהיה · זיכרון · צריכת חשמל · קישוריות">Latency · memory · power · connectivity</p></div></section>
+<section class="causal-teaser" aria-labelledby="causal-home-heading"><div><p class="p-eyebrow" data-en="Prediction &amp; causal analysis" data-he="חיזוי וניתוח סיבתי">Prediction &amp; causal analysis</p><h2 id="causal-home-heading" data-en="What happens next?<br>What changes if you act?" data-he="מה צפוי לקרות?<br>מה ישתנה אם נפעל?">What happens next?<br>What changes if you act?</h2><p data-en="Our causal-analysis expertise connects business questions to the evidence needed to evaluate decisions." data-he="המומחיות שלנו בניתוח סיבתי מחברת שאלות עסקיות לראיות הנדרשות להערכת החלטות.">Our causal-analysis expertise connects business questions to the evidence needed to evaluate decisions.</p><a href="/predictive-intelligence/#causal-ladder" data-en="Explore the Ladder of Causation →" data-he="גלו את סולם הסיבתיות (באנגלית) ←">Explore the Ladder of Causation →</a></div><ol class="causal-mini"><li><span>01</span><strong data-en="Observe &amp; predict" data-he="להתבונן ולחזות">Observe &amp; predict</strong><p data-en="What is likely?" data-he="מה צפוי?">What is likely?</p></li><li><span>02</span><strong data-en="Intervene" data-he="להתערב">Intervene</strong><p data-en="What if we act?" data-he="מה אם נפעל?">What if we act?</p></li><li><span>03</span><strong data-en="Reason counterfactually" data-he="לחשוב על חלופה למציאות">Reason counterfactually</strong><p data-en="What would have happened otherwise?" data-he="מה היה קורה אילו פעלנו אחרת?">What would have happened otherwise?</p></li></ol></section>
+<div class="p-product"><div><div class="p-eyebrow" style="color:#8cbbff" data-en="A product by MLAIA" data-he="מוצר מבית MLAIA">A product by MLAIA</div><h3>NextDemand</h3><p data-en="Spare-parts forecasting for slow, sporadic demand. Understand what to reorder, where stock is at risk and where capital is tied up." data-he="חיזוי לחלפים עם ביקוש איטי ולא סדיר. להבין מה להזמין מחדש, היכן צפוי מחסור והיכן הון כלוא במלאי.">Spare-parts forecasting for slow, sporadic demand. Understand what to reorder, where stock is at risk and where capital is tied up.</p></div><div class="p-actions"><a class="p-button" href="https://nextdemand.ai/" data-en="Explore NextDemand ↗" data-he="ל-NextDemand ↗">Explore NextDemand ↗</a></div></div>
+</section>
 <!-- WHAT WE DO -->
 <section class="what-we-do" aria-label="About our services">
   <div class="wwd-inner rv">
@@ -1081,12 +1091,10 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
     </p>
 
     <p class="about-bio-para" id="about-para-2">
-      MLAIA operates across five signal domains — real-time signal processing, medical data &amp; clinical AI, enterprise business intelligence, computer vision, and generative AI. Every engagement is designed from day one for production: models that ship, scale, and deliver measurable results in the field, not just in the lab.
+      MLAIA brings four specialist practices together: audio and acoustics, medical AI, prediction and causal analysis, and AI agents and automation. Data engineering and edge deployment connect the work across domains.
     </p>
 
-    <p class="about-bio-para" id="about-para-3">
-      Clients include leading defense contractors, hospital systems, fintech platforms, and global retail analytics firms — united by the need for AI that works under real-world constraints. <strong>Every model MLAIA builds goes to production.</strong>
-    </p>
+    <p class="about-bio-para" id="about-para-3">We work with enterprises, startups and research teams, from defining the problem to evaluating a model and planning its deployment.</p>
   </div>
 
   <!-- Full-width credentials row -->
@@ -1100,106 +1108,13 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
 </section>
 
 <!-- DOMAIN VISUALIZERS — 5 panels -->
-<section class="domains" id="domains" aria-labelledby="domains-heading">
-  <div class="dv-hdr rv">
-    <div class="sl" style="justify-content:center" data-en="Technical Depth" data-he="עומק טכני">Technical Depth</div>
-    <h2 id="domains-heading" data-en="Five Signature Domains" data-he="חמישה תחומי מומחיות">Five Signature Domains</h2>
-    <p data-en="Each domain has its own language and toolchain. We speak all five fluently." data-he="לכל תחום שפה וכלים משלו. אנחנו דוברים את כולם ברהיטות.">Each domain has its own language and toolchain. We speak all five fluently.</p>
-  </div>
-  <div class="dv-grid">
 
-    <!-- Signal -->
-    <div class="dv-panel sig rv">
-      <div class="dv-hd">
-        <div class="dv-lbl" data-en="Signal &amp; Audio" data-he="אות ואודיו">Signal &amp; Audio</div>
-        <h3 data-en="Real-Time Signal Processing" data-he="עיבוד אותות בזמן אמת">Real-Time Signal Processing</h3>
-        <p data-en="Waveforms → intelligent decisions via neural DSP and spectral AI." data-he="צורות גל ← החלטות חכמות דרך DSP נוירוני ו-AI ספקטרלי.">Waveforms → intelligent decisions via neural DSP and spectral AI.</p>
-      </div>
-      <div class="dv-cw"><canvas id="c-sig"></canvas></div>
-      <div class="dv-tags">
-        <span class="dvt sig">FFT</span><span class="dvt sig" data-en="Neural Audio" data-he="אודיו נוירוני">Neural Audio</span>
-        <span class="dvt sig" data-en="Radar AI" data-he="רדאר AI">Radar AI</span><span class="dvt sig" data-en="Noise Cancel" data-he="ביטול רעש">Noise Cancel</span>
-        <span class="dvt sig" data-en="Edge DSP" data-he="DSP קצה">Edge DSP</span>
-      </div>
-      <a href="blog-signal.html" class="dv-readmore" data-en="Deep dive →" data-he="← צלילה עמוקה">Deep dive →</a>
-    </div>
-
-    <!-- Medical -->
-    <div class="dv-panel med rv d1">
-      <div class="dv-hd">
-        <div class="dv-lbl" data-en="Healthcare AI" data-he="AI רפואי">Healthcare AI</div>
-        <h3 data-en="Medical Data &amp; Clinical AI" data-he="נתונים רפואיים ו-AI קליני">Medical Data &amp; Clinical AI</h3>
-        <p data-en="HIPAA-compliant AI for biosignals, imaging and clinical NLP." data-he="AI תואם HIPAA לאותות ביולוגיים, הדמיה ועיבוד שפה קלינית.">HIPAA-compliant AI for biosignals, imaging and clinical NLP.</p>
-      </div>
-      <div class="dv-cw"><canvas id="c-med"></canvas></div>
-      <div class="dv-tags">
-        <span class="dvt med">ECG / EEG</span><span class="dvt med" data-en="Retinal AI" data-he="AI רשתית">Retinal AI</span>
-        <span class="dvt med" data-en="Sleep Apnea" data-he="דום נשימה">Sleep Apnea</span><span class="dvt med">HIPAA</span>
-        <span class="dvt med" data-en="Survival" data-he="הישרדות">Survival</span>
-      </div>
-      <a href="blog-medical.html" class="dv-readmore" style="color:var(--c-medical)" data-en="Deep dive →" data-he="← צלילה עמוקה">Deep dive →</a>
-    </div>
-
-    <!-- BI -->
-    <div class="dv-panel bi rv d2">
-      <div class="dv-hd">
-        <div class="dv-lbl" data-en="Business Intelligence" data-he="מודיעין עסקי">Business Intelligence</div>
-        <h3 data-en="Enterprise BI &amp; Analytics" data-he="BI וניתוח ארגוני">Enterprise BI &amp; Analytics</h3>
-        <p data-en="Raw enterprise data → actionable forecasts and decision pipelines." data-he="נתוני ארגון גולמיים ← תחזיות ניתנות לפעולה וצינורות החלטה.">Raw enterprise data → actionable forecasts and decision pipelines.</p>
-      </div>
-      <div class="dv-cw"><canvas id="c-bi"></canvas></div>
-      <div class="dv-tags">
-        <span class="dvt bi" data-en="Sales Forecast" data-he="תחזית מכירות">Sales Forecast</span><span class="dvt bi" data-en="Churn" data-he="נטישה">Churn</span>
-        <span class="dvt bi" data-en="KPI Dash" data-he="דשבורד KPI">KPI Dash</span><span class="dvt bi" data-en="Anomaly" data-he="חריגות">Anomaly</span>
-        <span class="dvt bi" data-en="Pipelines" data-he="צינורות">Pipelines</span><span class="dvt bi" data-en="Ads &amp; Bids" data-he="מודעות והצעות">Ads &amp; Bids</span>
-      </div>
-      <a href="blog-bi.html" class="dv-readmore" style="color:var(--c-bi)" data-en="Deep dive →" data-he="← צלילה עמוקה">Deep dive →</a>
-    </div>
-
-    <!-- Vision -->
-    <div class="dv-panel vis rv d3">
-      <div class="dv-hd">
-        <div class="dv-lbl" data-en="Computer Vision" data-he="ראייה ממוחשבת">Computer Vision</div>
-        <h3 data-en="Vision AI &amp; Image Intelligence" data-he="AI ראייה ואינטליגנציה תמונתית">Vision AI &amp; Image Intelligence</h3>
-        <p data-en="Detection, segmentation and classification from pixels to production." data-he="זיהוי, פילוח וסיווג מפיקסלים לייצור.">Detection, segmentation and classification from pixels to production.</p>
-      </div>
-      <div class="dv-cw dv-cw-vis">
-        <img loading="lazy" decoding="async" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Shopping_Center_with_Parking_Lot.jpg/320px-Shopping_Center_with_Parking_Lot.jpg"
-             alt="Computer Vision scene" class="vis-bg-img" onerror="this.src='https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&q=60'">
-        <canvas id="c-vis"></canvas>
-      </div>
-      <div class="dv-tags">
-        <span class="dvt vis" data-en="Object Detection" data-he="זיהוי עצמים">Object Detection</span><span class="dvt vis" data-en="Segmentation" data-he="פילוח">Segmentation</span>
-        <span class="dvt vis">OCR</span><span class="dvt vis" data-en="Video AI" data-he="AI וידאו">Video AI</span>
-        <span class="dvt vis" data-en="Edge Vision" data-he="ראייה בקצה">Edge Vision</span>
-      </div>
-      <a href="blog-computer-vision-production.html" class="dv-readmore" style="color:var(--c-vision)" data-en="Deep dive →" data-he="← צלילה עמוקה">Deep dive →</a>
-    </div>
-
-    <!-- GenAI -->
-    <div class="dv-panel gen rv d3">
-      <div class="dv-hd">
-        <div class="dv-lbl" data-en="GenAI &amp; LLMs" data-he="GenAI ומודלי שפה">GenAI &amp; LLMs</div>
-        <h3 data-en="Large Language Models &amp; Agents" data-he="מודלי שפה גדולים וסוכנים">Large Language Models &amp; Agents</h3>
-        <p data-en="Custom LLMs, RAG pipelines and AI agents for real enterprise tasks." data-he="מודלי LLM מותאמים, צינורות RAG וסוכני AI למשימות ארגוניות אמיתיות.">Custom LLMs, RAG pipelines and AI agents for real enterprise tasks.</p>
-      </div>
-      <div class="dv-cw"><canvas id="c-gen"></canvas></div>
-      <div class="dv-tags">
-        <span class="dvt gen">RAG</span><span class="dvt gen" data-en="Fine-Tuning" data-he="כיוונון עדין">Fine-Tuning</span>
-        <span class="dvt gen" data-en="Agents" data-he="סוכנים">Agents</span><span class="dvt gen" data-en="On-Prem LLM" data-he="LLM מקומי">On-Prem LLM</span>
-        <span class="dvt gen" data-en="Embeddings" data-he="הטמעות">Embeddings</span>
-      </div>
-      <a href="blog-llms.html" class="dv-readmore" style="color:var(--c-genai)" data-en="Deep dive →" data-he="← צלילה עמוקה">Deep dive →</a>
-    </div>
-
-  </div>
-</section>
 
 <!-- INLINE CTA STRIP — after Five Signature Domains -->
 <section class="cta-strip" aria-label="CTA after domains">
   <h2 class="cta-strip-heading rv" data-en="Ready to accelerate with AI?" data-he="מוכנים להאיץ עם AI?">Ready to accelerate with AI?</h2>
   <a href="#contact" class="cta-strip-btn rv">
-    <span data-en="Get Your Free AI Roadmap →" data-he="קבלו מפת דרכים חינמית ←">Get Your Free AI Roadmap →</span>
+    <span data-en="Discuss your AI project →" data-he="נדבר על פרויקט ה-AI שלכם ←">Discuss your AI project →</span>
   </a>
 </section>
 
@@ -1277,7 +1192,7 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
 <section class="cta-strip" aria-label="CTA after testimonials">
   <h2 class="cta-strip-heading rv" data-en="Ready to accelerate with AI?" data-he="מוכנים להאיץ עם AI?">Ready to accelerate with AI?</h2>
   <a href="#contact" class="cta-strip-btn rv">
-    <span data-en="Get Your Free AI Roadmap →" data-he="קבלו מפת דרכים חינמית ←">Get Your Free AI Roadmap →</span>
+    <span data-en="Discuss your AI project →" data-he="נדבר על פרויקט ה-AI שלכם ←">Discuss your AI project →</span>
   </a>
 </section>
 
@@ -1297,7 +1212,7 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
   <div class="bl-grid">
     <a href="blog-rag-production.html" class="bl-card bc-llm rv">
       <div class="bl-img" style="background:linear-gradient(160deg,#120820 0%,#1a0a28 60%,#200d30 100%)"><canvas class="bl-canvas" id="bv1"></canvas><span class="bl-img-label" data-en="LLMs &amp; GenAI" data-he="LLMs ו-GenAI">LLMs &amp; GenAI</span></div>
-      <div class="bl-body"><div class="bl-tag" data-en="LLMs &amp; GenAI" data-he="LLMs ו-GenAI">LLMs &amp; GenAI</div><h3 data-en="Enterprise RAG That Ships: The Five Failure Modes That Kill Pilots — and a 90-Day Plan to Production" data-he="RAG ארגוני שמגיע לפרודקשן: חמשת הכשלים שהורגים פיילוטים — ותוכנית 90 יום לייצור">Enterprise RAG That Ships: The Five Failure Modes That Kill Pilots — and a 90-Day Plan to Production</h3><p data-en="67% of Fortune 500 companies run RAG in production — yet most pilots never ship. Retrieval, evaluation harnesses, knowledge-base rot, permissions, and cost budgets: the discipline behind the 340% ROI numbers." data-he="67% מחברות Fortune 500 מריצות RAG בפרודקשן — אך רוב הפיילוטים לא מגיעים לשם. אחזור, מערכי הערכה, ריקבון מאגרי ידע, הרשאות ותקציבי עלות: המשמעת ההנדסית שמאחורי המספרים.">67% of Fortune 500 companies run RAG in production — yet most pilots never ship. Retrieval, evaluation harnesses, knowledge-base rot, permissions, and cost budgets: the discipline behind the 340% ROI numbers.</p><div class="bl-rm"><span data-en="Read More" data-he="קרא עוד">Read More</span> <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div class="bl-body"><div class="bl-tag" data-en="LLMs &amp; GenAI" data-he="LLMs ו-GenAI">LLMs &amp; GenAI</div><h3 data-en="Enterprise RAG That Ships: The Five Failure Modes That Kill Pilots — and a 90-Day Plan to Production" data-he="RAG ארגוני שמגיע לפרודקשן: חמשת הכשלים שהורגים פיילוטים — ותוכנית 90 יום לייצור">Enterprise RAG That Ships: The Five Failure Modes That Kill Pilots — and a 90-Day Plan to Production</h3><p data-en="Explore retrieval quality, evaluation, knowledge-base maintenance, permissions and cost controls when taking enterprise RAG into production." data-he="איכות אחזור, הערכה, תחזוקת מאגרי ידע, הרשאות ובקרת עלויות בדרך להפעלת RAG ארגוני בפרודקשן.">Explore retrieval quality, evaluation, knowledge-base maintenance, permissions and cost controls when taking enterprise RAG into production.</p><div class="bl-rm"><span data-en="Read More" data-he="קרא עוד">Read More</span> <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     </a>
     <a href="blog-music-ai.html" class="bl-card bc-sig rv d1">
       <div class="bl-img" style="background:linear-gradient(160deg,#060a18 0%,#090f22 60%,#0d1530 100%)"><canvas class="bl-canvas" id="bv2"></canvas><span class="bl-img-label" data-en="Signal &amp; Audio AI" data-he="AI לאות ואודיו">Signal &amp; Audio AI</span></div>
@@ -1350,7 +1265,7 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
 
     <details class="faq-item rv">
       <summary class="faq-q"><span data-en="What makes MLAIA different from other AI consulting firms?" data-he="מה מייחד את MLAIA מחברות ייעוץ AI אחרות?">What makes MLAIA different from other AI consulting firms?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
-      <div class="faq-a"><p data-en="MLAIA combines academic-level research expertise with hands-on production engineering. Every engagement results in deployed models, not just reports. Cross-domain expertise spanning signal processing, medical AI, Ad Tech, and NLP enables solutions that generalist consultants cannot provide." data-he="המלאיה משלבת מומחיות מחקרית ברמה אקדמית עם הנדסת ייצור מעשית. כל מעורבות מסתיימת במודלים פרוסים, לא רק בדוחות. מומחיות רב-תחומית המשתרעת על עיבוד אותות, AI רפואי, Ad Tech ו-NLP מאפשרת פתרונות שיועצים כלליים אינם יכולים לספק.">MLAIA combines academic-level research expertise with hands-on production engineering. Every engagement results in deployed models, not just reports. Cross-domain expertise spanning signal processing, medical AI, Ad Tech, and NLP enables solutions that generalist consultants cannot provide.</p></div>
+      <div class="faq-a"><p data-en="MLAIA combines academic-level research expertise with hands-on production engineering. Engagements span research, evaluation and production engineering. Cross-domain expertise spanning signal processing, medical AI, Ad Tech, and NLP enables solutions that generalist consultants cannot provide." data-he="המלאיה משלבת מומחיות מחקרית ברמה אקדמית עם הנדסת ייצור מעשית. כל מעורבות מסתיימת במודלים פרוסים, לא רק בדוחות. מומחיות רב-תחומית המשתרעת על עיבוד אותות, AI רפואי, Ad Tech ו-NLP מאפשרת פתרונות שיועצים כלליים אינם יכולים לספק.">MLAIA combines academic-level research expertise with hands-on production engineering. Engagements span research, evaluation and production engineering. Cross-domain expertise spanning signal processing, medical AI, Ad Tech, and NLP enables solutions that generalist consultants cannot provide.</p></div>
     </details>
 
     <details class="faq-item rv d1">
@@ -1363,12 +1278,16 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
 
 <!-- CTA -->
 <section class="cta" id="contact" aria-labelledby="contact-h2">
+  <div class="site-home-contact-copy">
   <div class="sl rv" data-en="Ready to Start?" data-he="מוכנים להתחיל?">Ready to Start?</div>
   <h2 class="rv" id="contact-h2" style="color:#fff">Let's Take Your Data<br>from Insight to Impact</h2>
   <p class="rv d1" data-en="Tell us about your data challenge. MLAIA — Machine Learning &amp; AI Approach — will design the solution." data-he="ספרו לנו על האתגר שלכם בתחום הנתונים. MLAIA — למידת מכונה וגישת AI — תתכנן את הפתרון.">Tell us about your data challenge. MLAIA — Machine Learning &amp; AI Approach — will design the solution.</p>
+  <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></p>
+  </div>
   <form class="cta-form rv d2" id="contact-form"
         action="https://formspree.io/f/mvzdggyq"
-        method="POST" onsubmit="handleForm(event)" aria-label="Contact us form" novalidate>
+        method="POST" onsubmit="handleForm(event)" aria-label="Contact us form">
+    <input type="hidden" name="practice" id="inquiry-practice" value="general">
     <div class="cf-row">
       <input type="text" name="name" data-ph-en="Your Name" data-ph-he="שמך" placeholder="Your Name" aria-label="Your name (required)" required>
       <input type="text" name="company" data-ph-en="Company" data-ph-he="חברה" placeholder="Company" aria-label="Company name">
@@ -1395,11 +1314,7 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
 </main><!-- /main -->
 
 <!-- SEO: Hebrew company info — visible to crawlers, hidden visually (sr-only pattern, NOT display:none) -->
-<div class="seo-content" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" aria-hidden="true">
-  <h2>המלאיה מדעני נתונים בע״מ - MLAIA Data Science</h2>
-  <p>המלאיה מדעני נתונים היא חברת ייעוץ מובילה בתחום הבינה המלאכותית ומדעי הנתונים בישראל. אנו מתמחים בלמידת מכונה, למידה עמוקה, עיבוד אותות ואודיו, אקוסטיקה, Ad Tech ופרסום דיגיטלי, חיזוי מכירות וביקוש, בינה עסקית (BI), עיבוד מידע רפואי, ועיבוד שפה טבעית (NLP). מנתונים להחלטות — בפרודקשן.</p>
-  <p>MLAIA Data Science is a leading AI and data science consulting company in Israel, specializing in machine learning, deep learning, signal processing, audio and acoustics, Ad Tech and digital advertising, sales and demand forecasting, business intelligence, medical data processing, and natural language processing (NLP). From data to decisions — in production.</p>
-</div>
+
 
 <!-- FOOTER -->
 <footer role="contentinfo">
@@ -1407,7 +1322,7 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
     <div><a href="#" class="ft-logo">ML<span>AI</span>A</a><div class="ft-tag" data-en="Machine Learning &amp; AI Approach" data-he="למידת מכונה וגישת בינה מלאכותית">Machine Learning &amp; AI Approach</div></div>
     <ul class="ft-links" role="list" aria-label="Footer navigation">
       <li><a href="#about" data-en="About" data-he="אודות">About</a></li>
-      <li><a href="#domains" data-en="Domains" data-he="תחומים">Domains</a></li>
+      <li><a href="#domains" data-en="Expertise" data-he="התמחויות">Expertise</a></li>
       <li><a href="blog.html" data-en="Blog" data-he="בלוג">Blog</a></li>
       <li><a href="wiki/index.html" data-en="Wiki" data-he="מדריך">Wiki</a></li>
       <li><a href="https://nextdemand.ai/" target="_blank" rel="noopener" data-en="NextDemand ↗" data-he="NextDemand ↗">NextDemand ↗</a></li>
@@ -1463,7 +1378,7 @@ html[lang="he"] .faq-a{padding:0 0 22px 32px}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 
 /* ══ HERO STOCK CHART ══ */
 (function(){
@@ -2339,6 +2254,7 @@ function handleForm(e){
   fetch(action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}})
     .then(r=>{
       if(r.ok){
+        document.dispatchEvent(new CustomEvent('mlaia-inquiry-success',{detail:{practice:new URLSearchParams(location.search).get('practice')||'general'}}));
         form.innerHTML='<div class="cf-success">✓ Message sent! We\'ll be in touch within 24 hours.</div>';
       } else {
         r.json().then(d=>{
@@ -2395,8 +2311,8 @@ let currentLang='en';
 // Rich-HTML translations (elements containing <br>, <em>, <strong>)
 const RICH_TRANS=[
   {id:'hero-h1',
-   en:'From Data to Decisions — in Production',
-   he:'מנתונים להחלטות — בפרודקשן'},
+   en:'Deep science.<br>Real-world AI.',
+   he:'מדע עמוק.<br>AI בעולם האמיתי.'},
   {id:'mid-cta-h2',
    en:'Ready to transform your data?<br>Let\'s talk.',
    he:'מוכנים להפוך את הנתונים שלכם?<br>בואו נדבר.'},
@@ -2406,12 +2322,8 @@ const RICH_TRANS=[
   {id:'about-para-1',
    en:'Dr. Yochai Edlitz brings <strong>20+ years of R&amp;D leadership</strong> across defense intelligence, academic research, and enterprise AI. With a <strong>Ph.D. from the Weizmann Institute</strong> and experience leading elite IDF technology units, he founded MLAIA to bridge the gap between cutting-edge research and production-ready AI systems.',
    he:'ד\u05f4ר יוחאי אדליץ מביא <strong>20+ שנות ניהול מו\u05f4פ</strong> בתחומי המודיעין הביטחוני, המחקר האקדמי ו-AI ארגוני. עם <strong>דוקטורט ממכון ויצמן למדע</strong> וניסיון בהובלת יחידות טכנולוגיה מובחרות בצה\u05f4ל, הוא ייסד את MLAIA לגשר בין מחקר חדשני למערכות AI מוכנות לייצור.'},
-  {id:'about-para-2',
-   en:'MLAIA operates across five signal domains \u2014 real-time signal processing, medical data &amp; clinical AI, enterprise business intelligence, computer vision, and generative AI. Every engagement is designed from day one for production: models that ship, scale, and deliver measurable results in the field, not just in the lab.',
-   he:'MLAIA מתמחה בחמישה תחומים עיקריים \u2014 \u05e2\u05d9\u05d1\u05d5\u05d3 \u05d0\u05d5\u05ea\u05d5\u05ea \u05d1\u05d6\u05de\u05df \u05d0\u05de\u05ea, \u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05e8\u05e4\u05d5\u05d0\u05d9\u05d9\u05dd \u05d5-AI \u05e7\u05dc\u05d9\u05e0\u05d9, \u05de\u05d5\u05d3\u05d9\u05e2\u05d9\u05df \u05e2\u05e1\u05e7\u05d9 \u05d0\u05e8\u05d2\u05d5\u05e0\u05d9, \u05e8\u05d0\u05d9\u05d9\u05d4 \u05de\u05de\u05d5\u05d7\u05e9\u05d1\u05ea \u05d5-AI \u05d2\u05e0\u05e8\u05d8\u05d9\u05d1\u05d9. \u05db\u05dc \u05de\u05e2\u05d5\u05e8\u05d1\u05d5\u05ea \u05de\u05ea\u05d5\u05db\u05e0\u05e0\u05ea \u05de\u05d4\u05d9\u05d5\u05dd \u05d4\u05e8\u05d0\u05e9\u05d5\u05df \u05dc\u05d9\u05d9\u05e6\u05d5\u05e8: \u05de\u05d5\u05d3\u05dc\u05d9\u05dd \u05e9\u05de\u05d2\u05d9\u05e2\u05d9\u05dd \u05dc\u05e9\u05d5\u05e7, \u05de\u05ea\u05e8\u05d7\u05d1\u05d9\u05dd \u05d5\u05de\u05e1\u05e4\u05e7\u05d9\u05dd \u05ea\u05d5\u05e6\u05d0\u05d5\u05ea \u05de\u05d3\u05d9\u05d3\u05d5\u05ea \u05d1\u05e9\u05d8\u05d7, \u05dc\u05d0 \u05e8\u05e7 \u05d1\u05de\u05e2\u05d1\u05d3\u05d4.'},
-  {id:'about-para-3',
-   en:'Clients include leading defense contractors, hospital systems, fintech platforms, and global retail analytics firms \u2014 united by the need for AI that works under real-world constraints. <strong>Every model MLAIA builds goes to production.</strong>',
-   he:'\u05d4\u05dc\u05e7\u05d5\u05d7\u05d5\u05ea \u05db\u05d5\u05dc\u05dc\u05d9\u05dd \u05e7\u05d1\u05dc\u05e0\u05d9 \u05d1\u05d9\u05d8\u05d7\u05d5\u05df \u05de\u05d5\u05d1\u05d9\u05dc\u05d9\u05dd, \u05de\u05e2\u05e8\u05db\u05d5\u05ea \u05d1\u05ea\u05d9 \u05d7\u05d5\u05dc\u05d9\u05dd, \u05e4\u05dc\u05d8\u05e4\u05d5\u05e8\u05de\u05d5\u05ea \u05e4\u05d9\u05e0\u05d8\u05e7 \u05d5\u05d7\u05d1\u05e8\u05d5\u05ea \u05d0\u05e0\u05dc\u05d9\u05d8\u05d9\u05e7\u05d4 \u05e7\u05de\u05e2\u05d5\u05e0\u05d0\u05d9\u05ea \u05e2\u05d5\u05dc\u05de\u05d9\u05d5\u05ea \u2014 \u05db\u05d5\u05dc\u05dd \u05de\u05d0\u05d5\u05d7\u05d3\u05d9\u05dd \u05d1\u05e6\u05d5\u05e8\u05da \u05d1-AI \u05e9\u05e2\u05d5\u05d1\u05d3 \u05ea\u05d7\u05ea \u05d0\u05d9\u05dc\u05d5\u05e6\u05d9\u05dd \u05e9\u05dc \u05d4\u05e2\u05d5\u05dc\u05dd \u05d4\u05d0\u05de\u05d9\u05ea\u05d9. <strong>\u05db\u05dc \u05de\u05d5\u05d3\u05dc \u05e9\u05d1\u05d5\u05e0\u05d4 MLAIA \u05de\u05d2\u05d9\u05e2 \u05dc\u05d9\u05d9\u05e6\u05d5\u05e8.</strong>'},
+  {id:'about-para-2',en:'MLAIA brings four specialist practices together: audio and acoustics, medical AI, prediction and causal analysis, and AI agents and automation. Data engineering and edge deployment connect the work across domains.',he:'MLAIA משלבת ארבעה תחומי התמחות: אודיו ואקוסטיקה, AI רפואי, חיזוי וניתוח סיבתי, וסוכני AI ואוטומציה. הנדסת נתונים ופריסה על מכשירי קצה מחברות בין התחומים.'},
+  {id:'about-para-3',en:'We work with enterprises, startups and research teams, from defining the problem to evaluating a model and planning its deployment.',he:'אנחנו עובדים עם ארגונים, סטארטאפים וצוותי מחקר, מהגדרת הבעיה ועד להערכת המודל ותכנון הפריסה שלו.'},
 ];
 
 function setLang(lang){

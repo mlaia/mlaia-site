@@ -14,6 +14,12 @@
   </url>
 
   <!-- Blog index -->
+  <!-- Specialist practices: enable with approved production release only. -->
+  <url><loc>https://www.mlaia.com/audio-ai</loc></url>
+  <url><loc>https://www.mlaia.com/medical-ai</loc></url>
+  <url><loc>https://www.mlaia.com/predictive-intelligence</loc></url>
+
+  <!-- Blog index -->
   <url>
     <loc>https://www.mlaia.com/blog.html</loc>
     <lastmod>2026-08-23</lastmod>
@@ -234,3 +240,6 @@
   </url>
 
 </urlset>
+  <url><loc>https://www.mlaia.com/ai-automation</loc></url>
+  <url><loc>https://www.mlaia.com/predictive-intelligence/explorer/</loc></url>
+  <url><loc>https://www.mlaia.com/audio-ai/lab/</loc></url>
