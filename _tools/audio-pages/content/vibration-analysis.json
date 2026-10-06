@@ -1,0 +1,227 @@
+{
+ "slug": "vibration-analysis",
+ "title": "Vibration Analysis and Machine Learning | MLAIA",
+ "description": "Vibration analysis and machine learning for condition monitoring and product sensing: bearing faults, order tracking, anomaly detection and false-alarm control.",
+ "service_name": "Vibration analysis and machine learning consulting",
+ "breadcrumb": "Vibration Analysis",
+ "eyebrow": "Audio &amp; Acoustics · Vibration sensing",
+ "h1": "Vibration tells you what the machine is doing.<br>Physics tells you why.",
+ "intro": "We combine vibration analysis and machine learning for condition monitoring, predictive maintenance and product sensing. The work starts with the sensor, the mounting and the mechanics, so that every feature a model sees can be traced back to something physical.",
+ "cta": "Discuss your vibration data",
+ "lab_link": null,
+ "brief": {
+  "h2": "Built around your machine",
+  "items": [
+   [
+    "Your data",
+    "Accelerometer, MEMS, piezo or acoustic-emission signals, with or without speed reference"
+   ],
+   [
+    "Your constraints",
+    "Few labeled faults, variable speed, limited bandwidth and compute"
+   ],
+   [
+    "Our focus",
+    "Signal physics, DSP features and models you can trust at the alarm threshold"
+   ]
+  ]
+ },
+ "sections": [
+  {
+   "id": "signal-chain",
+   "eyebrow": "Sensing &amp; acquisition",
+   "h2": "Most vibration models fail at the sensor.<br>Not in the network.",
+   "lead": "A spectrum can only show what the measurement chain lets through. Before choosing a model, we check what the sensor, mount and sampling plan can support.",
+   "cards": [
+    {
+     "number": "01",
+     "h3": "Sensor choice",
+     "p": "IEPE piezoelectric accelerometers offer wide bandwidth and a low noise floor. MEMS accelerometers are cheap, small and DC-coupled, but noise density and bandwidth often limit early fault detection. Acoustic-emission sensors work at far higher frequencies and respond to crack growth and friction rather than bulk motion."
+    },
+    {
+     "number": "02",
+     "h3": "Mounting &amp; resonance",
+     "p": "Stud mounting preserves the most bandwidth; adhesive, magnetic and handheld mounts progressively lower the mounted resonance and distort the high-frequency band. Brackets and enclosures add their own modes. If the band you need for envelope analysis sits near a mounting resonance, the measurement, not the model, sets the ceiling."
+    },
+    {
+     "number": "03",
+     "h3": "Sampling &amp; anti-aliasing",
+     "p": "Sample rate follows the highest band of interest, not the shaft speed. Impact-excited resonances used for bearing diagnosis often sit in the kilohertz range. We check anti-aliasing, ADC resolution against the noise floor, record length for frequency resolution, and whether streaming or triggered snapshots fit the power budget."
+    },
+    {
+     "number": "04",
+     "h3": "Speed reference",
+     "p": "A tachometer or encoder pulse turns a hard problem into a tractable one. Without it, speed must be estimated from the vibration itself, which works on some machines and not others. We decide early whether a speed signal is available or must be estimated."
+    }
+   ],
+   "paragraphs": [
+    "Vibration is one part of our <a href=\"/audio-ai/\">Audio &amp; Acoustics practice</a>, and the same measurement discipline applies as for microphones."
+   ]
+  },
+  {
+   "id": "diagnostics",
+   "eyebrow": "Classical diagnostics",
+   "h2": "Know the fault frequencies.<br>Then look for them properly.",
+   "lead": "Many mechanical faults have a signature that physics predicts. A classical baseline finds those signatures directly and gives a learned model something concrete to beat.",
+   "cards": [
+    {
+     "h3": "Bearing fault detection",
+     "p": "Characteristic frequencies such as BPFO, BPFI, ball spin and cage frequency follow from bearing geometry and shaft speed. Real bearings slip slightly, so these lines are smeared rather than exact. We compute expected frequencies with tolerance bands and check harmonics and sidebands, such as inner-race lines modulated at shaft speed."
+    },
+    {
+     "h3": "Envelope analysis",
+     "p": "Early defects produce small periodic impacts that excite high-frequency resonances. Band-pass filtering around a resonance, demodulating, and taking the envelope spectrum exposes the defect repetition rate. Band choice is critical; spectral kurtosis and the kurtogram select it from data rather than by guesswork."
+    },
+    {
+     "h3": "Order tracking for variable speed",
+     "p": "When speed changes during a record, frequency lines smear across the spectrum. Resampling to constant shaft angle, using a tachometer or estimated speed profile, converts frequency to order. Shaft harmonics and gear-mesh components then stay in fixed bins, which also stabilizes learned features."
+    },
+    {
+     "h3": "Resonance &amp; modal behaviour",
+     "p": "Run-ups, coast-downs and impact tests reveal natural frequencies and how they shift with temperature, load or assembly. A rising level is not always wear: a forcing frequency moving onto a structural mode produces a similar symptom. Separating the two avoids replacing healthy parts."
+    }
+   ],
+   "paragraphs": [
+    "See also our guide to <a href=\"/wiki/signal-processing-machine-learning.html\">signal processing and machine learning</a>."
+   ],
+   "figures": [
+    {
+     "files": [
+      "vib-envelope.svg"
+     ],
+     "caption": "Simulated outer-race defect on a bearing with nine rolling elements and a 25 Hz shaft (BPFO = 90 Hz), with impact timing jittered by 1% to mimic slip. The raw spectrum shows shaft lines and a resonance but no clear defect line; band-pass filtering around the resonance and taking the envelope exposes the defect rate and its harmonics."
+    },
+    {
+     "files": [
+      "vib-order-a.svg",
+      "vib-order-b.svg"
+     ],
+     "caption": "Simulated run-up from 10 to 40 Hz with components at 1× and 3× shaft speed. An ordinary spectrum smears each component across the speed range; resampling to constant shaft angle with a tachometer signal turns them back into sharp, fixed order lines."
+    }
+   ]
+  },
+  {
+   "id": "machine-learning",
+   "eyebrow": "Machine learning",
+   "h2": "Labeled faults are rare.<br>Design for that from the start.",
+   "lead": "Machines are healthy most of the time, and the failures you care about may never have been recorded. Vibration analysis machine learning has to work with that imbalance.",
+   "cards": [
+    {
+     "h3": "Anomaly detection on healthy data",
+     "p": "Models trained only on normal operation, from autoencoders to density estimates on engineered features, flag departures from a learned baseline. The hard part is normalizing for operating condition so that load, speed and temperature changes do not look like faults."
+    },
+    {
+     "h3": "Supervised fault classification",
+     "p": "Where seeded-fault or historical failure data exist, classifiers can name the fault type. Public lab bearing datasets help development but rarely transfer directly to a different machine, mount or speed range. We validate on machines and conditions the model has not seen, not on random splits."
+    },
+    {
+     "h3": "Degradation &amp; remaining useful life",
+     "p": "Remaining useful life is best framed as a time-to-event problem with censored data, since most units are still running when data collection ends. We treat health indicators as covariates and avoid single-number predictions without uncertainty.",
+     "link": {
+      "href": "/blog-time-series-survival-analysis.html",
+      "text": "Read about survival analysis for time series →"
+     }
+    },
+    {
+     "h3": "Product sensing",
+     "p": "Vibration is also an input for products: detecting contact, usage or mechanical states through an accelerometer. The constraints resemble <a href=\"/audio-ai/edge-audio-ai/\">edge audio AI</a>: small models, tight memory, and behaviour validated on the target device."
+    }
+   ]
+  },
+  {
+   "id": "evaluation",
+   "eyebrow": "Evaluation",
+   "h2": "Measure the alarm, not the accuracy.<br>False alarms have a price.",
+   "lead": "Maintenance teams stop trusting a system after a few unnecessary call-outs. We evaluate alerts the way they will be used, with the cost of each error made explicit.",
+   "capabilities": {
+    "label": "What we measure",
+    "items": [
+     "False alarms per machine per month at the chosen threshold",
+     "Detection lead time before a confirmed fault",
+     "Missed detections, reviewed case by case",
+     "Stability across speed, load and temperature",
+     "Performance on machines held out from training",
+     "Robustness to sensor drift and loose mounts"
+    ]
+   },
+   "paragraphs": [
+    "We agree the relative cost of a false alarm and a missed fault with you before tuning thresholds. That choice shapes the alert logic, persistence rules such as requiring several consecutive anomalous windows, and which cases go to human review."
+   ],
+   "figures": [
+    {
+     "files": [
+      "vib-alarms.svg"
+     ],
+     "caption": "How the alert rule, not only the threshold, sets the false-alarm budget, under idealised assumptions: one scored window per minute and independent Gaussian healthy scores. Real anomaly scores are correlated in time, so persistence helps less than shown here. The point is the shape of the tradeoff, which we measure on your own healthy data."
+    }
+   ]
+  },
+  {
+   "id": "engagement",
+   "eyebrow": "How an engagement runs",
+   "h2": "From raw signals to a threshold you trust.",
+   "lead": "Four stages, each ending with something you can inspect.",
+   "steps": [
+    {
+     "h3": "Review the measurement chain",
+     "p": "Inspect sensors, mounts, sampling, speed references and existing recordings. Establish what the data can reveal before modeling."
+    },
+    {
+     "h3": "Build the physics baseline",
+     "p": "Compute expected fault frequencies, envelope spectra and order-tracked features. See what a classical approach detects and where it falls short."
+    },
+    {
+     "h3": "Add learning where it pays",
+     "p": "Train anomaly or classification models on the baseline features, split by machine and operating condition so results reflect deployment."
+    },
+    {
+     "h3": "Set thresholds &amp; hand over",
+     "p": "Tune alert logic against the agreed false-alarm cost, document limits and failure modes, and plan drift monitoring."
+    }
+   ],
+   "cta": {
+    "href": "/audio-ai/",
+    "text": "Explore the Audio &amp; Acoustics practice →"
+   }
+  }
+ ],
+ "faq": [
+  {
+   "q": "We have almost no recorded failures. Can machine learning still help?",
+   "a": "Often, yes. Anomaly detection trained on healthy operation can flag departures from normal behaviour without fault labels, provided load and speed changes are controlled for so they do not trigger alarms. A physics baseline built on expected fault frequencies also needs no labels and helps explain what an anomaly model reacts to."
+  },
+  {
+   "q": "Are MEMS accelerometers good enough for bearing fault detection?",
+   "a": "It depends on the machine and how early you need to detect. MEMS sensors are attractive on cost, size and power, but their noise floor and bandwidth can hide the small high-frequency impacts that envelope analysis relies on for early detection. We compare the sensor's specifications with the expected signal levels and, where possible, test it next to a reference accelerometer."
+  },
+  {
+   "q": "Our machines run at variable speed. Does that rule out spectral methods?",
+   "a": "No, but it changes the approach. Order tracking resamples the signal to constant shaft angle so that speed-related components stay in fixed bins. With a tachometer this is straightforward; without one, speed can sometimes be estimated from the vibration itself. Learned models also benefit, because order-domain features vary far less with speed."
+  },
+  {
+   "q": "Can you predict exactly when a component will fail?",
+   "a": "Not as a single date. Remaining useful life is better treated as a probability over time, estimated from degradation indicators and censored run histories. That gives maintenance planners a risk curve with uncertainty, which is more honest and more useful than a point estimate."
+  },
+  {
+   "q": "Can the analysis run on the sensor node instead of in the cloud?",
+   "a": "Frequently. Envelope features, band energies and compact anomaly models can run on embedded processors, sending only features or alerts upstream to save bandwidth and power. The tradeoff is less raw data for later investigation, so we usually recommend keeping occasional raw snapshots for review and retraining."
+  }
+ ],
+ "reads": [
+  {
+   "href": "/wiki/signal-processing-machine-learning.html",
+   "small": "Technical guide",
+   "strong": "Signal processing and machine learning"
+  },
+  {
+   "href": "/blog-time-series-survival-analysis.html",
+   "small": "Prediction",
+   "strong": "Survival analysis for time series"
+  },
+  {
+   "href": "/blog-signal.html",
+   "small": "Engineering perspective",
+   "strong": "Classical DSP and machine learning"
+  }
+ ]
+}

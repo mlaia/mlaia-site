@@ -1,0 +1,242 @@
+{
+ "slug": "beamforming-microphone-arrays",
+ "title": "Microphone Array Beamforming for Products | MLAIA",
+ "description": "Microphone array beamforming for devices: array geometry, spatial aliasing, MVDR/GSC, DOA estimation, mic calibration and neural mask-based front-ends.",
+ "service_name": "Microphone array design and beamforming engineering",
+ "breadcrumb": "Beamforming",
+ "eyebrow": "Audio &amp; Acoustics · Microphone arrays",
+ "h1": "Microphone array beamforming.<br>Designed around physics, then tuned on the device.",
+ "intro": "Microphone array beamforming lets a product listen in one direction and suppress the rest, but how well it works is largely fixed by geometry, microphone tolerances and the room before any algorithm runs. We help hardware and R&amp;D teams choose the array, the beamformer and the evaluation plan together, so the result holds up on real units in real rooms.",
+ "cta": "Discuss your array design",
+ "lab_link": {
+  "href": "/audio-ai/lab/#beamforming",
+  "text": "Steer a delay-and-sum array in the lab"
+ },
+ "brief": {
+  "h2": "Built around your array",
+  "items": [
+   [
+    "Your data",
+    "Multichannel recordings, array geometry &amp; enclosure"
+   ],
+   [
+    "Your constraints",
+    "Mic count, spacing, tolerance, latency &amp; compute"
+   ],
+   [
+    "Our focus",
+    "Array design, beamforming, DOA &amp; neural front-ends"
+   ]
+  ]
+ },
+ "sections": [
+  {
+   "id": "common-mistakes",
+   "eyebrow": "What buyers get wrong",
+   "h2": "Most array problems are decided<br>before the first line of code.",
+   "lead": "Teams often fix the microphone count and board layout first, then expect the beamformer to deliver the directivity. Geometry sets hard limits. These are the issues we see most often, and they are where our <a href=\"/audio-ai/\">Audio &amp; Acoustics practice</a> usually starts.",
+   "cards": [
+    {
+     "number": "01",
+     "h3": "Aperture vs low-frequency directivity",
+     "p": "Directivity depends on array size relative to wavelength. At 300 Hz the wavelength is over a metre, so a 6 cm delay-and-sum array is close to omnidirectional across much of the speech band. Small arrays can only gain low-frequency directivity through superdirective processing, which brings its own costs."
+    },
+    {
+     "number": "02",
+     "h3": "Spacing vs spatial aliasing",
+     "p": "To avoid grating lobes, element spacing should stay below half the shortest wavelength of interest: about 2.1 cm for content up to 8 kHz. Wider spacing improves low-frequency resolution but creates false lobes and ambiguous DOA at high frequencies. Many designs need nested or non-uniform layouts to satisfy both."
+    },
+    {
+     "number": "03",
+     "h3": "White-noise gain and robustness",
+     "p": "Superdirective and differential beamformers look excellent in simulation and then amplify sensor self-noise, wind and small errors on hardware. White-noise gain (WNG) measures that sensitivity. We constrain WNG explicitly, typically with diagonal loading, and accept a little less directivity in exchange for a beamformer that survives production."
+    },
+    {
+     "number": "04",
+     "h3": "Microphone mismatch and calibration",
+     "p": "MEMS microphones are commonly specified with sensitivity tolerances around ±1 dB, plus phase differences between parts and acoustic ports. Small-aperture arrays are very sensitive to this. Decide early whether you will buy matched parts, calibrate per unit on the line, or estimate mismatch adaptively in the field."
+    },
+    {
+     "number": "05",
+     "h3": "Enclosure, ports and the room",
+     "p": "Free-field steering vectors ignore the device body, gaskets, port tubes and reverberation. In a reverberant room the target arrives from many directions, and adaptive beamformers can cancel part of the desired speech. Measured or estimated relative transfer functions usually outperform idealised geometry."
+    }
+   ],
+   "figures": [
+    {
+     "files": [
+      "bf-patterns-a.svg",
+      "bf-patterns-b.svg"
+     ],
+     "caption": "Delay-and-sum response of a four-microphone linear array, steered to broadside and computed from the array geometry. <strong>Left:</strong> a 6 cm array forms a beam at 4 kHz but is nearly omnidirectional at 500 Hz. <strong>Right:</strong> at 6 kHz, 6 cm spacing exceeds half a wavelength and grating lobes appear as strong as the main beam. Every pattern is mirrored front-to-back, because a linear array cannot tell front from back."
+    }
+   ]
+  },
+  {
+   "id": "methods",
+   "eyebrow": "Methods",
+   "h2": "From delay-and-sum to neural front-ends.<br>Each with a known failure mode.",
+   "lead": "We start with a fixed beamformer as a baseline and add adaptivity or learned components only where measurements show they help.",
+   "cards": [
+    {
+     "h3": "Delay-and-sum and filter-and-sum",
+     "p": "Time-align channels toward a look direction and sum. Robust, cheap and predictable, with uncorrelated-noise gain that grows with microphone count. Directivity is limited by aperture at low frequencies, so it is a baseline and a fallback rather than the whole answer.",
+     "link": {
+      "href": "/audio-ai/lab/#beamforming",
+      "text": "See steering and mic count in the lab →"
+     }
+    },
+    {
+     "h3": "Superdirective and differential arrays",
+     "p": "Optimise for diffuse-noise suppression with closely spaced elements, the usual choice for earphones and compact devices. Differential designs give frequency-invariant patterns such as cardioids, but need equalisation of their low-frequency roll-off and careful WNG control."
+    },
+    {
+     "h3": "Adaptive beamforming: MVDR and GSC",
+     "p": "MVDR minimises output power while passing the look direction undistorted; the generalised sidelobe canceller (GSC) implements the same idea with a blocking matrix and adaptive filter. Both need good noise-covariance estimates and steering vectors, or they suppress the target. Voice-activity control and RTF steering are essential."
+    },
+    {
+     "h3": "Direction of arrival (DOA) estimation",
+     "p": "GCC-PHAT, SRP-PHAT and subspace methods such as MUSIC locate talkers or sound sources. Reverberation creates spurious peaks, and linear arrays cannot separate front from back. We pair DOA with tracking and confidence measures so steering does not jump to reflections or loudspeakers."
+    },
+    {
+     "h3": "Mask-based neural beamforming",
+     "p": "A network estimates time-frequency masks for speech and noise; the masks drive spatial covariance estimates for an MVDR or GEV beamformer. This keeps the linear, low-distortion spatial filter while letting a model decide what is target. It also reduces dependence on explicit geometry."
+    },
+    {
+     "h3": "Integration with AEC and post-filtering",
+     "p": "Ordering matters. Echo cancellation per microphone before the beamformer is expensive; a single canceller after an adaptive beamformer sees a changing echo path. Post-filters and dereverberation such as WPE sit downstream. We design the chain as one system, not separate blocks."
+    }
+   ],
+   "figures": [
+    {
+     "files": [
+      "bf-delay-sum.svg"
+     ],
+     "caption": "Delay-and-sum in one picture. Sound from angle θ reaches each microphone later by d·sinθ/c. Delaying each channel to remove that offset lines the target up before the sum, while sound from other directions stays misaligned and partly cancels."
+    },
+    {
+     "files": [
+      "bf-aec-order.svg"
+     ],
+     "caption": "Where echo cancellation sits changes both cost and difficulty. One canceller per microphone multiplies compute by N; a single canceller after the beam is cheaper but must track an echo path that moves whenever the beamformer steers."
+    }
+   ]
+  },
+  {
+   "id": "applications",
+   "eyebrow": "Where arrays are used",
+   "h2": "Different products.<br>Different array problems.",
+   "lead": "The same beamformer behaves very differently on a smart speaker, an earbud and a drone. Product constraints decide which methods are viable.",
+   "cards": [
+    {
+     "h3": "Smart devices and conferencing",
+     "p": "Far-field pickup at several metres, talkers anywhere in the room, a loudspeaker on the same device. Circular arrays support 360° steering; the hard parts are reverberation, double-talk with echo cancellation and fast, stable talker tracking for wake words and ASR."
+    },
+    {
+     "h3": "Earphones and hearables",
+     "p": "Two or three microphones a centimetre or two apart, tight power budgets and very low latency targets. Wind noise is largely uncorrelated between microphones, so a directional beamformer can make it worse; wind detection and fallback modes matter as much as the beam."
+    },
+    {
+     "h3": "Robots and drones",
+     "p": "Loud, harmonic ego-noise from motors and rotors in the near field, often much louder than the target. Array placement relative to noise sources, reference sensors and spatial nulls toward known noise directions usually do more than adding microphones."
+    },
+    {
+     "h3": "Industrial acoustic monitoring",
+     "p": "Localising leaks, faults or abnormal machines in noisy halls. Larger apertures and wider bandwidths are possible, but spatial aliasing and multipath dominate. Beamformed outputs often feed <a href=\"/wiki/acoustic-event-detection.html\">acoustic event detection</a> models, or complement <a href=\"/audio-ai/vibration-analysis/\">vibration analysis</a>."
+    }
+   ]
+  },
+  {
+   "id": "evaluation",
+   "eyebrow": "What to measure",
+   "h2": "Judge the array by what the product needs.<br>Not by the simulated beam pattern.",
+   "lead": "A clean simulated beam pattern says little about a product. We define measurements up front and run them on representative units, at the distances, angles and noise conditions the device will meet.",
+   "paragraphs": [
+    "Spatial metrics come first: measured beam patterns and directivity index per band, white-noise gain, and sensitivity to steering error and mismatch across a batch of units, not one golden sample. For speech products we then measure what the user and downstream model experience: SI-SDR or SNR improvement, quality estimates, and word error rate or wake-word false-accept and false-reject rates when ASR consumes the output. For localisation we report DOA error and tracking stability in reverberant rooms. Every result is paired with latency, memory and compute on the target processor; see <a href=\"/audio-ai/edge-audio-ai/\">edge audio AI</a> for that side of the budget."
+   ],
+   "capabilities": {
+    "label": "Typical evaluation set",
+    "items": [
+     "Beam pattern &amp; directivity index",
+     "White-noise gain",
+     "Mismatch sensitivity",
+     "SI-SDR / SNR gain",
+     "ASR word error rate",
+     "DOA error &amp; tracking",
+     "Latency &amp; compute"
+    ]
+   }
+  },
+  {
+   "id": "engagement",
+   "eyebrow": "How an array engagement runs",
+   "h2": "Simulate. Record. Tune on real units.",
+   "lead": "Array work goes best when hardware and algorithm decisions are made together, before the board layout is frozen.",
+   "steps": [
+    {
+     "h3": "Requirements &amp; geometry review",
+     "p": "Agree target distances, angles, bandwidth, noise scenarios and success metrics. Review mic count, spacing, ports and enclosure against aliasing and low-frequency directivity limits."
+    },
+    {
+     "h3": "Simulation &amp; trade study",
+     "p": "Model candidate geometries with simulated rooms and tolerance spreads. Compare fixed, superdirective and adaptive beamformers on directivity, WNG and robustness."
+    },
+    {
+     "h3": "Multichannel recording &amp; calibration",
+     "p": "Record on prototype units in representative rooms and noise. Characterise mismatch, transfer functions and enclosure effects; define a calibration strategy."
+    },
+    {
+     "h3": "Implementation &amp; on-device validation",
+     "p": "Tune the chosen chain, including DOA, AEC ordering and post-filtering, on the target processor. Validate across units and hand over code, test sets and documentation."
+    }
+   ],
+   "cta": {
+    "href": "#contact",
+    "text": "Talk through your array →"
+   }
+  }
+ ],
+ "faq": [
+  {
+   "q": "How many microphones does my product need?",
+   "a": "Fewer than many teams assume, if geometry is right. Uncorrelated-noise suppression grows with microphone count, but directivity at low frequencies is driven by aperture, and DOA ambiguity by layout. Two well-placed microphones can outperform four poorly spaced ones. We decide the count from the target scenarios, the bandwidth, the enclosure and the compute budget, then confirm it with simulation and prototype recordings."
+  },
+  {
+   "q": "Should we use a linear or circular array?",
+   "a": "A linear array is simple and works for endfire or broadside pickup, but it cannot distinguish front from back and its resolution varies with angle. A circular or planar array supports uniform 360° steering and unambiguous azimuth, at the cost of more channels and board area. The right choice depends on where talkers or sources can be relative to the device."
+  },
+  {
+   "q": "Is a neural network better than MVDR?",
+   "a": "Often the best systems use both. Mask-based beamforming uses a network to estimate which time-frequency bins are target and noise, then applies a linear MVDR or GEV filter that introduces little distortion, which suits ASR. Fully neural multichannel models can suppress more noise but need more compute and representative training data. We compare options on your recordings and on the target hardware."
+  },
+  {
+   "q": "Can you work with our existing hardware?",
+   "a": "Yes. Many projects start after the geometry is fixed. We characterise what the current array can and cannot achieve, calibrate for mismatch and enclosure effects, and choose algorithms that suit the geometry. If a hardware change would make a large difference, such as a microphone position or port design, we show the expected benefit so you can decide whether it is worth a board revision."
+  },
+  {
+   "q": "Do microphones need per-unit calibration?",
+   "a": "It depends on aperture and beamformer type. Delay-and-sum on a wide array tolerates typical sensitivity spread well. Small-aperture superdirective or differential designs can lose much of their directivity with a fraction of a decibel of mismatch. Options include matched-part grades, end-of-line calibration and online gain estimation. We quantify the sensitivity first, so calibration cost is justified by data."
+  },
+  {
+   "q": "Can you guarantee a dB of noise reduction?",
+   "a": "No. Achievable suppression depends on geometry, the noise field, reverberation and microphone tolerances, and a single dB figure hides most of that. We agree the metrics that matter for your product, such as word error rate or SI-SDR at given distances and noise conditions, and measure them on your hardware. Our general approach is described on the <a href=\"/audio-ai/\">Audio &amp; Acoustics</a> page."
+  }
+ ],
+ "reads": [
+  {
+   "href": "/blog-signal.html",
+   "small": "Engineering perspective",
+   "strong": "Classical DSP and machine learning"
+  },
+  {
+   "href": "/audio-ai/noise-reduction-anc/",
+   "small": "Audio &amp; Acoustics",
+   "strong": "Noise reduction and active noise control"
+  },
+  {
+   "href": "/blog-voice-ai-production.html",
+   "small": "Voice AI",
+   "strong": "Voice AI in production"
+  }
+ ]
+}
