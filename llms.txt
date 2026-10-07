@@ -27,6 +27,14 @@ MLAIA delivers end-to-end AI solutions — from research and prototyping through
 ### 1. Real-Time Signal Processing & Audio/Acoustics AI
 End-to-end signal processing pipelines combining classical DSP with deep learning. Capabilities include FFT, wavelet transforms, digital filters, anomaly detection, predictive maintenance, acoustic event detection, voice analysis, noise reduction, and real-time signal intelligence for industrial, defense, and healthcare applications.
 
+Practice pages:
+- [Audio, Acoustics & Signal Processing](https://www.mlaia.com/audio-ai/) — practice overview
+- [Microphone Array Beamforming](https://www.mlaia.com/audio-ai/beamforming-microphone-arrays/) — array geometry, DOA estimation, fixed and adaptive beamformers
+- [Noise Reduction & Active Noise Cancellation](https://www.mlaia.com/audio-ai/noise-reduction-anc/) — speech enhancement, echo cancellation, feedforward/feedback ANC
+- [On-Device Audio AI](https://www.mlaia.com/audio-ai/edge-audio-ai/) — wake words, sound events and speech models on phones, DSPs and controllers
+- [Vibration Analysis & Machine Learning](https://www.mlaia.com/audio-ai/vibration-analysis/) — condition monitoring, bearing fault features, anomaly detection
+- [Interactive Audio Lab](https://www.mlaia.com/audio-ai/lab/) — browser demos of filtering, beamforming and active noise cancellation
+
 ### 2. Medical AI & Clinical Data Science
 AI for healthcare and medical devices: EHR analysis, medical imaging (classification, segmentation), clinical outcome prediction, survival analysis, and graph neural networks for bioinformatics and patient relationship modeling.
 
@@ -101,4 +109,8 @@ Neutral, encyclopedic reference articles on applied AI topics (Applied AI & Data
 - Homepage: https://www.mlaia.com
 - Blog: https://www.mlaia.com/blog.html
 - Wiki: https://www.mlaia.com/wiki/index.html
+- Audio & Acoustics: https://www.mlaia.com/audio-ai/
+- Medical AI: https://www.mlaia.com/medical-ai/
+- Prediction & Causal Analysis: https://www.mlaia.com/predictive-intelligence/
+- AI & Automation: https://www.mlaia.com/ai-automation/
 - Contact: https://www.mlaia.com/#contact

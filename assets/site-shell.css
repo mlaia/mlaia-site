@@ -18,3 +18,15 @@ body[data-site-shell] .cta#contact{background:#081728;color:#c7d2e3;text-align:s
 .cta#contact{display:grid;grid-template-columns:1fr 1fr;gap:32px 64px;align-items:start}.cta#contact .site-home-contact-copy p{color:#c7d2e3}.cta#contact .site-home-contact-copy a{color:#d5e1f3;text-decoration:underline;text-underline-offset:4px}.cta#contact .cta-form{width:100%;max-width:none}.cta#contact .cta-phones{grid-column:1/-1;justify-content:flex-start;margin-top:0}
 @media(max-width:900px){.cta#contact{grid-template-columns:1fr;gap:28px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+/* Analytics consent banner for pages without their own (see site-shell.js). */
+.site-consent{position:fixed;z-index:1200;left:124px;bottom:24px;width:min(560px,calc(100% - 148px));padding:18px 20px;background:#0a1628;color:#fff;border-radius:10px;box-shadow:0 12px 32px rgba(10,22,40,.28);font:15px/1.5 'DM Sans',Arial,sans-serif;box-sizing:border-box}
+.site-consent[hidden]{display:none}
+.site-consent p{margin:0 0 14px;color:#fff}
+.site-consent a{color:#8fd8ff!important;text-decoration:underline}
+.site-consent-actions{display:flex;flex-wrap:wrap;gap:10px}
+.site-consent button{min-height:44px;padding:10px 18px;border:1px solid #0057ff;border-radius:6px;background:#0057ff;color:#fff;font:600 14px/1.2 'DM Sans',Arial,sans-serif;cursor:pointer}
+.site-consent button.secondary{background:transparent;border-color:#8796ad}
+.site-consent button:hover{background:#0044ce}.site-consent button.secondary:hover{background:rgba(255,255,255,.08)}
+.site-consent a:focus-visible,.site-consent button:focus-visible{outline:3px solid #00b4d8;outline-offset:3px}
+.site-consent-open{min-height:44px;padding:10px 18px;border:1px solid #0057ff;border-radius:6px;background:#fff;color:#0057ff;font:600 15px/1.2 'DM Sans',Arial,sans-serif;cursor:pointer}
+@media(max-width:900px){.site-consent{left:16px;right:16px;width:auto;bottom:calc(82px + env(safe-area-inset-bottom) + 12px)}}

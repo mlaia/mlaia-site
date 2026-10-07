@@ -1,0 +1,219 @@
+{
+ "slug": "edge-audio-ai",
+ "title": "On-Device Audio AI & Embedded Audio ML | MLAIA",
+ "description": "On-device audio AI for phones, MCUs and DSPs: wake words, sound event detection, int8 quantization and streaming inference, validated on target hardware.",
+ "service_name": "On-device and embedded audio machine learning",
+ "breadcrumb": "Edge Audio AI",
+ "eyebrow": "Audio &amp; Acoustics · Edge &amp; embedded",
+ "h1": "Audio models that run on the device.<br>Within its memory, latency and power.",
+ "intro": "On-device audio AI moves keyword spotting, sound event detection and audio classification onto phones, microcontrollers, DSPs and dedicated controllers. We engineer the path from microphone and front-end features to a quantized streaming model, and evaluate it on the target hardware with real microphones.",
+ "cta": "Discuss your device and model",
+ "lab_link": {
+  "href": "/audio-ai/lab/",
+  "text": "Try the interactive audio lab"
+ },
+ "brief": {
+  "h2": "Built around your device",
+  "items": [
+   [
+    "Your data",
+    "Audio from your microphones, in your acoustic conditions"
+   ],
+   [
+    "Your constraints",
+    "RAM, flash, cycles, latency &amp; always-on power"
+   ],
+   [
+    "Our focus",
+    "Front-end, model &amp; runtime evaluated together"
+   ]
+  ]
+ },
+ "sections": [
+  {
+   "id": "what-changes-on-device",
+   "eyebrow": "Why edge audio is its own discipline",
+   "h2": "The model is only part of the budget.<br>The audio pipeline is the rest.",
+   "lead": "A model that scores well in a notebook can still fail on a device. On constrained hardware, feature extraction, buffering, runtime and power management share one small budget with the network, and each choice changes what the model sees.",
+   "paragraphs": [
+    "Our project experience includes deploying machine-learning and deep-learning models on Android and iOS phones and on dedicated controllers for applications involving drones and earphones. Across platforms, the lesson is the same: keep training and on-device features identical, and test with the shipping microphones. The <a href=\"/audio-ai/\">Audio &amp; Acoustics practice</a> covers the wider signal chain."
+   ],
+   "cards": [
+    {
+     "number": "01",
+     "h3": "Keyword spotting &amp; wake words",
+     "p": "Always-on detection of a small vocabulary, typically as a cascade: a cheap first stage runs continuously and a larger verifier wakes only on candidates. The design trades false accepts per hour against false rejects and idle power."
+    },
+    {
+     "number": "02",
+     "h3": "Sound event detection on the edge",
+     "p": "Recognizing alarms, impacts, machinery states or other target sounds locally, without streaming audio off the device. Class definitions, onset handling and post-processing such as median filtering or hysteresis matter as much as the classifier. See the <a href=\"/wiki/acoustic-event-detection.html\">acoustic event detection guide</a>."
+    },
+    {
+     "number": "03",
+     "h3": "Learned enhancement in the loop",
+     "p": "Small networks that estimate noise-suppression masks or gains run on every frame, so their cost and algorithmic delay add directly to the audio path. They usually complement classical processing; see <a href=\"/audio-ai/noise-reduction-anc/\">noise reduction &amp; ANC</a>."
+    }
+   ],
+   "figures": [
+    {
+     "files": [
+      "edge-cascade.svg"
+     ],
+     "caption": "A wake-word cascade splits the work by power domain. Only the front-end and a tiny first stage run on every hop; the larger verifier runs on the main core only when the first stage flags a candidate. Idle power, and most false accepts, are decided by how that split is tuned."
+    }
+   ]
+  },
+  {
+   "id": "engineering",
+   "eyebrow": "Engineering the pipeline",
+   "h2": "Features, model, runtime.<br>Engineered as one system.",
+   "lead": "Most on-device audio failures come from mismatches between stages, not from the network itself. These are the areas we work through with your team.",
+   "cards": [
+    {
+     "h3": "Front-end feature cost",
+     "p": "Log-mel or MFCC extraction means windowing, an FFT, a mel filterbank and a log on every hop. On a microcontroller this can cost as much as a small model. We size the FFT, mel bands and hop, use fixed-point or vendor DSP kernels, and verify on-device features match training numerically."
+    },
+    {
+     "h3": "Streaming inference &amp; latency",
+     "p": "Frame length and hop set time resolution and minimum algorithmic delay. Convolutional models can stream by caching internal state, so each hop computes only new frames instead of re-running a full window. Buffering, inference time and decision smoothing go into one latency budget."
+    },
+    {
+     "h3": "Quantization &amp; pruning",
+     "p": "Post-training int8 quantization with a representative calibration set comes first; quantization-aware training follows if accuracy drops. We check per-channel scales, activation ranges after the log and operator support. On most small cores, structured pruning and architecture changes cut compute more reliably than unstructured sparsity."
+    },
+    {
+     "h3": "Runtime &amp; deployment target",
+     "p": "TensorFlow Lite and TFLite Micro, Core ML, ONNX Runtime and vendor NPU toolchains support different operators and quantization schemes. We choose architectures that convert cleanly, compare converted outputs with the reference, and profile per-layer latency and peak memory on the device."
+    },
+    {
+     "h3": "Always-on power budgets",
+     "p": "Continuous listening is dominated by what runs when nothing happens. We look at duty cycling, voice-activity or energy gating, a low-power first stage that wakes a larger core, and sample rate. Power is measured on the board in each operating state."
+    },
+    {
+     "h3": "Microphone &amp; acoustic path",
+     "p": "Data recorded on studio or laptop microphones rarely matches a MEMS microphone behind a port and grille. We characterize the device response and noise floor, then augment with measured responses and recorded device noise. Multi-microphone products can add a <a href=\"/audio-ai/beamforming-microphone-arrays/\">beamforming</a> front-end."
+    }
+   ],
+   "capabilities": {
+    "label": "Engineering considerations",
+    "items": [
+     "Log-mel / MFCC front-ends",
+     "int8 &amp; quantization-aware training",
+     "Streaming &amp; stateful inference",
+     "TFLite, Core ML, ONNX Runtime",
+     "Duty cycling &amp; wake cascades",
+     "On-target profiling"
+    ]
+   },
+   "figures": [
+    {
+     "files": [
+      "edge-streaming.svg"
+     ],
+     "caption": "Streaming inference caches intermediate results so each hop processes only the newest frame instead of the whole window. For convolutional and recurrent audio models this cuts compute per hop by roughly the number of frames in the window, at the cost of state memory and careful conversion."
+    }
+   ]
+  },
+  {
+   "id": "evaluation",
+   "eyebrow": "What we measure",
+   "h2": "Success is measured on the device.<br>Not only on the test set.",
+   "lead": "We agree on metrics before optimizing, and report them for the deployed build, with the real microphone and runtime.",
+   "cards": [
+    {
+     "h3": "Detection error that matches the use",
+     "p": "For wake words, false rejects at a fixed false-accept rate per hour of realistic background audio, not accuracy on balanced clips. For sound events, event-based precision and recall with onset tolerance, and false alarms per day in the field. Results are split by noise type and distance."
+    },
+    {
+     "h3": "Latency from sound to decision",
+     "p": "Time from the acoustic event to the device acting on it: buffering, feature hop, inference, smoothing and any core wake-up. We measure it end to end with a reference signal and report the distribution, not an average."
+    },
+    {
+     "h3": "Resource footprint",
+     "p": "Flash for weights and code, peak RAM including tensor arena and audio buffers, cycles or milliseconds per hop, and the CPU or DSP headroom left for the rest of the application."
+    },
+    {
+     "h3": "Power &amp; robustness on target",
+     "p": "Average current while idle-listening and when active, measured on the board. Robustness tests cover the shipped microphone and enclosure, playback through the device's own speaker, and drift between float, quantized and on-device outputs."
+    }
+   ],
+   "note": "Achievable numbers depend on your hardware, environment and data. We set targets with you against representative recordings; we do not promise benchmark figures.",
+   "figures": [
+    {
+     "files": [
+      "edge-latency.svg"
+     ],
+     "caption": "An example budget from sound onset to the device acting. Here the model is a small share: buffering the analysis window and smoothing decisions over several hops take most of the time. Profiling the full chain on the target shows where reductions are actually available."
+    }
+   ]
+  },
+  {
+   "id": "engagement",
+   "eyebrow": "How an engagement runs",
+   "h2": "From a trained model to a working device.<br>In four stages.",
+   "lead": "Engagements range from reviewing an existing on-device model to building the pipeline with your firmware or mobile team. A typical path:",
+   "steps": [
+    {
+     "h3": "Budget the device",
+     "p": "Agree on target hardware, runtime, latency, memory and power envelopes, and the error measures that matter. Profile a reference model on the device early, so the budget rests on measurements."
+    },
+    {
+     "h3": "Match the data to the microphone",
+     "p": "Record audio through the product's microphone and enclosure, build a negative set of realistic background audio, and lock one front-end specification for training and firmware."
+    },
+    {
+     "h3": "Design for the target",
+     "p": "Select architectures that fit the operator set and memory, train with device-realistic augmentation, then quantize and compare float, quantized and on-device outputs."
+    },
+    {
+     "h3": "Validate &amp; hand over",
+     "p": "Run the agreed tests on production-representative units, and document the pipeline, conversion steps and test harness so your team can retrain and redeploy."
+    }
+   ],
+   "cta": {
+    "href": "#contact",
+    "text": "Discuss your device and model"
+   }
+  }
+ ],
+ "faq": [
+  {
+   "q": "Can a useful audio model fit on a microcontroller?",
+   "a": "For well-scoped tasks such as keyword spotting or a small set of sound events, often yes. Published keyword-spotting models commonly fit in tens to a few hundred kilobytes after int8 quantization. Whether yours fits depends on the classes, acoustic variability and what the rest of the firmware needs, so we profile a candidate on your hardware early."
+  },
+  {
+   "q": "Should we run inference on the phone or in the cloud?",
+   "a": "On-device inference avoids network latency, works offline and keeps raw audio on the device. The cloud allows larger models and easier updates. Many products split the work: a small on-device model detects or gates, and sends only relevant segments or results onward. We compare both against your latency, privacy, cost and update requirements."
+  },
+  {
+   "q": "How much accuracy do we lose with int8 quantization?",
+   "a": "It varies. Well-calibrated post-training quantization often loses little, but audio models can be sensitive where activation ranges are wide, for example right after the log in a log-mel front-end. We measure float, quantized and on-device outputs on your test set and use quantization-aware training when the gap matters."
+  },
+  {
+   "q": "Why does our model work in testing but not on the device?",
+   "a": "Common causes are feature mismatches between Python and firmware (window, FFT scaling, mel filterbank or log floor), a microphone response and noise floor unlike the training data, and quantization or conversion differences. We trace the same audio through each stage on both sides and compare outputs numerically to find the divergence."
+  },
+  {
+   "q": "Do we need to record new data with our own hardware?",
+   "a": "Usually some. Public datasets help with pre-training and negatives, but a modest set of recordings through your microphone and enclosure, in realistic conditions, often closes the gap between lab and field. We help design the recording protocol and use measured device responses to make existing data more representative."
+  }
+ ],
+ "reads": [
+  {
+   "href": "/wiki/acoustic-event-detection.html",
+   "small": "Technical guide",
+   "strong": "Acoustic event detection"
+  },
+  {
+   "href": "/blog-audio-ai-production.html",
+   "small": "Audio AI",
+   "strong": "Audio AI in production"
+  },
+  {
+   "href": "/wiki/signal-processing-machine-learning.html",
+   "small": "Engineering perspective",
+   "strong": "Signal processing and machine learning"
+  }
+ ]
+}

@@ -1,0 +1,239 @@
+{
+ "slug": "noise-reduction-anc",
+ "title": "Noise Reduction & ANC Algorithms | MLAIA",
+ "description": "Noise reduction and active noise cancellation algorithms for products: speech enhancement, FxLMS ANC, echo cancellation and evaluation on the target device.",
+ "service_name": "Noise Reduction and Active Noise Cancellation Algorithm Development",
+ "breadcrumb": "Noise Reduction & ANC",
+ "eyebrow": "Audio &amp; Acoustics · Noise Reduction &amp; ANC",
+ "h1": "Remove the noise.<br>Keep the signal.",
+ "intro": "We design and evaluate noise reduction and active noise cancellation algorithms for products that capture speech or deliver sound to the ear: headsets, earphones, phones, vehicles and devices used in loud places. Classical DSP, adaptive filtering and neural enhancement, chosen against your latency, compute and listening-quality requirements.",
+ "cta": "Discuss your noise problem",
+ "lab_link": {
+  "href": "/audio-ai/lab/#anc",
+  "text": "Try the anti-phase cancellation demo"
+ },
+ "brief": {
+  "h2": "Built around your product",
+  "items": [
+   [
+    "Your data",
+    "Noisy speech, reference and in-ear microphones, path measurements"
+   ],
+   [
+    "Your constraints",
+    "Latency, causality, power and enclosure acoustics"
+   ],
+   [
+    "Our focus",
+    "Suppression that preserves speech and stays stable"
+   ]
+  ]
+ },
+ "sections": [
+  {
+   "id": "two-problems",
+   "eyebrow": "Two different problems",
+   "h2": "Noise reduction cleans a signal.<br>ANC cancels sound in the air.",
+   "lead": "Noise reduction processes a captured signal for a call, recording or recognizer, and can usually tolerate a frame of delay. Active noise cancellation plays anti-noise to cancel sound acoustically at the ear, under hard limits on latency, bandwidth and stability. Many products need both, plus echo cancellation. This work is part of our <a href=\"/audio-ai/\">Audio &amp; Acoustics practice</a>."
+  },
+  {
+   "id": "speech-enhancement",
+   "eyebrow": "Speech &amp; signal enhancement",
+   "h2": "Suppress the noise.<br>Without damaging the speech.",
+   "lead": "Every single-channel suppressor trades noise reduction against speech distortion. The engineering work is choosing where on that curve your product sits, and keeping it there across noise types and levels.",
+   "cards": [
+    {
+     "number": "01",
+     "h3": "Spectral subtraction &amp; Wiener filtering",
+     "p": "Classical STFT-domain gains: spectral subtraction, Wiener and MMSE log-spectral amplitude estimators with decision-directed a priori SNR. Cheap and predictable on stationary noise. Over-aggressive gains leave musical noise, isolated tonal artifacts listeners find more annoying than the original hiss.",
+     "link": {
+      "href": "/audio-ai/lab/#noise",
+      "text": "Hear a filtering experiment →"
+     }
+    },
+    {
+     "number": "02",
+     "h3": "Noise estimation",
+     "p": "A suppressor is only as good as its noise estimate. Minimum-statistics and MCRA-style trackers follow slowly varying noise during speech, but lag behind sudden changes and mistake babble or music for speech. Many field complaints trace back to this estimator rather than the gain rule.",
+     "link": null
+    },
+    {
+     "number": "03",
+     "h3": "Neural speech enhancement",
+     "p": "Networks that predict a real or complex time-frequency mask, map to a clean spectrum, or work end-to-end on waveforms. They handle babble and transient noise far better than classical gains, at the cost of compute, memory, algorithmic latency and failures on conditions absent from training.",
+     "link": null
+    },
+    {
+     "number": "04",
+     "h3": "Hybrid &amp; multi-microphone designs",
+     "p": "Small networks that estimate gains for a classical pipeline, or spatial filtering ahead of a single-channel post-filter. With two or more microphones, a beamformer gives the post-filter a far better noise reference than any single-channel estimator.",
+     "link": {
+      "href": "/audio-ai/beamforming-microphone-arrays/",
+      "text": "Microphone arrays &amp; beamforming →"
+     }
+    }
+   ],
+   "figures": [
+    {
+     "files": [
+      "anc-gain.svg"
+     ],
+     "caption": "Two classical gain rules plotted against the estimated SNR of a time-frequency bin. Wiener filtering suppresses low-SNR bins about twice as hard (in dB) as power spectral subtraction. A gain floor caps how deep the gain can go, trading some residual noise for fewer musical-noise artifacts."
+    }
+   ]
+  },
+  {
+   "id": "active-noise-cancellation",
+   "eyebrow": "Active noise cancellation",
+   "h2": "Cancel sound with sound.<br>Within the limits of physics.",
+   "lead": "ANC produces a signal of equal amplitude and opposite phase at the point of cancellation. Small gain or phase errors quickly erode the result, so architecture, secondary-path modelling and latency matter more than the choice of adaptive rule.",
+   "cards": [
+    {
+     "h3": "Feedforward, feedback &amp; hybrid",
+     "p": "Feedforward filters an outer reference microphone to predict noise at the ear, and depends on fit. Feedback closes a loop around an in-ear error microphone and is limited by the waterbed effect: suppression in one band is paid for with amplification elsewhere. Hybrid systems combine both.",
+     "link": null
+    },
+    {
+     "h3": "FxLMS &amp; the secondary path",
+     "p": "Adaptive ANC usually relies on filtered-x LMS, which filters the reference through a model of the loudspeaker-to-error-microphone path. Where that model's phase error approaches 90 degrees, adaptation becomes unstable. Fit and leakage change the path, so online modelling or robust fixed designs are needed.",
+     "link": null
+    },
+    {
+     "h3": "Causality &amp; latency",
+     "p": "In feedforward ANC, the electronic path (ADC, filtering, DAC and driver) must be shorter than the acoustic travel time from reference microphone to ear, a fraction of a millisecond in an earbud. Codec decimation filters can consume that budget, so ANC often runs on dedicated low-latency paths.",
+     "link": null
+    },
+    {
+     "h3": "Why ANC works at low frequencies",
+     "p": "Long wavelengths keep noise coherent between microphone and ear, and a fixed timing error is a small phase error at low frequency. As frequency rises, the zone of quiet shrinks and phase errors grow. Passive isolation from the seal and enclosure covers the higher band, so both are designed together.",
+     "link": null
+    },
+    {
+     "h3": "Transparency &amp; hear-through",
+     "p": "Hear-through passes outside sound to the ear through the same microphones. Latency must be low enough to avoid comb filtering with sound leaking past the seal, and the response should compensate for the occlusion effect so the user's own voice sounds natural.",
+     "link": null
+    },
+    {
+     "h3": "Acoustic echo cancellation",
+     "p": "When a device plays and records at once, an adaptive filter (NLMS or frequency-domain) models the loudspeaker-to-microphone path and subtracts the echo. Double-talk detection, loudspeaker nonlinearity and residual echo suppression decide whether calls feel full-duplex.",
+     "link": null
+    }
+   ],
+   "cta": {
+    "href": "/audio-ai/lab/#anc",
+    "text": "Tune gain and phase in the ANC demo →"
+   },
+   "figures": [
+    {
+     "files": [
+      "anc-architectures.svg"
+     ],
+     "caption": "Feedforward ANC races the noise: its electronics must deliver anti-noise before the sound itself reaches the ear. Feedback ANC listens at the ear and closes a loop, which removes the race but brings stability limits and the waterbed effect."
+    },
+    {
+     "files": [
+      "anc-timing.svg"
+     ],
+     "caption": "Computed best case: anti-noise with perfect amplitude that arrives τ late leaves a residual of 2·|sin(πfτ)|. Tens of microseconds of delay still cancel deeply at low frequencies, but only about 10 dB around 1–5 kHz, and above 1/(6τ) the anti-noise makes things louder. Real systems add gain and path errors on top, so passive isolation handles the high band."
+    }
+   ]
+  },
+  {
+   "id": "evaluation",
+   "eyebrow": "What we measure",
+   "h2": "Objective metrics first.<br>Listeners decide.",
+   "lead": "No single number captures noise-reduction quality. We combine objective metrics, measured attenuation and structured listening, on recordings that represent your users rather than a convenient benchmark.",
+   "cards": [
+    {
+     "h3": "Signal-level metrics",
+     "p": "SNR improvement and SI-SDR on mixtures where the clean reference is known. Useful for tracking development and comparing variants, but they reward aggressive suppression and say little about naturalness, so they are never used alone.",
+     "link": null
+    },
+    {
+     "h3": "Perceptual &amp; intelligibility estimates",
+     "p": "PESQ for quality, STOI for intelligibility, and non-intrusive estimators such as DNSMOS when no clean reference exists. We report speech distortion, residual noise and overall quality separately, because a suppressor can improve one while degrading another.",
+     "link": null
+    },
+    {
+     "h3": "Attenuation spectra for ANC",
+     "p": "Active and passive attenuation across frequency on an ear simulator or head-and-torso setup, across fits and noise fields. Equally important: where the system amplifies, how it handles wind and the user's own voice, and whether it stays stable.",
+     "link": null
+    },
+    {
+     "h3": "Listening tests &amp; device checks",
+     "p": "Blind comparisons with representative listeners on the target hardware, plus latency, CPU and memory load and, for calls, echo return loss enhancement (ERLE) and double-talk behaviour, against targets agreed in advance.",
+     "link": null
+    }
+   ],
+   "note": "Targets are set against your hardware, acoustics and test data. We do not quote suppression or dB figures before measuring."
+  },
+  {
+   "id": "engagement",
+   "eyebrow": "How an engagement runs",
+   "h2": "Measure the acoustics.<br>Then build the algorithm.",
+   "lead": "Noise problems are often decided by the transducers, the enclosure and the latency budget before any algorithm is written. Our process reflects that.",
+   "steps": [
+    {
+     "h3": "Characterize the system",
+     "p": "Record representative noise and speech, measure microphone responses and, for ANC, the primary and secondary paths across fits. Map the latency chain from ADC to driver and the available compute."
+    },
+    {
+     "h3": "Build a classical baseline",
+     "p": "Implement a Wiener or MMSE suppressor, AEC or fixed ANC filter as a reference that shows what the hardware supports and gives later work something concrete to beat."
+    },
+    {
+     "h3": "Develop &amp; compare",
+     "p": "Evaluate adaptive, neural and hybrid options on held-out recordings with the agreed metrics and listening tests. Review failures by noise type, level and user condition, not only averages."
+    },
+    {
+     "h3": "Port, tune &amp; hand over",
+     "p": "Optimize for the target processor with fixed-point or quantized implementations, verify on the device, and hand over code, test sets and tuning notes so your team owns the result."
+    }
+   ],
+   "note": "Our project experience includes deploying ML and deep-learning models on Android and iOS phones and on dedicated controllers for applications involving drones and earphones. See <a href=\"/audio-ai/edge-audio-ai/\">edge audio AI</a> for on-device constraints."
+  }
+ ],
+ "faq": [
+  {
+   "q": "Should we use a neural network or classical DSP for noise reduction?",
+   "a": "It depends on the noise and the budget. Classical suppressors handle stationary noise such as fans and road hum cheaply and predictably. Neural enhancement does much better on babble and transients but costs compute and needs careful testing. We build a classical baseline first and add a model where measurements justify it."
+  },
+  {
+   "q": "Why does our noise suppression sound robotic or watery?",
+   "a": "Usually musical noise or speech distortion from over-aggressive gains: a noise estimate that lags or overestimates, no gain floor, or too little smoothing. Neural suppressors show similar artifacts on unfamiliar data. A sensible gain floor, a better noise tracker and measuring distortion separately from residual noise usually help."
+  },
+  {
+   "q": "Why does our ANC barely reduce noise above about 1 kHz?",
+   "a": "That is expected physics, not necessarily a bug. At higher frequencies the zone of quiet around the error microphone shrinks and fixed latency becomes a large phase error. Products rely on passive isolation from the ear tip and enclosure there, so seal and fit matter as much as the filter."
+  },
+  {
+   "q": "Can ANC run on a general-purpose audio DSP?",
+   "a": "Sometimes. The limit is end-to-end latency, not processing power. Feedforward ANC must act within the acoustic travel time from reference microphone to ear, and codec decimation filters plus block processing can exceed it. We measure the latency chain before committing to an architecture."
+  },
+  {
+   "q": "Should we use adaptive FxLMS or fixed ANC filters?",
+   "a": "Many earbuds use fixed filters designed offline from paths measured across many fits, because they are robust and predictable. Adaptive FxLMS follows changing noise and fit, and is common in vehicles and ducts, but needs secondary-path modelling and stability safeguards. The choice depends on how much the paths vary in use."
+  },
+  {
+   "q": "How do you avoid biased evaluation results?",
+   "a": "We hold out recordings by speaker, device and environment, report SI-SDR, PESQ, STOI and DNSMOS-style scores separately, and run blind listening comparisons on the target hardware. For ANC we measure attenuation and amplification across frequency and fits. Success criteria are agreed before development starts."
+  }
+ ],
+ "reads": [
+  {
+   "href": "/blog-signal.html",
+   "small": "Engineering perspective",
+   "strong": "Classical DSP and machine learning"
+  },
+  {
+   "href": "/blog-voice-ai-production.html",
+   "small": "Voice AI",
+   "strong": "Voice AI in production"
+  },
+  {
+   "href": "/audio-ai/beamforming-microphone-arrays/",
+   "small": "Audio &amp; Acoustics",
+   "strong": "Beamforming &amp; microphone arrays"
+  }
+ ]
+}
