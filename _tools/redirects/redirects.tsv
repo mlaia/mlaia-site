@@ -1,0 +1,45 @@
+# Old WordPress URLs (2024 site) -> current page. Source: Search Console "Not found (404)" + one 5xx, 8 Oct 2026.
+# Columns: old_path<TAB>new_url<TAB>confidence (sure|judgment)<TAB>note
+/home/	/	sure	old homepage
+/home	/	sure	old homepage, no trailing slash
+/author/mlauser/	/#about	sure	author archive
+/blog/	/blog.html	sure	blog index
+/category/article-en/	/blog.html	sure	English article archive
+/privacy-policy/	/privacy	sure	privacy policy
+/about-us/	/#about	sure	about page
+/solutions/medical-healthcare-applications-development/	/medical-ai/	sure	medical AI apps
+/solutions/vision-and-multiple-views-geometry-solutions/	/blog-computer-vision-production.html	sure	computer vision
+/solutions/scorecard-building-services/	/predictive-intelligence/	sure	scorecards = predictive models
+/wait-the-worlds-fastest-ai-supercomputers-run-on-something-called-slurm/	/blog-slurm.html	sure	same article
+/ai-sales-optimization-success/	/blog-sales-ai.html	sure	same topic
+/leveraging-machine-learning-models-in-digital-signal-processing/	/blog-signal.html	sure	same topic
+/harness-your-datas-potential-with-large-language-models-llms/	/blog-llms.html	sure	same topic
+/the-need-for-model-interpretability-methods-and-benefits/	/predictive-intelligence/explorer/	judgment	interpretability -> SHAP explorer demo
+/leveraging-graph-models-in-machine-learning/	/blog-medical.html	sure	same topic (graph ML article; file is misnamed blog-medical.html)
+/companion/	/	judgment	unknown old page
+/ai-services/	/	judgment	generic services page
+/outsourcing-ai-development/	/	judgment	generic services page
+/he/	/?lang=he	sure	Hebrew home (not reported, added for safety)
+/he/בית/	/?lang=he	sure	Hebrew home
+/he/אודות-המלאיה/	/?lang=he#about	sure	about MLAIA
+/he/author/mlauser/	/?lang=he	sure	author archive
+/he/category/article-he/	/blog.html	sure	Hebrew article archive
+/he/solutions/	/?lang=he	sure	solutions index
+/he/solutions/פיתוח-אפליקציות-בינה-מלאכותית-לרפואה/	/medical-ai/	sure	medical AI apps
+/he/medical-ai-מה-זה-אומר/	/medical-ai/	sure	"medical AI, what it means"
+/he/solutions/דימות-חוזי-ותמונות/	/blog-computer-vision-production.html	sure	imaging / vision
+/he/solutions/שירותי-בניית-כרטיסי-ניקוד-scorecards/	/predictive-intelligence/	sure	scorecards
+/he/enhancing-machine-learning-based-decisions/	/predictive-intelligence/	sure	ML-based decisions
+/he/causal-inference-unlocking-the-power-of-cause-and-effect-for-better-decision-making/	/wiki/causal-inference.html	sure	same topic (English page)
+/he/solutions/ניתוח-מסקנות-סיבתיות/	/wiki/causal-inference.html	sure	causal inference (English page)
+/he/solutions/מודלים-מבוססי-עיבוד-אותות/	/audio-ai/	sure	signal-processing models
+/he/עיבוד-אותות-בעולם-ההייטק/	/audio-ai/	sure	signal processing in hi-tech (was 5xx)
+/he/websmartbot/	/ai-automation/	sure	web chatbot
+/he/צאט-בוט-בינה-מלאכותית/	/ai-automation/	sure	AI chatbot
+/he/בינה-מלאכותית-gpt/	/blog-llms.html	judgment	"AI GPT" -> LLMs article (English)
+/he/מהו-פיתוח-אלגוריתמים/	/?lang=he	judgment	"what is algorithm development"
+/he/פתרונות-בינה-מלאכותית-בהתאמה-אישית/	/?lang=he	judgment	"custom AI solutions"
+/he/solutions/פיתוח-וייעוץ-בתחומי-למידת-מכונה-עיבוד/	/?lang=he	judgment	"ML development and consulting"
+/he/שירותי-פיתוח-תוכנה-לעסקים/	/?lang=he	judgment	"software development for business"
+/he/machine-learning-למה-זה-משמש/	/?lang=he	judgment	"machine learning, what it's for"
+/he/בינה-מלאכותית/	/?lang=he	judgment	"artificial intelligence"
