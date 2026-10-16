@@ -1,7 +1,7 @@
 {
  "slug": "beamforming-microphone-arrays",
- "title": "Microphone Array Beamforming for Products | MLAIA",
- "description": "Microphone array beamforming for devices: array geometry, spatial aliasing, MVDR/GSC, DOA estimation, mic calibration and neural mask-based front-ends.",
+ "title": "Microphone Arrays, Beamforming & Machine Learning | MLAIA",
+ "description": "Microphone array beamforming and machine learning for devices: array geometry, spatial aliasing, MVDR/GSC, DOA estimation, calibration and neural front-ends.",
  "service_name": "Microphone array design and beamforming engineering",
  "breadcrumb": "Beamforming",
  "eyebrow": "Audio &amp; Acoustics · Microphone arrays",

@@ -259,7 +259,8 @@
     text-align: center;
   }
 </style>
-<link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
+<link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do gradient-boosted trees still beat deep learning on tabular data in 2026?", "acceptedAnswer": {"@type": "Answer", "text": "Gradient-boosted trees still win most tabular problems in 2026. Deep learning wins in specific cases: TabPFN on small datasets, FT-Transformer or SAINT on very large ones with text features, and foundation models such as TabFM when labels are scarce."}}, {"@type": "Question", "name": "How do TabNet, TabPFN and TabFM compare with XGBoost?", "acceptedAnswer": {"@type": "Answer", "text": "XGBoost, LightGBM and CatBoost remain the default for most tabular problems. TabPFN v2 matches a tuned XGBoost on datasets under about 10k rows with no tuning but doesn't scale to large data. TabNet rarely beats tuned trees on mid-sized data. Google's TabFM targets cases with little labeled data and meaningful column names, but is not yet publicly available at scale."}}]}</script>
+</head>
 <body data-site-shell="true"><nav class="site-quick-nav" aria-label="Quick navigation"><a href="/" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">Home</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">Contact us</span></a></nav>
 
 <header class="site">
@@ -288,6 +289,13 @@
       <div class="stat"><div class="num">2×–5×</div><div class="label">faster training for GBDT vs. comparable DL on typical tabular datasets</div></div>
       <div class="stat"><div class="num">&lt;10k</div><div class="label">rows — regime where TabPFN outperforms XGBoost without any hyperparameter tuning</div></div>
       <div class="stat"><div class="num">$0</div><div class="label">feature engineering needed for TabFM — zero-shot generalization across datasets</div></div>
+    </div>
+
+    <div class="callout" id="quick-answer">
+      <strong>Quick answer: TabNet vs TabPFN vs TabFM vs XGBoost</strong>
+      <p>Gradient-boosted trees still win most tabular problems in 2026. Deep learning wins in specific cases: TabPFN on small datasets, FT-Transformer or SAINT on very large ones with text features, and foundation models such as TabFM when labels are scarce.</p>
+      <div style="overflow-x:auto"><table class="arch-table"><thead><tr><th>Model</th><th>Where it wins</th><th>Main limit</th></tr></thead><tbody><tr><td>XGBoost, LightGBM, CatBoost</td><td>Most tabular problems, especially 10k–500k rows; explainable with SHAP</td><td>Need hyperparameter tuning and feature work</td></tr><tr><td>TabPFN v2</td><td>Under about 10k rows: matches a tuned XGBoost in seconds with no tuning</td><td>Not viable for large datasets</td></tr><tr><td>TabNet</td><td>When a deep-learning stack is mandated; attention masks give some interpretability</td><td>Finicky to train; rarely beats tuned trees on mid-sized data</td></tr><tr><td>FT-Transformer, SAINT</td><td>Over 500k rows with text or embedding-heavy features, GPU available</td><td>GPU hours instead of CPU minutes</td></tr><tr><td>TabFM (Google)</td><td>Little or no labeled data, with meaningful column names</td><td>Not yet publicly available at scale</td></tr></tbody></table></div>
+      <p>The full decision guide is in <a href="#decision-framework">the 2026 decision framework</a>.</p>
     </div>
 
     <hr>
@@ -529,7 +537,7 @@
 
     <hr>
 
-    <h2>The 2026 Decision Framework</h2>
+    <h2 id="decision-framework">The 2026 Decision Framework</h2>
 
     <p>The answer to "do gradient-boosted trees still beat deep learning on tabular data?" in 2026 is: yes, in the majority of cases — but the exceptions are real, well-understood, and increasingly common. The right framework is not algorithm loyalty but problem diagnosis:</p>
 
@@ -543,6 +551,8 @@
     </ul>
 
     <p>Gradient-boosted trees are not losing their throne anytime soon. But the kingdom is being productively challenged, and the challengers are improving fast. The practitioners who win in 2026 are the ones who know exactly when to call in the new guard — and when to keep shipping XGBoost.</p>
+
+    <p><strong>Related:</strong> how we approach <a href="/predictive-intelligence/">forecasting, churn and causal analysis</a>, and the <a href="/predictive-intelligence/explorer/">interactive prediction explorer</a> with SHAP explanations.</p>
 
     <div class="cta">
       <strong>Choosing between GBDT and deep learning for your tabular data problem?</strong>

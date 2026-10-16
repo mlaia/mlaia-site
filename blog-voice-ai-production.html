@@ -254,7 +254,8 @@
     text-align: center;
   }
 </style>
-<link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
+<link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which streaming speech recognition API is most accurate for continuous audio?", "acceptedAnswer": {"@type": "Answer", "text": "For English-first streaming, Deepgram Nova-3 is the strongest choice: low word error rate, word-level timestamps and speaker diarization, with words arriving about 200–300 ms after they are spoken. For Hebrew, Arabic or mixed-language audio, Google Speech-to-Text v2 (chirp_2) and Azure Speech are stronger. Accuracy depends on your microphones, accents and vocabulary, so benchmark the candidates on a sample of your own audio before committing."}}, {"@type": "Question", "name": "Which speech-to-text options fit a sub-500 ms voice pipeline?", "acceptedAnswer": {"@type": "Answer", "text": "The 500 ms target covers the whole pipeline, not transcription alone. A streaming engine adds roughly 30–80 ms for the final segment once the speaker stops, and Deepgram Nova-3 streams words about 200–300 ms after they are spoken. Non-streaming transcription can't meet the budget: a pipeline that waits for complete transcripts has a floor of about 1.5–3 seconds."}}, {"@type": "Question", "name": "What is a good on-premise alternative to Azure Speech?", "acceptedAnswer": {"@type": "Answer", "text": "Self-hosted Faster-Whisper running Whisper large-v3. It matches the original model's accuracy at 4–6× its throughput and handles about 40–60 concurrent real-time streams on a single NVIDIA A10G (24 GB). Distil-Whisper large-v3 is about 5.8× faster for roughly 1.5% higher word error rate. For Hebrew telephone audio, fine-tuning Whisper on in-domain speech substantially improves accuracy."}}]}</script>
+</head>
 <body data-site-shell="true"><nav class="site-quick-nav" aria-label="Quick navigation"><a href="/" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">Home</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">Contact us</span></a></nav>
 
 <header class="site">
@@ -285,6 +286,17 @@
       <div class="stat"><div class="num">67%</div><div class="label">Fortune 500 companies with production voice AI deployments</div></div>
       <div class="stat"><div class="num">&lt;500ms</div><div class="label">end-to-end latency required for natural conversation feel</div></div>
       <div class="stat"><div class="num">$0.40</div><div class="label">typical per-call cost for AI vs $7–12 for human agents</div></div>
+    </div>
+
+    <div class="callout" id="quick-answers">
+      <strong>Quick answers: choosing speech-to-text</strong>
+      <h3>Which streaming speech recognition API is most accurate for continuous audio?</h3>
+      <p>For English-first streaming, Deepgram Nova-3 is the strongest choice: low word error rate, word-level timestamps and speaker diarization, with words arriving about 200–300 ms after they are spoken. For Hebrew, Arabic or mixed-language audio, Google Speech-to-Text v2 (chirp_2) and Azure Speech are stronger. Accuracy depends on your microphones, accents and vocabulary, so benchmark the candidates on a sample of your own audio before committing.</p>
+      <h3>Which speech-to-text options fit a sub-500 ms voice pipeline?</h3>
+      <p>The 500 ms target covers the whole pipeline, not transcription alone. A streaming engine adds roughly 30–80 ms for the final segment once the speaker stops, and Deepgram Nova-3 streams words about 200–300 ms after they are spoken. Non-streaming transcription can&#x27;t meet the budget: a pipeline that waits for complete transcripts has a floor of about 1.5–3 seconds.</p>
+      <h3>What is a good on-premise alternative to Azure Speech?</h3>
+      <p>Self-hosted Faster-Whisper running Whisper large-v3. It matches the original model&#x27;s accuracy at 4–6× its throughput and handles about 40–60 concurrent real-time streams on a single NVIDIA A10G (24 GB). Distil-Whisper large-v3 is about 5.8× faster for roughly 1.5% higher word error rate. For Hebrew telephone audio, fine-tuning Whisper on in-domain speech substantially improves accuracy.</p>
+      <p>Details and tradeoffs are in <a href="#stt-landscape">section 4</a> and <a href="#latency-budget">section 2</a>.</p>
     </div>
 
     <hr>
@@ -430,7 +442,7 @@
 
     <p>The practical recommendation for 2026: if your latency requirement is above 400ms first-audio-byte and your use case requires domain adaptation or compliance monitoring, build on a cascaded pipeline with aggressive streaming optimization. If you're building a consumer conversational product where naturalness is paramount and latency is sub-400ms, S2S is worth prototyping — but plan for limited debuggability and higher infrastructure costs.</p>
 
-    <h2>2. The Sub-500ms Latency Budget</h2>
+    <h2 id="latency-budget">2. The Sub-500ms Latency Budget</h2>
 
     <p>Human conversation has a remarkably narrow tolerance window. Psychoacoustic research places the threshold for "natural" turn-taking latency at approximately 200ms — that's how quickly humans respond to each other in fluid conversation. In practice, voice AI systems can get away with 400–500ms before users consciously register awkward pauses, and up to 700ms before the interaction starts to feel robotic. Beyond 1 second, the experience degrades sharply and callers begin to disengage.</p>
 
@@ -563,7 +575,7 @@
 
     <p>One important caveat: the 95th percentile of calls handled by AI is not the same as the 95th percentile of calls that humans handle. Voice AI systems today still struggle with highly ambiguous requests, strong emotional states, and multi-party scenarios. The practical model is a hybrid: AI handles the 60–75% of interactions that are routine and well-structured; human agents handle the tail. The effective per-interaction cost for the hybrid model is substantially lower than pure-human, even though the AI portion isn't fully autonomous.</p>
 
-    <h2>4. The STT Landscape: Open-Source vs Cloud</h2>
+    <h2 id="stt-landscape">4. The STT Landscape: Open-Source vs Cloud</h2>
 
     <p>Speech-to-text has seen more competitive disruption in the past two years than any other component of the voice AI stack. OpenAI's Whisper — released as open weights — established a new benchmark for accuracy and multilingual coverage, and the derivative ecosystem (Faster-Whisper, WhisperX, Distil-Whisper) has made high-quality ASR deployable on commodity hardware. At the same time, commercial STT providers have responded with models that significantly outperform vanilla Whisper on real-time streaming, speaker diarization, and domain-specific vocabulary.</p>
 
@@ -648,6 +660,8 @@
 
     <h3>About MLAIA</h3>
     <p>MLAIA — Machine Learning &amp; AI Approach — is an Israeli AI consulting firm specializing in production-grade ML systems across signal processing, audio AI, medical, defense, and enterprise domains. Led by Dr. Yochai Edlitz (PhD, Weizmann Institute), MLAIA builds voice AI pipelines that work in production: low-latency cascaded architectures, Hebrew and multilingual STT optimization, custom voice cloning, and real-time monitoring infrastructure. Based in Yavne, Israel; serving clients globally.</p>
+
+    <p><strong>Related engineering guides:</strong> <a href="/audio-ai/noise-reduction-anc/">noise reduction, echo cancellation and ANC</a> for cleaner input audio, <a href="/audio-ai/edge-audio-ai/">on-device audio AI</a> for wake words and streaming models within latency and power budgets, and <a href="/audio-ai/beamforming-microphone-arrays/">microphone array beamforming</a> for far-field pickup.</p>
 
     <div class="cta">
       <p><strong>Building a production voice AI system?</strong></p>
