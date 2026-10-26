@@ -1,0 +1,88 @@
+{
+ "practice": "ai-agents",
+ "slug": "aws-bedrock-agents",
+ "title": "AI Agents on AWS & Amazon Bedrock | MLAIA",
+ "description": "AI agents on AWS: Amazon Bedrock models and guardrails, Lambda and Step Functions workflows, Transcribe and Connect for voice, deployed in your own account.",
+ "service_name": "AI agent development on AWS and Amazon Bedrock",
+ "breadcrumb": "AI Agents on AWS",
+ "eyebrow": "AI Agents · Amazon Web Services",
+ "h1": "AI agents on AWS.<br>In your account, under your controls.",
+ "intro": "Amazon Bedrock gives access to models such as Claude, Llama, Mistral and Amazon Nova inside your AWS account, with your IAM permissions, regions and logging. We design the agent around it: models and guardrails, the workflow that orchestrates steps, the data it can reach and the voice or phone channels it speaks through.",
+ "cta": "Discuss your AWS agent",
+ "brief": {
+  "h2": "Built inside your account",
+  "items": [
+   ["Your data", "Stays in your chosen AWS regions and services"],
+   ["Your controls", "IAM, VPC, KMS, CloudTrail &amp; budgets"],
+   ["Our focus", "Agent, workflow &amp; channels designed together"]
+  ]
+ },
+ "sections": [
+  {
+   "id": "building-blocks",
+   "eyebrow": "The building blocks",
+   "h2": "Pick the managed pieces.<br>Write code where the logic is yours.",
+   "lead": "AWS offers managed agent features and plain compute. The right mix depends on how much of the workflow is standard, how much control you need over each step, and which data and residency rules apply.",
+   "cards": [
+    {"number": "01", "h3": "Amazon Bedrock models", "p": "The Converse API with streaming and tool calling, the same code across model families. Cross-region inference profiles can be limited to one geography, so requests stay within, for example, the EU."},
+    {"number": "02", "h3": "Bedrock Agents &amp; AgentCore", "p": "Managed agents with action groups, and AgentCore for running your own agent code with managed runtime, memory, identity and tool gateways. Useful when you want AWS to operate the agent runtime."},
+    {"number": "03", "h3": "Knowledge Bases &amp; retrieval", "p": "Managed ingestion and vector search over S3 documents, or your own pipeline with OpenSearch or Postgres and pgvector when you need custom chunking, permissions or hybrid search."},
+    {"number": "04", "h3": "Guardrails", "p": "Content filters, denied topics, sensitive-information masking and grounding checks applied to inputs and outputs. They complement, not replace, tool permissions and evaluation."},
+    {"number": "05", "h3": "Lambda &amp; Step Functions", "p": "Tools as Lambda functions with narrow IAM roles; long or multi-step processes as Step Functions workflows with retries, timeouts and human approval tasks."},
+    {"number": "06", "h3": "Your own agent code", "p": "LangGraph or plain Python agents on Lambda, ECS Fargate or AgentCore, calling Bedrock models. Full control over each step, still inside your account. See <a href=\"/ai-agents/langgraph-agents/\">LangGraph agents</a>."}
+   ]
+  },
+  {
+   "id": "voice-on-aws",
+   "eyebrow": "Voice &amp; contact centre on AWS",
+   "h2": "The same agent,<br>speaking on the web or the phone.",
+   "lead": "AWS covers the speech channel end to end. Amazon Transcribe provides streaming speech-to-text, including Hebrew; Amazon Polly provides text-to-speech; Amazon Nova Sonic offers a single speech-to-speech model for supported languages; Amazon Connect and Lex put an agent on a phone number.",
+   "paragraphs": [
+    "In a healthcare voice assistant we are developing, speech is transcribed by Amazon Transcribe streaming in an EU region and answered by Claude on Bedrock through an EU-only inference profile; the code refuses to start with any other region. The <a href=\"/ai-agents/voice-agents/\">voice agents</a> page covers latency, interruption and voice choice in detail."
+   ],
+   "cards": [
+    {"h3": "Web voice", "p": "Browser audio over WebSocket to a streaming STT service, the agent, and a TTS voice streamed back sentence by sentence."},
+    {"h3": "Phone", "p": "Amazon Connect routes a call to the agent, with transfer to a human queue and the conversation summary passed along."},
+    {"h3": "Speech-to-speech", "p": "Nova Sonic handles listening and speaking in one model, which can reduce delay. We compare it with a pipeline on your languages before choosing."}
+   ],
+   "capabilities": {"label": "Services we work with", "items": ["Bedrock", "AgentCore", "Knowledge Bases", "Guardrails", "Lambda", "Step Functions", "ECS Fargate", "API Gateway WebSocket", "Transcribe", "Polly", "Nova Sonic", "Connect", "S3", "OpenSearch", "Secrets Manager", "CloudWatch"]}
+  },
+  {
+   "id": "security-cost",
+   "eyebrow": "Security &amp; cost",
+   "h2": "Least privilege for tools.<br>Hard limits for spend.",
+   "lead": "Most agent risk on AWS sits in what the tools can touch and how much the agent can spend. We set both explicitly.",
+   "cards": [
+    {"h3": "Narrow roles per tool", "p": "Each tool gets its own IAM role, scoped to the resources it needs. The agent never holds broad credentials, and access keys are not stored on servers."},
+    {"h3": "Region &amp; data residency", "p": "Models, transcription and storage pinned to the regions your policy allows, with logging configured so prompts and audio are not kept unless you decide to keep them."},
+    {"h3": "Budgets &amp; throttles", "p": "Per-user and per-session rate limits, token and tool-call caps per turn, and AWS Budgets alarms that can disable a public endpoint automatically."},
+    {"h3": "Audit trail", "p": "Every tool call recorded with who, what and when, without storing the user's words. CloudTrail covers the AWS side."}
+   ]
+  },
+  {
+   "id": "process",
+   "eyebrow": "A practical delivery path",
+   "h2": "Start small in your account.<br>Then harden and scale.",
+   "steps": [
+    {"h3": "Choose the use case", "p": "Define users, channels, permitted actions, data sources and the regions and policies that apply."},
+    {"h3": "Prototype on Bedrock", "p": "Compare candidate models on representative tasks; decide between managed agents and your own agent code."},
+    {"h3": "Tools &amp; channels", "p": "Implement tools with narrow roles, add retrieval, voice or phone channels, and approval steps."},
+    {"h3": "Harden &amp; operate", "p": "Infrastructure as code, budgets, alarms, tracing and an evaluation suite that runs on every change."}
+   ],
+   "cta": {"href": "#contact", "text": "Plan your AWS agent →"}
+  }
+ ],
+ "faq": [
+  {"q": "Does our data leave our AWS account when using Bedrock?", "a": "Bedrock runs models within AWS, and you choose the regions. Data handling depends on the model provider and your configuration; we document which services, regions and logs each request touches before go-live."},
+  {"q": "Bedrock Agents, AgentCore or our own code?", "a": "Managed agents are quickest for standard tool-calling assistants. AgentCore suits teams that want their own agent code with a managed runtime. Fully custom code on Lambda or containers gives the most control. We often prototype with one and keep the option to move."},
+  {"q": "Can the agent answer phone calls?", "a": "Yes. Amazon Connect can route calls to the agent through streaming speech services, with transfer to a person when needed. We measure end-to-end delay on real phone audio, which is narrower-band than web audio."},
+  {"q": "Does it support Hebrew?", "a": "Amazon Transcribe supports Hebrew streaming transcription and Bedrock models handle Hebrew text. Speech output in Hebrew usually needs a voice from another provider, which we connect alongside AWS."},
+  {"q": "How do you control cost for a public-facing agent?", "a": "Rate limits per user and session, short sessions, caps on tokens and tool calls per turn, a bot check before expensive steps, and a budget alarm that turns the endpoint off at a fixed monthly amount."}
+ ],
+ "reads": [
+  {"href": "/blog-cloud-ml-platforms-rapid-development.html", "small": "Cloud platforms", "strong": "Bedrock, Vertex AI and Azure AI for faster ML R&amp;D"},
+  {"href": "/blog-sovereign-ai-onprem.html", "small": "Data residency", "strong": "Sovereign AI and on-premises deployment"},
+  {"href": "/blog-agents-production.html", "small": "Agentic AI", "strong": "Agentic AI in production: a practical framework"},
+  {"href": "/ai-agents/voice-agents/", "small": "Related topic", "strong": "Voice agents"}
+ ]
+}

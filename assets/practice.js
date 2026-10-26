@@ -2,7 +2,7 @@
 (()=>{
   'use strict';
   const preview=document.documentElement.dataset.preview==='true';
-  const allowed=['audio-ai','medical-ai','predictive-intelligence','ai-automation'];
+  const allowed=['audio-ai','medical-ai','predictive-intelligence','ai-agents','ai-automation'];
   const requested=new URLSearchParams(location.search).get('practice');
   const practice=document.body.dataset.practice||(allowed.includes(requested)?requested:'general');
   const field=document.getElementById('inquiry-practice');

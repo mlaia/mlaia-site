@@ -1,0 +1,82 @@
+{
+ "practice": "ai-agents",
+ "slug": "n8n-automation",
+ "title": "n8n AI Workflow Automation | MLAIA",
+ "description": "n8n workflow automation with AI steps: connect forms, email, CRM and documents to LLM classification and extraction, with approvals, error handling and self-hosting.",
+ "service_name": "n8n and AI workflow automation",
+ "breadcrumb": "n8n Automation",
+ "eyebrow": "AI Agents · Workflow automation",
+ "h1": "Automate the routine steps.<br>Keep people on the decisions.",
+ "intro": "n8n connects the systems a business already uses, such as forms, email, spreadsheets, CRM, messaging and databases, into visual workflows. With AI steps, those workflows can read an email, classify a request, extract fields from a document or draft a reply. We design workflows that your team can see and change, with AI used only where it improves the result.",
+ "cta": "Discuss your workflow",
+ "brief": {
+  "h2": "Built around your tools",
+  "items": [
+   ["Your systems", "CRM, email, sheets, forms &amp; internal APIs"],
+   ["Your team", "Who approves, who maintains, who gets alerted"],
+   ["Our focus", "Reliable flows, clear AI steps &amp; error handling"]
+  ]
+ },
+ "sections": [
+  {
+   "id": "what-to-automate",
+   "eyebrow": "Where AI steps help",
+   "h2": "Most of a workflow is plumbing.<br>A few steps need judgement.",
+   "lead": "A good automation is mostly deterministic: receive, look up, update, notify. AI steps are added where a rule cannot do the job, such as understanding free text or a scanned document, and their output is checked before anything consequential happens.",
+   "cards": [
+    {"number": "01", "h3": "Lead &amp; inquiry routing", "p": "Read a web form or email, classify the request, enrich it, create the CRM record and alert the right person with a short summary."},
+    {"number": "02", "h3": "Document intake", "p": "Extract fields from invoices, forms or contracts into structured data, with confidence checks and a review step when fields are missing or unclear."},
+    {"number": "03", "h3": "Support triage", "p": "Categorise tickets, detect urgency, suggest a reply from approved knowledge and send it for agent review instead of directly to the customer."},
+    {"number": "04", "h3": "Reports &amp; summaries", "p": "Collect data from several systems on a schedule and produce a written summary or alert when something changes."},
+    {"number": "05", "h3": "Agent back-office", "p": "Workflows as tools for a chat or voice agent: the agent decides what the user needs, and an n8n workflow carries out the booking, record update or notification."},
+    {"number": "06", "h3": "When to leave n8n", "p": "Long-running, high-volume or complex stateful logic can outgrow a visual tool. We move those parts to code, for example a <a href=\"/ai-agents/langgraph-agents/\">LangGraph agent</a> or AWS Step Functions, and keep n8n for integration."}
+   ]
+  },
+  {
+   "id": "reliability",
+   "eyebrow": "Reliability",
+   "h2": "Automations fail quietly.<br>Design for the failure.",
+   "lead": "An automation that silently stops is worse than none. We treat every workflow as production software.",
+   "cards": [
+    {"h3": "Error paths", "p": "Retries with backoff, an error workflow that alerts a person, and a record of the failed item so it can be re-run."},
+    {"h3": "Structured AI output", "p": "AI steps return validated JSON against a schema. Invalid or low-confidence results route to review rather than onward."},
+    {"h3": "Approvals", "p": "Steps that send, pay or change records can wait for a person to approve in email, Slack or Teams."},
+    {"h3": "Versioning &amp; environments", "p": "Workflows exported to version control, separate test and production instances, and credentials kept in the n8n credential store or a secrets manager."}
+   ],
+   "capabilities": {"label": "Typical integrations", "items": ["n8n (cloud or self-hosted)", "OpenAI, Claude &amp; Gemini", "Amazon Bedrock", "Gmail &amp; Outlook", "Google Sheets", "HubSpot &amp; Salesforce", "Slack &amp; Teams", "WhatsApp Business", "Postgres", "Webhooks &amp; REST APIs"]}
+  },
+  {
+   "id": "self-hosting",
+   "eyebrow": "Data &amp; hosting",
+   "h2": "Self-host when the data<br>should stay with you.",
+   "lead": "n8n can run on your own server or cloud account. Combined with models through Amazon Bedrock or a model hosted on your infrastructure, customer data stays in systems you control. We set up hosting, backups, access control and updates as part of the work.",
+   "paragraphs": [
+    "Where personal data is involved, we decide with you which fields each AI step needs, mask the rest, and keep execution logs only as long as they are useful. For models running entirely on your premises, see our article on <a href=\"/blog-slm-onprem-israel.html\">small language models on-premises</a>."
+   ]
+  },
+  {
+   "id": "process",
+   "eyebrow": "A practical delivery path",
+   "h2": "One workflow first.<br>Then the next one is faster.",
+   "steps": [
+    {"h3": "Pick the workflow", "p": "A repetitive process with a clear owner, measurable volume and an obvious cost of delay or error."},
+    {"h3": "Map &amp; build", "p": "Map the steps and systems, build the flow with AI steps where needed, and test on real past cases."},
+    {"h3": "Pilot with review", "p": "Run with a person reviewing outputs, measure accuracy and time saved, then reduce review where it is safe."},
+    {"h3": "Hand over", "p": "Documentation, alerts and training so your team can maintain and extend the workflows."}
+   ],
+   "cta": {"href": "#contact", "text": "Start with one workflow →"}
+  }
+ ],
+ "faq": [
+  {"q": "Why n8n rather than Zapier or Make?", "a": "n8n can be self-hosted, supports code steps where a visual block is not enough, and has native AI and agent nodes. Zapier or Make can be simpler for small, standard integrations; we recommend based on your data and volume."},
+  {"q": "Can n8n call our internal systems?", "a": "Yes, through REST APIs, webhooks or database connections. When self-hosted inside your network, it can reach internal systems that are not exposed to the internet."},
+  {"q": "Is AI output reliable enough to act on automatically?", "a": "For some steps, after measurement. We start with a person reviewing AI outputs, measure accuracy on real cases, and automate only where error rates and consequences are acceptable."},
+  {"q": "Can a chatbot or voice agent trigger n8n workflows?", "a": "Yes. Workflows can be exposed as tools the agent calls, so the conversation stays in the agent and the system actions stay in auditable workflows."}
+ ],
+ "reads": [
+  {"href": "/blog-ai-agents-pilot-to-production.html", "small": "AI agents", "strong": "From pilot to production: beating the odds"},
+  {"href": "/blog-sales-ai.html", "small": "Sales", "strong": "AI for sales optimisation"},
+  {"href": "/blog-slm-onprem-israel.html", "small": "On-prem AI", "strong": "Small language models running on-premises"},
+  {"href": "/ai-agents/langgraph-agents/", "small": "Related topic", "strong": "LangGraph agents"}
+ ]
+}

@@ -69,8 +69,38 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mlaia.com/ai-automation/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <loc>https://www.mlaia.com/ai-agents/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/ai-agents/langgraph-agents/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/ai-agents/aws-bedrock-agents/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/ai-agents/voice-agents/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/ai-agents/ai-avatars/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/ai-agents/n8n-automation/</loc>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -66,7 +66,7 @@ def stack(eyebrow, title, panel):
 CARDS = {
     "og-image.png": side("Specialist AI consulting", "Audio, medical AI<br>&amp; prediction.",
                          "Led by Dr. Yochai Edlitz · Ph.D., Weizmann Institute", "mlaia.com",
-                         rows(["Audio & acoustics", "Medical AI", "Prediction & causal analysis", "AI & automation"])),
+                         rows(["Audio & acoustics", "Medical AI", "Prediction & causal analysis", "AI agents & voice agents"])),
     "og/audio-ai.png": side("Audio &amp; Acoustics", "Intelligence starts<br>with the signal.",
                             "Acoustics, classical DSP and machine learning, engineered together.", "mlaia.com/audio-ai",
                             rows(["Microphone arrays & beamforming", "Noise reduction & ANC", "On-device audio AI", "Vibration analysis"])),
@@ -83,6 +83,24 @@ CARDS = {
     "og/vibration-analysis.png": side("Audio &amp; Acoustics", "Vibration analysis<br>&amp; machine learning.",
                                       "Find the fault the raw spectrum hides.", "mlaia.com/audio-ai/vibration-analysis",
                                       f'<div class="panel">{fig("vib-envelope.svg")}</div>'),
+    "og/ai-agents.png": side("AI Agents &amp; Voice Agents", "Agents that answer,<br>speak and act.",
+                             "LangGraph, Amazon Bedrock and n8n, with people on the decisions.", "mlaia.com/ai-agents",
+                             rows(["LangGraph agents", "AI agents on AWS", "Voice agents", "AI avatars", "n8n automation"])),
+    "og/langgraph-agents.png": side("AI Agents · LangGraph", "Agents as<br>explicit graphs.",
+                                    "State you can inspect, steps you can test.", "mlaia.com/ai-agents/langgraph-agents",
+                                    rows(["Typed shared state", "Tool calls with limits", "Human approval steps", "Step-level evaluation"])),
+    "og/aws-bedrock-agents.png": side("AI Agents · AWS", "AI agents<br>on AWS.",
+                                      "In your account, under your controls.", "mlaia.com/ai-agents/aws-bedrock-agents",
+                                      rows(["Amazon Bedrock & AgentCore", "Lambda & Step Functions", "Transcribe, Polly & Connect", "Budgets & least privilege"])),
+    "og/voice-agents.png": side("AI Agents · Voice", "Voice agents that<br>answer in time.",
+                                "And stop when you interrupt.", "mlaia.com/ai-agents/voice-agents",
+                                rows(["Turn detection", "Streaming speech-to-text", "Agent with tools", "Text-to-speech", "Barge-in"])),
+    "og/ai-avatars.png": side("AI Agents · Avatars", "A face for<br>your assistant.",
+                              "Lip-synced to what it actually says.", "mlaia.com/ai-agents/ai-avatars",
+                              rows(["Rendered in the browser or app", "Audio-driven lip sync", "Photoreal video avatars", "Characters & mascots"])),
+    "og/n8n-automation.png": side("AI Agents · Automation", "Automate the<br>routine steps.",
+                                  "Keep people on the decisions.", "mlaia.com/ai-agents/n8n-automation",
+                                  rows(["Lead & inquiry routing", "Document intake", "Support triage", "Approvals & error paths"])),
 }
 
 
