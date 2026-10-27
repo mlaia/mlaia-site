@@ -1,80 +1,219 @@
 {
- "practice": "ai-agents",
- "slug": "ai-avatars",
- "title": "Talking AI Avatars & Digital Humans | MLAIA",
- "description": "Talking AI avatars for apps and websites: lip-synced faces driven by the agent's voice, from lightweight browser avatars to photoreal video, with privacy built in.",
- "service_name": "Talking AI avatar development",
- "breadcrumb": "AI Avatars",
- "eyebrow": "AI Agents · Avatars",
- "h1": "A face for your assistant.<br>Lip-synced to what it actually says.",
- "intro": "A talking avatar gives a voice agent a face: the mouth follows the audio, the eyes blink, the head moves while it thinks. It can make an assistant easier to approach, especially for children or people who find text hard. We build avatars that run in the browser or app, and integrate photoreal video avatars where realism matters more than cost.",
- "cta": "Discuss your avatar",
- "brief": {
-  "h2": "Built around your users",
-  "items": [
-   ["Your audience", "Customers, patients, children or staff"],
-   ["Your platform", "Website, mobile app or kiosk"],
-   ["Our focus", "Lip sync, delay, cost &amp; privacy"]
+  "practice": "ai-agents",
+  "slug": "ai-avatars",
+  "title": "Talking AI Avatars & Digital Humans | MLAIA",
+  "description": "Talking AI avatars for apps and websites: lip-synced faces driven by the agent's voice, from lightweight browser avatars to photoreal video, with privacy built in.",
+  "service_name": "Talking AI avatar development",
+  "breadcrumb": "AI Avatars",
+  "eyebrow": "AI Agents · Avatars",
+  "h1": "A face for your assistant.<br>Lip-synced to what it actually says.",
+  "intro": "A talking avatar gives a voice agent a face: the mouth follows the audio, the eyes blink, the head moves while it thinks. It can make an assistant easier to approach, especially for children or people who find text hard. We build avatars that run in the browser or app, and integrate photoreal video avatars where realism matters more than cost.",
+  "cta": "Discuss your avatar",
+  "brief": {
+    "h2": "Built around your users",
+    "items": [
+      [
+        "Your audience",
+        "Customers, patients, children or staff"
+      ],
+      [
+        "Your platform",
+        "Website, mobile app or kiosk"
+      ],
+      [
+        "Our focus",
+        "Lip sync, delay, cost &amp; privacy"
+      ]
+    ]
+  },
+  "sections": [
+    {
+      "id": "approaches",
+      "eyebrow": "Two ways to build a face",
+      "h2": "Render it on the device,<br>or stream it as video.",
+      "lead": "The main choice is where the face is rendered. A device-rendered avatar is drawn by the user's browser or phone from the agent's audio. A video avatar is generated in the cloud and streamed to the user as video.",
+      "cards": [
+        {
+          "number": "01",
+          "h3": "Device-rendered avatars",
+          "p": "A 2.5D picture or 3D head drawn with WebGL in the browser or a mobile WebView. The mouth is driven by visemes computed from the audio itself, so it works with any voice provider. No per-minute fees and no video upload."
+        },
+        {
+          "number": "02",
+          "h3": "Photoreal video avatars",
+          "p": "Services such as HeyGen, Tavus or Simli generate a realistic face in real time and stream it over WebRTC. More lifelike, with higher cost per minute, more delay and a third party that sees the conversation."
+        },
+        {
+          "number": "03",
+          "h3": "Characters, not only people",
+          "p": "Cartoon, animal or robot characters can suit children's or playful products better than a realistic human, and avoid the discomfort of an almost-real face."
+        },
+        {
+          "number": "04",
+          "h3": "Your own character",
+          "p": "A face drawn for your brand, or several to choose from, each with a matching voice. Adding a new face can be a configuration change, not a new project."
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "eyebrow": "What we have built",
+      "h2": "An avatar assistant<br>that runs on the phone.",
+      "lead": "For a healthcare app, currently in development, we built a talking avatar assistant from the rendering up. Faces are animated by a shader on the device: jaw movement along the lip line, blinking, breathing and a glance while the assistant thinks. A lip-sync model running on the actual speech audio drives the mouth, so the face matches whichever voice is speaking.",
+      "paragraphs": [
+        "Users choose from a set of characters, including human faces and child-friendly ones, and the voice follows the character. The avatar page runs offline inside the app with a strict content policy: it receives audio and images from the app and makes no network requests of its own. The voice and agent behind it are described on the <a href=\"/ai-agents/voice-agents/\">voice agents</a> page."
+      ],
+      "note": "We describe client projects in general terms. Details are shared in conversation, subject to confidentiality."
+    },
+    {
+      "id": "design-choices",
+      "eyebrow": "What decides the design",
+      "h2": "Realism is one factor.<br>Delay, cost and trust are the others.",
+      "lead": "A beautiful avatar that starts talking two seconds late feels worse than a simple one that answers at once. We decide the approach against the use case.",
+      "cards": [
+        {
+          "h3": "Delay",
+          "p": "Device-rendered avatars add almost no delay beyond the voice. Video avatars add generation and streaming time, which we measure on real networks."
+        },
+        {
+          "h3": "Cost per conversation",
+          "p": "Video avatars are typically billed per minute; device avatars cost nothing extra to run. For public or high-volume use, this often decides."
+        },
+        {
+          "h3": "Privacy",
+          "p": "With a device-rendered avatar, no third party receives the face stream or the audio for rendering. For sensitive conversations this keeps the data path short."
+        },
+        {
+          "h3": "Accessibility",
+          "p": "Captions alongside speech, a stop button that always works, reduced-motion support, and an option to use the assistant without the face."
+        }
+      ],
+      "capabilities": {
+        "label": "Avatar stack options",
+        "items": [
+          "three.js &amp; WebGL",
+          "Audio-driven visemes",
+          "Ready Player Me &amp; GLB heads",
+          "React Native WebView",
+          "HeyGen",
+          "Tavus",
+          "Simli",
+          "WebRTC"
+        ]
+      }
+    },
+    {
+      "id": "process",
+      "eyebrow": "A practical delivery path",
+      "h2": "Prototype the face early.<br>Test it with real users.",
+      "steps": [
+        {
+          "h3": "Audience &amp; tone",
+          "p": "Who will talk to the avatar, what it is for, and how realistic or playful it should look."
+        },
+        {
+          "h3": "Prototype",
+          "p": "A working face connected to a voice, on the target devices, to check lip sync, delay and performance."
+        },
+        {
+          "h3": "Connect the agent",
+          "p": "Link the avatar to the voice agent, captions and controls, with fallbacks when audio or rendering fails."
+        },
+        {
+          "h3": "Test &amp; refine",
+          "p": "Sessions with representative users, then refinements to characters, voices and motion."
+        }
+      ],
+      "cta": {
+        "href": "#contact",
+        "text": "Discuss an avatar prototype →"
+      }
+    },
+    {
+      "id": "business",
+      "eyebrow": "Working for your organisation",
+      "h2": "Your data, your systems,<br>your customers' languages.",
+      "lead": "A demo avatar knows a public website. One built for an organisation works with its own information and tools, and can reach out as well as answer.",
+      "cards": [
+        {
+          "number": "01",
+          "h3": "Answers from your knowledge",
+          "p": "Documents, catalogues, policies, FAQs and records are searched on every question, so answers come from your sources. Access rules decide what each user can see."
+        },
+        {
+          "number": "02",
+          "h3": "Connected to your systems",
+          "p": "Through your APIs the agent behind the face can check an order or account, book or move an appointment, open a ticket or update the CRM. Changes are confirmed by the user first and logged."
+        },
+        {
+          "number": "03",
+          "h3": "Reaching your customers",
+          "p": "Reminders, follow-ups and short check-ins by phone, WhatsApp, SMS or email, only to people who agreed to be contacted, with a hand-over to a person when needed."
+        },
+        {
+          "number": "04",
+          "h3": "Hebrew, Arabic, Russian, English",
+          "p": "Speech recognition, voices and replies in each language, with the avatar switching to the language the user speaks. Lip sync follows the audio, so it works in all of them."
+        }
+      ]
+    },
+    {
+      "id": "build-types",
+      "eyebrow": "Three ways to build it",
+      "h2": "Scripted, free-talking,<br>or a mix of both.",
+      "lead": "Not every conversation should be open-ended. The right mix depends on the use case and on what has to be auditable.",
+      "cards": [
+        {
+          "number": "01",
+          "h3": "Flow-based",
+          "p": "Fixed steps and approved wording: intake questionnaires, eligibility checks, onboarding. Fully predictable and easy to audit."
+        },
+        {
+          "number": "02",
+          "h3": "AI agent",
+          "p": "Understands open questions and answers from your knowledge. Suits support, pre-sales questions and explaining complex topics."
+        },
+        {
+          "number": "03",
+          "h3": "Hybrid",
+          "p": "A fixed flow for the steps that must happen in order, with the AI answering questions along the way and guiding the user back to the next step."
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "Do we need a video avatar service such as HeyGen?",
+      "a": "Not necessarily. A device-rendered avatar costs nothing per minute and keeps data off third-party servers. A photoreal video avatar makes sense when realism is central, for example a branded presenter."
+    },
+    {
+      "q": "Does lip sync work in Hebrew?",
+      "a": "Lip sync driven by the audio works for any language the voice speaks. Accuracy is best on languages close to the training data, so we review it on your languages and adjust where needed."
+    },
+    {
+      "q": "Can the avatar run on mobile phones?",
+      "a": "Yes. Our device-rendered avatars run inside a mobile WebView as well as in desktop browsers. We test frame rate and battery on mid-range phones, not only flagships."
+    },
+    {
+      "q": "Can we use our own character or mascot?",
+      "a": "Yes. A 2.5D avatar can be built from a single well-prepared image of the character; a 3D head needs a model with mouth shapes, which we can specify or prepare."
+    }
+  ],
+  "reads": [
+    {
+      "href": "/ai-agents/voice-agents/",
+      "small": "Related topic",
+      "strong": "Voice agents"
+    },
+    {
+      "href": "/blog-voice-ai-production.html",
+      "small": "Voice AI",
+      "strong": "Voice AI in production"
+    },
+    {
+      "href": "/blog-computer-vision-production.html",
+      "small": "Vision",
+      "strong": "Computer vision in production"
+    }
   ]
- },
- "sections": [
-  {
-   "id": "approaches",
-   "eyebrow": "Two ways to build a face",
-   "h2": "Render it on the device,<br>or stream it as video.",
-   "lead": "The main choice is where the face is rendered. A device-rendered avatar is drawn by the user's browser or phone from the agent's audio. A video avatar is generated in the cloud and streamed to the user as video.",
-   "cards": [
-    {"number": "01", "h3": "Device-rendered avatars", "p": "A 2.5D picture or 3D head drawn with WebGL in the browser or a mobile WebView. The mouth is driven by visemes computed from the audio itself, so it works with any voice provider. No per-minute fees and no video upload."},
-    {"number": "02", "h3": "Photoreal video avatars", "p": "Services such as HeyGen, Tavus or Simli generate a realistic face in real time and stream it over WebRTC. More lifelike, with higher cost per minute, more delay and a third party that sees the conversation."},
-    {"number": "03", "h3": "Characters, not only people", "p": "Cartoon, animal or robot characters can suit children's or playful products better than a realistic human, and avoid the discomfort of an almost-real face."},
-    {"number": "04", "h3": "Your own character", "p": "A face drawn for your brand, or several to choose from, each with a matching voice. Adding a new face can be a configuration change, not a new project."}
-   ]
-  },
-  {
-   "id": "experience",
-   "eyebrow": "What we have built",
-   "h2": "An avatar assistant<br>that runs on the phone.",
-   "lead": "For a healthcare app, currently in development, we built a talking avatar assistant from the rendering up. Faces are animated by a shader on the device: jaw movement along the lip line, blinking, breathing and a glance while the assistant thinks. A lip-sync model running on the actual speech audio drives the mouth, so the face matches whichever voice is speaking.",
-   "paragraphs": [
-    "Users choose from a set of characters, including human faces and child-friendly ones, and the voice follows the character. The avatar page runs offline inside the app with a strict content policy: it receives audio and images from the app and makes no network requests of its own. The voice and agent behind it are described on the <a href=\"/ai-agents/voice-agents/\">voice agents</a> page."
-   ],
-   "note": "We describe client projects in general terms. Details are shared in conversation, subject to confidentiality."
-  },
-  {
-   "id": "design-choices",
-   "eyebrow": "What decides the design",
-   "h2": "Realism is one factor.<br>Delay, cost and trust are the others.",
-   "lead": "A beautiful avatar that starts talking two seconds late feels worse than a simple one that answers at once. We decide the approach against the use case.",
-   "cards": [
-    {"h3": "Delay", "p": "Device-rendered avatars add almost no delay beyond the voice. Video avatars add generation and streaming time, which we measure on real networks."},
-    {"h3": "Cost per conversation", "p": "Video avatars are typically billed per minute; device avatars cost nothing extra to run. For public or high-volume use, this often decides."},
-    {"h3": "Privacy", "p": "With a device-rendered avatar, no third party receives the face stream or the audio for rendering. For sensitive conversations this keeps the data path short."},
-    {"h3": "Accessibility", "p": "Captions alongside speech, a stop button that always works, reduced-motion support, and an option to use the assistant without the face."}
-   ],
-   "capabilities": {"label": "Avatar stack options", "items": ["three.js &amp; WebGL", "Audio-driven visemes", "Ready Player Me &amp; GLB heads", "React Native WebView", "HeyGen", "Tavus", "Simli", "WebRTC"]}
-  },
-  {
-   "id": "process",
-   "eyebrow": "A practical delivery path",
-   "h2": "Prototype the face early.<br>Test it with real users.",
-   "steps": [
-    {"h3": "Audience &amp; tone", "p": "Who will talk to the avatar, what it is for, and how realistic or playful it should look."},
-    {"h3": "Prototype", "p": "A working face connected to a voice, on the target devices, to check lip sync, delay and performance."},
-    {"h3": "Connect the agent", "p": "Link the avatar to the voice agent, captions and controls, with fallbacks when audio or rendering fails."},
-    {"h3": "Test &amp; refine", "p": "Sessions with representative users, then refinements to characters, voices and motion."}
-   ],
-   "cta": {"href": "#contact", "text": "Discuss an avatar prototype →"}
-  }
- ],
- "faq": [
-  {"q": "Do we need a video avatar service such as HeyGen?", "a": "Not necessarily. A device-rendered avatar costs nothing per minute and keeps data off third-party servers. A photoreal video avatar makes sense when realism is central, for example a branded presenter."},
-  {"q": "Does lip sync work in Hebrew?", "a": "Lip sync driven by the audio works for any language the voice speaks. Accuracy is best on languages close to the training data, so we review it on your languages and adjust where needed."},
-  {"q": "Can the avatar run on mobile phones?", "a": "Yes. Our device-rendered avatars run inside a mobile WebView as well as in desktop browsers. We test frame rate and battery on mid-range phones, not only flagships."},
-  {"q": "Can we use our own character or mascot?", "a": "Yes. A 2.5D avatar can be built from a single well-prepared image of the character; a 3D head needs a model with mouth shapes, which we can specify or prepare."}
- ],
- "reads": [
-  {"href": "/ai-agents/voice-agents/", "small": "Related topic", "strong": "Voice agents"},
-  {"href": "/blog-voice-ai-production.html", "small": "Voice AI", "strong": "Voice AI in production"},
-  {"href": "/blog-computer-vision-production.html", "small": "Vision", "strong": "Computer vision in production"}
- ]
 }
