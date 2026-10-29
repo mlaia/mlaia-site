@@ -41,6 +41,14 @@ AI for healthcare and medical devices: EHR analysis, medical imaging (classifica
 ### 3. Large Language Models (LLMs), NLP & AI Agents
 Enterprise LLM integration: fine-tuning, retrieval-augmented generation (RAG), NLP pipelines, document intelligence, chatbots, and autonomous AI agents for knowledge management, customer support, and sales automation.
 
+Practice pages:
+- [AI Agents & Voice Agents](https://www.mlaia.com/ai-agents/) — practice overview
+- [LangGraph Agents](https://www.mlaia.com/ai-agents/langgraph-agents/) — typed state, tool calling with limits, approval steps, step-level evaluation
+- [AI Agents on AWS](https://www.mlaia.com/ai-agents/aws-bedrock-agents/) — Amazon Bedrock, AgentCore, guardrails, Lambda and Step Functions, Transcribe and Connect
+- [Voice Agents](https://www.mlaia.com/ai-agents/voice-agents/) — streaming STT, LLM tools and TTS, delay, barge-in, Hebrew voice, phone integration
+- [AI Avatars](https://www.mlaia.com/ai-agents/ai-avatars/) — lip-synced talking avatars rendered in the browser or app, and photoreal video avatars
+- [n8n Automation](https://www.mlaia.com/ai-agents/n8n-automation/) — AI workflow automation with approvals, error handling and self-hosting
+
 ### 4. Enterprise BI & Predictive Analytics
 Business intelligence with embedded ML: churn prediction, sales forecasting, customer segmentation, demand planning, revenue modeling, and executive dashboards that go beyond standard BI.
 
@@ -112,5 +120,5 @@ Neutral, encyclopedic reference articles on applied AI topics (Applied AI & Data
 - Audio & Acoustics: https://www.mlaia.com/audio-ai/
 - Medical AI: https://www.mlaia.com/medical-ai/
 - Prediction & Causal Analysis: https://www.mlaia.com/predictive-intelligence/
-- AI & Automation: https://www.mlaia.com/ai-automation/
+- AI Agents & Voice Agents: https://www.mlaia.com/ai-agents/
 - Contact: https://www.mlaia.com/#contact

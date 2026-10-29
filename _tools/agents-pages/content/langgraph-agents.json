@@ -1,0 +1,87 @@
+{
+ "practice": "ai-agents",
+ "slug": "langgraph-agents",
+ "title": "LangGraph Agent Development | MLAIA",
+ "description": "LangGraph agents built for production: explicit state, tool calling, human approval steps, retries and evaluation, deployed on your cloud with tracing.",
+ "service_name": "LangGraph agent design and development",
+ "breadcrumb": "LangGraph Agents",
+ "eyebrow": "AI Agents · LangGraph",
+ "h1": "Agents as explicit graphs.<br>State you can inspect, steps you can test.",
+ "intro": "LangGraph models an agent as a graph of steps that share a typed state: call a model, run a tool, check a result, ask a person, try again. We use it when an assistant has to take several actions in order, recover from errors and stop for approval, and when the team needs to see exactly why it did what it did.",
+ "cta": "Discuss your agent workflow",
+ "brief": {
+  "h2": "Built around your process",
+  "items": [
+   ["Your workflow", "The steps, systems and decisions the agent supports"],
+   ["Your guardrails", "Which actions need approval, and who gives it"],
+   ["Our focus", "State, tools, evaluation &amp; tracing designed together"]
+  ]
+ },
+ "sections": [
+  {
+   "id": "why-a-graph",
+   "eyebrow": "Why a graph, not a loop",
+   "h2": "A free-running loop is easy to demo.<br>A graph is easier to operate.",
+   "lead": "The simplest agent is a loop: the model picks a tool, reads the result and repeats until it decides it is done. That works in a demo and becomes hard to control in production, where some steps must always happen, some must never happen without a person, and every failure needs a defined next step.",
+   "paragraphs": [
+    "In a LangGraph design, the routes between steps are code. The model still decides what to say and which tool to call, but the graph decides what is allowed next. This is the same principle we apply across the <a href=\"/ai-agents/\">AI Agents practice</a>: deterministic structure where the process is known, model judgement where it adds value."
+   ],
+   "cards": [
+    {"number": "01", "h3": "Typed shared state", "p": "Every step reads and writes a defined state object: the conversation, retrieved documents, tool results, flags and counters. State can be saved after each step, so a run can pause, resume or be replayed for debugging."},
+    {"number": "02", "h3": "Tool calling with limits", "p": "Tools are typed functions with validated inputs. We cap tool calls per turn, set timeouts and decide what the agent says when a tool fails, instead of letting it guess."},
+    {"number": "03", "h3": "Human-in-the-loop steps", "p": "Consequential actions, such as sending, booking, refunding or changing a record, stop at an approval node. The person sees the proposed action and its inputs, then approves, edits or rejects it."},
+    {"number": "04", "h3": "Branches, retries &amp; fallbacks", "p": "Conditional edges route by intent, confidence or tool outcome. A failed retrieval can trigger a rephrased search; a low-confidence answer can route to a person rather than to the user."},
+    {"number": "05", "h3": "Multi-agent only when it helps", "p": "A supervisor with specialised sub-agents can help when tasks really differ, but each extra agent adds latency, cost and failure modes. We start with one well-scoped graph and split only when evaluation shows a gain."},
+    {"number": "06", "h3": "Streaming to the interface", "p": "Graph events stream to the client as they happen: partial text, tool starts and results, and approval requests. Users see progress, and voice front-ends can start speaking the first sentence early."}
+   ]
+  },
+  {
+   "id": "what-we-measure",
+   "eyebrow": "Quality you can measure",
+   "h2": "Evaluate the steps,<br>not only the final answer.",
+   "lead": "An agent can reach a correct answer by a wrong route, or a wrong answer through one bad tool call. We build an evaluation set from representative tasks and score both the outcome and the path.",
+   "cards": [
+    {"h3": "Task success", "p": "Did the run finish the task the user asked for, within the permitted actions? Scored against expected outcomes for each test case."},
+    {"h3": "Tool-call correctness", "p": "Right tool, valid arguments, no unnecessary calls. Most production regressions show up here before they show up in answers."},
+    {"h3": "Grounding", "p": "For answers drawn from documents, whether each claim is supported by the retrieved sources, and whether the agent says it does not know when nothing relevant was found."},
+    {"h3": "Latency &amp; cost per run", "p": "Model calls, tokens and wall-clock time for each test case, tracked as prompts, models and graphs change."}
+   ],
+   "capabilities": {"label": "Typical stack", "items": ["LangGraph", "LangChain tools", "Claude, GPT &amp; Gemini models", "Amazon Bedrock", "LangSmith or OpenTelemetry tracing", "Postgres &amp; pgvector", "FastAPI services"]}
+  },
+  {
+   "id": "experience",
+   "eyebrow": "What we have built",
+   "h2": "Agents that take actions,<br>with the safeguards around them.",
+   "lead": "Our recent work includes a voice-and-avatar assistant for a healthcare app, currently in development. It runs Claude on Amazon Bedrock with around twenty tools, caps tool calls and time per turn, streams the reply one sentence at a time, and never applies a settings change until the user confirms it on screen.",
+   "paragraphs": [
+    "Earlier, we built and ran a self-serve website chatbot product: it crawled a customer's site, indexed it for retrieval, answered in Hebrew or English and captured leads through a separate tool-calling agent. The lessons from both carry into every agent we design: scope the tools tightly, keep exact values such as dates and amounts out of free-text generation where possible, and log what the agent did without logging what users said."
+   ],
+   "note": "We describe client projects in general terms. Details are shared in conversation, subject to confidentiality."
+  },
+  {
+   "id": "process",
+   "eyebrow": "A practical delivery path",
+   "h2": "From one workflow<br>to a production agent.",
+   "steps": [
+    {"h3": "Map the workflow", "p": "List the steps, systems, decisions and the actions that need approval. Agree on what success looks like for each task."},
+    {"h3": "Build the evaluation set", "p": "Collect representative requests, expected outcomes and known edge cases before tuning prompts."},
+    {"h3": "Graph &amp; tools", "p": "Implement the graph, tools and approval steps; measure against the evaluation set and fix the worst failures first."},
+    {"h3": "Deploy &amp; observe", "p": "Ship behind access controls with tracing, cost limits and alerts. Re-run the evaluation whenever a model or prompt changes."}
+   ],
+   "cta": {"href": "#contact", "text": "Start with one workflow →"}
+  }
+ ],
+ "faq": [
+  {"q": "When is LangGraph the right choice over a simple chain?", "a": "When the assistant has to take several actions in order, recover from failures, pause for a person or resume later. For a single retrieval-and-answer step, a simple chain or a direct API call is easier to maintain."},
+  {"q": "Can a LangGraph agent run on our own cloud?", "a": "Yes. The graph is ordinary Python, so it runs in a container or serverless function on AWS, Azure or Google Cloud, or on your own servers, with any model your policies allow, including models through Amazon Bedrock."},
+  {"q": "Which model should the agent use?", "a": "We test candidate models on your evaluation set and compare success rate, latency and cost. Often a smaller, faster model handles routing and simple steps while a stronger model handles the hard ones."},
+  {"q": "How do you stop an agent from taking a harmful action?", "a": "Tools only do what their code allows, inputs are validated, and consequential actions stop at an approval step. The agent cannot reach systems it was not given a tool for."},
+  {"q": "Can it work in Hebrew?", "a": "Yes. We have built assistants that work in Hebrew and English, including retrieval over mixed-language content. Hebrew needs its own test cases, because tokenisation, search and model behaviour differ from English."}
+ ],
+ "reads": [
+  {"href": "/blog-agents-production.html", "small": "Agentic AI", "strong": "Agentic AI in production: a practical framework"},
+  {"href": "/blog-ai-agents-pilot-to-production.html", "small": "AI agents", "strong": "From pilot to production: beating the odds"},
+  {"href": "/blog-rag-production.html", "small": "Retrieval", "strong": "RAG in production"},
+  {"href": "/ai-agents/aws-bedrock-agents/", "small": "Related topic", "strong": "AI agents on AWS"}
+ ]
+}

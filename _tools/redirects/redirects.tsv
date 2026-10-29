@@ -34,8 +34,8 @@
 /he/solutions/ניתוח-מסקנות-סיבתיות/	/wiki/causal-inference.html	sure	causal inference (English page)
 /he/solutions/מודלים-מבוססי-עיבוד-אותות/	/audio-ai/	sure	signal-processing models
 /he/עיבוד-אותות-בעולם-ההייטק/	/audio-ai/	sure	signal processing in hi-tech (was 5xx)
-/he/websmartbot/	/ai-automation/	sure	web chatbot
-/he/צאט-בוט-בינה-מלאכותית/	/ai-automation/	sure	AI chatbot
+/he/websmartbot/	/ai-agents/	sure	web chatbot
+/he/צאט-בוט-בינה-מלאכותית/	/ai-agents/	sure	AI chatbot
 /he/בינה-מלאכותית-gpt/	/blog-llms.html	judgment	"AI GPT" -> LLMs article (English)
 /he/מהו-פיתוח-אלגוריתמים/	/?lang=he	judgment	"what is algorithm development"
 /he/פתרונות-בינה-מלאכותית-בהתאמה-אישית/	/?lang=he	judgment	"custom AI solutions"
@@ -43,3 +43,4 @@
 /he/שירותי-פיתוח-תוכנה-לעסקים/	/?lang=he	judgment	"software development for business"
 /he/machine-learning-למה-זה-משמש/	/?lang=he	judgment	"machine learning, what it's for"
 /he/בינה-מלאכותית/	/?lang=he	judgment	"artificial intelligence"
+/ai-automation/	/ai-agents/	sure	practice renamed 2026-10-26 (AI agents & voice agents)

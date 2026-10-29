@@ -2,7 +2,7 @@
 (()=>{
   'use strict';
   const preview=document.documentElement.dataset.preview==='true';
-  const allowed=['audio-ai','medical-ai','predictive-intelligence','ai-automation'];
+  const allowed=['audio-ai','medical-ai','predictive-intelligence','ai-agents','ai-automation'];
   const requested=new URLSearchParams(location.search).get('practice');
   const practice=document.body.dataset.practice||(allowed.includes(requested)?requested:'general');
   const field=document.getElementById('inquiry-practice');
@@ -39,7 +39,7 @@
   }
   function hasConsent(){try{return JSON.parse(localStorage.getItem('mlaia-cookie-consent')||'{}').analytics===true;}catch{return false;}}
   function track(event,p=practice){if(!preview&&hasConsent()&&typeof window.gtag==='function')window.gtag('event',event,{practice:allowed.includes(p)?p:'general'});}
-  document.addEventListener('click',e=>{if(e.target.closest('a[href="#contact"]'))track('contact_cta_click');});
+  document.addEventListener('click',e=>{if(e.target.closest('a[href="#contact"]'))track('contact_cta_click');else if(e.target.closest('a[href^="https://talk.mlaia.com"]'))track('demo_click');});
   document.addEventListener('mlaia-inquiry-success',e=>track('generate_lead',e.detail?.practice));
   // The existing homepage owns its own consent UI and analytics loader.
   if(document.body.classList.contains('practice-page')){

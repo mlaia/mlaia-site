@@ -1,0 +1,83 @@
+{
+ "practice": "ai-agents",
+ "slug": "voice-agents",
+ "title": "Voice AI Agents: STT, LLM & TTS | MLAIA",
+ "description": "Voice AI agents that listen, act and answer: streaming speech-to-text, LLM tools and natural TTS, with low delay, barge-in, Hebrew support and phone integration.",
+ "service_name": "Voice AI agent development",
+ "breadcrumb": "Voice Agents",
+ "eyebrow": "AI Agents · Voice",
+ "h1": "Voice agents that answer in time.<br>And stop when you interrupt.",
+ "intro": "A voice agent chains speech-to-text, a language model with tools, and text-to-speech, all streaming at once. Users judge it in the first second: how long it waits, whether it talks over them, and whether it mispronounces a name. We engineer the whole chain, from the microphone to the voice, and measure it on real audio in your languages.",
+ "cta": "Discuss your voice agent",
+ "brief": {
+  "h2": "Built around your callers",
+  "items": [
+   ["Your channel", "Web, mobile app, phone line or device"],
+   ["Your languages", "Including Hebrew, accents &amp; domain terms"],
+   ["Our focus", "Delay, interruption &amp; voice quality, end to end"]
+  ]
+ },
+ "sections": [
+  {
+   "id": "pipeline",
+   "eyebrow": "The pipeline",
+   "h2": "Three models in a row.<br>Each one adds delay.",
+   "lead": "Every stage of a voice pipeline adds time: deciding the user has finished speaking, finalising the transcript, the model's first tokens, and the first audio from the voice. We stream every stage and start speaking at the first complete sentence, instead of waiting for the whole reply.",
+   "cards": [
+    {"number": "01", "h3": "Turn detection", "p": "Voice activity detection and an end-of-speech pause decide when the user is done. Too short and the agent interrupts; too long and it feels slow. We tune it per use case and language."},
+    {"number": "02", "h3": "Streaming speech-to-text", "p": "ElevenLabs Scribe, Amazon Transcribe, Deepgram, Google, Azure or Whisper-family models, chosen by language, accuracy on your vocabulary, and streaming delay. Low-confidence fragments are dropped instead of answered."},
+    {"number": "03", "h3": "The agent", "p": "A language model with tools, such as booking, lookup or record updates, released one sentence at a time. Exact values like dates and amounts can be shown on screen rather than spoken from free text."},
+    {"number": "04", "h3": "Text-to-speech", "p": "ElevenLabs, Google Chirp and WaveNet, Amazon Polly, Azure or Cartesia voices, compared on naturalness, pronunciation and time to first audio. A fallback voice takes over if the primary one is slow."},
+    {"number": "05", "h3": "Barge-in", "p": "When the user starts talking, the agent pauses at once. A cough or an \"mm\" resumes playback; a real new request stops the turn. Echo cancellation keeps the agent from hearing itself."},
+    {"number": "06", "h3": "Speech-to-speech models", "p": "Models such as Amazon Nova Sonic or OpenAI's realtime models listen and speak in one step, which can cut delay. We compare them with a pipeline on your languages and tool needs before choosing."}
+   ]
+  },
+  {
+   "id": "experience",
+   "eyebrow": "What we have built",
+   "h2": "A Hebrew and English voice assistant,<br>with an avatar that speaks.",
+   "lead": "For a healthcare app, currently in development, we built a voice assistant with a lip-synced avatar. It uses Amazon Transcribe streaming for Hebrew speech recognition in an EU region, Claude on Amazon Bedrock for the agent, and sentence-by-sentence speech so the avatar starts talking early. If a cloud voice responds too slowly, the sentence falls back to the device's own voice.",
+   "paragraphs": [
+    "Hands-free mode includes soft barge-in: speech while the assistant is talking pauses it, and only a relevant final transcript interrupts the turn. We ran comparisons of Hebrew and English voices across several providers before choosing defaults, and kept demo voices off sensitive data unless the provider's contract covers it. Voice work builds on our <a href=\"/audio-ai/\">audio and acoustics practice</a>, including <a href=\"/audio-ai/noise-reduction-anc/\">noise reduction and echo cancellation</a>."
+   ],
+   "note": "We describe client projects in general terms. Details are shared in conversation, subject to confidentiality."
+  },
+  {
+   "id": "hebrew",
+   "eyebrow": "Hebrew &amp; multilingual voice",
+   "h2": "Hebrew needs its own tests.<br>Not a translated English setup.",
+   "lead": "Hebrew speech recognition and synthesis behave differently from English. Missing vowels make names and rare words ambiguous for a voice, gendered forms of address matter, and many callers switch between Hebrew and English in one sentence.",
+   "cards": [
+    {"h3": "Pronunciation", "p": "Adding vowel marks or phonetic hints for names and terms before synthesis, and testing the voice on your vocabulary, not on sample sentences."},
+    {"h3": "Recognition on your terms", "p": "Custom vocabularies and evaluation on recordings that include product names, addresses and code-switching."},
+    {"h3": "Gender &amp; register", "p": "Addressing the user in the right grammatical gender and register, which affects both the model's text and the chosen voice."}
+   ],
+   "capabilities": {"label": "Voice stack options", "items": ["ElevenLabs Scribe", "Amazon Transcribe", "Deepgram", "Google Speech", "Whisper", "ElevenLabs", "Google Chirp &amp; WaveNet", "Amazon Polly", "Cartesia", "Nova Sonic", "WebSocket &amp; WebRTC", "LiveKit", "Amazon Connect", "Twilio"]}
+  },
+  {
+   "id": "process",
+   "eyebrow": "A practical delivery path",
+   "h2": "Measure on real audio.<br>Then tune the slowest stage.",
+   "steps": [
+    {"h3": "Define the conversation", "p": "Who calls, about what, in which languages and on which channel, and which actions the agent may take."},
+    {"h3": "Bake-off", "p": "Compare speech-to-text and voices on your recordings and vocabulary, with delay measured per stage."},
+    {"h3": "Build &amp; tune", "p": "Streaming pipeline, turn detection, barge-in and fallbacks, tuned against recorded test conversations."},
+    {"h3": "Operate", "p": "Monitor delay, interruptions, transcription confidence and handoffs, with privacy rules for what is logged."}
+   ],
+   "cta": {"href": "#contact", "text": "Start with a voice bake-off →"}
+  }
+ ],
+ "faq": [
+  {"q": "How fast can a voice agent respond?", "a": "It depends on the channel, models and network. We measure each stage on your setup and stream all of them, so the agent starts speaking at its first sentence instead of after the full reply."},
+  {"q": "Can we use ElevenLabs?", "a": "Yes, ElevenLabs is one of the voices we integrate and compare. For personal or health data, we check the provider's data terms first and use a provider with the right contract where needed."},
+  {"q": "Can a voice agent work over the phone?", "a": "Yes, through Amazon Connect, Twilio or a SIP provider. Phone audio is narrower-band and noisier than web audio, so recognition and turn detection are tested on real calls."},
+  {"q": "What happens when the agent cannot help?", "a": "It says so and hands off: transfer to a person, a callback request, or a message with a summary of the conversation so far, depending on the channel."},
+  {"q": "Do you record the calls?", "a": "Only if you decide to and the user is informed. Many of our designs keep no audio or transcripts at all and log only which tools were used."}
+ ],
+ "reads": [
+  {"href": "/blog-voice-ai-production.html", "small": "Voice AI", "strong": "Voice AI in production"},
+  {"href": "/blog-audio-ai-production.html", "small": "Audio AI", "strong": "Audio AI in production"},
+  {"href": "/audio-ai/noise-reduction-anc/", "small": "Audio &amp; Acoustics", "strong": "Noise reduction &amp; echo cancellation"},
+  {"href": "/ai-agents/ai-avatars/", "small": "Related topic", "strong": "AI avatars"}
+ ]
+}
