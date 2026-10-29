@@ -126,3 +126,22 @@ html:has(.practice-home){font-size:16px!important}
 .p-figure-scroll svg{max-width:900px;margin-inline:auto}
 .p-figure figcaption{margin:18px auto 0;max-width:760px;font-size:15px;color:var(--quiet);text-align:center}
 @media(max-width:700px){.p-figure{padding:16px}.p-figure-scroll{overflow-x:auto}.p-figure-scroll svg{min-width:620px}}
+/* "Talk to our AI agent" band: looping avatar clips linking to the live demo at talk.mlaia.com */
+.talk-demo{background:#0a1628;color:#fff;padding:64px 0}
+.talk-demo-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:center}
+.talk-demo .p-eyebrow{color:#7fb0ff;font-size:12px;letter-spacing:.12em;margin:0 0 12px}
+.talk-demo h2{font-size:clamp(28px,3vw,42px);line-height:1.15;letter-spacing:-.03em;margin:0 0 16px;color:#fff}
+.talk-demo-copy>p{color:#b9c4d8;font-size:17px;line-height:1.65;margin:0 0 26px}
+.talk-demo-actions{display:flex;flex-wrap:wrap;gap:12px}
+.talk-btn{display:inline-flex;align-items:center;gap:8px;background:#0057ff;color:#fff;padding:13px 22px;border-radius:6px;font-weight:600;font-size:16px;text-decoration:none;border:1px solid #0057ff}
+.talk-btn:hover{background:#0046cc}
+.talk-btn.ghost{background:transparent;border-color:#ffffff38;color:#fff}
+.talk-btn.ghost:hover{border-color:#fff}
+.talk-demo-note{font-size:13px;color:#8a97ad;margin:18px 0 0}
+.talk-demo-faces{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.talk-demo-faces a{display:block;text-decoration:none;color:#e6ecf5}
+.talk-demo-faces video{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;display:block;background:#13213a;border:1px solid #ffffff1f;transition:border-color .2s}
+.talk-demo-faces a:hover video{border-color:#7fb0ff}
+.talk-demo-faces span{display:block;font-size:14px;font-weight:600;margin-top:9px;line-height:1.35}
+.talk-demo-faces small{display:block;color:#8a97ad;font-size:12px;font-weight:400}
+@media(max-width:900px){.talk-demo{padding:44px 0}.talk-demo-grid{grid-template-columns:1fr;gap:28px}.talk-demo-faces{grid-template-columns:repeat(2,minmax(0,1fr))}}
