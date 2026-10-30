@@ -264,6 +264,7 @@
     <a href="https://www.mlaia.com/index.html#domains">Domains</a>
     <a href="https://www.mlaia.com/blog.html">Blog</a>
     <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+    <a href="https://ultrabot.ai/" target="_blank" rel="noopener">Ultrabot ↗</a>
     <a href="https://www.mlaia.com/index.html#contact">Contact</a>
   </nav>
 </header>
@@ -277,6 +278,8 @@
   <article>
 
     <p>Computer vision has had a quietly transformative few years. The field that once meant "train a ResNet on ImageNet and call it a day" now spans real-time multi-object tracking at 60 fps, RAFT-based optical flow that beats classical methods at a fraction of the latency, Vision Language Models that answer open-ended questions about what a camera sees, and inference on purpose-built silicon that fits inside a dashcam housing. What hasn't changed is the gap between a working demo and a production system. This post is a practitioner's guide to crossing it — covering the tracking algorithms actually deployed at scale, the state of optical flow in 2026, how VLMs are reshaping CV pipelines, sensor fusion tradeoffs, and what it really takes to ship CV on constrained edge hardware.</p>
+
+    <p>At MLAIA we apply these methods in two settings where mistakes are expensive: <a href="/medical-ai/">medical imaging</a>, where a model has to hold up across scanners, sites and patient groups, and <a href="/audio-ai/#edge-ai">drones and other edge devices</a>, where detection and tracking must fit tight weight, power and latency budgets. <a href="#medical-imaging-drones">Section 7</a> covers what changes in each.</p>
 
     <div class="stat-row">
       <div class="stat"><div class="num">$22B</div><div class="label">global computer vision market, 2026</div></div>
@@ -515,14 +518,24 @@
 
     <p>The practical response in most commercial deployments is privacy-by-design: face blurring or replacement at the camera or edge device level, before any data leaves the physical premises. Production face blurring pipelines use lightweight face detectors (RetinaFace, YuNet) running at full frame rate on edge hardware, with Gaussian or pixelation blur applied to detected bounding boxes before the frame is forwarded to any downstream model or storage. The latency overhead is typically under 5ms on INT8-quantized detectors. For analytics use cases that need body-level tracking without facial identification, skeleton pose estimation (replacing bounding boxes with keypoint representations) has become the privacy-compliant alternative to person tracking with appearance features.</p>
 
+    <h2 id="medical-imaging-drones">7. Where We Apply This: Medical Imaging and Drones</h2>
+
+    <h3>Medical imaging</h3>
+
+    <p>The methods above carry over to medical images, but the definition of "working" changes. A segmentation or detection model is judged on images from scanners, hospitals and patient groups it never saw in training, so splits are made by patient and by site, never by image. Labels come from clinicians who often disagree, and that disagreement sets the ceiling for any metric. Overlap scores such as Dice need to be paired with errors a clinician cares about, such as a missed lesion or a wrong measurement. The privacy work in section 6 starts earlier: images are de-identified before they leave the hospital, including text burned into the pixels. See our <a href="/medical-ai/">medical AI practice</a> and the <a href="/wiki/medical-ai-validation.html">guide to medical AI validation</a>.</p>
+
+    <h3>Drones and other edge devices</h3>
+
+    <p>On a drone, every section of this post meets a hard budget. The camera itself moves, so optical flow and motion compensation come before tracking. Detection and tracking run on board, quantized to INT8 on Jetson- or Hailo-class hardware, because the radio link drops and adds delay. Power and weight limit the compute, and the model must cope with changing altitude, blur, glare and small targets seen from far away. We test on footage from the real flight conditions, not only on public datasets. See our <a href="/audio-ai/#edge-ai">edge and on-device AI work</a>.</p>
+
     <hr>
 
     <p>Computer vision in production is a discipline of tradeoffs: accuracy versus latency, generality versus optimization, rich sensor fusion versus engineering complexity, capability versus privacy compliance. The field has matured to the point where the algorithm questions are largely answerable — ByteTrack for tracking, RAFT variants for flow, VLMs for open-ended understanding, INT8 quantization for edge deployment. The questions that separate successful production deployments from failed ones are operational: how do you detect when your model has drifted, how do you keep your annotation pipeline current with your deployment environment, and how do you design for the privacy obligations that come with any camera-based system. Getting those right is what "making AI work in production" actually means in computer vision.</p>
 
     <div class="cta">
-      <strong>Deploying computer vision in a production environment?</strong>
+      <strong>Deploying computer vision in medical imaging or on a device?</strong>
       <br>
-      <a href="https://www.mlaia.com/index.html#contact">Talk to MLAIA about CV system design, edge deployment, and model monitoring →</a>
+      <a href="https://www.mlaia.com/index.html#contact">Talk to MLAIA about medical imaging or on-device vision →</a>
     </div>
 
   </article>
