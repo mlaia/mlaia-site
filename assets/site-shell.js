@@ -23,7 +23,7 @@
  // Contact tracking for pages without practice.js (which tracks these itself). Fires only when GA was loaded with consent.
  if(!document.querySelector('script[src*="practice.js"]')){
   const ga=(name,params)=>{if(typeof window.gtag==='function')window.gtag('event',name,params);};
-  document.addEventListener('click',e=>{if(e.target.closest('a[href="#contact"],a[href$="/#contact"]'))ga('contact_cta_click',{page_path:location.pathname});});
+  document.addEventListener('click',e=>{if(e.target.closest('a[href="#contact"],a[href$="/#contact"]'))ga('contact_cta_click',{page_path:location.pathname});else if(e.target.closest('a[href^="https://talk.mlaia.com"]'))ga('demo_click',{page_path:location.pathname});});
   document.addEventListener('mlaia-inquiry-success',()=>ga('generate_lead',{page_path:location.pathname}));
  }
  function language(){const he=document.documentElement.lang==='he';document.querySelectorAll('.site-quick-nav [data-en],.site-consent [data-en]').forEach(el=>{el.textContent=he?el.dataset.he:el.dataset.en;});if(consent)consent.dir=he?'rtl':'ltr';}
