@@ -41,6 +41,8 @@
   function track(event,p=practice){if(!preview&&hasConsent()&&typeof window.gtag==='function')window.gtag('event',event,{practice:allowed.includes(p)?p:'general'});}
   document.addEventListener('click',e=>{if(e.target.closest('a[href="#contact"]'))track('contact_cta_click');else if(e.target.closest('a[href^="https://talk.mlaia.com"]'))track('demo_click');});
   document.addEventListener('mlaia-inquiry-success',e=>track('generate_lead',e.detail?.practice));
+  // The AI Agents question box opens the demo from script, so it is counted on submit rather than as a link click.
+  document.addEventListener('submit',e=>{if(e.target.id==='ag-ask'&&document.getElementById('ag-q')?.value.trim())track('demo_ask');});
   // The existing homepage owns its own consent UI and analytics loader.
   if(document.body.classList.contains('practice-page')){
     const consent=document.querySelector('.p-consent');
