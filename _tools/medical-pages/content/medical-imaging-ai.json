@@ -1,0 +1,139 @@
+{
+  "practice": "medical-ai",
+  "slug": "medical-imaging-ai",
+  "title": "Medical Imaging AI Development & Segmentation | MLAIA",
+  "description": "Medical imaging AI development: image segmentation and detection, scanner and site shift, label disagreement, metrics beyond Dice and DICOM de-identification.",
+  "service_name": "Medical imaging AI development",
+  "breadcrumb": "Medical Imaging AI",
+  "eyebrow": "Medical AI · Medical imaging",
+  "h1": "Imaging models that hold up<br>on the next scanner.",
+  "intro": "We develop and evaluate segmentation, detection and classification models for medical images, including spectral imaging. The work covers the whole chain: data from several sites and devices, labels that experts disagree on, metrics that reflect clinical errors, and images that must be de-identified before they move.",
+  "cta": "Book a 30-minute clinical AI feasibility call",
+  "cta_href": "/medical-ai/#contact",
+  "nav_cta": "Book a feasibility call",
+  "lab_link": {"href": "/blog-computer-vision-production.html#medical-imaging-drones", "text": "Computer vision in production"},
+  "proofline": [
+    "A specialist practice of MLAIA Data Science",
+    "Led by Dr. Yochai Edlitz · Ph.D., Weizmann Institute",
+    "Published clinical prediction research: <a href=\"https://doi.org/10.7554/eLife.71862\" rel=\"noopener\" target=\"_blank\">Edlitz &amp; Segal, <i>eLife</i>, 2022</a>"
+  ],
+  "brief": {
+    "h2": "Built around your images",
+    "items": [
+      ["Your data", "CT, MRI, X-ray, ultrasound, microscopy, photos or spectral images, with expert labels"],
+      ["Your challenge", "Scanner and site shift, few labels, readers who disagree"],
+      ["Our focus", "Errors that matter clinically, measured per site"]
+    ]
+  },
+  "sections": [
+    {
+      "id": "tasks",
+      "eyebrow": "Segmentation, detection &amp; classification",
+      "h2": "Pick the task the clinic needs.<br>Then the architecture.",
+      "lead": "The output follows the clinical question: an outline for volumes or planning, a box or point for finding lesions, a label for triage.",
+      "cards": [
+        {"number": "01", "h3": "Medical image segmentation", "p": "Pixel- or voxel-level outlines of organs, lesions or structures, in 2D or 3D. Self-configuring U-Net baselines such as nnU-Net are strong starting points, and give any custom architecture a fair benchmark to beat.", "link": {"href": "https://doi.org/10.1038/s41592-020-01008-z", "text": "nnU-Net, Nature Methods →"}},
+        {"number": "02", "h3": "Detection", "p": "Finding and localising lesions or findings, often small and rare. Evaluation counts lesions, not pixels: how many are found, how many false alarms per scan, and at what size."},
+        {"number": "03", "h3": "Classification &amp; triage", "p": "Image- or study-level labels for screening, triage or prioritisation. Thresholds are set with clinicians, weighing the cost of a missed case against the cost of a false alarm."},
+        {"number": "04", "h3": "Small datasets", "p": "Medical datasets are often small. Transfer learning, self-supervised pretraining on unlabelled scans and careful augmentation can help. Only a test set from patients and sites the model never saw shows whether they did."}
+      ],
+      "paragraphs": ["Imaging is part of our <a href=\"/medical-ai/\">Medical AI practice</a>. For how imaging models reach production, see <a href=\"/blog-computer-vision-production.html#medical-imaging-drones\">computer vision in production</a>."]
+    },
+    {
+      "id": "site-shift",
+      "eyebrow": "Multi-site &amp; scanner shift",
+      "h2": "A new scanner<br>is a new dataset.",
+      "lead": "Vendor, protocol, reconstruction, resolution and patient mix all change the pixels. A model trained at one site often loses accuracy at the next.",
+      "cards": [
+        {"h3": "Shortcut learning", "p": "Models can pick up markers of the hospital or device instead of the disease. In one chest X-ray study, pneumonia models did worse on another hospital's images in three of five comparisons, and a network could tell which hospital system an image came from.", "link": {"href": "https://doi.org/10.1371/journal.pmed.1002683", "text": "Zech et al., PLOS Medicine 2018 →"}},
+        {"h3": "Site-aware splits", "p": "Always split by patient. Hold out whole sites or scanners when the question is transfer. Report performance per site and per device, not only pooled."},
+        {"h3": "Harmonisation &amp; augmentation", "p": "Intensity normalisation, resampling to a common spacing, and augmentation that mimics real acquisition differences. These narrow the gap. They do not replace testing on the target site."},
+        {"h3": "Watching after go-live", "p": "Scanner software updates and protocol changes shift inputs silently. We define input checks and image statistics to monitor, so drift is seen before performance falls.", "link": {"href": "/blog-clinical-ai-production.html", "text": "Clinical AI in production →"}}
+      ]
+    },
+    {
+      "id": "labels",
+      "eyebrow": "Labels &amp; ground truth",
+      "h2": "Experts disagree.<br>Plan for it.",
+      "lead": "Two readers rarely draw the same outline. Their disagreement can be as large as the error you are trying to measure.",
+      "cards": [
+        {"h3": "Several readers", "p": "Where the budget allows, several annotators label the same cases. Agreement between readers sets a realistic ceiling: a model that matches readers as well as they match each other is near the limit of the labels."},
+        {"h3": "Combining annotations", "p": "Majority voting, consensus review or STAPLE-style estimation combine several outlines into one reference, and estimate how reliable each reader is.", "link": {"href": "https://doi.org/10.1109/TMI.2004.828354", "text": "STAPLE, IEEE TMI 2004 →"}},
+        {"h3": "Annotation protocol", "p": "A written protocol with examples, edge cases and a pilot round reduces disagreement before it reaches the data. We review the hardest cases with your clinicians."},
+        {"h3": "Reference standard", "p": "Where possible, labels come from a stronger source than the image itself: pathology, follow-up or outcome. Labels read from the image alone are reported as such."}
+      ]
+    },
+    {
+      "id": "evaluation",
+      "eyebrow": "What we measure",
+      "h2": "Dice is a start.<br>Clinical errors decide.",
+      "lead": "Overlap scores are easy to compute and easy to misread. We choose metrics that match the clinical question, following published recommendations such as Metrics Reloaded.",
+      "cards": [
+        {"h3": "Overlap", "p": "Dice and IoU summarise overlap. They punish errors on small structures far more than on large ones, and ignore where the error is. A high average Dice can hide a missed small lesion."},
+        {"h3": "Boundary distance", "p": "Hausdorff distance, often its 95th percentile, and average surface distance show how far an outline strays. That matters when the output is used for planning or measurement."},
+        {"h3": "Lesion-level counts", "p": "Detection sensitivity, false positives per scan and results by lesion size. A model that finds every large lesion and misses the small ones may fail the clinical need."},
+        {"h3": "Clinical measurements", "p": "Volumes, diameters or counts derived from the output, compared with what clinicians measure. Reader studies where the question is whether the model helps a reader."}
+      ],
+      "note": "Metric choice follows <a href=\"https://doi.org/10.1038/s41592-023-02151-z\" rel=\"noopener\" target=\"_blank\">Metrics Reloaded</a> and its <a href=\"https://doi.org/10.1038/s41592-023-02150-0\" rel=\"noopener\" target=\"_blank\">companion paper on metric pitfalls</a>. Results are reported per site and subgroup, with confidence intervals. We do not quote target scores before seeing the data."
+    },
+    {
+      "id": "dicom-deidentification",
+      "eyebrow": "De-identifying images",
+      "h2": "Images carry identifiers.<br>Not only in the header.",
+      "lead": "DICOM files hold names, IDs, dates and device details in their tags. Some identifiers sit in the pixels themselves.",
+      "cards": [
+        {"h3": "DICOM tags", "p": "The DICOM standard defines confidentiality profiles: which attributes to remove, replace or keep, with options to retain dates, device details or longitudinal links when a study needs them.", "link": {"href": "https://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html", "text": "DICOM PS3.15, Annex E →"}},
+        {"h3": "Burned-in text", "p": "Ultrasound, screen captures and scanned documents can have names or IDs written into the image. Header cleaning does not touch them. We detect text in the pixels, mask it, and check a sample by eye."},
+        {"h3": "Faces in head scans", "p": "A 3D head scan can be rendered into a face. In one study, face-recognition software matched MRI-based reconstructions to participants' photos. Defacing tools remove facial features, at some cost to later analysis.", "link": {"href": "https://doi.org/10.1056/NEJMc1908881", "text": "Schwarz et al., NEJM 2019 →"}},
+        {"h3": "Private tags &amp; free text", "p": "Vendor private tags, study descriptions and embedded reports can contain identifiers. They need review per vendor and modality, not one generic script.", "link": {"href": "/medical-ai/clinical-data-deidentification/", "text": "Clinical data de-identification →"}}
+      ]
+    },
+    {
+      "id": "engagement",
+      "eyebrow": "How an engagement runs",
+      "h2": "Define the clinical error.<br>Then train the model.",
+      "lead": "An imaging project is decided early: by the reference standard, the annotation protocol and how the data is split. Our process reflects that.",
+      "steps": [
+        {"h3": "Define the task", "p": "Agree the clinical question, the output (outline, box or label), the reference standard and the metric that reflects clinical success."},
+        {"h3": "Prepare the data", "p": "De-identify, check image quality and acquisition metadata, write the annotation protocol, and split by patient and site before any training."},
+        {"h3": "Build &amp; compare", "p": "Start from a strong baseline, then test each change against it on held-out patients. Review failures by site, scanner and lesion size."},
+        {"h3": "Validate &amp; hand over", "p": "Test on held-out sites, report per-site and subgroup results in a report structured around CLAIM, and hand over code your team can retrain."}
+      ],
+      "note": "We produce development and validation evidence. We are not regulatory consultants, and engaging MLAIA does not imply any regulatory status for your product."
+    },
+    {
+      "id": "sources",
+      "eyebrow": "Sources",
+      "h2": "Standards and papers<br>cited on this page.",
+      "reads": [
+        {"href": "https://doi.org/10.1148/ryai.240300", "small": "Tejani et al. · Radiology: AI 2024", "strong": "CLAIM checklist, 2024 update"},
+        {"href": "https://doi.org/10.1038/s41592-023-02151-z", "small": "Maier-Hein et al. · Nature Methods 2024", "strong": "Metrics Reloaded"},
+        {"href": "https://doi.org/10.1038/s41592-023-02150-0", "small": "Reinke et al. · Nature Methods 2024", "strong": "Metric pitfalls in image analysis validation"},
+        {"href": "https://doi.org/10.1038/s41592-020-01008-z", "small": "Isensee et al. · Nature Methods 2021", "strong": "nnU-Net for biomedical image segmentation"},
+        {"href": "https://doi.org/10.1371/journal.pmed.1002683", "small": "Zech et al. · PLOS Medicine 2018", "strong": "Pneumonia models across hospitals"},
+        {"href": "https://doi.org/10.1109/TMI.2004.828354", "small": "Warfield et al. · IEEE TMI 2004", "strong": "STAPLE for combining segmentations"},
+        {"href": "https://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html", "small": "DICOM standard · PS3.15", "strong": "Attribute confidentiality profiles"},
+        {"href": "https://doi.org/10.1056/NEJMc1908881", "small": "Schwarz et al. · NEJM 2019", "strong": "Face recognition from MRI scans"}
+      ]
+    }
+  ],
+  "faq": [
+    {"q": "Is a high Dice score good enough?", "a": "Not on its own. Dice favours large structures and ignores where errors fall. We pair it with boundary distances, lesion-level detection and the measurements clinicians actually use."},
+    {"q": "Our model works at one hospital but not another. Why?", "a": "Usually acquisition shift: different scanners, protocols or patient mix, sometimes made worse by shortcuts the model learned at the first site. We test per site, find what changed, and choose between harmonisation, more varied training data and local fine-tuning."},
+    {"q": "How many labelled images do we need?", "a": "It depends on the task, the variability and how small the target is. We look at a pilot set and at agreement between readers before estimating. Fewer cases labelled well usually beat many labelled loosely."},
+    {"q": "Is removing DICOM header tags enough to de-identify images?", "a": "No. Identifiers can be burned into the pixels, hidden in private tags or free-text fields, or reconstructed, as with faces in head scans. We clean headers, check pixels and review a sample by eye."},
+    {"q": "Can you work on images that cannot leave the hospital?", "a": "Yes. We can work inside your environment under your access controls, or on de-identified exports prepared for the task. This is agreed with the data owner before work starts."},
+    {"q": "Do you handle FDA or CE clearance?", "a": "No. We produce the development and validation evidence, structured so it can support regulatory work. We are not regulatory consultants, and engaging MLAIA does not imply any regulatory status for your product."}
+  ],
+  "reads": [
+    {"href": "/blog-computer-vision-production.html#medical-imaging-drones", "small": "Medical imaging", "strong": "Computer vision in production: medical imaging"},
+    {"href": "/blog-clinical-ai-production.html", "small": "Deployment", "strong": "Clinical AI that ships: shadow mode and monitoring"},
+    {"href": "/wiki/medical-ai-validation.html", "small": "Technical guide", "strong": "Medical AI validation &amp; the regulatory landscape"}
+  ],
+  "contact": {
+    "h2": "Book a 30-minute clinical AI feasibility call.",
+    "p": "Tell us the clinical question, the images and labels you have and what a reviewer would need to see. We’ll tell you whether it’s feasible and what the first step would be.",
+    "href": "/medical-ai/#contact",
+    "button": "Book a feasibility call →"
+  }
+}
