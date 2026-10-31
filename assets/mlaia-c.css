@@ -354,3 +354,27 @@ body.c-page .site-quick-nav .site-contact-link:hover{background:var(--c-btn-hove
 body.c-page .site-quick-nav a:focus-visible{outline:3px solid var(--c-focus);outline-offset:3px}
 @media (max-width:900px){body.c-page .site-quick-nav{border-right:0;border-top:1px solid var(--c-rule)}}
 .c-specs-title+.c-creds{margin-top:12px}
+
+/* ---------- 19. Collapsible instrument extras (button[data-c-collapse], mlaia-c.js) ---------- */
+.c-more dl{margin-top:14px}
+.c-more[hidden]{display:none}
+.c-more-toggle{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:48px;padding:0 var(--c-gutter);background:var(--c-bg);color:var(--c-fg);border:0;border-bottom:1px solid var(--c-rule);font:500 13px/1 var(--c-mono);text-align:left;cursor:pointer}
+.c-more-toggle[hidden]{display:none}
+.c-more-toggle:hover{color:var(--c-amber)}
+.c-more-toggle:focus-visible{outline-offset:-3px}
+.c-more-toggle__icon{display:inline-block;font-size:16px}
+.c-more-toggle[aria-expanded="true"] .c-more-toggle__icon{transform:rotate(180deg)}
+@media (max-width:700px){
+  .c-hero{display:flex;flex-direction:column}
+  .c-hero>.c-instrument,.c-hero .c-readout{display:contents}
+  .c-hero .c-screen{order:1}
+  .c-hero .c-readout__head{order:2;padding:10px var(--c-gutter) 12px;background:var(--c-bg-2);border-top:1px solid var(--c-rule)}
+  .c-hero .c-readout__head dl{grid-template-columns:1fr 1fr}
+  .c-hero>.c-legend{order:3}
+  .c-hero>.c-more-toggle{order:4}
+  .c-hero .c-more{order:5;padding:0 var(--c-gutter) 16px;background:var(--c-bg-2);border-bottom:1px solid var(--c-rule)}
+  .c-hero .c-more dl{margin-top:12px;grid-template-columns:1fr 1fr}
+  .c-hero>.c-hero__copy{order:6;padding-top:20px}
+  .c-hero .c-crumb{margin-bottom:12px}
+  .c-hero>.c-legend{font-size:14px;padding-top:10px;padding-bottom:10px}
+}

@@ -272,7 +272,22 @@ function Trace(cv){
   return it;
 }
 
+/* ---------- collapsible extras: button[data-c-collapse="<max px>"][aria-controls] ----------
+   At or below the breakpoint the target starts collapsed and the button toggles it; above it
+   the target is always shown and the button is hidden. Without JS the button stays hidden and
+   the target stays open. */
+function Collapse(btn){
+  const tgt=document.getElementById(btn.getAttribute('aria-controls'));if(!tgt)return;
+  const m=matchMedia('(max-width:'+(+btn.dataset.cCollapse||700)+'px)');let open=false;
+  const apply=()=>{const narrow=m.matches,shown=!narrow||open;btn.hidden=!narrow;tgt.hidden=!shown;btn.setAttribute('aria-expanded',String(shown));};
+  btn.addEventListener('click',()=>{open=!open;apply();});
+  const reset=()=>{open=false;apply();};
+  if(m.addEventListener)m.addEventListener('change',reset);else if(m.addListener)m.addListener(reset);
+  apply();
+}
+
 function init(root=document){
+  root.querySelectorAll('button[data-c-collapse]').forEach(b=>{if(!b.__cDone){b.__cDone=1;Collapse(b);}});
   root.querySelectorAll('[data-c-scope]').forEach(b=>{if(!b.__cDone){b.__cDone=1;register(Scope(b));}});
   root.querySelectorAll('[data-c-waterfall]').forEach(b=>{if(!b.__cDone){b.__cDone=1;register(Waterfall(b));}});
   root.querySelectorAll('canvas[data-c-trace]').forEach(cv=>{if(!cv.__cDone){cv.__cDone=1;register(Trace(cv));}});
