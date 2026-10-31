@@ -224,3 +224,24 @@ setPauseText();
 redraw();sync();
 window.MLAIAHome={get running(){return !!raf;},get t(){return t;},get still(){return still();}};
 })();
+
+/* Testimonials (#customers): field filter. Without JS the filter stays hidden and every card shows.
+   "All" shows every group; a field shows only its group ("Working with MLAIA" shows only under All). */
+(()=>{
+'use strict';
+const sec=document.getElementById('customers');if(!sec)return;
+const bar=sec.querySelector('.hm-tfilter'),groups=[...sec.querySelectorAll('.hm-tgroup')],status=document.getElementById('hm-tstatus');
+if(!bar||!groups.length)return;
+const btns=[...bar.querySelectorAll('.hm-tf')];
+const he=()=>document.documentElement.lang==='he';
+const apply=(f,announce)=>{
+  let n=0;
+  groups.forEach(g=>{const on=f==='all'||g.dataset.field===f;g.hidden=!on;if(on)n+=g.querySelectorAll('.hm-t').length;});
+  btns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===f)));
+  if(announce&&status)status.textContent=he()?(n===1?'מוצגת המלצה אחת':`מוצגות ${n} המלצות`):`Showing ${n} testimonial${n===1?'':'s'}`;
+};
+const label=()=>bar.setAttribute('aria-label',he()?bar.dataset.heLabel:bar.dataset.enLabel);
+btns.forEach(b=>b.addEventListener('click',()=>apply(b.dataset.filter,true)));
+new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+bar.hidden=false;label();apply('all',false);
+})();
