@@ -101,6 +101,13 @@ CARDS = {
     "og/n8n-automation.png": side("AI Agents · Automation", "Automate the<br>routine steps.",
                                   "Keep people on the decisions.", "mlaia.com/ai-agents/n8n-automation",
                                   rows(["Lead & inquiry routing", "Document intake", "Support triage", "Approvals & error paths"])),
+    "og/demand-forecasting.png": stack("Prediction · Demand", "Demand forecasting for every item, including the slow ones",
+                                       f'<div class="panel">{fig("pred-intermittent.svg")}</div>'),
+    "og/churn-prediction.png": side("Prediction · Churn", "Who will leave.<br>Who an offer keeps.",
+                                    "Calibrated churn risk, and uplift to target offers.", "mlaia.com/predictive-intelligence/churn-prediction",
+                                    rows(["Churn label without leakage", "Survival framing", "Calibrated risk", "Thresholds vs team capacity", "Uplift, not just risk"])),
+    "og/causal-inference.png": stack("Prediction · Causal", "Causal inference: what did the change actually do?",
+                                     f'<div class="panel">{fig("pred-did.svg")}</div>'),
 }
 
 
