@@ -555,6 +555,14 @@
 
     <p>Gradient-boosted trees are not losing their throne anytime soon. But the kingdom is being productively challenged, and the challengers are improving fast. The practitioners who win in 2026 are the ones who know exactly when to call in the new guard — and when to keep shipping XGBoost.</p>
 
+    <h2 id="faq">Frequently asked questions</h2>
+
+    <h3>Do gradient-boosted trees still beat deep learning on tabular data in 2026?</h3>
+    <p>Gradient-boosted trees still win most tabular problems in 2026. Deep learning wins in specific cases: TabPFN on small datasets, FT-Transformer or SAINT on very large ones with text features, and foundation models such as TabFM when labels are scarce.</p>
+
+    <h3>How do TabNet, TabPFN and TabFM compare with XGBoost?</h3>
+    <p>XGBoost, LightGBM and CatBoost remain the default for most tabular problems. TabPFN v2 matches a tuned XGBoost on datasets under about 10k rows with no tuning but doesn't scale to large data. TabNet rarely beats tuned trees on mid-sized data. Google's TabFM targets cases with little labeled data and meaningful column names, but is not yet publicly available at scale.</p>
+
     <p><strong>Related:</strong> how we approach <a href="/predictive-intelligence/">forecasting, churn and causal analysis</a>, and the <a href="/predictive-intelligence/explorer/">interactive prediction explorer</a> with SHAP explanations.</p>
 
     <div class="cta">
