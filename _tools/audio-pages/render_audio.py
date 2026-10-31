@@ -21,7 +21,7 @@ CONTACT_STYLE = ('<style>.p-contact-list{list-style:none;padding:0;margin:0 0 22
                  '.p-contact-list li{padding:6px 0 6px 22px;position:relative}'
                  '.p-contact-list li::before{content:"";position:absolute;left:0;top:15px;width:8px;height:8px;background:#ffd170}</style>')
 NAV = [("/audio-ai/", "Audio & Acoustics"), ("/medical-ai/", "Medical AI"),
-       ("/predictive-intelligence/", "Prediction &amp; Causal Analysis"), ("/ai-agents/", "AI Agents")]
+       ("/predictive-intelligence/", "Prediction &amp; Causal Analysis")]
 
 
 def esc(s):
