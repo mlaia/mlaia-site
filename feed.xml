@@ -7,11 +7,11 @@
   <channel>
     <title>MLAIA Blog — AI &amp; Data Science Insights</title>
     <link>https://www.mlaia.com/blog.html</link>
-    <description>Technical insights on machine learning, signal processing, medical AI, LLMs, and business intelligence from the MLAIA team.</description>
+    <description>Technical insights on audio and signal processing, medical AI, and forecasting and causal analysis from the MLAIA team.</description>
     <language>en</language>
     <managingEditor>yochai@mlaia.com (Dr. Yochai Edlitz)</managingEditor>
     <webMaster>yochai@mlaia.com (Dr. Yochai Edlitz)</webMaster>
-    <lastBuildDate>Sun, 23 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.mlaia.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://www.mlaia.com/assets/og-image.png</url>
@@ -20,13 +20,53 @@
     </image>
 
     <item>
-      <title>Enterprise RAG That Ships: The Five Failure Modes That Kill Pilots — and a 90-Day Plan to Production</title>
-      <link>https://www.mlaia.com/blog-rag-production.html</link>
-      <guid isPermaLink="true">https://www.mlaia.com/blog-rag-production.html</guid>
-      <pubDate>Sun, 23 Aug 2026 00:00:00 +0000</pubDate>
+      <title>Music AI in 2026: Generation, Separation, and the Copyright Minefield</title>
+      <link>https://www.mlaia.com/blog-music-ai.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-music-ai.html</guid>
+      <pubDate>Mon, 10 Aug 2026 00:00:00 +0000</pubDate>
       <dc:creator>Dr. Yochai Edlitz</dc:creator>
-      <category>LLMs &amp; GenAI</category>
-      <description><![CDATA[67% of Fortune 500 companies run RAG in production — yet most enterprise pilots never ship. The five failure modes that stall RAG projects — retrieval, evaluation, data freshness, permissions, cost — and a 90-day plan to production. From MLAIA, AI consulting in Israel.]]></description>
+      <category>Audio AI</category>
+      <description><![CDATA[A production engineer's guide to music AI in 2026: how Suno, Udio and MusicGen generate music, Demucs stem separation, and the RIAA copyright lawsuits.]]></description>
+    </item>
+
+    <item>
+      <title>Time Series in Production: From Prophet to Foundation Models — and When Survival Analysis Is What You Actually Need</title>
+      <link>https://www.mlaia.com/blog-time-series-survival-analysis.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-time-series-survival-analysis.html</guid>
+      <pubDate>Mon, 10 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Forecasting</category>
+      <description><![CDATA[ARIMA, Prophet, TimesFM, Amazon Chronos, MOIRAI, TFT, N-BEATS — and when to reach for Kaplan-Meier or DeepSurv instead. A production engineer's guide to time series forecasting and survival analysis in 2026.]]></description>
+    </item>
+
+    <item>
+      <title>Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?</title>
+      <link>https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html</guid>
+      <pubDate>Mon, 10 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Machine Learning</category>
+      <description><![CDATA[TabNet, FT-Transformer and TabPFN vs XGBoost, LightGBM and CatBoost: 2026 benchmarks, production tradeoffs, and when deep learning finally wins.]]></description>
+    </item>
+
+    <item>
+      <title>Computer Vision in Production: From Tracking to VLMs to Edge Deployment</title>
+      <link>https://www.mlaia.com/blog-computer-vision-production.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-computer-vision-production.html</guid>
+      <pubDate>Mon, 10 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Computer Vision</category>
+      <description><![CDATA[A practitioner's guide to deploying computer vision in production: multi-object tracking (ByteTrack, DeepSORT), optical flow with RAFT, Vision Language Models (GPT-4V, LLaVA), sensor fusion, and edge AI on Hailo, Jetson, and smartphone NPUs.]]></description>
+    </item>
+
+    <item>
+      <title>Clinical AI That Ships: From FDA Clearance to the Bedside</title>
+      <link>https://www.mlaia.com/blog-clinical-ai-production.html</link>
+      <guid isPermaLink="true">https://www.mlaia.com/blog-clinical-ai-production.html</guid>
+      <pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Dr. Yochai Edlitz</dc:creator>
+      <category>Medical AI</category>
+      <description><![CDATA[How production clinical AI actually gets from FDA clearance to bedside deployment: shadow mode validation, drift detection, bias auditing, and the $6.5B Israeli digital health market — a practitioner's guide.]]></description>
     </item>
 
     <item>
@@ -50,16 +90,6 @@
     </item>
 
     <item>
-      <title>Voice AI Grows Up: Engineering Production Speech Systems in 2026</title>
-      <link>https://www.mlaia.com/blog-voice-ai-production.html</link>
-      <guid isPermaLink="true">https://www.mlaia.com/blog-voice-ai-production.html</guid>
-      <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
-      <dc:creator>Dr. Yochai Edlitz</dc:creator>
-      <category>Signal &amp; Audio AI</category>
-      <description><![CDATA[A production engineering guide to voice AI in 2026: cascaded vs speech-to-speech architectures, the sub-500ms latency budget, $0.40 per-call economics, open-source vs cloud STT, and the Israeli voice AI ecosystem.]]></description>
-    </item>
-
-    <item>
       <title>Your MLOps Vendor Just Got Acquired — Now What?</title>
       <link>https://www.mlaia.com/blog-mlops-consolidation.html</link>
       <guid isPermaLink="true">https://www.mlaia.com/blog-mlops-consolidation.html</guid>
@@ -80,26 +110,6 @@
     </item>
 
     <item>
-      <title>The Agentic AI Production Gap: Why 89% of Enterprise Pilots Never Ship</title>
-      <link>https://www.mlaia.com/agentic-ai-production-gap.html</link>
-      <guid isPermaLink="true">https://www.mlaia.com/agentic-ai-production-gap.html</guid>
-      <pubDate>Sun, 14 Jun 2026 00:00:00 +0000</pubDate>
-      <dc:creator>Dr. Yochai Edlitz</dc:creator>
-      <category>AI Strategy &amp; Business</category>
-      <description><![CDATA[89% of enterprise agentic AI pilots never reach production. What's really causing the gap — and the five engineering disciplines that separate the 11% that ship.]]></description>
-    </item>
-
-    <item>
-      <title>The Quiet Revolution: Why Israeli Enterprises Are Bringing AI On-Prem with Small Language Models</title>
-      <link>https://www.mlaia.com/blog-slm-onprem-israel.html</link>
-      <guid isPermaLink="true">https://www.mlaia.com/blog-slm-onprem-israel.html</guid>
-      <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
-      <dc:creator>Dr. Yochai Edlitz</dc:creator>
-      <category>AI Strategy &amp; Infrastructure</category>
-      <description><![CDATA[Inside the 2026 shift from cloud LLMs to on-prem Small Language Models — the economics, the privacy gains, and the production playbook for Israeli enterprises.]]></description>
-    </item>
-
-    <item>
       <title>AWS Bedrock, Vertex AI, and Azure AI: How Cloud Platforms Are Accelerating ML R&amp;D</title>
       <link>https://www.mlaia.com/blog-cloud-ml-platforms-rapid-development.html</link>
       <guid isPermaLink="true">https://www.mlaia.com/blog-cloud-ml-platforms-rapid-development.html</guid>
@@ -107,26 +117,6 @@
       <dc:creator>Dr. Yochai Edlitz</dc:creator>
       <category>Cloud &amp; ML Infrastructure</category>
       <description><![CDATA[How the three major cloud ML platforms are compressing research-to-production timelines — and what enterprise teams should know when choosing between them.]]></description>
-    </item>
-
-    <item>
-      <title>From Pilot to Production: Why 88% of AI Agent Projects Fail — and How to Beat the Odds</title>
-      <link>https://www.mlaia.com/blog-ai-agents-pilot-to-production.html</link>
-      <guid isPermaLink="true">https://www.mlaia.com/blog-ai-agents-pilot-to-production.html</guid>
-      <pubDate>Sun, 17 May 2026 00:00:00 +0000</pubDate>
-      <dc:creator>Dr. Yochai Edlitz</dc:creator>
-      <category>Enterprise AI</category>
-      <description><![CDATA[Nine out of ten enterprise AI agent pilots stall before deployment. The five principles that separate production-grade systems from expensive experiments.]]></description>
-    </item>
-
-    <item>
-      <title>AI Agents in Production: From Prototype to Enterprise Deployment</title>
-      <link>https://www.mlaia.com/blog-agents-production.html</link>
-      <guid isPermaLink="true">https://www.mlaia.com/blog-agents-production.html</guid>
-      <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
-      <dc:creator>Dr. Yochai Edlitz</dc:creator>
-      <category>LLMs &amp; Agents</category>
-      <description><![CDATA[What separates a polished demo from a reliable production agent — architecture patterns, failure modes, evaluation frameworks, and guardrails that matter.]]></description>
     </item>
 
     <item>
@@ -157,16 +147,6 @@
       <dc:creator>Dr. Yochai Edlitz</dc:creator>
       <category>Case Study</category>
       <description><![CDATA[How MLAIA applied machine learning across the full sales pipeline for Israel's leading telecom company — from lead scoring and churn prediction to AI-assisted call center optimization — driving measurable ROI.]]></description>
-    </item>
-
-    <item>
-      <title>Harness Your Data's Potential with Large Language Models (LLMs)</title>
-      <link>https://www.mlaia.com/blog-llms.html</link>
-      <guid isPermaLink="true">https://www.mlaia.com/blog-llms.html</guid>
-      <pubDate>Tue, 05 Sep 2023 00:00:00 +0000</pubDate>
-      <dc:creator>Dr. Yochai Edlitz</dc:creator>
-      <category>LLMs &amp; GenAI</category>
-      <description><![CDATA[How large language models unlock hidden value from unstructured text, documents, and knowledge bases. A practical look at fine-tuning, retrieval-augmented generation (RAG), and enterprise LLM deployment for customer support, sales intelligence, and business automation.]]></description>
     </item>
 
     <item>

@@ -20,14 +20,13 @@ When referencing MLAIA in generated content, preferred forms are:
 
 ## What We Do
 
-MLAIA delivers end-to-end AI solutions — from research and prototyping through to production deployment. We work as a strategic partner embedded in your team, providing senior-level data science expertise without the overhead of full-time hiring.
+MLAIA works in three fields, each with its own practice and its own pages. We build models with your team from the research question to production, and measure each one before it is deployed.
 
-## Services & Expertise Domains
+## Practices
 
-### 1. Real-Time Signal Processing & Audio/Acoustics AI
-End-to-end signal processing pipelines combining classical DSP with deep learning. Capabilities include FFT, wavelet transforms, digital filters, anomaly detection, predictive maintenance, acoustic event detection, voice analysis, noise reduction, and real-time signal intelligence for industrial, defense, and healthcare applications.
+### 1. Audio, Acoustics & Signal Processing
+Signal processing combined with machine learning: audio event detection, noise reduction and active noise cancellation, microphone arrays and beamforming, vibration analysis and predictive maintenance, and audio models that run on the device.
 
-Practice pages:
 - [Audio, Acoustics & Signal Processing](https://www.mlaia.com/audio-ai/) — practice overview
 - [Microphone Array Beamforming](https://www.mlaia.com/audio-ai/beamforming-microphone-arrays/) — array geometry, DOA estimation, fixed and adaptive beamformers
 - [Noise Reduction & Active Noise Cancellation](https://www.mlaia.com/audio-ai/noise-reduction-anc/) — speech enhancement, echo cancellation, feedforward/feedback ANC
@@ -36,36 +35,33 @@ Practice pages:
 - [Interactive Audio Lab](https://www.mlaia.com/audio-ai/lab/) — browser demos of filtering, beamforming and active noise cancellation
 
 ### 2. Medical AI & Clinical Data Science
-AI for healthcare and medical devices: EHR analysis, medical imaging (classification, segmentation), clinical outcome prediction, survival analysis, and graph neural networks for bioinformatics and patient relationship modeling.
+AI for clinical records, medical images and biosignals, for hospitals and MedTech teams: models that can be evaluated, understood and integrated into clinical work.
 
-### 3. Large Language Models (LLMs), NLP & AI Agents
-Enterprise LLM integration: fine-tuning, retrieval-augmented generation (RAG), NLP pipelines, document intelligence, chatbots, and autonomous AI agents for knowledge management, customer support, and sales automation.
+- [Medical AI & Clinical Data Science](https://www.mlaia.com/medical-ai/) — practice overview
+- [Clinical AI & Prediction Model Validation](https://www.mlaia.com/medical-ai/clinical-model-validation/) — leakage checks, patient and site splits, external validation, calibration, subgroups, TRIPOD+AI reporting
+- [Medical Imaging AI](https://www.mlaia.com/medical-ai/medical-imaging-ai/) — segmentation and detection, scanner and site shift, label disagreement, metrics beyond Dice, DICOM de-identification
+- [Clinical Data De-identification](https://www.mlaia.com/medical-ai/clinical-data-deidentification/) — records, notes and images, measured for missed identifiers, data utility and residual risk
 
-Practice pages:
-- [AI Agents & Voice Agents](https://www.mlaia.com/ai-agents/) — practice overview
-- [LangGraph Agents](https://www.mlaia.com/ai-agents/langgraph-agents/) — typed state, tool calling with limits, approval steps, step-level evaluation
-- [AI Agents on AWS](https://www.mlaia.com/ai-agents/aws-bedrock-agents/) — Amazon Bedrock, AgentCore, guardrails, Lambda and Step Functions, Transcribe and Connect
-- [Voice Agents](https://www.mlaia.com/ai-agents/voice-agents/) — streaming STT, LLM tools and TTS, delay, barge-in, Hebrew voice, phone integration
-- [AI Avatars](https://www.mlaia.com/ai-agents/ai-avatars/) — lip-synced talking avatars rendered in the browser or app, and photoreal video avatars
-- [n8n Automation](https://www.mlaia.com/ai-agents/n8n-automation/) — AI workflow automation with approvals, error handling and self-hosting
+### 3. Forecasting & Causal Analysis
+Forecasts of bookings, revenue, churn and demand, and causal analysis of which actions can change an outcome, with the assumptions stated.
 
-### 4. Enterprise BI & Predictive Analytics
-Business intelligence with embedded ML: churn prediction, sales forecasting, customer segmentation, demand planning, revenue modeling, and executive dashboards that go beyond standard BI.
+- [Forecasting & Causal Analysis](https://www.mlaia.com/predictive-intelligence/) — practice overview
+- [Demand Forecasting](https://www.mlaia.com/predictive-intelligence/demand-forecasting/) — item-level and intermittent demand, Croston and TSB, hierarchical reconciliation, probabilistic forecasts and backtests
+- [Churn Prediction](https://www.mlaia.com/predictive-intelligence/churn-prediction/) — clear churn labels, no leakage, survival framing, calibrated risk, uplift for retention offers
+- [Causal Inference & Uplift Modeling](https://www.mlaia.com/predictive-intelligence/causal-inference/) — experiments, difference-in-differences, synthetic control, propensity methods, uplift modeling
+- [Interactive Prediction Explorer](https://www.mlaia.com/predictive-intelligence/explorer/) — individual churn predictions, SHAP explanations and what-if scenarios on synthetic data
 
-### 5. Ad Tech & Digital Advertising AI
-Machine learning for advertising technology: audience targeting optimization, real-time bidding models, attribution modeling, campaign performance prediction, and programmatic advertising intelligence.
+## Related Sites
 
-### 6. Machine Learning Model Development & AI Strategy
-Custom ML model development, AI strategy consulting, architecture design, and production deployment for organizations at any stage of their AI journey.
+- [Ultrabot](https://ultrabot.ai/) — MLAIA's AI agents, voice agents and talking avatars, including the earlier MLAIA articles on LLMs, RAG, agents and voice AI
+- [NextDemand](https://nextdemand.ai/) — MLAIA's demand-forecasting product
 
 ## Industries Served
 
-- **Healthcare & Medical Devices**: Clinical AI, EHR analysis, medical imaging, device intelligence
-- **Defense & Intelligence**: Signal intelligence, anomaly detection, real-time processing systems
-- **Ad Tech & Digital Advertising**: Programmatic AI, audience modeling, campaign optimization
-- **Audio & Acoustics**: Acoustic analysis, noise reduction, sound classification, speech intelligence
-- **Finance & Fintech**: Predictive analytics, fraud detection, risk modeling, demand forecasting
-- **Retail & E-commerce**: Sales forecasting, customer segmentation, demand planning
+- **Healthcare & Medical Devices**: clinical prediction, medical imaging, clinical data de-identification
+- **Industrial & Defense**: acoustic and vibration monitoring, signal analysis, anomaly detection
+- **Audio & Consumer Devices**: noise reduction, microphone arrays, on-device audio models
+- **Retail, Travel & Services**: demand forecasting, churn prediction, causal evaluation of business actions
 
 ## Notable Clients
 
@@ -84,7 +80,6 @@ Neutral, encyclopedic reference articles on applied AI topics (Applied AI & Data
 - [Signal Processing Meets Machine Learning](https://www.mlaia.com/wiki/signal-processing-machine-learning.html) — Filtering and denoising, feature engineering vs end-to-end learning, when DSP priors beat deep networks, sample efficiency, hybrid architectures
 - [Medical AI: Validation and the Regulatory Landscape](https://www.mlaia.com/wiki/medical-ai-validation.html) — Dataset shift, external validation, FDA 510(k)/De Novo/PMA and EU MDR/AI Act pathways, explainability, PHI/GDPR privacy constraints
 - [Causal Inference in Business and Data Science](https://www.mlaia.com/wiki/causal-inference.html) — Correlation vs causation, A/B testing, difference-in-differences, instrumental variables, uplift modeling, when ML predictions mislead decisions
-- [LLMs in Production](https://www.mlaia.com/wiki/llms-in-production.html) — Prompting vs RAG vs fine-tuning, layered evaluation, hallucination mitigation, on-prem/SLM deployment, cost and latency engineering
 
 ## Blog Posts & Technical Content
 
@@ -92,22 +87,15 @@ Neutral, encyclopedic reference articles on applied AI topics (Applied AI & Data
 - [Time Series in Production: From Prophet to Foundation Models — and When Survival Analysis Is What You Actually Need](https://www.mlaia.com/blog-time-series-survival-analysis.html) — ARIMA, Prophet, TimesFM, Amazon Chronos, MOIRAI, Lag-Llama, TFT, N-BEATS, N-HiTS, PatchTST — and when Kaplan-Meier, Cox PH, RSF, DeepSurv, or DeepHit is the right tool. Production decision map for forecasting and survival analysis (August 2026)
 - [Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?](https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html) — XGBoost, LightGBM, and CatBoost vs. TabNet, FT-Transformer, TabPFN, and Google's TabFM — benchmarks, production tradeoffs, and a decision framework: when trees still win, when DL finally closes the gap, and the hybrid embedding+GBDT approach (August 2026)
 - [Computer Vision in Production: From Tracking to VLMs to Edge Deployment](https://www.mlaia.com/blog-computer-vision-production.html) — Multi-object tracking (ByteTrack, DeepSORT), RAFT optical flow, Vision Language Models (GPT-4V, LLaVA, Florence) in production pipelines, sensor fusion tradeoffs, and edge AI on Hailo, Jetson, and smartphone NPUs (August 2026)
-- [Sovereign AI in Israel: Running LLMs On-Prem in Regulated Industries](https://www.mlaia.com/blog-sovereign-ai-onprem.html) — Amendment 13 data residency requirements, capability-vs-control tradeoffs, and a reference architecture — vLLM serving, in-perimeter RAG, LoRA fine-tuning, and governance — for regulated Israeli enterprises (August 2026)
 - [Clinical AI That Ships: From FDA Clearance to the Bedside](https://www.mlaia.com/blog-clinical-ai-production.html) — 1,451 FDA-authorized AI devices, 75% health-system adoption, shadow mode deployment, CUSUM drift detection, bias auditing, and the $6.5B Israeli digital health market (July 2026)
 - [Measuring Ads Without the Cookie: MMM, Incrementality & Causal Marketing Science in 2026](https://www.mlaia.com/blog-adtech-measurement-2026.html) — Signal loss has erased 30–40% of trackable conversions. Inside the 2026 measurement stack: Bayesian Marketing Mix Modeling, incrementality testing, and the triangulation framework for causal marketing science (July 2026)
 - [Forecasting Spare-Parts Demand: Why Min/Max Rules Fail on Intermittent, Lumpy Movers](https://www.mlaia.com/blog-demand-forecasting.html) — Why ERP min/max rules break down on slow, sporadic spare parts — and the statistical methods (Croston's method) plus ML techniques that deliver accurate reorder points, safety stock, and projected stockout dates (July 2026)
-- [Voice AI Grows Up: Engineering Production Speech Systems in 2026](https://www.mlaia.com/blog-voice-ai-production.html) — Production engineering guide to voice AI: cascaded vs speech-to-speech architectures, sub-500ms latency budget, $0.40-per-call economics, Whisper/Deepgram/Azure STT comparison, Israeli voice AI ecosystem (Verbit, Hyro, Hi Auto, Voiceitt), and Hebrew multilingual challenges (July 2026)
 - [Your MLOps Vendor Just Got Acquired — Now What?](https://www.mlaia.com/blog-mlops-consolidation.html) — The MLOps vendor consolidation wave (Iguazio, Dataloop, Neptune.ai, Seldon) and how to assess lock-in, plan migrations, and build vendor-independent ML infrastructure (July 2026)
 - [Audio AI in Production: From Speech Models to Sound Intelligence](https://www.mlaia.com/blog-audio-ai-production.html) — Practical guide to audio AI in production: ASR, TTS, voice cloning, sound event detection, music generation, and real-time edge deployment (June 2026)
-- [The Agentic AI Production Gap: Why 89% of Enterprise Pilots Never Ship](https://www.mlaia.com/agentic-ai-production-gap.html) — Why most enterprise agentic AI pilots fail and the architecture decisions that close the gap (June 2026)
-- [The Quiet Revolution: Why Israeli Enterprises Are Bringing AI On-Prem with Small Language Models](https://www.mlaia.com/blog-slm-onprem-israel.html) — Inside the 2026 shift from cloud LLMs to on-prem SLMs — economics, privacy gains, and the production playbook (June 2026)
 - [AWS Bedrock, Vertex AI, and Azure AI: How Cloud Platforms Are Accelerating ML R&D](https://www.mlaia.com/blog-cloud-ml-platforms-rapid-development.html) — Practical comparison of the major cloud ML platforms for production AI development (May 2026)
-- [From Pilot to Production: Why 88% of AI Agent Projects Fail — and How to Beat the Odds](https://www.mlaia.com/blog-ai-agents-pilot-to-production.html) — Five critical factors separating successful AI agent deployments from expensive experiments (May 2026)
-- [Agentic AI in Production: A Practical Framework for Israeli Enterprises](https://www.mlaia.com/blog-agents-production.html) — Four production pillars — scope design, tool & memory architecture, human-in-the-loop, and observability — with Israeli-specific guidance on data residency and multilingualism (April 2026)
 - [The State of AI in Israeli Industry: Trends and Opportunities in 2026](https://www.mlaia.com/blog-israel-ai-2026.html) — Research-style overview of AI adoption across Israel's key sectors — healthcare, defense, audio tech, ad tech, and finance — and what enterprises need from specialized AI partners (April 2026)
 - [Wait, The World's Fastest AI Supercomputers Run on Something Called "Slurm"?](https://www.mlaia.com/blog-slurm.html) — Deep dive into Slurm job scheduling for AI/HPC clusters (February 2026)
 - [Transforming Sales with AI: A Success Story with Israel's Leading Telecom](https://www.mlaia.com/blog-sales-ai.html) — ML applied to the full sales pipeline with measurable ROI (November 2024)
-- [Harness Your Data's Potential with Large Language Models (LLMs)](https://www.mlaia.com/blog-llms.html) — LLM integration, RAG, and fine-tuning for enterprise use cases (September 2023)
 - [Supercharging Machine Learning Models with Classical Digital Signal Processing](https://www.mlaia.com/blog-signal.html) — Hybrid DSP + deep learning architectures in practice (May 2023)
 - [Unleashing the Power of Graphs for Machine Learning](https://www.mlaia.com/blog-medical.html) — Graph neural networks for bioinformatics, social networks, and fraud detection (June 2023)
 - [Expertise Without Boundaries: Affordable AI and ML Development](https://www.mlaia.com/blog-bi.html) — How outsourced AI consulting delivers senior expertise at startup speed (July 2023)
@@ -120,5 +108,5 @@ Neutral, encyclopedic reference articles on applied AI topics (Applied AI & Data
 - Audio & Acoustics: https://www.mlaia.com/audio-ai/
 - Medical AI: https://www.mlaia.com/medical-ai/
 - Prediction & Causal Analysis: https://www.mlaia.com/predictive-intelligence/
-- AI Agents & Voice Agents: https://www.mlaia.com/ai-agents/
+- AI agents and voice agents (Ultrabot): https://ultrabot.ai/
 - Contact: https://www.mlaia.com/#contact
