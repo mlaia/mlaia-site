@@ -187,8 +187,9 @@
   const lab=window.MLAIALab;
   if(!lab||!$('vibration'))return;
   const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const C={bg:'#0a1628',grid:'#30445f',text:'#afc3de',blue:'#72a8ff',cyan:'#63dcf1',amber:'#ffd170',red:'#ff7a7a',green:'#7be0a6',white:'#ffffff'};
-  const FONT='12px Arial,sans-serif';
+  /* Design C: amber = raw/input, blue = processed/output, white dashed = reference marks, red = alarm */
+  const C={bg:'#070908',grid:'#262b28',text:'#9ca39d',blue:'#71d4ff',amber:'#ffb547',ref:'#eceee9',red:'#ff6b6b',green:'#7be0a6',white:'#eceee9'};
+  const FONT='11px "Martian Mono",ui-monospace,Menlo,monospace',TITLE='600 13px "IBM Plex Sans",system-ui,sans-serif';
   function canvasCtx(cv,aspect,minH,maxH){
     const w=Math.max(260,cv.clientWidth||cv.parentElement.clientWidth),h=Math.round(Math.min(maxH||9999,Math.max(minH,w*aspect))),dpr=Math.min(window.devicePixelRatio||1,2);
     if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);cv.style.height=h+'px';}
@@ -199,9 +200,9 @@
     g.fillStyle=C.text;g.textAlign='right';
     for(const [y,label] of yTicks){g.strokeStyle=C.grid;g.lineWidth=1;g.beginPath();g.moveTo(box.x,y);g.lineTo(box.x+box.w,y);g.stroke();g.fillText(label,box.x-6,y);}
     g.textAlign='center';for(const [x,label] of xTicks)g.fillText(label,x,box.y+box.h+14);
-    if(title){g.textAlign='left';g.fillStyle=C.white;g.font='600 12px Arial,sans-serif';g.fillText(title,box.x,box.y-12);g.font=FONT;}
+    if(title){g.textAlign='left';g.fillStyle=C.white;g.font=TITLE;g.fillText(title,box.x,box.y-12);g.font=FONT;}
   }
-  const LUT=(()=>{const stops=[[0,[10,22,40]],[.28,[18,52,128]],[.5,[0,87,255]],[.7,[99,220,241]],[.88,[255,209,112]],[1,[255,255,255]]],lut=new Uint8ClampedArray(256*3);
+  const LUT=(()=>{const stops=[[0,[7,9,8]],[.28,[14,30,38]],[.5,[26,86,122]],[.7,[113,212,255]],[.88,[255,181,71]],[1,[255,246,226]]],lut=new Uint8ClampedArray(256*3);
     for(let i=0;i<256;i++){const v=i/255;let j=0;while(j<stops.length-2&&v>stops[j+1][0])j++;const [a,ca]=stops[j],[b,cb]=stops[j+1],u=(v-a)/(b-a);for(let c=0;c<3;c++)lut[i*3+c]=ca[c]+(cb[c]-ca[c])*u;}return lut;})();
   function drawSpectrogram(g,box,spec,frames,bins,lo,hi){
     const img=new ImageData(frames,bins),d=img.data;
@@ -236,21 +237,21 @@
       const ns=Math.round(.1*VFS);
       const x=makeVibration(state.rpm,state.imb,state.fault,.1,7),peak=2,yW=v=>top.y+top.h/2-v/peak*top.h/2;
       axes(g,top,[[top.y,'+2 g'],[top.y+top.h/2,'0'],[top.y+top.h,'−2']],[[top.x,'0'],[top.x+pw/2,'50 ms'],[top.x+pw,'100 ms']],'Acceleration, first 100 ms');
-      g.save();g.beginPath();g.rect(top.x,top.y,top.w,top.h);g.clip();line(g,Array.from({length:ns},(_,i)=>[top.x+i/(ns-1)*pw,yW(x[i])]),C.blue,1);g.restore();
+      g.save();g.beginPath();g.rect(top.x,top.y,top.w,top.h);g.clip();line(g,Array.from({length:ns},(_,i)=>[top.x+i/(ns-1)*pw,yW(x[i])]),C.amber,1);g.restore();
       // raw spectrum on log frequency axis
       const fx=f=>mid.x+Math.log(f/10)/Math.log(800)*pw,yR=v=>mid.y+Math.min(1,Math.max(0,(0-20*Math.log10(v+1e-9))/80))*mid.h;
       axes(g,mid,[[mid.y,'0 dB'],[mid.y+mid.h/2,'−40'],[mid.y+mid.h,'−80']],[10,100,1000,8000].map(f=>[fx(f),f===8000?'8 kHz':f>=1000?f/1000+'k':String(f)]),'Raw spectrum · dB re 1 g');
-      g.fillStyle='rgba(255,209,112,.13)';g.fillRect(fx(V_BAND[0]),mid.y,fx(V_BAND[1])-fx(V_BAND[0]),mid.h);g.fillStyle=C.amber;g.textAlign='center';g.fillText('envelope band',(fx(V_BAND[0])+fx(V_BAND[1]))/2,mid.y+10);
-      const pts=[];for(let k=Math.ceil(10/a.df);k<a.raw.length;k++)pts.push([fx(k*a.df),yR(a.raw[k])]);line(g,pts,C.cyan,1);
+      g.fillStyle='rgba(236,238,233,.07)';g.fillRect(fx(V_BAND[0]),mid.y,fx(V_BAND[1])-fx(V_BAND[0]),mid.h);g.fillStyle=C.text;g.textAlign='center';g.fillText('envelope band',(fx(V_BAND[0])+fx(V_BAND[1]))/2,mid.y+10);
+      const pts=[];for(let k=Math.ceil(10/a.df);k<a.raw.length;k++)pts.push([fx(k*a.df),yR(a.raw[k])]);line(g,pts,C.amber,1);
       g.fillStyle=C.white;g.textAlign='left';g.fillText('1×',fx(a.fr)+4,yR(a.oneX)-2);
       // envelope spectrum 0-500 Hz, linear, dB re envelope floor
       const ex=f=>bot.x+f/500*pw,yE=v=>bot.y+bot.h-Math.min(1,Math.max(0,20*Math.log10(v/a.envFloor+1e-9)+6)/36)*bot.h;
       axes(g,bot,[[yE(a.envFloor*10**(30/20)),'+30'],[yE(a.envFloor*10**(1)),'+20'],[yE(a.envFloor*10**(.5)),'+10'],[yE(a.envFloor),'0 dB']],[0,100,200,300,400,500].map(f=>[ex(f),f===500?'500 Hz':String(f)]),'Envelope spectrum · dB re floor');
       const thrY=yE(a.envFloor*10**(state.thr/20));g.setLineDash([5,5]);line(g,[[bot.x,thrY],[bot.x+pw,thrY]],C.red,1.2);g.setLineDash([]);
       g.fillStyle=C.red;g.textAlign='right';g.fillText('alarm threshold',bot.x+pw-4,thrY-8);
-      for(let m=1;m*a.bpfo<500;m++){const X=ex(m*a.bpfo);g.setLineDash([2,4]);line(g,[[X,bot.y],[X,bot.y+bot.h]],C.amber,1);g.setLineDash([]);g.fillStyle=C.amber;g.textAlign='center';g.fillText(m===1?'BPFO':m+'×',X,bot.y+8);}
+      for(let m=1;m*a.bpfo<500;m++){const X=ex(m*a.bpfo);g.setLineDash([2,4]);line(g,[[X,bot.y],[X,bot.y+bot.h]],C.ref,1);g.setLineDash([]);g.fillStyle=C.ref;g.textAlign='center';g.fillText(m===1?'BPFO':m+'×',X,bot.y+8);}
       const ep=[];for(let k=1;k*a.df<=500;k++)ep.push([ex(k*a.df),yE(Math.max(a.envSpec[k],a.envFloor*.5))]);
-      g.save();g.beginPath();g.rect(bot.x,bot.y,bot.w,bot.h);g.clip();line(g,ep,C.cyan,1.3);g.restore();
+      g.save();g.beginPath();g.rect(bot.x,bot.y,bot.w,bot.h);g.clip();line(g,ep,C.blue,1.5);g.restore();
       cv.setAttribute('aria-label',`Three plots. Waveform peak about ${(Math.max(...x.map(Math.abs))).toFixed(2)} g. Raw spectrum shows the 1× shaft line at ${a.fr.toFixed(1)} Hz, ${(a.oneX*1000).toFixed(0)} milli-g. Envelope spectrum peak near the outer-race frequency ${a.bpfo.toFixed(1)} Hz is ${a.bpfoDb.toFixed(1)} dB above the median floor; alarm threshold ${state.thr} dB.`);
     }
     redraws.push(draw);
@@ -282,16 +283,16 @@
       const tx=t=>L+t/EDUR*pw;
       drawSpectrogram(g,sp,feats.spec,feats.frames,feats.bins,-108,-36);
       axes(g,sp,[[sp.y,'8k'],[sp.y+sp.h/2,'4k'],[sp.y+sp.h,'0 Hz']],[],'Spectrogram (0–8 kHz)');
-      if(res.kind==='band'){const y1=sp.y+sp.h*(1-6/8),y2=sp.y+sp.h*(1-1/8);g.strokeStyle=C.amber;g.setLineDash([4,4]);g.strokeRect(L+.5,y1,pw-1,y2-y1);g.setLineDash([]);}
+      if(res.kind==='band'){const y1=sp.y+sp.h*(1-6/8),y2=sp.y+sp.h*(1-1/8);g.strokeStyle=C.ref;g.setLineDash([4,4]);g.strokeRect(L+.5,y1,pw-1,y2-y1);g.setLineDash([]);}
       // feature trace
       const f=res.feat,lo=res.det.floor-10,hi=res.det.floor+45,fy=v=>ft.y+ft.h-Math.min(1,Math.max(0,(v-lo)/(hi-lo)))*ft.h;
       axes(g,ft,[[fy(res.det.floor+40),'+40'],[fy(res.det.floor+20),'+20'],[fy(res.det.floor),'0 dB']],[0,2,4,6,8].map(t=>[tx(t),t+' s']),(res.kind==='band'?'1–6 kHz energy':'Broadband energy')+' · dB re median');
-      line(g,Array.from(f,(v,i)=>[tx(feats.frameTime(i)),fy(v)]),C.cyan,1.2);
+      line(g,Array.from(f,(v,i)=>[tx(feats.frameTime(i)),fy(v)]),C.blue,1.3);
       const thY=fy(res.det.floor+res.thr);g.setLineDash([5,5]);line(g,[[L,thY],[L+pw,thY]],C.red,1.2);g.setLineDash([]);
       // lanes
       g.textAlign='right';g.fillStyle=C.text;g.fillText('truth',L-6,ln.y+ln.h*.25);g.fillText('found',L-6,ln.y+ln.h*.8);
-      for(const d of scene.distractors){g.fillStyle='rgba(175,195,222,.22)';g.fillRect(tx(d.t0),ln.y,tx(d.t1)-tx(d.t0),ln.h*.45);}
-      scene.truth.forEach((t,i)=>{g.fillStyle=res.sc.hitTruth[i]?C.green:C.amber;g.fillRect(tx(t.t0),ln.y,Math.max(3,tx(t.t1)-tx(t.t0)),ln.h*.45);});
+      for(const d of scene.distractors){g.fillStyle='rgba(156,163,157,.4)';g.fillRect(tx(d.t0),ln.y,tx(d.t1)-tx(d.t0),ln.h*.45);}
+      scene.truth.forEach((t,i)=>{const bw=Math.max(3,tx(t.t1)-tx(t.t0));if(res.sc.hitTruth[i]){g.fillStyle=C.green;g.fillRect(tx(t.t0),ln.y,bw,ln.h*.45);}else{g.strokeStyle=C.ref;g.lineWidth=1.5;g.strokeRect(tx(t.t0)+.75,ln.y+.75,Math.max(1.5,bw-1.5),ln.h*.45-1.5);}});
       for(const s of res.det.segs){g.fillStyle=s.hit?C.blue:C.red;g.fillRect(tx(s.t0),ln.y+ln.h*.6,Math.max(3,tx(s.t1)-tx(s.t0)),ln.h*.4);}
       if(playT!==undefined&&playT<=EDUR){g.strokeStyle=C.white;g.lineWidth=1.5;g.beginPath();g.moveTo(tx(playT),sp.y);g.lineTo(tx(playT),ln.y+ln.h);g.stroke();}
       cv.setAttribute('aria-label',`Spectrogram of an 8 second synthetic scene with 8 target events and 2 low-frequency rumbles, an energy trace with the threshold, and event lanes. ${$('sed-summary').textContent}`);
@@ -340,6 +341,7 @@
     compute();
   })();
 
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>redraws.forEach(f=>f()));
   let resizeTimer=0,lastW=window.innerWidth;
   window.addEventListener('resize',()=>{if(window.innerWidth===lastW)return;lastW=window.innerWidth;clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>redraws.forEach(f=>f()),120);});
 })();
