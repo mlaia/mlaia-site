@@ -14,7 +14,7 @@ Keep that prefix. If a `.nojekyll` file is ever added, move this folder out of t
 | Path | What it is |
 |------|------------|
 | `content/<slug>.json` | Page text: meta, hero, sections, cards, steps, FAQ, related reads, and which figures go in which section |
-| `render_audio.py` | Turns a content JSON into `audio-ai/<slug>/index.html` using the practice-page shell. Builds Service, BreadcrumbList and FAQPage JSON-LD from the same text |
+| `render_audio.py` | Turns a content JSON into `<practice>/<slug>/index.html` in design C: dark C nav and hero, the article body in the light reading variant, dark contact and footer. Styles are `assets/mlaia-c.css` plus `assets/c-topics.css` (topic-page additions). Builds Service, BreadcrumbList and FAQPage JSON-LD from the same text |
 | `figures/*.svg` | Generated figures, inlined into the pages at render time |
 | `figs_beamforming.py` | Beamforming figures (polar patterns from the array factor, delay-and-sum, AEC placement) |
 | `figs_anc.py` | Noise reduction & ANC figures |
