@@ -1,0 +1,91 @@
+/* MLAIA design C: right-to-left (Hebrew) layer.
+   Load after mlaia-c.css on pages with <html dir="rtl"> and <body class="c-page">.
+   Every rule is scoped to html[dir="rtl"] .c-page, so it changes nothing elsewhere.
+   - Hebrew text uses Heebo; Latin, digits and units keep Archivo / Martian Mono.
+   - Instrument screens carry dir="ltr" in the markup: time runs left to right in every language,
+     and the drag handle, its keys and its chip are positioned physically.
+   - Numbers and units sit in dir="ltr" elements (readouts, slider values). */
+
+/* ---------- 1. Type ---------- */
+html[dir="rtl"] .c-page{
+  --c-display:"Heebo","Archivo",system-ui,sans-serif;
+  --c-body:"Heebo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  /* Label slots hold Hebrew words, so they use Heebo (Martian Mono's wide spaces break Hebrew
+     word rhythm); numbers, units and the logo keep Martian Mono / Archivo, set below. */
+  --c-mono:"Heebo",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --c-num:"Martian Mono","Heebo",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --c-fs-display:clamp(44px,6.6vw,118px);
+  --c-fs-h2:clamp(34px,4.4vw,70px);
+}
+/* Numbers: Martian Mono for indices, slider values, units and contact details;
+   the big readout values keep the English page's condensed Archivo so they fit the panel. */
+html[dir="rtl"] .c-page :is(.c-idx,.c-app__num,.c-cell__num,.c-ctl__val,.c-mono,.c-readout__note [dir="ltr"],.c-handle__chip){font-family:var(--c-num)}
+html[dir="rtl"] .c-page .c-readout dd{font-family:"Archivo",system-ui,sans-serif}
+html[dir="rtl"] .c-page .c-step__num{font-family:"Archivo",system-ui,sans-serif}
+/* Hebrew has no capitals or condensed cuts: no tracking, a little more line height. */
+html[dir="rtl"] .c-page .c-display{line-height:.98;letter-spacing:0;max-width:11em}
+html[dir="rtl"] .c-page .c-h2{line-height:1.02;letter-spacing:0}
+html[dir="rtl"] .c-page .c-kicker,html[dir="rtl"] .c-page .c-readout__title,html[dir="rtl"] .c-page .c-facts h4{letter-spacing:0}
+/* Hebrew in the mono label slots (rendered by Heebo) reads better a step larger. */
+html[dir="rtl"] .c-page .c-kicker,html[dir="rtl"] .c-page .c-crumb,html[dir="rtl"] .c-page .c-specs-title,
+html[dir="rtl"] .c-page .c-specs dt,html[dir="rtl"] .c-page .c-creds,html[dir="rtl"] .c-page .c-app__go,
+html[dir="rtl"] .c-page .c-tile small,html[dir="rtl"] .c-page .c-chips strong,html[dir="rtl"] .c-page .c-chips span,
+html[dir="rtl"] .c-page .c-form label,html[dir="rtl"] .c-page .c-quote cite,html[dir="rtl"] .c-page .c-footer,
+html[dir="rtl"] .c-page .c-readout__title{font-size:13px}
+html[dir="rtl"] .c-page .c-nav-links{font-size:14px}
+html[dir="rtl"] .c-page .c-readout dt,html[dir="rtl"] .c-page .c-readout__note{font-size:12px}
+html[dir="rtl"] .c-page .c-ctl{font-size:13px}
+html[dir="rtl"] .c-page .c-note{font-size:14px}
+/* The logo and anything marked LTR stay LTR inside Hebrew lines. */
+html[dir="rtl"] .c-page .c-logo{direction:ltr;unicode-bidi:isolate}
+html[dir="rtl"] .c-page [dir="ltr"],html[dir="rtl"] .c-page .ltr,html[dir="rtl"] .c-page [lang="en"]{unicode-bidi:isolate}
+html[dir="rtl"] .c-page .ltr{direction:ltr;display:inline-block}
+html[dir="rtl"] .c-page .he-en{font-weight:400;font-size:.85em;white-space:nowrap}
+html[dir="rtl"] .c-page .c-tile strong .he-en{font-weight:400}
+
+/* ---------- 2. Skip link (the quick nav stays on the left in both languages) ---------- */
+/* .c-skip and .c-consent keep their physical left offsets: site-shell's rail is always on the left. */
+
+/* ---------- 3. Hero instrument ---------- */
+/* The screen is the first grid column, so in RTL it sits on the right; the readout panel on the left. */
+html[dir="rtl"] .c-page .c-readout{border-left:0;border-right:1px solid var(--c-rule)}
+html[dir="rtl"] .c-page .c-readout dd{text-align:right}
+html[dir="rtl"] .c-page .c-ctl__val{text-align:left}
+html[dir="rtl"] .c-page .c-specs div{padding:16px 0 0 24px}
+@media (max-width:1000px){html[dir="rtl"] .c-page .c-readout{border-right:0}}
+@media (max-width:640px){
+  html[dir="rtl"] .c-page .c-specs div{padding:12px 0}
+}
+/* The handle chip is translated by c-he.js and set to dir="rtl"; keep it on one line. */
+html[dir="rtl"] .c-page .c-handle__chip{unicode-bidi:isolate}
+
+/* ---------- 4. Grids with physical borders ---------- */
+html[dir="rtl"] .c-page .c-tiles{border-left:0;border-right:1px solid var(--c-rule)}
+html[dir="rtl"] .c-page .c-tile{border-right:0;border-left:1px solid var(--c-rule)}
+html[dir="rtl"] .c-page .c-cells{border-left:0;border-right:1px solid var(--c-rule)}
+html[dir="rtl"] .c-page .c-cell{border-right:0;border-left:1px solid var(--c-rule)}
+@media (max-width:640px){
+  html[dir="rtl"] .c-page .c-cells{border-right:0}
+  html[dir="rtl"] .c-page .c-cell{border-left:0}
+}
+html[dir="rtl"] .c-page .c-lab__vis{border-right:0;border-left:1px solid var(--c-rule)}
+@media (max-width:1000px){html[dir="rtl"] .c-page .c-lab__vis{border-left:0}}
+html[dir="rtl"] .c-page .c-chips strong{margin-right:0;margin-left:8px}
+html[dir="rtl"] .c-page .c-prose blockquote{padding-left:0;border-left:0;padding-right:20px;border-right:3px solid var(--c-rule-2)}
+
+/* ---------- 5. Steps ---------- */
+html[dir="rtl"] .c-page .c-step{padding:28px 0 0 28px}
+html[dir="rtl"] .c-page .c-step+.c-step{padding-right:28px;border-left:0;border-right:1px solid var(--c-rule)}
+@media (max-width:900px){
+  html[dir="rtl"] .c-page .c-step:nth-child(3){padding-right:0;border-right:0}
+}
+@media (max-width:640px){
+  html[dir="rtl"] .c-page .c-step,html[dir="rtl"] .c-page .c-step+.c-step{padding:24px 0;border-right:0}
+}
+
+/* ---------- 6. Form ---------- */
+html[dir="rtl"] .c-page .c-form input[type=email]{direction:ltr;text-align:right}
+html[dir="rtl"] .c-page .c-form input[type=email]::placeholder{text-align:right}
+
+/* ---------- 7. Site shell rail in this theme ---------- */
+/* The rail stays on the left (site-shell.css); nothing to mirror. */
