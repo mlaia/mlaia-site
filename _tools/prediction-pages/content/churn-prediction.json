@@ -1,0 +1,102 @@
+{
+ "practice": "predictive-intelligence",
+ "slug": "churn-prediction",
+ "title": "Churn Prediction Models & Customer Retention | MLAIA",
+ "description": "Customer churn prediction models that hold up: clear churn labels, no leakage, survival framing, calibrated risk, and uplift to target retention offers.",
+ "service_name": "Churn prediction and retention modeling",
+ "breadcrumb": "Churn Prediction",
+ "eyebrow": "Prediction &amp; Causal Analysis · Churn &amp; retention",
+ "h1": "Know who is likely to leave.<br>And who an offer would keep.",
+ "intro": "Customer churn prediction for subscription, telecom and B2B teams. We define churn the way your business counts it, build a model that holds up on future customers, and separate predicted risk from the effect of a retention offer.",
+ "cta": "Book a 30-minute forecasting review",
+ "cta_href": "/predictive-intelligence/#contact",
+ "nav_cta": "Book a review",
+ "lab_link": {"href": "/predictive-intelligence/explorer/", "text": "Try a prediction &amp; what-if"},
+ "brief": {
+  "h2": "Built around your customers",
+  "items": [
+   ["Your data", "CRM, billing, usage &amp; support history"],
+   ["Your decision", "Who to contact, with what, and when"],
+   ["Our focus", "Calibrated risk, and the effect of acting on it"]
+  ]
+ },
+ "sections": [
+  {
+   "id": "framing",
+   "eyebrow": "Getting the question right",
+   "h2": "Most churn models fail before training.<br>At the label and the data.",
+   "lead": "The hard part is rarely the algorithm. It’s defining churn, choosing the date you predict from, and keeping the future out of the training data.",
+   "paragraphs": [
+    "Our <a href=\"/predictive-intelligence/explorer/\">interactive explorer</a> shows a churn-style prediction on synthetic customers, with what-if scenarios, SHAP explanations and a decision threshold. For a related client project, read our account of <a href=\"/blog-sales-ai.html\">lead prioritization for one of Israel’s largest communication companies</a>."
+   ],
+   "cards": [
+    {"number": "01", "h3": "Label definition", "p": "Contractual churn has a cancellation date. Non-contractual churn needs a rule, such as no purchase in 90 days. The rule changes who counts as churned, so we set it with the team that acts on it."},
+    {"number": "02", "h3": "Leakage", "p": "Data recorded after the prediction date makes a model look excellent in testing and useless in production. A logged cancellation call is a classic example. We build features as of a fixed cut-off date. See <a href=\"https://doi.org/10.1145/2382577.2382579\" target=\"_blank\" rel=\"noopener\">Kaufman et al. on leakage</a>."},
+    {"number": "03", "h3": "Survival framing", "p": "Often the question is when a customer leaves, not only whether. Survival models handle customers who haven’t left yet without treating them as stayers, and give risk over any horizon. Our <a href=\"/blog-time-series-survival-analysis.html\">survival analysis guide</a> covers when to use them."}
+   ]
+  },
+  {
+   "id": "approach",
+   "eyebrow": "From score to action",
+   "h2": "A risk score is a ranking.<br>Acting on it well takes more.",
+   "lead": "A model that ranks customers well can still lead to poor decisions. These are the parts we work through with your team.",
+   "cards": [
+    {"h3": "Calibration", "p": "If the model says 30%, about 30 in 100 such customers should leave. We check this on held-out customers and correct it when needed, so scores can feed cost and capacity plans. See the <a href=\"https://scikit-learn.org/stable/modules/calibration.html\" target=\"_blank\" rel=\"noopener\">scikit-learn calibration guide</a>."},
+    {"h3": "Thresholds vs team capacity", "p": "If your team can contact only so many customers a week, the question is which ones. We set the cut-off from capacity and the cost of a contact, and report precision at that cut-off, not only AUC."},
+    {"h3": "Explanations", "p": "SHAP values show which factors drive each score. They help the team act and catch data problems. They describe the model, not what causes churn."},
+    {"h3": "Risk is not treatment effect", "p": "A high-risk customer may leave whatever you do. Another may stay anyway. Comparing customers who got an offer with those who didn’t mixes the offer’s effect with who was chosen."},
+    {"h3": "Uplift modeling", "p": "Uplift models estimate how much an offer changes each customer’s chance of leaving. They need data where the offer was randomized, or a credible causal design. See <a href=\"/predictive-intelligence/causal-inference/\">causal inference &amp; uplift</a>."},
+    {"h3": "Monitoring", "p": "Customer mix, pricing and products change. We monitor input drift, calibration and actual churn by segment, and retrain on a schedule agreed with your team."}
+   ],
+   "figures": [
+    {"files": ["pred-uplift-groups.svg"], "caption": "The four groups describe what a customer would do with and without an offer. No one is observed both ways, so the groups can’t be labelled directly. A churn score ranks lost causes and persuadables together. An uplift model, trained on randomized offers, estimates who is likely to be persuadable. Schematic; the four-group framing is common in the <a href=\"https://proceedings.mlr.press/v67/gutierrez17a.html\" target=\"_blank\" rel=\"noopener\">uplift literature</a>."}
+   ],
+   "capabilities": {"label": "Methods we use", "items": ["Gradient-boosted classifiers", "Cox &amp; survival models", "Platt &amp; isotonic calibration", "SHAP explanations", "Uplift meta-learners", "Time-based validation"]}
+  },
+  {
+   "id": "what-we-measure",
+   "eyebrow": "What we measure",
+   "h2": "Measured on future customers.<br>At the cut-off you’ll use.",
+   "lead": "We agree the measures before modeling, and test on customers from a later period than the training data.",
+   "cards": [
+    {"h3": "Ranking quality", "p": "AUC and precision-recall on a later period. Precision at the number of customers your team can contact matters more than overall AUC."},
+    {"h3": "Calibration", "p": "Calibration curves and Brier score, overall and by segment, so a 30% score means roughly 30%."},
+    {"h3": "Lift by decile", "p": "How much more churn sits in the top-scored groups than in a random selection. It’s easy for a retention team to read."},
+    {"h3": "Incremental effect", "p": "In a holdout or A/B test, how much churn fell among customers who got the offer, compared with similar customers who didn’t. This is the number that justifies the program."}
+   ],
+   "note": "Achievable results depend on your customers, data and how churn is defined. We measure them on your own history next to your current approach. We don’t promise benchmark figures."
+  },
+  {
+   "id": "engagement",
+   "eyebrow": "How an engagement runs",
+   "h2": "From customer history to a measured retention result.<br>In four steps.",
+   "lead": "Each step ends with evidence you can check before the next one starts.",
+   "steps": [
+    {"h3": "Define churn &amp; audit data", "p": "We agree the churn definition, the prediction date and the horizon. We check CRM, billing and usage data for gaps and leakage, and measure your current approach as a baseline."},
+    {"h3": "Build &amp; validate", "p": "We train on earlier customers and test on later ones. You see ranking, calibration and lift next to the baseline."},
+    {"h3": "Set the decision rule", "p": "We set cut-offs from team capacity and contact cost, and bring scores into the CRM or reports your team already uses."},
+    {"h3": "Test the offer", "p": "A holdout or A/B test measures what the retention action changes. Where effects differ across customers, we model uplift to target better."}
+   ],
+   "cta": {"href": "/predictive-intelligence/#contact", "text": "Book a 30-minute forecasting review"}
+  }
+ ],
+ "faq": [
+  {"q": "How accurate will the churn model be?", "a": "We can’t say before seeing your data. We test on customers from a later period than training, next to your current approach, and report precision at the number of customers your team can contact."},
+  {"q": "Why does our model score well in testing but not in production?", "a": "Common causes are leakage, a random split instead of a time-based one, and a churn label that differs between training and use. We check each one in the data audit."},
+  {"q": "Should we contact the customers with the highest risk?", "a": "Not always. Some high-risk customers will leave whatever you do, and for some, the contact itself prompts them to leave. Risk tells you who might leave. An experiment or uplift model tells you whom an offer helps."},
+  {"q": "Do we need an A/B test?", "a": "To measure what a retention offer changes, a randomized holdout is the most reliable evidence. Without one, causal designs on historical data can help, but they rest on stronger assumptions. We state them."},
+  {"q": "What data do we need?", "a": "Dated customer history from your CRM, billing and product usage, plus records of past retention actions if you have them. For the first call, a column list is enough. Please don’t send confidential data."}
+ ],
+ "reads": [
+  {"href": "/blog-time-series-survival-analysis.html", "small": "Survival analysis", "strong": "From Prophet to foundation models, and when you need survival analysis"},
+  {"href": "/wiki/causal-inference.html", "small": "Causal guide", "strong": "Causal inference in business: A/B tests, diff-in-diff, uplift"},
+  {"href": "/blog-tabular-data-ml-vs-dl.html", "small": "Tabular data", "strong": "Do gradient-boosted trees still beat deep learning on tabular data?"}
+ ],
+ "contact": {
+  "h2": "Book a 30-minute<br>forecasting review.",
+  "p": "Bring one churn model or retention decision you want to improve. In 30 minutes we’ll cover:",
+  "bullets": ["What your data can realistically support", "How we’d test it against your current approach", "Where a holdout test would show the real impact"],
+  "label": "What do you predict or decide today?",
+  "button": "Request a forecasting review →"
+ }
+}

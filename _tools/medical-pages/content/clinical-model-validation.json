@@ -1,0 +1,127 @@
+{
+  "practice": "medical-ai",
+  "slug": "clinical-model-validation",
+  "title": "Clinical AI & Prediction Model Validation | MLAIA",
+  "description": "Clinical AI validation for prediction models: leakage checks, patient and site splits, external validation, calibration, subgroups and TRIPOD+AI reporting.",
+  "service_name": "Clinical prediction model validation",
+  "breadcrumb": "Clinical Model Validation",
+  "eyebrow": "Medical AI · Clinical model validation",
+  "h1": "Validate the model.<br>Before a reviewer does.",
+  "intro": "We design and run validation for clinical prediction models and medical AI: risk scores, diagnostic classifiers and imaging models. The goal is evidence that holds on patients, sites and time periods the model never saw, reported so a clinical reviewer can follow it.",
+  "cta": "Book a 30-minute clinical AI feasibility call",
+  "cta_href": "/medical-ai/#contact",
+  "nav_cta": "Book a feasibility call",
+  "lab_link": {"href": "/wiki/medical-ai-validation.html", "text": "Read our validation guide"},
+  "proofline": [
+    "A specialist practice of MLAIA Data Science",
+    "Led by Dr. Yochai Edlitz · Ph.D., Weizmann Institute",
+    "Published clinical prediction research: <a href=\"https://doi.org/10.7554/eLife.71862\" rel=\"noopener\" target=\"_blank\">Edlitz &amp; Segal, <i>eLife</i>, 2022</a>"
+  ],
+  "brief": {
+    "h2": "Built around your model",
+    "items": [
+      ["Your data", "Records, registries, images or biosignals with known outcomes"],
+      ["Your challenge", "Leakage, site differences, small or imbalanced cohorts"],
+      ["Our focus", "Honest performance, with uncertainty and known limits"]
+    ]
+  },
+  "sections": [
+    {
+      "id": "failure-modes",
+      "eyebrow": "Where validation goes wrong",
+      "h2": "Most clinical models look better in development.<br>Than they will in the clinic.",
+      "lead": "Optimistic results usually come from the evaluation, not the model. These are the problems we check for first.",
+      "cards": [
+        {"number": "01", "h3": "Leakage", "p": "Information about the outcome reaches the inputs. Common sources: features recorded after the prediction time, codes entered because of the diagnosis, preprocessing fitted on all the data, and the same patient in training and test. Each one inflates performance without warning."},
+        {"number": "02", "h3": "Splitting by record", "p": "Visits, records and images from one patient are correlated. Split by record, and the model can recognise patients instead of learning the disease. We split by patient, and by site or time when the question is whether the model transfers."},
+        {"number": "03", "h3": "Dataset shift", "p": "A new hospital brings different patients, prevalence, devices, coding habits and workflows. Performance can drop, and calibration often drifts first. Cross-validation on the development data cannot measure this. Only data from elsewhere can."},
+        {"number": "04", "h3": "Shortcuts", "p": "Models can learn markers of the hospital, the device or the care pathway that happen to correlate with the outcome. Such a model scores well where it was built and fails elsewhere. Per-site results and error review expose it."}
+      ],
+      "paragraphs": ["Validation is part of our <a href=\"/medical-ai/\">Medical AI practice</a>, and runs through every project we take on."]
+    },
+    {
+      "id": "external-validation",
+      "eyebrow": "Internal, temporal &amp; external",
+      "h2": "Test where the model will be used.<br>Not where it was built.",
+      "lead": "Each level of validation answers a different question. We plan which ones the data can support before any modelling starts.",
+      "cards": [
+        {"h3": "Internal validation", "p": "Cross-validation or bootstrapping on the development data, with every preprocessing and selection step repeated inside each fold. It estimates and corrects optimism. It does not show that the model transfers."},
+        {"h3": "Temporal validation", "p": "Train on earlier patients, test on later ones. It catches drift in practice, coding and population, and mirrors real use: the model will only ever see patients who arrive after it was built."},
+        {"h3": "External validation", "p": "Test the frozen model on another site, region or health system. In our own published work, diabetes risk scores were developed on UK Biobank data, and one was externally validated on Clalit Health Services records.", "link": {"href": "https://doi.org/10.7554/eLife.71862", "text": "Edlitz &amp; Segal, eLife 2022 →"}},
+        {"h3": "Enough events", "p": "Too few outcome events make both development and validation unstable. We check the data against published sample-size methods for prediction models before promising a result, and give confidence intervals for every metric.", "link": {"href": "https://doi.org/10.1136/bmj.m441", "text": "Riley et al., BMJ 2020 →"}}
+      ]
+    },
+    {
+      "id": "evaluation",
+      "eyebrow": "What we measure",
+      "h2": "Ranking is not enough.<br>Calibration and usefulness count too.",
+      "lead": "A model can rank patients well and still give the wrong risk. We report several measures, each with uncertainty, against criteria agreed in advance.",
+      "cards": [
+        {"h3": "Discrimination", "p": "AUROC (the C-statistic) for ranking, plus precision-recall curves when the outcome is rare. Sensitivity, specificity, PPV and NPV at the thresholds the clinic would actually use, since predictive values change with prevalence."},
+        {"h3": "Calibration", "p": "Calibration plots, calibration slope and calibration-in-the-large. A predicted risk of 20% should mean about 20 in 100 similar patients have the event. A miscalibrated score misleads treatment thresholds even when its ranking is good.", "link": {"href": "https://doi.org/10.1186/s12916-019-1466-7", "text": "Van Calster et al., BMC Medicine 2019 →"}},
+        {"h3": "Clinical usefulness", "p": "Decision curve analysis compares acting on the model with treating everyone or no one, across a range of thresholds. It asks whether using the model would do more good than harm, not only whether it is accurate.", "link": {"href": "https://doi.org/10.1177/0272989X06295361", "text": "Vickers &amp; Elkin, 2006 →"}},
+        {"h3": "Subgroups &amp; sites", "p": "Performance and calibration by site, age, sex and other groups that matter for the intended use. Intervals show when a subgroup is too small to judge. Gaps are reported, not averaged away."}
+      ],
+      "note": "We do not quote target AUCs before seeing the data. Success criteria are set with your clinical team against the intended use."
+    },
+    {
+      "id": "reporting",
+      "eyebrow": "Reporting standards",
+      "h2": "Report it the way<br>reviewers expect.",
+      "lead": "Published guidelines set out what a prediction-model study must disclose. We structure validation reports around them, so the items a reviewer looks for are there.",
+      "cards": [
+        {"h3": "TRIPOD+AI", "p": "The 2024 reporting guideline for clinical prediction models that use regression or machine learning. It covers data sources, outcome definitions, sample size, missing data, performance measures and fairness.", "link": {"href": "https://doi.org/10.1136/bmj-2023-078378", "text": "Collins et al., BMJ 2024 →"}},
+        {"h3": "PROBAST+AI", "p": "A tool for judging the quality, risk of bias and applicability of prediction-model studies. We use it as a self-check on our own study design, before anyone else applies it.", "link": {"href": "https://doi.org/10.1136/bmj-2024-082505", "text": "Moons et al., BMJ 2025 →"}},
+        {"h3": "DECIDE-AI &amp; CLAIM", "p": "DECIDE-AI covers the early clinical evaluation of AI decision support, such as a silent-mode phase. CLAIM covers studies of AI in medical imaging. We follow whichever fits the study.", "link": {"href": "https://doi.org/10.1038/s41591-022-01772-9", "text": "DECIDE-AI, Nature Medicine 2022 →"}}
+      ],
+      "note": "MLAIA produces validation evidence: study design, analysis, results and documented limitations. We are not regulatory consultants. Regulatory strategy and submissions stay with your regulatory team or advisers, and engaging MLAIA does not imply any regulatory status for your product."
+    },
+    {
+      "id": "engagement",
+      "eyebrow": "How an engagement runs",
+      "h2": "Fix the protocol.<br>Then look at the results.",
+      "lead": "Most validation problems are decided before any model is trained: by the prediction time, the outcome definition and the split. Our process starts there.",
+      "steps": [
+        {"h3": "Agree the protocol", "p": "Intended use, prediction time, outcome definition, population and success criteria. We fix the split strategy and lock a test set before any model sees it."},
+        {"h3": "Audit the data", "p": "Trace every feature to when it is recorded relative to the prediction time. Check for repeated patients, label leakage, missing-data patterns and differences between sites."},
+        {"h3": "Validate", "p": "Internal, temporal and external validation as the data allows. Discrimination, calibration, clinical usefulness and subgroups, each with confidence intervals and known failure modes."},
+        {"h3": "Report &amp; hand over", "p": "A validation report structured around TRIPOD+AI, with limitations stated plainly, plus code your team can rerun. Where useful, a plan for prospective or silent-mode evaluation."}
+      ],
+      "note": "This page goes deeper on the retrospective validation step of our <a href=\"/medical-ai/#engagement\">medical engagement model</a>."
+    },
+    {
+      "id": "sources",
+      "eyebrow": "Sources",
+      "h2": "Standards and papers<br>cited on this page.",
+      "reads": [
+        {"href": "https://doi.org/10.1136/bmj-2023-078378", "small": "Collins et al. · BMJ 2024", "strong": "TRIPOD+AI reporting guideline"},
+        {"href": "https://doi.org/10.1136/bmj-2024-082505", "small": "Moons et al. · BMJ 2025", "strong": "PROBAST+AI assessment tool"},
+        {"href": "https://doi.org/10.1038/s41591-022-01772-9", "small": "Vasey et al. · Nature Medicine 2022", "strong": "DECIDE-AI reporting guideline"},
+        {"href": "https://doi.org/10.1186/s12916-019-1466-7", "small": "Van Calster et al. · BMC Medicine 2019", "strong": "Calibration: the Achilles heel of predictive analytics"},
+        {"href": "https://doi.org/10.1177/0272989X06295361", "small": "Vickers &amp; Elkin · Med Decis Making 2006", "strong": "Decision curve analysis"},
+        {"href": "https://doi.org/10.1136/bmj.m441", "small": "Riley et al. · BMJ 2020", "strong": "Sample size for clinical prediction models"},
+        {"href": "https://doi.org/10.7554/eLife.71862", "small": "Edlitz &amp; Segal · eLife 2022", "strong": "Type 2 diabetes prediction with scorecards"}
+      ]
+    }
+  ],
+  "faq": [
+    {"q": "What is the difference between internal and external validation?", "a": "Internal validation tests the model on data from the same source it was built on, using cross-validation or bootstrapping. It estimates optimism. External validation tests the frozen model on patients from other sites or later periods. Only external validation shows whether the model transfers."},
+    {"q": "Why is our model much worse on new data?", "a": "Common causes are leakage in the original evaluation, splitting by record instead of by patient, and real shift in patients, prevalence or measurement at the new site. We audit the original evaluation first, because a leak changes what the drop means."},
+    {"q": "Our model has a high AUC. Is that enough?", "a": "No. AUC measures ranking only. A model can rank well and still over- or underestimate risk, which matters when decisions use a threshold. We also report calibration, measures at the clinical threshold and decision curves."},
+    {"q": "Can you recalibrate a model for our hospital?", "a": "Often, yes. If ranking holds but calibration drifts, updating the intercept or slope on local data can fix much of the problem. If ranking drops too, the model may need refitting. Either way, the updated model needs its own validation."},
+    {"q": "Can you validate a model we did not build?", "a": "Yes. Independent validation of a vendor or in-house model is a common need. We need the model's outputs on your data, or the model itself, and a clear statement of its intended use."},
+    {"q": "Do you prepare FDA or CE submissions?", "a": "No. We produce the validation evidence that regulatory work relies on: study design, results with uncertainty, subgroup analysis and documented limitations. We are not regulatory consultants, and engaging MLAIA does not imply any regulatory status for your product."}
+  ],
+  "reads": [
+    {"href": "/wiki/medical-ai-validation.html", "small": "Technical guide", "strong": "Medical AI validation &amp; the regulatory landscape"},
+    {"href": "/blog-clinical-ai-production.html", "small": "Deployment", "strong": "Clinical AI that ships: shadow mode and monitoring"},
+    {"href": "/medical-ai/medical-imaging-ai/", "small": "Medical AI", "strong": "Medical imaging AI"}
+  ],
+  "nav_href": "/medical-ai/#contact",
+  "contact_band": {
+    "h2": "Book a 30-minute clinical AI feasibility call.",
+    "p": "Tell us the clinical question, the model or data you have and what a reviewer would need to see. We’ll tell you whether it’s feasible and what the first step would be.",
+    "href": "/medical-ai/#contact",
+    "button": "Book a feasibility call →"
+  }
+}

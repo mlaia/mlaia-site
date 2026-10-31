@@ -1,0 +1,102 @@
+{
+ "practice": "predictive-intelligence",
+ "slug": "causal-inference",
+ "title": "Causal Inference Consulting & Uplift Modeling | MLAIA",
+ "description": "Causal inference consulting for business decisions: experiments, difference-in-differences, synthetic control, propensity methods and uplift modeling.",
+ "service_name": "Causal inference and uplift modeling",
+ "breadcrumb": "Causal Inference",
+ "eyebrow": "Prediction &amp; Causal Analysis · Causal inference",
+ "h1": "Did it work?<br>How much, and for whom?",
+ "intro": "Causal analysis for pricing, retention, marketing and operations decisions. We estimate what an action changed, compared with what would have happened without it, and state the assumptions behind each estimate.",
+ "cta": "Book a 30-minute forecasting review",
+ "cta_href": "/predictive-intelligence/#contact",
+ "nav_cta": "Book a review",
+ "lab_link": {"href": "/predictive-intelligence/#causal-ladder", "text": "Climb the causal ladder"},
+ "brief": {
+  "h2": "Built around your decision",
+  "items": [
+   ["Your question", "What a price, offer or process change did"],
+   ["Your data", "Experiments, rollouts or historical records"],
+   ["Our focus", "Effect estimates with explicit assumptions"]
+  ]
+ },
+ "sections": [
+  {
+   "id": "why-causal",
+   "eyebrow": "Prediction vs cause",
+   "h2": "Prediction says what will happen.<br>Causal analysis says what changes it.",
+   "lead": "A model can predict sales well and still be wrong about what a price rise will do. Causal questions need a comparison: the outcome with the action against the outcome without it. Only one of them is ever observed.",
+   "paragraphs": [
+    "Our <a href=\"/wiki/causal-inference.html\">causal inference guide</a> introduces the ideas, and the <a href=\"/predictive-intelligence/#causal-ladder\">ladder of causation</a> shows how the questions differ. For a full textbook treatment, see Hernán and Robins, <a href=\"https://miguelhernan.org/whatifbook\" target=\"_blank\" rel=\"noopener\"><em>Causal Inference: What If</em></a>."
+   ],
+   "cards": [
+    {"number": "01", "h3": "Experiments first", "p": "When you can randomize who gets the action, do. A/B tests and randomized holdouts give the most reliable estimate. We design the comparison, sample size and analysis plan before launch."},
+    {"number": "02", "h3": "Quasi-experiments", "p": "When you can’t randomize, a rollout by region, date or threshold can still give a fair comparison. Difference-in-differences, synthetic control and regression discontinuity use that structure."},
+    {"number": "03", "h3": "Adjusting historical data", "p": "With only historical data, we adjust for the factors that drove both the decision and the outcome. That works only if the important ones are measured, so we test how sensitive the answer is."}
+   ]
+  },
+  {
+   "id": "methods",
+   "eyebrow": "Methods",
+   "h2": "The design comes first.<br>The estimator follows.",
+   "lead": "Each method rests on an assumption. We choose the one your data and rollout can support, and say what it assumes.",
+   "cards": [
+    {"h3": "Experiment design", "p": "Randomization unit, sample size and power, guardrail metrics and an analysis plan fixed in advance. We check balance, avoid stopping early on a lucky result, and use pre-period data to reduce noise where it helps."},
+    {"h3": "Difference-in-differences", "p": "Compare the change in a treated group with the change in a comparison group. It assumes both would have moved in parallel without the action. We check trends before the change. See Cunningham’s <a href=\"https://mixtape.scunning.com/09-difference_in_differences\" target=\"_blank\" rel=\"noopener\"><em>Causal Inference: The Mixtape</em></a>."},
+    {"h3": "Synthetic control", "p": "For one treated market or region, build a weighted mix of untreated ones that tracks it before the change. The gap afterwards estimates the effect (<a href=\"https://doi.org/10.1198/jasa.2009.ap08746\" target=\"_blank\" rel=\"noopener\">Abadie, Diamond &amp; Hainmueller, 2010</a>)."},
+    {"h3": "Propensity methods", "p": "Model the chance that each unit got the action, then match or weight so groups are comparable on measured factors (<a href=\"https://doi.org/10.1093/biomet/70.1.41\" target=\"_blank\" rel=\"noopener\">Rosenbaum &amp; Rubin, 1983</a>). We check overlap and balance, and often pair it with an outcome model."},
+    {"h3": "Uplift modeling", "p": "Estimate how the effect varies across customers, to target an action where it helps. Meta-learners build this on standard ML models (<a href=\"https://doi.org/10.1073/pnas.1804597116\" target=\"_blank\" rel=\"noopener\">Künzel et al., 2019</a>). We evaluate with uplift or Qini curves on randomized data."},
+    {"h3": "Assumptions &amp; sensitivity", "p": "Every estimate rests on assumptions the data can’t fully check. We draw them as a causal diagram, test what we can, and report how strong a hidden confounder would need to be to change the answer (<a href=\"https://doi.org/10.1111/rssb.12348\" target=\"_blank\" rel=\"noopener\">Cinelli &amp; Hazlett</a>; <a href=\"https://doi.org/10.7326/M16-2607\" target=\"_blank\" rel=\"noopener\">E-values</a>)."}
+   ],
+   "figures": [
+    {"files": ["pred-did.svg"], "caption": "An idealised difference-in-differences. The dashed line assumes the treated group would have followed the comparison group’s trend. The estimate is only as good as that parallel-trends assumption, so we check the trends before the change. Schematic, not data."}
+   ],
+   "capabilities": {"label": "Methods we use", "items": ["A/B tests &amp; holdouts", "Difference-in-differences", "Synthetic control", "Propensity weighting &amp; matching", "Uplift meta-learners", "Sensitivity analysis"]}
+  },
+  {
+   "id": "what-we-measure",
+   "eyebrow": "What we measure",
+   "h2": "An effect, a range and the assumptions.<br>Reported together.",
+   "lead": "A causal result is more than one number. We report these with every estimate.",
+   "cards": [
+    {"h3": "Effect with uncertainty", "p": "The estimated change in the outcome, in business units, with an interval. A wide interval is a result too: it tells you whether to collect more data before deciding."},
+    {"h3": "Effect for whom", "p": "Average effects by segment, and uplift curves where targeting is the goal. We say where the data are too thin to tell."},
+    {"h3": "Checks on the design", "p": "Trends before the change, balance and overlap for propensity methods, and placebo tests on dates or groups that weren’t treated."},
+    {"h3": "Robustness", "p": "Sensitivity to hidden confounding and to reasonable changes in the analysis. If the answer flips easily, we say so."}
+   ],
+   "note": "Not every causal question can be answered from the data you have. The first step tells you whether yours can, and what experiment or extra data would close the gap."
+  },
+  {
+   "id": "engagement",
+   "eyebrow": "How an engagement runs",
+   "h2": "From a business question to a measured effect.<br>In four steps.",
+   "lead": "Each step ends with evidence you can check before the next one starts.",
+   "steps": [
+    {"h3": "Frame the question", "p": "We define the action, the outcome, the comparison and the decision the answer will inform. We draw the causal assumptions with your team."},
+    {"h3": "Choose the design", "p": "We check the data and how the action was assigned, then pick an experiment or a quasi-experimental design it can support."},
+    {"h3": "Estimate &amp; stress-test", "p": "We estimate the effect with uncertainty, run placebo and sensitivity checks, and show results by segment where the data allow."},
+    {"h3": "Decide &amp; keep measuring", "p": "We turn the result into a decision rule, such as who gets an offer, and keep a holdout so the effect stays measured."}
+   ],
+   "cta": {"href": "/predictive-intelligence/#contact", "text": "Book a 30-minute forecasting review"}
+  }
+ ],
+ "faq": [
+  {"q": "Can’t we just compare customers who got the offer with those who didn’t?", "a": "Usually not. Customers are chosen for offers for a reason, and that reason often affects the outcome too. The difference mixes the offer’s effect with who was chosen. A randomized holdout, or a design that accounts for how offers were assigned, separates them."},
+  {"q": "We can’t run an A/B test. Can you still estimate the effect?", "a": "Often, if the action rolled out in a way that gives a fair comparison, such as by region or date. Difference-in-differences and synthetic control use that structure. The estimate rests on stronger assumptions than an experiment, and we state them."},
+  {"q": "What is uplift modeling?", "a": "Uplift modeling estimates how much an action changes the outcome for different customers, rather than who is likely to have the outcome. It’s used to target offers where they help. It works best when trained and evaluated on randomized data."},
+  {"q": "Isn’t a feature-importance chart enough?", "a": "No. Feature importance and SHAP values describe what a predictive model uses. They don’t show what happens if you change that factor. Causal claims need a design that compares outcomes with and without the action."},
+  {"q": "What do you need to start?", "a": "The decision you want to make, how the action was assigned in the past, and a description of the outcome data. Please don’t send confidential data."}
+ ],
+ "reads": [
+  {"href": "/wiki/causal-inference.html", "small": "Causal guide", "strong": "Causal inference in business: A/B tests, diff-in-diff, uplift"},
+  {"href": "/blog-adtech-measurement-2026.html", "small": "Causal measurement", "strong": "Measuring ads without the cookie: MMM and incrementality"},
+  {"href": "/predictive-intelligence/churn-prediction/", "small": "Related topic", "strong": "Churn prediction &amp; retention modeling"}
+ ],
+ "contact": {
+  "h2": "Book a 30-minute<br>forecasting review.",
+  "p": "Bring one decision whose effect you want to measure. In 30 minutes we’ll cover:",
+  "bullets": ["What your data can realistically support", "Which design fits how the action was assigned", "Whether an experiment would give a clearer answer"],
+  "label": "What decision do you want to measure?",
+  "button": "Request a forecasting review →"
+ }
+}
