@@ -250,7 +250,7 @@ a.c-app:hover h3,a.c-app:hover .c-app__go{color:var(--c-amber)}
 .c-tile{display:block;padding:24px;border-right:1px solid var(--c-rule);border-bottom:1px solid var(--c-rule);text-decoration:none;color:inherit!important}
 .c-tile small{display:block;font:400 var(--c-fs-label)/1.5 var(--c-mono);color:var(--c-muted);margin-bottom:12px}
 .c-tile strong{display:block;font:700 23px/1.12 var(--c-display);font-stretch:88%;color:var(--c-fg);margin-bottom:8px}
-.c-tile span{display:block;font-size:var(--c-fs-small);line-height:1.55;color:var(--c-text)}
+.c-tile > span{display:block;font-size:var(--c-fs-small);line-height:1.55;color:var(--c-text)}
 a.c-tile:hover{background:var(--c-bg-2)}
 a.c-tile:hover strong{color:var(--c-amber)}
 @media (max-width:1000px){.c-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}

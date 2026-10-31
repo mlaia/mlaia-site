@@ -25,10 +25,15 @@
       <canvas aria-hidden="true"></canvas>
     </div>
     <div class="c-readout">
+      <div class="c-readout__head">
       <p class="c-readout__title">מה המסנן השיג</p>
       <dl>
         <div class="c-big c-raw"><dt>SNR גולמי</dt><dd dir="ltr" data-c-read="raw">+7.5 dB</dd></div>
         <div class="c-big c-out"><dt>SNR אחרי המסנן</dt><dd dir="ltr" data-c-read="out">+21.2 dB</dd></div>
+      </dl>
+      </div>
+      <div class="c-more" id="scope-more">
+      <dl>
         <div><dt>שיפור</dt><dd dir="ltr" data-c-read="gain">+13.7 dB</dd></div>
         <div><dt>הטון אחרי המסנן</dt><dd dir="ltr" data-c-read="tgain">0.0 dB</dd></div>
         <div><dt>פיגור פאזה בטון</dt><dd dir="ltr" data-c-read="lag">68°</dd></div>
@@ -40,14 +45,16 @@
         <label class="c-ctl"><span class="c-ctl__name">עוצמה</span><input type="range" dir="ltr" min="-20" max="0" step="1" value="0" data-c-ctl="level"><output class="c-ctl__val" dir="ltr" data-c-ctl-out="level">0 dB</output></label>
         <label class="c-ctl"><span class="c-ctl__name">פאזה</span><input type="range" dir="ltr" min="0" max="360" step="5" value="0" data-c-ctl="phase"><output class="c-ctl__val" dir="ltr" data-c-ctl-out="phase">0°</output></label>
       </div>
+      </div>
     </div>
   </div>
   <p class="c-legend"><b>הדגמה חיה:</b> <b class="c-amber">כתום</b> הוא אות המיקרופון הגולמי, <b class="c-blue">כחול</b> הוא אחרי המסנן שלנו. גררו לאורך הגרף כדי להוסיף או להסיר רעש, או שנו את הטון, העוצמה והפאזה.</p>
+  <button type="button" class="c-more-toggle" aria-expanded="true" aria-controls="scope-more" data-c-collapse="700" hidden>טון, עוצמה ופאזה <span class="c-more-toggle__icon" aria-hidden="true">▾</span></button>
   <div class="c-wrap c-hero__copy">
     <nav class="c-crumb" aria-label="פירורי לחם"><a href="/?lang=he">MLAIA</a> / אודיו ואקוסטיקה</nav>
     <h1 class="c-display" id="hero-title">אלגוריתמים שעומדים <span class="c-accent">במבחן המכשיר האמיתי.</span></h1>
     <div class="c-hero__row">
-      <p>ליצרני אוזניות, אוזניות ראש ומכשירי שמיעה לבישים, לצוותי חישה ברחפנים, בביטחון ובאבטחה, ולניטור מצב מכונות בתעשייה. פיתוח אלגוריתמים לעיבוד אותות שמשלב אקוסטיקה, DSP ולמידת מכונה, נבנה ונבדק על המיקרופונים, החומרה והרעש שלכם.</p>
+      <p>לצוותים שבונים מוצרים שמקשיבים, מאוזניות ומכשירי שמיעה ועד רחפנים, מכונות ואפליקציות בריאות. פיתוח אלגוריתמים לעיבוד אותות שמשלב אקוסטיקה, DSP ולמידת מכונה, נבנה ונבדק על המיקרופונים, החומרה והרעש שלכם.</p>
       <div class="c-btns">
         <a href="#contact" class="c-btn" data-track="practice_cta">לקביעת שיחת היתכנות של 30 דקות <span aria-hidden="true">↖</span></a>
         <a href="/audio-ai/lab/" class="c-btn c-btn--ghost">למעבדת האודיו האינטראקטיבית <span class="he-en">(באנגלית)</span></a>
