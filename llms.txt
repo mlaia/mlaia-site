@@ -1,6 +1,6 @@
 # MLAIA — Machine Learning & AI Approach
 
-> B2B AI and data science consultancy delivering production-grade AI solutions. Founded by Yochai Edlitz, MLAIA specializes in signal processing, medical AI, large language models (LLMs/NLP), business intelligence, Ad Tech AI, and predictive analytics. Trusted by Google, EL AL, Israel Ministry of Defense, and 20+ leading enterprises worldwide.
+> Applied AI scientists for three fields: audio and acoustics, medical and clinical AI, and forecasting and causal analysis. Founded by Dr. Yochai Edlitz. Every model is measured before it is deployed. Trusted by Google, EL AL, Israel Ministry of Defense, and 20+ leading enterprises worldwide.
 
 ## Company
 

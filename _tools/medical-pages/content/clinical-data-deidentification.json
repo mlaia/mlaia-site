@@ -140,7 +140,8 @@
     {"href": "/blog-clinical-ai-production.html", "small": "Deployment", "strong": "Clinical AI that ships: shadow mode and monitoring"},
     {"href": "/medical-ai/clinical-model-validation/", "small": "Medical AI", "strong": "Clinical model validation"}
   ],
-  "contact": {
+  "nav_href": "/medical-ai/#contact",
+  "contact_band": {
     "h2": "Book a 30-minute clinical AI feasibility call.",
     "p": "Tell us what data you hold, how it will be used and who needs access. We’ll tell you what a de-identification workflow would involve and what the first step would be.",
     "href": "/medical-ai/#contact",

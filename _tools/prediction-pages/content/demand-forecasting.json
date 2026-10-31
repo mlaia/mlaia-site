@@ -1,0 +1,103 @@
+{
+ "practice": "predictive-intelligence",
+ "slug": "demand-forecasting",
+ "title": "Demand Forecasting Consulting & Intermittent Demand | MLAIA",
+ "description": "Demand forecasting consulting for item-level and intermittent demand: Croston and TSB, hierarchical reconciliation, probabilistic forecasts and backtests.",
+ "service_name": "Demand forecasting consulting",
+ "breadcrumb": "Demand Forecasting",
+ "eyebrow": "Prediction &amp; Causal Analysis · Demand forecasting",
+ "h1": "Forecast every item.<br>Including the slow ones.",
+ "intro": "Item-level demand forecasting for retail, distribution and spare parts. We forecast steady sellers and intermittent, lumpy demand, test the result against your current method, and connect it to reorder decisions.",
+ "cta": "Book a 30-minute forecasting review",
+ "cta_href": "/predictive-intelligence/#contact",
+ "nav_cta": "Book a review",
+ "lab_link": {"href": "/blog-demand-forecasting.html", "text": "Why min/max rules fail"},
+ "brief": {
+  "h2": "Built around your items",
+  "items": [
+   ["Your data", "Sales, order or usage history per item and location"],
+   ["Your decisions", "Reorder points, safety stock &amp; purchase plans"],
+   ["Our focus", "Forecasts measured against your current method"]
+  ]
+ },
+ "sections": [
+  {
+   "id": "demand-patterns",
+   "eyebrow": "Why item-level demand is hard",
+   "h2": "Most items don’t sell every week.<br>Average-based rules miss that.",
+   "lead": "A typical catalogue mixes steady sellers with items that sell a few times a year. Methods built for smooth demand treat the empty weeks as noise. For slow movers, the empty weeks are the pattern.",
+   "paragraphs": [
+    "We build forecasting products ourselves. <a href=\"https://nextdemand.ai/\" target=\"_blank\" rel=\"noopener\">NextDemand</a> is MLAIA’s own spare-parts forecasting product, made for slow, sporadic demand. This practice builds bespoke forecasting for your items, data and systems."
+   ],
+   "cards": [
+    {"number": "01", "h3": "Steady &amp; seasonal demand", "p": "Items that sell most periods. We use exponential smoothing, ARIMA and gradient-boosted models with price, promotion and calendar features. A single global model trained across many items is often a strong option."},
+    {"number": "02", "h3": "Intermittent &amp; lumpy demand", "p": "Items with many zero periods. <a href=\"https://doi.org/10.2307/3007885\" target=\"_blank\" rel=\"noopener\">Croston’s method</a> forecasts the size of demand and the interval between demands separately. <a href=\"https://doi.org/10.1016/j.ejor.2011.05.018\" target=\"_blank\" rel=\"noopener\">TSB</a> updates the chance of demand every period, so it reacts when an item is going obsolete."},
+    {"number": "03", "h3": "Classify before you forecast", "p": "We group items by how often they sell and how much order sizes vary. Each group gets methods suited to it. New items without history need another approach, such as borrowing from similar items."}
+   ],
+   "figures": [
+    {"files": ["pred-intermittent.svg"], "caption": "Simulated weekly demand for one slow-moving item. Most weeks are zero. A Croston-style forecast smooths demand size and the interval between demands separately, and gives a steady rate to plan stock against. It doesn’t predict which week the next order comes. Illustration only, with a smoothing constant of 0.15."}
+   ]
+  },
+  {
+   "id": "approach",
+   "eyebrow": "How we approach it",
+   "h2": "Forecasts that add up.<br>And say how sure they are.",
+   "lead": "A point forecast is only the start. These are the parts that decide whether planners can use it.",
+   "cards": [
+    {"h3": "Hierarchical reconciliation", "p": "Forecasts by item, location, category and total should add up. Reconciliation methods such as <a href=\"https://doi.org/10.1080/01621459.2018.1448825\" target=\"_blank\" rel=\"noopener\">MinT</a> adjust every level so they agree, and can improve accuracy too. <a href=\"https://otexts.com/fpp3/hierarchical-forecasting.html\" target=\"_blank\" rel=\"noopener\">Hyndman &amp; Athanasopoulos</a> explain the idea."},
+    {"h3": "Probabilistic forecasts", "p": "Stock decisions need a range, not one number. We forecast quantiles or full distributions. A 95% cycle service level, for example, is set from the 95th percentile of demand over the lead time."},
+    {"h3": "Backtests against your current method", "p": "We replay past periods: forecast with only the data available at the time, then compare with what happened. Your current method runs through the same test. That gives the bar to beat. See <a href=\"https://otexts.com/fpp3/tscv.html\" target=\"_blank\" rel=\"noopener\">time series cross-validation</a>."},
+    {"h3": "Stockouts &amp; demand drivers", "p": "Promotions, price changes and holidays shape demand. Stockouts hide it: you can’t sell what you don’t have. We flag those periods so the model doesn’t learn them as low demand."},
+    {"h3": "From forecast to reorder", "p": "A forecast pays off through the reorder point, safety stock and order quantity. We turn forecast ranges and lead times into those numbers, and test the policy in a simulation on past demand."},
+    {"h3": "New &amp; replaced items", "p": "New items, substitutes and part supersessions break item history. We link related items, borrow from similar ones, and show where the forecast is weak."}
+   ],
+   "capabilities": {"label": "Methods we use", "items": ["Croston, SBA &amp; TSB", "ETS &amp; ARIMA", "Gradient-boosted global models", "Hierarchical reconciliation", "Quantile &amp; distribution forecasts", "Rolling-origin backtests"]}
+  },
+  {
+   "id": "what-we-measure",
+   "eyebrow": "What we measure",
+   "h2": "Accuracy that matches the decision.<br>Not one headline number.",
+   "lead": "We agree the measures before modeling, and report them by item group, not only in total.",
+   "cards": [
+    {"h3": "Error that works with zeros", "p": "Percentage errors break when actual demand is zero. We use scaled errors such as MASE or RMSSE, so items and methods can be compared fairly."},
+    {"h3": "Bias", "p": "A forecast that runs high fills the warehouse. One that runs low causes stockouts. We track bias separately from error, by item group."},
+    {"h3": "Quality of the range", "p": "How often actual demand falls inside the forecast range, and pinball loss or CRPS for the whole distribution. Both are <a href=\"https://doi.org/10.1198/016214506000001437\" target=\"_blank\" rel=\"noopener\">proper scoring rules</a> for quantiles and distributions."},
+    {"h3": "Inventory outcomes", "p": "In a simulation on past demand: the service level reached, stockouts, and the stock held to get there. This is where forecast accuracy turns into money."}
+   ],
+   "note": "Achievable accuracy depends on your items, data and lead times. We measure it on your own history next to your current method. We don’t promise benchmark figures."
+  },
+  {
+   "id": "engagement",
+   "eyebrow": "How an engagement runs",
+   "h2": "From sales history to reorder decisions.<br>In four steps.",
+   "lead": "Each step ends with evidence you can check before the next one starts.",
+   "steps": [
+    {"h3": "Data audit &amp; baseline", "p": "We review your sales, order or usage history, stockouts and lead times. Then we measure how your current method performs. That’s the bar to beat."},
+    {"h3": "Segment &amp; backtest", "p": "We group items by demand pattern, fit suitable methods, and backtest them on past periods next to your current method."},
+    {"h3": "Connect to reorders", "p": "We turn forecasts into reorder points and safety stock, and simulate the policy on past demand before it goes live."},
+    {"h3": "Deploy &amp; monitor", "p": "Forecasts go into your ERP, planning tool or reports, with data-quality checks and accuracy monitoring. We document it so your team can run it."}
+   ],
+   "cta": {"href": "/predictive-intelligence/#contact", "text": "Book a 30-minute forecasting review"}
+  }
+ ],
+ "faq": [
+  {"q": "Can you forecast items that sell only a few times a year?", "a": "Yes, within limits. Methods such as Croston’s and TSB are built for intermittent demand. They give a demand rate and a range, not the date of the next order. For setting stock levels, the range is what matters."},
+  {"q": "Will it beat our ERP forecast?", "a": "We can’t promise that before we see your data. We backtest on your own history with your current method in the same test, so you see the difference before you rely on it."},
+  {"q": "Machine learning or statistical methods?", "a": "Both, chosen by item group. Gradient-boosted models do well when there are many items and useful drivers such as price and promotions. For sparse items, simple intermittent-demand methods are often competitive. The backtest decides."},
+  {"q": "How much history do we need?", "a": "More helps. To see a seasonal pattern repeat, you need at least two full seasons. Items with less history can borrow from groups of similar items. The data audit tells you what’s realistic."},
+  {"q": "Is this the same as NextDemand?", "a": "No. NextDemand is MLAIA’s own product for spare-parts demand and inventory planning. This practice builds bespoke forecasting for your data, items and systems."},
+  {"q": "What do you need for the first call?", "a": "The decision you want to support, how you forecast today, and a column list of the data you have. Please don’t send confidential data."}
+ ],
+ "reads": [
+  {"href": "/blog-demand-forecasting.html", "small": "Demand forecasting", "strong": "Why min/max rules fail on intermittent, lumpy spare-parts demand"},
+  {"href": "/blog-time-series-survival-analysis.html", "small": "Time series", "strong": "From Prophet to foundation models, and when you need survival analysis"},
+  {"href": "/blog-tabular-data-ml-vs-dl.html", "small": "Tabular data", "strong": "Do gradient-boosted trees still beat deep learning on tabular data?"}
+ ],
+ "contact": {
+  "h2": "Book a 30-minute<br>forecasting review.",
+  "p": "Bring one forecast or decision you want to improve. In 30 minutes we’ll cover:",
+  "bullets": ["What your data can realistically support", "How we’d backtest it against your current method", "Where a causal test would show the real impact"],
+  "label": "What do you forecast or decide today?",
+  "button": "Request a forecasting review →"
+ }
+}

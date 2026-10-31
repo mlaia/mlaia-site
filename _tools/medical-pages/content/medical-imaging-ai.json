@@ -130,7 +130,8 @@
     {"href": "/blog-clinical-ai-production.html", "small": "Deployment", "strong": "Clinical AI that ships: shadow mode and monitoring"},
     {"href": "/wiki/medical-ai-validation.html", "small": "Technical guide", "strong": "Medical AI validation &amp; the regulatory landscape"}
   ],
-  "contact": {
+  "nav_href": "/medical-ai/#contact",
+  "contact_band": {
     "h2": "Book a 30-minute clinical AI feasibility call.",
     "p": "Tell us the clinical question, the images and labels you have and what a reviewer would need to see. We’ll tell you whether it’s feasible and what the first step would be.",
     "href": "/medical-ai/#contact",
