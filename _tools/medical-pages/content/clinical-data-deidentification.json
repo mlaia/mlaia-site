@@ -1,0 +1,150 @@
+{
+  "practice": "medical-ai",
+  "slug": "clinical-data-deidentification",
+  "title": "Clinical Data De-identification & Anonymization | MLAIA",
+  "description": "Clinical data de-identification and medical data anonymization for records, notes and images, measured for missed identifiers, data utility and residual risk.",
+  "service_name": "Clinical data de-identification",
+  "breadcrumb": "Clinical Data De-identification",
+  "eyebrow": "Medical AI · De-identification &amp; privacy",
+  "h1": "Use clinical data.<br>Protect the patients in it.",
+  "intro": "We build and evaluate de-identification workflows for clinical data: structured records, free-text notes and medical images. Each workflow is designed around the intended use and access model, measured for what it misses and what it removes, and can run inside the hospital’s own environment.",
+  "cta": "Book a 30-minute clinical AI feasibility call",
+  "cta_href": "/medical-ai/#contact",
+  "nav_cta": "Book a feasibility call",
+  "lab_link": {"href": "/medical-ai/#deidentification", "text": "Our approach in brief"},
+  "proofline": [
+    "A specialist practice of MLAIA Data Science",
+    "Led by Dr. Yochai Edlitz · Ph.D., Weizmann Institute",
+    "Published clinical prediction research: <a href=\"https://doi.org/10.7554/eLife.71862\" rel=\"noopener\" target=\"_blank\">Edlitz &amp; Segal, <i>eLife</i>, 2022</a>"
+  ],
+  "brief": {
+    "h2": "Built around your data",
+    "items": [
+      ["Your data", "EMR extracts, clinical notes, letters, reports and DICOM images"],
+      ["Your constraints", "Data that can’t leave the hospital, approvals, mixed languages"],
+      ["Our focus", "Measured residual risk, and data that stays useful"]
+    ]
+  },
+  "sections": [
+    {
+      "id": "terms",
+      "eyebrow": "Terms that matter",
+      "h2": "De-identified, pseudonymised, anonymous.<br>Not the same thing.",
+      "lead": "The words are often used loosely. The difference decides which rules apply and how the data may be used.",
+      "cards": [
+        {"h3": "De-identification", "p": "Removing or transforming identifiers so records are not readily linked to a person. In the US, HIPAA describes two routes: Safe Harbor, which removes 18 listed types of identifier, and Expert Determination, where an expert judges the re-identification risk to be very small.", "link": {"href": "https://www.hhs.gov/hipaa/for-professionals/special-topics/de-identification/index.html", "text": "HHS de-identification guidance →"}},
+        {"h3": "Pseudonymisation", "p": "Replacing identifiers with codes, while whoever holds the key can still link back. It allows longitudinal studies and follow-up. Under the GDPR, pseudonymised data is still personal data.", "link": {"href": "https://www.edpb.europa.eu/public-consultations/guidelines-012025-on-pseudonymisation_en", "text": "EDPB guidelines on pseudonymisation →"}},
+        {"h3": "Anonymisation", "p": "Data that can no longer be linked to a person by means reasonably likely to be used. That is a high bar for rich clinical data, and it depends on context: what else is available, who has access and what they could link it to.", "link": {"href": "https://eur-lex.europa.eu/eli/reg/2016/679/oj", "text": "GDPR, Recital 26 →"}},
+        {"h3": "Which one you need", "p": "That depends on the use, the jurisdiction and the data owner’s approvals. We implement and measure the technical side. Legal classification and approvals stay with your privacy officer, legal counsel and ethics committee."}
+      ],
+      "paragraphs": ["This page goes deeper on the <a href=\"/medical-ai/#deidentification\">de-identification work</a> in our Medical AI practice. De-identification alone is not a guarantee of anonymity."]
+    },
+    {
+      "id": "structured-records",
+      "eyebrow": "Structured records",
+      "h2": "Removing names<br>is the easy part.",
+      "lead": "In tables, direct identifiers are simple to drop. The risk sits in combinations of ordinary fields.",
+      "cards": [
+        {"number": "01", "h3": "Direct identifiers", "p": "Names, ID numbers, addresses, phone numbers and record numbers. Dropped, or replaced with keyed pseudonyms so the same patient keeps the same code across tables when the study needs linkage."},
+        {"number": "02", "h3": "Quasi-identifiers", "p": "Age, sex, postcode, dates and rare diagnoses can single out a person in combination. Generalising (age bands, coarser places) or suppressing rare combinations lowers that risk. k-anonymity is one way to measure it.", "link": {"href": "https://doi.org/10.1142/S0218488502001648", "text": "Sweeney, k-anonymity, 2002 →"}},
+        {"number": "03", "h3": "Dates", "p": "Exact dates identify. Shifting all of one patient’s dates by the same random offset keeps the intervals, so time to event, length of stay and the order of events stay usable."},
+        {"number": "04", "h3": "Rare cases &amp; small cells", "p": "A very rare condition, an extreme value or a small site can identify a patient on its own. We look for small groups and outliers, and agree with the data owner how to handle them."}
+      ]
+    },
+    {
+      "id": "free-text",
+      "eyebrow": "Free text",
+      "h2": "Clinical notes hide identifiers<br>in plain sentences.",
+      "lead": "Names, dates, places and relatives appear anywhere in notes, letters and reports, often misspelled or abbreviated. Finding them is a detection task, and it should be measured like one.",
+      "cards": [
+        {"h3": "Rules plus models", "p": "Patterns and dictionaries for ID numbers, dates and phone numbers; trained named-entity models for names and places. Combining both usually beats either alone. Shared tasks such as the 2014 i2b2/UTHealth challenge give useful benchmarks.", "link": {"href": "https://doi.org/10.1016/j.jbi.2015.06.007", "text": "Stubbs et al., 2015 →"}},
+        {"h3": "Recall first", "p": "A missed name is a disclosure. An over-removed word is a loss of usefulness. Systems are usually tuned to find as many identifiers as possible, then checked for how much clinical content they remove.", "link": {"href": "https://doi.org/10.1038/s41746-020-0258-y", "text": "Philter, npj Digital Medicine 2020 →"}},
+        {"h3": "Surrogates, not blanks", "p": "Replacing a found name with a realistic substitute, rather than a [NAME] tag, makes any missed identifier harder to spot among the substitutes. It also keeps the text natural for later analysis."},
+        {"h3": "Language &amp; local formats", "p": "Hebrew and mixed Hebrew-English notes, local ID formats and address conventions need their own rules and test sets. Tools built for English notes do not cover them."}
+      ]
+    },
+    {
+      "id": "images",
+      "eyebrow": "Images",
+      "h2": "Image files need<br>their own checks.",
+      "lead": "Medical images carry identifiers in headers, private tags, burned-in text and sometimes in the anatomy itself.",
+      "cards": [
+        {"h3": "DICOM headers", "p": "The DICOM standard’s confidentiality profiles list which attributes to remove, replace or keep. Options allow dates or longitudinal links to be kept when the study needs them.", "link": {"href": "https://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html", "text": "DICOM PS3.15, Annex E →"}},
+        {"h3": "Burned-in text", "p": "Ultrasound, screen captures and scanned documents can have names or IDs written into the pixels. We detect and mask that text, then check a sample by eye."},
+        {"h3": "Faces in head scans", "p": "A 3D head scan can be rendered into a recognisable face. Defacing removes facial features before images are shared.", "link": {"href": "/medical-ai/medical-imaging-ai/#dicom-deidentification", "text": "De-identifying medical images →"}}
+      ]
+    },
+    {
+      "id": "evaluation",
+      "eyebrow": "What we measure",
+      "h2": "Measure what was missed.<br>And what was lost.",
+      "lead": "A de-identification workflow is only as trustworthy as its evaluation. We measure it on a sample of your own data, annotated for identifiers.",
+      "cards": [
+        {"h3": "Identifiers found", "p": "The share of true identifiers caught, by type: names, IDs, dates, places. Each miss is reviewed by a person, because one missed ID number matters more than an average suggests."},
+        {"h3": "Over-removal", "p": "How much clinical content was removed or changed by mistake: drug names taken for surnames, eponyms, doses taken for dates. This decides whether the data stays useful."},
+        {"h3": "Residual risk in tables", "p": "The size of the smallest groups sharing the same quasi-identifiers, how many records are unique, and how each generalisation step changes that."},
+        {"h3": "Downstream usefulness", "p": "Whether an analysis or model built on the de-identified data performs as it does on the original, compared inside the secure environment where possible."}
+      ],
+      "note": "No method guarantees anonymity. We report what was measured, the remaining risk and its assumptions, so the data owner can decide."
+    },
+    {
+      "id": "on-premises",
+      "eyebrow": "Inside the hospital",
+      "h2": "Bring the work<br>to the data.",
+      "lead": "Often the safest option is not to move the data at all.",
+      "cards": [
+        {"h3": "In-hospital environments", "p": "We can work inside your research environment, under your access controls, and take out only approved outputs. Hosting, access and contracts are agreed with the data owner before work starts."},
+        {"h3": "Local models", "p": "De-identification models, and any language models in the workflow, can run on infrastructure you control, so raw notes are not sent to outside services."},
+        {"h3": "LLM workflows", "p": "Define what information may reach an LLM or multimodal service, where it may be processed and how access is controlled. De-identification lowers the risk; it is one control among several."},
+        {"h3": "Privacy-preserving collaboration", "p": "Federated learning, differential privacy and synthetic data can widen collaboration without pooling raw records. Each trades some usefulness for privacy, and that trade-off should be measured, not assumed."}
+      ]
+    },
+    {
+      "id": "engagement",
+      "eyebrow": "How an engagement runs",
+      "h2": "Map the data and the use.<br>Then remove what must go.",
+      "lead": "What counts as an identifier, and what must be kept, depends on who will use the data and for what.",
+      "steps": [
+        {"h3": "Map data &amp; use", "p": "Agree the downstream use, who gets access and where processing runs. List direct and quasi-identifiers per table, note type and image source."},
+        {"h3": "Build the pipeline", "p": "Rules and models for each data type, keyed pseudonyms where linkage is needed, date shifting, and header and pixel cleaning for images."},
+        {"h3": "Evaluate on your data", "p": "Annotate a representative sample, measure identifiers found, over-removal and residual risk, and review every miss with your team."},
+        {"h3": "Document &amp; hand over", "p": "A report of methods, results, remaining risk and assumptions for your privacy officer and ethics committee, plus the pipeline running in your environment."}
+      ],
+      "note": "We are not legal or regulatory consultants. We implement and measure the technical controls; compliance decisions stay with the data owner."
+    },
+    {
+      "id": "sources",
+      "eyebrow": "Sources",
+      "h2": "Standards and papers<br>cited on this page.",
+      "reads": [
+        {"href": "https://www.hhs.gov/hipaa/for-professionals/special-topics/de-identification/index.html", "small": "US HHS", "strong": "Guidance on HIPAA de-identification methods"},
+        {"href": "https://www.edpb.europa.eu/public-consultations/guidelines-012025-on-pseudonymisation_en", "small": "European Data Protection Board · 2025", "strong": "Guidelines 01/2025 on pseudonymisation"},
+        {"href": "https://eur-lex.europa.eu/eli/reg/2016/679/oj", "small": "EU Regulation 2016/679", "strong": "General Data Protection Regulation"},
+        {"href": "https://doi.org/10.1142/S0218488502001648", "small": "Sweeney · 2002", "strong": "k-anonymity: a model for protecting privacy"},
+        {"href": "https://doi.org/10.1016/j.jbi.2015.06.007", "small": "Stubbs et al. · J Biomed Inform 2015", "strong": "2014 i2b2/UTHealth de-identification task"},
+        {"href": "https://doi.org/10.1038/s41746-020-0258-y", "small": "Norgeot et al. · npj Digital Medicine 2020", "strong": "Philter for de-identifying clinical notes"},
+        {"href": "https://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html", "small": "DICOM standard · PS3.15", "strong": "Attribute confidentiality profiles"}
+      ]
+    }
+  ],
+  "faq": [
+    {"q": "Is de-identified data anonymous?", "a": "Not necessarily. De-identification lowers the chance of linking data to a person; it does not guarantee anonymity. Whether data counts as anonymous depends on the law that applies, the context and what else is available. We measure residual risk; the legal decision stays with the data owner."},
+    {"q": "How do you know the de-identification worked?", "a": "We test it on a sample of your data annotated for identifiers: identifiers found by type, clinical content removed by mistake, and residual risk in tables. Every miss is reviewed by a person."},
+    {"q": "Can you de-identify Hebrew clinical notes?", "a": "Hebrew and mixed Hebrew-English notes need their own rules, models and test sets. We build and evaluate them on an annotated sample of your own notes, since formats differ between institutions."},
+    {"q": "Can an LLM de-identify our notes?", "a": "It can help, but it needs the same evaluation as any other method, and it must run where the data is allowed to go. Raw notes should not be sent to an outside service to have their identifiers removed. We compare LLM-based and conventional approaches on your annotated sample."},
+    {"q": "Does the work have to happen inside the hospital?", "a": "Not always, but often it should. We can work inside your environment under your access controls, or on extracts the data owner has approved. This is agreed before work starts."},
+    {"q": "Do you decide whether our data meets HIPAA or GDPR?", "a": "No. We implement and measure the technical side of de-identification and document it. Legal and regulatory decisions belong to your privacy officer, legal counsel and ethics committee. We are not legal or regulatory consultants."}
+  ],
+  "reads": [
+    {"href": "/wiki/medical-ai-validation.html", "small": "Technical guide", "strong": "Medical AI validation, regulation &amp; privacy"},
+    {"href": "/blog-clinical-ai-production.html", "small": "Deployment", "strong": "Clinical AI that ships: shadow mode and monitoring"},
+    {"href": "/medical-ai/clinical-model-validation/", "small": "Medical AI", "strong": "Clinical model validation"}
+  ],
+  "nav_href": "/medical-ai/#contact",
+  "contact_band": {
+    "h2": "Book a 30-minute clinical AI feasibility call.",
+    "p": "Tell us what data you hold, how it will be used and who needs access. We’ll tell you what a de-identification workflow would involve and what the first step would be.",
+    "href": "/medical-ai/#contact",
+    "button": "Book a feasibility call →"
+  }
+}
