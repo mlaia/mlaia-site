@@ -50,7 +50,7 @@
   --c-btn-bg:#151716; --c-btn-fg:#ebe9e4; --c-btn-hover:#9a5300;
 }
 @media (max-width:900px){.c-page{--c-gutter:24px;--c-sec:80px;--c-gap:32px}}
-@media (max-width:640px){.c-page{--c-gutter:16px;--c-sec:64px;--c-fs-body:17px;--c-scope-h:240px}}
+@media (max-width:640px){.c-page{--c-gutter:16px;--c-sec:64px;--c-fs-body:17px;--c-scope-h:220px}}
 
 /* ---------- 2. Base ---------- */
 body.c-page{margin:0;background:var(--c-bg);color:var(--c-text);font:400 var(--c-fs-body)/1.6 var(--c-body);-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;overflow-x:hidden}
@@ -145,6 +145,22 @@ body.c-page{margin:0;background:var(--c-bg);color:var(--c-text);font:400 var(--c
 .c-readout dd{margin:2px 0 0;font:700 22px/1.1 var(--c-display);font-stretch:85%;color:var(--c-fg);font-variant-numeric:tabular-nums}
 .c-readout .c-big dd{font-size:clamp(30px,2.6vw,40px);font-weight:800;font-stretch:75%}
 .c-readout .c-raw dd{color:var(--c-amber)} .c-readout .c-out dd{color:var(--c-blue)}
+.c-readout__note{font:400 11px/1.5 var(--c-mono);color:var(--c-muted);margin:14px 0 0}
+@media (min-width:1001px){.c-instrument .c-screen{height:auto;min-height:var(--c-scope-h)}}
+/* Instrument controls: native range inputs in the C look (keyboard and touch work natively). */
+.c-ctls{display:grid;gap:2px;margin-top:12px;padding-top:10px;border-top:1px solid var(--c-rule)}
+.c-ctl{display:grid;grid-template-columns:48px minmax(0,1fr) 62px;align-items:center;gap:10px;min-height:40px;font:400 12px/1 var(--c-mono)}
+.c-ctl__name{color:var(--c-muted)}
+.c-ctl__val{color:var(--c-fg);text-align:right;font-variant-numeric:tabular-nums}
+.c-ctl input[type=range]{-webkit-appearance:none;appearance:none;width:100%;min-width:0;height:36px;margin:0;background:transparent;cursor:pointer}
+.c-ctl input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--c-rule-2)}
+.c-ctl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;margin-top:-9px;border-radius:50%;background:var(--c-fg);border:3px solid #0c0e0d;box-shadow:0 0 0 1px var(--c-fg)}
+.c-ctl input[type=range]::-moz-range-track{height:2px;background:var(--c-rule-2)}
+.c-ctl input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--c-fg);border:3px solid #0c0e0d;box-shadow:0 0 0 1px var(--c-fg)}
+.c-ctl input[type=range]:focus-visible{outline:none}
+.c-ctl input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 2px #0c0e0d,0 0 0 5px var(--c-focus)}
+.c-ctl input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 2px #0c0e0d,0 0 0 5px var(--c-focus)}
+.c-ctl:focus-within .c-ctl__name{color:var(--c-fg)}
 .c-hero__copy{position:relative;padding-top:48px;padding-bottom:56px}
 .c-hero__row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px 48px;margin-top:32px;flex-wrap:wrap}
 .c-hero__row p{margin:0;max-width:36em;font-size:var(--c-fs-lead);color:var(--c-text)}
@@ -168,6 +184,8 @@ body.c-page{margin:0;background:var(--c-bg);color:var(--c-text);font:400 var(--c
   .c-readout dd{font-size:19px}
   .c-readout .c-big dd{font-size:26px}
   .c-readout .c-opt{display:none}
+  .c-readout dt{font-size:10px}
+  .c-ctl{min-height:44px;grid-template-columns:44px minmax(0,1fr) 58px}
   .c-legend{font-size:15px;padding:12px var(--c-gutter)}
   .c-hero__copy{padding-top:32px;padding-bottom:40px}
   .c-specs{grid-template-columns:1fr}

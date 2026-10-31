@@ -104,46 +104,86 @@ function Handle(box,o){
   return api;
 }
 
-/* ---------- hero oscilloscope ---------- */
-const DB_LO=-24,DB_HI=6;
+/* ---------- hero oscilloscope ----------
+   A tone plus white noise, sampled at 48 kHz, through a fixed 4th-order Butterworth low-pass
+   (cutoff in data-cutoff, default 1 kHz). The drag handle sets the noise level; optional
+   range inputs [data-c-ctl="tone|level|phase"] in the same [data-c-instrument] set the tone.
+   Readouts are the exact expected values for this signal and filter, computed from the
+   filter's response, so they never flicker and never flatter the filter:
+     raw   = tone power / noise power
+     out   = tone power x |H(f)|^2 / (noise power x sum h[n]^2)
+     tgain = |H(f)| in dB, lag = -arg H(f) in degrees, delay = lag / (360 f). */
+const DB_LO=-24,DB_HI=6,FS=48000;
+function butterLP(fc){ // two biquads, Butterworth Q values for 4th order
+  return [0.54119610,1.30656296].map(Q=>{const w=TAU*fc/FS,cw=Math.cos(w),al=Math.sin(w)/(2*Q),a0=1+al;
+    return{b0:(1-cw)/2/a0,b1:(1-cw)/a0,b2:(1-cw)/2/a0,a1:-2*cw/a0,a2:(1-al)/a0};});
+}
+function response(st,f){ // magnitude and unwrapped phase of the cascade at f
+  let mag=1,ph=0;const w=TAU*f/FS;
+  for(const q of st){
+    const zr=Math.cos(w),zi=-Math.sin(w),z2r=Math.cos(2*w),z2i=-Math.sin(2*w);
+    const nr=q.b0+q.b1*zr+q.b2*z2r,ni=q.b1*zi+q.b2*z2i,dr=1+q.a1*zr+q.a2*z2r,di=q.a1*zi+q.a2*z2i;
+    mag*=Math.hypot(nr,ni)/Math.hypot(dr,di);ph+=Math.atan2(ni,nr)-Math.atan2(di,dr);
+  }
+  return{mag,ph};
+}
 function Scope(box){
   const cv=box.querySelector('canvas'),ctx=cv.getContext('2d');
   const root=box.closest('[data-c-instrument]')||box.parentElement;
   const R={};root.querySelectorAll('[data-c-read]').forEach(n=>R[n.dataset.cRead]=n);
-  const f=+box.dataset.tone||440,span=0.02,noiseRate=48000,warm=240;
-  const fc=f*2.6;
-  const it={cv,box,dpr:1,phase:0,off:0,db:0,target:0,snrRaw:null,snrOut:null,readT:1,col:screenColors(box)};
+  const C={},O={};root.querySelectorAll('[data-c-ctl]').forEach(n=>C[n.dataset.cCtl]=n);
+  root.querySelectorAll('[data-c-ctl-out]').forEach(n=>O[n.dataset.cCtlOut]=n);
+  const span=0.02,N=Math.round(span*FS),warm=960,fc=+box.dataset.cutoff||1000;
+  const stages=butterLP(fc);
+  let neb=0;{const s=new Float64Array(8);for(let i=0;i<8192;i++){let x=i?0:1;stages.forEach((q,k)=>{const j=k*4,y=q.b0*x+q.b1*s[j]+q.b2*s[j+1]-q.a1*s[j+2]-q.a2*s[j+3];s[j+1]=s[j];s[j]=x;s[j+3]=s[j+2];s[j+2]=y;x=y;});neb+=x*x;}}
+  // tone slider: semitones relative to 440 Hz (log scale), -25..+26 = 104 Hz to 1.98 kHz
+  const toneOf=v=>440*Math.pow(2,v/12),sliderOf=f=>12*Math.log2(f/440);
+  const cur={f:+box.dataset.tone||440,lvl:0,ph:0};
+  const tgt={...cur};
+  const it={cv,box,dpr:1,scroll:0,off:0,db:0,target:0,col:screenColors(box)};
   const toDb=v=>DB_LO+v*(DB_HI-DB_LO);
+  const sign=x=>x<0?'−':x>0?'+':'';
   const handle=Handle(box,{axis:'x',value:+box.dataset.value||0.55,lo:0.04,hi:0.96,step:1/30,hintAmp:0.24,
-    label:'Noise level added to the tone',units:v=>Math.round(toDb(v)),
-    text:v=>{const d=Math.round(toDb(v)),s=(d>0?'+':d<0?'−':'')+Math.abs(d);return{chip:'◀ drag ▶  noise '+s+' dB',valuetext:'noise '+s+' dB relative to the tone'};},
-    onInput:v=>{it.target=toDb(v);if(reduce){it.db=it.target;it.readT=1;it.draw();}}});
+    label:'Noise level',units:v=>Math.round(toDb(v)),
+    text:v=>{const d=Math.round(toDb(v)),s=sign(d)+Math.abs(d);return{chip:'◀ drag ▶  noise '+s+' dB',valuetext:'noise '+s+' dB'};},
+    onInput:v=>{it.target=toDb(v);if(reduce){it.db=it.target;it.draw();}}});
   it.target=it.db=toDb(handle.value);
+  function readCtl(){
+    if(C.tone)tgt.f=toneOf(+C.tone.value);
+    if(C.level)tgt.lvl=+C.level.value;
+    if(C.phase)tgt.ph=+C.phase.value;
+    if(O.tone)O.tone.textContent=Math.round(tgt.f)+' Hz';
+    if(O.level)O.level.textContent=sign(tgt.lvl)+Math.abs(tgt.lvl)+' dB';
+    if(O.phase)O.phase.textContent=Math.round(tgt.ph)+'°';
+    if(C.tone)C.tone.setAttribute('aria-valuetext',Math.round(tgt.f)+' hertz');
+    if(C.level)C.level.setAttribute('aria-valuetext',sign(tgt.lvl)+Math.abs(tgt.lvl)+' decibels');
+    if(C.phase)C.phase.setAttribute('aria-valuetext',Math.round(tgt.ph)+' degrees');
+    if(reduce&&it.draw){Object.assign(cur,tgt);it.draw();}
+  }
+  if(C.tone)C.tone.value=String(Math.round(sliderOf(cur.f)));
+  Object.values(C).forEach(n=>n.addEventListener('input',()=>{handle.interacted=true;handle.stopHint();readCtl();}));
+  readCtl();Object.assign(cur,tgt);
   it.onVisible=()=>{if(!it.hinted&&box.hasAttribute('data-hint')){it.hinted=true;setTimeout(()=>{if(it.visible)handle.hint();},1500);}};
   it.resized=()=>{it.col=screenColors(box);};
   it.step=dt=>{
-    it.db+=(it.target-it.db)*(1-Math.exp(-dt/0.22));
+    const k=1-Math.exp(-dt/0.22);
+    it.db+=(it.target-it.db)*k;
+    cur.f*=Math.pow(tgt.f/cur.f,k);cur.lvl+=(tgt.lvl-cur.lvl)*k;
+    let dp=((tgt.ph-cur.ph+540)%360)-180;cur.ph=(cur.ph+dp*k+360)%360;
     // Slow, smooth scroll: about one screen per second, capped so high tones never strobe.
-    const cps=Math.min(10,0.9*f*span);it.phase+=TAU*cps*dt;it.off+=noiseRate*(cps/f)*dt;it.readT+=dt;
+    const cps=Math.min(10,0.9*cur.f*span);it.scroll+=TAU*cps*dt;it.off+=FS*(cps/cur.f)*dt;
   };
-  function biquad(){const w=TAU*fc/fsPts(),cw=Math.cos(w),al=Math.sin(w)/Math.SQRT2,a0=1+al;
-    return{b0:(1-cw)/2/a0,b1:(1-cw)/a0,b2:(1-cw)/2/a0,a1:-2*cw/a0,a2:(1-al)/a0};}
-  let N=600;const fsPts=()=>N/span;
+  let lastRead='';
   it.draw=()=>{
-    const W=cv.width,H=cv.height,d=it.dpr,c=it.col;N=Math.round(clamp(it.cssW,320,1200));
+    const W=cv.width,H=cv.height,d=it.dpr,c=it.col,f=cur.f;
     ctx.clearRect(0,0,W,H);
-    const q=biquad(),sigRms=Math.sqrt(0.55*0.55/2+0.2*0.2/2),nAmp=sigRms*Math.pow(10,it.db/20);
-    // two cascaded 2nd-order Butterworth low-pass stages on signal+noise, and on each part alone for SNR
-    const st=new Float64Array(18);
-    const run=(x,k)=>{let y=q.b0*x+q.b1*st[k]+q.b2*st[k+1]-q.a1*st[k+2]-q.a2*st[k+3];st[k+1]=st[k];st[k]=x;st[k+3]=st[k+2];st[k+2]=y;return y;};
-    const raw=new Float32Array(N),out=new Float32Array(N);let ps=0,pn=0,pso=0,pno=0;
+    const A=0.78*Math.pow(10,cur.lvl/20),sigma=0.55*Math.pow(10,it.db/20),ph0=cur.ph*Math.PI/180;
+    const st=new Float64Array(8),off=Math.floor(it.off);
+    const raw=new Float32Array(N),out=new Float32Array(N);
     for(let i=-warm;i<N;i++){
-      const x=i/N*span,ph=TAU*f*x+it.phase;
-      const s=0.55*Math.sin(ph)+0.2*Math.sin(2*ph+0.6);
-      const n=nAmp*nz(x*noiseRate+it.off);
-      const v=s+n,o=run(run(v,0),4),so=run(run(s,8),12);
-      const no=o-so;
-      if(i>=0){raw[i]=v;out[i]=o;ps+=s*s;pn+=n*n;pso+=so*so;pno+=no*no;}
+      const v=A*Math.sin(TAU*f*i/FS+it.scroll+ph0)+sigma*noise[(((i+off)%NT)+NT)%NT];
+      let x=v;for(let s=0;s<2;s++){const q=stages[s],j=s*4,y=q.b0*x+q.b1*st[j]+q.b2*st[j+1]-q.a1*st[j+2]-q.a2*st[j+3];st[j+1]=st[j];st[j]=x;st[j+3]=st[j+2];st[j+2]=y;x=y;}
+      if(i>=0){raw[i]=v;out[i]=x;}
     }
     const yc=H*0.5,amp=H*0.3;
     const trace=(arr,col,lw,alpha)=>{ctx.globalAlpha=alpha;ctx.strokeStyle=col;ctx.lineWidth=lw*d;ctx.lineJoin='round';ctx.beginPath();
@@ -151,19 +191,13 @@ function Scope(box){
     ctx.strokeStyle='rgba(236,238,233,.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,yc);ctx.lineTo(W,yc);ctx.stroke();
     trace(raw,c.a,4,.12);trace(raw,c.a,1.1,.85);
     trace(out,c.b,7,.14);trace(out,c.b,2.2,1);
-    // readouts, smoothed and updated a few times a second so the numbers are legible
-    const r1=10*Math.log10(ps/Math.max(pn,1e-12)),r2=10*Math.log10(pso/Math.max(pno,1e-12));
-    it.snrRaw=it.snrRaw==null||reduce?r1:it.snrRaw+(r1-it.snrRaw)*0.15;
-    it.snrOut=it.snrOut==null||reduce?r2:it.snrOut+(r2-it.snrOut)*0.15;
-    if(it.readT>=0.25){it.readT=0;
-      const fmt=x=>(x<0?'−':x>0?'+':'')+Math.abs(x).toFixed(1)+' dB';
-      if(R.tone)R.tone.textContent=f+' Hz';
-      if(R.noise){const dd=Math.round(it.db);R.noise.textContent=(dd<0?'−':dd>0?'+':'')+Math.abs(dd)+' dB';}
-      if(R.raw)R.raw.textContent=fmt(it.snrRaw);
-      if(R.out)R.out.textContent=fmt(it.snrOut);
-      if(R.gain)R.gain.textContent=fmt(it.snrOut-it.snrRaw);
-      if(R.delay)R.delay.textContent=(2*1000*Math.SQRT2/(TAU*fc)).toFixed(2)+' ms';
-    }
+    // exact expected readouts for the current settings
+    const r=response(stages,f),ps=A*A/2,pn=sigma*sigma;
+    const snrRaw=10*Math.log10(ps/pn),snrOut=10*Math.log10(ps*r.mag*r.mag/(pn*neb));
+    const lag=-r.ph*180/Math.PI,fmt=x=>sign(+x.toFixed(1))+Math.abs(x).toFixed(1)+' dB';
+    const vals={raw:fmt(snrRaw),out:fmt(snrOut),gain:fmt(snrOut-snrRaw),tgain:fmt(20*Math.log10(r.mag)),lag:Math.round(lag)+'°',delay:(1000*lag/(360*f)).toFixed(2)+' ms'};
+    const key=JSON.stringify(vals);
+    if(key!==lastRead){lastRead=key;for(const k in vals)if(R[k])R[k].textContent=vals[k];}
   };
   it.handle=handle;
   return it;

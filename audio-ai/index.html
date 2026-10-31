@@ -87,16 +87,22 @@
     <div class="c-readout">
       <p class="c-readout__title">What the filter achieved</p>
       <dl>
-        <div class="c-big c-raw"><dt>raw SNR</dt><dd data-c-read="raw">7.5 dB</dd></div>
-        <div class="c-big c-out"><dt>filtered SNR</dt><dd data-c-read="out">18.0 dB</dd></div>
-        <div><dt>improvement</dt><dd data-c-read="gain">+10.5 dB</dd></div>
-        <div class="c-opt"><dt>tone</dt><dd data-c-read="tone">440 Hz</dd></div>
-        <div class="c-opt"><dt>noise</dt><dd data-c-read="noise">−8 dB</dd></div>
-        <div class="c-opt"><dt>filter delay</dt><dd data-c-read="delay">0.39 ms</dd></div>
+        <div class="c-big c-raw"><dt>raw SNR</dt><dd data-c-read="raw">+7.5 dB</dd></div>
+        <div class="c-big c-out"><dt>filtered SNR</dt><dd data-c-read="out">+21.2 dB</dd></div>
+        <div><dt>improvement</dt><dd data-c-read="gain">+13.7 dB</dd></div>
+        <div><dt>tone through filter</dt><dd data-c-read="tgain">0.0 dB</dd></div>
+        <div><dt>phase lag at tone</dt><dd data-c-read="lag">68°</dd></div>
+        <div><dt>delay at tone</dt><dd data-c-read="delay">0.43 ms</dd></div>
       </dl>
+      <p class="c-readout__note">Filter: 4th-order low-pass, 1 kHz cutoff</p>
+      <div class="c-ctls">
+        <label class="c-ctl"><span class="c-ctl__name">tone</span><input type="range" min="-25" max="26" step="1" value="0" data-c-ctl="tone"><output class="c-ctl__val" data-c-ctl-out="tone">440 Hz</output></label>
+        <label class="c-ctl"><span class="c-ctl__name">level</span><input type="range" min="-20" max="0" step="1" value="0" data-c-ctl="level"><output class="c-ctl__val" data-c-ctl-out="level">0 dB</output></label>
+        <label class="c-ctl"><span class="c-ctl__name">phase</span><input type="range" min="0" max="360" step="5" value="0" data-c-ctl="phase"><output class="c-ctl__val" data-c-ctl-out="phase">0°</output></label>
+      </div>
     </div>
   </div>
-  <p class="c-legend"><b>Live demo:</b> <b class="c-amber">amber</b> is the raw microphone signal, <b class="c-blue">blue</b> is after our filter. Drag across the trace to add or remove noise and watch the filter keep the tone.</p>
+  <p class="c-legend"><b>Live demo:</b> <b class="c-amber">amber</b> is the raw microphone signal, <b class="c-blue">blue</b> is after our filter. Drag across the trace to add or remove noise, or change the tone, level and phase, and watch what the filter keeps.</p>
   <div class="c-wrap c-hero__copy">
     <nav class="c-crumb" aria-label="Breadcrumb"><a href="/">MLAIA</a> / Audio &amp; Acoustics</nav>
     <h1 class="c-display" id="hero-title">Algorithms that survive <span class="c-accent">the real device.</span></h1>
