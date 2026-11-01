@@ -5,7 +5,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.mlaia.com/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/"/>
@@ -16,7 +16,7 @@
   <!-- Specialist practices -->
   <url>
     <loc>https://www.mlaia.com/audio-ai/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/audio-ai/"/>
@@ -25,7 +25,7 @@
   </url>
   <url>
     <loc>https://www.mlaia.com/he/audio-ai/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/audio-ai/"/>
@@ -34,7 +34,7 @@
   </url>
   <url>
     <loc>https://www.mlaia.com/audio-ai/lab/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -64,7 +64,7 @@
   </url>
   <url>
     <loc>https://www.mlaia.com/medical-ai/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -88,7 +88,7 @@
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -180,7 +180,7 @@
 
   <url>
     <loc>https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
