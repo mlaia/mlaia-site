@@ -247,7 +247,7 @@ bar.hidden=false;label();apply('all',false);
 })();
 
 /* Customer logos: a slow scrolling strip. The list is cloned once (aria-hidden, out of the tab order)
-   and looped with CSS; hover, keyboard focus or the Pause button stop it. Under prefers-reduced-motion,
+   and looped with CSS; hover, keyboard focus, the Pause button or scrolling off-screen stop it. Under prefers-reduced-motion,
    ?still or the accessibility widget's "Stop Animations" the clones go and the static grid shows. */
 (()=>{
 'use strict';
@@ -269,5 +269,6 @@ btn.addEventListener('click',()=>{paused=!paused;sync();});
 if(mq.addEventListener)mq.addEventListener('change',sync);
 new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});
 new MutationObserver(text).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+if('IntersectionObserver' in window)new IntersectionObserver(e=>box.classList.toggle('is-offscreen',!e[0].isIntersecting)).observe(box);
 sync();
 })();
