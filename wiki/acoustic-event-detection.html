@@ -92,7 +92,7 @@
           "name": "What is the difference between sound event detection and audio classification?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sound event detection outputs event labels with onset and offset times in a continuous audio stream, while audio classification assigns one or more labels to an entire clip with no timing information. Detection is the harder problem and requires either strongly labeled data or weak-label learning techniques."
+            "text": "Sound event detection outputs event labels with onset and offset times in a continuous stream; audio classification assigns one or more labels to an entire clip with no timing. Detection is the harder problem and requires either strongly labeled data or weak-label learning techniques."
           }
         },
         {
@@ -100,7 +100,7 @@
           "name": "Why are spectrograms used instead of raw waveforms?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Time-frequency representations such as log-mel spectrograms make the structure of sound (harmonics, transients, formants) explicit, so models need far less data to learn it. Raw-waveform models can match spectrogram models at very large scale, but at typical industrial dataset sizes the spectrogram prior almost always wins."
+            "text": "Time–frequency representations make the structure of sound (harmonics, transients, formants) explicit, so models need far less data to learn it. Raw-waveform models exist and can match spectrogram models at scale, but at typical industrial dataset sizes the spectrogram prior almost always wins."
           }
         },
         {
@@ -108,7 +108,7 @@
           "name": "How much labeled data does an acoustic event detector need?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "There is no universal number, but with pre-trained audio embeddings useful detectors have been built from a few hundred labeled events per class, extended with synthetic mixing and augmentation. Training competitive models from scratch typically requires tens of thousands of examples or a large weakly labeled corpus such as AudioSet."
+            "text": "There is no universal number, but with pre-trained embeddings, useful detectors have been built from a few hundred labeled events per class, augmented synthetically. Training competitive models from scratch typically requires tens of thousands of examples or a large weakly labeled corpus."
           }
         }
       ]
