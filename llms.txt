@@ -28,11 +28,12 @@ MLAIA works in three fields, each with its own practice and its own pages. We bu
 Signal processing combined with machine learning: audio event detection, noise reduction and active noise cancellation, microphone arrays and beamforming, vibration analysis and predictive maintenance, and audio models that run on the device.
 
 - [Audio, Acoustics & Signal Processing](https://www.mlaia.com/audio-ai/) — practice overview
+- [Audio, Acoustics & Signal Processing, in Hebrew](https://www.mlaia.com/he/audio-ai/) — the practice overview in Hebrew
 - [Microphone Array Beamforming](https://www.mlaia.com/audio-ai/beamforming-microphone-arrays/) — array geometry, DOA estimation, fixed and adaptive beamformers
 - [Noise Reduction & Active Noise Cancellation](https://www.mlaia.com/audio-ai/noise-reduction-anc/) — speech enhancement, echo cancellation, feedforward/feedback ANC
 - [On-Device Audio AI](https://www.mlaia.com/audio-ai/edge-audio-ai/) — wake words, sound events and speech models on phones, DSPs and controllers
 - [Vibration Analysis & Machine Learning](https://www.mlaia.com/audio-ai/vibration-analysis/) — condition monitoring, bearing fault features, anomaly detection
-- [Interactive Audio Lab](https://www.mlaia.com/audio-ai/lab/) — browser demos of filtering, beamforming and active noise cancellation
+- [Interactive Audio Lab](https://www.mlaia.com/audio-ai/lab/) — six browser demos on synthetic signals: noise filtering, microphone-array beamforming, active noise cancellation, machine vibration (bearing fault) diagnostics, sound event detection and speech enhancement
 
 ### 2. Medical AI & Clinical Data Science
 AI for clinical records, medical images and biosignals, for hospitals and MedTech teams: models that can be evaluated, understood and integrated into clinical work.
