@@ -245,3 +245,30 @@ btns.forEach(b=>b.addEventListener('click',()=>apply(b.dataset.filter,true)));
 new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 bar.hidden=false;label();apply('all',false);
 })();
+
+/* Customer logos: a slow scrolling strip. The list is cloned once (aria-hidden, out of the tab order)
+   and looped with CSS; hover, keyboard focus, the Pause button or scrolling off-screen stop it. Under prefers-reduced-motion,
+   ?still or the accessibility widget's "Stop Animations" the clones go and the static grid shows. */
+(()=>{
+'use strict';
+const box=document.querySelector('[data-hm-marquee]');if(!box)return;
+const list=box.querySelector('.hm-logos'),btn=document.getElementById('hm-logos-pause');if(!list||!btn)return;
+const mq=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+const still=()=>/[?&]still\b/.test(location.search)||mq.matches||document.body.classList.contains('a11y-no-anim');
+const he=()=>document.documentElement.lang==='he';
+let paused=false,clones=[];
+const text=()=>{btn.textContent=paused?(he()?'הפעלת הלוגואים':'Play logos'):(he()?'עצירת הלוגואים':'Pause logos');};
+const sync=()=>{
+  const move=!still();
+  if(move&&!clones.length)clones=[...list.children].map(li=>{const c=li.cloneNode(true);c.setAttribute('aria-hidden','true');c.querySelectorAll('a').forEach(a=>a.tabIndex=-1);list.appendChild(c);return c;});
+  if(!move&&clones.length){clones.forEach(c=>c.remove());clones=[];}
+  box.classList.toggle('is-moving',move);box.classList.toggle('is-paused',paused);
+  btn.hidden=!move;btn.setAttribute('aria-pressed',String(paused));text();
+};
+btn.addEventListener('click',()=>{paused=!paused;sync();});
+if(mq.addEventListener)mq.addEventListener('change',sync);
+new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});
+new MutationObserver(text).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+if('IntersectionObserver' in window)new IntersectionObserver(e=>box.classList.toggle('is-offscreen',!e[0].isIntersecting)).observe(box);
+sync();
+})();
