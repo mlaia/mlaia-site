@@ -1,54 +1,309 @@
 <!doctype html>
-<html lang="he" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>עיבוד אותות, אקוסטיקה ו-AI לאודיו | MLAIA</title><meta name="description" content="פיתוח אלגוריתמים לעיבוד אותות ו-AI לאודיו: זיהוי אירועים אקוסטיים, הפחתת רעשים וביטול רעשים אקטיבי, מערכי מיקרופונים, ניתוח רעידות ומודלים שרצים על המכשיר."><meta name="robots" content="index, follow"><link rel="canonical" href="https://www.mlaia.com/he/audio-ai/"><link rel="alternate" hreflang="he" href="https://www.mlaia.com/he/audio-ai/"><link rel="alternate" hreflang="en" href="https://www.mlaia.com/audio-ai/"><link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/audio-ai/"><meta property="og:title" content="עיבוד אותות, אקוסטיקה ו-AI לאודיו | MLAIA"><meta property="og:description" content="פיתוח אלגוריתמים לעיבוד אותות ו-AI לאודיו: זיהוי אירועים אקוסטיים, הפחתת רעשים וביטול רעשים אקטיבי, מערכי מיקרופונים, ניתוח רעידות ומודלים שרצים על המכשיר."><meta property="og:type" content="website"><meta property="og:locale" content="he_IL"><meta property="og:url" content="https://www.mlaia.com/he/audio-ai/"><meta property="og:image" content="https://www.mlaia.com/assets/og/audio-ai.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://www.mlaia.com/assets/og/audio-ai.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/practices.css"><script src="/assets/practice.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"MLAIA אודיו ואקוסטיקה","description":"אקוסטיקה, עיבוד אותות קלאסי ולמידת מכונה, שמהונדסים יחד. ממיקרופונים וחיישני רעידות ועד אלגוריתמים שרצים על מכשירים אמיתיים.","url":"https://www.mlaia.com/he/audio-ai/","inLanguage":"he","provider":{"@type":"Organization","@id":"https://www.mlaia.com/#organization","name":"MLAIA Data Science","url":"https://www.mlaia.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "he", "mainEntity": [{"@type": "Question", "name": "זה ירוץ על ה-DSP או על ה-Cortex-M שלנו?", "acceptedAnswer": {"@type": "Answer", "text": "לעיתים קרובות כן, בזיהוי מילות מפתח, באירועים קוליים ובמאפייני רעידות. קודם אנחנו מתאימים את שלב העיבוד המקדים ואת המודל לזיכרון, לתדר השעון ולצריכת ההספק שלכם, ומודדים על מכשיר היעד לפני שאנחנו מתחייבים למספר."}}, {"@type": "Question", "name": "אפשר לעבוד עם המיקרופונים הקיימים שלנו?", "acceptedAnswer": {"@type": "Answer", "text": "כן, ואנחנו אפילו מעדיפים. אנחנו מאפיינים את המיקרופונים ואת אופן ההתקנה שאתם משווקים, ואז מאמנים ובודקים על הקלטות מהם, כי מודל שכוונן על חומרה אחרת נוטה לאבד מהביצועים שלו על החומרה שלכם."}}, {"@type": "Question", "name": "אילו נתונים צריך כדי להתחיל?", "acceptedAnswer": {"@type": "Answer", "text": "הקלטות מהמכשיר האמיתי בסביבה האמיתית, גם אם זה סט קטן, ותיאור של הקולות או התקלות שחשובים לכם. אם עדיין אין לכם הקלטות, הצעד הראשון הוא תוכנית הקלטה."}}, {"@type": "Question", "name": "האם כל בעיית אודיו דורשת רשת נוירונים?", "acceptedAnswer": {"@type": "Answer", "text": "לא. במשימה מוגדרת היטב ייתכן שסינון, ניתוח ספקטרלי או מודל פיזיקלי יספיקו. אנחנו בוחרים את הגישה לפי ביצועים מדודים ולפי האילוצים של המוצר. כשלמידת מכונה מוסיפה ערך, אנחנו בודקים אותה כחלק משרשרת האות המלאה."}}, {"@type": "Question", "name": "אתם יכולים לשפר מודל אודיו קיים?", "acceptedAnswer": {"@type": "Answer", "text": "כן. אפשר להתחיל בסקירה ממוקדת של הנתונים, התיוג, שרשרת האות ומגבלות הפריסה, ואז לסכם יחד תוכנית הערכה לפני שמשנים את המודל."}}, {"@type": "Question", "name": "אתם יכולים להבטיח השהיה או דיוק מסוימים?", "acceptedAnswer": {"@type": "Answer", "text": "את היעדים צריך לקבוע מול החומרה שלכם, סביבת ההפעלה ונתוני בדיקה מייצגים. אנחנו מגדירים איתכם את תקציב ההשהיה המלא ואת מדדי השגיאה הרלוונטיים, ולא מבטיחים מספרי ביצועים שלא נבדקו."}}, {"@type": "Question", "name": "אתם עובדים גם מעבר לדיבור?", "acceptedAnswer": {"@type": "Answer", "text": "כן. התחום כולל אירועים אקוסטיים, רעידות ואותות חיישנים, ומשלב הבנה פיזיקלית עם שיטות סטטיסטיות ושיטות של למידת מכונה."}}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MLAIA","item":"https://www.mlaia.com/"},{"@type":"ListItem","position":2,"name":"אודיו ואקוסטיקה","item":"https://www.mlaia.com/he/audio-ai/"}]}</script><style>
-.au-for{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:36px}
-.au-for a{display:block;padding:26px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--practice);text-decoration:none}
-.au-for a:hover{border-color:var(--practice)}
-.au-for small{display:block;font:13px monospace;color:var(--practice);margin-bottom:10px}
-.au-for strong{display:block;font-size:20px;line-height:1.35;margin-bottom:8px}
-.au-for span{display:block;color:var(--quiet);line-height:1.6}
-.au-creds{margin-top:48px;padding-top:22px;border-top:1px solid #314158;font-size:14px;color:#b7c6dc}
-.au-creds p{margin:0 0 10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:#9fb0c9}
-.au-creds ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 32px}
-.au-creds a{color:#fff;overflow-wrap:anywhere}
-.au-guides{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:28px;padding-top:22px;border-top:1px solid var(--line);font-size:15px}
-.au-guides strong{width:100%;font-size:14px}
-.p-faq details p{max-width:760px}
-.p-contact h2{overflow-wrap:break-word}
-@media(max-width:900px){.au-for{grid-template-columns:1fr}}
-@media(max-width:768px){.p-process{grid-template-columns:1fr}.p-hero h1{font-size:38px}.p-hero h1 br{display:none}}
-/* Hebrew / RTL (page-local; shared CSS is LTR-first). Font follows the homepage: Heebo for Hebrew. */
-body.practice-page,.site-quick-nav{font-family:'Heebo','DM Sans',Arial,sans-serif}
-.p-logo{direction:ltr}
-.p-hero h1{letter-spacing:-.02em;line-height:1.12}
-.p-section h2,.p-contact h2,.p-service h3,.p-product h3{letter-spacing:-.01em}
-.p-eyebrow,.au-creds p,.p-brief h2{letter-spacing:.02em}
-.p-quote{padding:0 30px 0 0;border-left:0;border-right:3px solid var(--practice)}
-.p-quote cite .en{direction:ltr;unicode-bidi:isolate}
-.he-en{font-weight:400;font-size:.85em;white-space:nowrap}
-.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
-.p-form input[type=email]{direction:ltr;text-align:right}
-</style><link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
-<body class="practice-page audio" data-practice="audio-ai" data-site-shell="true"><nav class="site-quick-nav" aria-label="ניווט מהיר"><a href="/?lang=he" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">בית</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">צרו קשר</span></a></nav><a class="p-skip" href="#main">דילוג לתוכן הראשי</a><header class="p-nav"><div class="p-wrap p-nav-inner"><a class="p-logo" href="/?lang=he">ML<span>AI</span>A</a><button class="p-menu" type="button" aria-expanded="false" aria-controls="practice-nav">תפריט</button><nav class="p-nav-links" id="practice-nav" aria-label="ניווט ראשי"><a href="/he/audio-ai/" aria-current="page">אודיו ואקוסטיקה</a><a href="/medical-ai/">AI רפואי</a><a href="/predictive-intelligence/">חיזוי וניתוח סיבתי</a><a href="/blog.html">תובנות</a><a href="/audio-ai/" hreflang="en" lang="en">English</a><a class="p-button" href="#contact">בואו נדבר</a></nav></div></header>
-<main id="main"><section class="p-hero"><div class="p-wrap"><div class="p-breadcrumb"><a href="/?lang=he">MLAIA</a> / אודיו ואקוסטיקה</div><div class="p-hero-grid"><div><p class="p-eyebrow">MLAIA · אודיו ואקוסטיקה</p><h1>אלגוריתמים שעומדים <br>במבחן המכשיר האמיתי.</h1><p class="p-intro">ליצרני אוזניות, אוזניות ראש ומכשירי שמיעה לבישים, לצוותי חישה ברחפנים, בביטחון ובאבטחה, ולניטור מצב מכונות בתעשייה. פיתוח אלגוריתמים לעיבוד אותות שמשלב אקוסטיקה, DSP ולמידת מכונה, נבנה ונבדק על המיקרופונים, החומרה והרעש שלכם.</p><div class="p-actions"><a href="#contact" class="p-button" data-track="practice_cta">לקביעת שיחת היתכנות של 30 דקות <span aria-hidden="true">↖</span></a><a href="/audio-ai/lab/" class="p-button secondary">למעבדת האודיו האינטראקטיבית <span class="he-en">(באנגלית)</span></a></div></div><aside class="p-brief"><h2>נבנה סביב האתגר שלכם</h2><dl><div><dt>הנתונים שלכם</dt><dd>קול, דיבור ורעידות</dd></div><div><dt>האילוצים שלכם</dt><dd>רעש, השהיה ומשאבי חישוב מוגבלים</dd></div><div><dt>המיקוד שלנו</dt><dd>פיזיקה, DSP ולמידת מכונה</dd></div></dl></aside></div><div class="au-creds"><p>מאחורי התחום</p><ul><li>בהובלת ד״ר יוחאי אדליץ, דוקטורט ממכון ויצמן</li><li>ממציא שותף בפטנטים רשומים בעיבוד אותות אקוסטיים ולמידת מכונה</li></ul></div></div></section><section class="p-section white" id="who"><div class="p-wrap"><p class="p-eyebrow">עם מי אנחנו עובדים</p><h2>שלושה סוגי צוותים.<br>שרשרת אות אחת.</h2><div class="au-for"><a href="/audio-ai/noise-reduction-anc/"><small>01</small><strong>אוזניות, אוזניות ראש ומכשירי שמיעה לבישים</strong><span>הפחתת רעשים, ביטול רעשים אקטיבי (ANC) ו-beamforming עם שניים או שלושה מיקרופונים, תקציב הספק זעיר והשהיה נמוכה מאוד. <span class="he-en">(באנגלית)</span></span></a><a href="/audio-ai/edge-audio-ai/"><small>02</small><strong>רחפנים, ביטחון ומערכות חישה לאבטחה</strong><span>זיהוי ואיתור של קולות בתוך רוח, רעש מנועים והפרעות רקע, על חומרה שצריכה להחליט במקום. <span class="he-en">(באנגלית)</span></span></a><a href="/audio-ai/vibration-analysis/"><small>03</small><strong>ניטור מצב מכונות בתעשייה</strong><span>אותות רעידה ואותות אקוסטיים ממכונות ומצנרת, שהופכים למאפייני תקלה ולהתראות שאפשר לקשור חזרה לפיזיקה. <span class="he-en">(באנגלית)</span></span></a></div></div></section>
-<section class="p-section" id="signal-processing"><div class="p-wrap"><p class="p-eyebrow">אקוסטיקה קלאסית ועיבוד אותות ספרתי</p><h2>להבין את הפיזיקה.<br>להנדס את האות.</h2><p class="p-section-lead">מערכת אודיו שימושית מתחילה בהבנה איך הקול נוצר, איך הוא נקלט ואיך הוא משתנה בדרך. אנחנו עובדים לאורך כל מערך המדידה, שרשרת האות והאלגוריתם, כך שפיתוח האלגוריתמים וההחלטות על המודל נשענים על מה שהחיישנים באמת מודדים.</p><div class="p-grid">
-<article class="p-service"><span class="p-number">01</span><h3>מדידה אקוסטית וכיול</h3><p>אפיון של מיקרופונים, חיישנים ושרשרת המדידה. בוחנים רגישות, תגובת תדר, רצפת רעש וטווח דינמי, כדי להבין במה הנתונים יכולים לתמוך.</p></article>
-<article class="p-service"><span class="p-number">02</span><h3>ניתוח בזמן ובתדר</h3><p>שימוש ב-FFT, ספקטרוגרמות, הערכות ספקטרליות וקורלציה כדי לחקור הרמוניות, תופעות מעבר, מחזוריות והפרעות, ולקשר את הדפוסים שנמצאו למקורות הפיזיקליים שלהם.</p></article>
-<article class="p-service"><span class="p-number">03</span><h3>תכנון מסננים והפחתת רעשים</h3><p>תכנון מסננים סלקטיביים בתדר והערכה של אסטרטגיות להפחתת רעשים. שוקלים את האיזון בין דיכוי האות הלא רצוי, שמירה על האות השימושי והשהיית העיבוד.</p><a href="/audio-ai/lab/#noise">להאזין לניסוי הסינון <span class="he-en">(באנגלית)</span> ←</a></article>
-<article class="p-service"><span class="p-number">04</span><h3>מערכי מיקרופונים ו-beamforming</h3><p>שימוש במידע מרחבי כדי להתמקד בכיוון מסוים, תוך התחשבות בגאומטריית המערך, בהשהיות ההתפשטות, בתגובה שתלויה בתדר ובסביבה האקוסטית.</p><a href="/audio-ai/lab/#beamforming">לכוון את סימולציית המערך <span class="he-en">(באנגלית)</span> ←</a></article>
-<article class="p-service"><span class="p-number">05</span><h3>רעידות וחישה פיזיקלית</h3><p>ניתוח של אותות רעידה, תהודות ותגובות חיישנים. מתכננים ניסויים שאפשר לשחזר ומפרשים את המדידות בהקשר של המכניקה שמאחוריהן.</p></article>
-<article class="p-service"><span class="p-number">06</span><h3>צנרת עיבוד אותות בזמן אמת</h3><p>הנדסה של דגימה, אגירה (buffering), סינון והפקת מאפיינים סביב מכשיר היעד. בודקים את המסלול המלא מהקליטה ועד הפלט, כולל השהיה ומגבלות חישוב.</p></article>
-</div><div class="p-product"><div><p class="p-eyebrow" style="color:#77d9ed">לבחור את השיטה שמתאימה לבעיה</p><h3>DSP קלאסי. למידת מכונה.<br>או שילוב מתוכנן היטב.</h3><p>מתחילים מבסיס של עיבוד אותות, ומוסיפים מודלים נלמדים כשהמשימה דורשת אותם, למשל בזיהוי אירועים אקוסטיים או בזיהוי דיבור. במערכת משולבת ה-DSP יכול להכין את האות והמודל לפרש אותו, וכל שלב נבדק מול אותן דרישות תפעוליות.</p></div><div><p>עבור המוצר שלכם, המשמעות היא לבדוק דיוק לצד איכות אות, עמידות, השהיה, זיכרון וצריכת הספק, ולא להתייחס לציון של המודל כאילו הוא המערכת כולה.</p><a class="p-button" href="/audio-ai/lab/">למעבדת האודיו <span class="he-en">(באנגלית)</span> ←</a></div></div></div></section>
-<section class="p-section" id="semantic-hearing"><div class="p-wrap"><p class="p-eyebrow">שמיעה סמנטית ובינה אקוסטית</p><h2>להבין אילו קולות חשובים.</h2><p class="p-section-lead">לעבור ממדידה של אות לפרשנות של המשמעות שלו עבור יישום מסוים. משלבים אקוסטיקה, עיבוד אותות ומודלים נלמדים כדי לזהות אירועים רלוונטיים ולתמוך בהאזנה סלקטיבית.</p><div class="p-grid"><article class="p-service"><h3>זיהוי אירועים קוליים</h3><p>מגדירים את הקולות שהמערכת צריכה לזהות, אוספים דוגמאות מייצגות ובודקים את הזיהויים מול התראות שווא ואירועים שהוחמצו.</p></article><article class="p-service"><h3>האזנה עם מטרה</h3><p>מחברים בין סוגי קולות והקשר לבין הצרכים של המשתמש. מחליטים אילו אירועים לשמר, להדגיש או להגיב אליהם, ובודקים את חוויית ההאזנה כולה.</p></article><article class="p-service"><h3>בינה מלאכותית על המכשיר</h3><p>איזון בין איכות הזיהוי, השהיה, זיכרון וצריכת הספק בטלפונים ובחומרה משובצת. בודקים עם הרעש, המיקרופונים ותנאי ההפעלה שהמוצר יפגוש בפועל.</p></article></div><p><a class="p-button" href="/audio-ai/lab/">לשחק עם קול <span class="he-en">(באנגלית)</span> ←</a></p><p class="p-note">המעבדה האינטראקטיבית הנוכחית מדגימה עקרונות של עיבוד אותות קלאסי באמצעות אודיו סינתטי. היא אינה מריצה מודל לזיהוי סמנטי של קולות.</p></div></section><section class="p-section white" id="topics"><div class="p-wrap"><p class="p-eyebrow">נושאי התמחות</p><h2>להעמיק<br>בבעיה ספציפית.</h2><p class="p-section-lead">כל עמוד נושא מסביר איך אנחנו ניגשים לבעיה, מה אנחנו מודדים ואילו שאלות כדאי לסגור לפני שפרויקט מתחיל. העמודים זמינים כרגע באנגלית.</p><div class="p-grid"><article class="p-service"><h3>מערכי מיקרופונים ו-beamforming</h3><p>גאומטריית מערך, הערכת כיוון הגעה ו-beamformers קבועים או אדפטיביים, שמתוכננים סביב המכשיר והחדר.</p><a href="/audio-ai/beamforming-microphone-arrays/">Beamforming ומערכי מיקרופונים <span class="he-en">(באנגלית)</span> ←</a></article><article class="p-service"><h3>הפחתת רעשים וביטול רעשים אקטיבי</h3><p>שיפור דיבור, ביטול הד וביטול רעשים אקטיבי (ANC), באיזון בין דיכוי הרעש לבין עיוות והשהיה.</p><a href="/audio-ai/noise-reduction-anc/">הפחתת רעשים ו-ANC <span class="he-en">(באנגלית)</span> ←</a></article><article class="p-service"><h3>AI לאודיו על המכשיר</h3><p>מילות הפעלה, אירועים קוליים ומודלי דיבור בטלפונים, במעבדי DSP ובבקרים ייעודיים, בתוך מגבלות הזיכרון, ההשהיה וההספק.</p><a href="/audio-ai/edge-audio-ai/">AI לאודיו על המכשיר <span class="he-en">(באנגלית)</span> ←</a></article><article class="p-service"><h3>ניתוח רעידות</h3><p>אותות של מדי תאוצה ואותות רעידה לניטור מצב ולחישה במוצרים, מהתקנת החיישן ועד מאפייני תקלה וזיהוי חריגות.</p><a href="/audio-ai/vibration-analysis/">ניתוח רעידות <span class="he-en">(באנגלית)</span> ←</a></article></div></div></section><section class="p-section white" id="experience"><div class="p-wrap"><p class="p-eyebrow">מנקודת המבט של לקוח</p><h2>מוכרים בזכות מומחיות באודיו וב-DSP.</h2><blockquote class="p-quote"><p>”המומחיות והידע הרחב שלכם היו גורם מרכזי בביסוס תשתית ה-AI שלנו.“</p><cite><span class="en" lang="en">Tzvika Fridman</span>, CTO, Silentium<br>תרגום של קטע מההמלצה שפורסמה באתר של MLAIA (במקור באנגלית).</cite></blockquote></div></section>
-<section class="p-section white" id="speech"><div class="p-wrap"><p class="p-eyebrow">ממשקים קוליים</p><h2>דיבור שמתחבר לתהליכי העבודה שלכם.</h2><p class="p-section-lead">המרת דיבור לטקסט (STT), המרת טקסט לדיבור (TTS) ומודלי אודיו ייעודיים לתחום. בודקים יחד שפה, אוצר מילים, רעש והשהיה, ואז מחברים את הממשק הקולי לעוזר דיגיטלי או לתהליך עסקי.</p><div class="p-actions"><a class="p-button" href="/audio-ai/lab/">למעבדת האודיו האינטראקטיבית <span class="he-en">(באנגלית)</span> ←</a><a href="https://ultrabot.ai/voice-agents/" target="_blank" rel="noopener">AI שיחתי ואוטומציה <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></a></div></div></section>
-<section class="p-section" id="edge-ai"><div class="p-wrap"><p class="p-eyebrow">AI בקצה, במערכות משובצות ובעולם הפיזי</p><h2>ממודל מאומן<br>למכשיר שעובד.</h2><p class="p-section-lead">הניסיון שלנו בפרויקטים כולל פריסה של מודלים של למידת מכונה ולמידה עמוקה בטלפונים מבוססי Android ו-iOS, וגם בבקרים ייעודיים ליישומים בתחום הרחפנים והאוזניות.</p><div class="p-grid"><article class="p-service"><h3>הסקה בטלפון הנייד</h3><p>הרצת מודלים בתוך אפליקציות Android ו-iOS. מתכננים סביב משאבי המכשיר, הגישה לחיישנים, זמני התגובה והחוויה של מי שמשתמש באפליקציה.</p></article><article class="p-service"><h3>בקרים ייעודיים</h3><p>הבאת ההסקה לחומרה מוגבלת במשאבים. בוחנים את גודל המודל, הזיכרון, זמן העיבוד וצריכת ההספק לצד דרישות הדיוק של היישום.</p></article><article class="p-service"><h3>רחפנים, אוזניות ומערכות פיזיקליות</h3><p>מחברים חישה והסקה למכשירים שפועלים בעולם הפיזי. מגדירים איך התחזיות מניעות את התנהגות המכשיר, ואז מאמתים על חומרת היעד.</p></article></div><div class="p-capabilities"><strong>שיקולים הנדסיים</strong><span>דחיסת מודלים וקוונטיזציה</span><span>צנרת עיבוד אותות</span><span>תקציבי השהיה והספק</span><span>הערכה ברמת המכשיר</span><span>Android ו-iOS</span><span>בקרים ייעודיים</span><span>רחפנים ואוזניות</span><span>מגבלות קישוריות</span></div><p><a href="/audio-ai/edge-audio-ai/">AI לאודיו על המכשיר, לעומק <span class="he-en">(באנגלית)</span> ←</a> &nbsp; <a href="/audio-ai/lab/#beamforming">לסימולציית מערך המיקרופונים <span class="he-en">(באנגלית)</span> ←</a></p></div></section>
-<section class="p-section" id="engagement"><div class="p-wrap"><p class="p-eyebrow">איך מתנהל פרויקט</p><h2>מודדים. בונים אב-טיפוס. מריצים על המכשיר.</h2><div class="p-process"><article class="p-step"><span>01</span><h3>מדידה ובדיקה של שרשרת האות</h3><p>אנחנו בודקים את המיקרופונים או החיישנים, את אופן ההתקנה, את הדגימה ואת רצפת הרעש. כך תדעו במה הנתונים יכולים לתמוך ובמה לא.</p></article><article class="p-step"><span>02</span><h3>אב-טיפוס על נתונים מוקלטים</h3><p>אנחנו בונים בסיס DSP, ואחר כך שיטות נלמדות או היברידיות, אם הן עוקפות אותו. הכול נמדד על הקלטות מהמכשיר שלכם.</p></article><article class="p-step"><span>03</span><h3>גרסה בזמן אמת, על המכשיר</h3><p>אנחנו מעבירים את השיטה שנבחרה לטלפון, ל-DSP או לבקר שלכם. השהיה, זיכרון וצריכת הספק נמדדים על מכשיר היעד, ולא מוערכים.</p></article><article class="p-step"><span>04</span><h3>בדיקות שטח ומסירה</h3><p>אנחנו בודקים בסביבה האמיתית, בוחנים כשלים ומכווננים. אתם מקבלים את הקוד, סט הבדיקה והתיעוד, כדי שהמערכת תהיה שלכם.</p></article></div></div></section>
-<section class="p-section white" id="insights"><div class="p-wrap"><p class="p-eyebrow">תובנות</p><h2>אודיו ועיבוד אותות,<br>במאמרים.</h2><p class="p-section-lead">המאמרים והמדריכים זמינים כרגע באנגלית.</p><div class="p-grid p-reads"><a href="/blog-signal.html"><small>נקודת מבט הנדסית</small><strong>DSP קלאסי ולמידת מכונה <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></strong></a><a href="/wiki/signal-processing-machine-learning.html"><small>מדריך טכני</small><strong>עיבוד אותות פוגש למידת מכונה <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></strong></a><a href="/wiki/acoustic-event-detection.html"><small>מדריך טכני</small><strong>זיהוי אירועים אקוסטיים <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></strong></a><a href="/blog-audio-ai-production.html"><small>AI לאודיו</small><strong>ממודלי דיבור לבינה קולית <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></strong></a><a href="/blog-music-ai.html"><small>AI למוזיקה</small><strong>יצירה, הפרדת ערוצים וזכויות יוצרים <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></strong></a></div><div class="au-guides"><strong>מדריכי התמחות (באנגלית)</strong><a href="/audio-ai/beamforming-microphone-arrays/">Beamforming ומערכי מיקרופונים</a><a href="/audio-ai/noise-reduction-anc/">הפחתת רעשים ו-ANC</a><a href="/audio-ai/edge-audio-ai/">AI לאודיו על המכשיר</a><a href="/audio-ai/vibration-analysis/">ניתוח רעידות</a><a href="/audio-ai/lab/">מעבדת אודיו אינטראקטיבית</a></div></div></section>
-<section class="p-section"><div class="p-wrap p-faq"><p class="p-eyebrow">לפני שמתחילים</p><h2>שאלות טובות. תשובות ישירות.</h2><details><summary>זה ירוץ על ה-DSP או על ה-Cortex-M שלנו?</summary><p>לעיתים קרובות כן, בזיהוי מילות מפתח, באירועים קוליים ובמאפייני רעידות. קודם אנחנו מתאימים את שלב העיבוד המקדים ואת המודל לזיכרון, לתדר השעון ולצריכת ההספק שלכם, ומודדים על מכשיר היעד לפני שאנחנו מתחייבים למספר.</p></details><details><summary>אפשר לעבוד עם המיקרופונים הקיימים שלנו?</summary><p>כן, ואנחנו אפילו מעדיפים. אנחנו מאפיינים את המיקרופונים ואת אופן ההתקנה שאתם משווקים, ואז מאמנים ובודקים על הקלטות מהם, כי מודל שכוונן על חומרה אחרת נוטה לאבד מהביצועים שלו על החומרה שלכם.</p></details><details><summary>אילו נתונים צריך כדי להתחיל?</summary><p>הקלטות מהמכשיר האמיתי בסביבה האמיתית, גם אם זה סט קטן, ותיאור של הקולות או התקלות שחשובים לכם. אם עדיין אין לכם הקלטות, הצעד הראשון הוא תוכנית הקלטה.</p></details><details><summary>האם כל בעיית אודיו דורשת רשת נוירונים?</summary><p>לא. במשימה מוגדרת היטב ייתכן שסינון, ניתוח ספקטרלי או מודל פיזיקלי יספיקו. אנחנו בוחרים את הגישה לפי ביצועים מדודים ולפי האילוצים של המוצר. כשלמידת מכונה מוסיפה ערך, אנחנו בודקים אותה כחלק משרשרת האות המלאה.</p></details><details><summary>אתם יכולים לשפר מודל אודיו קיים?</summary><p>כן. אפשר להתחיל בסקירה ממוקדת של הנתונים, התיוג, שרשרת האות ומגבלות הפריסה, ואז לסכם יחד תוכנית הערכה לפני שמשנים את המודל.</p></details><details><summary>אתם יכולים להבטיח השהיה או דיוק מסוימים?</summary><p>את היעדים צריך לקבוע מול החומרה שלכם, סביבת ההפעלה ונתוני בדיקה מייצגים. אנחנו מגדירים איתכם את תקציב ההשהיה המלא ואת מדדי השגיאה הרלוונטיים, ולא מבטיחים מספרי ביצועים שלא נבדקו.</p></details><details><summary>אתם עובדים גם מעבר לדיבור?</summary><p>כן. התחום כולל אירועים אקוסטיים, רעידות ואותות חיישנים, ומשלב הבנה פיזיקלית עם שיטות סטטיסטיות ושיטות של למידת מכונה.</p></details></div></section>
-<section class="p-contact" id="contact"><div class="p-wrap p-contact-grid"><div><p class="p-eyebrow" style="color:#66d9f0">אודיו ואקוסטיקה</p><h2>לקביעת שיחת היתכנות של 30 דקות.</h2><p>ספרו לנו על המכשיר, על המיקרופונים או החיישנים, ועל הקול שצריך לזהות, להסיר או למדוד. נגיד לכם מה נראה ישים ומה כדאי למדוד קודם.</p><p>נא לא לצרף מאגרי נתונים חסויים, פרטי התחברות או מידע על מטופלים.</p><p><a href="mailto:yochai@mlaia.com" class="ltr">yochai@mlaia.com</a><br><a href="tel:+972524846282" class="ltr">+972 52 484 6282</a></p></div><form class="p-form" action="https://formspree.io/f/mvzdggyq" method="POST"><input type="hidden" name="practice" value="audio-ai"><input type="hidden" name="lang" value="he"><div class="p-form-row"><label>שם<input name="name" autocomplete="name" required></label><label>חברה<input name="company" autocomplete="organization"></label></div><label>אימייל בעבודה<input type="email" name="email" autocomplete="email" required></label><label>המכשיר והבעיה<textarea name="message" required></textarea></label><p style="font-size:14px;margin:0">הפנייה שלכם מטופלת בהתאם ל<a href="/privacy.html">מדיניות הפרטיות</a> שלנו <span class="he-en">(באנגלית)</span>.</p><button type="submit" class="p-button">בקשת שיחת היתכנות ←</button><p class="p-form-status" role="status" aria-live="polite"></p></form></div></section></main>
-<footer class="p-footer"><div class="p-wrap"><div>© 2026 MLAIA Data Science · ישראל · עובדים עם לקוחות בכל העולם</div><div><a href="/?lang=he#about">אודות MLAIA</a><a href="/privacy.html">פרטיות</a><a href="/accessibility.html">נגישות</a><a href="/terms.html">תנאי שימוש</a><button type="button" class="p-cookie-settings">העדפות עוגיות</button></div></div></footer>
-<div class="p-consent" hidden role="dialog" aria-label="העדפות עוגיות"><p>אנליטיקה אופציונלית עוזרת לנו להבין כיצד משתמשים באתר. אפשר לסרב לאנליטיקה ועדיין להשתמש בכל תכונות האתר. <a href="/privacy.html">מדיניות הפרטיות</a></p><div class="p-actions"><button class="p-button" type="button" data-consent="yes">אישור אנליטיקה</button><button class="p-button secondary" type="button" data-consent="no">סירוב</button></div></div>
+<html lang="he" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>עיבוד אותות, אקוסטיקה ו-AI לאודיו | MLAIA</title><meta name="description" content="פיתוח אלגוריתמים לעיבוד אותות ו-AI לאודיו: זיהוי אירועים אקוסטיים, הפחתת רעשים וביטול רעשים אקטיבי, מערכי מיקרופונים, ניתוח רעידות ומודלים שרצים על המכשיר."><meta name="robots" content="index, follow"><link rel="canonical" href="https://www.mlaia.com/he/audio-ai/"><link rel="alternate" hreflang="he" href="https://www.mlaia.com/he/audio-ai/"><link rel="alternate" hreflang="en" href="https://www.mlaia.com/audio-ai/"><link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/audio-ai/"><meta property="og:title" content="עיבוד אותות, אקוסטיקה ו-AI לאודיו | MLAIA"><meta property="og:description" content="פיתוח אלגוריתמים לעיבוד אותות ו-AI לאודיו: זיהוי אירועים אקוסטיים, הפחתת רעשים וביטול רעשים אקטיבי, מערכי מיקרופונים, ניתוח רעידות ומודלים שרצים על המכשיר."><meta property="og:type" content="website"><meta property="og:locale" content="he_IL"><meta property="og:url" content="https://www.mlaia.com/he/audio-ai/"><meta property="og:image" content="https://www.mlaia.com/assets/og/audio-ai.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://www.mlaia.com/assets/og/audio-ai.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Heebo:wght@300..900&family=Martian+Mono:wdth,wght@87.5,300..600&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/mlaia-c.css"><link rel="stylesheet" href="/assets/c-rtl.css"><script src="/assets/practice.js" defer></script><script src="/assets/mlaia-c.js" defer></script><script src="/assets/c-he.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"MLAIA אודיו ואקוסטיקה","description":"אקוסטיקה, עיבוד אותות קלאסי ולמידת מכונה, שמהונדסים יחד. ממיקרופונים וחיישני רעידות ועד אלגוריתמים שרצים על מכשירים אמיתיים.","url":"https://www.mlaia.com/he/audio-ai/","inLanguage":"he","provider":{"@type":"Organization","@id":"https://www.mlaia.com/#organization","name":"MLAIA Data Science","url":"https://www.mlaia.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "he", "mainEntity": [{"@type": "Question", "name": "זה ירוץ על ה-DSP או על ה-Cortex-M שלנו?", "acceptedAnswer": {"@type": "Answer", "text": "לעיתים קרובות כן, בזיהוי מילות מפתח, באירועים קוליים ובמאפייני רעידות. קודם אנחנו מתאימים את שלב העיבוד המקדים ואת המודל לזיכרון, לתדר השעון ולצריכת ההספק שלכם, ומודדים על מכשיר היעד לפני שאנחנו מתחייבים למספר."}}, {"@type": "Question", "name": "אפשר לעבוד עם המיקרופונים הקיימים שלנו?", "acceptedAnswer": {"@type": "Answer", "text": "כן, ואנחנו אפילו מעדיפים. אנחנו מאפיינים את המיקרופונים ואת אופן ההתקנה שאתם משווקים, ואז מאמנים ובודקים על הקלטות מהם, כי מודל שכוונן על חומרה אחרת נוטה לאבד מהביצועים שלו על החומרה שלכם."}}, {"@type": "Question", "name": "אילו נתונים צריך כדי להתחיל?", "acceptedAnswer": {"@type": "Answer", "text": "הקלטות מהמכשיר האמיתי בסביבה האמיתית, גם אם זה סט קטן, ותיאור של הקולות או התקלות שחשובים לכם. אם עדיין אין לכם הקלטות, הצעד הראשון הוא תוכנית הקלטה."}}, {"@type": "Question", "name": "האם כל בעיית אודיו דורשת רשת נוירונים?", "acceptedAnswer": {"@type": "Answer", "text": "לא. במשימה מוגדרת היטב ייתכן שסינון, ניתוח ספקטרלי או מודל פיזיקלי יספיקו. אנחנו בוחרים את הגישה לפי ביצועים מדודים ולפי האילוצים של המוצר. כשלמידת מכונה מוסיפה ערך, אנחנו בודקים אותה כחלק משרשרת האות המלאה."}}, {"@type": "Question", "name": "אתם יכולים לשפר מודל אודיו קיים?", "acceptedAnswer": {"@type": "Answer", "text": "כן. אפשר להתחיל בסקירה ממוקדת של הנתונים, התיוג, שרשרת האות ומגבלות הפריסה, ואז לסכם יחד תוכנית הערכה לפני שמשנים את המודל."}}, {"@type": "Question", "name": "אתם יכולים להבטיח השהיה או דיוק מסוימים?", "acceptedAnswer": {"@type": "Answer", "text": "את היעדים צריך לקבוע מול החומרה שלכם, סביבת ההפעלה ונתוני בדיקה מייצגים. אנחנו מגדירים איתכם את תקציב ההשהיה המלא ואת מדדי השגיאה הרלוונטיים, ולא מבטיחים מספרי ביצועים שלא נבדקו."}}, {"@type": "Question", "name": "אתם עובדים גם מעבר לדיבור?", "acceptedAnswer": {"@type": "Answer", "text": "כן. התחום כולל אירועים אקוסטיים, רעידות ואותות חיישנים, ומשלב הבנה פיזיקלית עם שיטות סטטיסטיות ושיטות של למידת מכונה."}}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MLAIA","item":"https://www.mlaia.com/"},{"@type":"ListItem","position":2,"name":"אודיו ואקוסטיקה","item":"https://www.mlaia.com/he/audio-ai/"}]}</script><link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
+<body class="practice-page audio c-page" data-practice="audio-ai" data-site-shell="true">
+<nav class="site-quick-nav" aria-label="ניווט מהיר"><a href="/?lang=he" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">בית</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">צרו קשר</span></a></nav>
+<a class="c-skip" href="#main">דילוג לתוכן הראשי</a>
+<header class="c-nav">
+  <div class="c-wrap c-nav__inner">
+    <a class="c-logo" href="/?lang=he">MLAIA</a>
+    <button class="p-menu c-menu" type="button" aria-expanded="false" aria-controls="practice-nav">תפריט</button>
+    <nav class="p-nav-links c-nav-links" id="practice-nav" aria-label="ניווט ראשי">
+      <a href="/he/audio-ai/" aria-current="page">אודיו ואקוסטיקה</a>
+      <a href="/medical-ai/">AI רפואי</a>
+      <a href="/predictive-intelligence/">חיזוי וניתוח סיבתי</a>
+      <a href="/blog.html">תובנות</a>
+      <a href="/audio-ai/" hreflang="en" lang="en">English</a>
+      <a class="c-btn" href="#contact">בואו נדבר</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="c-hero" aria-labelledby="hero-title">
+  <div class="c-instrument" data-c-instrument role="group" aria-label="הדגמה חיה של מסנן">
+    <div class="c-screen" dir="ltr" data-c-scope data-tone="440" data-value="0.55" data-hint>
+      <canvas aria-hidden="true"></canvas>
+    </div>
+    <div class="c-readout">
+      <div class="c-readout__head">
+      <p class="c-readout__title">מה המסנן השיג</p>
+      <dl>
+        <div class="c-big c-raw"><dt>SNR גולמי</dt><dd dir="ltr" data-c-read="raw">+7.5 dB</dd></div>
+        <div class="c-big c-out"><dt>SNR אחרי המסנן</dt><dd dir="ltr" data-c-read="out">+21.2 dB</dd></div>
+      </dl>
+      </div>
+      <div class="c-more" id="scope-more">
+      <dl>
+        <div><dt>שיפור</dt><dd dir="ltr" data-c-read="gain">+13.7 dB</dd></div>
+        <div><dt>הטון אחרי המסנן</dt><dd dir="ltr" data-c-read="tgain">0.0 dB</dd></div>
+        <div><dt>פיגור פאזה בטון</dt><dd dir="ltr" data-c-read="lag">68°</dd></div>
+        <div><dt>השהיה בטון</dt><dd dir="ltr" data-c-read="delay">0.43 ms</dd></div>
+      </dl>
+      <p class="c-readout__note">המסנן: מעביר נמוכים מסדר 4, תדר קיטעון <span dir="ltr">1 kHz</span></p>
+      <div class="c-ctls">
+        <label class="c-ctl"><span class="c-ctl__name">טון</span><input type="range" dir="ltr" min="-25" max="26" step="1" value="0" data-c-ctl="tone"><output class="c-ctl__val" dir="ltr" data-c-ctl-out="tone">440 Hz</output></label>
+        <label class="c-ctl"><span class="c-ctl__name">עוצמה</span><input type="range" dir="ltr" min="-20" max="0" step="1" value="0" data-c-ctl="level"><output class="c-ctl__val" dir="ltr" data-c-ctl-out="level">0 dB</output></label>
+        <label class="c-ctl"><span class="c-ctl__name">פאזה</span><input type="range" dir="ltr" min="0" max="360" step="5" value="0" data-c-ctl="phase"><output class="c-ctl__val" dir="ltr" data-c-ctl-out="phase">0°</output></label>
+      </div>
+      </div>
+    </div>
+  </div>
+  <p class="c-legend"><b>הדגמה חיה:</b> <b class="c-amber">כתום</b> הוא אות המיקרופון הגולמי, <b class="c-blue">כחול</b> הוא אחרי המסנן שלנו. גררו לאורך הגרף כדי להוסיף או להסיר רעש, או שנו את הטון, העוצמה והפאזה.</p>
+  <button type="button" class="c-more-toggle" aria-expanded="true" aria-controls="scope-more" data-c-collapse="700" hidden>טון, עוצמה ופאזה <span class="c-more-toggle__icon" aria-hidden="true">▾</span></button>
+  <div class="c-wrap c-hero__copy">
+    <nav class="c-crumb" aria-label="פירורי לחם"><a href="/?lang=he">MLAIA</a> / אודיו ואקוסטיקה</nav>
+    <h1 class="c-display" id="hero-title">אלגוריתמים שעומדים <span class="c-accent">במבחן המכשיר האמיתי.</span></h1>
+    <div class="c-hero__row">
+      <p>לצוותים שבונים מוצרים שמקשיבים, מאוזניות ומכשירי שמיעה ועד רחפנים, מכונות ואפליקציות בריאות. פיתוח אלגוריתמים לעיבוד אותות שמשלב אקוסטיקה, DSP ולמידת מכונה, נבנה ונבדק על המיקרופונים, החומרה והרעש שלכם.</p>
+      <div class="c-btns">
+        <a href="#contact" class="c-btn" data-track="practice_cta">לקביעת שיחת היתכנות של 30 דקות <span aria-hidden="true">↖</span></a>
+        <a href="/audio-ai/lab/" class="c-btn c-btn--ghost">למעבדת האודיו האינטראקטיבית <span class="he-en">(באנגלית)</span></a>
+      </div>
+    </div>
+    <h2 class="c-specs-title">נבנה סביב האתגר שלכם</h2>
+    <dl class="c-specs">
+      <div><dt>הנתונים שלכם</dt><dd>קול, דיבור ורעידות</dd></div>
+      <div><dt>האילוצים שלכם</dt><dd>רעש, השהיה ומשאבי חישוב מוגבלים</dd></div>
+      <div><dt>המיקוד שלנו</dt><dd>פיזיקה, DSP ולמידת מכונה</dd></div>
+    </dl>
+    <p class="c-specs-title">מאחורי התחום</p>
+    <ul class="c-creds">
+      <li>בהובלת ד״ר יוחאי אדליץ, דוקטורט ממכון ויצמן</li>
+      <li>ממציא שותף בפטנטים רשומים בעיבוד אותות אקוסטיים ולמידת מכונה</li>
+    </ul>
+  </div>
+</section>
+
+<section class="c-sec" id="who" aria-labelledby="who-title">
+  <div class="c-wrap c-split">
+    <div class="c-split__head">
+      <p class="c-kicker"><span class="c-idx">01</span> עם מי אנחנו עובדים</p>
+      <h2 class="c-h2" id="who-title">שלושה סוגי צוותים. שרשרת אות אחת.</h2>
+    </div>
+    <div>
+      <ul class="c-apps">
+        <li><a class="c-app" href="/audio-ai/noise-reduction-anc/"><span class="c-app__num">01</span><div><h3>אוזניות, אוזניות ראש ומכשירי שמיעה לבישים</h3><p>הפחתת רעשים, ביטול רעשים אקטיבי (ANC) ו-beamforming עם שניים או שלושה מיקרופונים, תקציב הספק זעיר והשהיה נמוכה מאוד.</p><span class="c-app__go">(באנגלית) ←</span></div><canvas class="c-trace" data-c-trace="ear" aria-hidden="true"></canvas></a></li>
+        <li><a class="c-app" href="/audio-ai/edge-audio-ai/"><span class="c-app__num">02</span><div><h3>רחפנים, ביטחון ומערכות חישה לאבטחה</h3><p>זיהוי ואיתור של קולות בתוך רוח, רעש מנועים והפרעות רקע, על חומרה שצריכה להחליט במקום.</p><span class="c-app__go">(באנגלית) ←</span></div><canvas class="c-trace" data-c-trace="drone" aria-hidden="true"></canvas></a></li>
+        <li><a class="c-app" href="/audio-ai/vibration-analysis/"><span class="c-app__num">03</span><div><h3>ניטור מצב מכונות בתעשייה</h3><p>אותות רעידה ואותות אקוסטיים ממכונות ומצנרת, שהופכים למאפייני תקלה ולהתראות שאפשר לקשור חזרה לפיזיקה.</p><span class="c-app__go">(באנגלית) ←</span></div><canvas class="c-trace" data-c-trace="vib" aria-hidden="true"></canvas></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" id="signal-processing" aria-labelledby="sp-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">02</span> אקוסטיקה קלאסית ועיבוד אותות ספרתי</p>
+      <h2 class="c-h2" id="sp-title">להבין את הפיזיקה. להנדס את האות.</h2>
+      <p class="c-lead">מערכת אודיו שימושית מתחילה בהבנה איך הקול נוצר, איך הוא נקלט ואיך הוא משתנה בדרך. אנחנו עובדים לאורך כל מערך המדידה, שרשרת האות והאלגוריתם, כך שפיתוח האלגוריתמים וההחלטות על המודל נשענים על מה שהחיישנים באמת מודדים.</p>
+    </div>
+    <div class="c-cells">
+      <article class="c-cell"><span class="c-cell__num">01</span><h3>מדידה אקוסטית וכיול</h3><p>אפיון של מיקרופונים, חיישנים ושרשרת המדידה. בוחנים רגישות, תגובת תדר, רצפת רעש וטווח דינמי, כדי להבין במה הנתונים יכולים לתמוך.</p></article>
+      <article class="c-cell"><span class="c-cell__num">02</span><h3>ניתוח בזמן ובתדר</h3><p>שימוש ב-FFT, ספקטרוגרמות, הערכות ספקטרליות וקורלציה כדי לחקור הרמוניות, תופעות מעבר, מחזוריות והפרעות, ולקשר את הדפוסים שנמצאו למקורות הפיזיקליים שלהם.</p></article>
+      <article class="c-cell"><span class="c-cell__num">03</span><h3>תכנון מסננים והפחתת רעשים</h3><p>תכנון מסננים סלקטיביים בתדר והערכה של אסטרטגיות להפחתת רעשים. שוקלים את האיזון בין דיכוי האות הלא רצוי, שמירה על האות השימושי והשהיית העיבוד.</p><a class="c-link" href="/audio-ai/lab/#noise">להאזין לניסוי הסינון <span class="he-en">(באנגלית)</span> ←</a></article>
+      <article class="c-cell"><span class="c-cell__num">04</span><h3>מערכי מיקרופונים ו-beamforming</h3><p>שימוש במידע מרחבי כדי להתמקד בכיוון מסוים, תוך התחשבות בגאומטריית המערך, בהשהיות ההתפשטות, בתגובה שתלויה בתדר ובסביבה האקוסטית.</p><a class="c-link" href="/audio-ai/lab/#beamforming">לכוון את סימולציית המערך <span class="he-en">(באנגלית)</span> ←</a></article>
+      <article class="c-cell"><span class="c-cell__num">05</span><h3>רעידות וחישה פיזיקלית</h3><p>ניתוח של אותות רעידה, תהודות ותגובות חיישנים. מתכננים ניסויים שאפשר לשחזר ומפרשים את המדידות בהקשר של המכניקה שמאחוריהן.</p></article>
+      <article class="c-cell"><span class="c-cell__num">06</span><h3>צנרת עיבוד אותות בזמן אמת</h3><p>הנדסה של דגימה, אגירה (buffering), סינון והפקת מאפיינים סביב מכשיר היעד. בודקים את המסלול המלא מהקליטה ועד הפלט, כולל השהיה ומגבלות חישוב.</p></article>
+    </div>
+    <div class="c-callout">
+      <div>
+        <p class="c-kicker">לבחור את השיטה שמתאימה לבעיה</p>
+        <h3>DSP קלאסי. למידת מכונה. או שילוב מתוכנן היטב.</h3>
+        <p>מתחילים מבסיס של עיבוד אותות, ומוסיפים מודלים נלמדים כשהמשימה דורשת אותם, למשל בזיהוי אירועים אקוסטיים או בזיהוי דיבור. במערכת משולבת ה-DSP יכול להכין את האות והמודל לפרש אותו, וכל שלב נבדק מול אותן דרישות תפעוליות.</p>
+      </div>
+      <div>
+        <p>עבור המוצר שלכם, המשמעות היא לבדוק דיוק לצד איכות אות, עמידות, השהיה, זיכרון וצריכת הספק, ולא להתייחס לציון של המודל כאילו הוא המערכת כולה.</p>
+        <a class="c-btn c-btn--ghost" href="/audio-ai/lab/">למעבדת האודיו <span class="he-en">(באנגלית)</span> ←</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec" id="semantic-hearing" aria-labelledby="sh-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">03</span> שמיעה סמנטית ובינה אקוסטית</p>
+      <h2 class="c-h2" id="sh-title">להבין אילו קולות חשובים.</h2>
+      <p class="c-lead">לעבור ממדידה של אות לפרשנות של המשמעות שלו עבור יישום מסוים. משלבים אקוסטיקה, עיבוד אותות ומודלים נלמדים כדי לזהות אירועים רלוונטיים ולתמוך בהאזנה סלקטיבית.</p>
+    </div>
+    <div class="c-cells">
+      <article class="c-cell"><h3>זיהוי אירועים קוליים</h3><p>מגדירים את הקולות שהמערכת צריכה לזהות, אוספים דוגמאות מייצגות ובודקים את הזיהויים מול התראות שווא ואירועים שהוחמצו.</p></article>
+      <article class="c-cell"><h3>האזנה עם מטרה</h3><p>מחברים בין סוגי קולות והקשר לבין הצרכים של המשתמש. מחליטים אילו אירועים לשמר, להדגיש או להגיב אליהם, ובודקים את חוויית ההאזנה כולה.</p></article>
+      <article class="c-cell"><h3>בינה מלאכותית על המכשיר</h3><p>איזון בין איכות הזיהוי, השהיה, זיכרון וצריכת הספק בטלפונים ובחומרה משובצת. בודקים עם הרעש, המיקרופונים ותנאי ההפעלה שהמוצר יפגוש בפועל.</p></article>
+    </div>
+    <p class="c-links"><a class="c-btn" href="/audio-ai/lab/">לשחק עם קול <span class="he-en">(באנגלית)</span> ←</a></p>
+    <p class="c-note">המעבדה האינטראקטיבית הנוכחית מדגימה עקרונות של עיבוד אותות קלאסי באמצעות אודיו סינתטי. היא אינה מריצה מודל לזיהוי סמנטי של קולות.</p>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" id="topics" aria-labelledby="topics-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">04</span> נושאי התמחות</p>
+      <h2 class="c-h2" id="topics-title">להעמיק בבעיה ספציפית.</h2>
+      <p class="c-lead">כל עמוד נושא מסביר איך אנחנו ניגשים לבעיה, מה אנחנו מודדים ואילו שאלות כדאי לסגור לפני שפרויקט מתחיל. העמודים זמינים כרגע באנגלית.</p>
+    </div>
+    <div class="c-cells c-cells--4">
+      <article class="c-cell"><h3>מערכי מיקרופונים ו-beamforming</h3><p>גאומטריית מערך, הערכת כיוון הגעה ו-beamformers קבועים או אדפטיביים, שמתוכננים סביב המכשיר והחדר.</p><a class="c-link" href="/audio-ai/beamforming-microphone-arrays/">Beamforming ומערכי מיקרופונים <span class="he-en">(באנגלית)</span> ←</a></article>
+      <article class="c-cell"><h3>הפחתת רעשים וביטול רעשים אקטיבי</h3><p>שיפור דיבור, ביטול הד וביטול רעשים אקטיבי (ANC), באיזון בין דיכוי הרעש לבין עיוות והשהיה.</p><a class="c-link" href="/audio-ai/noise-reduction-anc/">הפחתת רעשים ו-ANC <span class="he-en">(באנגלית)</span> ←</a></article>
+      <article class="c-cell"><h3>AI לאודיו על המכשיר</h3><p>מילות הפעלה, אירועים קוליים ומודלי דיבור בטלפונים, במעבדי DSP ובבקרים ייעודיים, בתוך מגבלות הזיכרון, ההשהיה וההספק.</p><a class="c-link" href="/audio-ai/edge-audio-ai/">AI לאודיו על המכשיר <span class="he-en">(באנגלית)</span> ←</a></article>
+      <article class="c-cell"><h3>ניתוח רעידות</h3><p>אותות של מדי תאוצה ואותות רעידה לניטור מצב ולחישה במוצרים, מהתקנת החיישן ועד מאפייני תקלה וזיהוי חריגות.</p><a class="c-link" href="/audio-ai/vibration-analysis/">ניתוח רעידות <span class="he-en">(באנגלית)</span> ←</a></article>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec" id="experience" aria-labelledby="exp-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">05</span> מנקודת המבט של לקוח</p>
+      <h2 class="c-h2" id="exp-title">מוכרים בזכות מומחיות באודיו וב-DSP.</h2>
+    </div>
+    <div class="c-quotes">
+      <blockquote class="c-quote"><p>”המומחיות והידע הרחב שלכם היו גורם מרכזי בביסוס תשתית ה-AI שלנו.“</p><cite><span class="en" lang="en">Tzvika Fridman</span>, CTO, Silentium<br>תרגום של קטע מההמלצה שפורסמה באתר של MLAIA (במקור באנגלית).</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" id="speech" aria-labelledby="speech-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">06</span> ממשקים קוליים</p>
+      <h2 class="c-h2" id="speech-title">דיבור שמתחבר לתהליכי העבודה שלכם.</h2>
+      <p class="c-lead">המרת דיבור לטקסט (STT), המרת טקסט לדיבור (TTS) ומודלי אודיו ייעודיים לתחום. בודקים יחד שפה, אוצר מילים, רעש והשהיה, ואז מחברים את הממשק הקולי לעוזר דיגיטלי או לתהליך עסקי.</p>
+    </div>
+    <div class="c-btns">
+      <a class="c-btn" href="/audio-ai/lab/">למעבדת האודיו האינטראקטיבית <span class="he-en">(באנגלית)</span> ←</a>
+      <a class="c-link" href="https://ultrabot.ai/voice-agents/" target="_blank" rel="noopener">AI שיחתי ואוטומציה <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec" id="edge-ai" aria-labelledby="edge-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">07</span> AI בקצה, במערכות משובצות ובעולם הפיזי</p>
+      <h2 class="c-h2" id="edge-title">ממודל מאומן למכשיר שעובד.</h2>
+      <p class="c-lead">הניסיון שלנו בפרויקטים כולל פריסה של מודלים של למידת מכונה ולמידה עמוקה בטלפונים מבוססי Android ו-iOS, וגם בבקרים ייעודיים ליישומים בתחום הרחפנים והאוזניות.</p>
+    </div>
+    <div class="c-cells">
+      <article class="c-cell"><h3>הסקה בטלפון הנייד</h3><p>הרצת מודלים בתוך אפליקציות Android ו-iOS. מתכננים סביב משאבי המכשיר, הגישה לחיישנים, זמני התגובה והחוויה של מי שמשתמש באפליקציה.</p></article>
+      <article class="c-cell"><h3>בקרים ייעודיים</h3><p>הבאת ההסקה לחומרה מוגבלת במשאבים. בוחנים את גודל המודל, הזיכרון, זמן העיבוד וצריכת ההספק לצד דרישות הדיוק של היישום.</p></article>
+      <article class="c-cell"><h3>רחפנים, אוזניות ומערכות פיזיקליות</h3><p>מחברים חישה והסקה למכשירים שפועלים בעולם הפיזי. מגדירים איך התחזיות מניעות את התנהגות המכשיר, ואז מאמתים על חומרת היעד.</p></article>
+    </div>
+    <div class="c-chips">
+      <strong>שיקולים הנדסיים</strong>
+      <span>דחיסת מודלים וקוונטיזציה</span><span>צנרת עיבוד אותות</span><span>תקציבי השהיה והספק</span><span>הערכה ברמת המכשיר</span><span>Android ו-iOS</span><span>בקרים ייעודיים</span><span>רחפנים ואוזניות</span><span>מגבלות קישוריות</span>
+    </div>
+    <p class="c-links"><a class="c-link" href="/audio-ai/edge-audio-ai/">AI לאודיו על המכשיר, לעומק <span class="he-en">(באנגלית)</span> ←</a> <a class="c-link" href="/audio-ai/lab/#beamforming">לסימולציית מערך המיקרופונים <span class="he-en">(באנגלית)</span> ←</a></p>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" id="engagement" aria-labelledby="eng-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">08</span> איך מתנהל פרויקט</p>
+      <h2 class="c-h2" id="eng-title">מודדים. בונים אב-טיפוס. מריצים על המכשיר.</h2>
+    </div>
+    <div class="c-steps">
+      <article class="c-step"><span class="c-step__num" aria-hidden="true">01</span><h3>מדידה ובדיקה של שרשרת האות</h3><p>אנחנו בודקים את המיקרופונים או החיישנים, את אופן ההתקנה, את הדגימה ואת רצפת הרעש. כך תדעו במה הנתונים יכולים לתמוך ובמה לא.</p></article>
+      <article class="c-step"><span class="c-step__num" aria-hidden="true">02</span><h3>אב-טיפוס על נתונים מוקלטים</h3><p>אנחנו בונים בסיס DSP, ואחר כך שיטות נלמדות או היברידיות, אם הן עוקפות אותו. הכול נמדד על הקלטות מהמכשיר שלכם.</p></article>
+      <article class="c-step"><span class="c-step__num" aria-hidden="true">03</span><h3>גרסה בזמן אמת, על המכשיר</h3><p>אנחנו מעבירים את השיטה שנבחרה לטלפון, ל-DSP או לבקר שלכם. השהיה, זיכרון וצריכת הספק נמדדים על מכשיר היעד, ולא מוערכים.</p></article>
+      <article class="c-step"><span class="c-step__num" aria-hidden="true">04</span><h3>בדיקות שטח ומסירה</h3><p>אנחנו בודקים בסביבה האמיתית, בוחנים כשלים ומכווננים. אתם מקבלים את הקוד, סט הבדיקה והתיעוד, כדי שהמערכת תהיה שלכם.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec" id="insights" aria-labelledby="ins-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">09</span> תובנות</p>
+      <h2 class="c-h2" id="ins-title">אודיו ועיבוד אותות, במאמרים.</h2>
+      <p class="c-lead">המאמרים והמדריכים זמינים כרגע באנגלית.</p>
+    </div>
+    <div class="c-tiles">
+      <a class="c-tile" href="/blog-signal.html"><small>נקודת מבט הנדסית</small><strong>DSP קלאסי ולמידת מכונה <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></strong></a>
+      <a class="c-tile" href="/wiki/signal-processing-machine-learning.html"><small>מדריך טכני</small><strong>עיבוד אותות פוגש למידת מכונה <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></strong></a>
+      <a class="c-tile" href="/wiki/acoustic-event-detection.html"><small>מדריך טכני</small><strong>זיהוי אירועים אקוסטיים <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></strong></a>
+      <a class="c-tile" href="/blog-audio-ai-production.html"><small>AI לאודיו</small><strong>ממודלי דיבור לבינה קולית <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></strong></a>
+      <a class="c-tile" href="/blog-music-ai.html"><small>AI למוזיקה</small><strong>יצירה, הפרדת ערוצים וזכויות יוצרים <span class="he-en">(באנגלית)</span> <span aria-hidden="true">↖</span></strong></a>
+    </div>
+    <div class="c-chips">
+      <strong>מדריכי התמחות (באנגלית)</strong>
+      <a class="c-link" href="/audio-ai/beamforming-microphone-arrays/">Beamforming ומערכי מיקרופונים</a>
+      <a class="c-link" href="/audio-ai/noise-reduction-anc/">הפחתת רעשים ו-ANC</a>
+      <a class="c-link" href="/audio-ai/edge-audio-ai/">AI לאודיו על המכשיר</a>
+      <a class="c-link" href="/audio-ai/vibration-analysis/">ניתוח רעידות</a>
+      <a class="c-link" href="/audio-ai/lab/">מעבדת אודיו אינטראקטיבית</a>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" aria-labelledby="faq-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">10</span> לפני שמתחילים</p>
+      <h2 class="c-h2" id="faq-title">שאלות טובות. תשובות ישירות.</h2>
+    </div>
+    <div class="c-faq">
+      <details><summary>זה ירוץ על ה-DSP או על ה-Cortex-M שלנו?</summary><p>לעיתים קרובות כן, בזיהוי מילות מפתח, באירועים קוליים ובמאפייני רעידות. קודם אנחנו מתאימים את שלב העיבוד המקדים ואת המודל לזיכרון, לתדר השעון ולצריכת ההספק שלכם, ומודדים על מכשיר היעד לפני שאנחנו מתחייבים למספר.</p></details>
+      <details><summary>אפשר לעבוד עם המיקרופונים הקיימים שלנו?</summary><p>כן, ואנחנו אפילו מעדיפים. אנחנו מאפיינים את המיקרופונים ואת אופן ההתקנה שאתם משווקים, ואז מאמנים ובודקים על הקלטות מהם, כי מודל שכוונן על חומרה אחרת נוטה לאבד מהביצועים שלו על החומרה שלכם.</p></details>
+      <details><summary>אילו נתונים צריך כדי להתחיל?</summary><p>הקלטות מהמכשיר האמיתי בסביבה האמיתית, גם אם זה סט קטן, ותיאור של הקולות או התקלות שחשובים לכם. אם עדיין אין לכם הקלטות, הצעד הראשון הוא תוכנית הקלטה.</p></details>
+      <details><summary>האם כל בעיית אודיו דורשת רשת נוירונים?</summary><p>לא. במשימה מוגדרת היטב ייתכן שסינון, ניתוח ספקטרלי או מודל פיזיקלי יספיקו. אנחנו בוחרים את הגישה לפי ביצועים מדודים ולפי האילוצים של המוצר. כשלמידת מכונה מוסיפה ערך, אנחנו בודקים אותה כחלק משרשרת האות המלאה.</p></details>
+      <details><summary>אתם יכולים לשפר מודל אודיו קיים?</summary><p>כן. אפשר להתחיל בסקירה ממוקדת של הנתונים, התיוג, שרשרת האות ומגבלות הפריסה, ואז לסכם יחד תוכנית הערכה לפני שמשנים את המודל.</p></details>
+      <details><summary>אתם יכולים להבטיח השהיה או דיוק מסוימים?</summary><p>את היעדים צריך לקבוע מול החומרה שלכם, סביבת ההפעלה ונתוני בדיקה מייצגים. אנחנו מגדירים איתכם את תקציב ההשהיה המלא ואת מדדי השגיאה הרלוונטיים, ולא מבטיחים מספרי ביצועים שלא נבדקו.</p></details>
+      <details><summary>אתם עובדים גם מעבר לדיבור?</summary><p>כן. התחום כולל אירועים אקוסטיים, רעידות ואותות חיישנים, ומשלב הבנה פיזיקלית עם שיטות סטטיסטיות ושיטות של למידת מכונה.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="c-contact" id="contact" aria-labelledby="contact-title">
+  <div class="c-wrap c-contact__grid">
+    <div class="c-contact__copy">
+      <p class="c-kicker">אודיו ואקוסטיקה</p>
+      <h2 class="c-h2" id="contact-title">לקביעת שיחת היתכנות של 30 דקות.</h2>
+      <p>ספרו לנו על המכשיר, על המיקרופונים או החיישנים, ועל הקול שצריך לזהות, להסיר או למדוד. נגיד לכם מה נראה ישים ומה כדאי למדוד קודם.</p>
+      <p>נא לא לצרף מאגרי נתונים חסויים, פרטי התחברות או מידע על מטופלים.</p>
+      <p class="c-mono"><a href="mailto:yochai@mlaia.com" class="ltr">yochai@mlaia.com</a><br><a href="tel:+972524846282" class="ltr">+972 52 484 6282</a></p>
+    </div>
+    <form class="p-form c-form" action="https://formspree.io/f/mvzdggyq" method="POST">
+      <input type="hidden" name="practice" value="audio-ai">
+      <input type="hidden" name="lang" value="he">
+      <div class="c-form__row">
+        <label>שם<input name="name" autocomplete="name" required></label>
+        <label>חברה<input name="company" autocomplete="organization"></label>
+      </div>
+      <label>אימייל בעבודה<input type="email" name="email" autocomplete="email" required></label>
+      <label>המכשיר והבעיה<textarea name="message" required></textarea></label>
+      <p>הפנייה שלכם מטופלת בהתאם ל<a href="/privacy.html">מדיניות הפרטיות</a> שלנו <span class="he-en">(באנגלית)</span>.</p>
+      <button type="submit" class="c-btn">בקשת שיחת היתכנות ←</button>
+      <p class="p-form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="c-footer">
+  <div class="c-wrap">
+    <div>© 2026 MLAIA Data Science · ישראל · עובדים עם לקוחות בכל העולם</div>
+    <nav aria-label="כותרת תחתונה">
+      <a href="/?lang=he#about">אודות MLAIA</a>
+      <a href="/privacy.html">פרטיות</a>
+      <a href="/accessibility.html">נגישות</a>
+      <a href="/terms.html">תנאי שימוש</a>
+      <button type="button" class="p-cookie-settings">העדפות עוגיות</button>
+    </nav>
+  </div>
+</footer>
+<div class="p-consent c-consent" hidden role="dialog" aria-label="העדפות עוגיות">
+  <p>אנליטיקה אופציונלית עוזרת לנו להבין כיצד משתמשים באתר. אפשר לסרב לאנליטיקה ועדיין להשתמש בכל תכונות האתר. <a href="/privacy.html">מדיניות הפרטיות</a></p>
+  <div class="c-btns">
+    <button class="c-btn" type="button" data-consent="yes">אישור אנליטיקה</button>
+    <button class="c-btn c-btn--ghost" type="button" data-consent="no">סירוב</button>
+  </div>
+</div>
 <script>
 /* practice.js writes English form-status messages; show them in Hebrew on this page. */
 (()=>{const s=document.querySelector('.p-form-status');if(!s)return;const he={'Preview only — nothing was sent.':'תצוגה מקדימה בלבד, שום דבר לא נשלח.','Sending your inquiry…':'הפנייה נשלחת…','Thank you. Your inquiry was sent to MLAIA.':'תודה. הפנייה שלכם נשלחה ל-MLAIA.','Your inquiry could not be sent. Please try again or email yochai@mlaia.com.':'לא הצלחנו לשלוח את הפנייה. נסו שוב או כתבו ל-yochai@mlaia.com.'};new MutationObserver(()=>{const t=he[s.textContent];if(t)s.textContent=t;}).observe(s,{childList:true,characterData:true,subtree:true});})();
 </script>
-</body></html>
+</body>
+</html>
