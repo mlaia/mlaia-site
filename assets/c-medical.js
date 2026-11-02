@@ -102,6 +102,9 @@ function Ecg(box){
   const root=box.closest('[data-c-instrument]')||box.parentElement,R={};
   root.querySelectorAll('[data-m-read]').forEach(n=>R[n.dataset.mRead]=n);
   const cs=getComputedStyle(box),col={a:cs.getPropertyValue('--c-amber').trim()||'#ffb547',b:cs.getPropertyValue('--c-blue').trim()||'#71d4ff',fg:cs.getPropertyValue('--c-fg').trim()||'#eceee9',mu:cs.getPropertyValue('--c-muted').trim()||'#9ca39d'};
+  /* canvas and check-readout strings; a page can override them with data-m-labels='{"key":"text"}' (e.g. Hebrew) */
+  const L={font:'"Martian Mono",ui-monospace,monospace',trueBeats:'true beats',detected:'detected',energy:'detector energy · threshold',missed:'missed',false:'false',sec:'1 s',pass:'pass',failBeats:'fail: beats',failRate:'fail: rate'};
+  try{Object.assign(L,JSON.parse(box.dataset.mLabels||'{}'));}catch{}
   const it={cv,box,t:20,a:0,target:0,readT:9,frames:0,visible:!('IntersectionObserver' in window),dpr:1,cssW:0,cssH:0,last:null};
   /* visible handle with slider semantics (same markup and styling as mlaia-c.js handles) */
   let v=clamp(+box.dataset.value||0.2),drag=false,hintRaf=0,interacted=false;
@@ -141,7 +144,7 @@ function Ecg(box){
     const t0=it.t-span,X=t=>(t-t0)/span*W;
     ctx.clearRect(0,0,W,H);
     const yc=H*0.39,mv=H*0.19,top=H*0.08,bot=H*0.62,yT=H*0.695,yD=H*0.775,eT=H*0.84,eB=H*0.965;
-    ctx.font=(10*d)+'px "Martian Mono",ui-monospace,monospace';ctx.textBaseline='middle';
+    ctx.font=(10*d)+'px '+L.font;ctx.textBaseline='middle';
     // ECG lane: 1 mV scale bar and baseline
     ctx.strokeStyle='rgba(236,238,233,.10)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,yc);ctx.lineTo(W,yc);ctx.stroke();
     // detections as faint vertical guides through the ECG
@@ -159,8 +162,8 @@ function Ecg(box){
       if(hollow){ctx.setLineDash([2*d,2*d]);ctx.strokeRect(x-4*d,y-6*d,8*d,12*d);ctx.setLineDash([]);}else ctx.fillRect(x-1.5*d,y-6*d,3*d,12*d);};
     let lastLab=-1e9;const lab=(x,y,txt,c)=>{if(x-lastLab<58*d||x>W-110*d)return;lastLab=x;ctx.fillStyle=c;ctx.fillText(txt,x+7*d,y);};
     const marks=[];
-    for(const b of res.beats){const x=X(b.t);if(x<-4||x>W+4)continue;tick(x,yT,col.fg,false);if(!b.hit)marks.push([x,'missed',col.fg,true]);}
-    for(const q of res.det){const x=X(q.t);if(x<-4||x>W+4)continue;if(q.ok)tick(x,yD,col.b,false);else marks.push([x,'false',col.b,false]);}
+    for(const b of res.beats){const x=X(b.t);if(x<-4||x>W+4)continue;tick(x,yT,col.fg,false);if(!b.hit)marks.push([x,L.missed,col.fg,true]);}
+    for(const q of res.det){const x=X(q.t);if(x<-4||x>W+4)continue;if(q.ok)tick(x,yD,col.b,false);else marks.push([x,L.false,col.b,false]);}
     marks.sort((p,q)=>p[0]-q[0]);
     for(const [x,txt,c,miss] of marks){tick(x,yD,c,miss);if(!miss){ctx.beginPath();ctx.arc(x,yD-11*d,3*d,0,TAU);ctx.fill();}lab(x,yD,txt,c);}
     // detector energy and its threshold, compressed so a clean beat reaches about two thirds
@@ -173,10 +176,10 @@ function Ecg(box){
     // lane labels, on a dark chip so the trace never hides them
     // (right-aligned, so they stay clear of the handle at its usual low-artifact positions)
     const tag=(y,txt,c)=>{const w=ctx.measureText(txt).width+10*d,x=W-8*d-w;ctx.fillStyle='rgba(7,9,8,.82)';ctx.fillRect(x,y-8*d,w,16*d);ctx.fillStyle=c;ctx.fillText(txt,x+5*d,y);};
-    tag(yT,'true beats',col.fg);tag(yD,'detected',col.b);tag(eT+2*d,'detector energy · threshold',col.mu);
+    tag(yT,L.trueBeats,col.fg);tag(yD,L.detected,col.b);tag(eT+2*d,L.energy,col.mu);
     // one-second scale under the ECG lane
     ctx.strokeStyle=col.mu;ctx.lineWidth=1*d;ctx.beginPath();ctx.moveTo(W-12*d-W/span,bot-6*d);ctx.lineTo(W-12*d,bot-6*d);ctx.stroke();
-    ctx.fillStyle=col.mu;ctx.textAlign='right';ctx.fillText('1 s',W-12*d,bot-16*d);ctx.textAlign='left';
+    ctx.fillStyle=col.mu;ctx.textAlign='right';ctx.fillText(L.sec,W-12*d,bot-16*d);ctx.textAlign='left';
     if(it.readT>=0.5||reduce){it.readT=0;readouts(res);}
   };
   function readouts(r){
@@ -186,7 +189,7 @@ function Ecg(box){
     if(R.err)R.err.textContent=err==null?'–':sgn(err)+' bpm';
     if(R.beats)R.beats.textContent=r.detected+' / '+r.actual;
     if(R.fpfn)R.fpfn.textContent=r.fp+' · '+r.fn;
-    if(R.check){R.check.textContent=ok?'pass':rateOk?'fail: beats':'fail: rate';R.check.closest('div').classList.toggle('m-fail',!ok);}
+    if(R.check){R.check.textContent=ok?L.pass:rateOk?L.failBeats:L.failRate;R.check.closest('div').classList.toggle('m-fail',!ok);}
   }
   it.handle={get value(){return v;},set,hint};
   return it;

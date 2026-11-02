@@ -21,6 +21,9 @@ if(!box)return;
 const cv=box.querySelector('canvas');if(!cv||!cv.getContext)return;
 const ctx=cv.getContext('2d');
 const root=box.closest('[data-c-instrument]')||box.parentElement;
+/* axis labels; a page can override them with data-p-labels='{"key":"text"}' (e.g. Hebrew) */
+const L={history:'← history',backtest:'backtest · last 26 wk',backtestShort:'backtest 26 wk',forecast:'forecast · 12 wk →',forecastShort:'forecast'};
+try{Object.assign(L,JSON.parse(box.dataset.pLabels||'{}'));}catch{}
 const R={};root.querySelectorAll('[data-p-read]').forEach(n=>{R[n.dataset.pRead]=n;});
 const mq=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
 let reduce=mq.matches||/[?&]still\b/.test(location.search);
@@ -178,9 +181,9 @@ function draw(snap,dt=0){
   // region labels along the time axis
   ctx.font=(11*d)+'px '+C.mono;ctx.textBaseline='alphabetic';ctx.fillStyle=C.muted;ctx.textAlign='left';
   const ly=top+ph+19*d;
-  if(!narrow){const tw=ctx.measureText('← history').width;ctx.fillText('← history',Math.max(6*d,xBt-10*d-tw),ly);}
-  ctx.fillText(narrow?'backtest 26 wk':'backtest · last 26 wk',xBt+6*d,ly);
-  ctx.fillStyle=C.b;ctx.fillText(narrow?'forecast':'forecast · 12 wk →',xNow+6*d,ly);
+  if(!narrow){const tw=ctx.measureText(L.history).width;ctx.fillText(L.history,Math.max(6*d,xBt-10*d-tw),ly);}
+  ctx.fillText(narrow?L.backtestShort:L.backtest,xBt+6*d,ly);
+  ctx.fillStyle=C.b;ctx.fillText(narrow?L.forecastShort:L.forecast,xNow+6*d,ly);
   // band: backtest (week by week) and forecast (flat)
   ctx.fillStyle='rgba(113,212,255,.17)';
   for(let t=T-BT;t<T;t++){const o=disp.get(t);if(!o||!isFinite(o.lo))continue;const x0=col(t)*cw;
