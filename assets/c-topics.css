@@ -11,6 +11,11 @@
 .c-topic .c-tp-hero .c-creds a{color:var(--c-muted)}
 .c-topic .c-tp-hero .c-creds a:hover{color:var(--c-amber)}
 .c-topic .c-tp-hero .c-specs+.c-creds{margin-top:32px}
+/* Answer-first paragraph under the H1: the direct answer to the page's main question. */
+.c-topic .c-tp-answer{margin:32px 0 0;max-width:40em;font-size:clamp(19px,1.7vw,24px);line-height:1.5;color:var(--c-fg);
+  padding-left:20px;border-left:3px solid var(--c-amber)}
+.c-topic .c-tp-answer+.c-hero__row{margin-top:28px}
+@media (max-width:640px){.c-topic .c-tp-answer{padding-left:14px;margin-top:24px}}
 
 /* ---------- Reading body: light surface, C type and accents ---------- */
 .c-tp-body{background:var(--c-bg);color:var(--c-text);counter-reset:c-tp-sec}
@@ -57,6 +62,20 @@
   .c-fig__scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
   .c-fig__scroll svg{min-width:620px}
 }
+
+/* ---------- Comparison tables: C reading-table style; scroll inside the wrapper on phones ---------- */
+.c-tp-table{margin:48px 0 0;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-top:2px solid var(--c-fg);border-bottom:1px solid var(--c-rule)}
+.c-tp-table:focus-visible{outline-offset:6px}
+.c-tp-table table{width:100%;min-width:760px;border-collapse:collapse;font-size:16px;line-height:1.55;color:var(--c-text)}
+.c-tp-table caption{caption-side:top;text-align:left;padding:14px 0 6px;font:400 var(--c-fs-label)/1.5 var(--c-mono);color:var(--c-muted)}
+.c-tp-table th,.c-tp-table td{padding:16px 24px 16px 0;text-align:left;vertical-align:top;border-bottom:1px solid var(--c-rule)}
+.c-tp-table thead th{font:500 12px/1.5 var(--c-mono);color:var(--c-muted);letter-spacing:.02em;padding-top:10px}
+.c-tp-table tbody th{width:19%;font:700 18px/1.2 var(--c-display);font-stretch:88%;color:var(--c-fg)}
+.c-tp-table tbody td{width:40.5%}
+.c-tp-table tbody tr:last-child>*{border-bottom:0}
+.c-tp-table a{color:var(--c-blue)}
+.c-tp-table a:hover{color:var(--c-amber)}
+@media (max-width:700px){.c-tp-table table{min-width:640px;font-size:15px}.c-tp-table tbody th{font-size:16px}}
 
 /* ---------- Contact: dark C section; bullet list for the prediction pages ---------- */
 .c-topic .c-contact .c-tp-h2{margin-bottom:28px}

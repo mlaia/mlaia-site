@@ -6,6 +6,7 @@
  "breadcrumb": "Noise Reduction & ANC",
  "eyebrow": "Audio &amp; Acoustics · Noise Reduction &amp; ANC",
  "h1": "Remove the noise.<br>Keep the signal.",
+ "answer": "Noise reduction cleans a signal after it is captured: it suppresses noise in the microphone signal so that a listener or a speech recognizer hears the voice more clearly. Active noise cancellation (ANC) acts on the sound reaching the ear: it plays anti-noise through a loudspeaker to cancel noise acoustically, which works best at low frequencies and only if the anti-noise arrives within a very tight latency budget. Both trade the amount of noise removed against distortion, delay and compute.",
  "intro": "We design and evaluate noise reduction and active noise cancellation algorithms for products that capture speech or deliver sound to the ear: headsets, earphones, phones, vehicles and devices used in loud places. Classical DSP, adaptive filtering and neural enhancement, chosen against your latency, compute and listening-quality requirements.",
  "cta": "Discuss your noise problem",
  "lab_link": {
@@ -41,6 +42,9 @@
    "eyebrow": "Speech &amp; signal enhancement",
    "h2": "Suppress the noise.<br>Without damaging the speech.",
    "lead": "Every single-channel suppressor trades noise reduction against speech distortion. The engineering work is choosing where on that curve your product sits, and keeping it there across noise types and levels.",
+   "paragraphs": [
+    "Deciding between one microphone and an array? <a href=\"/audio-ai/beamforming-vs-single-mic-noise-reduction/\">Beamforming vs single-microphone noise reduction</a> sets the two side by side."
+   ],
    "cards": [
     {
      "number": "01",

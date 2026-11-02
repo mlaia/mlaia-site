@@ -7,6 +7,7 @@
  "breadcrumb": "Churn Prediction",
  "eyebrow": "Prediction &amp; Causal Analysis · Churn &amp; retention",
  "h1": "Know who is likely to leave.<br>And who an offer would keep.",
+ "answer": "Churn prediction estimates which customers are likely to cancel or stop buying within a set period, from their usage, billing and support history. A model that holds up needs a precise churn label, no leakage from data recorded after the prediction date, and calibrated probabilities. High churn risk is not the same as being persuadable, so deciding who should get a retention offer needs an experiment or an uplift model, not the risk score alone.",
  "intro": "Customer churn prediction for subscription, telecom and B2B teams. We define churn the way your business counts it, build a model that holds up on future customers, and separate predicted risk from the effect of a retention offer.",
  "cta": "Book a 30-minute forecasting review",
  "cta_href": "/predictive-intelligence/#contact",

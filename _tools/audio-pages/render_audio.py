@@ -77,6 +77,17 @@ def figure(fig):
     return f'<figure class="c-fig">{body}<figcaption>{fig["caption"]}</figcaption></figure>'
 
 
+def table(t):
+    # Comparison table. The first cell of each row is its row header. On narrow screens the
+    # table keeps a readable width and scrolls inside its own focusable wrapper.
+    head = "".join(f'<th scope="col">{h}</th>' for h in t["head"])
+    rows = "".join("<tr>" + f'<th scope="row">{r[0]}</th>' + "".join(f"<td>{c}</td>" for c in r[1:]) + "</tr>"
+                   for r in t["rows"])
+    label = esc(strip_tags(t["caption"]))
+    return (f'<div class="c-tp-table" role="region" aria-label="{label}" tabindex="0"><table>'
+            f'<caption>{t["caption"]}</caption><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>')
+
+
 def section(s, alt):
     cls = "c-sec c-sec--alt" if alt else "c-sec"
     sid = f' id="{esc(s["id"])}"' if s.get("id") else ""
@@ -89,6 +100,8 @@ def section(s, alt):
     for para in s.get("paragraphs", []):
         parts.append(f'<p class="c-tp-para">{para}</p>')
     parts.append("</div>")
+    if s.get("table"):
+        parts.append(table(s["table"]))
     if s.get("cards"):
         parts.append(cells(s["cards"]))
     for fig in s.get("figures", []):
@@ -133,6 +146,17 @@ def render(d):
         "serviceType": html.unescape(d["service_name"]), "description": html.unescape(desc), "url": url, "areaServed": "Worldwide",
         "provider": {"@type": "Organization", "@id": f"{BASE}/#organization", "name": "MLAIA Data Science", "url": f"{BASE}/"},
     }
+    art = d.get("article")
+    if art:
+        # Comparison pages are articles, not service offers: TechArticle replaces Service.
+        service_ld = {
+            "@context": "https://schema.org", "@type": "TechArticle", "headline": html.unescape(art["headline"]),
+            "description": html.unescape(desc), "url": url, "mainEntityOfPage": url, "inLanguage": "en",
+            "datePublished": art["date"], "dateModified": art.get("modified", art["date"]),
+            "image": f"{BASE}/assets/og/{slug}.png",
+            "author": {"@type": "Person", "name": "Dr. Yochai Edlitz", "url": f"{BASE}/#person-yochai"},
+            "publisher": {"@type": "Organization", "@id": f"{BASE}/#organization", "name": "MLAIA Data Science", "url": f"{BASE}/"},
+        }
     crumbs_ld = {
         "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "MLAIA", "item": f"{BASE}/"},
@@ -165,6 +189,10 @@ def render(d):
     nav_cta = d.get("nav_cta", "Let’s talk")
     proof = "".join(f"<li>{x}</li>" for x in d.get(
         "proofline", ["A specialist practice of MLAIA Data Science", "Led by Dr. Yochai Edlitz · Ph.D., Weizmann Institute"]))
+    # Optional answer-first paragraph under the H1. It answers the page's main question and
+    # must read on its own, since assistants and search engines quote it without context.
+    answer = f'<p class="c-tp-answer">{d["answer"]}</p>' if d.get("answer") else ""
+    og_type = "article" if art else "website"
     kicker = f'<p class="c-kicker">{esc(pname)} · {esc(crumb)}</p>'
     reach = '<p class="c-mono c-tp-reach"><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br><a href="tel:+972524846282">+972 52 484 6282</a></p>'
     band = d.get("contact_band")
@@ -178,13 +206,13 @@ def render(d):
 <form class="p-form c-form" action="https://formspree.io/f/mvzdggyq" method="POST"><input type="hidden" name="practice" value="{practice}"><input type="hidden" name="topic" value="{esc(slug)}"><div class="c-form__row"><label>Name<input name="name" autocomplete="name" required></label><label>Company<input name="company" autocomplete="organization"></label></div><label>Work email<input type="email" name="email" autocomplete="email" required></label><label>{contact_label}<textarea name="message" required></textarea></label><p>Your inquiry is handled under our <a href="/privacy.html">Privacy Policy</a>.</p><button type="submit" class="c-btn">{contact_button}</button><p class="p-form-status" role="status" aria-live="polite"></p></form></div></section>'''
 
     return f'''<!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(desc)}"><meta name="robots" content="index, follow"><link rel="canonical" href="{url}"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:type" content="website"><meta property="og:url" content="{url}"><meta property="og:image" content="{BASE}/assets/og/{slug}.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{BASE}/assets/og/{slug}.png">{FONTS}<link rel="stylesheet" href="/assets/mlaia-c.css"><link rel="stylesheet" href="/assets/c-topics.css"><script src="/assets/practice.js" defer></script>{ld}<link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)}</title><meta name="description" content="{esc(desc)}"><meta name="robots" content="index, follow"><link rel="canonical" href="{url}"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:type" content="{og_type}"><meta property="og:url" content="{url}"><meta property="og:image" content="{BASE}/assets/og/{slug}.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{BASE}/assets/og/{slug}.png">{FONTS}<link rel="stylesheet" href="/assets/mlaia-c.css"><link rel="stylesheet" href="/assets/c-topics.css"><script src="/assets/practice.js" defer></script>{ld}<link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
 <body class="practice-page {body_cls} c-page c-topic" data-practice="{practice}" data-site-shell="true">
 <nav class="site-quick-nav" aria-label="Quick navigation"><a href="/" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">Home</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">Contact us</span></a></nav><a class="c-skip" href="#main">Skip to main content</a>
 <header class="c-nav"><div class="c-wrap c-nav__inner"><a class="c-logo" href="/">MLAIA</a><button class="p-menu c-menu" type="button" aria-expanded="false" aria-controls="practice-nav">Menu</button>
 <nav class="p-nav-links c-nav-links" id="practice-nav" aria-label="Main navigation">{nav}<a href="/blog.html">Insights</a><a class="c-btn" href="{esc(d.get('nav_href', '#contact'))}">{nav_cta}</a></nav></div></header>
 <main id="main">
-<section class="c-hero c-tp-hero"><div class="c-wrap c-hero__copy"><nav class="c-crumb" aria-label="Breadcrumb"><a href="/">MLAIA</a> / <a href="/{practice}/">{esc(pname)}</a> / {esc(crumb)}</nav><p class="c-kicker">{d["eyebrow"]}</p><h1 class="c-display">{accent_h1(d["h1"])}</h1>
+<section class="c-hero c-tp-hero"><div class="c-wrap c-hero__copy"><nav class="c-crumb" aria-label="Breadcrumb"><a href="/">MLAIA</a> / <a href="/{practice}/">{esc(pname)}</a> / {esc(crumb)}</nav><p class="c-kicker">{d["eyebrow"]}</p><h1 class="c-display">{accent_h1(d["h1"])}</h1>{answer}
 <div class="c-hero__row"><p>{d["intro"]}</p><div class="c-btns"><a href="{esc(cta_href)}" class="c-btn" data-track="practice_cta">{d["cta"]} <span aria-hidden="true">↗</span></a>{hero_lab}</div></div>
 <h2 class="c-specs-title">{d["brief"]["h2"]}</h2><dl class="c-specs">{brief}</dl><ul class="c-creds">{proof}</ul></div></section>
 <div class="c-page c-reading c-tp-body">{sections}

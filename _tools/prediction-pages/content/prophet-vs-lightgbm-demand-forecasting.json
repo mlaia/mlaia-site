@@ -1,0 +1,91 @@
+{
+ "practice": "predictive-intelligence",
+ "slug": "prophet-vs-lightgbm-demand-forecasting",
+ "title": "Prophet vs LightGBM for Demand Forecasting | MLAIA",
+ "description": "Prophet vs LightGBM for demand forecasting: data needs, compute, uncertainty, intermittent demand, failure modes, and how to choose with a backtest.",
+ "service_name": "Demand forecasting consulting",
+ "breadcrumb": "Prophet vs LightGBM",
+ "article": {"headline": "Prophet vs LightGBM for demand forecasting", "date": "2026-11-02"},
+ "eyebrow": "Prediction &amp; Causal Analysis · Comparison",
+ "h1": "Prophet vs LightGBM<br>for demand forecasting.",
+ "answer": "Prophet fits one model per series from trend, yearly and weekly seasonality and holidays, so it gives a reasonable, explainable forecast from a few seasons of history with very little feature work. LightGBM is a gradient-boosted tree model, usually trained as one global model across many items with lag, calendar, price and promotion features; with enough history and related series, it learns driver effects and cross-item patterns that a per-series model cannot. Use Prophet for a handful of strongly seasonal, aggregate series, LightGBM for item-level demand at scale, and backtest both against a simple baseline before choosing.",
+ "intro": "A guide for planning and data teams choosing a forecasting approach. We compare the two on what they need, what they cost to run, how they express uncertainty and how they fail.",
+ "cta": "Book a 30-minute forecasting review",
+ "cta_href": "/predictive-intelligence/#contact",
+ "nav_cta": "Book a review",
+ "lab_link": {"href": "/predictive-intelligence/demand-forecasting/", "text": "Demand forecasting in depth"},
+ "brief": {
+  "h2": "The short version",
+  "items": [
+   ["Prophet fits", "One additive model per series"],
+   ["LightGBM fits", "One global model across items"],
+   ["Decided by", "A backtest on your own history"]
+  ]
+ },
+ "sections": [
+  {
+   "id": "comparison",
+   "eyebrow": "Side by side",
+   "h2": "A decomposition per series,<br>or one model for every item.",
+   "lead": "<a href=\"https://doi.org/10.1080/00031305.2017.1380080\" target=\"_blank\" rel=\"noopener\">Prophet</a> treats each series as trend plus seasonality plus holidays. LightGBM treats forecasting as a regression on features, and is usually trained across many series at once. That difference drives most of the rows below.",
+   "table": {
+    "caption": "Prophet compared with LightGBM for demand forecasting",
+    "head": ["Criterion", "Prophet", "LightGBM"],
+    "rows": [
+     ["What the model is", "An additive regression model fitted per series: a piecewise-linear or logistic trend, Fourier terms for yearly and weekly seasonality, holiday effects and optional regressors. Seasonality can also be multiplicative.", "Gradient-boosted decision trees on a table of features. For demand, usually one global model trained across many items and locations."],
+     ["Where it wins", "A few series with strong, regular seasonality and holidays, such as daily totals for a business or region. Limited history. Teams that want to see the trend and seasonal components.", "Many items with shared patterns. Demand driven by price, promotions, events and availability. Enough history to compute lags. Nonlinear effects, such as a promotion that works differently in peak season."],
+     ["Data needs", "A date and a value per series. At least two full cycles to estimate yearly seasonality well. A holiday calendar. Any extra regressors must be known for the forecast period.", "Engineered features: lags, rolling statistics, calendar, price and promotion, item and store attributes. Lags must respect the forecast horizon, and drivers must be known or forecast for the future. More history and more related series help."],
+     ["Compute", "One fit per series. Each fit is light, but thousands of series mean thousands of fits, and tuning multiplies that. Fits run in parallel easily.", "One training run covers all series and is fast on CPUs. Feature engineering, backtesting and hyperparameter tuning take most of the effort. Prediction is fast."],
+     ["Uncertainty", "Built-in intervals from trend uncertainty and observation noise. By default they leave out uncertainty in the seasonal terms, so they can be too narrow.", "Point forecasts by default. Ranges need quantile objectives, conformal prediction or a distributional model, and a check of their coverage in the backtest."],
+     ["Intermittent demand", "Assumes continuous, roughly Gaussian noise, so on sparse items it can forecast fractions and negative values. A poor fit for items with many zero periods.", "Poisson or Tweedie objectives handle counts and many zeros better. Still worth comparing with Croston’s method or TSB on those items."],
+     ["How it fails", "Trend changepoints can extend a recent swing too far. Structural breaks and shifting seasonality degrade it. Each series is fitted alone, so new and short-history items get little help.", "Leakage through features that use information not available at forecast time. Trees can’t extrapolate beyond the target range seen in training, so trends need detrending or differencing. Recursive multi-step forecasts can accumulate error."],
+     ["Explaining a forecast", "Trend, seasonality and holiday components can be plotted directly.", "Feature importance and SHAP values show which drivers moved a forecast. Less direct than a decomposition."]
+    ]
+   },
+   "note": "This compares general properties of the two model families. Which one is more accurate depends on your items, history, drivers and horizon, and is settled by a backtest on your own data."
+  },
+  {
+   "id": "when-each-wins",
+   "eyebrow": "When each one wins",
+   "h2": "Few seasonal series, or many related items.<br>And sometimes neither.",
+   "lead": "Both are reasonable defaults in the right setting. Neither is the right default for every item in a catalogue.",
+   "cards": [
+    {"number": "01", "h3": "Choose Prophet when", "p": "You forecast a small number of aggregate series with strong yearly and weekly patterns and known holidays, history is short, and planners need to see why the forecast moved. Exponential smoothing is worth testing alongside it in the same setting."},
+    {"number": "02", "h3": "Choose LightGBM when", "p": "You forecast many items and locations, demand responds to price, promotions or events, and those drivers are known ahead of time. Global gradient-boosted models were prominent among the top entries in the <a href=\"https://doi.org/10.1016/j.ijforecast.2021.11.013\" target=\"_blank\" rel=\"noopener\">M5 competition</a> on retail item-level sales."},
+    {"number": "03", "h3": "Choose neither when", "p": "Most periods are zero: intermittent-demand methods such as Croston’s or TSB are built for that. And when history is very short, a seasonal naive forecast or borrowing from similar items can beat both. Our <a href=\"/predictive-intelligence/demand-forecasting/\">demand forecasting page</a> covers these cases."}
+   ]
+  },
+  {
+   "id": "how-we-choose",
+   "eyebrow": "How we’d choose",
+   "h2": "Set the bar, then backtest.<br>Choose by item group.",
+   "lead": "The choice is an empirical one. These are the steps we follow on client data before recommending a model.",
+   "steps": [
+    {"h3": "Set a baseline", "p": "A seasonal naive forecast and exponential smoothing on the same data, next to the method you use today. Any model has to beat them to earn its complexity."},
+    {"h3": "Profile the portfolio", "p": "We count the series, measure history length and the share of zero periods, and list which drivers are known ahead of the forecast date."},
+    {"h3": "Backtest at the decision’s horizon", "p": "Rolling-origin backtests that use only the data available at each origin, scored with scaled errors such as MASE or RMSSE, bias and quantile loss, by item group."},
+    {"h3": "Choose per segment &amp; monitor", "p": "Different groups often get different models, reconciled so item, location and total forecasts add up. Accuracy and drift are monitored after go-live."}
+   ],
+   "cta": {"href": "/predictive-intelligence/#contact", "text": "Book a 30-minute forecasting review"}
+  }
+ ],
+ "faq": [
+  {"q": "Is LightGBM more accurate than Prophet?", "a": "Not always. Global gradient-boosted models often win when there are many related series and useful drivers such as price and promotions. On a few smooth, seasonal series with short history, Prophet or exponential smoothing is often as accurate and simpler to run. A backtest on your own data decides."},
+  {"q": "How much history does Prophet need?", "a": "For yearly seasonality, at least two full years helps it separate seasonality from trend. Weekly seasonality needs only a few months of daily data. With less than a year, no method can learn a yearly pattern from the series alone, so borrowing from similar series becomes necessary."},
+  {"q": "Can LightGBM forecast new items?", "a": "Partly. A global model can forecast an item with little history from its attributes and from similar items, which a per-series model can’t do. Quality depends on how similar the new item really is, so new items should be scored as their own group in the backtest."},
+  {"q": "Do we have to pick one?", "a": "No. Many systems use different models for different item groups, or average several models. What matters is that every candidate goes through the same backtest and that the forecasts add up across the hierarchy."},
+  {"q": "What about foundation models such as TimesFM or Chronos?", "a": "Add them to the same backtest as another candidate. They forecast without training a model per series and do well on many datasets, but support for external drivers such as price and promotions varies by model and version. Our <a href=\"/blog-time-series-survival-analysis.html\">time series article</a> covers when they fit."}
+ ],
+ "reads": [
+  {"href": "/predictive-intelligence/demand-forecasting/", "small": "Topic", "strong": "Demand forecasting for every item, including intermittent demand"},
+  {"href": "/blog-time-series-survival-analysis.html", "small": "Time series", "strong": "From Prophet to foundation models, and when you need survival analysis"},
+  {"href": "/predictive-intelligence/", "small": "Practice", "strong": "Prediction &amp; Causal Analysis at MLAIA"}
+ ],
+ "contact": {
+  "h2": "Book a 30-minute<br>forecasting review.",
+  "p": "Bring one forecast or decision you want to improve. In 30 minutes we’ll cover:",
+  "bullets": ["What your data can realistically support", "Which model families are worth backtesting", "How we’d test them against your current method"],
+  "label": "What do you forecast or decide today?",
+  "button": "Request a forecasting review →"
+ }
+}

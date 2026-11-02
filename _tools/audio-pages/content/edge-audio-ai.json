@@ -6,7 +6,8 @@
  "breadcrumb": "Edge Audio AI",
  "eyebrow": "Audio &amp; Acoustics · Edge &amp; embedded",
  "h1": "Audio models that run on the device.<br>Within its memory, latency and power.",
- "intro": "On-device audio AI moves keyword spotting, sound event detection and audio classification onto phones, microcontrollers, DSPs and dedicated controllers. We engineer the path from microphone and front-end features to a quantized streaming model, and evaluate it on the target hardware with real microphones.",
+ "answer": "On-device audio AI runs models such as wake-word detection, sound event detection and audio classification on the product’s own processor, a phone, microcontroller or DSP, instead of sending audio to the cloud. That keeps latency low, works without a network connection and keeps raw audio on the device. The cost is that the model must fit tight limits on memory, compute and power, which usually means a small streaming model, quantization and testing on the target hardware.",
+ "intro": "We engineer the path from microphone and front-end features to a quantized streaming model, on phones, microcontrollers, DSPs and dedicated controllers, and evaluate it on the target hardware with real microphones.",
  "cta": "Discuss your device and model",
  "lab_link": {
   "href": "/audio-ai/lab/",

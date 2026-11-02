@@ -7,7 +7,8 @@
  "breadcrumb": "Demand Forecasting",
  "eyebrow": "Prediction &amp; Causal Analysis · Demand forecasting",
  "h1": "Forecast every item.<br>Including the slow ones.",
- "intro": "Item-level demand forecasting for retail, distribution and spare parts. We forecast steady sellers and intermittent, lumpy demand, test the result against your current method, and connect it to reorder decisions.",
+ "answer": "Demand forecasting predicts how much of each item will be needed, by location and period, so planners can set reorder points, safety stock and purchase plans. Steady and seasonal items suit methods such as exponential smoothing, ARIMA or gradient-boosted models, while intermittent items with many zero periods need methods built for them, such as Croston’s method or TSB. A forecast that drives stock should give a range, not just one number, and be backtested against the method used today.",
+ "intro": "Item-level demand forecasting for retail, distribution and spare parts. We group items by demand pattern, backtest each method on your own history, and connect the forecasts to reorder decisions.",
  "cta": "Book a 30-minute forecasting review",
  "cta_href": "/predictive-intelligence/#contact",
  "nav_cta": "Book a review",
@@ -43,6 +44,9 @@
    "eyebrow": "How we approach it",
    "h2": "Forecasts that add up.<br>And say how sure they are.",
    "lead": "A point forecast is only the start. These are the parts that decide whether planners can use it.",
+   "paragraphs": [
+    "Choosing a model family? <a href=\"/predictive-intelligence/prophet-vs-lightgbm-demand-forecasting/\">Prophet vs LightGBM for demand forecasting</a> compares the two on data needs, compute, uncertainty and how each one fails."
+   ],
    "cards": [
     {"h3": "Hierarchical reconciliation", "p": "Forecasts by item, location, category and total should add up. Reconciliation methods such as <a href=\"https://doi.org/10.1080/01621459.2018.1448825\" target=\"_blank\" rel=\"noopener\">MinT</a> adjust every level so they agree, and can improve accuracy too. <a href=\"https://otexts.com/fpp3/hierarchical-forecasting.html\" target=\"_blank\" rel=\"noopener\">Hyndman &amp; Athanasopoulos</a> explain the idea."},
     {"h3": "Probabilistic forecasts", "p": "Stock decisions need a range, not one number. We forecast quantiles or full distributions. A 95% cycle service level, for example, is set from the 95th percentile of demand over the lead time."},

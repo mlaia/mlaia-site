@@ -6,7 +6,8 @@
  "breadcrumb": "Beamforming",
  "eyebrow": "Audio &amp; Acoustics · Microphone arrays",
  "h1": "Microphone array beamforming.<br>Designed around physics, then tuned on the device.",
- "intro": "Microphone array beamforming lets a product listen in one direction and suppress the rest, but how well it works is largely fixed by geometry, microphone tolerances and the room before any algorithm runs. We help hardware and R&amp;D teams choose the array, the beamformer and the evaluation plan together, so the result holds up on real units in real rooms.",
+ "answer": "Beamforming combines the signals from two or more microphones so that sound from a chosen direction adds up and sound from other directions is attenuated. You need it when the voice you want and the noise you don’t come from different directions, for example a talker in a room with a TV, a fan or other people speaking, because a single microphone can separate them only by how they sound, not by where they are. How much it helps is set largely by the array geometry, the matching between microphones and the room, before any algorithm runs.",
+ "intro": "We help hardware and R&amp;D teams choose the array, the beamformer and the evaluation plan together, so the result holds up on real units in real rooms.",
  "cta": "Discuss your array design",
  "lab_link": {
   "href": "/audio-ai/lab/#beamforming",
@@ -77,6 +78,9 @@
    "eyebrow": "Methods",
    "h2": "From delay-and-sum to neural front-ends.<br>Each with a known failure mode.",
    "lead": "We start with a fixed beamformer as a baseline and add adaptivity or learned components only where measurements show they help.",
+   "paragraphs": [
+    "Not sure the extra microphones are worth it? <a href=\"/audio-ai/beamforming-vs-single-mic-noise-reduction/\">Beamforming vs single-microphone noise reduction</a> compares the two approaches on what they separate, what they need and how they fail."
+   ],
    "cards": [
     {
      "h3": "Delay-and-sum and filter-and-sum",
