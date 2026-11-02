@@ -185,7 +185,7 @@
   /* ---------- UI ---------- */
   const $=id=>document.getElementById(id);
   const lab=window.MLAIALab;
-  if(!lab||!$('vibration'))return;
+  if(!lab)return; // each experiment below returns early when its section is not on this page
   const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* Design C: amber = raw/input, blue = processed/output, white dashed = reference marks, red = alarm */
   const C={bg:'#070908',grid:'#262b28',text:'#9ca39d',blue:'#71d4ff',amber:'#ffb547',ref:'#eceee9',red:'#ff6b6b',green:'#7be0a6',white:'#eceee9'};
@@ -218,6 +218,7 @@
 
   /* 04 Vibration UI */
   (function(){
+    if(!$('vibration'))return;
     let state=null;
     function compute(){
       const rpm=+$('vib-rpm').value,imb=+$('vib-imbalance').value/100,fault=+$('vib-fault').value/100,thr=+$('vib-threshold').value;
@@ -266,6 +267,7 @@
 
   /* 05 Event detection UI */
   (function(){
+    if(!$('sound-events'))return;
     let scene=null,feats=null,bgKey=null,res=null,anim=0;
     function compute(){
       const bg=+$('sed-background').value,thr=+$('sed-threshold').value,kind=document.querySelector('input[name="sed-feature"]:checked').value;
@@ -312,6 +314,7 @@
 
   /* 06 Spectral subtraction UI */
   (function(){
+    if(!$('spectral-subtraction'))return;
     let key=null,c=null,e=null,specIn=null,specOut=null;
     function compute(){
       const type=$('ss-noise').value,snr=+$('ss-snr').value,alpha=+$('ss-alpha').value,floor=+$('ss-floor').value,k=type+snr;
