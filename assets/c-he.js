@@ -1,7 +1,9 @@
-/* MLAIA design C: Hebrew strings for the live instruments (mlaia-c.js writes English).
-   Load after mlaia-c.js on Hebrew pages. It only rewrites text that mlaia-c.js generates:
-   the noise handle's label, chip and value text, and the value text of the tone, level and
-   phase sliders. Numbers and units are wrapped in Unicode isolates so they stay left to right. */
+/* MLAIA design C: Hebrew strings for the live instruments (mlaia-c.js, c-medical.js and
+   c-prediction.js write English). Load after them on Hebrew pages. It only rewrites the text
+   those scripts generate on drag handles and sliders: the handle's label, chip and value text,
+   and the value text of the tone, level and phase sliders. Canvas labels come from the page
+   (data-m-labels / data-p-labels). Numbers and units are wrapped in Unicode isolates so they
+   stay left to right. */
 (()=>{
 'use strict';
 if(document.documentElement.lang!=='he')return;
@@ -9,15 +11,23 @@ const LRI='⁦',PDI='⁩';
 const rules={
   // handle chip, e.g. "◀ drag ▶  noise −7 dB"
   chip:[[/noise\s+([−+]?\d+)\s*dB/,m=>'▶ גררו ◀  רעש '+LRI+m[1]+' dB'+PDI],
-        [/tone\s+(\S+\s*k?Hz)/,m=>'▲ גררו ▼  טון '+LRI+m[1]+PDI]],
+        [/tone\s+(\S+\s*k?Hz)/,m=>'▲ גררו ▼  טון '+LRI+m[1]+PDI],
+        // c-medical.js: "◀ drag ▶  motion artifact 0.24 mV"
+        [/motion artifact\s+([\d.]+)\s*mV/,m=>'▶ גררו ◀  ארטיפקט תנועה '+LRI+m[1]+' mV'+PDI],
+        // c-prediction.js: "◀ drag ▶  zero-demand weeks 50%"
+        [/zero-demand weeks\s+(\d+)%/,m=>'▶ גררו ◀  שבועות ללא ביקוש '+LRI+m[1]+'%'+PDI]],
   // aria-valuetext on the handle and the range inputs
   value:[[/^noise\s+([−+]?\d+)\s*dB$/,m=>'רעש '+m[1]+' דציבל'],
          [/^tone at\s+(.+)$/,m=>'טון ב-'+m[1]],
          [/^(\S+)\s+hertz$/,m=>m[1]+' הרץ'],
          [/^(\S+)\s+decibels$/,m=>m[1]+' דציבל'],
-         [/^(\S+)\s+degrees$/,m=>m[1]+' מעלות']]
+         [/^(\S+)\s+degrees$/,m=>m[1]+' מעלות'],
+         [/^motion artifact\s+(\S+)\s+millivolts$/,m=>'ארטיפקט תנועה '+m[1]+' מיליוולט'],
+         [/^(\d+)% chance that a week has zero demand$/,m=>'סיכוי של '+m[1]+'% ששבוע יעבור ללא ביקוש']]
 };
-const labels={'Noise level':'עוצמת הרעש','Frequency of the added tone':'תדר הטון שנוסף'};
+const labels={'Noise level':'עוצמת הרעש','Frequency of the added tone':'תדר הטון שנוסף',
+  'Motion artifact added to the synthetic ECG':'ארטיפקט התנועה שנוסף ל-ECG הסינתטי',
+  'Share of weeks with zero demand (intermittency)':'שיעור השבועות ללא ביקוש'};
 const he=/[֐-׿]/;
 function tr(text,list){if(!text||he.test(text))return null;for(const [re,f] of list){const m=text.match(re);if(m)return f(m);}return null;}
 function fixChip(chip){const t=tr(chip.textContent,rules.chip);if(t!==null)chip.textContent=t;}
