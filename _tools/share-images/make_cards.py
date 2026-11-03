@@ -117,6 +117,14 @@ CARDS = {
                                     rows(["Churn label without leakage", "Survival framing", "Calibrated risk", "Thresholds vs team capacity", "Uplift, not just risk"])),
     "og/causal-inference.png": stack("Prediction · Causal", "Causal inference: what did the change actually do?",
                                      f'<div class="panel">{fig("pred-did.svg")}</div>'),
+    "og/beamforming-vs-single-mic-noise-reduction.png": side(
+        "Audio &amp; Acoustics · Comparison", "Beamforming vs<br>single-mic noise reduction.",
+        "Separate by direction, or by time and frequency.", "mlaia.com/audio-ai",
+        rows(["What each separates on", "Hardware & data needs", "Latency & compute", "How each one fails", "How we'd choose"])),
+    "og/prophet-vs-lightgbm-demand-forecasting.png": side(
+        "Prediction · Comparison", "Prophet vs LightGBM<br>for demand forecasting.",
+        "One model per series, or one model for every item.", "mlaia.com/predictive-intelligence",
+        rows(["Data needs", "Compute", "Uncertainty", "Intermittent demand", "How each one fails"])),
 }
 
 

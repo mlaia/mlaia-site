@@ -6,6 +6,7 @@
  "breadcrumb": "Vibration Analysis",
  "eyebrow": "Audio &amp; Acoustics · Vibration sensing",
  "h1": "Vibration tells you what the machine is doing.<br>Physics tells you why.",
+ "answer": "Vibration analysis measures how a machine or structure moves, usually with accelerometers, and reads its condition from the signal. Faults such as bearing defects, imbalance and misalignment leave characteristic patterns, often at frequencies tied to shaft speed and component geometry, and envelope analysis helps reveal early bearing damage that the raw spectrum hides. It is used for condition monitoring, predictive maintenance and product sensing, and machine learning adds anomaly detection and fault classification on top.",
  "intro": "We combine vibration analysis and machine learning for condition monitoring, predictive maintenance and product sensing. The work starts with the sensor, the mounting and the mechanics, so that every feature a model sees can be traced back to something physical.",
  "cta": "Discuss your vibration data",
  "lab_link": null,

@@ -1,0 +1,80 @@
+{
+ "slug": "beamforming-vs-single-mic-noise-reduction",
+ "title": "Beamforming vs Single-Microphone Noise Reduction | MLAIA",
+ "description": "Beamforming vs single-microphone noise reduction: what each separates, hardware and data needs, latency and compute, failure modes, and how to choose.",
+ "service_name": "Microphone array and noise reduction engineering",
+ "breadcrumb": "Beamforming vs Single-Mic Noise Reduction",
+ "article": {"headline": "Beamforming vs single-microphone noise reduction", "date": "2026-11-02"},
+ "eyebrow": "Audio &amp; Acoustics · Comparison",
+ "h1": "Beamforming vs<br>single-microphone noise reduction.",
+ "answer": "Beamforming uses two or more microphones to separate sound by direction, so it can reduce noise that overlaps the voice in frequency, such as other talkers or a TV, with little distortion. Single-microphone noise reduction can only separate sound by how it behaves in time and frequency: it works well on steady noise such as fans and hum, and neural models handle changing noise far better than classical filters, but it has no cue for which of two voices is the one you want. If the product can fit matched microphones and the noise comes from other directions, start with a beamformer; most multi-microphone products then add single-channel noise reduction after it.",
+ "intro": "A guide for hardware and R&amp;D teams deciding how many microphones a product needs. We compare the two approaches on what they separate, what they need and how they fail.",
+ "cta": "Discuss your microphone design",
+ "lab_link": {"href": "/audio-ai/beamforming-microphone-arrays/", "text": "Beamforming in depth"},
+ "brief": {
+  "h2": "The short version",
+  "items": [
+   ["Beamforming separates by", "Direction of arrival"],
+   ["Single-mic separates by", "Time &amp; frequency structure"],
+   ["Often best", "A beamformer, then a post-filter"]
+  ]
+ },
+ "sections": [
+  {
+   "id": "comparison",
+   "eyebrow": "Side by side",
+   "h2": "Two ways to separate a voice from noise.<br>Different inputs, different limits.",
+   "lead": "Beamforming is a spatial filter: it needs more than one microphone and works on where sound comes from. Single-microphone noise reduction is a time-frequency filter: it works on one signal and on how speech and noise differ in it.",
+   "table": {
+    "caption": "Beamforming compared with single-microphone noise reduction",
+    "head": ["Criterion", "Beamforming (two or more microphones)", "Single-microphone noise reduction"],
+    "rows": [
+     ["What it separates on", "Where sound comes from. The microphone signals are delayed, filtered and summed so the look direction adds up and other directions partly cancel.", "How sound behaves in time and frequency. A gain for each time-frequency bin, from a classical estimator such as a Wiener filter or from a neural network, keeps speech-dominated bins and suppresses the rest."],
+     ["Where it wins", "Noise from directions other than the talker: other people speaking, a TV or loudspeaker, a fan across the room. Far-field capture, with the talker a metre or more away. Noise that overlaps speech in frequency.", "Products with room for only one microphone, or hardware that is already fixed. Steady noise such as fans, air conditioning and hum. A talker close to the microphone. A software-only upgrade."],
+     ["Hardware &amp; data needs", "Two or more microphones with known spacing, synchronized sampling, and matched sensitivity and phase, or calibration per unit. Multichannel recordings from the device for tuning and testing.", "One microphone. Classical methods need little data. Neural models need large sets of clean speech and noise for training, plus recordings from the target device to check for mismatch."],
+     ["Latency &amp; compute", "Fixed beamformers are cheap and add little delay. Adaptive beamformers such as MVDR or GSC cost more, and need noise-covariance estimates and voice-activity control. Compute grows with the number of microphones.", "Classical STFT-domain methods are cheap; the frame length sets most of the algorithmic delay. Neural models range from small to heavy, and on a device usually need a streaming design and quantization."],
+     ["Physical limits", "Directivity depends on array size relative to wavelength, so a small array gives little directivity at low frequencies. Above the frequency where microphone spacing exceeds half a wavelength, spatial aliasing creates extra lobes.", "No spatial selectivity. A sound with the same time-frequency character as the target, such as another voice, can’t be removed without risking the target too."],
+     ["How it fails", "Microphone mismatch, a blocked port or a talker outside the look direction weaken the beam. Adaptive beamformers can cancel the target when steering is wrong or the room is very reverberant. Diffuse noise is reduced much less than noise from one direction.", "Aggressive suppression leaves musical noise or muffled, distorted speech. Babble and music leak through, or pull speech down with them. Neural models can fail on noise unlike their training data."],
+     ["What to measure", "SNR improvement and speech distortion by angle and distance, on several production units, in reverberant rooms. Word error rate if a speech recognizer listens.", "SNR improvement against speech distortion across noise types and levels, objective quality scores, word error rate and structured listening tests."]
+    ]
+   },
+   "note": "This compares general properties of the two approaches. How much either one helps on a given product depends on the microphones, the enclosure, the room and the noise, and has to be measured on the device."
+  },
+  {
+   "id": "when-each-wins",
+   "eyebrow": "When each one wins",
+   "h2": "Pick by where the noise comes from.<br>Then by what the hardware allows.",
+   "lead": "The deciding questions are physical: where the noise is, how steady it is, and whether the product has room for matched microphones.",
+   "cards": [
+    {"number": "01", "h3": "Choose beamforming when", "p": "The noise comes from somewhere other than the talker, the talker is at a distance, or other voices are the main problem. The product must also allow two or more microphones at a known spacing, with tolerances you can control or calibrate."},
+    {"number": "02", "h3": "Choose single-microphone when", "p": "The hardware has one microphone, the noise is mostly steady, or the talker is close to the microphone, as in many handheld uses. A neural suppressor can then handle much of the changing noise, within the device’s compute and latency budget."},
+    {"number": "03", "h3": "Use both when", "p": "The product has an array. A beamformer reduces directional noise with little distortion, and a single-channel post-filter removes the diffuse noise left in its output. Under a single-target model, the multichannel Wiener filter can be written as exactly this: an MVDR beamformer followed by a single-channel Wiener post-filter."}
+   ]
+  },
+  {
+   "id": "how-we-choose",
+   "eyebrow": "How we’d choose",
+   "h2": "Measure the scene first.<br>Then decide the microphones.",
+   "lead": "Microphone count and placement are hard to change once the board layout is frozen, so we settle this question early and with recordings from the product’s own conditions.",
+   "steps": [
+    {"h3": "Record the real scene", "p": "We record on a prototype or reference device in the conditions users meet, and find out where the noise comes from, how steady it is and how far away the talker is."},
+    {"h3": "Check the mechanical budget", "p": "We review how many microphones fit, at what spacing, with what port design and tolerances. Small spacing points to differential or superdirective designs, with limited gain at low frequencies."},
+    {"h3": "Set latency &amp; compute budgets", "p": "A call, a speech recognizer and a hearing device each tolerate different delay. That sets the frame length, the beamformer type and how large a model can be."},
+    {"h3": "Prototype both, measure the same way", "p": "We run a single-channel baseline, a beamformer and the combination through one evaluation on held-out recordings, and choose on the measurements."}
+   ],
+   "cta": {"href": "#contact", "text": "Discuss your microphone design"}
+  }
+ ],
+ "faq": [
+  {"q": "Can a neural network on one microphone replace a microphone array?", "a": "Often not fully. Single-channel neural enhancement is strong on many noise types, but with one microphone it has no spatial cue, so when the interference is another voice it can’t reliably tell which talker is wanted, unless it is given a sample of the target voice. An array adds that cue, and a neural model can then work on the beamformer’s output or on all channels."},
+  {"q": "Are two microphones enough for beamforming?", "a": "Often, for headsets, earbuds and phones. Two microphones support a differential or adaptive beamformer, or give a noise reference for a post-filter. Directivity is limited, especially at low frequencies, and more microphones give more freedom to place nulls. Geometry matters as much as the count."},
+  {"q": "Does beamforming add latency?", "a": "A fixed time-domain beamformer adds very little. A frequency-domain beamformer adds the delay of its analysis frame, the same as frequency-domain single-channel noise reduction. If both run in one STFT pipeline, the frame delay is paid only once."},
+  {"q": "Should a product use both?", "a": "In most multi-microphone products, yes. The beamformer removes directional noise with little distortion, and a single-channel post-filter removes the diffuse noise it leaves behind."},
+  {"q": "Where does echo cancellation fit?", "a": "Echo from the device’s own loudspeaker is a separate problem. Acoustic echo cancellation uses the playback signal as a reference, and neither approach here replaces it. With an array, where the canceller sits relative to the beamformer changes both cost and difficulty. Our <a href=\"/audio-ai/beamforming-microphone-arrays/\">beamforming page</a> covers the options."}
+ ],
+ "reads": [
+  {"href": "/audio-ai/beamforming-microphone-arrays/", "small": "Topic", "strong": "Microphone array beamforming: geometry, methods and evaluation"},
+  {"href": "/audio-ai/noise-reduction-anc/", "small": "Topic", "strong": "Noise reduction &amp; active noise cancellation"},
+  {"href": "/audio-ai/", "small": "Practice", "strong": "Audio &amp; Acoustics at MLAIA"}
+ ]
+}

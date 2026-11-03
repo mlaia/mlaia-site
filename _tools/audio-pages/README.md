@@ -36,6 +36,14 @@ python3 _tools/audio-pages/render_audio.py . _tools/audio-pages/content/*.json
 
 If you only changed text, the last command is enough.
 
+## Optional fields
+
+- `answer`: the answer-first paragraph rendered under the H1 (`.c-tp-answer`). Two or three sentences that answer the page's main question directly and read on their own, since AI assistants and search engines quote it without context. Keep `intro` about what MLAIA does, so the two don't repeat each other.
+- `sections[].table`: a comparison table, `{"caption", "head": [...], "rows": [[row header, cell, ...], ...]}`. It scrolls inside its own wrapper on phones.
+- `article`: `{"headline", "date"}` for comparison pages. It replaces the Service JSON-LD with TechArticle and sets `og:type` to `article`.
+
+Comparison pages (`beamforming-vs-single-mic-noise-reduction`, and `prophet-vs-lightgbm-demand-forecasting` in `_tools/prediction-pages/`) use all three.
+
 ## Content rules
 
 - Claim only experience the site already states. Don't invent clients, results or numbers.
