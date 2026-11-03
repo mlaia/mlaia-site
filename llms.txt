@@ -50,6 +50,13 @@ AI for clinical records, medical images and biosignals, for hospitals and MedTec
 - [Clinical AI & Prediction Model Validation](https://www.mlaia.com/medical-ai/clinical-model-validation/) — leakage checks, patient and site splits, external validation, calibration, subgroups, TRIPOD+AI reporting
 - [Medical Imaging AI](https://www.mlaia.com/medical-ai/medical-imaging-ai/) — segmentation and detection, scanner and site shift, label disagreement, metrics beyond Dice, DICOM de-identification
 - [Clinical Data De-identification](https://www.mlaia.com/medical-ai/clinical-data-deidentification/) — records, notes and images, measured for missed identifiers, data utility and residual risk
+- [Interactive Medical AI Lab](https://www.mlaia.com/medical-ai/lab/) — six browser demos on synthetic data (not a medical device): ECG heart rate, patient-level leakage, calibration and thresholds, scanner shift, Dice vs clinical error and clinical note de-identification
+  - [Heart rate from a noisy ECG demo](https://www.mlaia.com/medical-ai/lab/heart-rate-ecg/) — motion artifact vs a QRS detector, beat by beat: missed and false beats behind a plausible average
+  - [Patient-level data leakage demo](https://www.mlaia.com/medical-ai/lab/patient-leakage/) — split by visit vs by patient and watch test AUC inflate
+  - [Calibration and decision threshold demo](https://www.mlaia.com/medical-ai/lab/calibration-threshold/) — threshold, prevalence and miscalibration vs missed cases, false alarms and net benefit
+  - [Scanner shift in medical imaging demo](https://www.mlaia.com/medical-ai/lab/scanner-shift/) — a segmentation tuned on scanner A, applied to scanner B with different contrast and noise
+  - [Dice score vs clinical error demo](https://www.mlaia.com/medical-ai/lab/dice-vs-clinical-error/) — a missed small lesion barely moves Dice; compare HD95 and lesions detected
+  - [Clinical note de-identification demo](https://www.mlaia.com/medical-ai/lab/note-deidentification/) — rule-based redaction of a fictional note in English, Hebrew or mixed: caught, missed and over-redacted identifiers
 
 ### 3. Forecasting & Causal Analysis
 Forecasts of bookings, revenue, churn and demand, and causal analysis of which actions can change an outcome, with the assumptions stated.
