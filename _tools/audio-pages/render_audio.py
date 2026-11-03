@@ -194,7 +194,7 @@ def render(d):
     answer = f'<p class="c-tp-answer">{d["answer"]}</p>' if d.get("answer") else ""
     og_type = "article" if art else "website"
     kicker = f'<p class="c-kicker">{esc(pname)} · {esc(crumb)}</p>'
-    reach = '<p class="c-mono c-tp-reach"><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br><a href="tel:+972524846282">+972 52 484 6282</a></p>'
+    reach = '<p class="c-mono c-tp-reach"><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br>WhatsApp: <a href="https://wa.me/972524846282" target="_blank" rel="noopener">+972 52 484 6282</a></p>'
     band = d.get("contact_band")
     if band:
         contact = (f'<section class="c-contact" id="contact"><div class="c-wrap c-contact__grid"><div class="c-contact__copy">{kicker}'
