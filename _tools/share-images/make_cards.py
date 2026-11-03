@@ -63,6 +63,9 @@ def stack(eyebrow, title, panel):
             f'<h1>{title}</h1>{panel}</div></body></html>')
 
 
+LAB_DEMOS = ["Noise filtering", "Beamforming", "Active noise control",
+             "Bearing fault vibration", "Sound event detection", "Speech enhancement"]
+
 CARDS = {
     "og-image.png": side("Specialist AI consulting", "Audio, medical AI<br>&amp; prediction.",
                          "Led by Dr. Yochai Edlitz · Ph.D., Weizmann Institute", "mlaia.com",
@@ -70,9 +73,9 @@ CARDS = {
     "og/audio-ai.png": side("Audio &amp; Acoustics", "Intelligence starts<br>with the signal.",
                             "Acoustics, classical DSP and machine learning, engineered together.", "mlaia.com/audio-ai",
                             rows(["Microphone arrays & beamforming", "Noise reduction & ANC", "On-device audio AI", "Vibration analysis"])),
-    "og/audio-lab.png": side("Interactive audio lab", "Change it. See it.<br>Hear it.",
-                             "Three browser experiments in signal processing. No microphone or uploads needed.", "mlaia.com/audio-ai/lab",
-                             rows(["Noise filtering", "Beamforming", "Active noise control"])),
+    "og/audio-lab-v2.png": side("Interactive audio lab", "Change it. See it.<br>Hear it.",
+                                "Six browser experiments in signal processing. No microphone or uploads needed.", "mlaia.com/audio-ai/lab",
+                                rows(LAB_DEMOS)),
     "og/beamforming-microphone-arrays.png": side("Audio &amp; Acoustics", "Microphone array<br>beamforming.",
                                                  "Geometry sets the limits before any algorithm runs.", "mlaia.com/audio-ai/beamforming-microphone-arrays",
                                                  f'<div class="panel">{fig("bf-patterns-b.svg")}</div>'),
@@ -126,6 +129,24 @@ CARDS = {
         "One model per series, or one model for every item.", "mlaia.com/predictive-intelligence",
         rows(["Data needs", "Compute", "Uncertainty", "Intermittent demand", "How each one fails"])),
 }
+
+
+# One card per audio-lab demo page (/audio-ai/lab/<slug>/), titled after its H1.
+for slug, title, sub, items in [
+    ("noise-filtering", "Low-pass filter<br>noise reduction.", "Set the SNR and cutoff, then hear what the filter keeps.",
+     ["Input SNR", "Butterworth cutoff", "Output SNR", "Signal retained"]),
+    ("beamforming", "Microphone array<br>beamforming simulator.", "Steer a delay-and-sum array between two sources.",
+     ["Steering angle", "Number of microphones", "Directional response", "Listen to the output"]),
+    ("active-noise-control", "Active noise<br>control (ANC).", "Cancel a 180 Hz hum with an opposing tone.",
+     ["Anti-noise phase", "Anti-noise amplitude", "Destructive interference", "Residual amplitude"]),
+    ("bearing-fault-vibration", "Bearing fault<br>vibration analysis.", "Envelope analysis finds the defect the raw spectrum hides.",
+     ["Shaft imbalance", "Outer-race defect", "Raw spectrum", "Envelope spectrum & BPFO"]),
+    ("sound-event-detection", "Sound event<br>detection.", "Tune an energy detector against ground truth.",
+     ["Broadband vs 1–6 kHz feature", "Threshold", "Hits & misses", "False alarms"]),
+    ("speech-enhancement", "Spectral subtraction<br>speech enhancement.", "Trade noise reduction against distortion and musical noise.",
+     ["Noise type & input SNR", "Over-subtraction", "Spectral floor", "Clean, noisy, enhanced"]),
+]:
+    CARDS[f"og/lab-{slug}.png"] = side("Interactive audio lab", title, sub, f"mlaia.com/audio-ai/lab/{slug}", rows(items))
 
 
 def render(name, page):

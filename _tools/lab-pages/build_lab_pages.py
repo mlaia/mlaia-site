@@ -18,7 +18,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 HUB = ROOT / "audio-ai" / "lab" / "index.html"
 SITE = "https://www.mlaia.com"
-OG = SITE + "/assets/og/audio-lab.png"
 
 TOPICS = {
     "anc": ("/audio-ai/noise-reduction-anc/", "Noise reduction and ANC"),
@@ -134,6 +133,10 @@ PAGES = [
 BY_SECTION = {p["section"]: p for p in PAGES}
 
 
+def og(p):
+    return f"{SITE}/assets/og/lab-{p['slug']}.png"
+
+
 def url(p):
     return f"/audio-ai/lab/{p['slug']}/"
 
@@ -177,7 +180,7 @@ def jsonld(p):
                 "name": p["name"], "description": p["description"], "url": page_url,
                 "inLanguage": "en", "isAccessibleForFree": True,
                 "learningResourceType": "Interactive simulation", "teaches": p["teaches"],
-                "image": OG,
+                "image": og(p),
                 "isPartOf": {"@type": "WebPage", "name": "Interactive Audio Lab", "url": SITE + "/audio-ai/lab/"},
                 "provider": {"@id": SITE + "/#organization"}}
     dump = lambda o: json.dumps(o, ensure_ascii=False, separators=(",", ":"))
@@ -188,6 +191,7 @@ def jsonld(p):
 def build(p, parts):
     e = html.escape
     page_url = SITE + url(p)
+    OG = og(p)
     topic_href, topic_name = TOPICS[p["topic"]]
     topic_href = p.get("topic_href", topic_href)
     topic_link = f'<a href="{topic_href}">{p.get("topic_label", topic_name.lower())}</a>'
