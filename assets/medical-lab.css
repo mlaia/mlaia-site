@@ -1,0 +1,108 @@
+/* Medical AI lab (/medical-ai/lab/), design direction C. Loaded after /assets/mlaia-c.css and
+   /assets/audio-lab.css: the page body carries both .audio-lab (shared lab layout, sliders, buttons,
+   readouts) and .medical-lab (the pieces below). Data colours as in the audio lab:
+   amber = raw/input, blue = model output, white dashed = reference, red = error, green = correct. */
+
+.ml-flag{margin:16px 0 0;font:400 11px/1.5 var(--c-mono);color:var(--c-muted);letter-spacing:.02em}
+.ml-flag::before{content:"";display:inline-block;width:7px;height:7px;margin-right:8px;border:1px solid var(--c-amber)}
+.lab-readouts .ml-bad strong{color:var(--lab-red)}
+.lab-readouts .ml-warn strong{color:var(--c-amber)}
+.lab-readouts--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ml-verdict{margin:0 0 6px;font-size:15px;line-height:1.55;color:var(--c-fg)}
+.medical-lab .lab-display p.lab-small{margin-bottom:0}
+
+/* checkboxes in the control panel */
+.lab-controls label.ml-check{justify-content:flex-start;align-items:center;gap:12px;font-weight:400;color:var(--c-text);min-height:40px;margin:14px 0 4px;cursor:pointer}
+.ml-check input{flex:none;width:18px;height:18px;margin:0;accent-color:var(--c-amber)}
+.ml-check input:focus-visible{outline:3px solid var(--c-focus);outline-offset:2px}
+
+/* legend swatches: filled blocks and a dashed outline */
+.ml-key{display:inline-flex;align-items:center;gap:8px}
+.ml-key::before{content:"";flex:none;width:12px;height:12px;background:currentColor}
+.ml-key--line::before{height:0;width:18px;border-top:2px dashed currentColor;background:none}
+.ml-k-blue{color:var(--c-blue)}.ml-k-amber{color:var(--c-amber)}.ml-k-red{color:var(--lab-red)}.ml-k-green{color:var(--lab-green)}.ml-k-fg{color:var(--c-fg)}.ml-k-muted{color:var(--c-muted)}
+
+/* SVG chart labels (class ml-t); the wide charts get larger labels on phones, as in the audio lab */
+.medical-lab .lab-display svg text.ml-t{font-size:11px}
+.medical-lab .lab-display svg.ml-wide text.ml-t{font-size:13px}
+
+/* ---------- 01 ECG: the c-medical.js instrument inside the lab display ---------- */
+.ml-ecg{--c-scope-h:300px;grid-template-columns:1fr;border:1px solid var(--c-rule)}
+.ml-ecg .c-readout{border-left:0;border-top:1px solid var(--c-rule);padding:16px 18px}
+.ml-ecg .c-readout dl{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ml-ecg .c-readout .m-fail dd{color:var(--c-amber)}
+.ml-ecg .m-disclaim{margin:14px 0 0;font:400 11px/1.5 var(--c-mono);color:var(--c-muted)}
+
+/* ---------- 02 Leakage: split map and AUC bars ---------- */
+.ml-split{display:grid;gap:5px;margin:2px 0 20px}
+.ml-row{display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;align-items:center;font:400 11px/1 var(--c-mono);color:var(--c-muted)}
+.ml-row div{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;max-width:440px}
+.ml-row i{display:block;height:13px}
+.ml-row i.ml-tr{background:rgba(156,163,157,.38)}
+.ml-row i.ml-te{background:var(--c-blue)}
+.ml-bars{border-top:1px solid var(--c-rule);padding-top:6px}
+.ml-bars__group{margin:12px 0 6px;font:400 11px/1.4 var(--c-mono);color:var(--c-muted)}
+.ml-bars__group.is-current{color:var(--c-fg)}
+.ml-bars__group.is-current::after{content:"  · selected";color:var(--c-amber)}
+.ml-bar{display:grid;grid-template-columns:150px minmax(0,1fr) 46px;gap:12px;align-items:center;margin:5px 0;font-size:14px;color:var(--c-text);opacity:.5}
+.ml-bar.is-current{opacity:1}
+.ml-bar__track{height:14px;background:var(--c-bg-2);border:1px solid var(--c-rule)}
+.ml-bar__track b{display:block;height:100%}
+.ml-b-blue{background:var(--c-blue)}.ml-b-fg{background:var(--c-fg)}
+.ml-bar strong{font:500 14px/1 var(--c-mono);color:var(--c-fg);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- 03 Calibration: two small charts side by side ---------- */
+.ml-charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.ml-charts figure,.ml-scans figure{margin:0;min-width:0}
+.ml-charts figcaption,.ml-scans figcaption,.ml-cap{margin:0 0 8px;font:400 11px/1.4 var(--c-mono);color:var(--c-muted)}
+
+/* ---------- 04 / 05 Images ---------- */
+.ml-scans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ml-scans figcaption b{color:var(--c-fg);font-weight:500}
+.ml-img{display:block;width:100%;aspect-ratio:1/1;height:auto;background:#000;image-rendering:pixelated}
+.ml-lesion{max-width:460px}
+.ml-hist{margin-top:18px}
+
+/* ---------- 06 De-identification ---------- */
+.ml-note{margin:0;padding:18px 20px;min-height:220px;background:var(--c-bg);border:1px solid var(--c-rule);font:400 17px/1.95 var(--c-body);color:var(--c-text);overflow-wrap:anywhere}
+.ml-note[dir=rtl]{font-family:"Heebo","Arial Hebrew","Noto Sans Hebrew","Segoe UI",system-ui,sans-serif;font-size:18px;text-align:right}
+.ml-note mark{unicode-bidi:isolate;color:var(--c-fg);background:none;padding:1px 2px}
+.ml-note .ml-hit{background:rgba(123,224,166,.15);box-shadow:inset 0 -2px 0 var(--lab-green)}
+.ml-note .ml-miss{background:rgba(255,107,107,.2);box-shadow:inset 0 -2px 0 var(--lab-red)}
+.ml-note .ml-fp{background:rgba(255,181,71,.16);box-shadow:inset 0 -2px 0 var(--c-amber)}
+.ml-note .ml-red{padding:2px 5px;background:var(--c-fg);color:#0c0e0d;font:500 12px/1 var(--c-mono)}
+.ml-note .ml-red.is-fp{background:var(--c-amber)}
+.ml-rules{list-style:none;margin:20px 0 6px;padding:0;font-size:13px;line-height:1.4;color:var(--c-muted)}
+.ml-rules li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;padding:6px 0;border-bottom:1px solid var(--c-rule)}
+.ml-rules li>span:first-child{font:400 11px/1.6 var(--c-mono)}
+.ml-rules li.is-on{color:var(--c-fg)}
+.ml-rules li.is-on>span:first-child{color:var(--c-amber)}
+.ml-rules-title{margin:22px 0 0;font:400 var(--c-fs-label)/1.4 var(--c-mono);color:var(--c-muted)}
+.ml-types{width:100%;border-collapse:collapse;margin-top:4px;font-size:14px}
+.ml-types caption{text-align:left;margin-bottom:6px;font:400 11px/1.4 var(--c-mono);color:var(--c-muted)}
+.ml-types th,.ml-types td{padding:8px 0;border-bottom:1px solid var(--c-rule);text-align:left;font-weight:400;color:var(--c-text)}
+.ml-types td{padding-left:12px;font:500 13px/1 var(--c-mono);color:var(--c-fg);white-space:nowrap}
+.ml-types td:last-child{width:45%}
+.ml-meter{display:block;height:8px;background:var(--c-bg-2);border:1px solid var(--c-rule)}
+.ml-meter b{display:block;height:100%;background:var(--lab-green)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1100px){.lab-readouts--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  .ml-charts{grid-template-columns:1fr;gap:24px}
+  .ml-charts svg{max-width:400px}
+  .medical-lab .lab-display svg text.ml-t{font-size:12px}
+  .medical-lab .lab-display svg.ml-wide text.ml-t{font-size:22px}
+  .ml-bar{grid-template-columns:118px minmax(0,1fr) 42px;gap:8px;font-size:13px}
+  .ml-note{padding:14px;font-size:16px}
+  .ml-note[dir=rtl]{font-size:17px}
+}
+@media (max-width:640px){
+  .ml-ecg{--c-scope-h:240px}
+  .ml-ecg .c-readout dl{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ml-ecg .c-readout .c-opt{display:block}
+  .ml-scans{gap:10px}
+  /* full-bleed lab panels (audio-lab.css): keep readouts and the note off the screen edge */
+  .medical-lab .lab-display{padding:16px}
+  .medical-lab .lab-display svg{width:100%;margin-left:0}
+}

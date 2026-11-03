@@ -137,6 +137,7 @@
     {"q": "Do you decide whether our data meets HIPAA or GDPR?", "a": "No. We implement and measure the technical side of de-identification and document it. Legal and regulatory decisions belong to your privacy officer, legal counsel and ethics committee. We are not legal or regulatory consultants."}
   ],
   "reads": [
+    {"href": "/medical-ai/lab/note-deidentification/", "small": "Interactive lab", "strong": "Try de-identifying a clinical note"},
     {"href": "/wiki/medical-ai-validation.html", "small": "Technical guide", "strong": "Medical AI validation, regulation &amp; privacy"},
     {"href": "/blog-clinical-ai-production.html", "small": "Deployment", "strong": "Clinical AI that ships: shadow mode and monitoring"},
     {"href": "/medical-ai/clinical-model-validation/", "small": "Medical AI", "strong": "Clinical model validation"}

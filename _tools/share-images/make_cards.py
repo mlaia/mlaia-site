@@ -149,6 +149,29 @@ for slug, title, sub, items in [
     CARDS[f"og/lab-{slug}.png"] = side("Interactive audio lab", title, sub, f"mlaia.com/audio-ai/lab/{slug}", rows(items))
 
 
+# Medical AI lab: the hub card and one card per demo page (/medical-ai/lab/<slug>/), titled after its H1.
+MED_LAB_DEMOS = ["Heart rate from a noisy ECG", "Patient-level leakage", "Calibration & thresholds",
+                 "Scanner shift", "Dice vs clinical error", "Note de-identification"]
+CARDS["og/medical-lab.png"] = side("Interactive medical AI lab", "Interactive<br>Medical AI Lab.",
+                                   "Six browser demos on synthetic data. No patient data, nothing uploaded.", "mlaia.com/medical-ai/lab",
+                                   rows(MED_LAB_DEMOS))
+for slug, title, sub, items in [
+    ("heart-rate-ecg", "Heart rate from<br>a noisy ECG.", "Right on average, wrong beat by beat.",
+     ["Motion artifact", "QRS detector", "Missed & false beats", "Pass / fail check"]),
+    ("patient-leakage", "Patient-level<br>data leakage.", "Same model, two test scores.",
+     ["Split by record", "Split by patient", "Visits per patient", "AUC on new patients"]),
+    ("calibration-threshold", "Calibration &amp;<br>decision thresholds.", "Same ranking, different usefulness.",
+     ["Risk threshold", "Prevalence", "Calibration plot", "Net benefit"]),
+    ("scanner-shift", "Scanner shift in<br>medical imaging.", "Tuned on scanner A, tested on scanner B.",
+     ["Contrast & noise", "Intensity window", "Dice on A vs B", "Normalisation"]),
+    ("dice-vs-clinical-error", "Dice score vs<br>clinical error.", "A high Dice can hide a missed lesion.",
+     ["Dice", "HD95 boundary distance", "Lesions detected", "Small-lesion size"]),
+    ("note-deidentification", "De-identifying<br>a clinical note.", "Names are easy. The rest re-identifies.",
+     ["English, Hebrew, mixed", "Rule strictness", "Caught & missed", "Over-redaction"]),
+]:
+    CARDS[f"og/lab-{slug}.png"] = side("Interactive medical AI lab", title, sub, f"mlaia.com/medical-ai/lab/{slug}", rows(items))
+
+
 def render(name, page):
     out = os.path.join(ROOT, "assets", name)
     os.makedirs(os.path.dirname(out), exist_ok=True)

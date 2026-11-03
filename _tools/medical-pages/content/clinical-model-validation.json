@@ -114,6 +114,7 @@
     {"q": "Do you prepare FDA or CE submissions?", "a": "No. We produce the validation evidence that regulatory work relies on: study design, results with uncertainty, subgroup analysis and documented limitations. We are not regulatory consultants, and engaging MLAIA does not imply any regulatory status for your product."}
   ],
   "reads": [
+    {"href": "/medical-ai/lab/", "small": "Interactive lab", "strong": "Try the leakage, calibration &amp; ECG demos"},
     {"href": "/wiki/medical-ai-validation.html", "small": "Technical guide", "strong": "Medical AI validation &amp; the regulatory landscape"},
     {"href": "/blog-clinical-ai-production.html", "small": "Deployment", "strong": "Clinical AI that ships: shadow mode and monitoring"},
     {"href": "/medical-ai/medical-imaging-ai/", "small": "Medical AI", "strong": "Medical imaging AI"}
