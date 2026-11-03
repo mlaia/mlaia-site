@@ -127,6 +127,7 @@
     {"q": "Do you handle FDA or CE clearance?", "a": "No. We produce the development and validation evidence, structured so it can support regulatory work. We are not regulatory consultants, and engaging MLAIA does not imply any regulatory status for your product."}
   ],
   "reads": [
+    {"href": "/medical-ai/lab/scanner-shift/", "small": "Interactive lab", "strong": "Try the scanner-shift demo"},
     {"href": "/blog-computer-vision-production.html#medical-imaging-drones", "small": "Medical imaging", "strong": "Computer vision in production: medical imaging"},
     {"href": "/blog-clinical-ai-production.html", "small": "Deployment", "strong": "Clinical AI that ships: shadow mode and monitoring"},
     {"href": "/wiki/medical-ai-validation.html", "small": "Technical guide", "strong": "Medical AI validation &amp; the regulatory landscape"}
