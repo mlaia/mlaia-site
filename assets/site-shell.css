@@ -38,3 +38,6 @@ body[data-site-shell] .cta#contact{background:#081728;color:#c7d2e3;text-align:s
 .site-cta-btn{display:inline-block;padding:.6rem 1.1rem;border-radius:6px;background:#0057ff;color:#fff!important;font-weight:600;text-decoration:none!important}
 .site-cta-btn:hover{background:#0044ce}
 .site-cta-btn:focus-visible{outline:3px solid #00b4d8;outline-offset:3px}
+/* Ultrabot site chat (talk.mlaia.com/widget.js): lift its bottom-right button clear of the mobile bar and the homepage accessibility button. */
+body[data-site-shell]:has(#a11y-btn){--ultrabot-offset:88px}
+@media(max-width:900px){body[data-site-shell]{--ultrabot-offset:calc(90px + env(safe-area-inset-bottom))}body[data-site-shell]:has(#a11y-btn){--ultrabot-offset:calc(150px + env(safe-area-inset-bottom))}}
