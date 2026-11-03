@@ -16,7 +16,7 @@
   <!-- Specialist practices -->
   <url>
     <loc>https://www.mlaia.com/audio-ai/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/audio-ai/"/>
@@ -25,7 +25,7 @@
   </url>
   <url>
     <loc>https://www.mlaia.com/he/audio-ai/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/audio-ai/"/>
@@ -34,81 +34,153 @@
   </url>
   <url>
     <loc>https://www.mlaia.com/audio-ai/lab/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.mlaia.com/audio-ai/lab/noise-filtering/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/audio-ai/lab/beamforming/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/audio-ai/lab/active-noise-control/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/audio-ai/lab/bearing-fault-vibration/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/audio-ai/lab/sound-event-detection/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/audio-ai/lab/speech-enhancement/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.mlaia.com/audio-ai/beamforming-microphone-arrays/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/audio-ai/noise-reduction-anc/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/audio-ai/edge-audio-ai/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/audio-ai/vibration-analysis/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.mlaia.com/audio-ai/beamforming-vs-single-mic-noise-reduction/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.mlaia.com/medical-ai/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/medical-ai/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.mlaia.com/he/medical-ai/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/medical-ai/"/>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/he/medical-ai/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/medical-ai/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.mlaia.com/he/medical-ai/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/medical-ai/"/>
   </url>
   <url>
     <loc>https://www.mlaia.com/medical-ai/clinical-model-validation/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/medical-ai/medical-imaging-ai/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/medical-ai/clinical-data-deidentification/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/predictive-intelligence/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.mlaia.com/he/predictive-intelligence/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/predictive-intelligence/"/>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/he/predictive-intelligence/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/predictive-intelligence/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.mlaia.com/he/predictive-intelligence/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/predictive-intelligence/"/>
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/demand-forecasting/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/churn-prediction/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/causal-inference/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/predictive-intelligence/prophet-vs-lightgbm-demand-forecasting/</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/explorer/</loc>
