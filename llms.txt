@@ -34,11 +34,19 @@ Signal processing combined with machine learning: audio event detection, noise r
 - [On-Device Audio AI](https://www.mlaia.com/audio-ai/edge-audio-ai/) — wake words, sound events and speech models on phones, DSPs and controllers
 - [Vibration Analysis & Machine Learning](https://www.mlaia.com/audio-ai/vibration-analysis/) — condition monitoring, bearing fault features, anomaly detection
 - [Interactive Audio Lab](https://www.mlaia.com/audio-ai/lab/) — six browser demos on synthetic signals: noise filtering, microphone-array beamforming, active noise cancellation, machine vibration (bearing fault) diagnostics, sound event detection and speech enhancement
+  - [Low-pass filter noise reduction demo](https://www.mlaia.com/audio-ai/lab/noise-filtering/) — input SNR, cutoff, output SNR and how much wanted signal survives
+  - [Microphone array beamforming simulator](https://www.mlaia.com/audio-ai/lab/beamforming/) — steer a delay-and-sum linear array between two sources
+  - [Active noise control demo](https://www.mlaia.com/audio-ai/lab/active-noise-control/) — phase and amplitude of anti-noise against a 180 Hz hum
+  - [Bearing fault vibration analysis demo](https://www.mlaia.com/audio-ai/lab/bearing-fault-vibration/) — envelope analysis reveals the BPFO line the raw spectrum hides
+  - [Sound event detection demo](https://www.mlaia.com/audio-ai/lab/sound-event-detection/) — energy detector feature and threshold vs hits, misses and false alarms
+  - [Spectral subtraction speech enhancement demo](https://www.mlaia.com/audio-ai/lab/speech-enhancement/) — noise reduction vs distortion and musical noise
+- [Beamforming vs Single-Microphone Noise Reduction](https://www.mlaia.com/audio-ai/beamforming-vs-single-mic-noise-reduction/) — what each separates, hardware and data needs, latency, failure modes, how to choose
 
 ### 2. Medical AI & Clinical Data Science
 AI for clinical records, medical images and biosignals, for hospitals and MedTech teams: models that can be evaluated, understood and integrated into clinical work.
 
 - [Medical AI & Clinical Data Science](https://www.mlaia.com/medical-ai/) — practice overview
+- [Medical AI & Clinical Data Science, in Hebrew](https://www.mlaia.com/he/medical-ai/) — the practice overview in Hebrew
 - [Clinical AI & Prediction Model Validation](https://www.mlaia.com/medical-ai/clinical-model-validation/) — leakage checks, patient and site splits, external validation, calibration, subgroups, TRIPOD+AI reporting
 - [Medical Imaging AI](https://www.mlaia.com/medical-ai/medical-imaging-ai/) — segmentation and detection, scanner and site shift, label disagreement, metrics beyond Dice, DICOM de-identification
 - [Clinical Data De-identification](https://www.mlaia.com/medical-ai/clinical-data-deidentification/) — records, notes and images, measured for missed identifiers, data utility and residual risk
@@ -47,9 +55,11 @@ AI for clinical records, medical images and biosignals, for hospitals and MedTec
 Forecasts of bookings, revenue, churn and demand, and causal analysis of which actions can change an outcome, with the assumptions stated.
 
 - [Forecasting & Causal Analysis](https://www.mlaia.com/predictive-intelligence/) — practice overview
+- [Forecasting & Causal Analysis, in Hebrew](https://www.mlaia.com/he/predictive-intelligence/) — the practice overview in Hebrew
 - [Demand Forecasting](https://www.mlaia.com/predictive-intelligence/demand-forecasting/) — item-level and intermittent demand, Croston and TSB, hierarchical reconciliation, probabilistic forecasts and backtests
 - [Churn Prediction](https://www.mlaia.com/predictive-intelligence/churn-prediction/) — clear churn labels, no leakage, survival framing, calibrated risk, uplift for retention offers
 - [Causal Inference & Uplift Modeling](https://www.mlaia.com/predictive-intelligence/causal-inference/) — experiments, difference-in-differences, synthetic control, propensity methods, uplift modeling
+- [Prophet vs LightGBM for Demand Forecasting](https://www.mlaia.com/predictive-intelligence/prophet-vs-lightgbm-demand-forecasting/) — data needs, compute, uncertainty, intermittent demand, failure modes, choosing with a backtest
 - [Interactive Prediction Explorer](https://www.mlaia.com/predictive-intelligence/explorer/) — individual churn predictions, SHAP explanations and what-if scenarios on synthetic data
 
 ## Related Sites
