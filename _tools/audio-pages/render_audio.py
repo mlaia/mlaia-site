@@ -23,7 +23,7 @@ PRACTICES = {
 # Optional per-page "contact" block in the JSON (used by the prediction pages).
 # Keys: h2, p, bullets, label, button. Missing keys keep the default text.
 NAV = [("/audio-ai/", "Audio &amp; Acoustics"), ("/medical-ai/", "Medical AI"),
-       ("/predictive-intelligence/", "Prediction &amp; Causal Analysis")]
+       ("/predictive-intelligence/", "Prediction &amp; Causal Analysis"), ("/ai-adoption/", "AI Adoption")]
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
          '<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600'
          '&family=Martian+Mono:wdth,wght@87.5,300..600&display=swap" rel="stylesheet">')
