@@ -69,6 +69,12 @@ Forecasts of bookings, revenue, churn and demand, and causal analysis of which a
 - [Prophet vs LightGBM for Demand Forecasting](https://www.mlaia.com/predictive-intelligence/prophet-vs-lightgbm-demand-forecasting/) — data needs, compute, uncertainty, intermittent demand, failure modes, choosing with a backtest
 - [Interactive Prediction Explorer](https://www.mlaia.com/predictive-intelligence/explorer/) — individual churn predictions, SHAP explanations and what-if scenarios on synthetic data
 
+### 4. AI Adoption for Organisations
+Helping organisations put AI to work: mapping where AI pays off, choosing tools, an AI usage and data policy aligned with Israel's Privacy Protection Law Amendment 13, role-based training, team workflows, and pilots with success measures that move to production.
+
+- [AI Adoption for Organisations](https://www.mlaia.com/ai-adoption/) — use-case mapping, tool selection, AI usage policy, training, pilots and production
+- [הטמעת AI בארגון](https://www.mlaia.com/he/ai-adoption/) — the AI adoption page in Hebrew (the main version)
+
 ## Related Sites
 
 - [Ultrabot](https://ultrabot.ai/) — MLAIA's AI assistants in Hebrew & English (chatbots, knowledge assistants, in-app assistants, voice and avatars), plus RAG and automation, including the earlier MLAIA articles on LLMs, RAG, agents and voice AI
