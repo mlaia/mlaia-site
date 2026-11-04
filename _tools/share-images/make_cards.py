@@ -172,6 +172,31 @@ for slug, title, sub, items in [
     CARDS[f"og/lab-{slug}.png"] = side("Interactive medical AI lab", title, sub, f"mlaia.com/medical-ai/lab/{slug}", rows(items))
 
 
+# AI adoption practice: English card, and a Hebrew (RTL) card for /he/ai-adoption/.
+ADOPTION = ["Map where AI pays off", "Choose the tools", "Usage & data policy",
+            "Training by role", "Skills & workflows for teams", "Pilot, then production"]
+CARDS["og/ai-adoption.png"] = side("AI Adoption for Organisations", "AI that works in<br>the organisation.",
+                                   "From strategy to working use, by a team that builds AI in production.",
+                                   "mlaia.com/ai-adoption", rows(ADOPTION))
+HE_CSS = ("body{font-family:'Heebo',Arial,sans-serif}.eyebrow{letter-spacing:0;font-size:20px}"
+          "h1{letter-spacing:-.01em;line-height:1.12}.url{left:auto;right:64px}"
+          ".list div{font-size:24px}.logo{direction:ltr;text-align:right}")
+HE_HEAD = (HEAD.replace('<html>', '<html lang="he" dir="rtl">')
+           .replace('family=Syne', 'family=Heebo:wght@400;600;700;800&family=Syne')
+           .replace('</style>', HE_CSS + '</style>'))
+
+def side_he(eyebrow, title, sub, url, panel):
+    """Right-to-left variant of side() for Hebrew pages (Heebo, URL kept left to right)."""
+    return (HE_HEAD + f'<div class="card side"><div class="text">{LOGO}<div class="eyebrow">{eyebrow}</div>'
+            f'<h1>{title}</h1><div class="sub">{sub}</div></div>{panel}<div class="url" dir="ltr">{url}</div></div></body></html>')
+
+
+CARDS["og/ai-adoption-he.png"] = side_he("הטמעת AI בארגון", "AI שעובד בארגון,<br>לא רק במצגת.",
+                                         "מאסטרטגיה לשימוש בפועל,<br>עם צוות שבונה AI בייצור.",
+                                         "mlaia.com/he/ai-adoption",
+                                         rows(["ממפים איפה AI משתלם", "בוחרים את הכלים", "מדיניות שימוש ונתונים",
+                                               "הדרכה לפי תפקיד", "skills ותהליכי עבודה לצוותים", "פיילוט, ומשם לייצור"]))
+
 def render(name, page):
     out = os.path.join(ROOT, "assets", name)
     os.makedirs(os.path.dirname(out), exist_ok=True)

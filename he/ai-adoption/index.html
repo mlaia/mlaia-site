@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>הטמעת AI בארגון: מיפוי, כלים, מדיניות והדרכה | MLAIA</title><meta name="description" content="הטמעת AI בארגון, מהאסטרטגיה ועד שימוש בפועל: מיפוי מקרי שימוש, בחירת כלים, מדיניות שימוש לפי תיקון 13 לחוק הגנת הפרטיות, הדרכה לפי תפקיד ופיילוטים שעוברים לייצור."><meta name="robots" content="index, follow"><link rel="canonical" href="https://www.mlaia.com/he/ai-adoption/"><link rel="alternate" hreflang="he" href="https://www.mlaia.com/he/ai-adoption/"><link rel="alternate" hreflang="en" href="https://www.mlaia.com/ai-adoption/"><link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/ai-adoption/"><meta property="og:title" content="הטמעת AI בארגון: מיפוי, כלים, מדיניות והדרכה | MLAIA"><meta property="og:description" content="הטמעת AI בארגון, מהאסטרטגיה ועד שימוש בפועל: מיפוי מקרי שימוש, בחירת כלים, מדיניות שימוש לפי תיקון 13 לחוק הגנת הפרטיות, הדרכה לפי תפקיד ופיילוטים שעוברים לייצור."><meta property="og:type" content="website"><meta property="og:locale" content="he_IL"><meta property="og:url" content="https://www.mlaia.com/he/ai-adoption/"><meta property="og:image" content="https://www.mlaia.com/assets/og/ai-adoption-he.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://www.mlaia.com/assets/og/ai-adoption-he.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Heebo:wght@300..900&family=Martian+Mono:wdth,wght@87.5,300..600&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/mlaia-c.css"><link rel="stylesheet" href="/assets/c-rtl.css"><script src="/assets/practice.js" defer></script><script src="/assets/c-he.js" defer></script><style>
+/* AI adoption page, design C: page-only pieces (shared system in /assets/mlaia-c.css) */
+.a-intro{max-width:38em}
+.c-hero__row p.a-audience{font:600 var(--c-fs-small)/1.5 var(--c-body);color:var(--c-fg);margin:0 0 14px}
+.a-cred{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:12px 0 0;border-top:1px solid var(--c-rule)}
+.a-cred>div{min-width:0;padding:16px 24px 0 0;font-size:var(--c-fs-small);line-height:1.55;color:var(--c-text)}
+html[dir="rtl"] .a-cred>div{padding:16px 0 0 24px}
+.a-cred strong{display:block;margin-bottom:6px;font:600 19px/1.3 var(--c-display);color:var(--c-fg)}
+.a-cta{background:var(--c-bg-2)}
+.a-steps{grid-template-columns:repeat(5,minmax(0,1fr))}
+.a-steps .c-step__num{font-size:60px}
+.a-steps .c-step h3{font-size:21px}
+@media (max-width:1100px){
+  .a-steps{grid-template-columns:1fr}
+  .a-steps .c-step,.a-steps .c-step+.c-step{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:20px;padding:24px 0!important;border-left:0!important;border-right:0!important;border-bottom:1px solid var(--c-rule)}
+  .a-steps .c-step__num{grid-row:span 2;margin:0;font-size:52px}
+}
+@media (max-width:640px){
+  .a-cred{grid-template-columns:1fr}
+  .a-cred>div,html[dir="rtl"] .a-cred>div{padding:12px 0;border-bottom:1px solid var(--c-rule)}
+  .a-steps .c-step,.a-steps .c-step+.c-step{grid-template-columns:48px minmax(0,1fr);column-gap:14px}
+  .a-steps .c-step__num{font-size:40px}
+}
+</style><link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
+<body class="practice-page adoption c-page" data-practice="ai-adoption" data-site-shell="true">
+<nav class="site-quick-nav" aria-label="ניווט מהיר"><a href="/?lang=he" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">בית</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">צרו קשר</span></a></nav>
+<a class="c-skip" href="#main">דילוג לתוכן הראשי</a>
+<header class="c-nav">
+  <div class="c-wrap c-nav__inner">
+    <a class="c-logo" href="/?lang=he">MLAIA</a>
+    <button class="p-menu c-menu" type="button" aria-expanded="false" aria-controls="practice-nav">תפריט</button>
+    <nav class="p-nav-links c-nav-links" id="practice-nav" aria-label="ניווט ראשי">
+      <a href="/he/audio-ai/">אודיו ואקוסטיקה</a>
+      <a href="/he/medical-ai/">AI רפואי</a>
+      <a href="/he/predictive-intelligence/">חיזוי וניתוח סיבתי</a>
+      <a href="/blog.html">תובנות</a>
+      <a href="/ai-adoption/" hreflang="en" lang="en">English</a>
+      <a class="c-btn" href="#contact">לשיחת היכרות</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="c-hero" aria-labelledby="hero-title">
+  <div class="c-wrap c-hero__copy">
+    <nav class="c-crumb" aria-label="פירורי לחם"><a href="/?lang=he">MLAIA</a> / <span dir="rtl">הטמעת AI בארגון</span></nav>
+    <p class="c-kicker">הטמעת AI בארגון</p>
+    <h1 class="c-display" id="hero-title">AI שעובד בארגון, <span class="c-accent">לא רק במצגת.</span></h1>
+    <div class="c-hero__row">
+      <div class="a-intro">
+        <p class="a-audience">להנהלות, לצוותי IT ולמובילי חדשנות בחברות ישראליות.</p>
+        <p>MLAIA מלווה ארגונים בהטמעת AI, מהאסטרטגיה ועד שימוש בפועל: ממפים איפה AI משתלם, בוחרים את הכלים, כותבים מדיניות שימוש, מדריכים את הצוותים ומעבירים לייצור את מה שהוכיח את עצמו בפיילוט. אנחנו צוות שבונה ומפעיל מערכות AI בייצור, ולכן כל המלצה שלנו נבדקת מול השאלה אם אפשר לבנות אותה ולתחזק אותה. אנחנו בונים, לא מגישים מצגות.</p>
+      </div>
+      <div class="c-btns">
+        <a href="#contact" class="c-btn" data-track="practice_cta">לקביעת שיחת היכרות <span aria-hidden="true">↖</span></a>
+        <a href="#engagement" class="c-btn c-btn--ghost">איך מתנהל פרויקט</a>
+      </div>
+    </div>
+    <h2 class="c-specs-title">נבנה סביב הארגון שלכם</h2>
+    <dl class="c-specs">
+      <div><dt>נקודת המוצא</dt><dd>עובדים שכבר משתמשים ב-AI, בלי כללים אחידים</dd></div>
+      <div><dt>האתגר</dt><dd>לבחור כלים, לעמוד בדרישות פרטיות ואבטחה ולהגיע לשימוש אמיתי</dd></div>
+      <div><dt>המיקוד שלנו</dt><dd>פיילוט עם מדדי הצלחה, ומשם לייצור</dd></div>
+    </dl>
+    <p class="c-specs-title">מי עושה את העבודה</p>
+    <div class="a-cred" aria-label="הרקע שלנו">
+      <div><strong>צוות שבונה AI בייצור</strong>אנחנו מפתחים מודלים לחיזוי, AI רפואי, עיבוד אודיו וסוכני AI. מאותו צוות מגיעות ההמלצות, ההדרכות והבנייה.</div>
+      <div><strong>בהובלת ד״ר יוחאי אדליץ</strong>דוקטורט ממכון ויצמן למדע. מוביל את MLAIA ואת הפרויקטים שלה.</div>
+      <div><strong>בעברית, מול הצוותים שלכם</strong>הסדנאות, המדיניות והתיעוד נכתבים בעברית, לפי הכלים והתהליכים שכבר קיימים אצלכם.</div>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec" id="services" aria-labelledby="services-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">01</span> מה אנחנו עושים</p>
+      <h2 class="c-h2" id="services-title">מהמיפוי ועד הייצור.</h2>
+      <p class="c-lead">אפשר להתחיל בשירות אחד או לעבור את כל הדרך. כל שירות מסתיים בתוצר שהצוות שלכם יכול להמשיך לעבוד איתו.</p>
+    </div>
+    <div class="c-cells c-cells--4">
+      <article class="c-cell"><span class="c-cell__num">01</span><h3>ממפים איפה AI משתלם</h3><p>אנחנו עוברים על התהליכים, הצוותים והנתונים בארגון ומדרגים את מקרי השימוש לפי התועלת הצפויה, המורכבות והסיכון. אתם מקבלים רשימה ממוקדת של מה כדאי לעשות קודם ומה עדיף לדחות.</p></article>
+      <article class="c-cell"><span class="c-cell__num">02</span><h3>בוחרים את הכלים</h3><p><span lang="en">Microsoft Copilot</span>, <span lang="en">ChatGPT Enterprise</span>, <span lang="en">Claude</span>, או סוכנים שנבנים אצלכם. אנחנו בודקים מה מתאים לכל צוות לפי סוג העבודה, המערכות הקיימות, דרישות האבטחה והעלות.</p></article>
+      <article class="c-cell"><span class="c-cell__num">03</span><h3>מדיניות שימוש ב-AI ובנתונים</h3><p>אנחנו כותבים איתכם מדיניות שימוש: אילו כלים מאושרים, איזה מידע מותר להכניס אליהם ואיזה לא, ומי מאשר שימושים חדשים. המדיניות מותאמת לתיקון 13 לחוק הגנת הפרטיות ולנהלי אבטחת המידע של החברה.</p></article>
+      <article class="c-cell"><span class="c-cell__num">04</span><h3>בונים את מיומנויות ה-AI של האנשים</h3><p>הדרכה מעשית לפי תפקיד: מכירות, שירות לקוחות, כספים, משאבי אנוש, פיתוח והנהלה. כל צוות מתרגל על משימות מהעבודה שלו, בכלים שאושרו בארגון.</p></article>
+      <article class="c-cell"><span class="c-cell__num">05</span><h3>בונים לצוותים skills ותהליכי עבודה ב-AI</h3><p>אנחנו בונים skills וסוכנים לשימוש חוזר ב-<span lang="en">Claude</span> או ב-<span lang="en">Copilot</span>, שמחוברים לכלים ולנתונים של הצוות. משימה שחוזרת על עצמה נעשית כל פעם באותה דרך, ולא תלויה בפרומפט שמישהו זוכר.</p></article>
+      <article class="c-cell"><span class="c-cell__num">06</span><h3>פיילוט עם מדדי הצלחה, ומשם לייצור</h3><p>לפני שמרחיבים, מריצים פיילוט מוגדר על צוות ותהליך מסוימים, עם מדדי הצלחה שנקבעים מראש. מה שעובד עובר לייצור עם הרשאות, ניטור ובעלות ברורה. מה שלא עובד נעצר.</p></article>
+      <article class="c-cell"><span class="c-cell__num">07</span><h3>חיסכון בעלויות</h3><p>המטרה היא למצוא את העבודה וההוצאות ש-AI יכול לקחת על עצמו, ולצמצם אותן. אנחנו ממפים משימות ידניות שחוזרות על עצמן ושירותים חיצוניים שאפשר להחליף, ומודדים בפיילוט את המצב לפני ואחרי, כך שההחלטה נשענת על הנתונים שלכם.</p></article>
+      <article class="c-cell a-cta"><h3>לא בטוחים מאיפה להתחיל?</h3><p>בשיחת היכרות קצרה נבין איפה אתם עומדים היום ומה הצעד הראשון שהיינו עושים.</p><a class="c-link" href="#contact">לשיחת היכרות ←</a></article>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" id="builders" aria-labelledby="builders-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">02</span> למה MLAIA</p>
+      <h2 class="c-h2" id="builders-title">בונים, לא יועצי מצגות.</h2>
+      <p class="c-lead">אסטרטגיית AI שווה משהו רק כשמישהו בונה אותה. אצלנו אותו צוות ממפה, ממליץ ובונה.</p>
+    </div>
+    <div class="c-cells c-cells--2">
+      <article class="c-cell"><h3>המלצות שנבדקו מול ייצור</h3><p>אנחנו מפתחים ומפעילים מערכות AI. כשאנחנו ממליצים על כלי, על ארכיטקטורה או על תהליך, אנחנו יודעים מה נדרש כדי שזה יעבוד ביום-יום: הרשאות, חיבור למערכות, ניטור ותחזוקה.</p></article>
+      <article class="c-cell"><h3>בלי העברה בין ספקים</h3><p>המדיניות, ההדרכות, הפיילוט והבנייה נעשים על ידי אותו צוות. לא צריך להסביר את הארגון מחדש כשמגיעים לשלב הבנייה.</p></article>
+      <article class="c-cell"><h3>עוזרים על הנתונים של החברה</h3><p>כשהצוות צריך עוזר שעונה מתוך המסמכים, הנהלים והידע הפנימי של החברה, אנחנו בונים אותו עם <span lang="en">Ultrabot</span>, שבה אנחנו בונים עוזרים וסוכני AI.</p><a class="c-link" href="https://ultrabot.ai/he/knowledge-assistant/" target="_blank" rel="noopener">עוזרי ידע ארגוניים ב-Ultrabot <span aria-hidden="true">↖</span></a></article>
+      <article class="c-cell"><h3>כשצריך יותר מכלי מדף</h3><p>חלק מהבעיות דורשות מודל ייעודי שנבנה על הנתונים שלכם. לזה יש לנו תחומי התמחות בלמידת מכונה.</p><p class="c-links"><a class="c-link" href="/he/predictive-intelligence/">חיזוי וניתוח סיבתי ←</a> <a class="c-link" href="/he/medical-ai/">AI רפואי ←</a> <a class="c-link" href="/he/audio-ai/">אודיו ואקוסטיקה ←</a></p></article>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec" id="engagement" aria-labelledby="eng-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">03</span> איך מתנהל פרויקט</p>
+      <h2 class="c-h2" id="eng-title">ממיפוי לשימוש בפועל.</h2>
+      <p class="c-lead">חמישה שלבים, ולכל אחד תוצר ברור. אפשר לעצור אחרי כל שלב.</p>
+    </div>
+    <div class="c-steps a-steps">
+      <article class="c-step"><span class="c-step__num" aria-hidden="true">01</span><h3>מיפוי</h3><p>שיחות עם ההנהלה ועם ראשי הצוותים, וסקירה של התהליכים והנתונים. התוצר: רשימה מדורגת של מקרי שימוש.</p></article>
+      <article class="c-step"><span class="c-step__num" aria-hidden="true">02</span><h3>בחירת כלים</h3><p>התאמת כלים לצוותים, כולל בדיקת אבטחה, הרשאות ועלויות רישוי. התוצר: המלצה מנומקת לכל צוות.</p></article>
+      <article class="c-step"><span class="c-step__num" aria-hidden="true">03</span><h3>מדיניות והדרכה</h3><p>מדיניות שימוש ונתונים שמאושרת אצלכם, והדרכה לפי תפקיד. התוצר: מסמך מדיניות, וצוותים שמתחילים לעבוד לפיו.</p></article>
+      <article class="c-step"><span class="c-step__num" aria-hidden="true">04</span><h3>פיילוט</h3><p>צוות ותהליך מוגדרים, מדדי הצלחה שנקבעים מראש ומדידה לפני ואחרי. התוצר: החלטה להמשיך, לשנות או לעצור.</p></article>
+      <article class="c-step"><span class="c-step__num" aria-hidden="true">05</span><h3>ייצור</h3><p>מה שעבד מתרחב: חיבור למערכות, הרשאות, ניטור ובעלות פנימית. התוצר: תהליך עבודה שהצוות שלכם מחזיק בעצמו.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" id="faq" aria-labelledby="faq-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">04</span> שאלות שלקוחות שואלים</p>
+      <h2 class="c-h2" id="faq-title">תשובות ישירות.</h2>
+    </div>
+    <div class="c-faq">
+      <details><summary>העובדים שלנו כבר משתמשים ב-ChatGPT או ב-Copilot. מה עוד צריך?</summary><p>בדרך כלל שלושה דברים: מדיניות ברורה, הדרכה שמתאימה לכל תפקיד, ותהליכי עבודה שבנויים סביב הכלי במקום שימוש מזדמן. אנחנו מתחילים ממה שכבר קיים אצלכם.</p></details>
+      <details><summary>על איזה כלי אתם ממליצים?</summary><p>זה תלוי בצוות. ההמלצה נקבעת לפי סוג העבודה, המערכות שכבר בשימוש, דרישות האבטחה והעלות, ולפעמים התשובה היא שילוב של כמה כלים.</p></details>
+      <details><summary>המדיניות שתכתבו תתאים לתיקון 13 לחוק הגנת הפרטיות?</summary><p>אנחנו כותבים את המדיניות כך שתתאים לדרישות תיקון 13 ולנהלי אבטחת המידע שלכם. אנחנו לא משרד עורכי דין, ולכן את הנוסח הסופי כדאי לאשר מול היועץ המשפטי ומול האחראי על אבטחת המידע בארגון.</p></details>
+      <details><summary>המידע של הארגון יוצא החוצה?</summary><p>רק במסגרת שהמדיניות מאפשרת. לכל כלי אנחנו בודקים איפה הנתונים מעובדים ונשמרים ואילו הגדרות ארגוניות זמינות בו, ובונים את הפתרונות בתוך הסביבות שאושרו אצלכם.</p></details>
+      <details><summary>מה אתם צריכים מאיתנו כדי להתחיל?</summary><p>איש קשר מההנהלה, רשימה של הכלים שכבר בשימוש, וזמן לשיחות קצרות עם כמה ראשי צוותים. שיחת היכרות ראשונה מספיקה כדי להחליט אם ואיך להתחיל.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="c-contact" id="contact" aria-labelledby="contact-title">
+  <div class="c-wrap c-contact__grid">
+    <div class="c-contact__copy">
+      <p class="c-kicker">הטמעת AI בארגון</p>
+      <h2 class="c-h2" id="contact-title">לשיחת היכרות על הטמעת AI בארגון שלכם.</h2>
+      <p>ספרו לנו באילו כלים אתם כבר משתמשים, אילו צוותים רוצים להתחיל ומה מעכב אתכם היום. נגיד לכם מה הצעד הראשון שהיינו עושים.</p>
+      <p>נא לא לצרף מסמכים חסויים, פרטי התחברות או מידע אישי על עובדים או לקוחות.</p>
+      <p class="c-mono"><a href="mailto:yochai@mlaia.com" class="ltr">yochai@mlaia.com</a><br>ווטסאפ: <a href="https://wa.me/972524846282" target="_blank" rel="noopener" class="ltr">+972 52 484 6282</a></p>
+    </div>
+    <form class="p-form c-form" action="https://formspree.io/f/mvzdggyq" method="POST">
+      <input type="hidden" name="practice" value="ai-adoption">
+      <input type="hidden" name="lang" value="he">
+      <div class="c-form__row">
+        <label>שם<input name="name" autocomplete="name" required></label>
+        <label>חברה<input name="company" autocomplete="organization"></label>
+      </div>
+      <label>אימייל בעבודה<input type="email" name="email" autocomplete="email" required></label>
+      <label>מה תרצו להשיג עם AI, ובאילו צוותים<textarea name="message" required></textarea></label>
+      <p>הפנייה שלכם מטופלת בהתאם ל<a href="/privacy.html">מדיניות הפרטיות</a> שלנו <span class="he-en">(באנגלית)</span>.</p>
+      <button type="submit" class="c-btn">בקשת שיחת היכרות ←</button>
+      <p class="p-form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="c-footer">
+  <div class="c-wrap">
+    <div>© 2026 MLAIA Data Science · ישראל · עובדים עם לקוחות בכל העולם</div>
+    <nav aria-label="כותרת תחתונה">
+      <a href="/?lang=he#about">אודות MLAIA</a>
+      <a href="/privacy.html">פרטיות</a>
+      <a href="/accessibility.html">נגישות</a>
+      <a href="/terms.html">תנאי שימוש</a>
+      <button type="button" class="p-cookie-settings">העדפות עוגיות</button>
+    </nav>
+  </div>
+</footer>
+<div class="p-consent c-consent" hidden role="dialog" aria-label="העדפות עוגיות">
+  <p>אנליטיקה אופציונלית עוזרת לנו להבין כיצד משתמשים באתר. אפשר לסרב לאנליטיקה ועדיין להשתמש בכל תכונות האתר. <a href="/privacy.html">מדיניות הפרטיות</a></p>
+  <div class="c-btns">
+    <button class="c-btn" type="button" data-consent="yes">אישור אנליטיקה</button>
+    <button class="c-btn c-btn--ghost" type="button" data-consent="no">סירוב</button>
+  </div>
+</div>
+<script>
+/* practice.js writes English form-status messages; show them in Hebrew on this page. */
+(()=>{const s=document.querySelector('.p-form-status');if(!s)return;const he={'Preview only — nothing was sent.':'תצוגה מקדימה בלבד, שום דבר לא נשלח.','Sending your inquiry…':'הפנייה נשלחת…','Thank you. Your inquiry was sent to MLAIA.':'תודה. הפנייה שלכם נשלחה ל-MLAIA.','Your inquiry could not be sent. Please try again or email yochai@mlaia.com.':'לא הצלחנו לשלוח את הפנייה. נסו שוב או כתבו ל-yochai@mlaia.com.'};new MutationObserver(()=>{const t=he[s.textContent];if(t)s.textContent=t;}).observe(s,{childList:true,characterData:true,subtree:true});})();
+</script>
+</body>
+</html>
