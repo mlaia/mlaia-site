@@ -22,6 +22,29 @@ html[dir="rtl"] .a-cred>div{padding:16px 0 0 24px}
   .a-steps .c-step,.a-steps .c-step+.c-step{grid-template-columns:48px minmax(0,1fr);column-gap:14px}
   .a-steps .c-step__num{font-size:40px}
 }
+.c-hero__row p.a-inside{margin:18px 0 0;padding-inline-start:16px;border-inline-start:3px solid var(--c-amber);font:600 var(--c-fs-lead)/1.45 var(--c-body);color:var(--c-fg)}
+.a-week-key{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:0 0 22px;font-size:var(--c-fs-small);color:var(--c-muted)}
+.a-key{display:inline-flex;align-items:center;gap:8px;color:var(--c-fg)}
+.a-key::before{content:"";width:12px;height:12px;border-radius:2px;background:currentColor}
+.a-key--teach::before{background:var(--c-amber)}
+.a-key--build::before{background:var(--c-blue)}
+.a-week{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--c-rule)}
+.a-day{min-width:0;padding:20px 18px 24px;border-inline-start:1px solid var(--c-rule)}
+.a-day:first-child{border-inline-start:0;padding-inline-start:0}
+.a-day h3{margin:0 0 14px;font:600 13px/1.2 var(--c-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-muted)}
+.a-day ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.a-task{padding:12px 14px;background:var(--c-bg-2);border-inline-start:3px solid var(--c-amber);font-size:var(--c-fs-small);line-height:1.5;color:var(--c-text)}
+.a-task--build{border-inline-start-color:var(--c-blue)}
+.a-task b{display:block;margin-bottom:4px;font:500 11px/1.2 var(--c-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-amber)}
+.a-task--build b{color:var(--c-blue)}
+.a-task a{display:inline-block;margin-top:6px}
+@media (max-width:1100px){
+  .a-week{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+  .a-day,.a-day:first-child{padding:18px 0 22px;border-inline-start:0;border-bottom:1px solid var(--c-rule)}
+}
+@media (max-width:640px){
+  .a-week{grid-template-columns:1fr}
+}
 </style><link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"MLAIA הטמעת AI בארגון","serviceType":"הטמעת AI בארגון","description":"הטמעת AI בארגון, מהאסטרטגיה ועד שימוש בפועל: מיפוי מקרי שימוש, בחירת כלים, מדיניות שימוש לפי תיקון 13 לחוק הגנת הפרטיות, הדרכה לפי תפקיד ופיילוטים שעוברים לייצור.","url":"https://www.mlaia.com/he/ai-adoption/","inLanguage":"he","areaServed":"IL","provider":{"@type":"Organization","@id":"https://www.mlaia.com/#organization","name":"MLAIA Data Science","url":"https://www.mlaia.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"he","mainEntity":[{"@type":"Question","name":"העובדים שלנו כבר משתמשים ב-ChatGPT או ב-Copilot. מה עוד צריך?","acceptedAnswer":{"@type":"Answer","text":"בדרך כלל שלושה דברים: מדיניות ברורה, הדרכה שמתאימה לכל תפקיד, ותהליכי עבודה שבנויים סביב הכלי במקום שימוש מזדמן. אנחנו מתחילים ממה שכבר קיים אצלכם."}},{"@type":"Question","name":"על איזה כלי אתם ממליצים?","acceptedAnswer":{"@type":"Answer","text":"זה תלוי בצוות. ההמלצה נקבעת לפי סוג העבודה, המערכות שכבר בשימוש, דרישות האבטחה והעלות, ולפעמים התשובה היא שילוב של כמה כלים."}},{"@type":"Question","name":"המדיניות שתכתבו תתאים לתיקון 13 לחוק הגנת הפרטיות?","acceptedAnswer":{"@type":"Answer","text":"אנחנו כותבים את המדיניות כך שתתאים לדרישות תיקון 13 ולנהלי אבטחת המידע שלכם. אנחנו לא משרד עורכי דין, ולכן את הנוסח הסופי כדאי לאשר מול היועץ המשפטי ומול האחראי על אבטחת המידע בארגון."}},{"@type":"Question","name":"המידע של הארגון יוצא החוצה?","acceptedAnswer":{"@type":"Answer","text":"רק במסגרת שהמדיניות מאפשרת. לכל כלי אנחנו בודקים איפה הנתונים מעובדים ונשמרים ואילו הגדרות ארגוניות זמינות בו, ובונים את הפתרונות בתוך הסביבות שאושרו אצלכם."}},{"@type":"Question","name":"מה אתם צריכים מאיתנו כדי להתחיל?","acceptedAnswer":{"@type":"Answer","text":"איש קשר מההנהלה, רשימה של הכלים שכבר בשימוש, וזמן לשיחות קצרות עם כמה ראשי צוותים. שיחת היכרות ראשונה מספיקה כדי להחליט אם ואיך להתחיל."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MLAIA","item":"https://www.mlaia.com/"},{"@type":"ListItem","position":2,"name":"הטמעת AI בארגון","item":"https://www.mlaia.com/he/ai-adoption/"}]}</script>
@@ -55,6 +78,7 @@ html[dir="rtl"] .a-cred>div{padding:16px 0 0 24px}
       <div class="a-intro">
         <p class="a-audience">להנהלות, לצוותי IT ולמובילי חדשנות בחברות ישראליות.</p>
         <p>MLAIA מלווה ארגונים בהטמעת AI, מהאסטרטגיה ועד שימוש בפועל: ממפים איפה AI משתלם, בוחרים את הכלים, כותבים מדיניות שימוש, מדריכים את הצוותים ומעבירים לייצור את מה שהוכיח את עצמו בפיילוט. אנחנו צוות שבונה ומפעיל מערכות AI בייצור, ולכן כל המלצה שלנו נבדקת מול השאלה אם אפשר לבנות אותה ולתחזק אותה. אנחנו בונים, לא מגישים מצגות.</p>
+        <p class="a-inside">מהנדס AI של MLAIA יושב אצלכם בארגון ובונה יחד עם הצוותים.</p>
       </div>
       <div class="c-btns">
         <a href="#contact" class="c-btn" data-track="practice_cta">לקביעת שיחת היכרות <span aria-hidden="true">↖</span></a>
@@ -112,10 +136,28 @@ html[dir="rtl"] .a-cred>div{padding:16px 0 0 24px}
   </div>
 </section>
 
-<section class="c-sec" id="engagement" aria-labelledby="eng-title">
+<section class="c-sec" id="week" aria-labelledby="week-title">
   <div class="c-wrap">
     <div class="c-head">
-      <p class="c-kicker"><span class="c-idx">03</span> איך מתנהל פרויקט</p>
+      <p class="c-kicker"><span class="c-idx">03</span> מהנדס מבפנים</p>
+      <h2 class="c-h2" id="week-title">שבוע של מהנדס מבפנים.</h2>
+      <p class="c-lead">מהנדס AI של MLAIA עובד אצלכם בארגון, יום-יום, לצד הצוותים. חלק מהזמן הוא מלמד אנשים, וחלק מהזמן הוא בונה להם skills וסוכנים. כך עשוי להיראות שבוע כזה.</p>
+    </div>
+    <p class="a-week-key"><span class="a-key a-key--teach">מלמדים אנשים</span><span class="a-key a-key--build">בונים skills וסוכנים</span><span>שבוע לדוגמה, להמחשה. לא תיעוד של לקוח מסוים.</span></p>
+    <ol class="a-week" aria-label="שבוע לדוגמה, ראשון עד חמישי">
+      <li class="a-day"><h3>ראשון</h3><ul><li class="a-task a-task--teach"><b>הדרכה</b>סדנת <span lang="en">Copilot</span> לצוות המכירות, על הנתונים שלהם.</li></ul></li>
+      <li class="a-day"><h3>שני</h3><ul><li class="a-task a-task--build"><b>בנייה</b>skill לצוות התמיכה שמסכם פניות ומנסח טיוטת תשובה.</li><li class="a-task a-task--teach"><b>הדרכה</b>ליווי אישי למנהלים, אחד על אחד.</li></ul></li>
+      <li class="a-day"><h3>שלישי</h3><ul><li class="a-task a-task--teach"><b>הדרכה</b>עדכון מדיניות הנתונים יחד עם צוות אבטחת המידע.</li></ul></li>
+      <li class="a-day"><h3>רביעי</h3><ul><li class="a-task a-task--build"><b>בנייה</b>סוכן שמחבר את ה-CRM לדוח השבועי.</li></ul></li>
+      <li class="a-day"><h3>חמישי</h3><ul><li class="a-task a-task--teach"><b>הדרכה</b>מדידה: מי משתמש במה, ואיפה נתקעים.</li><li class="a-task a-task--build"><b>בנייה</b>זיהוי מקום ל-ML, כמו חיזוי ביקוש.<br><a class="c-link" href="/he/predictive-intelligence/">לחיזוי וניתוח סיבתי ←</a></li></ul></li>
+    </ol>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" id="engagement" aria-labelledby="eng-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">04</span> איך מתנהל פרויקט</p>
       <h2 class="c-h2" id="eng-title">ממיפוי לשימוש בפועל.</h2>
       <p class="c-lead">הטמעת בינה מלאכותית בארגונים מצליחה כשמתקדמים בשלבים. אצלנו יש חמישה שלבים, ולכל אחד תוצר ברור. אפשר לעצור אחרי כל שלב.</p>
     </div>
@@ -129,10 +171,10 @@ html[dir="rtl"] .a-cred>div{padding:16px 0 0 24px}
   </div>
 </section>
 
-<section class="c-sec c-sec--alt" id="faq" aria-labelledby="faq-title">
+<section class="c-sec" id="faq" aria-labelledby="faq-title">
   <div class="c-wrap">
     <div class="c-head">
-      <p class="c-kicker"><span class="c-idx">04</span> שאלות שלקוחות שואלים</p>
+      <p class="c-kicker"><span class="c-idx">05</span> שאלות שלקוחות שואלים</p>
       <h2 class="c-h2" id="faq-title">תשובות ישירות.</h2>
     </div>
     <div class="c-faq">
