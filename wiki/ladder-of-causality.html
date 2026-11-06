@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google Analytics 4 — fires only after analytics consent -->
+<script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ladder of Causality: Association, Intervention, Counterfactual | MLAIA</title>
+<meta name="description" content="Pearl&#x27;s ladder of causality explained: association, intervention and counterfactuals. The question, notation, data needs, methods and business and clinical examples for each rung.">
+<link rel="canonical" href="https://www.mlaia.com/wiki/ladder-of-causality.html">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="ladder of causality, Judea Pearl, causal hierarchy, association, intervention, counterfactual, do-operator, do-calculus, structural causal model, rungs of causation">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MLAIA">
+<meta property="og:title" content="Ladder of Causality: Association, Intervention, Counterfactual | MLAIA">
+<meta property="og:description" content="Pearl&#x27;s ladder of causality explained: association, intervention and counterfactuals. The question, notation, data needs, methods and business and clinical examples for each rung.">
+<meta property="og:url" content="https://www.mlaia.com/wiki/ladder-of-causality.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ladder of Causality: Association, Intervention, Counterfactual | MLAIA">
+<meta name="twitter:description" content="Pearl&#x27;s ladder of causality explained: association, intervention and counterfactuals. The question, notation, data needs, methods and business and clinical examples for each rung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=Martian+Mono:wdth,wght@87.5,300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/mlaia-c.css">
+<link rel="stylesheet" href="/assets/c-reading.css">
+<script src="/assets/c-reading.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "The Ladder of Causality: Association, Intervention, Counterfactual",
+      "description": "Pearl's ladder of causality explained: association, intervention and counterfactuals. The question, notation, data needs, methods and business and clinical examples for each rung.",
+      "datePublished": "2026-11-06",
+      "dateModified": "2026-11-06",
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Yochai Edlitz",
+        "url": "https://www.mlaia.com/#person-yochai",
+        "jobTitle": "Founder & CEO, MLAIA"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "MLAIA Data Science Ltd.",
+        "url": "https://www.mlaia.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.mlaia.com/assets/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mlaia.com/wiki/ladder-of-causality.html"
+      },
+      "keywords": "ladder of causality, Judea Pearl, association, intervention, counterfactual, do-operator, structural causal model",
+      "articleSection": "Applied AI Wiki",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "MLAIA",
+        "url": "https://www.mlaia.com/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.mlaia.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Applied AI Wiki",
+          "item": "https://www.mlaia.com/wiki/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "The Ladder of Causality: Association, Intervention, Counterfactual",
+          "item": "https://www.mlaia.com/wiki/ladder-of-causality.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the three rungs of the ladder of causality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The three rungs are association (seeing), intervention (doing) and counterfactuals (imagining). Association describes how variables move together in observed data, intervention describes what happens when you deliberately change a variable, and counterfactuals describe what would have happened to a specific case had a different action been taken."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who introduced the ladder of causality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The ladder of causality was introduced by the computer scientist Judea Pearl. It was popularized in The Book of Why, written with Dana Mackenzie, and corresponds to what the technical literature calls the causal hierarchy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which rung does machine learning operate on?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard supervised machine learning operates on the first rung, association. A model trained on observed data learns to predict an outcome from features under the conditions that produced the data. It does not, without further assumptions or experiments, say what happens when you intervene on one of those features."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between an intervention and a counterfactual?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An intervention asks what happens to a population, or to a subgroup, if an action is taken from now on. A counterfactual asks what would have happened to a particular case, given what was actually observed for it, had a different action been taken. Interventions can be answered by randomized experiments. Counterfactuals about individuals generally also need a structural causal model."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is an A/B test on rung two or rung three?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An A/B test is on rung two. Randomization lets you estimate the effect of an intervention on average, or within segments. It does not reveal what a specific user who saw version A would have done under version B, which is a rung-three question."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
+<body class="c-page c-reading" data-site-shell="true"><nav class="site-quick-nav" aria-label="Quick navigation"><a href="/" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">Home</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">Contact us</span></a></nav>
+
+<a class="skip-link c-skip" href="#main-content">Skip to main content</a>
+
+<!-- Custom cursor -->
+<div id="cd"></div>
+<div id="cr"></div>
+
+<!-- NAV -->
+<header class="c-nav" id="nav">
+  <div class="c-wrap c-nav__inner">
+    <a class="c-logo" href="../index.html">MLAIA<span class="c-logo__tag">Machine Learning &amp; AI Approach</span></a>
+    <button class="c-menu hamburger" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav class="c-nav-links nav-links" id="nav-links" aria-label="Main navigation">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#domains">Domains</a>
+      <a href="../blog.html">Blog</a>
+      <a href="index.html" aria-current="true">Wiki</a>
+      <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+      <a href="https://ultrabot.ai/" target="_blank" rel="noopener">Ultrabot ↗</a>
+      <a class="c-btn" href="../index.html#contact">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<header class="post-hero">
+  <div class="post-hero-orb"></div>
+  <div class="post-hero-inner">
+    <div class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span>/</span><a href="index.html">Wiki</a><span>/</span>The Ladder of Causality: Association, Intervention, Counterfactual</div>
+    <div class="post-category-tag">Applied AI Wiki · Decision Science</div>
+    <h1>The Ladder of Causality: Association, Intervention, Counterfactual</h1>
+    <div class="post-meta">
+      <span>Applied AI Wiki — reference article</span><span class="post-meta-sep">—</span><span>Updated November 6, 2026</span><span class="post-meta-sep">—</span><span>MLAIA Data Science</span>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<main id="main-content" class="post-body">
+  <div class="post-container">
+
+    <a href="index.html" class="back-link"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Wiki Home</span></a>
+
+    <article class="post-content">
+
+      <p>The <strong>ladder of causality</strong> is Judea Pearl's three-level classification of the questions that can be asked of data: <strong>association</strong> (what does seeing X tell me about Y?), <strong>intervention</strong> (what happens to Y if I do X?) and <strong>counterfactuals</strong> (what would Y have been had I acted differently?). Each rung needs more than the one below it: association needs only data, intervention needs an experiment or causal assumptions, and counterfactuals need a model of the mechanism that generated the data. The practical use of the ladder is to check which rung a question sits on before choosing a method to answer it.</p>
+
+      <figure class="infographic">
+        <svg viewBox="0 0 720 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ladder-svg-title ladder-svg-desc">
+          <title id="ladder-svg-title">The three rungs of the ladder of causality</title>
+          <desc id="ladder-svg-desc">Three ascending steps. Rung 1, association: seeing, P(y | x). Rung 2, intervention: doing, P(y | do(x)). Rung 3, counterfactuals: imagining, P(y_x | x', y'). Each higher rung needs stronger assumptions.</desc>
+          <text x="20" y="30" fill="#eceee9" font-family="sans-serif" font-size="16" font-weight="700">The ladder of causality</text>
+          <text x="20" y="50" fill="#9ca39d" font-family="sans-serif" font-size="12">Each rung answers a question the rung below cannot.</text>
+
+          <rect x="20" y="230" width="216" height="100" fill="#121514" stroke="#6b736d" stroke-width="1"/>
+          <text x="36" y="254" fill="#9ca39d" font-family="sans-serif" font-size="11" font-weight="700" letter-spacing="1">RUNG 1 · SEEING</text>
+          <text x="36" y="276" fill="#eceee9" font-family="sans-serif" font-size="16" font-weight="700">Association</text>
+          <text x="36" y="297" fill="#cfd4ce" font-family="monospace" font-size="13">P(y | x)</text>
+          <text x="36" y="317" fill="#cfd4ce" font-family="sans-serif" font-size="12">What if I see X?</text>
+          <text x="36" y="216" fill="#9ca39d" font-family="sans-serif" font-size="11">Needs data only</text>
+
+          <rect x="252" y="150" width="216" height="180" fill="#121514" stroke="#ffb547" stroke-width="1"/>
+          <text x="268" y="174" fill="#ffb547" font-family="sans-serif" font-size="11" font-weight="700" letter-spacing="1">RUNG 2 · DOING</text>
+          <text x="268" y="196" fill="#eceee9" font-family="sans-serif" font-size="16" font-weight="700">Intervention</text>
+          <text x="268" y="217" fill="#cfd4ce" font-family="monospace" font-size="13">P(y | do(x))</text>
+          <text x="268" y="237" fill="#cfd4ce" font-family="sans-serif" font-size="12">What if I do X?</text>
+          <text x="268" y="136" fill="#9ca39d" font-family="sans-serif" font-size="11">Needs an experiment or a causal model</text>
+
+          <rect x="484" y="84" width="216" height="246" fill="#121514" stroke="#71d4ff" stroke-width="1"/>
+          <text x="500" y="108" fill="#71d4ff" font-family="sans-serif" font-size="11" font-weight="700" letter-spacing="1">RUNG 3 · IMAGINING</text>
+          <text x="500" y="130" fill="#eceee9" font-family="sans-serif" font-size="16" font-weight="700">Counterfactuals</text>
+          <text x="500" y="151" fill="#cfd4ce" font-family="monospace" font-size="13">P(y_x | x', y')</text>
+          <text x="500" y="171" fill="#cfd4ce" font-family="sans-serif" font-size="12">What if I had done otherwise?</text>
+          <text x="500" y="70" fill="#9ca39d" font-family="sans-serif" font-size="11">Needs a structural causal model</text>
+
+          <line x1="20" y1="330" x2="700" y2="330" stroke="#6b736d" stroke-width="1"/>
+        </svg>
+        <figcaption>The three rungs of Pearl's ladder of causality. Moving up a rung requires assumptions or experiments that the data on the lower rung cannot supply.</figcaption>
+      </figure>
+
+      <h2>What is the ladder of causality?</h2>
+      <p>Pearl presented the ladder for a general audience in <em>The Book of Why</em> (with Dana Mackenzie), and the technical literature refers to the same idea as the <em>causal hierarchy</em>. Its central claim is that the three kinds of question are different in kind as well as in difficulty. Data collected on a lower rung cannot, by itself, answer a question on a higher rung, however large the dataset and however flexible the model. Something extra has to be supplied: a randomized experiment, or explicit assumptions about how the variables influence each other, usually written as a causal diagram or a <strong>structural causal model</strong>.</p>
+
+      <h2>What does rung one, association, answer?</h2>
+      <p><strong>Question:</strong> "What does observing X tell me about Y?" <strong>Notation:</strong> the conditional probability <code>P(y | x)</code>.</p>
+      <p><strong>What it needs:</strong> observed data and a statistical model. No causal assumptions are required, which is why this rung is the easiest to reach and the easiest to over-interpret.</p>
+      <p><strong>Business example:</strong> customers who contacted support twice in a month churn at a higher rate than those who did not. That is a valid basis for a churn-risk score. It does not say that preventing support contacts would reduce churn.</p>
+      <p><strong>Clinical example:</strong> patients with a raised biomarker have a higher rate of readmission. This supports a risk prediction model. It does not say that lowering the biomarker would prevent readmission.</p>
+      <p><strong>Methods on this rung:</strong> correlation and regression used descriptively, classification and risk scoring, forecasting, clustering, and most supervised and unsupervised machine learning, including deep learning trained on observational data.</p>
+
+      <h2>What does rung two, intervention, answer?</h2>
+      <p><strong>Question:</strong> "What will happen to Y if I set X to a given value?" <strong>Notation:</strong> <code>P(y | do(x))</code>, where Pearl's <em>do-operator</em> marks that X is set by an action and is no longer the result of its usual causes. In general <code>P(y | do(x))</code> differs from <code>P(y | x)</code>, because the people who happen to have X differ from those who do not.</p>
+      <p><strong>What it needs:</strong> either a randomized experiment, which implements <code>do(x)</code> directly, or observational data plus causal assumptions strong enough to identify the effect. Typical assumptions are that all common causes of treatment and outcome have been measured (the <em>back-door criterion</em> in Pearl's framework, <em>ignorability</em> in Rubin's potential-outcomes framework), or that a valid instrument or natural experiment exists.</p>
+      <p><strong>Business example:</strong> "If we raise the price by five percent, what happens to demand?" Historical prices were set in response to demand, so the observed price–demand relationship is confounded. A price experiment or a credible quasi-experimental design is needed.</p>
+      <p><strong>Clinical example:</strong> "If patients like these are given the drug, what is their risk of the outcome compared with not giving it?" This is the question a randomized controlled trial answers, and the question that observational studies try to answer through <a href="causal-inference-healthcare.html">target trial emulation</a>.</p>
+      <p><strong>Methods on this rung:</strong> randomized controlled trials and A/B tests; covariate adjustment, matching and propensity-score methods; instrumental variables; difference-in-differences; regression discontinuity; synthetic control; and Pearl's do-calculus for deciding whether an effect is identifiable from a given diagram. Estimating how an effect varies across segments, as in <a href="uplift-modeling.html">uplift modeling</a>, is also a rung-two task. These methods are described in the <a href="causal-inference.html">causal inference overview</a>.</p>
+
+      <h2>What does rung three, counterfactuals, answer?</h2>
+      <p><strong>Question:</strong> "Given what actually happened, what would have happened had I acted differently?" <strong>Notation:</strong> <code>P(y<sub>x</sub> | x′, y′)</code>: the probability that Y would have been y under action x, for a case in which x′ and y′ were actually observed.</p>
+      <p><strong>What it needs:</strong> a structural causal model, meaning functional relationships between variables together with assumptions about the unobserved factors. Pearl describes the computation in three steps: <em>abduction</em> (use the observed evidence to update what is known about the unobserved factors for this case), <em>action</em> (change the model to reflect the hypothetical intervention) and <em>prediction</em> (compute the outcome in the changed model). Because the same individual is never observed under both actions, counterfactual claims about individuals cannot be checked by experiment alone and rest on the model.</p>
+      <p><strong>Business example:</strong> "This customer received the discount and renewed. Would they have renewed without it?" This is a question about one case, and it underlies attribution: how much of an observed result was <em>because of</em> an action.</p>
+      <p><strong>Clinical example:</strong> "This patient was treated and recovered. Would they have recovered without treatment?" Questions of this type arise in the attribution of harm and in reasoning about individual response.</p>
+      <p><strong>Methods on this rung:</strong> structural causal models and structural equation models; mediation analysis that separates direct from indirect effects; probabilities of necessity and sufficiency; and counterfactual definitions of fairness. Results on this rung are often reported as bounds, since point estimates require strong assumptions.</p>
+
+      <h2>How do the three rungs compare?</h2>
+      <table>
+        <thead>
+          <tr><th>Rung</th><th>Question</th><th>Typical method</th><th>What can go wrong</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="label-col">1. Association</td><td>What does seeing X tell me about Y?</td><td>Regression, classification, forecasting, most machine learning</td><td>Reading a predictive pattern as an effect; confounding; selection bias; patterns that break when the policy changes</td></tr>
+          <tr><td class="label-col">2. Intervention</td><td>What happens to Y if I do X?</td><td>Randomized experiment; adjustment, propensity scores, instrumental variables, difference-in-differences</td><td>Unmeasured confounding; an invalid instrument or failed parallel trends; underpowered experiments; interference between units</td></tr>
+          <tr><td class="label-col">3. Counterfactual</td><td>What would Y have been for this case had I done otherwise?</td><td>Structural causal model; mediation analysis; bounds</td><td>Conclusions depend on untestable modeling assumptions; group-level effects presented as individual-level facts</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Why can't more data move you up a rung?</h2>
+      <p>More data narrows the uncertainty around <code>P(y | x)</code>. It does not change what <code>P(y | x)</code> means. Two different causal structures, for example "X causes Y" and "a third factor causes both", can produce exactly the same observational distribution while implying different results under intervention. No amount of data from that distribution can tell them apart. Climbing from rung one to rung two therefore takes either control over X (an experiment) or knowledge about the structure (assumptions that can be argued for and partly tested). Climbing from rung two to rung three takes assumptions about the mechanism at the level of the individual case.</p>
+
+      <h2>Where does machine learning sit on the ladder?</h2>
+      <p>A model trained to minimize prediction error on observed data is a rung-one tool, whatever its accuracy. Its feature importances describe what the model uses to predict, which is different from what would change the outcome if altered. Machine learning still has a role on higher rungs, as a component inside a causal design: flexible models estimate propensity scores and outcome regressions, and meta-learners and causal forests estimate heterogeneous treatment effects from experimental data. In each case the causal claim comes from the design and its assumptions, and the learner supplies the estimation.</p>
+
+      <h2>How is the ladder used in practice?</h2>
+      <ul>
+        <li><strong>Classify the question first.</strong> "Who is likely to churn?" is rung one. "Will this offer reduce churn?" is rung two. "Did the offer cause this customer to stay?" is rung three.</li>
+        <li><strong>Match the evidence to the rung.</strong> A rung-two decision supported only by rung-one evidence should be labelled as a hypothesis and tested.</li>
+        <li><strong>State the assumptions.</strong> When an experiment is not possible, write down the causal diagram and the assumptions the estimate depends on, so that others can challenge them.</li>
+        <li><strong>Be cautious with individual-level claims.</strong> Most business and clinical decisions need rung-two answers for groups. Rung-three statements about specific people need a stronger model and should carry their uncertainty.</li>
+      </ul>
+
+      <h2 id="faq">Frequently asked questions</h2>
+
+      <h3>What are the three rungs of the ladder of causality?</h3>
+      <p>The three rungs are association (seeing), intervention (doing) and counterfactuals (imagining). Association describes how variables move together in observed data, intervention describes what happens when you deliberately change a variable, and counterfactuals describe what would have happened to a specific case had a different action been taken.</p>
+
+      <h3>Who introduced the ladder of causality?</h3>
+      <p>The ladder of causality was introduced by the computer scientist Judea Pearl. It was popularized in The Book of Why, written with Dana Mackenzie, and corresponds to what the technical literature calls the causal hierarchy.</p>
+
+      <h3>Which rung does machine learning operate on?</h3>
+      <p>Standard supervised machine learning operates on the first rung, association. A model trained on observed data learns to predict an outcome from features under the conditions that produced the data. It does not, without further assumptions or experiments, say what happens when you intervene on one of those features.</p>
+
+      <h3>What is the difference between an intervention and a counterfactual?</h3>
+      <p>An intervention asks what happens to a population, or to a subgroup, if an action is taken from now on. A counterfactual asks what would have happened to a particular case, given what was actually observed for it, had a different action been taken. Interventions can be answered by randomized experiments. Counterfactuals about individuals generally also need a structural causal model.</p>
+
+      <h3>Is an A/B test on rung two or rung three?</h3>
+      <p>An A/B test is on rung two. Randomization lets you estimate the effect of an intervention on average, or within segments. It does not reveal what a specific user who saw version A would have done under version B, which is a rung-three question.</p>
+
+      <div class="takeaways">
+        <h2>Key takeaways</h2>
+        <ul>
+          <li>The ladder of causality separates three kinds of question: association (seeing), intervention (doing) and counterfactuals (imagining).</li>
+          <li>Data from a lower rung cannot answer a higher-rung question without an experiment or explicit causal assumptions.</li>
+          <li>Predictive machine learning sits on rung one; experiments and identification strategies reach rung two; structural causal models are needed for rung three.</li>
+          <li>Classifying a question by rung before choosing a method prevents the most common error: acting on a prediction as if it were an effect.</li>
+        </ul>
+      </div>
+
+      <p><strong>Related in this wiki:</strong> <a href="causal-inference.html">Causal Inference in Business and Data Science</a>, <a href="causal-inference-healthcare.html">Causal Inference in Healthcare and Medical AI</a> and <a href="uplift-modeling.html">Uplift Modeling</a>. For how MLAIA applies these methods, see <a href="/predictive-intelligence/causal-inference/">causal inference consulting</a>.</p>
+
+      <p class="consult-note">MLAIA consults on causal inference and experiment design for business decisions — from A/B testing programs to uplift models. See our <a href="../index.html#domains">BI &amp; predictive analytics expertise</a> or <a href="../index.html#contact">contact us</a>. Related reading: <a href="../blog-sales-ai.html">Transforming Sales with AI</a> and <a href="../blog-bi.html">Expertise Without Boundaries</a>.</p>
+
+    </article>
+
+    <!-- Page footer nav -->
+    <div class="post-footer-nav">
+      <a href="index.html" class="back-link" style="margin-bottom:0"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>All Wiki Articles</span></a>
+      <a href="causal-inference-healthcare.html" class="back-link" style="margin-bottom:0;flex-direction:row-reverse"><span>Causal Inference in Healthcare</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(180deg)" aria-hidden="true"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<section class="site-contact" id="contact" aria-labelledby="site-contact-title"><div class="site-contact-inner"><div><p class="site-contact-kicker">MLAIA DATA SCIENCE</p><h2 id="site-contact-title">Tell us what<br>you’re working on.</h2><p>Share the problem, the data you have and what success would look like. We’ll discuss a practical next step.</p><p>Please don’t include confidential datasets, credentials or patient information.</p><p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br>WhatsApp: <a href="https://wa.me/972524846282" target="_blank" rel="noopener">+972 52 484 6282</a></p></div><form class="site-inquiry" action="https://formspree.io/f/mvzdggyq" method="POST"><div class="site-contact-row"><label>Name<input name="name" autocomplete="name" required></label><label>Company<input name="company" autocomplete="organization"></label></div><label>Work email<input type="email" name="email" autocomplete="email" required></label><label>What would you like to solve?<textarea name="message" rows="4" required></textarea></label><p>Your inquiry is handled under our <a href="/privacy.html">Privacy Policy</a>.</p><button type="submit">Send project inquiry →</button><p role="status" class="site-inquiry-status"></p></form></div></section><footer class="c-footer">
+  <div class="c-wrap">
+    <div><span>&#169; 2025 MLAIA — Machine Learning &amp; AI Approach</span></div>
+    <nav aria-label="Footer">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#domains">Domains</a>
+      <a href="../blog.html">Blog</a>
+      <a href="index.html">Wiki</a>
+      <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+      <a href="https://ultrabot.ai/" target="_blank" rel="noopener">Ultrabot ↗</a>
+      <a href="../index.html#contact">Contact</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/accessibility.html">Accessibility</a>
+      <a href="/terms.html">Terms</a>
+      <button type="button" data-cookie-settings>Cookie preferences</button>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* CURSOR */
+(function(){
+  const cd=document.getElementById('cd');
+  const cr=document.getElementById('cr');
+  if(!cd||!cr)return;
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cd.style.left=mx+'px';cd.style.top=my+'px';
+  });
+  (function loop(){
+    rx+=(mx-rx)*.14;ry+=(my-ry)*.14;
+    cr.style.left=rx+'px';cr.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,[role="button"]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+  });
+  document.addEventListener('mousedown',()=>document.body.classList.add('ck'));
+  document.addEventListener('mouseup',()=>document.body.classList.remove('ck'));
+})();
+
+/* NAV SCROLL */
+const NAV=document.getElementById('nav');
+addEventListener('scroll',()=>NAV.classList.toggle('sc',scrollY>36));
+
+/* HAMBURGER */
+(function(){
+  const btn=document.querySelector('.hamburger');
+  const links=document.querySelector('.nav-links');
+  if(!btn||!links)return;
+  btn.addEventListener('click',()=>{
+    const isOpen=links.classList.toggle('open');
+    btn.classList.toggle('open');
+    btn.setAttribute('aria-expanded',isOpen);
+    document.body.style.overflow=isOpen?'hidden':'';
+  });
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    links.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+  }));
+})();
+</script>
+</body>
+</html>

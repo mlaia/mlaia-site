@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google Analytics 4 — fires only after analytics consent -->
+<script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Causal Inference in Healthcare and Medical AI — Applied AI Wiki | MLAIA</title>
+<meta name="description" content="Reference guide to causal inference in healthcare: confounding by indication, immortal time bias, target trial emulation, propensity scores, and why feature importance is not a treatment effect.">
+<link rel="canonical" href="https://www.mlaia.com/wiki/causal-inference-healthcare.html">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="causal inference in healthcare, confounding by indication, immortal time bias, target trial emulation, propensity score, inverse probability weighting, treatment effect, clinical model validation, medical AI">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MLAIA">
+<meta property="og:title" content="Causal Inference in Healthcare and Medical AI — Applied AI Wiki | MLAIA">
+<meta property="og:description" content="Reference guide to causal inference in healthcare: confounding by indication, immortal time bias, target trial emulation, propensity scores, and why feature importance is not a treatment effect.">
+<meta property="og:url" content="https://www.mlaia.com/wiki/causal-inference-healthcare.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Causal Inference in Healthcare and Medical AI — Applied AI Wiki | MLAIA">
+<meta name="twitter:description" content="Reference guide to causal inference in healthcare: confounding by indication, immortal time bias, target trial emulation, propensity scores, and why feature importance is not a treatment effect.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=Martian+Mono:wdth,wght@87.5,300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/mlaia-c.css">
+<link rel="stylesheet" href="/assets/c-reading.css">
+<script src="/assets/c-reading.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Causal Inference in Healthcare and Medical AI",
+      "description": "Reference guide to causal inference in healthcare: confounding by indication, immortal time bias, target trial emulation, propensity scores, and why feature importance is not a treatment effect.",
+      "datePublished": "2026-11-06",
+      "dateModified": "2026-11-06",
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Yochai Edlitz",
+        "url": "https://www.mlaia.com/#person-yochai",
+        "jobTitle": "Founder & CEO, MLAIA"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "MLAIA Data Science Ltd.",
+        "url": "https://www.mlaia.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.mlaia.com/assets/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mlaia.com/wiki/causal-inference-healthcare.html"
+      },
+      "keywords": "causal inference in healthcare, confounding by indication, immortal time bias, target trial emulation, propensity score, medical AI",
+      "articleSection": "Applied AI Wiki",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "MLAIA",
+        "url": "https://www.mlaia.com/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.mlaia.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Applied AI Wiki",
+          "item": "https://www.mlaia.com/wiki/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Causal Inference in Healthcare and Medical AI",
+          "item": "https://www.mlaia.com/wiki/causal-inference-healthcare.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is confounding by indication?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Confounding by indication occurs when the clinical reason for giving a treatment is itself related to the outcome. Because sicker patients are more likely to be treated, a simple comparison of treated and untreated patients mixes the effect of the treatment with the effect of the underlying severity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is immortal time bias?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Immortal time bias arises when follow-up for the treated group includes a period during which, by the way the group is defined, the outcome could not have occurred, such as the time between cohort entry and the first prescription. Counting that period as treated time, or excluding it, makes the treatment look more protective than it is."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is target trial emulation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Target trial emulation, set out by Miguel Hernán and James Robins, is a framework for analysing observational data by first specifying the protocol of the randomized trial you would ideally run, and then emulating each element of that protocol with the available data. Aligning eligibility, treatment assignment and the start of follow-up removes several common design biases."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a prediction model's feature importance be read as a treatment effect?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Feature importance describes how much a model relies on a variable to predict the outcome in the data it was trained on. It reflects correlations, including those created by confounding and by existing treatment patterns, and does not estimate what would happen to a patient if that variable were changed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do propensity scores remove all confounding?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Propensity score methods balance the covariates that were measured and included in the model. They do not adjust for confounders that were not measured or were measured poorly, so results should be accompanied by balance checks and sensitivity analyses."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
+<body class="c-page c-reading" data-site-shell="true"><nav class="site-quick-nav" aria-label="Quick navigation"><a href="/" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">Home</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">Contact us</span></a></nav>
+
+<a class="skip-link c-skip" href="#main-content">Skip to main content</a>
+
+<!-- Custom cursor -->
+<div id="cd"></div>
+<div id="cr"></div>
+
+<!-- NAV -->
+<header class="c-nav" id="nav">
+  <div class="c-wrap c-nav__inner">
+    <a class="c-logo" href="../index.html">MLAIA<span class="c-logo__tag">Machine Learning &amp; AI Approach</span></a>
+    <button class="c-menu hamburger" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav class="c-nav-links nav-links" id="nav-links" aria-label="Main navigation">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#domains">Domains</a>
+      <a href="../blog.html">Blog</a>
+      <a href="index.html" aria-current="true">Wiki</a>
+      <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+      <a href="https://ultrabot.ai/" target="_blank" rel="noopener">Ultrabot ↗</a>
+      <a class="c-btn" href="../index.html#contact">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<header class="post-hero">
+  <div class="post-hero-orb"></div>
+  <div class="post-hero-inner">
+    <div class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span>/</span><a href="index.html">Wiki</a><span>/</span>Causal Inference in Healthcare and Medical AI</div>
+    <div class="post-category-tag">Applied AI Wiki · Medical AI</div>
+    <h1>Causal Inference in Healthcare and Medical AI</h1>
+    <div class="post-meta">
+      <span>Applied AI Wiki — reference article</span><span class="post-meta-sep">—</span><span>Updated November 6, 2026</span><span class="post-meta-sep">—</span><span>MLAIA Data Science</span>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<main id="main-content" class="post-body">
+  <div class="post-container">
+
+    <a href="index.html" class="back-link"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Wiki Home</span></a>
+
+    <article class="post-content">
+
+      <p><strong>Causal inference in healthcare</strong> is the set of methods used to estimate the effect of a treatment, exposure or care decision on patient outcomes, particularly from observational sources such as electronic health records, registries and claims data where treatment was not assigned at random. It matters for medical AI because a model that predicts an outcome accurately does not, for that reason, tell a clinician what will happen if they intervene. The main threats are confounding by indication and design errors such as immortal time bias; the main tools are randomized trials, target trial emulation and propensity-based adjustment.</p>
+
+      <p>This page is an educational overview of methods. It is not medical advice and does not replace study-specific statistical or clinical guidance.</p>
+
+      <h2>Why is causal inference harder in healthcare than in an A/B test?</h2>
+      <p>In an online experiment, treatment is assigned by a random number generator. In routine care, treatment is assigned by clinicians and patients for reasons: severity, comorbidity, frailty, preference, access. Those reasons usually also affect the outcome. Health data adds further difficulties: treatments start, stop and change over time; follow-up is incomplete; outcomes are recorded only when a patient is seen; and many relevant factors, such as a clinician's overall impression of a patient, are not recorded in structured form. Randomized controlled trials remain the reference standard, but they are not available for every question, population or comparison, which is why careful observational analysis is needed. For the general framework, see <a href="causal-inference.html">causal inference in business and data science</a> and <a href="ladder-of-causality.html">the ladder of causality</a>.</p>
+
+      <h2>What is confounding by indication?</h2>
+      <p><strong>Confounding by indication</strong> occurs when the reason a treatment is given (its indication) is also a cause of the outcome. Patients who receive a treatment tend to be those who need it most, so in raw data treated patients often have worse outcomes than untreated ones even when the treatment is beneficial.</p>
+      <p>Approaches that reduce it include comparing the treatment with an <em>active comparator</em> (another treatment used for the same indication) instead of with no treatment, restricting to <em>new users</em> so that covariates are measured before treatment starts, and adjusting for measured markers of severity. None of these addresses severity that was not recorded, which is why residual confounding is the standard caveat on observational treatment comparisons.</p>
+
+      <h2>What is immortal time bias?</h2>
+      <p><strong>Immortal time</strong> is a span of follow-up during which, because of how the exposure group is defined, the outcome cannot occur. A typical case: patients are classified as "treated" if they fill a prescription at any time after hospital discharge, and follow-up is counted from discharge. Every treated patient must have survived from discharge to the prescription date, or they would not be in the treated group. If that interval is counted as treated time, or dropped, the treated group is credited with survival that was guaranteed by the definition, and the treatment appears protective.</p>
+      <p>The remedy is a matter of design: start follow-up at the moment when eligibility is met and treatment strategy is assigned, classify exposure using only information available at that moment, or model treatment as a time-varying exposure so that time before treatment is counted as untreated.</p>
+
+      <h2>What is target trial emulation?</h2>
+      <p><strong>Target trial emulation</strong> is a framework developed by Miguel Hernán and James Robins. The analyst first writes the protocol of the hypothetical randomized trial (the <em>target trial</em>) that would answer the question, and then emulates each component with observational data. The protocol components are:</p>
+      <ul>
+        <li><strong>Eligibility criteria:</strong> who would be enrolled, defined using information available at baseline.</li>
+        <li><strong>Treatment strategies:</strong> the specific strategies being compared, including what happens after initiation.</li>
+        <li><strong>Assignment:</strong> random in the target trial; emulated by adjusting for baseline confounders.</li>
+        <li><strong>Time zero:</strong> the start of follow-up, when eligibility is met and a strategy is assigned.</li>
+        <li><strong>Outcomes and follow-up:</strong> what is measured and for how long.</li>
+        <li><strong>Causal contrast:</strong> the observational analogue of the intention-to-treat or per-protocol effect.</li>
+        <li><strong>Analysis plan:</strong> how confounding, censoring and deviation from the strategy are handled.</li>
+      </ul>
+      <p>The discipline of the method is that eligibility, assignment and time zero must coincide, as they do in a real trial. That alignment removes immortal time bias and several related selection biases by construction. It does not remove unmeasured confounding: emulation fixes the design and leaves the adjustment problem to be solved separately.</p>
+
+      <h2>How do propensity score methods work?</h2>
+      <p>The <strong>propensity score</strong>, introduced by Rosenbaum and Rubin, is the probability that a patient receives the treatment given their measured baseline covariates. Among patients with the same propensity score, the distribution of those measured covariates is expected to be similar in treated and untreated groups. The score is used in four main ways: <strong>matching</strong> treated to untreated patients with similar scores, <strong>stratifying</strong> on the score, <strong>inverse probability of treatment weighting</strong> (weighting each patient by the inverse of the probability of the treatment they received), and including the score as a covariate.</p>
+      <p>The methods depend on three conditions: <em>exchangeability</em> (no unmeasured confounding after conditioning on the covariates), <em>positivity</em> (every type of patient has some chance of receiving each treatment) and <em>consistency</em> (the treatment is well defined). Good practice is to check covariate balance after matching or weighting, commonly with standardized mean differences, to inspect the overlap of the score distributions, and to report sensitivity analyses for unmeasured confounding. When treatment and confounders both change over time and earlier treatment affects later confounders, standard adjustment is biased, and the g-methods associated with Robins, such as marginal structural models fitted by inverse probability weighting and the parametric g-formula, are used.</p>
+
+      <h2>Why is a predictive model's feature importance not a treatment effect?</h2>
+      <p>A clinical prediction model is trained to predict an outcome from whatever inputs are informative. Its coefficients, SHAP values or other importance measures describe how the <em>prediction</em> depends on each input in the training data. They sit on the first rung of the <a href="ladder-of-causality.html">ladder of causality</a>. There are two main reasons they cannot be read as effects:</p>
+      <ul>
+        <li><strong>The model was not adjusted for the right things.</strong> An effect estimate requires a deliberate choice of confounders for one exposure. A prediction model includes any useful covariate, including consequences of the exposure. Interpreting every coefficient in one multivariable model as an effect is the error that Westreich and Greenland named the <em>Table 2 fallacy</em>.</li>
+        <li><strong>The data encodes existing care.</strong> A widely cited example, discussed by Caruana and colleagues, is a pneumonia risk model that learned that patients with asthma had lower mortality risk. Those patients were routinely given more intensive care, which lowered their observed risk. Used naively for triage, the pattern would have directed less care to a higher-risk group.</li>
+      </ul>
+      <p>Explanations remain useful for auditing what a model relies on. Estimating what a treatment does requires a causal design. Estimating which patients benefit most is a question of heterogeneous treatment effects, the clinical counterpart of <a href="uplift-modeling.html">uplift modeling</a>, and is best supported by randomized data.</p>
+
+      <h2>Where does causal thinking matter in clinical-model validation?</h2>
+      <ul>
+        <li><strong>What the model predicts.</strong> Outcomes in training data occurred under the treatment patterns of the time. A risk score therefore predicts risk <em>under usual care</em>, which may differ from risk if untreated. The intended use should say which one is meant.</li>
+        <li><strong>Shortcuts and dataset shift.</strong> Models can learn features of the acquisition process, such as the scanner, the ward or a marker in the image, instead of the disease. A causal view of how the data was generated helps predict which associations will hold at a new site, and motivates external validation.</li>
+        <li><strong>Effects of deployment.</strong> Once a model influences care, successful interventions prevent the outcomes it predicted, so its measured performance changes and data collected after deployment is affected by the model itself.</li>
+        <li><strong>Accuracy versus benefit.</strong> Discrimination and calibration show that a model predicts well. Whether using it improves patient outcomes is a rung-two question that needs an impact evaluation, ideally a randomized or stepped-wedge comparison of care with and without the model.</li>
+      </ul>
+      <p>The wider validation process, including external validation, calibration and reporting standards, is covered in <a href="medical-ai-validation.html">Medical AI: Validation and the Regulatory Landscape</a>.</p>
+
+      <h2 id="faq">Frequently asked questions</h2>
+
+      <h3>What is confounding by indication?</h3>
+      <p>Confounding by indication occurs when the clinical reason for giving a treatment is itself related to the outcome. Because sicker patients are more likely to be treated, a simple comparison of treated and untreated patients mixes the effect of the treatment with the effect of the underlying severity.</p>
+
+      <h3>What is immortal time bias?</h3>
+      <p>Immortal time bias arises when follow-up for the treated group includes a period during which, by the way the group is defined, the outcome could not have occurred, such as the time between cohort entry and the first prescription. Counting that period as treated time, or excluding it, makes the treatment look more protective than it is.</p>
+
+      <h3>What is target trial emulation?</h3>
+      <p>Target trial emulation, set out by Miguel Hernán and James Robins, is a framework for analysing observational data by first specifying the protocol of the randomized trial you would ideally run, and then emulating each element of that protocol with the available data. Aligning eligibility, treatment assignment and the start of follow-up removes several common design biases.</p>
+
+      <h3>Can a prediction model's feature importance be read as a treatment effect?</h3>
+      <p>No. Feature importance describes how much a model relies on a variable to predict the outcome in the data it was trained on. It reflects correlations, including those created by confounding and by existing treatment patterns, and does not estimate what would happen to a patient if that variable were changed.</p>
+
+      <h3>Do propensity scores remove all confounding?</h3>
+      <p>No. Propensity score methods balance the covariates that were measured and included in the model. They do not adjust for confounders that were not measured or were measured poorly, so results should be accompanied by balance checks and sensitivity analyses.</p>
+
+      <div class="takeaways">
+        <h2>Key takeaways</h2>
+        <ul>
+          <li>In routine care, treatment is assigned for reasons that also affect outcomes, so confounding by indication should be assumed until shown otherwise.</li>
+          <li>Immortal time bias is a design error, fixed by aligning eligibility, treatment assignment and the start of follow-up.</li>
+          <li>Target trial emulation makes an observational study explicit about the trial it is trying to imitate.</li>
+          <li>Propensity methods balance measured covariates only; balance checks, overlap checks and sensitivity analyses are part of the method.</li>
+          <li>Feature importance explains a prediction. It does not estimate what a treatment does, and model accuracy does not establish patient benefit.</li>
+        </ul>
+      </div>
+
+      <p><strong>Related in this wiki:</strong> <a href="causal-inference.html">Causal Inference in Business and Data Science</a>, <a href="ladder-of-causality.html">The Ladder of Causality</a>, <a href="uplift-modeling.html">Uplift Modeling</a> and <a href="medical-ai-validation.html">Medical AI: Validation and the Regulatory Landscape</a>. For how MLAIA approaches this work, see <a href="/medical-ai/clinical-model-validation/">clinical AI and prediction model validation</a>.</p>
+
+      <p class="consult-note">MLAIA consults on medical AI and clinical data science — model development, validation design, and regulatory-grade evaluation. See our <a href="../index.html#domains">medical AI domain expertise</a> or <a href="../index.html#contact">contact us</a>. Related reading: <a href="../blog-medical.html">Unleashing the Power of Graphs for Machine Learning</a>.</p>
+
+    </article>
+
+    <!-- Page footer nav -->
+    <div class="post-footer-nav">
+      <a href="index.html" class="back-link" style="margin-bottom:0"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>All Wiki Articles</span></a>
+      <a href="uplift-modeling.html" class="back-link" style="margin-bottom:0;flex-direction:row-reverse"><span>Uplift Modeling</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(180deg)" aria-hidden="true"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<section class="site-contact" id="contact" aria-labelledby="site-contact-title"><div class="site-contact-inner"><div><p class="site-contact-kicker">MLAIA DATA SCIENCE</p><h2 id="site-contact-title">Tell us what<br>you’re working on.</h2><p>Share the problem, the data you have and what success would look like. We’ll discuss a practical next step.</p><p>Please don’t include confidential datasets, credentials or patient information.</p><p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br>WhatsApp: <a href="https://wa.me/972524846282" target="_blank" rel="noopener">+972 52 484 6282</a></p></div><form class="site-inquiry" action="https://formspree.io/f/mvzdggyq" method="POST"><div class="site-contact-row"><label>Name<input name="name" autocomplete="name" required></label><label>Company<input name="company" autocomplete="organization"></label></div><label>Work email<input type="email" name="email" autocomplete="email" required></label><label>What would you like to solve?<textarea name="message" rows="4" required></textarea></label><p>Your inquiry is handled under our <a href="/privacy.html">Privacy Policy</a>.</p><button type="submit">Send project inquiry →</button><p role="status" class="site-inquiry-status"></p></form></div></section><footer class="c-footer">
+  <div class="c-wrap">
+    <div><span>&#169; 2025 MLAIA — Machine Learning &amp; AI Approach</span></div>
+    <nav aria-label="Footer">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#domains">Domains</a>
+      <a href="../blog.html">Blog</a>
+      <a href="index.html">Wiki</a>
+      <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+      <a href="https://ultrabot.ai/" target="_blank" rel="noopener">Ultrabot ↗</a>
+      <a href="../index.html#contact">Contact</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/accessibility.html">Accessibility</a>
+      <a href="/terms.html">Terms</a>
+      <button type="button" data-cookie-settings>Cookie preferences</button>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* CURSOR */
+(function(){
+  const cd=document.getElementById('cd');
+  const cr=document.getElementById('cr');
+  if(!cd||!cr)return;
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cd.style.left=mx+'px';cd.style.top=my+'px';
+  });
+  (function loop(){
+    rx+=(mx-rx)*.14;ry+=(my-ry)*.14;
+    cr.style.left=rx+'px';cr.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,[role="button"]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+  });
+  document.addEventListener('mousedown',()=>document.body.classList.add('ck'));
+  document.addEventListener('mouseup',()=>document.body.classList.remove('ck'));
+})();
+
+/* NAV SCROLL */
+const NAV=document.getElementById('nav');
+addEventListener('scroll',()=>NAV.classList.toggle('sc',scrollY>36));
+
+/* HAMBURGER */
+(function(){
+  const btn=document.querySelector('.hamburger');
+  const links=document.querySelector('.nav-links');
+  if(!btn||!links)return;
+  btn.addEventListener('click',()=>{
+    const isOpen=links.classList.toggle('open');
+    btn.classList.toggle('open');
+    btn.setAttribute('aria-expanded',isOpen);
+    document.body.style.overflow=isOpen?'hidden':'';
+  });
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    links.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+  }));
+})();
+</script>
+</body>
+</html>

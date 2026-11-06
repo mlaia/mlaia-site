@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google Analytics 4 — fires only after analytics consent -->
+<script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uplift Modeling: Meta-Learners, Qini Curves, Data Needs | MLAIA</title>
+<meta name="description" content="Reference guide to uplift modeling: the four customer types, two-model, S-, T- and X-learner approaches, Qini and uplift curves, the randomized holdout you need, and common failure modes.">
+<link rel="canonical" href="https://www.mlaia.com/wiki/uplift-modeling.html">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="uplift modeling, uplift modelling, incremental response, CATE, heterogeneous treatment effect, S-learner, T-learner, X-learner, meta-learner, Qini curve, uplift curve, persuadables, randomized holdout">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MLAIA">
+<meta property="og:title" content="Uplift Modeling: Meta-Learners, Qini Curves, Data Needs | MLAIA">
+<meta property="og:description" content="Reference guide to uplift modeling: the four customer types, two-model, S-, T- and X-learner approaches, Qini and uplift curves, the randomized holdout you need, and common failure modes.">
+<meta property="og:url" content="https://www.mlaia.com/wiki/uplift-modeling.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Uplift Modeling: Meta-Learners, Qini Curves, Data Needs | MLAIA">
+<meta name="twitter:description" content="Reference guide to uplift modeling: the four customer types, two-model, S-, T- and X-learner approaches, Qini and uplift curves, the randomized holdout you need, and common failure modes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=Martian+Mono:wdth,wght@87.5,300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/mlaia-c.css">
+<link rel="stylesheet" href="/assets/c-reading.css">
+<script src="/assets/c-reading.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Uplift Modeling: Estimating Who Responds to an Intervention",
+      "description": "Reference guide to uplift modeling: the four customer types, two-model, S-, T- and X-learner approaches, Qini and uplift curves, the randomized holdout you need, and common failure modes.",
+      "datePublished": "2026-11-06",
+      "dateModified": "2026-11-06",
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Yochai Edlitz",
+        "url": "https://www.mlaia.com/#person-yochai",
+        "jobTitle": "Founder & CEO, MLAIA"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "MLAIA Data Science Ltd.",
+        "url": "https://www.mlaia.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.mlaia.com/assets/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mlaia.com/wiki/uplift-modeling.html"
+      },
+      "keywords": "uplift modeling, CATE, S-learner, T-learner, X-learner, Qini curve, uplift curve, randomized holdout",
+      "articleSection": "Applied AI Wiki",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "MLAIA",
+        "url": "https://www.mlaia.com/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.mlaia.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Applied AI Wiki",
+          "item": "https://www.mlaia.com/wiki/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Uplift Modeling: Estimating Who Responds to an Intervention",
+          "item": "https://www.mlaia.com/wiki/uplift-modeling.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is uplift modeling?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Uplift modeling estimates, for each individual, the difference between the probability of an outcome if they receive a treatment and the probability if they do not. It is used to target an action, such as a retention offer, at the people whose behaviour it is most likely to change."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is uplift modeling different from churn or propensity modeling?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A churn or propensity model predicts how likely an outcome is. An uplift model predicts how much an action changes that likelihood. The customers most likely to buy or to churn are often not the ones most affected by an offer, so the two models can rank customers very differently."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What data do you need for uplift modeling?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You need data from a randomized experiment in which some eligible individuals received the treatment and a randomly chosen holdout did not, with features recorded before treatment and the outcome measured the same way in both groups. Because individual effects are small and noisy, the experiment usually has to be considerably larger than one sized only to detect an average effect."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between the S-learner, T-learner and X-learner?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The S-learner fits a single outcome model with the treatment indicator as a feature. The T-learner, also called the two-model approach, fits separate outcome models for the treated and control groups and subtracts their predictions. The X-learner adds a second stage that imputes individual effects using the opposite group's model and then models those imputed effects, which helps when the two groups differ greatly in size."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a Qini curve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A Qini curve plots the cumulative incremental outcomes obtained when individuals are targeted in descending order of predicted uplift, against the fraction of the population targeted. A model that ranks well rises above the straight line for random targeting, and the area between the two is summarized as the Qini coefficient."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script></head>
+<body class="c-page c-reading" data-site-shell="true"><nav class="site-quick-nav" aria-label="Quick navigation"><a href="/" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">Home</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">Contact us</span></a></nav>
+
+<a class="skip-link c-skip" href="#main-content">Skip to main content</a>
+
+<!-- Custom cursor -->
+<div id="cd"></div>
+<div id="cr"></div>
+
+<!-- NAV -->
+<header class="c-nav" id="nav">
+  <div class="c-wrap c-nav__inner">
+    <a class="c-logo" href="../index.html">MLAIA<span class="c-logo__tag">Machine Learning &amp; AI Approach</span></a>
+    <button class="c-menu hamburger" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav class="c-nav-links nav-links" id="nav-links" aria-label="Main navigation">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#domains">Domains</a>
+      <a href="../blog.html">Blog</a>
+      <a href="index.html" aria-current="true">Wiki</a>
+      <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+      <a href="https://ultrabot.ai/" target="_blank" rel="noopener">Ultrabot ↗</a>
+      <a class="c-btn" href="../index.html#contact">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<header class="post-hero">
+  <div class="post-hero-orb"></div>
+  <div class="post-hero-inner">
+    <div class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span>/</span><a href="index.html">Wiki</a><span>/</span>Uplift Modeling: Estimating Who Responds to an Intervention</div>
+    <div class="post-category-tag">Applied AI Wiki · Decision Science</div>
+    <h1>Uplift Modeling: Estimating Who Responds to an Intervention</h1>
+    <div class="post-meta">
+      <span>Applied AI Wiki — reference article</span><span class="post-meta-sep">—</span><span>Updated November 6, 2026</span><span class="post-meta-sep">—</span><span>MLAIA Data Science</span>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<main id="main-content" class="post-body">
+  <div class="post-container">
+
+    <a href="index.html" class="back-link"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Wiki Home</span></a>
+
+    <article class="post-content">
+
+      <p><strong>Uplift modeling</strong> estimates the <em>incremental</em> effect of an action on each individual: the difference between their probability of an outcome if treated and their probability if not treated. It answers "whose behaviour will this offer change?", which is a different question from "who is likely to buy?" or "who is likely to churn?". It is trained on data from a randomized experiment, is built with meta-learners or tree-based methods, and is evaluated with Qini and uplift curves because the individual effect is never observed directly.</p>
+
+      <p>The same quantity is called the <strong>conditional average treatment effect (CATE)</strong> in the causal inference literature. It sits on the second rung of the <a href="ladder-of-causality.html">ladder of causality</a>: it concerns the effect of an intervention, conditional on a customer's characteristics.</p>
+
+      <h2>How is uplift modeling different from response modeling?</h2>
+      <p>A response model estimates <code>P(Y = 1 | X)</code> among people who received a campaign, and targets those with the highest score. An uplift model estimates <code>P(Y = 1 | X, treated) − P(Y = 1 | X, not treated)</code>. The two can disagree sharply. Loyal customers have high response scores and would have bought anyway, so spending on them produces little additional revenue. Targeting by response score tends to select exactly that group. The underlying difficulty is what Holland called the <em>fundamental problem of causal inference</em>: each person is observed either treated or untreated, never both, so there is no individual-level label for uplift to train on.</p>
+
+      <h2>What are the four customer types in uplift modeling?</h2>
+      <p>Uplift modeling is usually explained with a two-by-two classification of how a person would behave with and without the treatment:</p>
+      <table>
+        <thead>
+          <tr><th>Type</th><th>If treated</th><th>If not treated</th><th>Targeting decision</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="label-col">Persuadables</td><td>Respond</td><td>Do not respond</td><td>Treat: the only group where the action creates value</td></tr>
+          <tr><td class="label-col">Sure things</td><td>Respond</td><td>Respond</td><td>Do not treat: the cost is spent on an outcome that would happen anyway</td></tr>
+          <tr><td class="label-col">Lost causes</td><td>Do not respond</td><td>Do not respond</td><td>Do not treat: no effect</td></tr>
+          <tr><td class="label-col">Sleeping dogs</td><td>Do not respond</td><td>Respond</td><td>Do not treat: the action has a negative effect</td></tr>
+        </tbody>
+      </table>
+      <p>Sleeping dogs, also called the do-not-disturb group, are the reason uplift can be negative: a retention call can remind a customer to cancel. Nobody can be assigned to a type with certainty, because only one of the two columns is ever observed for a given person. An uplift model estimates, for people with similar characteristics, the balance of these types.</p>
+
+      <h2>What are the two-model and meta-learner approaches?</h2>
+      <p><strong>Meta-learners</strong> are recipes that turn ordinary supervised learners (gradient-boosted trees, regularized regression, neural networks) into estimators of treatment effects. The S-, T- and X-learner names follow the terminology of Künzel and colleagues.</p>
+      <ul>
+        <li><strong>Two-model approach (T-learner).</strong> Fit one outcome model on the treated group and another on the control group; the predicted uplift is the difference between their predictions. It is simple and uses any learner. Its weakness is that each model is tuned to predict the outcome, not the difference, so two individually reasonable models can produce a noisy difference, especially when the effect is small relative to the baseline rate.</li>
+        <li><strong>S-learner.</strong> Fit a single model on all the data with the treatment indicator as one more feature; predict each person twice, with the indicator set to treated and to untreated, and subtract. It shares information between groups. Its weakness is that regularization can shrink the role of the treatment indicator, biasing estimated effects toward zero.</li>
+        <li><strong>X-learner.</strong> Stage one fits the two outcome models as in the T-learner. Stage two imputes an individual effect for each person: for treated people, the observed outcome minus the control model's prediction; for control people, the treated model's prediction minus the observed outcome. Two further models are fitted to these imputed effects and combined with a weight, typically the propensity score. It is designed for cases where one group is much larger than the other.</li>
+      </ul>
+      <p>Other established methods include the <em>transformed outcome</em> (class transformation) approach, which recodes the target so that a single classifier estimates uplift; <em>uplift trees</em>, whose split criterion maximizes the difference in treatment effect between branches; <em>causal forests</em>, associated with Wager and Athey; and the R-learner and doubly robust learners, which combine outcome and propensity models. No method is best on all data, and the choice should be made by evaluation on held-out randomized data.</p>
+
+      <h2>How are uplift models evaluated with Qini and uplift curves?</h2>
+      <p>Standard metrics such as AUC or log-loss compare predictions with observed labels, and uplift has no observed label. Evaluation therefore works at the level of groups, using a held-out part of the randomized experiment:</p>
+      <ul>
+        <li><strong>Uplift by decile.</strong> Sort the holdout by predicted uplift, split it into bins, and in each bin compare the outcome rate of treated and control individuals. A good model shows the largest observed difference in the top bin and a steady decline, possibly below zero, toward the bottom.</li>
+        <li><strong>Uplift curve.</strong> Plot the cumulative incremental outcome against the fraction of the population targeted, in descending order of predicted uplift. Random targeting gives a straight line from the origin to the overall effect.</li>
+        <li><strong>Qini curve.</strong> A variant introduced by Radcliffe that plots cumulative incremental positive outcomes, scaling the control group's count to the size of the treated group at each point. The <em>Qini coefficient</em> is the area between the model's curve and the random-targeting line.</li>
+      </ul>
+      <p>These curves are estimated from differences between two samples and are noisy. Report them with confidence intervals, for example from bootstrap resampling, and compare models on the same holdout.</p>
+
+      <h2>What data does uplift modeling need?</h2>
+      <p>The reliable basis is a <strong>randomized holdout</strong>: within the population eligible for the action, some individuals are assigned to receive it and a randomly chosen control group is withheld. The requirements are:</p>
+      <ul>
+        <li><strong>Random assignment across the whole eligible population</strong>, including people the current rules would never target, so that the model can learn where the effect is low or negative.</li>
+        <li><strong>Features measured before treatment.</strong> Anything recorded after assignment can be affected by the treatment and must be excluded.</li>
+        <li><strong>The same outcome definition and observation window</strong> in both groups, and an outcome that reflects the business goal.</li>
+        <li><strong>Enough volume.</strong> Estimating how an effect varies between individuals needs much more data than detecting an average effect.</li>
+        <li><strong>A continuing control group after deployment</strong>, so that the model can be monitored and retrained on unbiased data.</li>
+      </ul>
+      <p>Uplift can be estimated from observational data with propensity adjustment, but the result then depends on the assumption that all drivers of past targeting were measured. Past campaigns were normally targeted by rules or scores, which is the situation in which that assumption is weakest. See the <a href="causal-inference.html">causal inference overview</a> for the design options.</p>
+
+      <h2>What are the common failure modes of uplift modeling?</h2>
+      <ul>
+        <li><strong>Training on targeted data.</strong> If treatment followed a rule, the model learns the rule's selection effect and reports it as uplift.</li>
+        <li><strong>Weak signal.</strong> Individual effects are small compared with outcome noise, so models overfit easily and rankings are unstable between samples.</li>
+        <li><strong>Evaluating with the wrong metric.</strong> Selecting a model by AUC on the outcome rewards finding sure things, not persuadables.</li>
+        <li><strong>Post-treatment leakage.</strong> Features that are consequences of treatment produce uplift estimates that cannot be reproduced at decision time.</li>
+        <li><strong>Outcome and cost mismatch.</strong> Uplift in clicks or redemptions is different from uplift in margin. An offer that costs more than the incremental value it creates is unprofitable even with positive uplift.</li>
+        <li><strong>Non-compliance and interference.</strong> Not everyone assigned to treatment receives it, and one customer's treatment can affect another's outcome; both change what the estimate means.</li>
+      </ul>
+
+      <h2>Where is uplift modeling used?</h2>
+      <p>Typical applications are retention offers, cross-sell and promotion targeting, credit-line and pricing actions, and outreach programmes with limited capacity. In <a href="/predictive-intelligence/churn-prediction/">churn prediction</a>, uplift is the step that moves from ranking customers by risk to ranking them by how much an intervention helps. The same estimation problem appears in medicine as heterogeneity of treatment effect, discussed in <a href="causal-inference-healthcare.html">causal inference in healthcare and medical AI</a>.</p>
+
+      <h2 id="faq">Frequently asked questions</h2>
+
+      <h3>What is uplift modeling?</h3>
+      <p>Uplift modeling estimates, for each individual, the difference between the probability of an outcome if they receive a treatment and the probability if they do not. It is used to target an action, such as a retention offer, at the people whose behaviour it is most likely to change.</p>
+
+      <h3>How is uplift modeling different from churn or propensity modeling?</h3>
+      <p>A churn or propensity model predicts how likely an outcome is. An uplift model predicts how much an action changes that likelihood. The customers most likely to buy or to churn are often not the ones most affected by an offer, so the two models can rank customers very differently.</p>
+
+      <h3>What data do you need for uplift modeling?</h3>
+      <p>You need data from a randomized experiment in which some eligible individuals received the treatment and a randomly chosen holdout did not, with features recorded before treatment and the outcome measured the same way in both groups. Because individual effects are small and noisy, the experiment usually has to be considerably larger than one sized only to detect an average effect.</p>
+
+      <h3>What is the difference between the S-learner, T-learner and X-learner?</h3>
+      <p>The S-learner fits a single outcome model with the treatment indicator as a feature. The T-learner, also called the two-model approach, fits separate outcome models for the treated and control groups and subtracts their predictions. The X-learner adds a second stage that imputes individual effects using the opposite group's model and then models those imputed effects, which helps when the two groups differ greatly in size.</p>
+
+      <h3>What is a Qini curve?</h3>
+      <p>A Qini curve plots the cumulative incremental outcomes obtained when individuals are targeted in descending order of predicted uplift, against the fraction of the population targeted. A model that ranks well rises above the straight line for random targeting, and the area between the two is summarized as the Qini coefficient.</p>
+
+      <div class="takeaways">
+        <h2>Key takeaways</h2>
+        <ul>
+          <li>Uplift is the change in outcome probability caused by an action, estimated per individual; it is the conditional average treatment effect.</li>
+          <li>Only persuadables repay treatment. Sure things and lost causes waste it, and sleeping dogs are harmed by it.</li>
+          <li>The two-model (T-learner), S-learner and X-learner approaches build uplift estimates from standard learners, each with a known weakness.</li>
+          <li>Evaluate with uplift-by-decile, uplift curves and Qini curves on a randomized holdout, with confidence intervals.</li>
+          <li>The usual causes of failure are non-randomized training data, small effects, leakage and optimizing an outcome that does not reflect value.</li>
+        </ul>
+      </div>
+
+      <p><strong>Related in this wiki:</strong> <a href="causal-inference.html">Causal Inference in Business and Data Science</a>, <a href="ladder-of-causality.html">The Ladder of Causality</a> and <a href="causal-inference-healthcare.html">Causal Inference in Healthcare and Medical AI</a>. For how MLAIA applies these methods, see <a href="/predictive-intelligence/causal-inference/">causal inference consulting and uplift modeling</a>.</p>
+
+      <p class="consult-note">MLAIA consults on causal inference and experiment design for business decisions — from A/B testing programs to uplift models. See our <a href="../index.html#domains">BI &amp; predictive analytics expertise</a> or <a href="../index.html#contact">contact us</a>. Related reading: <a href="../blog-sales-ai.html">Transforming Sales with AI</a> and <a href="../blog-bi.html">Expertise Without Boundaries</a>.</p>
+
+    </article>
+
+    <!-- Page footer nav -->
+    <div class="post-footer-nav">
+      <a href="index.html" class="back-link" style="margin-bottom:0"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>All Wiki Articles</span></a>
+      <a href="causal-inference.html" class="back-link" style="margin-bottom:0;flex-direction:row-reverse"><span>Causal Inference</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(180deg)" aria-hidden="true"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<section class="site-contact" id="contact" aria-labelledby="site-contact-title"><div class="site-contact-inner"><div><p class="site-contact-kicker">MLAIA DATA SCIENCE</p><h2 id="site-contact-title">Tell us what<br>you’re working on.</h2><p>Share the problem, the data you have and what success would look like. We’ll discuss a practical next step.</p><p>Please don’t include confidential datasets, credentials or patient information.</p><p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br>WhatsApp: <a href="https://wa.me/972524846282" target="_blank" rel="noopener">+972 52 484 6282</a></p></div><form class="site-inquiry" action="https://formspree.io/f/mvzdggyq" method="POST"><div class="site-contact-row"><label>Name<input name="name" autocomplete="name" required></label><label>Company<input name="company" autocomplete="organization"></label></div><label>Work email<input type="email" name="email" autocomplete="email" required></label><label>What would you like to solve?<textarea name="message" rows="4" required></textarea></label><p>Your inquiry is handled under our <a href="/privacy.html">Privacy Policy</a>.</p><button type="submit">Send project inquiry →</button><p role="status" class="site-inquiry-status"></p></form></div></section><footer class="c-footer">
+  <div class="c-wrap">
+    <div><span>&#169; 2025 MLAIA — Machine Learning &amp; AI Approach</span></div>
+    <nav aria-label="Footer">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#domains">Domains</a>
+      <a href="../blog.html">Blog</a>
+      <a href="index.html">Wiki</a>
+      <a href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand ↗</a>
+      <a href="https://ultrabot.ai/" target="_blank" rel="noopener">Ultrabot ↗</a>
+      <a href="../index.html#contact">Contact</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/accessibility.html">Accessibility</a>
+      <a href="/terms.html">Terms</a>
+      <button type="button" data-cookie-settings>Cookie preferences</button>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* CURSOR */
+(function(){
+  const cd=document.getElementById('cd');
+  const cr=document.getElementById('cr');
+  if(!cd||!cr)return;
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cd.style.left=mx+'px';cd.style.top=my+'px';
+  });
+  (function loop(){
+    rx+=(mx-rx)*.14;ry+=(my-ry)*.14;
+    cr.style.left=rx+'px';cr.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,[role="button"]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+  });
+  document.addEventListener('mousedown',()=>document.body.classList.add('ck'));
+  document.addEventListener('mouseup',()=>document.body.classList.remove('ck'));
+})();
+
+/* NAV SCROLL */
+const NAV=document.getElementById('nav');
+addEventListener('scroll',()=>NAV.classList.toggle('sc',scrollY>36));
+
+/* HAMBURGER */
+(function(){
+  const btn=document.querySelector('.hamburger');
+  const links=document.querySelector('.nav-links');
+  if(!btn||!links)return;
+  btn.addEventListener('click',()=>{
+    const isOpen=links.classList.toggle('open');
+    btn.classList.toggle('open');
+    btn.setAttribute('aria-expanded',isOpen);
+    document.body.style.overflow=isOpen?'hidden':'';
+  });
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    links.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+  }));
+})();
+</script>
+</body>
+</html>
