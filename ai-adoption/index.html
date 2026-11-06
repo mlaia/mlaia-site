@@ -21,6 +21,29 @@
   .a-steps .c-step,.a-steps .c-step+.c-step{grid-template-columns:48px minmax(0,1fr);column-gap:14px}
   .a-steps .c-step__num{font-size:40px}
 }
+.c-hero__row p.a-inside{margin:18px 0 0;padding-inline-start:16px;border-inline-start:3px solid var(--c-amber);font:600 var(--c-fs-lead)/1.45 var(--c-body);color:var(--c-fg)}
+.a-week-key{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:0 0 22px;font-size:var(--c-fs-small);color:var(--c-muted)}
+.a-key{display:inline-flex;align-items:center;gap:8px;color:var(--c-fg)}
+.a-key::before{content:"";width:12px;height:12px;border-radius:2px;background:currentColor}
+.a-key--teach::before{background:var(--c-amber)}
+.a-key--build::before{background:var(--c-blue)}
+.a-week{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--c-rule)}
+.a-day{min-width:0;padding:20px 18px 24px;border-inline-start:1px solid var(--c-rule)}
+.a-day:first-child{border-inline-start:0;padding-inline-start:0}
+.a-day h3{margin:0 0 14px;font:600 13px/1.2 var(--c-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-muted)}
+.a-day ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.a-task{padding:12px 14px;background:var(--c-bg-2);border-inline-start:3px solid var(--c-amber);font-size:var(--c-fs-small);line-height:1.5;color:var(--c-text)}
+.a-task--build{border-inline-start-color:var(--c-blue)}
+.a-task b{display:block;margin-bottom:4px;font:500 11px/1.2 var(--c-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-amber)}
+.a-task--build b{color:var(--c-blue)}
+.a-task a{display:inline-block;margin-top:6px}
+@media (max-width:1100px){
+  .a-week{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+  .a-day,.a-day:first-child{padding:18px 0 22px;border-inline-start:0;border-bottom:1px solid var(--c-rule)}
+}
+@media (max-width:640px){
+  .a-week{grid-template-columns:1fr}
+}
 </style><link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"MLAIA AI Adoption for Organisations","serviceType":"AI Adoption for Organisations","description":"AI adoption for organisations, from strategy to working use: use-case mapping, tool selection, an AI usage policy aligned with Israel's Privacy Protection Law Amendment 13, role-based training and pilots taken into production.","url":"https://www.mlaia.com/ai-adoption/","inLanguage":"en","areaServed":"IL","provider":{"@type":"Organization","@id":"https://www.mlaia.com/#organization","name":"MLAIA Data Science","url":"https://www.mlaia.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Our people already use ChatGPT or Copilot. What else is needed?","acceptedAnswer":{"@type":"Answer","text":"Usually three things: a clear policy, training that fits each role, and workflows built around the tool instead of ad-hoc use. We start from what you already have."}},{"@type":"Question","name":"Which tool do you recommend?","acceptedAnswer":{"@type":"Answer","text":"It depends on the team. The recommendation follows the kind of work, the systems already in use, security requirements and cost, and sometimes the answer is a mix of tools."}},{"@type":"Question","name":"Will the policy you write meet Amendment 13 of the Privacy Protection Law?","acceptedAnswer":{"@type":"Answer","text":"We write the policy to align with the requirements of Amendment 13 and with your information-security rules. We are not a law firm, so the final wording should be approved by your legal counsel and whoever owns information security in the organisation."}},{"@type":"Question","name":"Does our data leave the organisation?","acceptedAnswer":{"@type":"Answer","text":"Only as far as the policy allows. For each tool we check where data is processed and stored and which organisation-level settings it offers, and we build inside the environments you have approved."}},{"@type":"Question","name":"What do you need from us to start?","acceptedAnswer":{"@type":"Answer","text":"A contact in management, a list of the tools already in use, and time for short conversations with a few team leads. A first intro call is enough to decide whether and how to start."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MLAIA","item":"https://www.mlaia.com/"},{"@type":"ListItem","position":2,"name":"AI Adoption for Organisations","item":"https://www.mlaia.com/ai-adoption/"}]}</script>
@@ -54,6 +77,7 @@
       <div class="a-intro">
         <p class="a-audience">For management, IT and innovation leads, mainly at Israeli companies.</p>
         <p>MLAIA helps organisations bring AI into everyday work, from strategy to working use. We map where AI pays off, choose the tools, write the usage policy, train the teams and take what proved itself in a pilot into production. We are a team that builds and runs AI in production, so every recommendation is checked against whether it can be built and maintained. We are builders, not slide-deck consultants.</p>
+        <p class="a-inside">An MLAIA AI engineer works inside your organisation, building alongside your teams.</p>
       </div>
       <div class="c-btns">
         <a href="#contact" class="c-btn" data-track="practice_cta">Book an intro call <span aria-hidden="true">↗</span></a>
@@ -111,10 +135,28 @@
   </div>
 </section>
 
-<section class="c-sec" id="engagement" aria-labelledby="eng-title">
+<section class="c-sec" id="week" aria-labelledby="week-title">
   <div class="c-wrap">
     <div class="c-head">
-      <p class="c-kicker"><span class="c-idx">03</span> How an engagement runs</p>
+      <p class="c-kicker"><span class="c-idx">03</span> An engineer on the inside</p>
+      <h2 class="c-h2" id="week-title">A week with an engineer on the inside.</h2>
+      <p class="c-lead">An MLAIA AI engineer works inside your organisation, day to day, next to your teams. Part of the time they teach people, and part of the time they build skills and agents for them. This is what such a week can look like.</p>
+    </div>
+    <p class="a-week-key"><span class="a-key a-key--teach">Teaching people</span><span class="a-key a-key--build">Building skills and agents</span><span>An illustrative week, not a record of any one client.</span></p>
+    <ol class="a-week" aria-label="An illustrative week, Sunday to Thursday">
+      <li class="a-day"><h3>Sunday</h3><ul><li class="a-task a-task--teach"><b>Teaching</b>A Copilot workshop for the sales team, on their own data.</li></ul></li>
+      <li class="a-day"><h3>Monday</h3><ul><li class="a-task a-task--build"><b>Building</b>A support skill that summarises tickets and drafts a reply.</li><li class="a-task a-task--teach"><b>Teaching</b>One-on-one coaching for managers.</li></ul></li>
+      <li class="a-day"><h3>Tuesday</h3><ul><li class="a-task a-task--teach"><b>Teaching</b>Updating the data policy with the security team.</li></ul></li>
+      <li class="a-day"><h3>Wednesday</h3><ul><li class="a-task a-task--build"><b>Building</b>An agent that connects the CRM to the weekly report.</li></ul></li>
+      <li class="a-day"><h3>Thursday</h3><ul><li class="a-task a-task--teach"><b>Teaching</b>Measuring who uses what, and where they get stuck.</li><li class="a-task a-task--build"><b>Building</b>Spotting a place for ML, such as demand forecasting.<br><a class="c-link" href="/predictive-intelligence/">Prediction &amp; causal analysis →</a></li></ul></li>
+    </ol>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" id="engagement" aria-labelledby="eng-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">04</span> How an engagement runs</p>
       <h2 class="c-h2" id="eng-title">From the map to working use.</h2>
       <p class="c-lead">Five steps, each with a clear output. You can stop after any of them.</p>
     </div>
@@ -128,10 +170,10 @@
   </div>
 </section>
 
-<section class="c-sec c-sec--alt" id="faq" aria-labelledby="faq-title">
+<section class="c-sec" id="faq" aria-labelledby="faq-title">
   <div class="c-wrap">
     <div class="c-head">
-      <p class="c-kicker"><span class="c-idx">04</span> Questions buyers ask</p>
+      <p class="c-kicker"><span class="c-idx">05</span> Questions buyers ask</p>
       <h2 class="c-h2" id="faq-title">Straight answers.</h2>
     </div>
     <div class="c-faq">
