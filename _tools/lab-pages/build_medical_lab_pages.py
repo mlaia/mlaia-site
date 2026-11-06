@@ -9,7 +9,8 @@ experiment there, then re-run:
 
 The shared JS (assets/medical-lab.js, plus assets/c-medical.js for the ECG demo) wires up only the
 experiments whose section is on the page, so each page carries exactly one section.
-Page-specific copy (title, description, explainer) lives in PAGES below. Share images are
+Page-specific copy (title, description, explainer) lives in PAGES below; the worked example, checklist
+and FAQ for each page live in EXTRA. Share images are
 assets/og/lab-<slug>.png, rendered by _tools/share-images/make_cards.py.
 
 Content rules: synthetic data only, plain technical English, no client or hospital names, no
@@ -137,6 +138,191 @@ PAGES = [
 ]
 BY_SECTION = {p["section"]: p for p in PAGES}
 
+# Longer copy for each demo page, below the explainer: a worked example, a checklist with a "Related" line,
+# and a visible FAQ that is also emitted as FAQPage JSON-LD (the same strings, so the two always match).
+# Every number quoted here is one the demo produces; re-check them if the demo logic in assets/ changes.
+# "link" is the name used when another page links to this demo; "siblings" are the demos linked from "Related".
+EXTRA = {
+    "heart-rate-ecg": {
+        "link": "heart rate from a noisy ECG", "siblings": ["patient-leakage", "calibration-threshold"],
+        "worked_h": "A heart-rate algorithm that passes on the average",
+        "worked": [
+            "Picture a team building a wearable heart-rate monitor. Their acceptance test compares the device’s average heart rate over a short window with a reference and passes when the two agree within ±5 bpm. On recordings taken at rest the algorithm passes easily, and the team concludes that the beat detector works.",
+            "The demo opens on that at-rest case. With the default 0.20 mV of motion artifact, the opening eight-second window on a wide screen holds 10 true beats and the detector finds all 10. True and estimated heart rate are both 74.3 bpm, the error reads ±0.0 bpm, false · missed reads 0 · 0 and the check says pass.",
+            "Now take the same window with the Heavy movement preset (1.40 mV). The estimated rate is 75.0 bpm against a true 74.3 bpm, an error of +0.7 bpm, well inside the ±5 bpm tolerance. But the detector reports 9 beats where there are 10, 3 of its detections are false and 4 true beats are missed. The false beats stand in for the missed ones almost one for one, so the average hardly moves, and the demo’s check reads “fail: beats”. A test on the mean rate alone would have passed this window.",
+            "A note on reproducing these figures: the trace scrolls, so the readouts change from moment to moment. The numbers above are for the opening window, which is the still frame the demo draws when your system asks for reduced motion. A narrow screen shows a six-second window, with slightly different figures and the same pattern.",
+            "The practical cost is that anything built on beat times, such as heart-rate variability or rhythm analysis, inherits the wrong beats even though the displayed rate looks fine. The correct practice is to validate at beat level: annotate reference beat times, match each detection to a reference beat within a stated tolerance (100 ms here), and report sensitivity and positive predictive value next to the rate error. Report them separately for rest, walking and heavy movement instead of pooling everything, and fix the pass criteria before looking at the results.",
+        ],
+        "check": [
+            "Is there a beat-level reference with annotated beat times, not only a reference heart rate?",
+            "Are beat-level sensitivity and positive predictive value reported, with the matching tolerance stated?",
+            "Are results broken down by activity or signal quality (rest, walking, heavy movement) instead of pooled?",
+            "Do the pass criteria cover beat errors as well as rate error, and were they fixed before testing?",
+            "Do the test recordings come from people and devices that were not used to tune the detector?",
+            "What does the algorithm do when the signal is unusable: report a number anyway, or flag low quality?",
+        ],
+        "faq": [
+            ("How is heart rate calculated from an ECG?",
+             "Each heartbeat produces a sharp QRS complex in the ECG. A detector finds the time of each one, usually at the R peak, and the interval between consecutive beats gives the rate: 60 divided by the R-R interval in seconds is the heart rate in beats per minute. Over a window, the rate is the number of intervals divided by the time from the first beat to the last, multiplied by 60."),
+            ("Why can a heart rate estimate be right when the beat detection is wrong?",
+             "An average rate depends on how many beats were counted in the window, not on which ones. A false detection and a missed beat cancel each other. In this demo’s opening window with heavy movement the rate error is only +0.7 bpm, although 3 detections are false and 4 true beats are missed."),
+            ("How do you validate a QRS detector?",
+             "Compare its detections with reference beat annotations, beat by beat. A detection counts as correct if it falls within a tolerance of a reference beat; the demo uses 100 ms. Report sensitivity (the share of true beats found) and positive predictive value (the share of detections that are real beats), by noise level, on recordings from people who were not used to develop the detector."),
+            ("What is motion artifact in an ECG?",
+             "Motion artifact is any change in the recorded signal caused by movement of the body, the electrodes or the cables: slow baseline wander, muscle noise and abrupt bursts. Its frequencies overlap those of the QRS complex, so filtering cannot remove it completely, and a burst can look like a beat or hide one."),
+        ],
+    },
+    "patient-leakage": {
+        "link": "patient-level data leakage", "siblings": ["calibration-threshold", "scanner-shift"],
+        "worked_h": "A readmission model with a test score that is too good",
+        "worked": [
+            "Picture a team validating a readmission model. Their table has one row per admission, and many patients have several admissions. They shuffle the rows, hold out a quarter as the test set and train on the rest. This is the default in most machine-learning tutorials, and nothing about it looks wrong.",
+            "The demo’s default settings reproduce that setup on synthetic data: 300 patients with 4 visits each, split at random by record into 903 training and 297 test records. The reported test AUC is 0.98. Under the readouts the demo adds one more figure: 100% of the test records belong to a patient who also has records in training.",
+            "Then the model meets patients it has never seen. On 240 fresh synthetic patients the same model has an AUC of 0.72, so the test score was optimistic by +0.26. The model had not learned much about the outcome. For each test visit, its nearest neighbours in the training set were the same patient’s other visits, which carry the same label, so it was looking patients up.",
+            "Now look at the second pair of bars, where the same records are split by patient: 880 training and 320 test records, and 0% of test records share a patient with training. The reported test AUC is 0.76 against 0.72 on new patients, an optimism of +0.04. The model is no better and no worse than before. Only the estimate has changed, and it is now close to what deployment will show.",
+            "The correct practice is to decide which unit has to be new at deployment, usually the patient, and to keep all of that unit’s records on one side of every split. That applies to cross-validation folds and hyperparameter tuning as well as to the final test set, and to preprocessing steps, which should be fitted on training data only. Where the model will also meet new sites or later time periods, hold those out too.",
+        ],
+        "check": [
+            "Which unit has to be new at deployment: the patient, the site, the time period? Is the split made on that unit?",
+            "Is there a reliable patient identifier, and were duplicate or merged records resolved before splitting?",
+            "Does each patient appear in exactly one of training, validation and test, including in cross-validation folds and tuning?",
+            "Were scaling, imputation and feature selection fitted on the training data only?",
+            "Is any feature recorded after the moment of prediction, or derived from the outcome?",
+            "Has the model been tested on a later time period or another site, not only on a random hold-out?",
+        ],
+        "faq": [
+            ("What is data leakage in machine learning?",
+             "Data leakage is information reaching the model during development that will not be available when it is used, which makes test results look better than real performance. Common forms are the same patient appearing in both training and test data, features recorded after the outcome, and preprocessing fitted on the full dataset before splitting."),
+            ("Should I split clinical data by patient or by record?",
+             "By patient, whenever one patient can contribute more than one record. Records from the same patient are much more alike than records from different patients, so a record-level split lets the model recognise people. In this demo the record-level split reports an AUC of 0.98 for a model that scores 0.72 on new patients, while the patient-level split reports 0.76."),
+            ("How do I do a patient-level train/test split?",
+             "Assign patients, not rows, to the training and test sets: draw the split over the list of patient identifiers and send all of a patient’s records the same way. Most libraries call this a grouped split; scikit-learn, for example, has GroupShuffleSplit, GroupKFold and StratifiedGroupKFold. Use the same grouping for cross-validation and hyperparameter tuning."),
+            ("Why is my model’s test AUC much higher than its performance on new patients?",
+             "Leakage in the original evaluation is the first thing to rule out: check whether test patients, or near-duplicates of their records, also appear in the training data. If the split is clean, the cause is more likely a real difference between the development data and the new patients, such as a different site, period, case mix or measurement method."),
+        ],
+    },
+    "calibration-threshold": {
+        "link": "calibration and decision thresholds", "siblings": ["patient-leakage", "heart-rate-ecg"],
+        "worked_h": "A referral threshold on a model that was judged by AUC alone",
+        "worked": [
+            "Picture a team with a risk model whose AUC is about 0.85. They plan to refer every patient whose predicted risk is 10% or higher, and the validation report so far contains the AUC and nothing else.",
+            "The demo’s default settings show the case where that works: 4,000 synthetic patients, 10% of them with the outcome, a 10% threshold and a well-calibrated model. The AUC is 0.845, and mean predicted risk and observed rate are both 10%. For every 1,000 patients the model flags 301, of whom 223 are false alarms, and misses 23 cases. Net benefit is 52.6 per 1,000, and the demo’s verdict is that the model gives more net benefit than treating everyone or no one.",
+            "Now tick the miscalibrated model and leave both sliders alone. The AUC is still 0.845, because the ranking of patients has not changed. But the mean predicted risk is 33% against an observed 10%, and at the same 10% threshold the model flags 918 of every 1,000 patients, 818 of them false alarms. It misses 0 cases only because it refers almost everyone, and net benefit falls to 8.8 per 1,000. The threshold no longer means what the team thinks it means, and the AUC gave no warning.",
+            "Untick the box and move prevalence to 20% instead, as if the well-calibrated model were deployed where the outcome is twice as common. The AUC is 0.835, mean predicted risk stays at 10% against an observed 20%, and missed cases rise from 23 to 60 per 1,000. Every risk is now too low.",
+            "The correct practice is to report calibration next to discrimination: a calibration plot and the mean predicted risk against the observed rate. Choose the threshold from the clinical trade-off between a missed case and an unnecessary referral, state the errors per 1,000 patients at that threshold, and compare net benefit with treating everyone and no one. Check calibration again in each new population, and if the model is recalibrated, validate the updated model.",
+        ],
+        "check": [
+            "Does the validation report include a calibration plot and the mean predicted risk against the observed rate?",
+            "Was the threshold chosen from a stated trade-off between missed cases and unnecessary treatment, before the test results were seen?",
+            "Are missed cases, false alarms and patients flagged given per 1,000 patients at that threshold, and can the service handle the number flagged?",
+            "Is net benefit compared with treating everyone and treating no one over the range of thresholds clinicians would consider?",
+            "Is the prevalence in the target population close to the development data, and has calibration been checked there?",
+            "If the model was recalibrated, was the updated model validated on data not used for the update?",
+        ],
+        "faq": [
+            ("What is model calibration?",
+             "Calibration is the agreement between predicted risks and observed outcomes: of patients given a 20% risk, about 20% should have the outcome. It is assessed with a calibration plot, by comparing the mean predicted risk with the observed rate, and with the calibration slope."),
+            ("Can a model have a high AUC and still be poorly calibrated?",
+             "Yes. AUC depends only on how patients are ranked, so any change to the risks that keeps their order leaves it untouched. In this demo the well-calibrated and the miscalibrated model both have an AUC of 0.845, but the miscalibrated one predicts a mean risk of 33% where the observed rate is 10%."),
+            ("How do I choose a decision threshold for a clinical risk model?",
+             "Start from the consequences, not from a default of 50% or from maximum accuracy. A threshold of t means that finding one true case is judged worth (1 − t) / t unnecessary treatments; at 10% that is nine. Then check the missed cases, false alarms and workload at that threshold, and whether the model’s net benefit beats treating everyone and treating no one."),
+            ("What is net benefit in decision curve analysis?",
+             "Net benefit is the proportion of true positives minus the proportion of false positives weighted by the threshold odds, t / (1 − t). A decision curve plots it over a range of thresholds for the model, for treating everyone and for treating no one. The model is useful at the thresholds where its net benefit is the highest of the three."),
+        ],
+    },
+    "scanner-shift": {
+        "link": "scanner shift", "siblings": ["dice-vs-clinical-error", "patient-leakage"],
+        "worked_h": "A segmentation model moved to a second site",
+        "worked": [
+            "Picture a team that develops a lesion segmentation on images from one scanner. They report Dice on held-out images from that scanner and then install the model at a second site, where the scanner and protocol are different.",
+            "The demo’s default settings stand for the held-out test. Scanner B has the same settings as scanner A, contrast 1.00× and noise 0.030, and only the noise pattern is new. Dice is 0.86 on scanner A and 0.85 on scanner B, with 55 extra and 7 missed lesion pixels. New images from the same scanner are handled about as well as the tuning image, which is all an internal test set can show.",
+            "Now change scanner B with the presets. With Lower contrast (0.70×), Dice on scanner B falls to 0.01, with 81 extra and 180 missed pixels: the lesion’s intensities have slid out of the window the model learned, so the lesion is no longer found. With Higher contrast (1.40×), Dice is 0.02, with 1,284 extra and 166 missed pixels, because organ tissue has moved into the window. With Noisier (noise 0.110 at contrast 1.00×), Dice is 0.70, with 110 extra and 24 missed pixels. The anatomy is identical in every case.",
+            "Tick the normalisation box and repeat. Dice on scanner B is 0.83 at lower contrast and 0.85 at higher contrast, so the contrast problem is almost gone. With the noisier scanner it is 0.71, practically unchanged. Harmonisation fixes the kind of shift it models and not the others.",
+            "One intensity window is a deliberately brittle model, and a trained network would usually degrade less sharply. The mechanism is the same, though: a model can depend on intensity and noise characteristics of the scanners it was trained on. The correct practice is to test on images from each scanner, protocol and site where the model will be used before it goes live, to report results per site instead of pooled, to normalise or augment for the variation you expect, and to check again after a scanner or software change.",
+        ],
+        "check": [
+            "Which scanners, vendors, protocols and reconstruction settings are in the training data, and which are used at the target site?",
+            "Are results reported per scanner and per site, not only pooled?",
+            "Is there a truly external test set, from a site that contributed nothing to training?",
+            "Is intensity normalisation or harmonisation part of the pipeline, and was it tested against noise and resolution differences as well as contrast?",
+            "Does the training augmentation cover the range of contrast and noise you expect in use?",
+            "Is there a plan to re-check performance after a scanner upgrade or protocol change?",
+        ],
+        "faq": [
+            ("What is scanner shift in medical imaging AI?",
+             "Scanner shift is a form of domain shift: the images a model meets in use differ systematically from its training images because they come from another scanner, vendor, protocol or site. The anatomy and disease are the same, but contrast, brightness, noise and resolution are not, and performance can drop."),
+            ("Why does a medical imaging model perform worse at a new site?",
+             "Usually because something about the images changed: the scanner model, the acquisition protocol, the reconstruction software or the patient mix. A model can come to rely on intensity and noise characteristics of its training scanners. In this demo a rule tuned on scanner A drops from a Dice of 0.86 to 0.01 when scanner B has lower contrast."),
+            ("Does intensity normalisation fix scanner differences?",
+             "Partly. Normalisation removes global differences in brightness and contrast, and in this demo it brings Dice at lower contrast back from 0.01 to 0.83. It does not remove differences in noise, resolution or artifacts: with the noisier scanner, Dice is 0.70 without normalisation and 0.71 with it."),
+            ("How should an imaging model be tested before it is used at a new site?",
+             "Collect a sample of images from the new site’s own scanners and protocols, with reference annotations, and run the frozen model on it without retraining. Report the results for that site separately and compare them with the development results. If performance drops, find the cause before adjusting the model, and validate any adjusted version on separate data."),
+        ],
+    },
+    "dice-vs-clinical-error": {
+        "link": "Dice score vs clinical error", "siblings": ["scanner-shift", "heart-rate-ecg"],
+        "worked_h": "A Dice of 0.98 with one lesion missing",
+        "worked": [
+            "Picture a team reporting results for a lesion segmentation model. The headline metric is Dice, and many of their images contain one large lesion and one or more small ones. A reviewer reads 0.98 and moves on.",
+            "The demo’s default settings show what can sit behind that number. The image is 160 × 160 mm, with a large lesion about 68 mm across and a small one 8 mm in diameter. The prediction follows the large lesion with 1.0 mm of boundary roughness and misses the small lesion entirely. Dice is 0.98. Per lesion it is 0.99 for the large one and 0.00 for the small one, but the small lesion is 1.4% of the true lesion area, so missing it costs almost nothing in the overall score.",
+            "The other readouts tell a different story. Lesions detected reads 1 of 2. The HD95 boundary distance is 38.5 mm and the maximum boundary distance is 42.9 mm, because the nearest predicted boundary to the small lesion is on the large one. HD95 notices here because the small lesion makes up 9% of the true boundary, more than the 5% that HD95 is designed to ignore.",
+            "Untick the box so the model finds the small lesion. Dice becomes 0.99, HD95 1.0 mm, the maximum distance 1.4 mm and lesions detected 2 of 2. The whole difference between missing and finding a lesion is 0.98 against 0.99 in Dice, which in a comparison of two models would pass as noise.",
+            "Tick the box again and shrink the small lesion to 4 mm. Dice is 0.99 and HD95 is 1.4 mm, so both now look fine. Only the maximum distance, 40.7 mm, and the count, 1 of 2, still show the miss.",
+            "The correct practice is to choose metrics from the clinical question. If each lesion matters, report lesion-level detection, meaning sensitivity and false positives per image, broken down by lesion size. Report Dice and a boundary metric next to it, not instead of it.",
+        ],
+        "check": [
+            "Does the clinical decision depend on finding every lesion, on total volume or on the exact boundary, and do the reported metrics match that?",
+            "Are lesion-level sensitivity and false positives per scan reported next to Dice?",
+            "Are results broken down by lesion size, so small lesions are not averaged away?",
+            "Is a boundary metric such as HD95 reported in millimetres, with the voxel spacing taken into account?",
+            "Is it stated whether Dice is averaged per case or pooled over all pixels, and how cases with no lesion are scored?",
+            "Has someone looked at the worst cases, not only at the mean?",
+        ],
+        "faq": [
+            ("What is the Dice score in image segmentation?",
+             "The Dice score measures the overlap between a predicted mask and the ground truth: twice the number of pixels the two share, divided by the total number of pixels in both. It runs from 0, no overlap, to 1, identical masks."),
+            ("What is a good Dice score?",
+             "There is no universal cut-off. Large, well-defined structures routinely reach high values, while small or irregular lesions score lower even when the segmentation is clinically acceptable. In this demo a prediction with a Dice of 0.98 misses one of two lesions. Judge Dice against the agreement between human annotators on the same task, and next to lesion-level results."),
+            ("What is the difference between Dice and Hausdorff distance?",
+             "Dice measures overlap in area or volume. Hausdorff distance measures how far apart the boundaries of the two masks are at their worst point, in millimetres. HD95 uses the 95th percentile of the boundary distances instead of the maximum, so a few outlying pixels do not dominate. Dice is insensitive to small missed regions; boundary distances are sensitive to them when they are far from the prediction."),
+            ("Why does a high Dice score miss small lesions?",
+             "Because Dice counts pixels, and a small lesion has few. In this demo the 8 mm lesion is 1.4% of the true lesion area, so missing it completely lowers Dice only from 0.99 to 0.98. Counting detected lesions, or computing Dice per lesion, shows the miss at once."),
+        ],
+    },
+    "note-deidentification": {
+        "link": "de-identifying a clinical note", "siblings": ["patient-leakage", "dice-vs-clinical-error"],
+        "worked_h": "A set of notes that looks de-identified",
+        "worked": [
+            "Picture a team preparing discharge notes for a research dataset or for use with a language model. They write rules for the obvious identifiers: ID numbers, phone numbers, numeric dates, names that follow a title and a short list of first names. They spot-check a few notes, see the patient names replaced and decide the notes are safe to share.",
+            "The demo’s default settings are that pipeline: the English note at strictness 2 (Basic). The fictional note has 13 annotated identifiers. The detector catches 6 of 13, misses 7 and over-redacts 0. By type it catches 3 of 4 names, 1 of 2 dates and 2 of 2 for ID and phone, but 0 of 3 for address and towns and 0 of 2 rare details.",
+            "The seven misses are the street address, both towns, the date written with a month name, a relative’s first name that is not on the list, the patient’s occupation and a unique event in his history. The last two are the most telling. An unusual job and a one-off event, next to a home town, can point to one person without any name at all.",
+            "Turning the strictness up helps, at a price. At level 3 the detector catches 11 of 13 and over-redacts 2 items, a drug name and a hospital department. At level 5 it catches 12 of 13 and over-redacts 16, including both doses, the troponin value and a drug name, so the note is losing the clinical content it was kept for. The unique event is never caught at any level. In Hebrew at the default level the result is also 6 of 13.",
+            "The correct practice is to measure, not spot-check. Annotate a sample of your own notes, in each language and note type you handle. Report the share of identifiers caught per type, and count over-redaction as well. Combine rules with a trained model and human review for the categories rules cannot reach. Treat what remains as residual risk to be managed with access controls and data-use agreements. De-identification lowers disclosure risk; it does not guarantee anonymity.",
+        ],
+        "check": [
+            "Do you have an annotated sample of your own notes, in each language and note type, to measure against?",
+            "Is the share of identifiers caught reported per identifier type, not as one overall figure?",
+            "Is over-redaction measured, and do doses, lab values and drug names survive?",
+            "Are indirect identifiers covered: rare occupations, unique events, relatives’ names, small places?",
+            "Are scripts without capital letters, mixed-language notes, abbreviations and typing errors handled?",
+            "Which controls stay in place after de-identification (access limits, agreements, review), given that no method removes all risk?",
+        ],
+        "faq": [
+            ("What is de-identification of clinical notes?",
+             "De-identification means finding the details in a note that could identify the patient or other people, and removing them or replacing them with placeholders or realistic substitutes. It covers direct identifiers such as names, ID numbers and contact details, and indirect ones such as dates, places and rare personal details."),
+            ("Is removing names enough to de-identify a clinical note?",
+             "No. Dates, addresses, towns, occupations and unusual events can identify a person, especially in combination. In this demo the default rules catch 3 of the 4 names in the fictional note but only 6 of its 13 identifiers, and miss the address, both towns, the occupation and a unique event."),
+            ("Which identifiers have to be removed from medical records?",
+             "That depends on the law and policy that apply to the data. A widely used reference is the HIPAA Safe Harbor list of 18 identifier types, which includes names, small geographic units, dates other than the year, contact details and record numbers. Other frameworks ask whether a person is reasonably identifiable instead of giving a fixed list. This is general information, not legal advice."),
+            ("Can regular expressions de-identify clinical text?",
+             "They work well for identifiers with a fixed format, such as ID numbers, phone numbers and numeric dates. They do poorly on names without a title and on free-text details, and stricter rules start to remove clinical content. In this demo the strictest setting over-redacts 16 items in the English note and still misses one identifier. Practical systems combine rules with trained models and human review."),
+        ],
+    },
+}
+for _p in PAGES:
+    _p.update(EXTRA[_p["slug"]])
+BY_SLUG = {p["slug"]: p for p in PAGES}
+
 
 def og(p):
     return f"{SITE}/assets/og/lab-{p['slug']}.png"
@@ -184,9 +370,34 @@ def jsonld(p):
                 "image": og(p),
                 "isPartOf": {"@type": "WebPage", "name": "Interactive Medical AI Lab", "url": SITE + "/medical-ai/lab/"},
                 "provider": {"@id": SITE + "/#organization"}}
+    faq = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in p["faq"]]}
     dump = lambda o: json.dumps(o, ensure_ascii=False, separators=(",", ":"))
     return (f'<script type="application/ld+json">{dump(crumbs)}</script>'
-            f'<script type="application/ld+json">{dump(resource)}</script>')
+            f'<script type="application/ld+json">{dump(resource)}</script>'
+            f'<script type="application/ld+json">{dump(faq)}</script>')
+
+
+def extra_sections(p):
+    """Worked example, checklist + related links, and the visible FAQ (plain text, same strings as the JSON-LD)."""
+    t = lambda s: html.escape(s, quote=False)
+    topic_href, _, topic_label = TOPICS[p["topic"]]
+    def split(kicker, hid, heading, body):
+        return (f'<section class="c-sec lab-explain" aria-labelledby="{hid}"><div class="c-wrap c-split"><div class="c-split__head">'
+                f'<p class="c-kicker">{kicker}</p><h2 class="c-h2" id="{hid}">{heading}</h2></div><div class="c-prose">{body}</div></div></section>')
+    worked = "".join(f"<p>{t(x)}</p>" for x in p["worked"])
+    siblings = " and ".join(f'<a href="{url(BY_SLUG[s])}">{t(BY_SLUG[s]["link"])}</a>' for s in p["siblings"])
+    related = (f'<p>Related: our <a href="{topic_href}">{topic_label}</a> service, the wiki page on '
+               f'<a href="/wiki/medical-ai-validation.html">medical AI validation</a>, and the demos on {siblings}.</p>')
+    check = "<ul>" + "".join(f"<li>{t(x)}</li>" for x in p["check"]) + "</ul>" + related
+    faq = "".join(
+        (f'<h3 style="margin-top:0">{t(q)}</h3>' if i == 0 else f"<h3>{t(q)}</h3>") + f"<p>{t(a)}</p>"
+        for i, (q, a) in enumerate(p["faq"]))
+    return [
+        split("Worked example", "worked-title", t(p["worked_h"]), worked),
+        split("Checklist", "check-title", "What to check in your own project", check),
+        split("FAQ", "faq-title", "Common questions", faq),
+    ]
 
 
 def build(p, parts):
@@ -240,6 +451,7 @@ def build(p, parts):
         parts["sections"][p["section"]],
         f'<section class="c-sec lab-explain" aria-labelledby="explain-title"><div class="c-wrap c-split"><div class="c-split__head"><p class="c-kicker">The principle</p><h2 class="c-h2" id="explain-title">How it works</h2></div>'
         f'<div class="c-prose">{body}</div></div></section>',
+        *extra_sections(p),
         f'<section class="c-sec lab-more" aria-labelledby="more-title"><div class="c-wrap"><p class="c-kicker">Medical AI lab</p><h2 class="c-h2" id="more-title">More demos</h2>'
         f'<div class="c-tiles">{tiles}</div>'
         f'<p class="c-links"><a class="c-link" href="/medical-ai/lab/">All six demos on one page: the medical AI lab</a><a class="c-link" href="{topic_href}">{topic_name} →</a></p></div></section>',
@@ -259,7 +471,8 @@ def main():
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(build(p, parts), encoding="utf-8")
         words = len(re.sub(r"<[^>]+>", " ", " ".join(p["body"])).split())
-        print(f"{out.relative_to(ROOT)}  explainer {words} words")
+        worked = len(" ".join(p["worked"]).split())
+        print(f"{out.relative_to(ROOT)}  explainer {words} words, worked example {worked} words, {len(p['faq'])} FAQ")
 
 
 if __name__ == "__main__":
