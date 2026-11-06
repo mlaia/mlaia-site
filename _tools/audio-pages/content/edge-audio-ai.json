@@ -215,6 +215,7 @@
    "href": "/wiki/signal-processing-machine-learning.html",
    "small": "Engineering perspective",
    "strong": "Signal processing and machine learning"
-  }
+  },
+  {"href": "/audio-ai/edge-vs-cloud-audio-inference/", "small": "Comparison", "strong": "Edge vs cloud audio inference: how to choose"}
  ]
 }

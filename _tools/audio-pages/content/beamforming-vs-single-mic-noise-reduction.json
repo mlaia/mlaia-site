@@ -75,6 +75,7 @@
  "reads": [
   {"href": "/audio-ai/beamforming-microphone-arrays/", "small": "Topic", "strong": "Microphone array beamforming: geometry, methods and evaluation"},
   {"href": "/audio-ai/noise-reduction-anc/", "small": "Topic", "strong": "Noise reduction &amp; active noise cancellation"},
-  {"href": "/audio-ai/", "small": "Practice", "strong": "Audio &amp; Acoustics at MLAIA"}
+  {"href": "/audio-ai/", "small": "Practice", "strong": "Audio &amp; Acoustics at MLAIA"},
+  {"href": "/audio-ai/deep-learning-vs-classical-dsp-noise-suppression/", "small": "Comparison", "strong": "Deep learning vs classical DSP noise suppression"}
  ]
 }

@@ -91,7 +91,8 @@
  "reads": [
   {"href": "/wiki/causal-inference.html", "small": "Causal guide", "strong": "Causal inference in business: A/B tests, diff-in-diff, uplift"},
   {"href": "/blog-adtech-measurement-2026.html", "small": "Causal measurement", "strong": "Measuring ads without the cookie: MMM and incrementality"},
-  {"href": "/predictive-intelligence/churn-prediction/", "small": "Related topic", "strong": "Churn prediction &amp; retention modeling"}
+  {"href": "/predictive-intelligence/churn-prediction/", "small": "Related topic", "strong": "Churn prediction &amp; retention modeling"},
+  {"href": "/predictive-intelligence/lab/", "small": "Interactive lab", "strong": "Causal inference lab: five demos on synthetic data"}
  ],
  "contact": {
   "h2": "Book a 30-minute<br>forecasting review.",
