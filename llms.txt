@@ -41,6 +41,9 @@ Signal processing combined with machine learning: audio event detection, noise r
   - [Sound event detection demo](https://www.mlaia.com/audio-ai/lab/sound-event-detection/) — energy detector feature and threshold vs hits, misses and false alarms
   - [Spectral subtraction speech enhancement demo](https://www.mlaia.com/audio-ai/lab/speech-enhancement/) — noise reduction vs distortion and musical noise
 - [Beamforming vs Single-Microphone Noise Reduction](https://www.mlaia.com/audio-ai/beamforming-vs-single-mic-noise-reduction/) — what each separates, hardware and data needs, latency, failure modes, how to choose
+- [Deep Learning vs Classical DSP Noise Suppression](https://www.mlaia.com/audio-ai/deep-learning-vs-classical-dsp-noise-suppression/) — neural suppression vs spectral subtraction, Wiener and adaptive filters: latency, compute, unseen noise, artefacts, when a hybrid wins
+- [Mel Spectrogram vs MFCC vs Audio Embeddings](https://www.mlaia.com/audio-ai/mel-spectrogram-vs-mfcc-vs-embeddings/) — choosing input features for sound event detection and audio classification by data size, compute and edge limits
+- [Edge vs Cloud Audio Inference](https://www.mlaia.com/audio-ai/edge-vs-cloud-audio-inference/) — latency, privacy, bandwidth, power, model size and update cycle, with a decision guide
 
 ### 2. Medical AI & Clinical Data Science
 AI for clinical records, medical images and biosignals, for hospitals and MedTech teams: models that can be evaluated, understood and integrated into clinical work.
@@ -68,6 +71,13 @@ Forecasts of bookings, revenue, churn and demand, and causal analysis of which a
 - [Causal Inference & Uplift Modeling](https://www.mlaia.com/predictive-intelligence/causal-inference/) — experiments, difference-in-differences, synthetic control, propensity methods, uplift modeling
 - [Prophet vs LightGBM for Demand Forecasting](https://www.mlaia.com/predictive-intelligence/prophet-vs-lightgbm-demand-forecasting/) — data needs, compute, uncertainty, intermittent demand, failure modes, choosing with a backtest
 - [Interactive Prediction Explorer](https://www.mlaia.com/predictive-intelligence/explorer/) — individual churn predictions, SHAP explanations and what-if scenarios on synthetic data
+- [Spare-Parts & Intermittent Demand Forecasting](https://www.mlaia.com/predictive-intelligence/spare-parts-demand-forecasting/) — ADI and CV² demand classes, Croston, SBA and TSB, hurdle models, service-level forecasts and metrics that do not break on zeros
+- [Interactive Causal Inference Lab](https://www.mlaia.com/predictive-intelligence/lab/) — five browser demos on synthetic data: Simpson's paradox, A/B test vs observational data, uplift modelling, difference-in-differences and the ladder of causality
+  - [Simpson's paradox and confounding demo](https://www.mlaia.com/predictive-intelligence/lab/confounding-simpsons-paradox/) — an action that helps in every segment looks harmful when segments are pooled
+  - [A/B test vs observational data demo](https://www.mlaia.com/predictive-intelligence/lab/ab-test-vs-observational/) — the same campaign measured both ways; selection bias inflates the observational lift
+  - [Uplift modelling vs churn prediction demo](https://www.mlaia.com/predictive-intelligence/lab/uplift-modelling/) — rank customers by churn risk or by uplift and count the extra customers retained at a budget
+  - [Difference-in-differences demo](https://www.mlaia.com/predictive-intelligence/lab/difference-in-differences/) — measure a launch without a control group, then break parallel trends and watch the estimate and a placebo test go wrong
+  - [Ladder of causality demo](https://www.mlaia.com/predictive-intelligence/lab/ladder-of-causality/) — one dataset asked an association, an intervention and a counterfactual question, with three different answers
 
 ### 4. AI Adoption for Organisations
 Helping organisations put AI to work: mapping where AI pays off, choosing tools, an AI usage and data policy aligned with Israel's Privacy Protection Law Amendment 13, role-based training, team workflows, and pilots with success measures that move to production.
@@ -104,6 +114,9 @@ Neutral, encyclopedic reference articles on applied AI topics (Applied AI & Data
 - [Signal Processing Meets Machine Learning](https://www.mlaia.com/wiki/signal-processing-machine-learning.html) — Filtering and denoising, feature engineering vs end-to-end learning, when DSP priors beat deep networks, sample efficiency, hybrid architectures
 - [Medical AI: Validation and the Regulatory Landscape](https://www.mlaia.com/wiki/medical-ai-validation.html) — Dataset shift, external validation, FDA 510(k)/De Novo/PMA and EU MDR/AI Act pathways, explainability, PHI/GDPR privacy constraints
 - [Causal Inference in Business and Data Science](https://www.mlaia.com/wiki/causal-inference.html) — Correlation vs causation, A/B testing, difference-in-differences, instrumental variables, uplift modeling, when ML predictions mislead decisions
+- [The Ladder of Causality](https://www.mlaia.com/wiki/ladder-of-causality.html) — Pearl's three rungs (association, intervention, counterfactual): the question, notation, data needs and methods for each, with business and clinical examples
+- [Causal Inference in Healthcare and Medical AI](https://www.mlaia.com/wiki/causal-inference-healthcare.html) — Confounding by indication, immortal time bias, target trial emulation, propensity scores, why feature importance is not a treatment effect
+- [Uplift Modeling](https://www.mlaia.com/wiki/uplift-modeling.html) — The four customer types, two-model and S-, T-, X-learner approaches, Qini and uplift curves, the randomized holdout required, failure modes
 
 ## Blog Posts & Technical Content
 

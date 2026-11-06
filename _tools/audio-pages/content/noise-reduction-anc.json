@@ -238,6 +238,7 @@
    "href": "/audio-ai/beamforming-microphone-arrays/",
    "small": "Audio &amp; Acoustics",
    "strong": "Beamforming &amp; microphone arrays"
-  }
+  },
+  {"href": "/audio-ai/deep-learning-vs-classical-dsp-noise-suppression/", "small": "Comparison", "strong": "Deep learning vs classical DSP noise suppression"}
  ]
 }

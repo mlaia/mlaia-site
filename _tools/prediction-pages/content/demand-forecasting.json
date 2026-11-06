@@ -95,7 +95,8 @@
  "reads": [
   {"href": "/blog-demand-forecasting.html", "small": "Demand forecasting", "strong": "Why min/max rules fail on intermittent, lumpy spare-parts demand"},
   {"href": "/blog-time-series-survival-analysis.html", "small": "Time series", "strong": "From Prophet to foundation models, and when you need survival analysis"},
-  {"href": "/blog-tabular-data-ml-vs-dl.html", "small": "Tabular data", "strong": "Do gradient-boosted trees still beat deep learning on tabular data?"}
+  {"href": "/blog-tabular-data-ml-vs-dl.html", "small": "Tabular data", "strong": "Do gradient-boosted trees still beat deep learning on tabular data?"},
+  {"href": "/predictive-intelligence/spare-parts-demand-forecasting/", "small": "Guide", "strong": "Spare-parts &amp; intermittent demand forecasting"}
  ],
  "contact": {
   "h2": "Book a 30-minute<br>forecasting review.",
