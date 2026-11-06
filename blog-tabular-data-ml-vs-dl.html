@@ -5,37 +5,37 @@
 <!-- Google Analytics 4 — fires only after analytics consent -->
 <script>(function(){var GA='G-1T3R1HL53V',KEY='mlaia-cookie-consent';function load(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',GA);}try{var p=JSON.parse(localStorage.getItem(KEY)||'{}');if(p.analytics)load();}catch(e){}document.addEventListener('mlaia-cookie-consent',function(e){if(e&&e.detail&&e.detail.analytics)load();});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XGBoost vs Deep Learning on Tabular Data (2026 Benchmarks)</title>
+<title>XGBoost vs Deep Learning vs Tabular Foundation Models</title>
 
 <!-- SEO -->
-<meta name="description" content="TabNet, FT-Transformer and TabPFN vs XGBoost, LightGBM and CatBoost: 2026 benchmarks, production tradeoffs, and when deep learning finally wins.">
+<meta name="description" content="XGBoost vs deep learning on tabular data: when gradient boosting still wins, and when TabPFN or another tabular foundation model (TabFM) is worth trying.">
 <meta name="keywords" content="XGBoost vs deep learning tabular, LightGBM, CatBoost, TabNet, FT-Transformer, TabPFN, TabFM Google, gradient boosting tabular data, SAINT tabular, NODE tabular, TabBench, tabular ML 2026, MLAIA, Israel data science">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html">
 
 <!-- Open Graph -->
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?">
-<meta property="og:description" content="XGBoost, LightGBM, and CatBoost hold the throne — but TabPFN, FT-Transformer, and Google's TabFM are closing the gap. A production engineer's head-to-head on tabular ML in 2026.">
+<meta property="og:title" content="XGBoost vs Deep Learning vs Tabular Foundation Models">
+<meta property="og:description" content="XGBoost vs deep learning on tabular data: when gradient boosting still wins, and when TabPFN or another tabular foundation model (TabFM) is worth trying.">
 <meta property="og:url" content="https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html">
 <meta property="og:site_name" content="MLAIA">
 <meta property="og:locale" content="en_US">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?">
-<meta name="twitter:description" content="XGBoost still wins most Kaggle tabular competitions — but TabPFN does few-shot better than GBDT on small datasets, and FT-Transformer closes the gap on very large ones. The full production comparison.">
+<meta name="twitter:title" content="XGBoost vs Deep Learning vs Tabular Foundation Models">
+<meta name="twitter:description" content="XGBoost vs deep learning on tabular data: when gradient boosting still wins, and when TabPFN or another tabular foundation model (TabFM) is worth trying.">
 
 <!-- Article JSON-LD -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?",
-  "description": "XGBoost, LightGBM, and CatBoost vs TabNet, FT-Transformer, TabPFN, and Google's TabFM — a practitioner's head-to-head on tabular data benchmarks, production tradeoffs, and when deep learning finally wins.",
+  "headline": "XGBoost vs Deep Learning vs Tabular Foundation Models",
+  "description": "XGBoost vs deep learning on tabular data: when gradient boosting still wins, and when TabPFN or another tabular foundation model (TabFM) is worth trying.",
   "image": "https://www.mlaia.com/assets/yochai-headshot.jpg",
   "datePublished": "2026-08-10",
-  "dateModified": "2026-08-10",
+  "dateModified": "2026-11-06",
   "author": {
     "@type": "Person",
     "name": "Dr. Yochai Edlitz",
@@ -99,7 +99,7 @@
 <main id="main">
   <span class="category">Machine Learning &amp; Tabular Data</span>
   <h1>Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?</h1>
-  <p class="meta">August 10, 2026 · 11 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
+  <p class="meta">August 10, 2026 · Updated November 6, 2026 · 11 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
   <p class="back-link"><a href="https://www.mlaia.com/blog.html">← Back to all posts</a></p>
 
   <article>
@@ -114,8 +114,8 @@
     </div>
 
     <div class="callout" id="quick-answer">
-      <strong>Quick answer: TabNet vs TabPFN vs TabFM vs XGBoost</strong>
-      <p>Gradient-boosted trees still win most tabular problems in 2026. Deep learning wins in specific cases: TabPFN on small datasets, FT-Transformer or SAINT on very large ones with text features, and foundation models such as TabFM when labels are scarce.</p>
+      <strong>Short answer: XGBoost vs deep learning vs tabular foundation models</strong>
+      <p>Gradient-boosted trees such as XGBoost, LightGBM and CatBoost are still the right default for most tabular problems: they train fast on CPUs, cope with missing values and mixed feature types, and are straightforward to explain with SHAP. A tabular foundation model such as TabPFN is worth trying when the table is small, roughly under 10k rows, and you want a strong result without tuning. A deep model such as FT-Transformer or SAINT is worth evaluating when the dataset is very large, a GPU is available, and the features include text or high-cardinality categories. In every case, run the candidate on the same cross-validation splits as a tuned gradient-boosted baseline, and keep it only if it wins by a margin that justifies the extra serving cost.</p>
       <div style="overflow-x:auto"><table class="arch-table"><thead><tr><th>Model</th><th>Where it wins</th><th>Main limit</th></tr></thead><tbody><tr><td>XGBoost, LightGBM, CatBoost</td><td>Most tabular problems, especially 10k–500k rows; explainable with SHAP</td><td>Need hyperparameter tuning and feature work</td></tr><tr><td>TabPFN v2</td><td>Under about 10k rows: matches a tuned XGBoost in seconds with no tuning</td><td>Not viable for large datasets</td></tr><tr><td>TabNet</td><td>When a deep-learning stack is mandated; attention masks give some interpretability</td><td>Finicky to train; rarely beats tuned trees on mid-sized data</td></tr><tr><td>FT-Transformer, SAINT</td><td>Over 500k rows with text or embedding-heavy features, GPU available</td><td>GPU hours instead of CPU minutes</td></tr><tr><td>TabFM (Google)</td><td>Little or no labeled data, with meaningful column names</td><td>Not yet publicly available at scale</td></tr></tbody></table></div>
       <p>The full decision guide is in <a href="#decision-framework">the 2026 decision framework</a>.</p>
     </div>
@@ -175,6 +175,22 @@
     <p><strong>SAINT</strong> (Self-Attention and Intersample Attention Transformer) applies attention both across features and across training samples — the inter-sample attention mechanism allows the model to learn from the relationship between training examples rather than just feature-target relationships. It performs well on classification but adds considerable memory overhead. <strong>NODE</strong> (Neural Oblivious Decision Ensembles) differentiably implements an oblivious decision tree ensemble — trees where each level uses the same split feature across all branches — allowing gradient-based optimization while preserving tree-like inductive bias. NODE is particularly effective on mid-sized datasets and often outperforms GBDTs in the 50k–500k row regime.</p>
 
     <aside class="site-cta-inline" aria-label="Talk to MLAIA"><p class="site-cta-title">Not sure whether trees or deep learning fit your data?</p><p>Describe your dataset (rows, feature types, target, and whether you need explanations) and we’ll reply with a short model shortlist and how we’d test it.</p><a href="#contact" class="site-cta-btn">Get a model shortlist →</a></aside>
+
+    <h2 id="tabular-foundation-models-vs-xgboost">Tabular Foundation Models vs XGBoost</h2>
+
+    <p>A tabular foundation model is a network pretrained on a very large number of tables, synthetic or real, so that it can predict on a table it has never seen without being trained on it. “TabFM” is often used as shorthand for any tabular foundation model, and this section uses it in that broad sense. TabPFN is the best-known example. Most of these models work by in-context learning: the labeled rows are passed to the model as context together with the rows to predict, and the answer comes back in a forward pass. No gradient steps or hyperparameter search are run on your data.</p>
+
+    <p>That changes the comparison with XGBoost in three ways.</p>
+
+    <ul>
+      <li><strong>Effort.</strong> XGBoost needs a tuning loop and usually some feature work to reach its best. A foundation model gives a strong result out of the box, which makes it a useful first baseline on a new problem.</li>
+      <li><strong>Scale.</strong> In-context models read the training rows at prediction time, so memory and latency grow with the size of the table. Gradient boosting pays that cost once, in training, and then predicts in microseconds to milliseconds on a CPU. On large tables the trees are cheaper to run and remain hard to beat on accuracy.</li>
+      <li><strong>Operations.</strong> A boosted model is a small file with exact TreeSHAP explanations and mature monitoring. A foundation model usually needs a GPU, is harder to explain to a regulator, and comes with its own license terms for the weights, which need checking before production use.</li>
+    </ul>
+
+    <p>So a tabular foundation model is worth trying when the table is small, when there is no time to tune, or when you need a quick read on whether a problem is predictable at all. XGBoost, LightGBM or CatBoost remain the safer choice for large tables, tight latency budgets, CPU-only serving and decisions that must be explained feature by feature.</p>
+
+    <p>The two can also work together. A foundation model tends to make different errors from a tree ensemble, so averaging or stacking the two can beat either one alone, at the price of running both. Whatever you choose, compare them fairly: the same splits, a properly tuned gradient-boosted baseline, and a record of training time, prediction latency and serving cost next to the accuracy metric.</p>
 
     <h2>3. Head-to-Head: When Does Deep Learning Actually Win?</h2>
 
