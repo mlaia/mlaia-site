@@ -1,0 +1,91 @@
+{
+ "protocol": {
+  "seed": 0,
+  "metric": "ROC AUC, minority class as positive",
+  "xgboost_default": "XGBClassifier defaults, tree_method=hist",
+  "xgboost_tuned": "RandomizedSearchCV, 30 configurations (20 on the large table), 3-fold inner CV on the training fold, refit on the full training fold; fit time includes the search",
+  "tabpfn": "TabPFN v2 classifier weights (openly licensed), default settings, no tuning; fit time is context loading, predict time is the forward passes",
+  "preprocessing": "categorical columns ordinal-encoded; indices passed to TabPFN; no other preprocessing",
+  "hardware": "arm64 arm, 10 CPU cores; TabPFN on Apple MPS GPU; XGBoost on CPU; each library in its own process",
+  "versions": {
+   "scikit-learn": "1.7.2",
+   "python": "3.10.12",
+   "tabpfn": "9.2.0",
+   "torch": "2.14.1",
+   "mps": true
+  }
+ },
+ "results": [
+  {
+   "dataset": "credit-g",
+   "openml_id": 31,
+   "rows": 1000,
+   "features": 20,
+   "categorical_features": 13,
+   "positive_rate": 0.3,
+   "eval": "5-fold stratified CV, mean and std over folds",
+   "test_rows_per_fold": 200,
+   "models": {
+    "tabpfn_v2": {
+     "auc": {
+      "mean": 0.7945476190476191,
+      "std": 0.026913862767545885
+     },
+     "fit_s": {
+      "mean": 0.24850945472717284,
+      "std": 0.2482156414329626
+     },
+     "predict_s": {
+      "mean": 1.1190153121948243,
+      "std": 0.4427740733432956
+     }
+    }
+   }
+  },
+  {
+   "dataset": "churn",
+   "openml_id": 40701,
+   "rows": 5000,
+   "features": 20,
+   "categorical_features": 4,
+   "positive_rate": 0.1414,
+   "eval": "5-fold stratified CV, mean and std over folds",
+   "test_rows_per_fold": 1000,
+   "models": {
+    "tabpfn_v2": {
+     "auc": {
+      "mean": 0.9239430713094958,
+      "std": 0.014770911033504575
+     },
+     "fit_s": {
+      "mean": 0.25298237800598145,
+      "std": 0.029541595519624382
+     },
+     "predict_s": {
+      "mean": 8.352917337417603,
+      "std": 0.4021021083759554
+     }
+    }
+   }
+  },
+  {
+   "dataset": "adult",
+   "openml_id": 1590,
+   "rows": 48842,
+   "features": 14,
+   "categorical_features": 8,
+   "positive_rate": 0.23928176569346055,
+   "eval": "single stratified 80/20 split",
+   "train_rows": 39073,
+   "test_rows": 9769,
+   "tabpfn_train_rows": 10000,
+   "models": {
+    "tabpfn_v2_10k": {
+     "auc": 0.9144297482663142,
+     "fit_s": 0.3242201805114746,
+     "predict_s": 50.12927174568176
+    }
+   }
+  }
+ ]
+}

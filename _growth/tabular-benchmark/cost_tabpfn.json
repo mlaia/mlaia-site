@@ -1,0 +1,49 @@
+{
+ "dataset": "credit-g (OpenML 31)",
+ "rows": 1000,
+ "bad_rate": 0.3,
+ "cost_matrix": {
+  "approve_bad": 5.0,
+  "reject_good": 1.0
+ },
+ "baselines_cost_per_applicant": {
+  "approve_everyone": 1.5,
+  "reject_everyone": 0.7
+ },
+ "eval": "5-fold stratified CV repeated 3 times (15 test folds); threshold chosen on inner 5-fold out-of-fold predictions of each training fold",
+ "versions": {
+  "scikit-learn": "1.7.2"
+ },
+ "models": {
+  "tabpfn_v2": {
+   "auc": {
+    "mean": 0.7924206349206351,
+    "std": 0.03017383706850412
+   },
+   "thr": {
+    "mean": 0.14800000000000002,
+    "std": 0.02925747767665559
+   },
+   "cost_tuned": {
+    "mean": 0.5416666666666666,
+    "std": 0.07103207413243368
+   },
+   "cost_050": {
+    "mean": 0.9033333333333332,
+    "std": 0.08233400809440099
+   },
+   "cost_theory_0167": {
+    "mean": 0.55,
+    "std": 0.074027022093287
+   },
+   "reject_rate_tuned": {
+    "mean": 0.6436666666666666,
+    "std": 0.06871357620991324
+   },
+   "seconds": {
+    "mean": 4.864357264836629,
+    "std": 0.3468695402071553
+   }
+  }
+ }
+}
