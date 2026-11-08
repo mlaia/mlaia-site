@@ -35,7 +35,7 @@
   "description": "XGBoost vs deep learning on tabular data: when gradient boosting still wins, and when TabPFN or another tabular foundation model (TabFM) is worth trying.",
   "image": "https://www.mlaia.com/assets/yochai-headshot.jpg",
   "datePublished": "2026-08-10",
-  "dateModified": "2026-11-06",
+  "dateModified": "2026-11-08",
   "author": {
     "@type": "Person",
     "name": "Dr. Yochai Edlitz",
@@ -99,7 +99,7 @@
 <main id="main">
   <span class="category">Machine Learning &amp; Tabular Data</span>
   <h1>Tabular Data in 2026: Do Gradient-Boosted Trees Still Beat Deep Learning?</h1>
-  <p class="meta">August 10, 2026 · Updated November 6, 2026 · 11 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
+  <p class="meta">August 10, 2026 · Updated November 8, 2026 · 11 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
   <p class="back-link"><a href="https://www.mlaia.com/blog.html">← Back to all posts</a></p>
 
   <article>
@@ -188,7 +188,7 @@
 
     <p>So a tabular foundation model is worth trying when the table is small, when there is no time to tune, or when you need a quick read on whether a problem is predictable at all. XGBoost, LightGBM or CatBoost remain the safer choice for large tables, tight latency budgets, CPU-only serving and decisions that must be explained feature by feature.</p>
 
-    <p>The two can also work together. A foundation model tends to make different errors from a tree ensemble, so averaging or stacking the two can beat either one alone, at the price of running both. Whatever you choose, compare them fairly: the same splits, a properly tuned gradient-boosted baseline, and a record of training time, prediction latency and serving cost next to the accuracy metric.</p>
+    <p>The two can also work together. A foundation model tends to make different errors from a tree ensemble, so averaging or stacking the two can beat either one alone, at the price of running both. Whatever you choose, compare them fairly: the same splits, a properly tuned gradient-boosted baseline, and a record of training time, prediction latency and serving cost next to the accuracy metric. We did exactly that on three public tables; the results are in <a href="#our-benchmark">our own run</a> below.</p>
 
     <h2>3. Head-to-Head: When Does Deep Learning Actually Win?</h2>
 
@@ -285,6 +285,44 @@
 
     <div class="callout">
       <strong>The Kaggle meta in 2026:</strong> The top solutions in tabular competitions have converged on a pattern: (1) Feature engineering + target encoding + embeddings from CatBoost/LightGBM; (2) Pseudo-labeling on test data; (3) Stacking — multiple GBDTs + optionally one DL model (usually FT-Transformer or MLP) in the second-layer meta-model. DL appears as a diversity source in the ensemble, not as the primary model.
+    </div>
+
+    <h2 id="our-benchmark">Our own run: TabPFN vs XGBoost on three public tables</h2>
+
+    <p>Published benchmarks are useful, but they are run by the people who built the models. So in November 2026 we ran a small comparison of our own: TabPFN v2 (the openly licensed weights, no tuning) against XGBoost with default settings and XGBoost tuned by a 30-configuration random search, on three public OpenML tables of different sizes. One Apple Silicon laptop, one random seed, TabPFN on the built-in GPU, XGBoost on the CPU. The small and medium tables use 5-fold cross-validation; the large one a single stratified 80/20 split. The metric is ROC AUC.</p>
+
+    <div style="overflow-x:auto"><table class="arch-table"><thead><tr><th>Table</th><th>Rows</th><th>XGBoost default</th><th>XGBoost tuned</th><th>TabPFN v2, no tuning</th></tr></thead><tbody>
+      <tr><td>German credit (credit-g)</td><td>1,000</td><td>0.773</td><td>0.794</td><td><strong>0.795</strong></td></tr>
+      <tr><td>Telco churn (OpenML 40701)</td><td>5,000</td><td>0.925</td><td>0.923</td><td>0.924</td></tr>
+      <tr><td>Adult income, 10,000-row sample</td><td>48,842</td><td>&mdash;</td><td><strong>0.921</strong></td><td>0.914</td></tr>
+      <tr><td>Adult income, full training set</td><td>48,842</td><td>0.928</td><td><strong>0.928</strong></td><td>not possible (10k-row limit)</td></tr>
+    </tbody></table></div>
+
+    <ul>
+      <li><strong>Small table:</strong> TabPFN with no tuning matched the tuned XGBoost, which needed an 80-second search. Both beat default XGBoost by about 0.02, which is smaller than the spread between folds (about 0.03).</li>
+      <li><strong>Medium table:</strong> all three are equal, and tuning XGBoost gained nothing.</li>
+      <li><strong>Large table:</strong> XGBoost wins, both on the same 10,000 rows and by using all the data, which TabPFN v2 cannot.</li>
+      <li><strong>Prediction time is the real gap.</strong> Scoring the 9,769 test rows of the adult table took XGBoost 7 milliseconds and TabPFN 50 seconds. On the 1,000-row test fold of the churn table, 2 milliseconds against 8 seconds.</li>
+    </ul>
+
+    <h3>The decision threshold mattered more than the model</h3>
+
+    <p>A reader pointed out that the German credit data ships with a cost matrix: approving a bad borrower costs 5, rejecting a good one costs 1. Scored on that cost instead of AUC, the picture changes. We repeated the small-table run with 5-fold cross-validation three times (15 test folds), added a plain random forest and the same forest wrapped in the reader's pairwise difference learning library (<code>pdll</code>), and chose each model's threshold on out-of-fold predictions inside the training fold, never on the test fold.</p>
+
+    <div style="overflow-x:auto"><table class="arch-table"><thead><tr><th>Model</th><th>AUC</th><th>Cost per applicant at 0.5</th><th>Cost per applicant, cost-tuned threshold</th><th>Chosen threshold</th></tr></thead><tbody>
+      <tr><td>Random forest + <code>pdll</code></td><td>0.789</td><td>1.043</td><td>0.534</td><td>0.25</td></tr>
+      <tr><td>Random forest</td><td>0.793</td><td>0.954</td><td>0.538</td><td>0.20</td></tr>
+      <tr><td>TabPFN v2</td><td>0.792</td><td>0.903</td><td>0.542</td><td>0.15</td></tr>
+      <tr><td>XGBoost tuned</td><td>0.788</td><td>0.897</td><td>0.548</td><td>0.14</td></tr>
+      <tr><td>XGBoost default</td><td>0.769</td><td>0.870</td><td>0.581</td><td>0.03</td></tr>
+      <tr><td>Reject everyone</td><td>&mdash;</td><td colspan="2">0.700</td><td>&mdash;</td></tr>
+      <tr><td>Approve everyone</td><td>&mdash;</td><td colspan="2">1.500</td><td>&mdash;</td></tr>
+    </tbody></table></div>
+
+    <p>At the usual 0.5 threshold every model is worse than rejecting every applicant. With the threshold chosen for the 5:1 cost, all five fall to between 0.53 and 0.58, and the top four are within 0.015 of each other, well inside the fold-to-fold spread of about 0.05. Four of the five chosen thresholds sit near the 1/6 that theory predicts for calibrated probabilities; default XGBoost needed 0.03, a sign of how overconfident its scores are. Moving the threshold cut the cost by a third to a half. Switching between the top four models moved it by under 3%. The pairwise difference wrapper matched its own base forest on this table and took about 25 times longer to fit; one dataset says little about a method built for many small ones.</p>
+
+    <div class="callout">
+      <strong>What to take from it:</strong> on a small table, a tabular foundation model gives you tuned-model accuracy in the first minute. For anything large or latency-bound, gradient boosting still wins. And before arguing about either, set the decision threshold from the real costs: that was worth far more than any model change. This is one laptop, one seed and three datasets, so read it as a worked example, not a leaderboard. The scripts and raw results are <a href="https://github.com/mlaia/mlaia-site/tree/main/_growth/tabular-benchmark" rel="noopener">in the site repository</a>.
     </div>
 
     <h2>6. Production Considerations: The Gap That Papers Don't Cover</h2>

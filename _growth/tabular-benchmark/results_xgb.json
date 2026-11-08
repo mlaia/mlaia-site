@@ -1,0 +1,127 @@
+{
+ "protocol": {
+  "seed": 0,
+  "metric": "ROC AUC, minority class as positive",
+  "xgboost_default": "XGBClassifier defaults, tree_method=hist",
+  "xgboost_tuned": "RandomizedSearchCV, 30 configurations (20 on the large table), 3-fold inner CV on the training fold, refit on the full training fold; fit time includes the search",
+  "tabpfn": "TabPFN v2 classifier weights (openly licensed), default settings, no tuning; fit time is context loading, predict time is the forward passes",
+  "preprocessing": "categorical columns ordinal-encoded; indices passed to TabPFN; no other preprocessing",
+  "hardware": "arm64 arm, 10 CPU cores; TabPFN on Apple MPS GPU; XGBoost on CPU; each library in its own process",
+  "versions": {
+   "scikit-learn": "1.7.2",
+   "python": "3.10.12",
+   "xgboost": "3.2.0"
+  }
+ },
+ "results": [
+  {
+   "dataset": "credit-g",
+   "openml_id": 31,
+   "rows": 1000,
+   "features": 20,
+   "categorical_features": 13,
+   "positive_rate": 0.3,
+   "eval": "5-fold stratified CV, mean and std over folds",
+   "test_rows_per_fold": 200,
+   "models": {
+    "xgb_default": {
+     "auc": {
+      "mean": 0.7731666666666667,
+      "std": 0.024095379258009225
+     },
+     "fit_s": {
+      "mean": 0.2331390857696533,
+      "std": 0.012098320113845196
+     },
+     "predict_s": {
+      "mean": 0.0008071422576904297,
+      "std": 0.00017477162342054785
+     }
+    },
+    "xgb_tuned": {
+     "auc": {
+      "mean": 0.7944285714285714,
+      "std": 0.035831347832984826
+     },
+     "fit_s": {
+      "mean": 79.40912919044494,
+      "std": 2.483768371585586
+     },
+     "predict_s": {
+      "mean": 0.0011322498321533203,
+      "std": 0.00020922802732885283
+     }
+    }
+   }
+  },
+  {
+   "dataset": "churn",
+   "openml_id": 40701,
+   "rows": 5000,
+   "features": 20,
+   "categorical_features": 4,
+   "positive_rate": 0.1414,
+   "eval": "5-fold stratified CV, mean and std over folds",
+   "test_rows_per_fold": 1000,
+   "models": {
+    "xgb_default": {
+     "auc": {
+      "mean": 0.9248101440605634,
+      "std": 0.012011331322487644
+     },
+     "fit_s": {
+      "mean": 0.27407145500183105,
+      "std": 0.04577181222178189
+     },
+     "predict_s": {
+      "mean": 0.0009570598602294921,
+      "std": 9.979934023544394e-05
+     }
+    },
+    "xgb_tuned": {
+     "auc": {
+      "mean": 0.9226875792994275,
+      "std": 0.01240958464045912
+     },
+     "fit_s": {
+      "mean": 88.26471858024597,
+      "std": 1.933805949273776
+     },
+     "predict_s": {
+      "mean": 0.0016211509704589845,
+      "std": 0.0005902635538359094
+     }
+    }
+   }
+  },
+  {
+   "dataset": "adult",
+   "openml_id": 1590,
+   "rows": 48842,
+   "features": 14,
+   "categorical_features": 8,
+   "positive_rate": 0.23928176569346055,
+   "eval": "single stratified 80/20 split",
+   "train_rows": 39073,
+   "test_rows": 9769,
+   "tabpfn_train_rows": 10000,
+   "models": {
+    "xgb_default_full": {
+     "auc": 0.9274540485900569,
+     "fit_s": 0.30061793327331543,
+     "predict_s": 0.0037310123443603516
+    },
+    "xgb_tuned_full": {
+     "auc": 0.928212782578335,
+     "fit_s": 90.4124128818512,
+     "predict_s": 0.007154226303100586
+    },
+    "xgb_tuned_10k": {
+     "auc": 0.9206078874030011,
+     "fit_s": 74.05128598213196,
+     "predict_s": 0.00904393196105957
+    }
+   }
+  }
+ ]
+}
