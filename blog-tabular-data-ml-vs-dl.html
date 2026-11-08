@@ -307,9 +307,9 @@
 
     <h3>The decision threshold mattered more than the model</h3>
 
-    <p>A reader pointed out that the German credit data ships with a cost matrix: approving a bad borrower costs 5, rejecting a good one costs 1. Scored on that cost instead of AUC, the picture changes. We repeated the small-table run with 5-fold cross-validation three times (15 test folds), added a plain random forest and the same forest wrapped in the reader's pairwise difference learning library (<code>pdll</code>), and chose each model's threshold on out-of-fold predictions inside the training fold, never on the test fold.</p>
+    <p>Cost is per applicant throughout this table. A reader pointed out that the German credit data ships with a cost matrix: approving a bad borrower costs 5, rejecting a good one costs 1. Scored on that cost instead of AUC, the picture changes. We repeated the small-table run with 5-fold cross-validation three times (15 test folds), added a plain random forest and the same forest wrapped in the reader's pairwise difference learning library (<code>pdll</code>), and chose each model's threshold on out-of-fold predictions inside the training fold, never on the test fold.</p>
 
-    <div style="overflow-x:auto"><table class="arch-table"><thead><tr><th>Model</th><th>AUC</th><th>Cost per applicant at 0.5</th><th>Cost per applicant, cost-tuned threshold</th><th>Chosen threshold</th></tr></thead><tbody>
+    <div style="overflow-x:auto"><table class="arch-table"><thead><tr><th>Model</th><th>AUC</th><th>Cost at 0.5</th><th>Cost, tuned threshold</th><th>Threshold</th></tr></thead><tbody>
       <tr><td>Random forest + <code>pdll</code></td><td>0.789</td><td>1.043</td><td>0.534</td><td>0.25</td></tr>
       <tr><td>Random forest</td><td>0.793</td><td>0.954</td><td>0.538</td><td>0.20</td></tr>
       <tr><td>TabPFN v2</td><td>0.792</td><td>0.903</td><td>0.542</td><td>0.15</td></tr>
