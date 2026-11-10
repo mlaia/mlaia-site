@@ -60,7 +60,9 @@ Status marks: `[ ]` not started, `[~]` in progress (owner in brackets), `[x]` do
 - [ ] Daily Search Console indexing requests until the 13 new mlaia pages and 6 NextDemand pages are indexed
 
 ### C. Be in the indexes assistants use
-- [ ] Bing: verify index coverage of all mlaia URLs in Bing Webmaster, submit missing ones via URL Submission, confirm sitemaps registered for all three sites
+- [x] Bing coverage checked (2026-11-10): 60 of 71 mlaia URLs indexed, last crawls late Sept to 24 Oct, sitemap copy had 58 URLs; sitemap resubmitted and accepted; IndexNow log shows all 71 URLs received. Ultrabot sitemap: 26 URLs, success.
+- [ ] Bing URL Submission is unavailable for mlaia because the site is a read-only import from Search Console; verify mlaia.com directly in Bing (DNS CNAME at LiveDNS or meta tag; Yochai) to unlock URL Submission and faster crawl
+- [ ] Re-check Bing index count weekly until the November pages appear
 - [ ] Add PerplexityBot, OAI-SearchBot, Google-Extended explicitly to mlaia and Ultrabot robots.txt (NextDemand already has them)
 - [ ] llms.txt: one-line answer per page, not only titles; keep current after every merge
 - [ ] IndexNow after every merge (standing)
@@ -119,4 +121,5 @@ Status marks: `[ ]` not started, `[~]` in progress (owner in brackets), `[x]` do
 
 ## Changelog
 
+- 2026-11-10: Bing audit: delivery via IndexNow works, crawl is the bottleneck; URL Submission needs direct site verification.
 - 2026-11-10: plan created from the first full reading of Search Console, Bing, GA4 and the generative-AI report. Five sessions started (A medical, A/B tabular + causal, B sound event detection, H GA4 events, F NextDemand). Tracker opened as PR #76.
