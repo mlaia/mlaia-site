@@ -30,6 +30,8 @@ NextDemand's GA is not touched) and the AI-visibility tracker in `_growth/ai-vis
 | Ultrabot GA4 AI-assistant sessions | 0 | 10 |
 | Bing impressions mlaia / Ultrabot | 101 / 12 | 600 / 150 |
 | Tracker: prompts cited (of 13) ChatGPT / Perplexity / Gemini / Claude | not run yet (keys needed) | 7 / 7 / 7 / 7 |
+| Bing AI Performance citations, 28 d (Copilot + partners): mlaia / NextDemand / Ultrabot | 273 / about 430 (1.3K per 3 months) / 0 | 800 / 900 / 50 |
+| Bing AI citation share on top grounding queries: mlaia / NextDemand | 20–35% / 23–26% | 40% / 35% |
 
 ## 3. Why these levers (what the data showed on 2026-11-10)
 
@@ -61,7 +63,7 @@ Status marks: `[ ]` not started, `[~]` in progress (owner in brackets), `[x]` do
 
 ### C. Be in the indexes assistants use
 - [x] Bing coverage checked (2026-11-10): 60 of 71 mlaia URLs indexed, last crawls late Sept to 24 Oct, sitemap copy had 58 URLs; sitemap resubmitted and accepted; IndexNow log shows all 71 URLs received. Ultrabot sitemap: 26 URLs, success.
-- [ ] Bing URL Submission is unavailable for mlaia because the site is a read-only import from Search Console; verify mlaia.com directly in Bing (DNS CNAME at LiveDNS or meta tag; Yochai) to unlock URL Submission and faster crawl
+- [ ] Bing URL Submission is unavailable for mlaia (read-only import from Search Console). "Add a site" answers "Site already added" and the imported site has no verification screen, so the path is: remove the imported mlaia.com from Bing Webmaster, add it manually, verify with the meta tag (coordinator adds it to the homepage head) or a CNAME at LiveDNS. Needs Yochai's OK for the removal.
 - [ ] Re-check Bing index count weekly until the November pages appear
 - [ ] Add PerplexityBot, OAI-SearchBot, Google-Extended explicitly to mlaia and Ultrabot robots.txt (NextDemand already has them)
 - [ ] llms.txt: one-line answer per page, not only titles; keep current after every merge
@@ -121,5 +123,6 @@ Status marks: `[ ]` not started, `[~]` in progress (owner in brackets), `[x]` do
 
 ## Changelog
 
+- 2026-11-10: Bing AI Performance read for the first time: mlaia 273 citations in 28 days with 20–35% citation share on causal-inference and parts-forecasting queries; NextDemand 1.3K in 3 months (intermittent demand, Croston); Ultrabot 0. Added to the scorecard.
 - 2026-11-10: Bing audit: delivery via IndexNow works, crawl is the bottleneck; URL Submission needs direct site verification.
 - 2026-11-10: plan created from the first full reading of Search Console, Bing, GA4 and the generative-AI report. Five sessions started (A medical, A/B tabular + causal, B sound event detection, H GA4 events, F NextDemand). Tracker opened as PR #76.
