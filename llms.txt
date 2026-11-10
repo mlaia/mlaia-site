@@ -42,6 +42,7 @@ Signal processing combined with machine learning: audio event detection, noise r
   - [Spectral subtraction speech enhancement demo](https://www.mlaia.com/audio-ai/lab/speech-enhancement/) — noise reduction vs distortion and musical noise
 - [Beamforming vs Single-Microphone Noise Reduction](https://www.mlaia.com/audio-ai/beamforming-vs-single-mic-noise-reduction/) — what each separates, hardware and data needs, latency, failure modes, how to choose
 - [Deep Learning vs Classical DSP Noise Suppression](https://www.mlaia.com/audio-ai/deep-learning-vs-classical-dsp-noise-suppression/) — neural suppression vs spectral subtraction, Wiener and adaptive filters: latency, compute, unseen noise, artefacts, when a hybrid wins
+- [Sound event detection: how it works, how it is measured, and a demo you can run](https://www.mlaia.com/audio-ai/sound-event-detection/) — features, threshold and post-processing; event-based F1, false alarms per hour and latency; classical detector vs neural model; links the interactive detector demo
 - [Mel Spectrogram vs MFCC vs Audio Embeddings](https://www.mlaia.com/audio-ai/mel-spectrogram-vs-mfcc-vs-embeddings/) — choosing input features for sound event detection and audio classification by data size, compute and edge limits
 - [Edge vs Cloud Audio Inference](https://www.mlaia.com/audio-ai/edge-vs-cloud-audio-inference/) — latency, privacy, bandwidth, power, model size and update cycle, with a decision guide
 

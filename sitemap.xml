@@ -122,6 +122,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <url>
+    <loc>https://www.mlaia.com/audio-ai/sound-event-detection/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://www.mlaia.com/medical-ai/</loc>
     <lastmod>2026-11-03</lastmod>
@@ -274,37 +281,37 @@
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/lab/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/lab/confounding-simpsons-paradox/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/lab/ab-test-vs-observational/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/lab/uplift-modelling/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/lab/difference-in-differences/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.mlaia.com/predictive-intelligence/lab/ladder-of-causality/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -327,7 +334,7 @@
 
   <url>
     <loc>https://www.mlaia.com/wiki/acoustic-event-detection.html</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -390,7 +397,7 @@
 
   <url>
     <loc>https://www.mlaia.com/blog-tabular-data-ml-vs-dl.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
