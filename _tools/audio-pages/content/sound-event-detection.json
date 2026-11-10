@@ -1,0 +1,181 @@
+{
+ "slug": "sound-event-detection",
+ "title": "Sound event detection: how it works, how it is measured, and a demo you can run",
+ "description": "Sound event detection finds target sounds in audio and marks when each starts and ends. How detectors work, event-based F1, false alarms per hour, and a demo.",
+ "service_name": "Sound event detection design and evaluation",
+ "breadcrumb": "Sound event detection",
+ "eyebrow": "Audio &amp; Acoustics · Sound event detection",
+ "h1": "Sound event detection: how it works,<br>how it is measured, and a demo you can run",
+ "article": {
+  "headline": "Sound event detection: how it works, how it is measured, and a demo you can run",
+  "date": "2026-11-10"
+ },
+ "answer": "Sound event detection is the task of finding target sounds, such as a glass break, an alarm or a machine impact, in a continuous audio stream and marking when each one starts and ends. A detector turns audio into a feature, compares it with a threshold and cleans up the result, whether the feature is hand-designed or learned by a neural network. The core trade-off is the threshold: lowering it catches more events and raises false alarms, and raising it does the reverse, which is exactly what the demo on this page lets you see.",
+ "intro": "We design sound event detectors for products and monitoring systems, from the feature and the operating point to evaluation on real recordings, and help teams choose between a classical detector and a trained model.",
+ "cta": "Discuss a sound detector",
+ "lab_link": {
+  "href": "/audio-ai/lab/sound-event-detection/",
+  "text": "Run the detector demo"
+ },
+ "brief": {
+  "h2": "What this page covers",
+  "items": [
+   [
+    "The pipeline",
+    "Features, threshold &amp; post-processing"
+   ],
+   [
+    "The measures",
+    "Event-based F1, false alarms per hour &amp; latency"
+   ],
+   [
+    "The choice",
+    "Classical detector vs neural model, and when each wins"
+   ]
+  ]
+ },
+ "sections": [
+  {
+   "id": "how-it-works",
+   "eyebrow": "How a detector works",
+   "h2": "Three stages decide what counts as an event.<br>Feature, threshold, post-processing.",
+   "lead": "Every sound event detector, from a two-line energy detector to a deep network, reduces to the same three decisions: what it measures in each short frame of audio, where it draws the line, and how it turns frame-by-frame decisions into events with a start and an end.",
+   "paragraphs": [
+    "The audio is cut into frames of a few tens of milliseconds, with a hop of half that or less, and each frame is summarised. The detector then decides frame by frame and merges the decisions in time. The sections below walk through each stage; the <a href=\"/wiki/acoustic-event-detection.html\">acoustic event detection guide</a> covers the research background, datasets and labelling."
+   ],
+   "cards": [
+    {
+     "number": "01",
+     "h3": "Features",
+     "p": "The simplest feature is the log energy of the frame, or the energy in one frequency band where the target sounds live and the background does not. Richer features are a log-mel spectrogram or MFCCs, and, in a neural detector, embeddings learned from large audio corpora. The feature decides what the detector can tell apart; see <a href=\"/audio-ai/mel-spectrogram-vs-mfcc-vs-embeddings/\">mel spectrogram vs MFCC vs embeddings</a>."
+    },
+    {
+     "number": "02",
+     "h3": "Threshold",
+     "p": "A classical detector flags a frame when the feature rises a set number of decibels above a floor, usually the median or a running noise estimate. A neural detector outputs a probability per class per frame and flags it above a chosen value. Either way the threshold is the operating point: it trades missed events against false alarms and is set from data, not by hand."
+    },
+    {
+     "number": "03",
+     "h3": "Post-processing",
+     "p": "Flagged frames become events by merging neighbours, filling short gaps, dropping events shorter than a minimum length and, for probabilities, median filtering or hysteresis with separate on and off thresholds. This stage removes most flicker and often improves event-based scores more than a better model would."
+    }
+   ]
+  },
+  {
+   "id": "metrics",
+   "eyebrow": "The metrics that matter",
+   "h2": "Accuracy says nothing here.<br>Measure events, false alarms and delay.",
+   "lead": "Target sounds are rare, so a detector that never fires can score 99.9% frame accuracy. Meaningful evaluation counts events against ground truth, counts false alarms over the operating time, and measures how long after onset the detector answers.",
+   "cards": [
+    {
+     "h3": "Event-based F1",
+     "p": "A detection counts as a hit if it overlaps a reference event, or starts within a tolerance of its onset, typically 200 ms; a detection that overlaps no event is a false positive and an event with no detection is a miss. Precision, recall and F1 are computed per class from those counts. Segment-based scores, which compare fixed time windows, are a useful second view but reward long, vague detections."
+    },
+    {
+     "h3": "False alarms per hour",
+     "p": "For an always-on detector the operational number is false alarms per hour at a fixed detection rate. A false-alarm rate that looks small per frame becomes dozens of alerts a day on continuous audio. Report it on background recordings from the deployment, including the sounds most likely to be confused with the target."
+    },
+    {
+     "h3": "Latency",
+     "p": "The time from the sound's onset to the detector's decision. It adds up from the analysis window, the hop, any look-ahead the model uses and the post-processing that waits to confirm an event. Smoothing that lowers false alarms raises latency, so the two are reported together."
+    }
+   ],
+   "note": "Evaluate on recordings from the deployment's own microphones and environments, with enough true events for the estimates to be stable. Results on a public dataset rarely transfer to a specific product."
+  },
+  {
+   "id": "where-it-is-used",
+   "eyebrow": "Where it is used",
+   "h2": "Three settings, one question:<br>which sound, under which noise, on which hardware.",
+   "lead": "Sound event detection appears wherever a system must react to something it can hear rather than see. The target sounds, the background and the compute available differ, and so does the right detector.",
+   "cards": [
+    {
+     "h3": "Industrial monitoring",
+     "p": "Impacts, leaks, abnormal machine sounds and alarm tones on plant floors and in test cells. Backgrounds are loud and structured, so band-limited features and per-site noise floors matter, and false alarms cost trust quickly. Vibration sensors often complement microphones; see <a href=\"/audio-ai/vibration-analysis/\">vibration analysis</a>."
+    },
+    {
+     "h3": "Smart buildings",
+     "p": "Glass break, smoke and intruder alarms, shouting or falls for assisted living, and occupancy from sound. Privacy drives the design: detectors run on the device and send events, not audio, and must be robust to the household sounds that resemble the targets."
+    },
+    {
+     "h3": "Consumer devices",
+     "p": "Phones, earbuds, wearables and smart speakers that react to a doorbell, a crying baby, a siren or a tap on the casing. Power and memory are tight, so a cheap energy stage usually gates a small quantized model; see <a href=\"/audio-ai/edge-audio-ai/\">on-device audio AI</a>."
+    }
+   ]
+  },
+  {
+   "id": "classical-vs-neural",
+   "eyebrow": "Classical detector vs neural model",
+   "h2": "A threshold on a feature, or a trained network.<br>Each wins in its own conditions.",
+   "lead": "A classical detector is a hand-chosen feature, a floor estimate and a threshold. A neural detector is a network trained on labelled audio that outputs a probability per class. Most production systems use both: the classical stage runs always-on and wakes the model.",
+   "table": {
+    "caption": "When a classical energy or band-energy detector wins and when a neural model wins. The right column is the usual production answer for consumer and monitoring products.",
+    "head": ["", "Classical detector", "Neural model", "Cascade (both)"],
+    "rows": [
+     ["Target sounds", "One or two sounds that stand out from the background in level or in one band", "Many classes, or sounds that overlap the background in level and band", "A cheap stage detects that something happened, the model decides what"],
+     ["Data needed", "A few recordings to set the floor and threshold", "Hundreds to thousands of labelled events per class, or pre-trained embeddings", "Both, but the model only needs to be right on the gated segments"],
+     ["Compute &amp; power", "Microwatts to milliwatts, runs on any microcontroller", "Tens of kilobytes to megabytes, needs a DSP, NPU or application core", "Idle power of the classical stage, model power only on candidates"],
+     ["False alarms", "High when the background has the same energy as the target", "Low once trained on the deployment's own confusable sounds", "Lowest, since the model vetoes the classical stage's false alarms"],
+     ["Explainability", "Every decision is a number against a line", "Needs probing and test sets to explain", "The gate is transparent, the model is not"],
+     ["Latency", "One frame plus merging, usually under 100 ms", "Window, look-ahead and smoothing, often 100 ms to 1 s", "Set by whichever stage must confirm the event"]
+    ]
+   },
+   "paragraphs": [
+    "The classical detector wins when the target sound is louder than, or in a different band from, everything else, when there is no labelled data, and when the budget is a microcontroller. The neural model wins when the target is quiet relative to the background, when there are many classes, and when the confusable sounds are known and can be included in training. The <a href=\"/audio-ai/deep-learning-vs-classical-dsp-noise-suppression/\">deep learning vs classical DSP</a> comparison covers the same choice for noise suppression."
+   ]
+  },
+  {
+   "id": "try-it",
+   "eyebrow": "Try it",
+   "h2": "Move the threshold yourself.<br>Watch hits and false alarms trade places.",
+   "lead": "The <a href=\"/audio-ai/lab/sound-event-detection/\">sound event detection demo</a> in our audio lab runs a classical energy detector over an eight-second synthetic scene of four knocks, four beeps and two low-frequency rumbles that should not trigger, and scores it against ground truth in the browser.",
+   "paragraphs": [
+    "With its default settings, 1–6 kHz band energy at 10 dB above the median and background noise at −46 dBFS, the demo reports 8 of 8 events detected and 0 false alarms. Lower the threshold to 5 dB and it still finds all 8 events but adds 2 false alarms; raise it to 20 dB and the false alarms stay at 0 but only 5 of 8 events are found. Switch the feature to broadband energy at the default 10 dB and the rumbles start to look like events: 5 of 8 detected with 2 false alarms.",
+    "That is the whole design problem in three moves. The feature decides what the detector can separate, the threshold picks the operating point on the hit versus false-alarm curve, and the post-processing turns frames into events. The demo uses synthetic signals and a deliberately simple detector so the effect is visible; a trained detector moves the same trade-off into the choice of probability threshold."
+   ],
+   "cta": {
+    "href": "/audio-ai/lab/sound-event-detection/",
+    "text": "Open the sound event detection demo →"
+   }
+  }
+ ],
+ "faq": [
+  {
+   "q": "What is a sound event detector?",
+   "a": "A sound event detector is a system that listens to a continuous audio stream and reports when specific target sounds occur, with a start and an end time for each. It computes a feature from short frames of audio, compares it with a threshold and merges the flagged frames into events. The feature and threshold can be hand-designed, as in an energy detector, or learned by a neural network trained on labelled recordings."
+  },
+  {
+   "q": "Which software does sound event detection?",
+   "a": "Research and prototyping usually run in Python with librosa or torchaudio for features, PyTorch or TensorFlow for models, and the sed_eval or psds_eval packages for scoring. Pre-trained models such as YAMNet and PANNs, and the DCASE challenge baselines, give a starting point for many sound classes. For products, the detector is typically re-implemented for the target: TensorFlow Lite or ONNX Runtime on phones and application processors, and fixed-point C or vendor DSP libraries on microcontrollers. There is no single off-the-shelf program for a specific product sound; the software is a pipeline built around your recordings and hardware."
+  },
+  {
+   "q": "How is sound event detection different from acoustic event detection?",
+   "a": "They are the same task under two names. Sound event detection, abbreviated SED, is the term used by the DCASE challenges and most research papers; acoustic event detection, or AED, is common in older literature and in industry. Both mean finding target sounds in audio and marking their onset and offset. Audio tagging or classification is the different task: it labels a whole clip without timestamps."
+  },
+  {
+   "q": "Can machine learning detect specific sounds in noisy environments?",
+   "a": "Yes, within limits set by the signal-to-noise ratio and the training data. A model trained on recordings that include the deployment's own background, and augmented by mixing isolated target sounds over that background at a range of levels, can detect sounds a simple energy threshold would miss. The limits are sounds quieter than the background in every frequency band, backgrounds that contain the target sound itself, and microphones or rooms unlike the training data. Evaluate on recordings from the real environment and report false alarms per hour, not just accuracy."
+  }
+ ],
+ "reads": [
+  {
+   "href": "/audio-ai/lab/sound-event-detection/",
+   "small": "Interactive demo",
+   "strong": "Sound event detection demo"
+  },
+  {
+   "href": "/wiki/acoustic-event-detection.html",
+   "small": "Technical guide",
+   "strong": "Acoustic event detection with machine learning"
+  },
+  {
+   "href": "/audio-ai/edge-audio-ai/",
+   "small": "Topic page",
+   "strong": "On-device audio AI"
+  },
+  {
+   "href": "/audio-ai/mel-spectrogram-vs-mfcc-vs-embeddings/",
+   "small": "Comparison",
+   "strong": "Mel spectrogram vs MFCC vs embeddings"
+  }
+ ]
+}
