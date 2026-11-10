@@ -41,6 +41,9 @@ NOTE = ("These demos are illustrative. Every customer, account, region and order
         "general principles of causal analysis, not the results of any real campaign, product or project.")
 
 FLAG = '<p class="ml-flag">Synthetic data · illustrative · not results from a real business</p>'
+UPDATED = "November 10, 2026"
+DATE_MODIFIED = "2026-11-10"
+UPDATED_HTML = f'<p class="lab-updated">Updated {UPDATED}</p>'
 
 
 def readouts(items):
@@ -74,7 +77,7 @@ PAGES = [
         "h1": 'Simpson’s paradox: why does the effect <span class="c-accent">reverse?</span>',
         "description": "Interactive demo of confounding and Simpson’s paradox on synthetic data: a customer call that helps in every segment looks harmful overall. Change how calls are targeted and compare within segments.",
         "teaches": "Confounding, Simpson’s paradox, stratification and adjusted effect estimates",
-        "answer": "Simpson’s paradox is a comparison that points one way in the whole dataset and the other way inside every subgroup. It appears when a hidden variable, a confounder, drives both who gets an action and the outcome. In this demo a success-team call raises renewal in both customer segments, yet called accounts renew less often overall, because calls go mostly to accounts that were already at risk.",
+        "answer": "The effect reverses because a hidden variable, a confounder, drives both who gets the action and the outcome, so the whole dataset compares different kinds of customer while each segment compares like with like. In this demo a success-team call raises renewal by {{dRisk}} among at-risk accounts and {{dHealthy}} among healthy ones, yet across all accounts the difference between called and uncalled accounts reads {{pooled}}, because the calls go mostly to accounts that were already at risk. The within-segment figures are the ones that answer what the call did.",
         "sec_kicker": "Confounding / Simpson’s paradox",
         "sec_h2": "Helps in every segment. Looks harmful overall.",
         "what": "a call that raises renewal for at-risk accounts and for healthy accounts can still show a lower renewal rate among called accounts, when at-risk accounts are the ones that get called.",
@@ -103,6 +106,9 @@ PAGES = [
             ("Which is correct, the pooled result or the stratified result?", "It depends on the causal structure. When the subgroup variable influences both the action and the outcome, as account risk does in this demo, the within-subgroup comparison reflects the action’s effect. When the variable is a consequence of the action, adjusting for it is the mistake."),
             ("What is a confounder?", "A confounder is a variable that affects both whether a unit receives an action and the outcome being measured. It creates an association between action and outcome that the action did not cause."),
             ("How do I detect confounding in my own data?", "Data alone cannot prove its absence. Start from how the action was assigned, list what influenced that decision, check whether those factors differ between the treated and untreated groups, and see whether the estimate changes when you adjust for them. A randomised holdout is the one check that does not depend on having measured everything."),
+            ("Why does my retention call look harmful in the dashboard when it helps every customer?", "Because the call is aimed at accounts that were already likely to leave. The called group then contains more at-risk accounts than the uncalled group, and its lower renewal rate reflects who was called, not what the call did. In the demo the pooled comparison reads {{pooled}} while the call adds about {{adjusted}} within segments."),
+            ("Is Simpson’s paradox the same thing as confounding?", "It is the most visible form of it. A third variable, here account risk, influences both who receives the action and the outcome, and leaves an association between them that the action did not cause. When that association is strong enough to flip the sign, it is called Simpson’s paradox. Stratifying by the variable removes it, provided the variable is recorded."),
+            ("Can Simpson’s paradox happen with more than two groups?", "Yes. Any number of subgroups with different baseline rates and different treatment shares can produce it, and the reversal can hide inside a dashboard that slices by one dimension while the confounder is another. The fix is the same: find out how the action was assigned and compare like with like."),
         ],
     },
     {
@@ -113,7 +119,7 @@ PAGES = [
         "h1": 'A/B test vs observational data: why do they <span class="c-accent">disagree?</span>',
         "description": "Interactive demo on synthetic data: one campaign measured by a randomised A/B test and by an observational comparison. Change how strongly targeting follows prior propensity and watch selection bias inflate the lift.",
         "teaches": "Selection bias, randomised experiments versus observational comparisons, stratified adjustment and overlap",
-        "answer": "A randomised A/B test and an observational comparison can give very different answers for the same campaign. In a test, chance decides who receives the campaign, so the two groups are alike. In observational data someone chose the recipients, usually the customers most likely to buy anyway, and that choice is counted as campaign effect. This demo measures one synthetic campaign both ways.",
+        "answer": "They disagree because an A/B test assigns the campaign by chance, so the two groups are alike, while in observational data someone chose the recipients, usually the customers most likely to buy anyway, and that choice is counted as campaign effect. In this demo one synthetic campaign with a true effect of {{truth}} measures {{ab}} in the randomised test and {{obs}} in the observational comparison, about {{ratio}} times the truth. The gap is selection bias, not persuasion.",
         "sec_kicker": "Experiments / selection bias",
         "sec_h2": "One campaign. Two measurements.",
         "what": "when a campaign is sent to the customers most likely to buy, comparing recipients with everyone else reports a lift several times the true one. A coin-flip test on the same customers does not.",
@@ -142,6 +148,9 @@ PAGES = [
             ("Can I measure incrementality without an A/B test?", "Sometimes. If the factors that determined targeting are recorded, and both targeted and untargeted customers exist at each level of them, methods such as stratification, matching or propensity weighting can remove the bias. The result rests on the assumption that nothing unrecorded drove targeting, which should be stated and stress-tested."),
             ("How large should a holdout group be?", "It depends on the baseline rate and the smallest effect worth detecting. In this demo, with about 25,000 customers in each arm and a baseline purchase rate near {{baseRate}}, the 95% interval reaches about {{abHalf}} percentage points either side of the estimate. A smaller holdout or a smaller effect needs a power calculation before launch."),
             ("Is a randomised test always the better measurement?", "For the average effect of the action, it is the most direct estimate. It can still mislead if it is stopped early on a good day, if the two groups influence each other, or if the customers in the test differ from the ones you will act on."),
+            ("Why does my campaign look better in the sales dashboard than in the A/B test?", "Because the dashboard compares recipients with non-recipients, and the recipients were chosen for being likely to buy. In the demo that comparison reports {{obs}} for a campaign whose true effect is {{truth}}, while the randomised test reports {{ab}}. The dashboard is measuring the targeting."),
+            ("What is selection bias in marketing measurement?", "It is the error that arises when the customers who receive a campaign differ from those who do not in ways that also affect the outcome. The comparison then mixes the campaign’s effect with that pre-existing difference, and the better the targeting, the larger the bias."),
+            ("Is a small holdout better than no holdout?", "Yes. Even a small randomised holdout gives an unbiased benchmark against which the observational numbers can be checked, which no amount of modelling on targeted data can provide. Its cost is a little lost reach. Its value is knowing what the campaign added."),
         ],
     },
     {
@@ -152,7 +161,7 @@ PAGES = [
         "h1": 'Uplift modelling vs churn prediction: who should get <span class="c-accent">the offer?</span>',
         "description": "Interactive demo on synthetic data: rank the same customers by churn risk and by uplift, set a budget and count the extra customers each ranking retains. Includes customers an offer cannot save and customers it pushes away.",
         "teaches": "Uplift modelling, churn-risk targeting, incremental retention and uplift curves",
-        "answer": "Churn prediction ranks customers by how likely they are to leave. Uplift modelling ranks them by how much a retention offer would change that. The two lists differ: some high-risk customers leave whatever you send, and some customers stay only if left alone. This demo targets the same synthetic customers both ways and counts how many extra customers each ranking retains at a fixed budget.",
+        "answer": "The customers worth an offer are the ones whose decision the offer changes, and that is what uplift modelling ranks by, while churn prediction ranks by how likely they are to leave at all. In this demo, with offers for 20% of 20,000 synthetic customers, ranking by uplift retains {{uplift}} customers who would otherwise have left, ranking by churn risk retains {{risk}}, and offers sent at random retain {{random}}. Some high-risk customers leave whatever you send, and some stay only if left alone, which is why the two lists differ.",
         "sec_kicker": "Uplift modelling / targeting",
         "sec_h2": "Most likely to leave. Not most worth an offer.",
         "what": "with a fixed number of retention offers, ranking customers by estimated uplift retains more of them than ranking by churn risk, when the customers at highest risk are hard to move.",
@@ -182,6 +191,9 @@ PAGES = [
             ("Does uplift modelling need an A/B test?", "It needs data in which the action was assigned at random, or observational data with a credible adjustment for how it was assigned. The cleanest route is a randomised pilot: fit the model on one part and evaluate it on another."),
             ("What are persuadables, sure things, lost causes and sleeping dogs?", "They are four response types. Persuadables stay only if they get the offer. Sure things stay either way. Lost causes leave either way. Sleeping dogs leave only if contacted. Only persuadables repay an offer. No individual’s type can be observed, so uplift models estimate the average effect for groups of similar customers."),
             ("When is a churn model enough?", "When the action’s effect rises with risk and little else predicts the response, a churn ranking captures most of the gain. Unticking the box in the demo moves towards that case. A randomised pilot shows which case your customers are in."),
+            ("Why does targeting the highest-risk customers retain fewer of them?", "Because the customers most likely to leave are often the hardest to keep, and an offer spent on them changes nothing. In the demo, offers for the top 20% by churn risk retain {{risk}} customers, while the same number of offers ranked by uplift retain {{uplift}}. A risk score says who will leave, not who an offer can keep."),
+            ("How do I know whether uplift modelling will beat my churn model?", "Run a randomised pilot, fit both rankings on part of it and compare them on the rest with an uplift curve, as the chart does. If the offer’s effect simply rises with risk, the churn ranking will do nearly as well; untick the box in the demo to see that case."),
+            ("What does ‘extra customers retained’ mean in this demo?", "It counts customers who would have churned without the offer and stayed with it, minus the few the offer pushed into leaving. The simulation holds both outcomes for every customer, so the count is exact here. In real data it has to be estimated from a randomised comparison."),
         ],
     },
     {
@@ -192,7 +204,7 @@ PAGES = [
         "h1": 'Difference-in-differences: what if parallel trends <span class="c-accent">fails?</span>',
         "description": "Interactive demo on synthetic data: measure a launch with difference-in-differences when there is no control group, then break the parallel-trends assumption and watch the estimate, and a placebo test, go wrong.",
         "teaches": "Difference-in-differences, the parallel-trends assumption, placebo tests and pre-trend checks",
-        "answer": "Difference-in-differences estimates the effect of a launch by comparing the change in the launch region with the change in a region that did not get it. It rests on one assumption: without the launch, both would have moved in parallel. This demo lets you break that assumption and watch the estimate absorb the difference in trends as if it were launch effect.",
+        "answer": "When parallel trends fails, difference-in-differences reports the difference in trends as if it were the effect of the launch, and nothing in the arithmetic warns you. At the default setting, with the two regions moving in parallel, a before-and-after comparison gives {{beforeAfter}} orders a week, difference-in-differences gives {{did}}, and the true effect is {{truth}}. Give the launch region an extra trend of its own and the estimate drifts away from the truth while the number still looks precise.",
         "sec_kicker": "Quasi-experiments / difference-in-differences",
         "sec_h2": "No control group. One assumption.",
         "what": "difference-in-differences recovers a launch effect when the two regions were moving in parallel, and reports a wrong effect, with no warning of its own, when they were not.",
@@ -223,6 +235,9 @@ PAGES = [
             ("Can you test parallel trends?", "Only partly. You can check whether the trends were parallel before the intervention, with plots, placebo dates and pre-period trend estimates. Whether they would have stayed parallel afterwards cannot be observed, so the assumption also needs an argument from knowledge of the business."),
             ("What happens if parallel trends is violated?", "The estimate equals the true effect plus the difference in trends that builds up between the pre-launch and post-launch periods. In the demo the error grows in proportion to the extra trend you add."),
             ("How is difference-in-differences different from a before-and-after comparison?", "A before-and-after comparison attributes every change over time to the intervention. Difference-in-differences removes the changes shared with a comparison group, such as seasonality or market growth. In the demo the before-and-after figure is {{beforeAfter}} orders a week and the difference-in-differences estimate is {{did}}, against a true effect of {{truth}}."),
+            ("How do I measure a launch when there is no control group?", "Compare the change in the launch region with the change over the same weeks in a region that did not get the launch. That is difference-in-differences. It needs a comparison region that would have moved like the launch region without the launch, which is the parallel-trends assumption, and that assumption should be checked on the pre-launch weeks before the estimate is trusted."),
+            ("Why is my before-and-after comparison overstating the effect of a launch?", "Because everything that changed over time, seasonality, market growth, a price change, is attributed to the launch. In the demo the shared growth trend alone turns a true effect of {{truth}} into a before-and-after reading of {{beforeAfter}}. A comparison region removes the changes the two regions share. It cannot remove changes that affected only the launch region."),
+            ("What is a placebo test in difference-in-differences?", "It applies the same calculation to a date when nothing launched, using only pre-launch data. With parallel trends the result should be near zero; at the default setting it is {{placebo}}. A placebo far from zero means the regions were already diverging before the launch."),
         ],
     },
     {
@@ -233,7 +248,7 @@ PAGES = [
         "h1": 'What is the ladder of causality? One dataset, <span class="c-accent">three answers</span>',
         "description": "Interactive demo on synthetic data: ask one dataset an association question, an intervention question and a counterfactual question about a retention offer, and get three different numbers, with the reason for each.",
         "teaches": "Pearl’s ladder of causation: association, intervention and counterfactual questions",
-        "answer": "The ladder of causality, Judea Pearl’s ladder of causation, separates three kinds of question: association (seeing), intervention (doing) and counterfactual (imagining). They sound alike and have different answers. This demo asks all three of one synthetic dataset about a retention offer and gets three different numbers.",
+        "answer": "The ladder of causality, Judea Pearl’s ladder of causation, separates three kinds of question that sound alike and have different answers: association (seeing), intervention (doing) and counterfactual (imagining). In this demo one retention offer gives {{seeing}} when offered customers are compared with the rest, {{doing}} when you ask what the offer does to renewal, and {{because}} when you ask what share of offered customers renewed because of it. Same synthetic data, three questions, three numbers.",
         "sec_kicker": "Association / intervention / counterfactual",
         "sec_h2": "Three questions. Three different numbers.",
         "what": "how often offered customers renew, what the offer does to renewal, and how many renewals the offer caused are three questions. One dataset gives each a different answer.",
@@ -264,10 +279,25 @@ PAGES = [
             ("Why can’t a predictive model answer what-if questions?", "A predictive model learns associations in data produced under past decisions. Changing the decision changes how the data is produced, and the model holds no information about that unless it was trained on experiments or built on a causal design."),
             ("What is a counterfactual?", "A statement about the same unit under a different history, for example whether a customer who received an offer and renewed would have renewed without it. Only one history is ever observed, so counterfactual answers need a causal model with assumptions beyond those needed for average effects."),
             ("Why are the three numbers in the demo different?", "They answer different questions. {{seeing}} compares two groups made up of different customers. {{doing}} is the average change from giving the offer. {{because}} is a share of one specific group, the offered customers who renewed. None of them is an estimate of another."),
+            ("Why does a predictive model get the sign of the offer’s effect wrong?", "Because it learns from data in which the offer went mostly to at-risk customers, who renew less whatever you send them. The seeing comparison reads {{seeing}} while the offer adds {{doing}}. A model trained on past decisions describes those decisions. It does not know what a different decision would do."),
+            ("Which rung of the ladder does an A/B test answer?", "The second, doing. Randomising who gets the offer makes the offered and non-offered groups alike, so the difference in their outcomes estimates the effect of the action. It does not by itself answer the third-rung question of which individual renewals the offer caused."),
+            ("How many renewals did the offer actually cause?", "In the demo, of the {{renewedOffered}} offered customers who renewed, {{because}} renewed because of the offer and {{anyway}} would have renewed anyway. That split can only be estimated under an assumption about how each customer would have behaved without the offer, which the data cannot test."),
         ],
     },
 ]
 BY = {p["section"]: p for p in PAGES}
+
+HUB_ANSWER = (
+    "Causal inference is how you tell what an action changed from what merely came with it, and these five experiments show, on synthetic data where the true effect is known, how far the usual comparisons land from it. "
+    "A call that helps every segment reads {{simpson.pooled}} across all accounts against about {{simpson.adjusted}} within segments; an observational comparison reports {{abobs.obs}} for a campaign whose true effect is {{abobs.truth}}; "
+    "ranking by uplift retains {{uplift.uplift}} customers where ranking by churn risk retains {{uplift.risk}}; difference-in-differences gives {{did.did}} orders a week against a true {{did.truth}}; and one dataset answers a seeing, a doing and an imagining question with {{ladder.seeing}}, {{ladder.doing}} and {{ladder.because}}. "
+    "Every number is computed in your browser from synthetic data, so the demos are illustrative, not results from a real business."
+)
+HUB_FAQ = [
+    ("What is causal inference, in plain terms?", "Causal inference is the set of methods for estimating what an action changed, as opposed to what merely came with it. A predictive model says which customers will renew; causal inference says what a call, an offer or a launch did to renewal. The difference matters whenever a number is used to decide whether to act."),
+    ("Why do these demos use synthetic data instead of real results?", "Because with synthetic data the true effect is known exactly, so you can see how far each method lands from it. Every customer, account and order is generated in your browser from a fixed seed, and no real campaign, product or client data is involved. The demos show general principles, not results from a real business."),
+    ("Which demo should I start with?", "Start with Simpson’s paradox: it is the shortest route to the central idea, that a comparison can reverse once a hidden variable is taken into account. Then A/B test vs observational for selection bias, uplift modelling if you run retention offers, difference-in-differences if you measure launches without a control group, and the ladder of causality to see why prediction, intervention and attribution need different evidence."),
+]
 
 SECTIONS = {
     "simpson": lambda p: section(
@@ -360,6 +390,7 @@ STYLE = (
     ".lab-explain .c-prose h3{margin:1.5em 0 .5em}.lab-explain .c-prose h3:first-child{margin-top:0}"
     ".lab-explain .c-prose ul{margin:0 0 1.1em;padding-left:1.2em}.lab-explain .c-prose li{margin:0 0 .55em}"
     ".cl-faq{border-top:1px solid var(--c-rule)}"
+    ".lab-updated{margin:14px 0 0;font:400 11px/1.4 var(--c-mono);letter-spacing:.04em;color:var(--c-muted)}"
     "@media (max-width:760px){.cl-wide .ml-bar{grid-template-columns:118px minmax(0,1fr) 80px}}"
     "</style>"
 )
@@ -466,6 +497,11 @@ def plain(s):
     return html.unescape(re.sub(r"<[^>]+>", "", s))
 
 
+def fill_all(text, allfacts):
+    """Fill {{section.key}} placeholders from every demo's facts (hub copy)."""
+    return re.sub(r"\{\{(\w+)\.(\w+)\}\}", lambda m: allfacts[m.group(1)][m.group(2)], text)
+
+
 def explain(p, f):
     out = []
     for heading, blocks_ in p["body"]:
@@ -479,8 +515,14 @@ def explain(p, f):
             '<h2 class="c-h2" id="explain-title">How it works</h2></div><div class="c-prose">' + "".join(out) + "</div></div></section>")
 
 
-def faq(p, f):
-    qa = "".join(f"<h3>{q}</h3><p>{fill(a, f)}</p>" for q, a in p["faq"])
+def faq_ld(pairs):
+    return {"@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": plain(a)}} for q, a in pairs]}
+
+
+def faq(p, f, pairs=None):
+    pairs = pairs if pairs is not None else [(q, fill(a, f)) for q, a in p["faq"]]
+    qa = "".join(f"<h3>{q}</h3><p>{a}</p>" for q, a in pairs)
     return ('<section class="c-sec lab-explain cl-faq" aria-labelledby="faq-title"><div class="c-wrap c-split"><div class="c-split__head"><p class="c-kicker">FAQ</p>'
             '<h2 class="c-h2" id="faq-title">Common questions</h2></div><div class="c-prose">' + qa + "</div></div></section>")
 
@@ -504,9 +546,9 @@ def demo_page(p, blocks, allfacts):
         crumbs((p["name"], url)),
         {"@context": "https://schema.org", "@type": ["WebPage", "LearningResource"], "name": p["name"], "description": p["description"], "url": url,
          "inLanguage": "en", "isAccessibleForFree": True, "learningResourceType": "Interactive simulation", "teaches": p["teaches"], "image": OG,
+         "dateModified": DATE_MODIFIED,
          "isPartOf": {"@type": "WebPage", "name": HUB_NAME, "url": SITE + BASE}, "provider": {"@id": SITE + "/#organization"}},
-        {"@context": "https://schema.org", "@type": "FAQPage",
-         "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": plain(fill(a, f))}} for q, a in p["faq"]]},
+        faq_ld([(q, fill(a, f)) for q, a in p["faq"]]),
     ]
     tiles = "".join(f'<a class="c-tile" href="{BASE}{q["slug"]}/"><small>{q["num"]} / {esc(q["short"])}</small><strong>{esc(q["name"])}</strong><span>{esc(q["tile"])}</span></a>'
                     for q in PAGES if q is not p)
@@ -519,7 +561,7 @@ def demo_page(p, blocks, allfacts):
         + '<div class="c-wrap"><div class="lab-heading lab-heading--demo"><div><nav class="c-crumb" aria-label="Breadcrumb"><a href="/">MLAIA</a> / '
         + f'<a href="/predictive-intelligence/">Prediction &amp; Causal Analysis</a> / <a href="{BASE}">Causal inference lab</a> / {esc(p["short"])}</nav>'
         + f'<p class="c-kicker"><span class="c-idx" aria-hidden="true">{p["num"]}</span>Causal inference lab · {esc(p["short"])}</p>'
-        + f'<h1 class="c-display" id="page-title">{p["h1"]}</h1><p class="lab-answer">{p["answer"]}</p></div><span class="lab-badge">SYNTHETIC DATA</span></div></div>\n'
+        + f'<h1 class="c-display" id="page-title">{p["h1"]}</h1><p class="lab-answer">{fill(p["answer"], f)}</p>{UPDATED_HTML}</div><span class="lab-badge">SYNTHETIC DATA</span></div></div>\n'
         + jumps(p) + "\n" + intro() + "\n</section>\n" + sec + "\n" + explain(p, f) + "\n" + faq(p, f) + "\n"
         + '<section class="c-sec lab-more" aria-labelledby="more-title"><div class="c-wrap"><p class="c-kicker">Causal inference lab</p><h2 class="c-h2" id="more-title">More demos</h2>'
         + f'<div class="c-tiles">{tiles}</div><p class="c-links"><a class="c-link" href="{BASE}">All five demos on one page: the causal inference lab</a>'
@@ -528,13 +570,15 @@ def demo_page(p, blocks, allfacts):
     )
 
 
-def hub_page(blocks):
+def hub_page(blocks, allfacts):
     url = SITE + BASE
+    hub_faq = [(q, fill_all(a, allfacts)) for q, a in HUB_FAQ]
     jsonld = [crumbs(),
               {"@context": "https://schema.org", "@type": ["WebPage", "LearningResource"], "name": HUB_NAME, "description": HUB_DESC, "url": url, "inLanguage": "en",
                "isAccessibleForFree": True, "learningResourceType": "Interactive simulation",
                "teaches": "Confounding, selection bias, uplift modelling, difference-in-differences and the ladder of causation", "image": OG,
-               "provider": {"@id": SITE + "/#organization"}}]
+               "dateModified": DATE_MODIFIED, "provider": {"@id": SITE + "/#organization"}},
+              faq_ld(hub_faq)]
     secs = []
     for p in PAGES:
         opener = f'<a class="lab-open" href="{BASE}{p["slug"]}/">Open as a page<span class="c-sr">: {esc(p["name"])}</span> →</a>'
@@ -549,15 +593,18 @@ def hub_page(blocks):
         + '<a href="/predictive-intelligence/">Prediction &amp; Causal Analysis</a> / Causal inference lab</nav>'
         + '<p class="c-kicker"><span class="c-idx" aria-hidden="true">LAB</span>The causal inference lab</p>'
         + '<h1 class="c-display" id="lab-title">Interactive <span class="c-accent">Causal Inference Lab</span></h1>'
-        + '<p>Five hands-on experiments in telling what an action changed from what merely came with it: an effect that reverses when a hidden variable is ignored, '
+        + f'<p class="lab-answer">{fill_all(HUB_ANSWER, allfacts)}</p>'
+        + '<p>Five hands-on experiments: an effect that reverses when a hidden variable is ignored, '
           'a campaign measured by a randomised test and by an observational comparison, retention offers ranked by churn risk and by uplift, a launch measured '
-          'with no control group, and one dataset asked a seeing, a doing and an imagining question.</p></div><span class="lab-badge">SYNTHETIC DATA</span></div></div>\n'
+          'with no control group, and one dataset asked a seeing, a doing and an imagining question.</p>'
+        + f'{UPDATED_HTML}</div><span class="lab-badge">SYNTHETIC DATA</span></div></div>\n'
         + jumps() + "\n" + intro() + "\n</section>\n\n" + "\n\n".join(secs) + "\n\n"
         + '<section class="c-sec lab-pages" aria-labelledby="lab-pages-title"><div class="c-wrap"><p class="c-kicker">One demo per page</p>'
         + '<h2 class="c-h2" id="lab-pages-title">Open a demo on its own</h2><p class="lab-pages__lead">Each experiment also has its own page, with an explanation of the principle, '
           'what to check in your own data and answers to common questions.</p>'
         + f'<ul class="lab-pages__list">{items}</ul><p class="c-links"><a class="c-link" href="/predictive-intelligence/causal-inference/">Causal inference consulting →</a>'
         + '<a class="c-link" href="/wiki/causal-inference.html">Causal inference guide →</a><a class="c-link" href="/predictive-intelligence/#causal-ladder">The ladder of causation →</a></p></div></section>\n'
+        + faq(None, None, hub_faq) + "\n"
         + END + "\n</main>\n" + CONTACT + "\n" + script(blocks, [p["section"] for p in PAGES]) + "\n</body></html>\n"
     )
 
@@ -566,7 +613,7 @@ def main():
     blocks = split_source()
     allfacts = facts(blocks)
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "index.html").write_text(hub_page(blocks), encoding="utf-8")
+    (OUT / "index.html").write_text(hub_page(blocks, allfacts), encoding="utf-8")
     print("wrote", (OUT / "index.html").relative_to(ROOT))
     for p in PAGES:
         d = OUT / p["slug"]
@@ -574,7 +621,7 @@ def main():
         page = demo_page(p, blocks, allfacts)
         (d / "index.html").write_text(page, encoding="utf-8")
         f = allfacts[p["section"]]
-        words = len(plain(" ".join([p["answer"]] + [fill(x, f) for _, bs in p["body"] for b in bs for x in (b if isinstance(b, list) else [b])]
+        words = len(plain(" ".join([fill(p["answer"], f)] + [fill(x, f) for _, bs in p["body"] for b in bs for x in (b if isinstance(b, list) else [b])]
                                    + [q + " " + fill(a, f) for q, a in p["faq"]])).split())
         print("wrote", (d / "index.html").relative_to(ROOT), f"({words} words of explanatory text)")
 
