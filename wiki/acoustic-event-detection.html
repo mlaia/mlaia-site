@@ -33,7 +33,7 @@
       "headline": "Audio Event Detection and Classification with Machine Learning",
       "description": "Audio (acoustic) event detection with machine learning: features, DSP–ML hybrid detectors, rare-event labels, evaluation metrics, and edge vs cloud inference.",
       "datePublished": "2026-07-13",
-      "dateModified": "2026-07-13",
+      "dateModified": "2026-11-10",
       "author": {
         "@type": "Person",
         "name": "Dr. Yochai Edlitz",
@@ -150,7 +150,7 @@
     <div class="post-category-tag">Applied AI Wiki · Audio</div>
     <h1>Audio Event Detection and Classification with Machine Learning</h1>
     <div class="post-meta">
-      <span>Applied AI Wiki — reference article</span><span class="post-meta-sep">—</span><span>Updated July 13, 2026</span><span class="post-meta-sep">—</span><span>MLAIA Data Science</span>
+      <span>Applied AI Wiki — reference article</span><span class="post-meta-sep">—</span><span>Updated November 10, 2026</span><span class="post-meta-sep">—</span><span>MLAIA Data Science</span>
     </div>
   </div>
 </header>
@@ -163,7 +163,7 @@
 
     <article class="post-content">
 
-      <p><strong>Acoustic event detection</strong> (also called <em>sound event detection</em>, SED) is the task of identifying <em>what</em> sound occurred in an audio stream and <em>when</em> it occurred — a glass break, a dog bark, a bearing fault, a siren, a cough. It differs from <strong>audio classification</strong> (or <em>tagging</em>), which assigns labels to a whole clip without timestamps, and from speech-specific tasks such as speech recognition. The field is organized around benchmarks such as Google's AudioSet ontology and the annual DCASE (Detection and Classification of Acoustic Scenes and Events) challenges, which have standardized much of the terminology and evaluation practice.</p>
+      <p><strong>Acoustic event detection</strong> is the task of finding specific sounds in a continuous audio stream, such as a glass break, a dog bark, a bearing fault, a siren or a cough, and marking when each one starts and ends. A detector computes a feature from short frames of audio, compares it with a threshold and merges the flagged frames into timed events, whether the feature is hand-designed or learned by a neural network. <strong>Sound event detection</strong> (SED) is the same task under the name used by the DCASE challenges; for an answer-first overview with metrics and an interactive demo, see <a href="/audio-ai/sound-event-detection/">Sound event detection: how it works, how it is measured, and a demo you can run</a>. It differs from <strong>audio classification</strong> (or <em>tagging</em>), which assigns labels to a whole clip without timestamps, and from speech-specific tasks such as speech recognition. The field is organized around benchmarks such as Google's AudioSet ontology and the annual DCASE (Detection and Classification of Acoustic Scenes and Events) challenges, which have standardized much of the terminology and evaluation practice.</p>
 
       <h2>Feature representations</h2>
       <p>Raw audio is a one-dimensional waveform sampled tens of thousands of times per second, and almost all practical systems first convert it into a time–frequency representation. The workhorse is the <strong>short-time Fourier transform (STFT)</strong>, whose magnitude over time forms a <strong>spectrogram</strong>. Applying a mel-scaled filter bank and a logarithm yields the <strong>log-mel spectrogram</strong>, the de-facto standard input for neural audio models; adding a discrete cosine transform produces <strong>MFCCs</strong> (mel-frequency cepstral coefficients), a compact feature that dominated the field before deep learning and remains useful for lightweight or classical-ML systems.</p>
