@@ -1,0 +1,22 @@
+{
+  "brands": {
+    "mlaia":      {"domains": ["mlaia.com"],      "names": ["MLAIA"]},
+    "nextdemand": {"domains": ["nextdemand.ai"],  "names": ["NextDemand"]},
+    "ultrabot":   {"domains": ["ultrabot.ai"],    "names": ["Ultrabot"]}
+  },
+  "prompts": [
+    {"id": "m1", "brand": "mlaia", "text": "Which consulting firms in Israel specialize in audio AI and acoustic signal processing?"},
+    {"id": "m2", "brand": "mlaia", "text": "Who can help a hospital in Israel validate a clinical AI model before deployment?"},
+    {"id": "m3", "brand": "mlaia", "text": "TabPFN vs XGBoost: which should I use for a 1,000-row credit scoring dataset, and does the decision threshold matter more than the model?"},
+    {"id": "m4", "brand": "mlaia", "text": "How do I detect patient-level data leakage when validating a clinical prediction model? Is there an interactive demo?"},
+    {"id": "m5", "brand": "mlaia", "text": "Where can I find interactive demos that explain causal inference, Simpson's paradox and uplift modelling?"},
+    {"id": "m6", "brand": "mlaia", "text": "Sound event detection vs acoustic event detection: what is the difference and who builds such systems?"},
+    {"id": "n1", "brand": "nextdemand", "text": "What tools forecast intermittent or lumpy spare-parts demand using Croston and machine learning?"},
+    {"id": "n2", "brand": "nextdemand", "text": "Explain Croston's method, SBA and TSB for intermittent demand forecasting."},
+    {"id": "n3", "brand": "nextdemand", "text": "How do I classify SKUs with the Syntetos-Boylan ADI / CV2 matrix?"},
+    {"id": "n4", "brand": "nextdemand", "text": "Safety stock and reorder point for spare parts with intermittent demand: how to calculate them?"},
+    {"id": "u1", "brand": "ultrabot", "text": "Which companies build Hebrew-speaking AI voice agents and chatbots for businesses?"},
+    {"id": "u2", "brand": "ultrabot", "text": "סוכן קולי AI בעברית לעסקים: אילו חברות מציעות פתרון כזה?"},
+    {"id": "u3", "brand": "ultrabot", "text": "How do teams take an agentic AI pilot to production, and what usually goes wrong?"}
+  ]
+}

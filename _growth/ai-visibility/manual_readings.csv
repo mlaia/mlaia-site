@@ -1,0 +1,15 @@
+date,site,metric,window,value,source
+2026-11-10,mlaia.com,google_ai_feature_impressions,28d,1970,GSC generative AI report
+2026-11-10,mlaia.com,google_all_impressions,28d,8070,GSC performance (www prefix property)
+2026-11-10,mlaia.com,google_clicks,28d,82,GSC performance (www prefix property)
+2026-11-10,mlaia.com,ga4_sessions_chatgpt,28d,19,GA4 traffic acquisition
+2026-11-10,mlaia.com,ga4_sessions_gemini,28d,2,GA4 traffic acquisition
+2026-11-10,mlaia.com,ga4_sessions_total,28d,99,GA4 traffic acquisition
+2026-11-10,nextdemand.ai,google_ai_feature_impressions,28d,306,GSC generative AI report
+2026-11-10,nextdemand.ai,google_all_impressions,28d,1290,GSC performance
+2026-11-10,nextdemand.ai,google_clicks,28d,18,GSC performance
+2026-11-10,ultrabot.ai,google_ai_feature_impressions,28d,28,GSC generative AI report
+2026-11-10,ultrabot.ai,google_all_impressions,28d,142,GSC performance
+2026-11-10,ultrabot.ai,google_clicks,28d,0,GSC performance
+2026-11-10,ultrabot.ai,ga4_sessions_ai_assistant,28d,0,GA4 traffic acquisition
+2026-11-10,ultrabot.ai,ga4_sessions_total,28d,23,GA4 traffic acquisition
