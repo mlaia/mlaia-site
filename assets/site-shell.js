@@ -26,6 +26,8 @@
   document.addEventListener('click',e=>{if(e.target.closest('a[href="#contact"],a[href$="/#contact"]'))ga('contact_cta_click',{page_path:location.pathname});else if(e.target.closest('a[href^="https://talk.mlaia.com"]'))ga('demo_click',{page_path:location.pathname});});
   document.addEventListener('mlaia-inquiry-success',()=>ga('generate_lead',{page_path:location.pathname}));
  }
+ // Valuable-traffic events (WhatsApp, lab interaction, article read, outbound links) load only once analytics consent lets GA run; see assets/analytics-events.js.
+ {const ev=()=>{if(window._mlaiaEvents)return;window._mlaiaEvents=true;const s=document.createElement('script');s.src='/assets/analytics-events.js';s.defer=true;document.body.append(s);};let ok=false;try{ok=JSON.parse(localStorage.getItem(KEY)||'{}').analytics===true;}catch{}if(ok)ev();document.addEventListener('mlaia-cookie-consent',e=>{if(e.detail&&e.detail.analytics)ev();});}
  // Ultrabot site chat: one script from talk.mlaia.com adds the "Ask us" button; the chat frame loads only when opened.
  if(!document.querySelector('script[src*="talk.mlaia.com/widget.js"]')){const chat=document.createElement('script');chat.src='https://talk.mlaia.com/widget.js';chat.dataset.brand='mlaia';chat.defer=true;document.body.append(chat);}
  function language(){const he=document.documentElement.lang==='he';document.querySelectorAll('.site-quick-nav [data-en],.site-consent [data-en]').forEach(el=>{el.textContent=he?el.dataset.he:el.dataset.en;});if(consent)consent.dir=he?'rtl':'ltr';}
