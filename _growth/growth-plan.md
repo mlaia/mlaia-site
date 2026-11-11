@@ -63,7 +63,8 @@ Status marks: `[ ]` not started, `[~]` in progress (owner in brackets), `[x]` do
 
 ### C. Be in the indexes assistants use
 - [x] Bing coverage checked (2026-11-10): 60 of 71 mlaia URLs indexed, last crawls late Sept to 24 Oct, sitemap copy had 58 URLs; sitemap resubmitted and accepted; IndexNow log shows all 71 URLs received. Ultrabot sitemap: 26 URLs, success.
-- [ ] Bing URL Submission is unavailable for mlaia (read-only import from Search Console). "Add a site" answers "Site already added" and the imported site has no verification screen, so the path is: remove the imported mlaia.com from Bing Webmaster, add it manually, verify with the meta tag (coordinator adds it to the homepage head) or a CNAME at LiveDNS. Needs Yochai's OK for the removal.
+- [x] Bing per-URL submission works on the imported site after all, through URL Inspection, "Request indexing" (quota 100 a day). The site needs no re-verification; Bing says the Search Console import already counts as verified. 2026-11-10: all 53 November URLs submitted.
+- [ ] Root cause to watch: Bing fetched new pages before their deploy finished (patient-leakage at 13:48 on 3 Nov), got the 404 page with its noindex, and marked them "indexing not allowed". After every launch, send IndexNow only once the page returns 200, and request indexing in Bing for new URLs the same day
 - [ ] Re-check Bing index count weekly until the November pages appear
 - [ ] Add PerplexityBot, OAI-SearchBot, Google-Extended explicitly to mlaia and Ultrabot robots.txt (NextDemand already has them)
 - [ ] llms.txt: one-line answer per page, not only titles; keep current after every merge
@@ -123,6 +124,7 @@ Status marks: `[ ]` not started, `[~]` in progress (owner in brackets), `[x]` do
 
 ## Changelog
 
+- 2026-11-10: Bing: submitted 53 November URLs via URL Inspection; found pages marked noindex because Bing crawled them before deploy (saw the 404 page).
 - 2026-11-10: Bing AI Performance read for the first time: mlaia 273 citations in 28 days with 20–35% citation share on causal-inference and parts-forecasting queries; NextDemand 1.3K in 3 months (intermittent demand, Croston); Ultrabot 0. Added to the scorecard.
 - 2026-11-10: Bing audit: delivery via IndexNow works, crawl is the bottleneck; URL Submission needs direct site verification.
 - 2026-11-10: plan created from the first full reading of Search Console, Bing, GA4 and the generative-AI report. Five sessions started (A medical, A/B tabular + causal, B sound event detection, H GA4 events, F NextDemand). Tracker opened as PR #76.
