@@ -156,7 +156,7 @@ for slug, title, sub, items in [
 MED_LAB_DEMOS = ["Heart rate from a noisy ECG", "Patient-level leakage", "Calibration & thresholds",
                  "Scanner shift", "Dice vs clinical error", "Note de-identification"]
 CARDS["og/medical-lab.png"] = side("Interactive medical AI lab", "Interactive<br>Medical AI Lab.",
-                                   "Six browser demos on synthetic data. No patient data, nothing uploaded.", "mlaia.com/medical-ai/lab",
+                                   "Nine browser demos on synthetic data. No patient data, nothing uploaded.", "mlaia.com/medical-ai/lab",
                                    rows(MED_LAB_DEMOS))
 for slug, title, sub, items in [
     ("heart-rate-ecg", "Heart rate from<br>a noisy ECG.", "Right on average, wrong beat by beat.",
@@ -171,6 +171,12 @@ for slug, title, sub, items in [
      ["Dice", "HD95 boundary distance", "Lesions detected", "Small-lesion size"]),
     ("note-deidentification", "De-identifying<br>a clinical note.", "Names are easy. The rest re-identifies.",
      ["English, Hebrew, mixed", "Rule strictness", "Caught & missed", "Over-redaction"]),
+    ("nodule-volume-slice-thickness", "Nodule volume &amp;<br>slice thickness.", "Same nodule, different volume. In 3D.",
+     ["Slice thickness", "Slice position", "Partial volume", "25% growth criterion"]),
+    ("validation-sample-size", "Sample size for<br>model validation.", "A good number from a small study.",
+     ["Patients & prevalence", "Positive cases", "95% interval", "Patients for ±5 points"]),
+    ("subgroup-performance", "Hidden subgroup<br>failure.", "Good overall, weak for some.",
+     ["Subgroup share", "Signal in the subgroup", "AUC per group", "Sensitivity per group"]),
 ]:
     CARDS[f"og/lab-{slug}.png"] = side("Interactive medical AI lab", title, sub, f"mlaia.com/medical-ai/lab/{slug}", rows(items))
 
