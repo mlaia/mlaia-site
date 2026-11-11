@@ -48,8 +48,9 @@ def main():
             sys.exit(f"refusing to overwrite a real page: {dest}")
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         he = old.startswith("/he/")
-        target = BASE + new
-        canonical = BASE + new.split("#")[0]
+        # New paths are on this site unless the TSV gives a full URL (e.g. ultrabot.ai).
+        target = new if new.startswith("http") else BASE + new
+        canonical = target.split("#")[0]
         open(dest, "w", encoding="utf-8").write(STUB.format(
             lang="he" if he else "en",
             canonical=html.escape(canonical, quote=True),

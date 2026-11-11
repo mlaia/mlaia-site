@@ -368,6 +368,8 @@ body.c-page .site-quick-nav a:focus-visible{outline:3px solid var(--c-focus);out
   .c-hero{display:flex;flex-direction:column}
   .c-hero>.c-instrument,.c-hero .c-readout{display:contents}
   .c-hero .c-screen{order:1}
+  /* readouts without the head/more split (medical, prediction) stay one padded panel under the screen */
+  .c-hero .c-readout:not(:has(.c-readout__head)){display:flex;order:2;padding:12px var(--c-gutter) 14px}
   .c-hero .c-readout__head{order:2;padding:10px var(--c-gutter) 12px;background:var(--c-bg-2);border-top:1px solid var(--c-rule)}
   .c-hero .c-readout__head dl{grid-template-columns:1fr 1fr}
   .c-hero>.c-legend{order:3}
