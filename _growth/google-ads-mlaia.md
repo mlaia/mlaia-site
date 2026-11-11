@@ -235,7 +235,7 @@ H: MLAIA Machine Learning
 Descriptions
 ```
 D: Forecast bookings, revenue, churn and demand with explicit assumptions and backtests.
-D: Causal analysis that shows which actions change outcomes before you spend. Based in Israel.
+D: Causal analysis showing which actions change outcomes before you spend. Based in Israel.
 D: Medical AI, audio AI and forecasting consulting from a PhD-led team you can talk to.
 D: We work with your data team or as your data team. Message us on WhatsApp to scope it.
 ```
