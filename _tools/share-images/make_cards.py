@@ -156,7 +156,7 @@ for slug, title, sub, items in [
 MED_LAB_DEMOS = ["Heart rate from a noisy ECG", "Patient-level leakage", "Calibration & thresholds",
                  "Scanner shift", "Dice vs clinical error", "Note de-identification"]
 CARDS["og/medical-lab.png"] = side("Interactive medical AI lab", "Interactive<br>Medical AI Lab.",
-                                   "Nine browser demos on synthetic data. No patient data, nothing uploaded.", "mlaia.com/medical-ai/lab",
+                                   "Fourteen browser demos on synthetic data. No patient data, nothing uploaded.", "mlaia.com/medical-ai/lab",
                                    rows(MED_LAB_DEMOS))
 for slug, title, sub, items in [
     ("heart-rate-ecg", "Heart rate from<br>a noisy ECG.", "Right on average, wrong beat by beat.",
@@ -176,7 +176,16 @@ for slug, title, sub, items in [
     ("validation-sample-size", "Sample size for<br>model validation.", "A good number from a small study.",
      ["Patients & prevalence", "Positive cases", "95% interval", "Patients for ±5 points"]),
     ("subgroup-performance", "Hidden subgroup<br>failure.", "Good overall, weak for some.",
-     ["Subgroup share", "Signal in the subgroup", "AUC per group", "Sensitivity per group"]),
+     ["Subgroup share", "Signal in the subgroup", "AUC per group", "Sensitivity per group"]),    ("slice-by-slice-segmentation", "Slice-by-slice<br>segmentation.", "Each slice fine, the lesion in pieces. In 3D.",
+     ["Missed slices", "Volume Dice", "Lesions reported", "Longest diameter"]),
+    ("predictive-value-prevalence", "Predictive value<br>&amp; prevalence.", "Accurate test, mostly false positives. In 3D.",
+     ["Prevalence", "Sensitivity & specificity", "Positive predictive value", "Positives per 1,000"]),
+    ("shortcut-learning", "Shortcut learning<br>in medical imaging.", "It learned the hospital, not the disease.",
+     ["Tag and diagnosis", "Same hospitals", "New hospital", "Weight on the tag"]),
+    ("model-drift-monitoring", "Model drift<br>&amp; monitoring.", "It worked at launch. Then it slipped.",
+     ["Labelled cases per month", "Drift per month", "Alarm margin", "Months undetected"]),
+    ("alert-burden", "Alert burden.", "A good AUC, an alert every half hour.",
+     ["Model AUC", "Sensitivity", "Patients per nurse", "Alerts per shift"]),
 ]:
     CARDS[f"og/lab-{slug}.png"] = side("Interactive medical AI lab", title, sub, f"mlaia.com/medical-ai/lab/{slug}", rows(items))
 
