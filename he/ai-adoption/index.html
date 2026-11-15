@@ -38,6 +38,31 @@ html[dir="rtl"] .a-cred>div{padding:16px 0 0 24px}
 .a-task b{display:block;margin-bottom:4px;font:500 11px/1.2 var(--c-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-amber)}
 .a-task--build b{color:var(--c-blue)}
 .a-task a{display:inline-block;margin-top:6px}
+.a-tools{margin:22px 0 0;font-size:var(--c-fs-small);line-height:1.6;color:var(--c-muted)}
+.a-tools b{color:var(--c-fg);font-weight:600}
+.a-case{margin:44px 0 0;padding:28px;background:var(--c-bg-2);border-inline-start:3px solid var(--c-blue)}
+.a-case h3{margin:0 0 10px;font:600 var(--c-fs-h3)/1.25 var(--c-display);color:var(--c-fg)}
+.a-case p{margin:0;max-width:72ch;color:var(--c-text)}
+.a-flow{list-style:none;counter-reset:f;margin:20px 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.a-flow li{counter-increment:f;padding:12px 14px;background:var(--c-bg);border-top:3px solid var(--c-blue);font-size:var(--c-fs-small);line-height:1.45;color:var(--c-text)}
+.a-flow li::before{content:counter(f,decimal-leading-zero);display:block;margin-bottom:6px;font:500 11px/1.2 var(--c-mono);color:var(--c-blue)}
+.a-flow li.a-flow__stop{border-top-color:var(--c-amber)}
+.a-flow li.a-flow__stop::before{color:var(--c-amber)}
+.a-quote{margin:44px 0 0;padding-inline-start:16px;border-inline-start:3px solid var(--c-amber)}
+.a-quote p{margin:0;max-width:60ch;font:600 var(--c-fs-lead)/1.45 var(--c-body);color:var(--c-fg)}
+.a-quote footer{margin-top:8px;font-size:var(--c-fs-small);color:var(--c-muted)}
+.a-notes{margin-top:44px}
+.a-notes h3{margin:0 0 12px}
+.a-notes ul{margin:0;padding-inline-start:18px;display:grid;gap:8px;font-size:var(--c-fs-small);line-height:1.5;color:var(--c-text)}
+.a-notes .c-link{margin-top:14px}
+@media (max-width:1100px){
+  .a-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .a-flow li.a-flow__stop{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .a-case{padding:22px 18px}
+  .a-flow{grid-template-columns:1fr}
+}
 @media (max-width:1100px){
   .a-week{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
   .a-day,.a-day:first-child{padding:18px 0 22px;border-inline-start:0;border-bottom:1px solid var(--c-rule)}
@@ -139,18 +164,44 @@ html[dir="rtl"] .a-cred>div{padding:16px 0 0 24px}
 <section class="c-sec" id="week" aria-labelledby="week-title">
   <div class="c-wrap">
     <div class="c-head">
-      <p class="c-kicker"><span class="c-idx">03</span> מהנדס מבפנים</p>
-      <h2 class="c-h2" id="week-title">שבוע של מהנדס מבפנים.</h2>
-      <p class="c-lead">מהנדס AI של MLAIA עובד אצלכם בארגון, יום-יום, לצד הצוותים. חלק מהזמן הוא מלמד אנשים, וחלק מהזמן הוא בונה להם skills וסוכנים. כך עשוי להיראות שבוע כזה.</p>
+      <p class="c-kicker"><span class="c-idx">03</span> מהשטח</p>
+      <h2 class="c-h2" id="week-title">מהנדס AI מבפנים, אצל לקוח.</h2>
+      <p class="c-lead">מהנדס של MLAIA בונה אצל אחד הלקוחות שלנו סוכני AI שמטפלים בבקשות גישה והרשאות בכלי ניהול השירות של הארגון. ככה נראית העבודה, לפי התשובות שלו. שם הלקוח לא מופיע.</p>
     </div>
-    <p class="a-week-key"><span class="a-key a-key--teach">מלמדים אנשים</span><span class="a-key a-key--build">בונים skills וסוכנים</span><span>שבוע לדוגמה, להמחשה. לא תיעוד של לקוח מסוים.</span></p>
-    <ol class="a-week" aria-label="שבוע לדוגמה, ראשון עד חמישי">
-      <li class="a-day"><h3>ראשון</h3><ul><li class="a-task a-task--teach"><b>הדרכה</b>סדנת <span lang="en">Copilot</span> לצוות המכירות, על הנתונים שלהם.</li></ul></li>
-      <li class="a-day"><h3>שני</h3><ul><li class="a-task a-task--build"><b>בנייה</b>skill לצוות התמיכה שמסכם פניות ומנסח טיוטת תשובה.</li><li class="a-task a-task--teach"><b>הדרכה</b>ליווי אישי למנהלים, אחד על אחד.</li></ul></li>
-      <li class="a-day"><h3>שלישי</h3><ul><li class="a-task a-task--teach"><b>הדרכה</b>עדכון מדיניות הנתונים יחד עם צוות אבטחת המידע.</li></ul></li>
-      <li class="a-day"><h3>רביעי</h3><ul><li class="a-task a-task--build"><b>בנייה</b>סוכן שמחבר את ה-CRM לדוח השבועי.</li></ul></li>
-      <li class="a-day"><h3>חמישי</h3><ul><li class="a-task a-task--teach"><b>הדרכה</b>מדידה: מי משתמש במה, ואיפה נתקעים.</li><li class="a-task a-task--build"><b>בנייה</b>זיהוי מקום ל-ML, כמו <a href="/blog-demand-forecasting.html">חיזוי ביקוש</a>.<br><a class="c-link" href="/he/predictive-intelligence/">לחיזוי וניתוח סיבתי ←</a></li></ul></li>
+    <p class="a-week-key"><span class="a-key a-key--teach">מלמדים אנשים</span><span class="a-key a-key--build">בונים skills וסוכנים</span><span>מה ממלא שבוע עבודה רגיל.</span></p>
+    <ol class="a-week" aria-label="מה ממלא שבוע עבודה רגיל">
+      <li class="a-day"><h3>מאפיינים</h3><ul><li class="a-task a-task--build"><b>בנייה</b>ממפים את השלבים, כללי ההחלטה, מקורות המידע והמקרים החריגים, ומוודאים שהנוהל ברור וחד-משמעי.</li></ul></li>
+      <li class="a-day"><h3>בונים ובודקים</h3><ul><li class="a-task a-task--build"><b>בנייה</b>בונים את הסוכן, בודקים כל שינוי בסביבת בדיקות, ורק אחר כך מעלים לייצור.</li></ul></li>
+      <li class="a-day"><h3>מפעילים</h3><ul><li class="a-task a-task--build"><b>בנייה</b>עוקבים אחרי הריצות, מטפלים בחריגים ומעדכנים את הסוכנים כשהנהלים משתנים.</li></ul></li>
+      <li class="a-day"><h3>מלמדים</h3><ul><li class="a-task a-task--teach"><b>הדרכה</b>הדרכות אישיות והדרכות לצוותים.</li></ul></li>
+      <li class="a-day"><h3>מדווחים</h3><ul><li class="a-task a-task--teach"><b>הדרכה</b>כותבים הוראות שימוש, דוחות ריצה ועדכונים להנהלה.</li></ul></li>
     </ol>
+    <p class="a-tools"><b>כלים:</b> <span lang="en">Claude</span> (skills וסוכנים) ו-<span lang="en">GitHub Copilot</span>. <b>מחוברים אל:</b> <span lang="en">ServiceNow, Microsoft 365 / Graph, SharePoint, GitHub, Jira, Confluence</span>. <b>עובדים עם:</b> צוות התמיכה (<span lang="en">Service Desk</span>), בעלי קבוצות ומאשרים, אבטחת מידע, צוותי פיתוח והנהלה.</p>
+
+    <div class="a-case">
+      <h3>דוגמה: סוכן לבקשות גישה</h3>
+      <p>לפני הסוכן, בקשות גישה חיכו זמן רב לטיפול ידני, לא תמיד היה ברור מי המאשר הנכון, והניתוב בין נציגים לא היה עקבי.</p>
+      <ol class="a-flow" aria-label="מה הסוכן עושה, שלב אחרי שלב">
+        <li>מקבל בקשת גישה לכלי.</li>
+        <li>קורא את נוהל הארגון בזמן אמת.</li>
+        <li>בודק את שרשרת המנהלים וטבלת ההרשאות ומאתר את המאשר הנכון.</li>
+        <li>שולח לאישור וסוגר את המשימה.</li>
+        <li class="a-flow__stop">במקרה לא ברור הוא עוצר ומעביר לטיפול ידני.</li>
+      </ol>
+      <p>מה זה חוסך: שעות אדם, פחות עבודה ידנית חוזרת לצוות התמיכה, טיפול מהיר יותר בבקשות, והחלטות עקביות לפי הנוהל עם תיעוד מלא בכל כרטיס.</p>
+    </div>
+
+    <blockquote class="a-quote">
+      <p>״מה שלקח לי הכי הרבה זמן ללמוד: לטפל בחריגים ובנהלים לא ברורים, ולוודא שהסוכן עוצר ולא מנחש.״</p>
+      <footer>מהנדס AI של MLAIA</footer>
+    </blockquote>
+
+    <div class="c-cells c-cells--4 a-notes">
+      <article class="c-cell"><h3>מה מודדים</h3><ul><li>כמה בקשות טופלו אוטומטית לעומת ידנית.</li><li>כמה זמן עובר מפתיחת הבקשה ועד שהיא נותבה.</li><li>כמה בקשות הועברו לבדיקה ידנית, ולמה.</li><li>כמה טעויות ניתוב היו.</li></ul></article>
+      <article class="c-cell"><h3>מה מעכב אימוץ</h3><ul><li>אבטחה והרשאות: למי מותר לכתוב למערכות ייצור.</li><li>אמון: צריך להוכיח שהסוכן לא טועה.</li><li>נהלים לא מעודכנים או לא חד-משמעיים.</li><li>בדיקת אבטחת מידע שכל skill עובר לפני שהוא מתפרסם.</li></ul></article>
+      <article class="c-cell"><h3>ההמלצות לארגון שמתחיל</h3><ul><li>להגדיר את התהליך לפני שבונים סוכן.</li><li>להתחיל מתהליך אחד, חוזר ומתועד היטב.</li><li>לעבוד בסביבת בדיקות לפני ייצור.</li><li>להשאיר אדם בלולאה בכל מקרה גבולי.</li></ul></article>
+      <article class="c-cell"><h3>מה הלאה</h3><ul><li>זיהוי דפוסים בבקשות חוזרות כדי לחזות עומסים.</li><li>סיווג אוטומטי של כרטיסים נכנסים.</li><li>זיהוי מוקדם של נהלים לא עקביים.</li><li>אוטומציה של מתן ההרשאה עצמה, לא רק של הניתוב.</li></ul><a class="c-link" href="/he/predictive-intelligence/">לחיזוי וניתוח סיבתי ←</a></article>
+    </div>
   </div>
 </section>
 
