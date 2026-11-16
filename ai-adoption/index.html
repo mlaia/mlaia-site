@@ -37,6 +37,31 @@
 .a-task b{display:block;margin-bottom:4px;font:500 11px/1.2 var(--c-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-amber)}
 .a-task--build b{color:var(--c-blue)}
 .a-task a{display:inline-block;margin-top:6px}
+.a-tools{margin:22px 0 0;font-size:var(--c-fs-small);line-height:1.6;color:var(--c-muted)}
+.a-tools b{color:var(--c-fg);font-weight:600}
+.a-case{margin:44px 0 0;padding:28px;background:var(--c-bg-2);border-inline-start:3px solid var(--c-blue)}
+.a-case h3{margin:0 0 10px;font:600 var(--c-fs-h3)/1.25 var(--c-display);color:var(--c-fg)}
+.a-case p{margin:0;max-width:72ch;color:var(--c-text)}
+.a-flow{list-style:none;counter-reset:f;margin:20px 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.a-flow li{counter-increment:f;padding:12px 14px;background:var(--c-bg);border-top:3px solid var(--c-blue);font-size:var(--c-fs-small);line-height:1.45;color:var(--c-text)}
+.a-flow li::before{content:counter(f,decimal-leading-zero);display:block;margin-bottom:6px;font:500 11px/1.2 var(--c-mono);color:var(--c-blue)}
+.a-flow li.a-flow__stop{border-top-color:var(--c-amber)}
+.a-flow li.a-flow__stop::before{color:var(--c-amber)}
+.a-quote{margin:44px 0 0;padding-inline-start:16px;border-inline-start:3px solid var(--c-amber)}
+.a-quote p{margin:0;max-width:60ch;font:600 var(--c-fs-lead)/1.45 var(--c-body);color:var(--c-fg)}
+.a-quote footer{margin-top:8px;font-size:var(--c-fs-small);color:var(--c-muted)}
+.a-notes{margin-top:44px}
+.a-notes h3{margin:0 0 12px}
+.a-notes ul{margin:0;padding-inline-start:18px;display:grid;gap:8px;font-size:var(--c-fs-small);line-height:1.5;color:var(--c-text)}
+.a-notes .c-link{margin-top:14px}
+@media (max-width:1100px){
+  .a-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .a-flow li.a-flow__stop{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .a-case{padding:22px 18px}
+  .a-flow{grid-template-columns:1fr}
+}
 @media (max-width:1100px){
   .a-week{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
   .a-day,.a-day:first-child{padding:18px 0 22px;border-inline-start:0;border-bottom:1px solid var(--c-rule)}
@@ -138,18 +163,44 @@
 <section class="c-sec" id="week" aria-labelledby="week-title">
   <div class="c-wrap">
     <div class="c-head">
-      <p class="c-kicker"><span class="c-idx">03</span> An engineer on the inside</p>
-      <h2 class="c-h2" id="week-title">A week with an engineer on the inside.</h2>
-      <p class="c-lead">An MLAIA AI engineer works inside your organisation, day to day, next to your teams. Part of the time they teach people, and part of the time they build skills and agents for them. This is what such a week can look like.</p>
+      <p class="c-kicker"><span class="c-idx">03</span> From the field</p>
+      <h2 class="c-h2" id="week-title">An AI engineer on the inside, at a client.</h2>
+      <p class="c-lead">At one of our clients, an MLAIA engineer builds AI agents that handle access and permission requests in the organisation's service management tool. This is what the work looks like, in the engineer's own answers. The client is not named.</p>
     </div>
-    <p class="a-week-key"><span class="a-key a-key--teach">Teaching people</span><span class="a-key a-key--build">Building skills and agents</span><span>An illustrative week, not a record of any one client.</span></p>
-    <ol class="a-week" aria-label="An illustrative week, Sunday to Thursday">
-      <li class="a-day"><h3>Sunday</h3><ul><li class="a-task a-task--teach"><b>Teaching</b>A Copilot workshop for the sales team, on their own data.</li></ul></li>
-      <li class="a-day"><h3>Monday</h3><ul><li class="a-task a-task--build"><b>Building</b>A support skill that summarises tickets and drafts a reply.</li><li class="a-task a-task--teach"><b>Teaching</b>One-on-one coaching for managers.</li></ul></li>
-      <li class="a-day"><h3>Tuesday</h3><ul><li class="a-task a-task--teach"><b>Teaching</b>Updating the data policy with the security team.</li></ul></li>
-      <li class="a-day"><h3>Wednesday</h3><ul><li class="a-task a-task--build"><b>Building</b>An agent that connects the CRM to the weekly report.</li></ul></li>
-      <li class="a-day"><h3>Thursday</h3><ul><li class="a-task a-task--teach"><b>Teaching</b>Measuring who uses what, and where they get stuck.</li><li class="a-task a-task--build"><b>Building</b>Spotting a place for ML, such as <a href="/blog-demand-forecasting.html">demand forecasting</a>.<br><a class="c-link" href="/predictive-intelligence/">Prediction &amp; causal analysis →</a></li></ul></li>
+    <p class="a-week-key"><span class="a-key a-key--teach">Teaching people</span><span class="a-key a-key--build">Building skills and agents</span><span>What fills a regular working week.</span></p>
+    <ol class="a-week" aria-label="What fills a regular working week">
+      <li class="a-day"><h3>Specify</h3><ul><li class="a-task a-task--build"><b>Building</b>Map the steps, the decision rules, the data sources and the exceptions, and make sure the procedure is clear and unambiguous.</li></ul></li>
+      <li class="a-day"><h3>Build and test</h3><ul><li class="a-task a-task--build"><b>Building</b>Build the agent, test every change in a staging environment, and only then release it to production.</li></ul></li>
+      <li class="a-day"><h3>Run</h3><ul><li class="a-task a-task--build"><b>Building</b>Follow the runs, handle the exceptions, and update the agents when procedures change.</li></ul></li>
+      <li class="a-day"><h3>Teach</h3><ul><li class="a-task a-task--teach"><b>Teaching</b>One-on-one training and team sessions.</li></ul></li>
+      <li class="a-day"><h3>Report</h3><ul><li class="a-task a-task--teach"><b>Teaching</b>Write usage guides, run reports and updates for management.</li></ul></li>
     </ol>
+    <p class="a-tools"><b>Tools:</b> Claude (skills and agents) and GitHub Copilot, connected to ServiceNow, Microsoft 365 and Graph, SharePoint, GitHub, Jira and Confluence. <b>Works with:</b> the Service Desk, group owners and approvers, information security, development teams and management.</p>
+
+    <div class="a-case">
+      <h3>Example: an access request agent</h3>
+      <p>Before the agent, access requests waited a long time for manual handling, it was not always clear who the right approver was, and routing between agents on the desk was inconsistent.</p>
+      <ol class="a-flow" aria-label="What the agent does, step by step">
+        <li>Receives a request for access to a tool.</li>
+        <li>Reads the organisation's procedure at that moment.</li>
+        <li>Checks the management chain and the permissions table, and finds the right approver.</li>
+        <li>Sends it for approval and closes the task.</li>
+        <li class="a-flow__stop">When a case is unclear, it stops and hands it to a person.</li>
+      </ol>
+      <p>What it saves: staff hours, less repetitive manual work for the support team, faster handling of requests, and consistent decisions that follow the procedure, with a full record in every ticket.</p>
+    </div>
+
+    <blockquote class="a-quote">
+      <p>“What took me longest to learn: handling exceptions and unclear procedures, and making sure the agent stops instead of guessing.”</p>
+      <footer>An MLAIA AI engineer</footer>
+    </blockquote>
+
+    <div class="c-cells c-cells--4 a-notes">
+      <article class="c-cell"><h3>What we measure</h3><ul><li>How many requests were handled automatically, and how many by hand.</li><li>How long it takes from opening a request until it is routed.</li><li>How many requests went to manual review, and why.</li><li>How many routing errors there were.</li></ul></article>
+      <article class="c-cell"><h3>What slows adoption</h3><ul><li>Security and permissions: who may write to production systems.</li><li>Trust: you have to show the agent does not make mistakes.</li><li>Procedures that are out of date or ambiguous.</li><li>The security review every skill passes before it is published.</li></ul></article>
+      <article class="c-cell"><h3>Advice for an organisation starting out</h3><ul><li>Define the process before you build an agent.</li><li>Start with one process that repeats and is well documented.</li><li>Work in a staging environment before production.</li><li>Keep a person in the loop for every borderline case.</li></ul></article>
+      <article class="c-cell"><h3>What comes next</h3><ul><li>Finding patterns in repeated requests to forecast load.</li><li>Classifying incoming tickets automatically.</li><li>Spotting inconsistent procedures early.</li><li>Automating the granting of access itself, not only the routing.</li></ul><a class="c-link" href="/predictive-intelligence/">Prediction &amp; causal analysis →</a></article>
+    </div>
   </div>
 </section>
 
