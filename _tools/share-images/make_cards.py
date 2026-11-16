@@ -156,7 +156,7 @@ for slug, title, sub, items in [
 MED_LAB_DEMOS = ["Heart rate from a noisy ECG", "Patient-level leakage", "Calibration & thresholds",
                  "Scanner shift", "Dice vs clinical error", "Note de-identification"]
 CARDS["og/medical-lab.png"] = side("Interactive medical AI lab", "Interactive<br>Medical AI Lab.",
-                                   "Fourteen browser demos on synthetic data. No patient data, nothing uploaded.", "mlaia.com/medical-ai/lab",
+                                   "Fifteen browser demos on synthetic data. No patient data, nothing uploaded.", "mlaia.com/medical-ai/lab",
                                    rows(MED_LAB_DEMOS))
 for slug, title, sub, items in [
     ("heart-rate-ecg", "Heart rate from<br>a noisy ECG.", "Right on average, wrong beat by beat.",
@@ -186,6 +186,8 @@ for slug, title, sub, items in [
      ["Labelled cases per month", "Drift per month", "Alarm margin", "Months undetected"]),
     ("alert-burden", "Alert burden.", "A good AUC, an alert every half hour.",
      ["Model AUC", "Sensitivity", "Patients per nurse", "Alerts per shift"]),
+    ("confounder-shift", "Confounder shift<br>in clinical AI.", "Age is a prior. Keep it out of the evidence.",
+     ["Age link in the study", "Age link in use", "Study prior vs local prior", "Stated vs actual risk"]),
 ]:
     CARDS[f"og/lab-{slug}.png"] = side("Interactive medical AI lab", title, sub, f"mlaia.com/medical-ai/lab/{slug}", rows(items))
 
