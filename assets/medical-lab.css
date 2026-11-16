@@ -92,7 +92,7 @@
 .ml-vol:focus-visible{outline:3px solid var(--c-focus);outline-offset:2px}
 
 /* ---------- 09 Subgroups: bars beside the ROC chart ---------- */
-.ml-b-amber{background:var(--c-amber)}
+.ml-b-amber{background:var(--c-amber)}.ml-b-red{background:var(--lab-red)}.ml-b-muted{background:var(--c-muted)}
 .ml-charts .ml-bars{border-top:0;padding-top:0}
 .ml-charts .ml-bars__group:first-child{margin-top:0}
 .ml-charts .ml-bar{grid-template-columns:104px minmax(0,1fr) 42px;gap:8px;font-size:13px}
