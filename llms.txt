@@ -69,7 +69,7 @@ AI for clinical records, medical images and biosignals, for hospitals and MedTec
   - [Positive predictive value and prevalence demo (3D)](https://www.mlaia.com/medical-ai/lab/predictive-value-prevalence/) — PPV as a surface over prevalence and specificity; 90% sensitive and 90% specific gives 8.3% at 1% prevalence
   - [Shortcut learning in medical imaging AI demo](https://www.mlaia.com/medical-ai/lab/shortcut-learning/) — a hospital tag that goes with the diagnosis: AUC falls from 0.94 to 0.64 at a new hospital
   - [Slice-by-slice segmentation of a 3D lesion demo (3D)](https://www.mlaia.com/medical-ai/lab/slice-by-slice-segmentation/) — per-slice Dice 0.98 next to one lesion reported as three, with the wrong length and volume
-  - [Confounder shift in clinical AI demo](https://www.mlaia.com/medical-ai/lab/confounder-shift/) — a model that adds age to the image scores AUC 0.83 in the study and 0.64 where age no longer tracks disease; the image alone scores 0.72, and keeping age as a replaceable prior recovers it
+  - [Confounder shift in clinical AI demo](https://www.mlaia.com/medical-ai/lab/confounder-shift/) — a sleep apnea model that adds BMI to an oximetry signal scores AUC 0.83 in the study and 0.64 where BMI no longer tracks apnea; the signal alone scores 0.72, and keeping BMI as a replaceable prior recovers it
 
 ### 3. Forecasting & Causal Analysis
 Forecasts of bookings, revenue, churn and demand, and causal analysis of which actions can change an outcome, with the assumptions stated.

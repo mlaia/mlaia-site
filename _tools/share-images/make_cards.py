@@ -186,8 +186,8 @@ for slug, title, sub, items in [
      ["Labelled cases per month", "Drift per month", "Alarm margin", "Months undetected"]),
     ("alert-burden", "Alert burden.", "A good AUC, an alert every half hour.",
      ["Model AUC", "Sensitivity", "Patients per nurse", "Alerts per shift"]),
-    ("confounder-shift", "Confounder shift<br>in clinical AI.", "Age is a prior. Keep it out of the evidence.",
-     ["Age link in the study", "Age link in use", "Study prior vs local prior", "Stated vs actual risk"]),
+    ("confounder-shift", "Confounder shift<br>in clinical AI.", "BMI is a prior. Keep it out of the evidence.",
+     ["BMI link in the study", "BMI link in use", "Study prior vs local prior", "Stated vs actual risk"]),
 ]:
     CARDS[f"og/lab-{slug}.png"] = side("Interactive medical AI lab", title, sub, f"mlaia.com/medical-ai/lab/{slug}", rows(items))
 
