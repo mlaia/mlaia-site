@@ -196,25 +196,26 @@ function alerts(aucv,sens,P,k){
 }
 
 /* ---------- 15 Confounder shift: prior and evidence ---------- */
-// Two scores per patient, normal and independent given the diagnosis: an age score z and an image
-// score x. In the study the diseased are older, by dz; in the new population by link*dz. The image
-// score differs by dx everywhere. A share `leak` of the age evidence can be read from the image, so a
-// plain image model learns it. Every method scores a*x+b*z, so its AUC has a closed form, and so does
-// the actual risk behind a stated risk. Prevalence is CF.PREV in both populations.
+// A sleep apnea model. Two scores per patient, normal and independent given the diagnosis: a BMI
+// score z and a signal score x from an overnight recording. In the study the diseased are heavier,
+// by dz; in the new population by link*dz. The signal score differs by dx everywhere. A share `leak`
+// of the BMI evidence can be read from the recording, so a plain signal model learns it. Every method
+// scores a*x+b*z, so its AUC has a closed form, and so does the actual risk behind a stated risk.
+// Prevalence is CF.PREV in both populations.
 const CF={PREV:0.2,PZ:1.5,PX:1.2};
 function confounder(aucZ,aucX,leak,link){
   const dz=Math.SQRT2*PhiInv(aucZ),dx=Math.SQRT2*PhiInv(aucX),L0=Math.log(CF.PREV/(1-CF.PREV)),sig=v=>1/(1+Math.exp(-v));
   const auc=(a,b,l)=>Phi((a*dx+b*l*dz)/Math.sqrt(2*(a*a+b*b)));
   // b as a function of the link in the population where the model is used
-  const defs={age:{a:0,b:()=>1},image:{a:dx,b:()=>0},plain:{a:dx,b:()=>leak*dz},study:{a:dx,b:()=>dz},local:{a:dx,b:l=>l*dz}};
+  const defs={bmi:{a:0,b:()=>1},signal:{a:dx,b:()=>0},plain:{a:dx,b:()=>leak*dz},study:{a:dx,b:()=>dz},local:{a:dx,b:l=>l*dz}};
   const out={dz,dx,curves:{},links:[]};for(let i=0;i<=40;i++)out.links.push(-1+i/20);
   for(const k in defs){const m=defs[k];out[k]={study:auc(m.a,k==='local'?dz:m.b(1),1),here:auc(m.a,m.b(link),link)};out.curves[k]=out.links.map(l=>auc(m.a,m.b(l),l));}
-  // stated log-odds S = L0 + dx*x - dx^2/2 + d*z - d^2/2 for a model that assumes an age difference d;
+  // stated log-odds S = L0 + dx*x - dx^2/2 + d*z - d^2/2 for a model that assumes a BMI difference d;
   // actual log-odds behind S where the real difference is link*dz
   const calib=d=>{const v=dx*dx+d*d,m0=L0-dx*dx/2-d*d/2,m1=m0+dx*dx+d*link*dz,slope=(m1-m0)/v,mid=(m1+m0)/2,act=S=>sig(L0+slope*(S-mid)),sd=Math.sqrt(v),lo=Math.min(m0,m1)-2.2*sd,hi=Math.max(m0,m1)+2.2*sd,pts=[];
     for(let i=0;i<=60;i++){const S=lo+(hi-lo)*i/60;pts.push([sig(S),act(S)]);}return{pts,at50:act(0)};};
   out.cal={plain:calib(leak*dz),study:calib(dz),local:calib(link*dz)};
-  // one older patient with a mildly suspicious image
+  // one heavy patient with a suspicious recording
   const lz=d=>d*CF.PZ-d*d/2,lx=dx*CF.PX-dx*dx/2;
   out.patient={priorStudy:sig(L0+lz(dz)),priorHere:sig(L0+lz(link*dz)),lr:Math.exp(lx),postStudy:sig(L0+lz(dz)+lx),postHere:sig(L0+lz(link*dz)+lx)};
   return out;
@@ -553,20 +554,20 @@ function initAlerts(){
 
 function initConfounder(){
   if(!$('confounder'))return;
-  const za=$('cf-age'),xa=$('cf-image'),lk=$('cf-leak'),li=$('cf-link');
-  const M=[['age','Age alone',COL.muted,'ml-b-muted'],['image','Image evidence alone',COL.fg,'ml-b-fg'],['plain','Plain image model',COL.red,'ml-b-red'],['study','Image + age, study prior',COL.amber,'ml-b-amber'],['local','Image + age, local prior',COL.blue,'ml-b-blue']];
+  const za=$('cf-bmi'),xa=$('cf-signal'),lk=$('cf-leak'),li=$('cf-link');
+  const M=[['bmi','BMI alone',COL.muted,'ml-b-muted'],['signal','Signal evidence alone',COL.fg,'ml-b-fg'],['plain','Plain signal model',COL.red,'ml-b-red'],['study','Signal + BMI, study prior',COL.amber,'ml-b-amber'],['local','Signal + BMI, local prior',COL.blue,'ml-b-blue']];
   const linkWord=l=>l===1?'same as the study':l===0?'none':l===-1?'reversed':l<0?'reversed, '+Math.round(-l*100)+'% as strong':Math.round(l*100)+'% as strong';
   const run=()=>{const link=li.value/100,r=confounder(za.value/100,xa.value/100,lk.value/100,link),f=v=>v.toFixed(2);
-    $('cf-age-value').textContent=f(za.value/100);$('cf-image-value').textContent=f(xa.value/100);$('cf-leak-value').textContent=lk.value+'%';$('cf-link-value').textContent=linkWord(link);
-    $('cf-study').textContent=f(r.study.study);$('cf-here').textContent=f(r.study.here);$('cf-here').closest('div').classList.toggle('ml-bad',r.study.here<r.image.here-0.005);
-    $('cf-img').textContent=f(r.image.here);$('cf-local').textContent=f(r.local.here);
+    $('cf-bmi-value').textContent=f(za.value/100);$('cf-signal-value').textContent=f(xa.value/100);$('cf-leak-value').textContent=lk.value+'%';$('cf-link-value').textContent=linkWord(link);
+    $('cf-study').textContent=f(r.study.study);$('cf-here').textContent=f(r.study.here);$('cf-here').closest('div').classList.toggle('ml-bad',r.study.here<r.signal.here-0.005);
+    $('cf-sig').textContent=f(r.signal.here);$('cf-local').textContent=f(r.local.here);
     const X=l=>70+(l+1)/2*530,Y=v=>190-clamp(v,0,1)*160;
-    let s=`<title id="cf-plot-title">AUC against the age link in the new population</title><desc id="cf-plot-desc">With the study prior the AUC is ${f(r.study.study)} where the link is the same as in the study and ${f(r.study.here)} at the selected link. Image evidence alone is ${f(r.image.here)} everywhere.</desc><g aria-hidden="true" ${MONO} fill="${COL.muted}">`;
+    let s=`<title id="cf-plot-title">AUC against the BMI link in the new population</title><desc id="cf-plot-desc">With the study prior the AUC is ${f(r.study.study)} where the link is the same as in the study and ${f(r.study.here)} at the selected link. Signal evidence alone is ${f(r.signal.here)} everywhere.</desc><g aria-hidden="true" ${MONO} fill="${COL.muted}">`;
     for(const v of [0,0.25,0.5,0.75,1])s+=`<line x1="70" x2="600" y1="${Y(v)}" y2="${Y(v)}" stroke="${v===0.5?COL.muted:COL.rule}"${v===0.5?' stroke-dasharray="2 4"':''}/>`+(v*4%2===0?`<text class="ml-t" x="62" y="${Y(v)+4}" text-anchor="end">${v.toFixed(1)}</text>`:'');
     s+=`<text class="ml-t" x="${X(-1)}" y="214" text-anchor="start">reversed</text><text class="ml-t" x="${X(0)}" y="214" text-anchor="middle">none</text><text class="ml-t" x="${X(1)}" y="214" text-anchor="end">as in study</text>`;
-    s+=`<text class="ml-t" x="335" y="246" text-anchor="middle">age link where the model is used</text><text class="ml-t" x="600" y="20" text-anchor="end">AUC</text></g>`;
+    s+=`<text class="ml-t" x="335" y="246" text-anchor="middle">BMI link where the model is used</text><text class="ml-t" x="600" y="20" text-anchor="end">AUC</text></g>`;
     s+=`<line x1="${X(link)}" x2="${X(link)}" y1="30" y2="190" stroke="${COL.fg}" stroke-width="1" opacity=".5"/>`;
-    for(const [k,,c] of M)s+=`<polyline points="${r.links.map((l,i)=>X(l).toFixed(1)+','+Y(r.curves[k][i]).toFixed(1)).join(' ')}" fill="none" stroke="${c}" stroke-width="${k==='age'?1.5:2.5}"${k==='age'?' stroke-dasharray="6 4"':''}/>`;
+    for(const [k,,c] of M)s+=`<polyline points="${r.links.map((l,i)=>X(l).toFixed(1)+','+Y(r.curves[k][i]).toFixed(1)).join(' ')}" fill="none" stroke="${c}" stroke-width="${k==='bmi'?1.5:2.5}"${k==='bmi'?' stroke-dasharray="6 4"':''}/>`;
     for(const [k,,c] of M)s+=`<circle cx="${X(link).toFixed(1)}" cy="${Y(r[k].here).toFixed(1)}" r="5" fill="${c}" stroke="#070908" stroke-width="1.5"/>`;
     $('cf-plot').innerHTML=s;
     const row=(l,v,cls)=>`<div class="ml-bar is-current"><span>${l}</span><div class="ml-bar__track"><b class="${cls}" style="width:${(clamp(v,0,1)*100).toFixed(1)}%"></b></div><strong>${f(v)}</strong></div>`;
@@ -579,10 +580,10 @@ function initConfounder(){
     for(const [k,col] of [['plain',COL.red],['study',COL.amber]])c+=`<polyline points="${r.cal[k].pts.map(p=>P(p[0]).toFixed(1)+','+Q(p[1]).toFixed(1)).join(' ')}" fill="none" stroke="${col}" stroke-width="2.5"/>`;
     c+=`<line x1="${P(0.5)}" x2="${P(0.5)}" y1="${Q(0.5)}" y2="${Q(r.cal.study.at50)}" stroke="${COL.amber}" stroke-dasharray="3 3"/><circle cx="${P(0.5)}" cy="${Q(r.cal.study.at50)}" r="5" fill="${COL.amber}" stroke="#070908" stroke-width="1.5"/>`;
     $('cf-cal').innerHTML=c;
-    const p=r.patient,gap=r.image.here-r.study.here,where=link===0?'Where age is unrelated to the disease':link===1?'Where the age link is the same as in the study':'Where the age link is '+linkWord(link);
-    $('cf-detail').textContent=(gap>0.005?where+', adding age with the study prior scores '+f(r.study.here)+', below the '+f(r.image.here)+' of the image evidence alone'+(r.study.here<0.5?' and below a coin flip':'')+'.':where+', adding age with the study prior scores '+f(r.study.here)+' against '+f(r.image.here)+' for the image evidence alone.')+
-      ' A plain image model scores '+f(r.plain.here)+'. A stated risk of 50% from the study-prior model is really '+pct0(r.cal.study.at50)+'.';
-    $('cf-patient').textContent='One older patient with a suspicious image: age alone puts the risk at '+pct0(p.priorStudy)+' in the study and '+pct0(p.priorHere)+' here. The image multiplies the odds by '+p.lr.toFixed(1)+'. Stated risk: '+pct0(p.postStudy)+' with the study prior, '+pct0(p.postHere)+' with the local prior.';};
+    const p=r.patient,gap=r.signal.here-r.study.here,where=link===0?'Where BMI is unrelated to the disease':link===1?'Where the BMI link is the same as in the study':'Where the BMI link is '+linkWord(link);
+    $('cf-detail').textContent=(gap>0.005?where+', adding BMI with the study prior scores '+f(r.study.here)+', below the '+f(r.signal.here)+' of the signal evidence alone'+(r.study.here<0.5?' and below a coin flip':'')+'.':where+', adding BMI with the study prior scores '+f(r.study.here)+' against '+f(r.signal.here)+' for the signal evidence alone.')+
+      ' A plain signal model scores '+f(r.plain.here)+'. A stated risk of 50% from the study-prior model is really '+pct0(r.cal.study.at50)+'.';
+    $('cf-patient').textContent='One heavy patient with a suspicious recording: BMI alone puts the risk at '+pct0(p.priorStudy)+' in the study and '+pct0(p.priorHere)+' here. The recording multiplies the odds by '+p.lr.toFixed(1)+'. Stated risk: '+pct0(p.postStudy)+' with the study prior, '+pct0(p.postHere)+' with the local prior.';};
   const go=scheduler(run);[za,xa,lk,li].forEach(e=>e.addEventListener('input',go));
   $('reset-confounder').addEventListener('click',()=>{za.value=78;xa.value=72;lk.value=50;li.value=0;run();});
   run();
