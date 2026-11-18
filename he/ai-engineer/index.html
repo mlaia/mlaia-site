@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>מהנדס AI לארגון: אסטרטגיה ופיתוח עד ייצור, בלי חצי שנה של גיוס | MLAIA</title><meta name="description" content="מהנדס AI של MLAIA משתלב בארגון שלכם, עם צוות מדעני AI מאחוריו: מיפוי מקרי שימוש, פיילוט שמגיע לייצור, RAG וסוכנים על המערכות שלכם, חיזוי, מדיניות שימוש לפי תיקון 13 והדרכת עובדים."><meta name="robots" content="index, follow"><link rel="canonical" href="https://www.mlaia.com/he/ai-engineer/"><link rel="alternate" hreflang="he" href="https://www.mlaia.com/he/ai-engineer/"><link rel="alternate" hreflang="en" href="https://www.mlaia.com/ai-engineer/"><link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/ai-engineer/"><meta property="og:title" content="מהנדס AI לארגון: אסטרטגיה ופיתוח עד ייצור, בלי חצי שנה של גיוס | MLAIA"><meta property="og:description" content="מהנדס AI של MLAIA משתלב בארגון שלכם, עם צוות מדעני AI מאחוריו: מיפוי מקרי שימוש, פיילוט שמגיע לייצור, RAG וסוכנים על המערכות שלכם, חיזוי, מדיניות שימוש לפי תיקון 13 והדרכת עובדים."><meta property="og:type" content="website"><meta property="og:locale" content="he_IL"><meta property="og:url" content="https://www.mlaia.com/he/ai-engineer/"><meta property="og:image" content="https://www.mlaia.com/assets/og/ai-engineer-he.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://www.mlaia.com/assets/og/ai-engineer-he.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Heebo:wght@300..900&family=Martian+Mono:wdth,wght@87.5,300..600&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/mlaia-c.css"><link rel="stylesheet" href="/assets/c-rtl.css"><script src="/assets/practice.js" defer></script><style>
+/* AI engineer page, design C: page-only pieces (shared system in /assets/mlaia-c.css) */
+.e-intro{max-width:40em}
+.c-hero__row p.e-audience{font:600 var(--c-fs-small)/1.5 var(--c-body);color:var(--c-fg);margin:0 0 14px}
+.e-cta{background:var(--c-bg-2)}
+.c-cell .c-links{margin-top:auto;padding-top:14px}
+.e-table-wrap{border-top:1px solid var(--c-rule)}
+.e-table{width:100%;border-collapse:collapse;font-size:var(--c-fs-small);line-height:1.5}
+.e-table caption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.e-table th,.e-table td{padding:18px 20px;text-align:start;vertical-align:top;border-bottom:1px solid var(--c-rule)}
+.e-table thead th{font:500 12px/1.2 var(--c-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-muted)}
+.e-table tbody th{width:22%;font:600 16px/1.35 var(--c-display);color:var(--c-fg)}
+.e-table td{color:var(--c-text)}
+.e-table .e-us{background:var(--c-bg-2);color:var(--c-fg)}
+.e-table thead .e-us{color:var(--c-blue);border-top:3px solid var(--c-blue)}
+.e-note{margin:18px 0 0;font-size:var(--c-fs-small);color:var(--c-muted)}
+.e-steps{grid-template-columns:repeat(4,minmax(0,1fr))}
+.e-steps .c-step__num{font-size:60px}
+.e-steps .c-step h3{font-size:21px}
+@media (max-width:1100px){
+  .e-steps{grid-template-columns:1fr}
+  .e-steps .c-step,.e-steps .c-step+.c-step{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:20px;padding:24px 0!important;border-left:0!important;border-right:0!important;border-bottom:1px solid var(--c-rule)}
+  .e-steps .c-step__num{grid-row:span 2;margin:0;font-size:52px}
+}
+@media (max-width:640px){
+  .e-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .e-table,.e-table tbody,.e-table tr,.e-table th,.e-table td{display:block;width:auto}
+  .e-table tr{padding:16px 0;border-bottom:1px solid var(--c-rule)}
+  .e-table tbody th{width:auto;padding:0 0 10px;border:0}
+  .e-table td{padding:10px 14px;border:0}
+  .e-table td::before{content:attr(data-label);display:block;margin-bottom:4px;font:500 11px/1.2 var(--c-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-muted)}
+  .e-table td.e-us::before{color:var(--c-blue)}
+  .e-steps .c-step,.e-steps .c-step+.c-step{grid-template-columns:48px minmax(0,1fr);column-gap:14px}
+  .e-steps .c-step__num{font-size:40px}
+}
+</style><link rel="stylesheet" href="/assets/site-shell.css"><script src="/assets/site-shell.js" defer></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"MLAIA מהנדס AI לארגון","serviceType":"מהנדס AI לארגון","description":"מהנדס AI של MLAIA משתלב בארגון שלכם, עם צוות מדעני AI מאחוריו: מיפוי מקרי שימוש, פיילוט שמגיע לייצור, RAG וסוכנים על המערכות שלכם, חיזוי, מדיניות שימוש לפי תיקון 13 והדרכת עובדים.","url":"https://www.mlaia.com/he/ai-engineer/","inLanguage":"he","areaServed":"IL","provider":{"@type":"Organization","@id":"https://www.mlaia.com/#organization","name":"MLAIA Data Science","url":"https://www.mlaia.com/"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"he","mainEntity":[{"@type":"Question","name":"אתם מחליפים גיוס?","acceptedAnswer":{"@type":"Answer","text":"לא. אפשר להתחיל עכשיו ולהמשיך לגייס במקביל. כשהעובד שלכם מגיע, אנחנו מעבירים לו את העבודה, הקוד והתיעוד, ואפשר להמשיך איתנו כצוות תומך."}},{"@type":"Question","name":"הנתונים יוצאים מהארגון?","acceptedAnswer":{"@type":"Answer","text":"לא חייבים. אפשר לבנות ולהריץ את הפתרונות בענן של הארגון או בשרתים שלו (on-prem), ולעבוד רק עם כלים ומודלים שאושרו אצלכם."}},{"@type":"Question","name":"לאילו ארגונים זה מתאים?","acceptedAnswer":{"@type":"Answer","text":"לכל ארגון עם תהליכים ונתונים, גם כשהוא לא חברת טכנולוגיה: ביטוח ופיננסים, בריאות ופארמה, תעשייה, קמעונאות ויבוא, תחבורה ומגזר ציבורי."}},{"@type":"Question","name":"יש התחייבות מינימלית?","acceptedAnswer":{"@type":"Answer","text":"מתחילים מחודש אחד של מיפוי ופיילוט. בסופו מחליטים יחד אם להמשיך, ובאיזה היקף."}},{"@type":"Question","name":"מי המהנדס שיגיע?","acceptedAnswer":{"@type":"Answer","text":"מהנדס AI מהצוות של MLAIA. מאחוריו עומדים מהנדסי AI בוגרי האוניברסיטאות המובילות בארץ, ומובילי AI עם יותר מ-20 שנות ניסיון בתפקידי פיתוח וניהול."}}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MLAIA","item":"https://www.mlaia.com/"},{"@type":"ListItem","position":2,"name":"מהנדס AI לארגון","item":"https://www.mlaia.com/he/ai-engineer/"}]}</script>
+</head>
+<body class="practice-page engineer c-page" data-practice="ai-engineer" data-site-shell="true">
+<nav class="site-quick-nav" aria-label="ניווט מהיר"><a href="/?lang=he" class="site-home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span data-en="Home" data-he="בית">בית</span></a><a href="#contact" class="site-contact-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/></svg><span data-en="Contact us" data-he="צרו קשר">צרו קשר</span></a></nav>
+<a class="c-skip" href="#main">דילוג לתוכן הראשי</a>
+<header class="c-nav">
+  <div class="c-wrap c-nav__inner">
+    <a class="c-logo" href="/?lang=he">MLAIA</a>
+    <button class="p-menu c-menu" type="button" aria-expanded="false" aria-controls="practice-nav">תפריט</button>
+    <nav class="p-nav-links c-nav-links" id="practice-nav" aria-label="ניווט ראשי">
+      <a href="/he/audio-ai/">אודיו ואקוסטיקה</a>
+      <a href="/he/medical-ai/">AI רפואי</a>
+      <a href="/he/predictive-intelligence/">חיזוי וניתוח סיבתי</a>
+      <a href="/he/ai-adoption/">הטמעת AI</a>
+      <a href="/blog.html">תובנות</a>
+      <a href="/ai-engineer/" hreflang="en" lang="en">English</a>
+      <a class="c-btn" href="#contact">לשיחת היכרות</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="c-hero" aria-labelledby="hero-title">
+  <div class="c-wrap c-hero__copy">
+    <nav class="c-crumb" aria-label="פירורי לחם"><a href="/?lang=he">MLAIA</a> / <span>מהנדס AI לארגון</span></nav>
+    <p class="c-kicker">מהנדס AI לארגון</p>
+    <h1 class="c-display" id="hero-title">מהנדס AI לארגון שלכם, <span class="c-accent">בלי חצי שנה של גיוס.</span></h1>
+    <div class="c-hero__row">
+      <div class="e-intro">
+        <p class="e-audience">למנהלים, לסמנכ״לי מערכות מידע ולמובילי חדשנות בארגונים שמחפשים איש AI.</p>
+        <p>מהנדס AI של MLAIA משתלב אצלכם בארגון, עם צוות של מדעני AI מאחוריו. הוא בוחר יחד איתכם מה שווה לבנות, ובונה את זה עד לייצור: עוזרים וסוכנים על המערכות שלכם, מודלים לחיזוי, מדיניות שימוש והדרכה לעובדים.</p>
+      </div>
+      <div class="c-btns">
+        <a href="#contact" class="c-btn" data-book>לתיאום שיחה של 20 דקות <span aria-hidden="true">↖</span></a>
+        <a href="https://wa.me/972524846282" class="c-btn c-btn--ghost" target="_blank" rel="noopener" data-book>לדבר בווטסאפ</a>
+      </div>
+    </div>
+    <h2 class="c-specs-title">התפקיד, כשירות</h2>
+    <dl class="c-specs"><div><dt>התפקיד</dt><dd>אסטרטגיה ופיתוח אצל אותו מהנדס, עם צוות מאחוריו</dd></div><div><dt>ההתחלה</dt><dd>מיפוי ופיילוט אחד בחודש הראשון</dd></div><div><dt>ההיקף</dt><dd>מספר ימים קבוע בשבוע, אצלכם או מרחוק</dd></div></dl>
+  </div>
+</section>
+
+<section class="c-sec" id="familiar" aria-labelledby="familiar-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">01</span> נשמע מוכר?</p>
+      <h2 class="c-h2" id="familiar-title">המשרה פתוחה, וה-AI מחכה.</h2>
+    </div>
+    <div class="c-cells c-cells--4"><article class="c-cell"><span class="c-cell__num">01</span><h3>המשרה פתוחה כבר חודשים</h3><p>פרסמתם משרה ל-AI Lead, ל-AI Enablement או לארכיטקט AI, והמועמד המתאים עוד לא נמצא.</p></article><article class="c-cell"><span class="c-cell__num">02</span><h3>צריך מישהו אסטרטגי וגם מעשי</h3><p>מי שמחליט מה שווה לבנות ומי שיודע לבנות את זה עד הסוף הם בדרך כלל שני אנשים שונים.</p></article><article class="c-cell"><span class="c-cell__num">03</span><h3>פיילוט שלא הגיע לייצור</h3><p>ההדגמה עבדה, ואז נתקעה בהרשאות, בחיבור למערכות ובשאלה מי מתחזק אותה.</p></article><article class="c-cell"><span class="c-cell__num">04</span><h3>עובדים ב-ChatGPT בלי מדיניות</h3><p>הכלים כבר בשימוש, ואין כללים ברורים מה מותר להכניס אליהם ומה אסור.</p></article></div>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" id="what-you-get" aria-labelledby="get-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">02</span> מה מקבלים</p>
+      <h2 class="c-h2" id="get-title">המשימות מהמודעה, מהיום הראשון.</h2>
+      <p class="c-lead">אלה המשימות שמופיעות במודעות דרושים לתפקידי AI בארגונים. כך מהנדס של MLAIA מכסה אותן.</p>
+    </div>
+    <div class="c-cells c-cells--4">
+      <article class="c-cell"><span class="c-cell__num">01</span><h3>מיפוי ותעדוף מקרי שימוש</h3><p>עוברים על התהליכים והנתונים ומדרגים את מקרי השימוש לפי ערך וסיכון. יודעים מה לבנות קודם ומה לדחות.</p></article>
+      <article class="c-cell"><span class="c-cell__num">02</span><h3>פיילוט שמגיע לייצור</h3><p>פיילוט עם מדדי הצלחה שנקבעים מראש. מה שעובד עובר לייצור, עם הרשאות, ניטור ובעלות ברורה.</p></article>
+      <article class="c-cell"><span class="c-cell__num">03</span><h3>RAG, עוזרים וסוכנים</h3><p>עוזרים וסוכני AI שמחוברים למערכות שכבר יש לכם: ERP, CRM, מסמכים ונהלים.</p><p class="c-links"><a class="c-link" href="https://ultrabot.ai/he/knowledge-assistant/" target="_blank" rel="noopener">עוזרי ידע ארגוניים ב-Ultrabot <span aria-hidden="true">↖</span></a></p></article>
+      <article class="c-cell"><span class="c-cell__num">04</span><h3>חיזוי ומודלים על הנתונים</h3><p>חיזוי ביקוש, מכירות, נטישה ומלאי, ומודלים שנבנים על הנתונים של הארגון.</p><p class="c-links"><a class="c-link" href="/he/predictive-intelligence/">חיזוי וניתוח סיבתי ←</a> <a class="c-link" href="https://nextdemand.ai/" target="_blank" rel="noopener">NextDemand <span aria-hidden="true">↖</span></a></p></article>
+      <article class="c-cell"><span class="c-cell__num">05</span><h3>מדיניות שימוש ואבטחה</h3><p>מדיניות שימוש ב-AI ובנתונים, מותאמת לתיקון 13 לחוק הגנת הפרטיות ולנהלי אבטחת המידע שלכם.</p></article>
+      <article class="c-cell"><span class="c-cell__num">06</span><h3>הדרכת עובדים לפי תפקיד</h3><p>סדנאות וליווי לפי תפקיד, על משימות מהעבודה של כל צוות, בכלים שאושרו בארגון.</p><p class="c-links"><a class="c-link" href="/he/ai-adoption/">הטמעת AI בארגון ←</a></p></article>
+      <article class="c-cell"><span class="c-cell__num">07</span><h3>העברת ידע למי שתגייסו</h3><p>קוד, תיעוד ותהליכים מסודרים, וחפיפה לאיש ה-AI שתגייסו בהמשך.</p></article>
+      <article class="c-cell e-cta"><h3>לא בטוחים מה מזה אתם צריכים?</h3><p>בשיחה של 20 דקות נבין מה הארגון מחפש, ונגיד מה היינו עושים בחודש הראשון.</p><a class="c-link" href="#contact" data-book>לתיאום שיחה ←</a></article>
+    </div>
+  </div>
+</section>
+
+<section class="c-sec" id="compare" aria-labelledby="compare-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">03</span> גיוס או MLAIA</p>
+      <h2 class="c-h2" id="compare-title">להשוות לפני שמחליטים.</h2>
+    </div>
+    <div class="e-table-wrap">
+      <table class="e-table">
+        <caption>השוואה בין גיוס עובד AI לבין מהנדס AI של MLAIA</caption>
+        <thead><tr><td></td><th scope="col">גיוס עובד</th><th scope="col" class="e-us">מהנדס AI של MLAIA</th></tr></thead>
+        <tbody><tr><th scope="row">זמן עד שמתחילים</th><td data-label="גיוס עובד">חיפוש, ראיונות, הודעה מוקדמת וקליטה</td><td class="e-us" data-label="מהנדס AI של MLAIA">מתחילים אחרי שיחת היכרות ותיאום, בלי תהליך גיוס</td></tr><tr><th scope="row">עלות</th><td data-label="גיוס עובד">משכורת קבועה ועלויות העסקה</td><td class="e-us" data-label="מהנדס AI של MLAIA">היקף גמיש, לפי מספר הימים בשבוע</td></tr><tr><th scope="row">מומחיות</th><td data-label="גיוס עובד">אדם אחד, עם הניסיון שהביא איתו</td><td class="e-us" data-label="מהנדס AI של MLAIA">מהנדס, ומאחוריו צוות: חיזוי, סוכנים ועוזרים, אודיו ו-AI רפואי</td></tr><tr><th scope="row">אם הוא עוזב</th><td data-label="גיוס עובד">הידע יוצא איתו, והגיוס מתחיל מחדש</td><td class="e-us" data-label="מהנדס AI של MLAIA">העבודה מתועדת, והצוות ממשיך אותה</td></tr><tr><th scope="row">התחייבות</th><td data-label="גיוס עובד">חוזה העסקה</td><td class="e-us" data-label="מהנדס AI של MLAIA">חודש של מיפוי ופיילוט, ואז מחליטים יחד על ההמשך</td></tr></tbody>
+      </table>
+    </div>
+    <p class="e-note">אפשר גם לשלב: להתחיל איתנו עכשיו ולהמשיך לגייס במקביל.</p>
+  </div>
+</section>
+
+<section class="c-sec c-sec--alt" id="how" aria-labelledby="how-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">04</span> איך עובדים</p>
+      <h2 class="c-h2" id="how-title">מתחילים בחודש אחד.</h2>
+    </div>
+    <div class="c-steps e-steps"><article class="c-step"><span class="c-step__num" aria-hidden="true">01</span><h3>ימים קבועים</h3><p>מספר ימים קבוע בשבוע, אצלכם במשרד או מרחוק, לפי מה שמתאים לצוותים.</p></article><article class="c-step"><span class="c-step__num" aria-hidden="true">02</span><h3>החודש הראשון</h3><p>מיפוי של מקרי השימוש ופיילוט אחד, עם מדדי הצלחה שנקבעים מראש.</p></article><article class="c-step"><span class="c-step__num" aria-hidden="true">03</span><h3>מפיילוט לייצור</h3><p>מה שהוכיח את עצמו עובר לייצור, ואחריו מקרה השימוש הבא ברשימה.</p></article><article class="c-step"><span class="c-step__num" aria-hidden="true">04</span><h3>במקביל לגיוס</h3><p>אם אתם מגייסים, ממשיכים במקביל, ובסוף מעבירים את העבודה, הקוד והתיעוד לעובד החדש.</p></article></div>
+  </div>
+</section>
+
+<section class="c-sec" id="faq" aria-labelledby="faq-title">
+  <div class="c-wrap">
+    <div class="c-head">
+      <p class="c-kicker"><span class="c-idx">05</span> שאלות נפוצות</p>
+      <h2 class="c-h2" id="faq-title">תשובות ישירות.</h2>
+    </div>
+    <div class="c-faq">
+      <details><summary>אתם מחליפים גיוס?</summary><p>לא. אפשר להתחיל עכשיו ולהמשיך לגייס במקביל. כשהעובד שלכם מגיע, אנחנו מעבירים לו את העבודה, הקוד והתיעוד, ואפשר להמשיך איתנו כצוות תומך.</p></details>
+      <details><summary>הנתונים יוצאים מהארגון?</summary><p>לא חייבים. אפשר לבנות ולהריץ את הפתרונות בענן של הארגון או בשרתים שלו (on-prem), ולעבוד רק עם כלים ומודלים שאושרו אצלכם.</p></details>
+      <details><summary>לאילו ארגונים זה מתאים?</summary><p>לכל ארגון עם תהליכים ונתונים, גם כשהוא לא חברת טכנולוגיה: ביטוח ופיננסים, בריאות ופארמה, תעשייה, קמעונאות ויבוא, תחבורה ומגזר ציבורי.</p></details>
+      <details><summary>יש התחייבות מינימלית?</summary><p>מתחילים מחודש אחד של מיפוי ופיילוט. בסופו מחליטים יחד אם להמשיך, ובאיזה היקף.</p></details>
+      <details><summary>מי המהנדס שיגיע?</summary><p>מהנדס AI מהצוות של MLAIA. מאחוריו עומדים מהנדסי AI בוגרי האוניברסיטאות המובילות בארץ, ומובילי AI עם יותר מ-20 שנות ניסיון בתפקידי פיתוח וניהול.</p></details>
+      
+    </div>
+  </div>
+</section>
+
+<section class="c-contact" id="contact" aria-labelledby="contact-title">
+  <div class="c-wrap c-contact__grid">
+    <div class="c-contact__copy">
+      <p class="c-kicker">מהנדס AI לארגון</p>
+      <h2 class="c-h2" id="contact-title">לשיחה של 20 דקות על AI בארגון שלכם.</h2>
+      <p>ספרו לנו איזו משרה אתם מנסים לאייש, או מה אתם רוצים ש-AI יעשה אצלכם. נחזור אליכם לתיאום שיחה.</p>
+      <p>נא לא לצרף מסמכים חסויים, פרטי התחברות או מידע אישי על עובדים או לקוחות.</p>
+      <p class="c-mono"><a href="mailto:yochai@mlaia.com" class="ltr">yochai@mlaia.com</a><br>ווטסאפ: <a href="https://wa.me/972524846282" target="_blank" rel="noopener" class="ltr" data-book>+972 52 484 6282</a></p>
+    </div>
+    <form class="p-form c-form" action="https://formspree.io/f/mvzdggyq" method="POST">
+      <input type="hidden" name="practice" value="ai-engineer">
+      <input type="hidden" name="lang" value="he">
+      <div class="c-form__row">
+        <label>שם<input name="name" autocomplete="name" required></label>
+        <label>חברה<input name="company" autocomplete="organization"></label>
+      </div>
+      <label>אימייל בעבודה<input type="email" name="email" autocomplete="email" required></label>
+      <label>מה אתם מחפשים: התפקיד, הצוותים או המשימות<textarea name="message" required></textarea></label>
+      <p>הפנייה שלכם מטופלת בהתאם ל<a href="/privacy.html">מדיניות הפרטיות</a> שלנו <span class="he-en">(באנגלית)</span>.</p>
+      <button type="submit" class="c-btn">לתיאום שיחה ←</button>
+      <p class="p-form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="c-footer">
+  <div class="c-wrap">
+    <div>© 2026 MLAIA Data Science · ישראל · עובדים עם לקוחות בכל העולם</div>
+    <nav aria-label="כותרת תחתונה">
+      <a href="/?lang=he#about">אודות MLAIA</a>
+      <a href="/privacy.html">פרטיות</a>
+      <a href="/accessibility.html">נגישות</a>
+      <a href="/terms.html">תנאי שימוש</a>
+      <button type="button" class="p-cookie-settings">העדפות עוגיות</button>
+    </nav>
+  </div>
+</footer>
+<div class="p-consent c-consent" hidden role="dialog" aria-label="העדפות עוגיות">
+  <p>אנליטיקה אופציונלית עוזרת לנו להבין כיצד משתמשים באתר. אפשר לסרב לאנליטיקה ועדיין להשתמש בכל תכונות האתר. <a href="/privacy.html">מדיניות הפרטיות</a></p>
+  <div class="c-btns">
+    <button class="c-btn" type="button" data-consent="yes">אישור אנליטיקה</button>
+    <button class="c-btn c-btn--ghost" type="button" data-consent="no">סירוב</button>
+  </div>
+</div>
+<script>
+/* practice.js writes English form-status messages; show them in Hebrew on this page. */
+(()=>{const s=document.querySelector('.p-form-status');if(!s)return;const he={'Preview only — nothing was sent.':'תצוגה מקדימה בלבד, שום דבר לא נשלח.','Sending your inquiry…':'הפנייה נשלחת…','Thank you. Your inquiry was sent to MLAIA.':'תודה. הפנייה שלכם נשלחה ל-MLAIA.','Your inquiry could not be sent. Please try again or email yochai@mlaia.com.':'לא הצלחנו לשלוח את הפנייה. נסו שוב או כתבו ל-yochai@mlaia.com.'};new MutationObserver(()=>{const t=he[s.textContent];if(t)s.textContent=t;}).observe(s,{childList:true,characterData:true,subtree:true});})();
+</script>
+</body>
+</html>

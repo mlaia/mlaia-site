@@ -2,7 +2,7 @@
 (()=>{
   'use strict';
   const preview=document.documentElement.dataset.preview==='true';
-  const allowed=['audio-ai','medical-ai','predictive-intelligence','ai-agents','ai-automation','ai-adoption'];
+  const allowed=['audio-ai','medical-ai','predictive-intelligence','ai-agents','ai-automation','ai-adoption','ai-engineer'];
   const requested=new URLSearchParams(location.search).get('practice');
   const practice=document.body.dataset.practice||(allowed.includes(requested)?requested:'general');
   const field=document.getElementById('inquiry-practice');
@@ -39,6 +39,8 @@
   }
   function hasConsent(){try{return JSON.parse(localStorage.getItem('mlaia-cookie-consent')||'{}').analytics===true;}catch{return false;}}
   function track(event,p=practice){if(!preview&&hasConsent()&&typeof window.gtag==='function')window.gtag('event',event,{practice:allowed.includes(p)?p:'general'});}
+  // Booking CTAs (the call and WhatsApp buttons marked data-book) count as book_click, for ads landing pages.
+  document.addEventListener('click',e=>{if(e.target.closest('a[data-book]'))track('book_click');});
   document.addEventListener('click',e=>{if(e.target.closest('a[href="#contact"]'))track('contact_cta_click');else if(e.target.closest('a[href^="https://talk.mlaia.com"]'))track('demo_click');});
   document.addEventListener('mlaia-inquiry-success',e=>track('generate_lead',e.detail?.practice));
   // The AI Agents question box opens the demo from script, so it is counted on submit rather than as a link click.

@@ -217,6 +217,18 @@ CARDS["og/ai-adoption-he.png"] = side_he("הטמעת AI בארגון", "AI שע�
                                          rows(["ממפים איפה AI משתלם", "בוחרים את הכלים", "מדיניות שימוש ונתונים",
                                                "הדרכה לפי תפקיד", "skills ותהליכי עבודה לצוותים", "פיילוט, ומשם לייצור"]))
 
+# AI engineer for organisations: English card, and a Hebrew (RTL) card for /he/ai-engineer/.
+CARDS["og/ai-engineer.png"] = side("AI Engineer for Organisations", "An AI engineer,<br>without the hire.",
+                                   "Embedded in your organisation, with a team of AI scientists behind them.",
+                                   "mlaia.com/ai-engineer",
+                                   rows(["Map and prioritise use cases", "A pilot that reaches production", "RAG, assistants and agents",
+                                         "Forecasting and data models", "Usage policy and security", "Training and handover"]))
+CARDS["og/ai-engineer-he.png"] = side_he("מהנדס AI לארגון", "מהנדס AI לארגון,<br>בלי חצי שנה של גיוס.",
+                                         "משתלב אצלכם בארגון,<br>עם צוות מדעני AI מאחוריו.",
+                                         "mlaia.com/he/ai-engineer",
+                                         rows(["מיפוי ותעדוף מקרי שימוש", "פיילוט שמגיע לייצור", "RAG, עוזרים וסוכנים",
+                                               "חיזוי ומודלים על הנתונים", "מדיניות שימוש ואבטחה", "הדרכה והעברת ידע"]))
+
 def render(name, page):
     out = os.path.join(ROOT, "assets", name)
     os.makedirs(os.path.dirname(out), exist_ok=True)
