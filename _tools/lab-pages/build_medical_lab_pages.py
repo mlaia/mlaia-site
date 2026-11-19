@@ -644,7 +644,7 @@ def extract(hub):
         return m.group(0)
     parts = {
         "fonts": one(r'<link rel="preconnect" href="https://fonts.googleapis.com">.*?rel="stylesheet">'),
-        "ga": one(r"<script>\(function\(\)\{var GA=.*?</script>"),
+        "ga": one(r'<script src="/assets/ga-consent\.js"></script>'),
         "quicknav": one(r'<nav class="site-quick-nav".*?</nav>'),
         "note": one(r'<p class="lab-note">.*?</p>'),
         "noscript": one(r"<noscript>.*?</noscript>"),

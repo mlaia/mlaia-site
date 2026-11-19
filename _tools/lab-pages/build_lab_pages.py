@@ -148,7 +148,7 @@ def extract(hub):
         return m.group(0)
     parts = {
         "fonts": one(r'<link rel="preconnect" href="https://fonts.googleapis.com">.*?rel="stylesheet">'),
-        "ga": one(r"<script>\(function\(\)\{var GA=.*?</script>"),
+        "ga": one(r'<script src="/assets/ga-consent\.js"></script>'),
         "quicknav": one(r'<nav class="site-quick-nav".*?</nav>'),
         "volume": one(r'<label for="volume">.*?</label>'),
         "stop": one(r'<button type="button" id="stop".*?</button>'),
