@@ -14,7 +14,8 @@
   function gtag(){window.dataLayer.push(arguments);}
   window.gtag=gtag;
   var DENIED={ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'};
-  var GRANTED={ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'};
+  // Accepting the banner grants analytics only; the ad signals stay denied until the banner also asks about ads.
+  var GRANTED={ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted'};
   gtag('consent','default',Object.assign({wait_for_update:500},DENIED));
   var stored=null;
   try{stored=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){}
