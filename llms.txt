@@ -94,6 +94,8 @@ Helping organisations put AI to work: mapping where AI pays off, choosing tools,
 
 - [AI Adoption for Organisations](https://www.mlaia.com/ai-adoption/) — use-case mapping, tool selection, AI usage policy, training, pilots and production
 - [הטמעת AI בארגון](https://www.mlaia.com/he/ai-adoption/) — the AI adoption page in Hebrew (the main version)
+- [AI Engineer for Your Organisation](https://www.mlaia.com/ai-engineer/) — an MLAIA AI engineer embedded in the organisation, backed by a team of AI scientists: use-case mapping, pilots that reach production, RAG and agents on your systems, forecasting, an Amendment 13 usage policy and staff training
+- [מהנדס AI לארגון](https://www.mlaia.com/he/ai-engineer/) — the AI engineer page in Hebrew (the main version)
 
 ## Related Sites
 
