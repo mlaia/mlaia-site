@@ -1,6 +1,6 @@
 (()=>{
- // Valuable-traffic events for GA4. Loaded by site-shell.js only after analytics consent, so window.gtag exists
- // whenever GA does. Every event fires at most once per page view and carries no personal data and no query strings.
+ // Valuable-traffic events for GA4. Loaded by site-shell.js on every page; GA4 and Consent Mode v2 come from
+ // assets/ga-consent.js, so window.gtag exists and Google applies the visitor's consent. Every event fires at most once per page view and carries no personal data and no query strings.
  if(window._mlaiaEventsRunning)return;window._mlaiaEventsRunning=true;
  const sent=new Set(),path=location.pathname;
  const ga=(name,params)=>{if(sent.has(name))return;sent.add(name);if(typeof window.gtag==='function')window.gtag('event',name,Object.assign({page_path:path},params));};

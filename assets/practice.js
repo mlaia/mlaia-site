@@ -1,4 +1,4 @@
-/* Shared navigation and consent-aware, non-PII inquiry measurement. */
+/* Shared navigation and non-PII inquiry measurement. GA4 with Consent Mode v2 is loaded by /assets/ga-consent.js. */
 (()=>{
   'use strict';
   const preview=document.documentElement.dataset.preview==='true';
@@ -38,7 +38,8 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape'){close();menu.focus();}});
   }
   function hasConsent(){try{return JSON.parse(localStorage.getItem('mlaia-cookie-consent')||'{}').analytics===true;}catch{return false;}}
-  function track(event,p=practice){if(!preview&&hasConsent()&&typeof window.gtag==='function')window.gtag('event',event,{practice:allowed.includes(p)?p:'general'});}
+  // GA4 and Consent Mode load from /assets/ga-consent.js; without consent Google gets cookieless pings only.
+  function track(event,p=practice){if(!preview&&typeof window.gtag==='function')window.gtag('event',event,{practice:allowed.includes(p)?p:'general'});}
   // Booking CTAs (the call and WhatsApp buttons marked data-book) count as book_click, for ads landing pages.
   document.addEventListener('click',e=>{if(e.target.closest('a[data-book]'))track('book_click');});
   document.addEventListener('click',e=>{if(e.target.closest('a[href="#contact"]'))track('contact_cta_click');else if(e.target.closest('a[href^="https://talk.mlaia.com"]'))track('demo_click');});
@@ -48,25 +49,16 @@
   // The existing homepage owns its own consent UI and analytics loader.
   if(document.body.classList.contains('practice-page')){
     const consent=document.querySelector('.p-consent');
-    function loadAnalytics(){
-      if(preview||!hasConsent()||window._gaLoaded)return;
-      window._gaLoaded=true;window.dataLayer=window.dataLayer||[];
-      window.gtag=function(){window.dataLayer.push(arguments);};
-      window.gtag('js',new Date());window.gtag('config','G-1T3R1HL53V');
-      const script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id=G-1T3R1HL53V';document.head.append(script);
-    }
     function choose(analytics){
       try{localStorage.setItem('mlaia-cookie-consent',JSON.stringify({necessary:true,analytics,timestamp:Date.now()}));}catch{}
       consent.hidden=true;
-      if(!analytics&&window._gaLoaded){location.reload();return;}
-      loadAnalytics();
+      document.dispatchEvent(new CustomEvent('mlaia-cookie-consent',{detail:{analytics}}));
     }
     if(consent){
       let saved=false;try{saved=!!localStorage.getItem('mlaia-cookie-consent');}catch{}
       consent.hidden=preview||saved;
       consent.querySelectorAll('[data-consent]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.consent==='yes')));
       document.querySelector('.p-cookie-settings')?.addEventListener('click',()=>{consent.hidden=false;consent.querySelector('button')?.focus();});
-      loadAnalytics();
     }
     document.querySelector('.p-form')?.addEventListener('submit',async e=>{
       e.preventDefault();const form=e.currentTarget,status=form.querySelector('.p-form-status'),button=form.querySelector('button[type=submit]');

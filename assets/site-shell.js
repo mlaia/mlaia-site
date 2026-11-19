@@ -1,6 +1,6 @@
 (()=>{
  // Analytics consent for pages without their own banner (the homepage and practice pages have one).
- // Same storage key and event as those banners, so the inline GA loader reacts to either.
+ // Same storage key and event as those banners, so assets/ga-consent.js updates Consent Mode from any of them.
  const KEY='mlaia-cookie-consent',preview=document.documentElement.dataset.preview==='true';
  let consent=null;
  if(!document.getElementById('cookie-banner')&&!document.querySelector('.p-consent')){
@@ -11,7 +11,6 @@
   const choose=analytics=>{
    try{localStorage.setItem(KEY,JSON.stringify({necessary:true,essential:true,analytics,marketing:false,timestamp:Date.now()}));}catch{}
    consent.hidden=true;
-   if(!analytics&&window._gaLoaded){location.reload();return;}
    document.dispatchEvent(new CustomEvent('mlaia-cookie-consent',{detail:{analytics}}));
   };
   consent.querySelectorAll('[data-consent]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.consent==='yes')));
@@ -20,14 +19,15 @@
   let saved=false;try{saved=!!localStorage.getItem(KEY);}catch{}
   consent.hidden=preview||saved;
  }
- // Contact tracking for pages without practice.js (which tracks these itself). Fires only when GA was loaded with consent.
+ // Contact tracking for pages without practice.js (which tracks these itself). Consent Mode decides what Google may store.
  if(!document.querySelector('script[src*="practice.js"]')){
   const ga=(name,params)=>{if(typeof window.gtag==='function')window.gtag('event',name,params);};
   document.addEventListener('click',e=>{if(e.target.closest('a[href="#contact"],a[href$="/#contact"]'))ga('contact_cta_click',{page_path:location.pathname});else if(e.target.closest('a[href^="https://talk.mlaia.com"]'))ga('demo_click',{page_path:location.pathname});});
   document.addEventListener('mlaia-inquiry-success',()=>ga('generate_lead',{page_path:location.pathname}));
  }
- // Valuable-traffic events (WhatsApp, lab interaction, article read, outbound links) load only once analytics consent lets GA run; see assets/analytics-events.js.
- {const ev=()=>{if(window._mlaiaEvents)return;window._mlaiaEvents=true;const s=document.createElement('script');s.src='/assets/analytics-events.js';s.defer=true;document.body.append(s);};let ok=false;try{ok=JSON.parse(localStorage.getItem(KEY)||'{}').analytics===true;}catch{}if(ok)ev();document.addEventListener('mlaia-cookie-consent',e=>{if(e.detail&&e.detail.analytics)ev();});}
+ // Valuable-traffic events (WhatsApp, lab interaction, article read, outbound links); see assets/analytics-events.js.
+ // GA4 runs on every page under Consent Mode v2 (assets/ga-consent.js), so they load right away and Google applies the visitor's choice.
+ {if(!window._mlaiaEvents){window._mlaiaEvents=true;const s=document.createElement('script');s.src='/assets/analytics-events.js';s.defer=true;document.body.append(s);}}
  // Ultrabot site chat: one script from talk.mlaia.com adds the "Ask us" button; the chat frame loads only when opened.
  if(!document.querySelector('script[src*="talk.mlaia.com/widget.js"]')){const chat=document.createElement('script');chat.src='https://talk.mlaia.com/widget.js';chat.dataset.brand='mlaia';chat.defer=true;document.body.append(chat);}
  function language(){const he=document.documentElement.lang==='he';document.querySelectorAll('.site-quick-nav [data-en],.site-consent [data-en]').forEach(el=>{el.textContent=he?el.dataset.he:el.dataset.en;});if(consent)consent.dir=he?'rtl':'ltr';}

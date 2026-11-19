@@ -196,7 +196,7 @@ def build(lang):
             {"@type": "ListItem", "position": 2, "name": t["service"] if not he else t["kicker"], "item": url}]}),
     ]
     rtl = ' dir="rtl"' if he else ""
-    head = (f'<!doctype html>\n<html lang="{lang}"{rtl}><head><meta charset="UTF-8">'
+    head = (f'<!doctype html>\n<html lang="{lang}"{rtl}><head><meta charset="UTF-8"><script src="/assets/ga-consent.js"></script>'
             f'<meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(t["title"])}</title>'
             f'<meta name="description" content="{esc(t["desc"])}"><meta name="robots" content="index, follow">'
             f'<link rel="canonical" href="{url}">'
