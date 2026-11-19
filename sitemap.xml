@@ -280,6 +280,24 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/ai-adoption/"/>
   </url>
   <url>
+    <loc>https://www.mlaia.com/ai-engineer/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/ai-engineer/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.mlaia.com/he/ai-engineer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/ai-engineer/"/>
+  </url>
+  <url>
+    <loc>https://www.mlaia.com/he/ai-engineer/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mlaia.com/ai-engineer/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.mlaia.com/he/ai-engineer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mlaia.com/ai-engineer/"/>
+  </url>
+  <url>
     <loc>https://www.mlaia.com/predictive-intelligence/</loc>
     <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
