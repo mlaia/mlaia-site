@@ -72,14 +72,14 @@
 .lab-button{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;font:600 14px/1.25 var(--c-display);font-stretch:105%;text-align:center;color:var(--c-fg);padding:11px 14px;min-height:44px;border:0;border-radius:0;background:transparent;box-shadow:inset 0 0 0 1px var(--c-rule-2);cursor:pointer}
 .lab-button:hover{color:var(--c-amber);box-shadow:inset 0 0 0 1px var(--c-amber)}
 .lab-button.primary{background:var(--c-btn-bg);color:var(--c-btn-fg);box-shadow:none}
-.lab-button.primary:hover{background:var(--c-btn-hover);color:#0c0e0d}
+.lab-button.primary:hover{background:var(--c-btn-hover);color:#0a1628}
 .lab-button:disabled,.lab-button:disabled:hover{opacity:.4;cursor:default;color:var(--c-fg);box-shadow:inset 0 0 0 1px var(--c-rule-2)}
 .lab-buttons .lab-stop,.lab-stop{background:transparent;box-shadow:none;border:1px dashed var(--c-rule-2)}
 .lab-stop:not(:disabled){border-color:var(--c-fg)}
 .lab-stop:not(:disabled):hover{border-color:var(--c-amber);box-shadow:none}
 .lab-stop:disabled,.lab-stop:disabled:hover{box-shadow:none;border-color:var(--c-rule-2)}
 .lab-button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--c-amber);color:var(--c-fg)}
-.lab-button.primary[aria-pressed=true]{background:var(--c-amber);color:#0c0e0d;box-shadow:none}
+.lab-button.primary[aria-pressed=true]{background:var(--c-amber);color:#0a1628;box-shadow:none}
 .lab-button[data-play]::before{content:"";flex:none;width:0;height:0;border:5px solid transparent;border-left:8px solid currentColor;border-right:0}
 .lab-button[data-play][aria-pressed=true]::before{width:9px;height:9px;border:0;background:currentColor}
 .lab-buttons.compact{flex-direction:row;flex-wrap:wrap}
@@ -160,7 +160,7 @@ body.c-page .site-consent{background:var(--c-bg-2);color:var(--c-text);border:1p
 body.c-page .site-consent p{color:var(--c-text)}
 body.c-page .site-consent a{color:var(--c-fg)!important}
 body.c-page .site-consent button{border:0;border-radius:0;background:var(--c-btn-bg);color:var(--c-btn-fg);font:600 14px/1.2 var(--c-display)}
-body.c-page .site-consent button:hover{background:var(--c-btn-hover);color:#0c0e0d}
+body.c-page .site-consent button:hover{background:var(--c-btn-hover);color:#0a1628}
 body.c-page .site-consent button.secondary{background:transparent;color:var(--c-fg);box-shadow:inset 0 0 0 1px var(--c-rule-2)}
 body.c-page .site-consent button.secondary:hover{background:transparent;color:var(--c-amber);box-shadow:inset 0 0 0 1px var(--c-amber)}
 body.c-page .site-consent a:focus-visible,body.c-page .site-consent button:focus-visible{outline:3px solid var(--c-focus);outline-offset:3px}

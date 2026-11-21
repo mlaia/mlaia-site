@@ -26,7 +26,7 @@ const NT=16384,tab=new Float32Array(NT);
 const nz=u=>{const i=Math.floor(u),f=u-i,a=tab[((i%NT)+NT)%NT],b=tab[(((i+1)%NT)+NT)%NT];return a+(b-a)*f;};
 const css=(n,f)=>getComputedStyle(root).getPropertyValue(n).trim()||f;
 let col={};
-const readColors=()=>{col={a:css('--c-amber','#ffb547'),b:css('--c-blue','#71d4ff'),bg:css('--c-bg-3','#070908'),fg:css('--c-fg','#eceee9')};};
+const readColors=()=>{col={a:css('--c-amber','#66d9f0'),b:css('--c-blue','#7aa2ff'),bg:css('--c-bg-3','#071122'),fg:css('--c-fg','#f4f6fb')};};
 readColors();
 
 const chans=[...root.querySelectorAll('canvas[data-hm-ch]')].map(cv=>({cv,ctx:cv.getContext('2d'),kind:cv.dataset.hmCh,
@@ -46,7 +46,7 @@ function line(ctx,xs,ys,n,color,lw,alpha,dash){
 }
 function frame(ctx,W,H,d){
   ctx.fillStyle=col.bg;ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='rgba(236,238,233,.07)';ctx.lineWidth=1;ctx.beginPath();
+  ctx.strokeStyle='rgba(244,246,251,.07)';ctx.lineWidth=1;ctx.beginPath();
   for(let k=1;k<4;k++){const y=Math.round(H*k/4)+.5;ctx.moveTo(0,y);ctx.lineTo(W,y);}
   ctx.stroke();
 }
@@ -148,8 +148,8 @@ function drawForecast(c,dt){
   const left=nowW-HIST,span=HIST+HOR,X=w=>(w-left)/span*W,Y=v=>H*.5-(v-100)/72*H*.5;
   const pred=w=>{const f=basis(w);let p=0;for(let j=0;j<6;j++)p+=shown[j]*f[j];return p;};
   // "now" divider and a faint tint over the forecast region
-  const xn=X(nowW);ctx.fillStyle='rgba(113,212,255,.04)';ctx.fillRect(xn,0,W-xn,H);
-  ctx.strokeStyle='rgba(236,238,233,.35)';ctx.lineWidth=1*d;ctx.setLineDash([3*d,4*d]);ctx.beginPath();ctx.moveTo(xn,0);ctx.lineTo(xn,H);ctx.stroke();ctx.setLineDash([]);
+  const xn=X(nowW);ctx.fillStyle='rgba(122,162,255,.04)';ctx.fillRect(xn,0,W-xn,H);
+  ctx.strokeStyle='rgba(244,246,251,.35)';ctx.lineWidth=1*d;ctx.setLineDash([3*d,4*d]);ctx.beginPath();ctx.moveTo(xn,0);ctx.lineTo(xn,H);ctx.stroke();ctx.setLineDash([]);
   // 80% band from the residual spread, widening with the horizon
   const z=1.2816,steps=40,top=[],bot=[],wEnd=nowW+HOR+1;
   for(let i=0;i<=steps;i++){const w=lastW+(i/steps)*(wEnd-lastW),h=w-lastW,half=z*shownSig*Math.sqrt(1+h/HOR);

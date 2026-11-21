@@ -137,8 +137,8 @@ function stopHint(){if(hintRaf){cancelAnimationFrame(hintRaf);hintRaf=0;}}
 /* ---------- drawing ---------- */
 function cssVar(name,fb){const v=getComputedStyle(box).getPropertyValue(name).trim();return v||fb;}
 let C={};
-function readColors(){C={a:cssVar('--c-amber','#ffb547'),b:cssVar('--c-blue','#71d4ff'),fg:cssVar('--c-fg','#eceee9'),
-  muted:cssVar('--c-muted','#9ca39d'),mono:cssVar('--c-mono','monospace')};}
+function readColors(){C={a:cssVar('--c-amber','#66d9f0'),b:cssVar('--c-blue','#7aa2ff'),fg:cssVar('--c-fg','#f4f6fb'),
+  muted:cssVar('--c-muted','#9fb0cc'),mono:cssVar('--c-mono','monospace')};}
 function fit(){
   const r=cv.getBoundingClientRect(),d=Math.min(2,window.devicePixelRatio||1);
   it.dpr=d;it.cssW=r.width;it.cssH=r.height;
@@ -168,14 +168,14 @@ function draw(snap,dt=0){
   ctx.clearRect(0,0,W,H);
   // regions
   const xBt=col(T-BT)*cw,xNow=col(T)*cw;
-  ctx.fillStyle='rgba(236,238,233,.035)';ctx.fillRect(xBt,0,xNow-xBt,H);
-  ctx.fillStyle='rgba(113,212,255,.045)';ctx.fillRect(xNow,0,W-xNow,H);
+  ctx.fillStyle='rgba(244,246,251,.035)';ctx.fillRect(xBt,0,xNow-xBt,H);
+  ctx.fillStyle='rgba(122,162,255,.045)';ctx.fillRect(xNow,0,W-xNow,H);
   // baseline and gridlines
-  ctx.strokeStyle='rgba(236,238,233,.08)';ctx.lineWidth=1;ctx.beginPath();
+  ctx.strokeStyle='rgba(244,246,251,.08)';ctx.lineWidth=1;ctx.beginPath();
   for(let g=1;g<=3;g++){const yy=Math.round(top+ph*g/4)+.5;ctx.moveTo(0,yy);ctx.lineTo(W,yy);}ctx.stroke();
-  ctx.strokeStyle='rgba(236,238,233,.3)';ctx.beginPath();ctx.moveTo(0,Math.round(top+ph)+.5);ctx.lineTo(W,Math.round(top+ph)+.5);ctx.stroke();
+  ctx.strokeStyle='rgba(244,246,251,.3)';ctx.beginPath();ctx.moveTo(0,Math.round(top+ph)+.5);ctx.lineTo(W,Math.round(top+ph)+.5);ctx.stroke();
   // dividers
-  ctx.setLineDash([3*d,4*d]);ctx.strokeStyle='rgba(236,238,233,.35)';ctx.beginPath();
+  ctx.setLineDash([3*d,4*d]);ctx.strokeStyle='rgba(244,246,251,.35)';ctx.beginPath();
   ctx.moveTo(Math.round(xBt)+.5,0);ctx.lineTo(Math.round(xBt)+.5,top+ph+bot);
   ctx.moveTo(Math.round(xNow)+.5,0);ctx.lineTo(Math.round(xNow)+.5,top+ph+bot);ctx.stroke();ctx.setLineDash([]);
   // region labels along the time axis
@@ -185,7 +185,7 @@ function draw(snap,dt=0){
   ctx.fillText(narrow?L.backtestShort:L.backtest,xBt+6*d,ly);
   ctx.fillStyle=C.b;ctx.fillText(narrow?L.forecastShort:L.forecast,xNow+6*d,ly);
   // band: backtest (week by week) and forecast (flat)
-  ctx.fillStyle='rgba(113,212,255,.17)';
+  ctx.fillStyle='rgba(122,162,255,.17)';
   for(let t=T-BT;t<T;t++){const o=disp.get(t);if(!o||!isFinite(o.lo))continue;const x0=col(t)*cw;
     ctx.fillRect(x0,Y(o.hi),cw+0.5,Y(o.lo)-Y(o.hi));}
   const bd=it.band;ctx.fillRect(xNow,Y(bd.hi),W-xNow,Y(bd.lo)-Y(bd.hi));

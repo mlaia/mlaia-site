@@ -52,7 +52,7 @@ const sint=v=>{const r=Math.round(v);return(r<0?'−':'+')+Math.abs(r).toLocaleS
 const snum=v=>sgn(Math.round(v*10)/10,1);
 const API={},FACTS={};
 const $=id=>document.getElementById(id);
-const COL={amber:'#ffb547',blue:'#71d4ff',fg:'#eceee9',muted:'#9ca39d',rule:'#262b28',red:'#ff6b6b',green:'#7be0a6'};
+const COL={amber:'#66d9f0',blue:'#7aa2ff',fg:'#f4f6fb',muted:'#9fb0cc',rule:'#1f3560',red:'#ff6b6b',green:'#7be0a6'};
 const MONO='font-family="&quot;Martian Mono&quot;,ui-monospace,Menlo,monospace"';
 // coalesce bursts of input events into one recompute per frame
 function scheduler(fn){let q=0;return()=>{if(q)return;q=requestAnimationFrame(()=>{q=0;fn();});};}

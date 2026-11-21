@@ -101,7 +101,7 @@ function Ecg(box){
   const cv=box.querySelector('canvas'),ctx=cv.getContext('2d');
   const root=box.closest('[data-c-instrument]')||box.parentElement,R={};
   root.querySelectorAll('[data-m-read]').forEach(n=>R[n.dataset.mRead]=n);
-  const cs=getComputedStyle(box),col={a:cs.getPropertyValue('--c-amber').trim()||'#ffb547',b:cs.getPropertyValue('--c-blue').trim()||'#71d4ff',fg:cs.getPropertyValue('--c-fg').trim()||'#eceee9',mu:cs.getPropertyValue('--c-muted').trim()||'#9ca39d'};
+  const cs=getComputedStyle(box),col={a:cs.getPropertyValue('--c-amber').trim()||'#66d9f0',b:cs.getPropertyValue('--c-blue').trim()||'#7aa2ff',fg:cs.getPropertyValue('--c-fg').trim()||'#f4f6fb',mu:cs.getPropertyValue('--c-muted').trim()||'#9fb0cc'};
   /* canvas and check-readout strings; a page can override them with data-m-labels='{"key":"text"}' (e.g. Hebrew) */
   const L={font:'"Martian Mono",ui-monospace,monospace',trueBeats:'true beats',detected:'detected',energy:'detector energy · threshold',missed:'missed',false:'false',sec:'1 s',pass:'pass',failBeats:'fail: beats',failRate:'fail: rate'};
   try{Object.assign(L,JSON.parse(box.dataset.mLabels||'{}'));}catch{}
@@ -146,7 +146,7 @@ function Ecg(box){
     const yc=H*0.39,mv=H*0.19,top=H*0.08,bot=H*0.62,yT=H*0.695,yD=H*0.775,eT=H*0.84,eB=H*0.965;
     ctx.font=(10*d)+'px '+L.font;ctx.textBaseline='middle';
     // ECG lane: 1 mV scale bar and baseline
-    ctx.strokeStyle='rgba(236,238,233,.10)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,yc);ctx.lineTo(W,yc);ctx.stroke();
+    ctx.strokeStyle='rgba(244,246,251,.10)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,yc);ctx.lineTo(W,yc);ctx.stroke();
     // detections as faint vertical guides through the ECG
     for(const q of res.det){const x=X(q.t);if(x<-4||x>W+4)continue;ctx.strokeStyle=col.b;ctx.globalAlpha=q.ok?.22:.5;ctx.lineWidth=(q.ok?1:1.5)*d;
       ctx.setLineDash(q.ok?[]:[4*d,4*d]);ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,yD+6*d);ctx.stroke();}
@@ -175,7 +175,7 @@ function Ecg(box){
     ctx.setLineDash([]);ctx.globalAlpha=1;
     // lane labels, on a dark chip so the trace never hides them
     // (right-aligned, so they stay clear of the handle at its usual low-artifact positions)
-    const tag=(y,txt,c)=>{const w=ctx.measureText(txt).width+10*d,x=W-8*d-w;ctx.fillStyle='rgba(7,9,8,.82)';ctx.fillRect(x,y-8*d,w,16*d);ctx.fillStyle=c;ctx.fillText(txt,x+5*d,y);};
+    const tag=(y,txt,c)=>{const w=ctx.measureText(txt).width+10*d,x=W-8*d-w;ctx.fillStyle='rgba(7,17,34,.82)';ctx.fillRect(x,y-8*d,w,16*d);ctx.fillStyle=c;ctx.fillText(txt,x+5*d,y);};
     tag(yT,L.trueBeats,col.fg);tag(yD,L.detected,col.b);tag(eT+2*d,L.energy,col.mu);
     // one-second scale under the ECG lane
     ctx.strokeStyle=col.mu;ctx.lineWidth=1*d;ctx.beginPath();ctx.moveTo(W-12*d-W/span,bot-6*d);ctx.lineTo(W-12*d,bot-6*d);ctx.stroke();
