@@ -188,7 +188,7 @@
   if(!lab)return; // each experiment below returns early when its section is not on this page
   const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* Design C: amber = raw/input, blue = processed/output, white dashed = reference marks, red = alarm */
-  const C={bg:'#070908',grid:'#262b28',text:'#9ca39d',blue:'#71d4ff',amber:'#ffb547',ref:'#eceee9',red:'#ff6b6b',green:'#7be0a6',white:'#eceee9'};
+  const C={bg:'#071122',grid:'#1f3560',text:'#9fb0cc',blue:'#7aa2ff',amber:'#66d9f0',ref:'#f4f6fb',red:'#ff6b6b',green:'#7be0a6',white:'#f4f6fb'};
   const FONT='11px "Martian Mono",ui-monospace,Menlo,monospace',TITLE='600 13px "IBM Plex Sans",system-ui,sans-serif';
   function canvasCtx(cv,aspect,minH,maxH){
     const w=Math.max(260,cv.clientWidth||cv.parentElement.clientWidth),h=Math.round(Math.min(maxH||9999,Math.max(minH,w*aspect))),dpr=Math.min(window.devicePixelRatio||1,2);
@@ -242,7 +242,7 @@
       // raw spectrum on log frequency axis
       const fx=f=>mid.x+Math.log(f/10)/Math.log(800)*pw,yR=v=>mid.y+Math.min(1,Math.max(0,(0-20*Math.log10(v+1e-9))/80))*mid.h;
       axes(g,mid,[[mid.y,'0 dB'],[mid.y+mid.h/2,'−40'],[mid.y+mid.h,'−80']],[10,100,1000,8000].map(f=>[fx(f),f===8000?'8 kHz':f>=1000?f/1000+'k':String(f)]),'Raw spectrum · dB re 1 g');
-      g.fillStyle='rgba(236,238,233,.07)';g.fillRect(fx(V_BAND[0]),mid.y,fx(V_BAND[1])-fx(V_BAND[0]),mid.h);g.fillStyle=C.text;g.textAlign='center';g.fillText('envelope band',(fx(V_BAND[0])+fx(V_BAND[1]))/2,mid.y+10);
+      g.fillStyle='rgba(244,246,251,.07)';g.fillRect(fx(V_BAND[0]),mid.y,fx(V_BAND[1])-fx(V_BAND[0]),mid.h);g.fillStyle=C.text;g.textAlign='center';g.fillText('envelope band',(fx(V_BAND[0])+fx(V_BAND[1]))/2,mid.y+10);
       const pts=[];for(let k=Math.ceil(10/a.df);k<a.raw.length;k++)pts.push([fx(k*a.df),yR(a.raw[k])]);line(g,pts,C.amber,1);
       g.fillStyle=C.white;g.textAlign='left';g.fillText('1×',fx(a.fr)+4,yR(a.oneX)-2);
       // envelope spectrum 0-500 Hz, linear, dB re envelope floor

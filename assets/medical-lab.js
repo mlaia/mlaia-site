@@ -182,7 +182,7 @@ if(typeof module==='object'&&module.exports){module.exports=Core;return;}
 
 /* ================= browser ================= */
 const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const COL={amber:'#ffb547',blue:'#71d4ff',fg:'#eceee9',muted:'#9ca39d',rule:'#262b28',red:'#ff6b6b',green:'#7be0a6'};
+const COL={amber:'#66d9f0',blue:'#7aa2ff',fg:'#f4f6fb',muted:'#9fb0cc',rule:'#1f3560',red:'#ff6b6b',green:'#7be0a6'};
 const MONO='font-family="&quot;Martian Mono&quot;,ui-monospace,Menlo,monospace"';
 const f1=v=>v.toFixed(1),f2=v=>v.toFixed(2),pc=v=>(v*100).toFixed(v<0.1?1:0)+'%';
 // coalesce bursts of input events into one recompute per frame
@@ -267,7 +267,7 @@ function initCalibration(){
     d+=`<polyline points="${curve(tt=>calAt(m,tt).all)}" fill="none" stroke="${COL.amber}" stroke-width="2"/>`;
     d+=`<line x1="${DX(0)}" x2="${DX(TMAX)}" y1="${DY(0)}" y2="${DY(0)}" stroke="${COL.muted}" stroke-width="2"/>`;
     d+=`<polyline points="${curve(tt=>calAt(m,tt).nb)}" fill="none" stroke="${COL.blue}" stroke-width="2.5"/>`;
-    d+=`<line x1="${DX(t)}" x2="${DX(t)}" y1="30" y2="206" stroke="${COL.fg}" stroke-dasharray="3 4" opacity=".7"/><circle cx="${DX(t)}" cy="${DY(clamp(r.nb*1000,ymin,ymax))}" r="5" fill="${COL.blue}" stroke="#070908" stroke-width="2"/>`;
+    d+=`<line x1="${DX(t)}" x2="${DX(t)}" y1="30" y2="206" stroke="${COL.fg}" stroke-dasharray="3 4" opacity=".7"/><circle cx="${DX(t)}" cy="${DY(clamp(r.nb*1000,ymin,ymax))}" r="5" fill="${COL.blue}" stroke="#071122" stroke-width="2"/>`;
     $('cal-dca').innerHTML=d;
   };
   const go=scheduler(run);[th,pv].forEach(e=>e.addEventListener('input',go));mis.addEventListener('change',go);
@@ -335,8 +335,8 @@ function initDice(){
     const s=w/DW;ctx.font=(11*d)+'px "Martian Mono",ui-monospace,monospace';ctx.textBaseline='middle';
     // ring the small lesion so it can be found, and label it
     const R=Math.max(sd/2+6,9)*s;ctx.strokeStyle=miss.checked?COL.red:COL.fg;ctx.lineWidth=1.5*d;ctx.setLineDash([4*d,4*d]);ctx.beginPath();ctx.arc(SM.x*s,SM.y*s,R,0,TAU);ctx.stroke();ctx.setLineDash([]);
-    const lab=miss.checked?'small lesion: missed':'small lesion: found';ctx.fillStyle='rgba(7,9,8,.85)';const tw=ctx.measureText(lab).width+10*d,lx=Math.max(4*d,Math.min(w-tw-4*d,SM.x*s-tw/2)),ly=Math.max(4*d,SM.y*s-R-22*d);ctx.fillRect(lx,ly,tw,16*d);ctx.fillStyle=miss.checked?COL.red:COL.fg;ctx.fillText(lab,lx+5*d,ly+8*d);
-    ctx.fillStyle='rgba(7,9,8,.85)';const l2='10 mm';ctx.fillRect(8*d,h-26*d,10*s+ctx.measureText(l2).width+20*d,20*d);ctx.strokeStyle=COL.fg;ctx.beginPath();ctx.moveTo(12*d,h-16*d);ctx.lineTo(12*d+10*s,h-16*d);ctx.stroke();ctx.fillStyle=COL.fg;ctx.fillText(l2,18*d+10*s,h-16*d);
+    const lab=miss.checked?'small lesion: missed':'small lesion: found';ctx.fillStyle='rgba(7,17,34,.85)';const tw=ctx.measureText(lab).width+10*d,lx=Math.max(4*d,Math.min(w-tw-4*d,SM.x*s-tw/2)),ly=Math.max(4*d,SM.y*s-R-22*d);ctx.fillRect(lx,ly,tw,16*d);ctx.fillStyle=miss.checked?COL.red:COL.fg;ctx.fillText(lab,lx+5*d,ly+8*d);
+    ctx.fillStyle='rgba(7,17,34,.85)';const l2='10 mm';ctx.fillRect(8*d,h-26*d,10*s+ctx.measureText(l2).width+20*d,20*d);ctx.strokeStyle=COL.fg;ctx.beginPath();ctx.moveTo(12*d,h-16*d);ctx.lineTo(12*d+10*s,h-16*d);ctx.stroke();ctx.fillStyle=COL.fg;ctx.fillText(l2,18*d+10*s,h-16*d);
   };
   const go=scheduler(run);[rough,size].forEach(e=>e.addEventListener('input',go));miss.addEventListener('change',go);
   $('reset-dice').addEventListener('click',()=>{miss.checked=true;rough.value=2;size.value=8;run();});

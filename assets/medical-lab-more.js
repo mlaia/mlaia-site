@@ -226,7 +226,7 @@ if(typeof module==='object'&&module.exports){module.exports=Core;return;}
 
 /* ================= browser ================= */
 const $=id=>document.getElementById(id);
-const COL={amber:'#ffb547',blue:'#71d4ff',fg:'#eceee9',muted:'#9ca39d',rule:'#262b28',red:'#ff6b6b',green:'#7be0a6'};
+const COL={amber:'#66d9f0',blue:'#7aa2ff',fg:'#f4f6fb',muted:'#9fb0cc',rule:'#1f3560',red:'#ff6b6b',green:'#7be0a6'};
 const MONO='font-family="&quot;Martian Mono&quot;,ui-monospace,Menlo,monospace"';
 const pct0=v=>Math.round(v*100)+'%',pct1=v=>(v*100).toFixed(1)+'%',sgn=v=>(v>=0?'+':'−')+Math.abs(Math.round(v*100))+'%';
 const mm3=v=>v>=100?Math.round(v).toLocaleString('en-US'):v.toFixed(1);
@@ -253,7 +253,7 @@ function initNodule(){
     const ca=Math.cos(az),sa=Math.sin(az),ce=Math.cos(el),se=Math.sin(el);
     // rotate about the scan axis (z), then tilt; returns screen x, screen y and depth towards the viewer
     const pr=(x,y,z)=>{const x1=x*ca-y*sa,y1=x*sa+y*ca,y2=y1*ce-z*se,z2=y1*se+z*ce;return[cx+x1*sc,cy-z2*sc,-y2];};
-    const strokeWire=front=>{ctx.lineWidth=1*d;ctx.setLineDash([3*d,4*d]);ctx.strokeStyle=front?'rgba(236,238,233,.62)':'rgba(236,238,233,.2)';ctx.beginPath();
+    const strokeWire=front=>{ctx.lineWidth=1*d;ctx.setLineDash([3*d,4*d]);ctx.strokeStyle=front?'rgba(244,246,251,.62)':'rgba(244,246,251,.2)';ctx.beginPath();
       for(const l of wire)for(let i=1;i<l.length;i++){const a=pr(l[i-1][0]*R,l[i-1][1]*R,l[i-1][2]*R),b=pr(l[i][0]*R,l[i][1]*R,l[i][2]*R);if(((a[2]+b[2])/2>0)!==front)continue;ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);}
       ctx.stroke();ctx.setLineDash([]);};
     strokeWire(false);
@@ -261,7 +261,7 @@ function initNodule(){
     const order=res.slabs.slice();if(el<0)order.reverse();const A=NV.ANG,light=[-0.45,-0.6,0.66];
     const shade=(nx,ny,nz,k)=>{const x1=nx*ca-ny*sa,y1=nx*sa+ny*ca,y2=y1*ce-nz*se,z2=y1*se+nz*ce,l=clamp(0.34+0.66*Math.max(0,x1*light[0]+y2*light[1]+z2*light[2]),0,1)*k;
       return`rgb(${Math.round(0x71*l)},${Math.round(0xd4*l)},${Math.round(0xff*l)})`;};
-    ctx.lineJoin='round';ctx.lineWidth=1*d;ctx.strokeStyle='rgba(7,9,8,.55)';
+    ctx.lineJoin='round';ctx.lineWidth=1*d;ctx.strokeStyle='rgba(7,17,34,.55)';
     for(const s of order){
       const quads=[];
       for(let a=0;a<A;a++){const b=(a+1)%A,t0=a*TAU/A,t1=b*TAU/A,xa=s.rad[a]*Math.cos(t0),ya=s.rad[a]*Math.sin(t0),xb=s.rad[b]*Math.cos(t1),yb=s.rad[b]*Math.sin(t1);
@@ -329,7 +329,7 @@ function initSample(){
     let s=`<title id="ss-plot-title">Confidence intervals</title><desc id="ss-plot-desc">Sensitivity ${pct0(r.sens)} measured on ${r.pos} positives, 95 percent interval ${pct0(r.ci[0])} to ${pct0(r.ci[1])}. Required minimum ${mn.value} percent.</desc><g aria-hidden="true" ${MONO} fill="${COL.muted}">`;
     for(let v=0.4;v<=1.0001;v+=0.1)s+=`<line x1="${X(v)}" x2="${X(v)}" y1="30" y2="176" stroke="${COL.rule}"/><text class="ml-t" x="${X(v)}" y="194" text-anchor="middle">${Math.round(v*100)}%</text>`;
     s+=`<text class="ml-t" x="140" y="${rows[0]+4}" text-anchor="end">positives</text><text class="ml-t" x="140" y="${rows[1]+4}" text-anchor="end">negatives</text><text class="ml-t" x="140" y="${rows[2]+4}" text-anchor="end">60 repeats</text></g>`;
-    const bar=(y,ci,p,c)=>`<line x1="${X(ci[0])}" x2="${X(ci[1])}" y1="${y}" y2="${y}" stroke="${c}" stroke-width="5"/><line x1="${X(ci[0])}" x2="${X(ci[0])}" y1="${y-9}" y2="${y+9}" stroke="${c}" stroke-width="2"/><line x1="${X(ci[1])}" x2="${X(ci[1])}" y1="${y-9}" y2="${y+9}" stroke="${c}" stroke-width="2"/><circle cx="${X(p)}" cy="${y}" r="6" fill="${c}" stroke="#070908" stroke-width="2"/>`;
+    const bar=(y,ci,p,c)=>`<line x1="${X(ci[0])}" x2="${X(ci[1])}" y1="${y}" y2="${y}" stroke="${c}" stroke-width="5"/><line x1="${X(ci[0])}" x2="${X(ci[0])}" y1="${y-9}" y2="${y+9}" stroke="${c}" stroke-width="2"/><line x1="${X(ci[1])}" x2="${X(ci[1])}" y1="${y-9}" y2="${y+9}" stroke="${c}" stroke-width="2"/><circle cx="${X(p)}" cy="${y}" r="6" fill="${c}" stroke="#071122" stroke-width="2"/>`;
     s+=bar(rows[0],r.ci,r.sens,r.ci[0]<min?COL.red:COL.blue)+bar(rows[1],r.ciNeg,r.spec,COL.muted);
     // repeats: a dot per repeated study, stacked where they coincide
     const cnt={};for(const v of r.reps){const k=Math.round(X(v));cnt[k]=(cnt[k]||0)+1;}const gap=Math.min(5,40/Math.max(1,...Object.values(cnt))),seen={};
@@ -363,7 +363,7 @@ function initSubgroup(){
     c+=`<line x1="44" x2="44" y1="30" y2="206" stroke="${COL.rule}"/><text class="ml-t" x="166" y="240" text-anchor="middle">false positive rate</text><text class="ml-t" x="38" y="16" text-anchor="start">sensitivity</text></g>`;
     c+=`<line x1="${X(0)}" y1="${Y(0)}" x2="${X(1)}" y2="${Y(1)}" stroke="${COL.muted}" stroke-dasharray="4 5" opacity=".6"/>`;
     c+=`<polyline points="${thin(r.sub.roc)}" fill="none" stroke="${COL.amber}" stroke-width="2.5"/><polyline points="${thin(r.main.roc)}" fill="none" stroke="${COL.blue}" stroke-width="2.5"/><polyline points="${thin(r.all.roc)}" fill="none" stroke="${COL.fg}" stroke-width="2" stroke-dasharray="6 4"/>`;
-    const dot=(p,col)=>`<circle cx="${X(1-p.spec).toFixed(1)}" cy="${Y(p.sens).toFixed(1)}" r="5" fill="${col}" stroke="#070908" stroke-width="2"/>`;
+    const dot=(p,col)=>`<circle cx="${X(1-p.spec).toFixed(1)}" cy="${Y(p.sens).toFixed(1)}" r="5" fill="${col}" stroke="#071122" stroke-width="2"/>`;
     c+=dot(r.main,COL.blue)+dot(r.sub,COL.amber)+dot(r.all,COL.fg);
     $('sg-roc').innerHTML=c;
   };
@@ -395,7 +395,7 @@ function camera(st,cx,cy,sc){const ca=Math.cos(st.az),sa=Math.sin(st.az),ce=Math
 function prism(ctx,pr,el,rad,z0,z1,rgb,d){const A=rad.length,quads=[],col=l=>`rgb(${Math.round(rgb[0]*l)},${Math.round(rgb[1]*l)},${Math.round(rgb[2]*l)})`;
   for(let a=0;a<A;a++){const b=(a+1)%A,t0=a*TAU/A,t1=(a+1)*TAU/A,xa=rad[a]*Math.cos(t0),ya=rad[a]*Math.sin(t0),xb=rad[b]*Math.cos(t1),yb=rad[b]*Math.sin(t1),p=[pr(xa,ya,z0),pr(xb,yb,z0),pr(xb,yb,z1),pr(xa,ya,z1)],tm=(t0+t1)/2;
     quads.push({p,z:(p[0][2]+p[1][2])/2,c:col(pr.light(Math.cos(tm),Math.sin(tm),0)*0.86)});}
-  quads.sort((u,v)=>u.z-v.z);ctx.lineJoin='round';ctx.lineWidth=1*d;ctx.strokeStyle='rgba(7,9,8,.55)';
+  quads.sort((u,v)=>u.z-v.z);ctx.lineJoin='round';ctx.lineWidth=1*d;ctx.strokeStyle='rgba(7,17,34,.55)';
   for(const q of quads){ctx.fillStyle=q.c;ctx.beginPath();ctx.moveTo(q.p[0][0],q.p[0][1]);for(let i=1;i<4;i++)ctx.lineTo(q.p[i][0],q.p[i][1]);ctx.closePath();ctx.fill();}
   const zc=el>=0?z1:z0;ctx.fillStyle=col(pr.light(0,0,el>=0?1:-1));ctx.beginPath();
   for(let a=0;a<A;a++){const t=a*TAU/A,p=pr(rad[a]*Math.cos(t),rad[a]*Math.sin(t),zc);if(a)ctx.lineTo(p[0],p[1]);else ctx.moveTo(p[0],p[1]);}
@@ -440,12 +440,12 @@ function initPredictive(){
     // surface: PPV over prevalence (log scale) and specificity, at the chosen sensitivity
     const quads=[];for(let i=0;i<G;i++)for(let j=0;j<G;j++){const c=[[i,j],[i+1,j],[i+1,j+1],[i,j+1]].map(([a,b])=>{const x=-1+2*a/G,y=-1+2*b/G,p=Math.pow(10,LO+(x+1)/2*(HI-LO)),s=0.5+(y+1)/2*0.49,v=predictive(p,sens,s).ppv;return{q:pr(x,y,zOf(v)),v};});
       quads.push({c,z:(c[0].q[2]+c[1].q[2]+c[2].q[2]+c[3].q[2])/4,v:(c[0].v+c[1].v+c[2].v+c[3].v)/4});}
-    quads.sort((a,b)=>a.z-b.z);ctx.lineWidth=0.75*d;ctx.strokeStyle='rgba(7,9,8,.6)';
+    quads.sort((a,b)=>a.z-b.z);ctx.lineWidth=0.75*d;ctx.strokeStyle='rgba(7,17,34,.6)';
     for(const q of quads){const l=0.22+0.78*q.v;ctx.fillStyle=`rgb(${Math.round(0x71*l)},${Math.round(0xd4*l)},${Math.round(0xff*l)})`;ctx.beginPath();q.c.forEach((p,i)=>{if(i)ctx.lineTo(p.q[0],p.q[1]);else ctx.moveTo(p.q[0],p.q[1]);});ctx.closePath();ctx.fill();ctx.stroke();}
     // the chosen point
     const v=predictive(prev,sens,spec).ppv,a=pr(xOf(prev),yOf(spec),zOf(0)),b=pr(xOf(prev),yOf(spec),zOf(v));
     ctx.strokeStyle=COL.amber;ctx.lineWidth=1.5*d;ctx.setLineDash([3*d,3*d]);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle=COL.amber;ctx.strokeStyle='#070908';ctx.lineWidth=2*d;ctx.beginPath();ctx.arc(b[0],b[1],6*d,0,TAU);ctx.fill();ctx.stroke();
+    ctx.fillStyle=COL.amber;ctx.strokeStyle='#071122';ctx.lineWidth=2*d;ctx.beginPath();ctx.arc(b[0],b[1],6*d,0,TAU);ctx.fill();ctx.stroke();
     ctx.beginPath();ctx.arc(a[0],a[1],3*d,0,TAU);ctx.fill();
     // axis labels
     const lab=(t,x,y,z,c)=>{const p=pr(x,y,z);ctx.fillStyle=c||COL.muted;ctx.fillText(t,clamp(p[0],40*d,w-40*d),clamp(p[1],10*d,h-10*d));};
@@ -472,14 +472,14 @@ function initShortcut(){
   const draw=()=>{if(!res)return;const {w,h,d}=fitCanvas(cv),ctx=cv.getContext('2d'),s=w/120,vis=+sg.value/100;ctx.fillStyle='#000';ctx.fillRect(0,0,w,h);
     // a schematic scan: body, two lung fields, a faint lesion, and a hospital tag in the corner
     ctx.fillStyle='#2a2e2c';ctx.beginPath();ctx.ellipse(60*s,66*s,48*s,46*s,0,0,TAU);ctx.fill();
-    ctx.fillStyle='#121514';for(const x of [42,78]){ctx.beginPath();ctx.ellipse(x*s,64*s,15*s,30*s,0,0,TAU);ctx.fill();}
-    const g=ctx.createRadialGradient(80*s,74*s,0,80*s,74*s,9*s);g.addColorStop(0,`rgba(236,238,233,${clamp(0.18+0.3*vis,0,0.9)})`);g.addColorStop(1,'rgba(236,238,233,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(80*s,74*s,9*s,0,TAU);ctx.fill();
+    ctx.fillStyle='#0f2044';for(const x of [42,78]){ctx.beginPath();ctx.ellipse(x*s,64*s,15*s,30*s,0,0,TAU);ctx.fill();}
+    const g=ctx.createRadialGradient(80*s,74*s,0,80*s,74*s,9*s);g.addColorStop(0,`rgba(244,246,251,${clamp(0.18+0.3*vis,0,0.9)})`);g.addColorStop(1,'rgba(244,246,251,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(80*s,74*s,9*s,0,TAU);ctx.fill();
     ctx.fillStyle=COL.fg;ctx.fillRect(7*s,7*s,22*s,11*s);ctx.fillStyle='#000';ctx.font=`700 ${8*s}px "Martian Mono",ui-monospace,monospace`;ctx.textBaseline='middle';ctx.textAlign='center';ctx.fillText('PORT',18*s,12.8*s);
     // where the model's weight is
     const heat=(x,y,r,a)=>{const q=ctx.createRadialGradient(x*s,y*s,0,x*s,y*s,r*s);q.addColorStop(0,`rgba(255,107,107,${0.85*a})`);q.addColorStop(1,'rgba(255,107,107,0)');ctx.fillStyle=q;ctx.beginPath();ctx.arc(x*s,y*s,r*s,0,TAU);ctx.fill();};
     heat(18,12.5,26,res.share);heat(80,74,22,1-res.share);
     ctx.font=(11*d)+'px "Martian Mono",ui-monospace,monospace';ctx.textAlign='left';
-    const tag=(t,x,y)=>{const tw=ctx.measureText(t).width+10*d;ctx.fillStyle='rgba(7,9,8,.85)';ctx.fillRect(x,y,tw,18*d);ctx.fillStyle=COL.fg;ctx.fillText(t,x+5*d,y+9*d);};
+    const tag=(t,x,y)=>{const tw=ctx.measureText(t).width+10*d;ctx.fillStyle='rgba(7,17,34,.85)';ctx.fillRect(x,y,tw,18*d);ctx.fillStyle=COL.fg;ctx.fillText(t,x+5*d,y+9*d);};
     tag('tag: '+pct0(res.share)+' of the weight',6*s,22*s);tag('disease signal: '+pct0(1-res.share),Math.min(52*s,w-170*d),90*s);};
   const run=()=>{const c=co.value/100,dv=sg.value/100;res=shortcut(dv,c);
     $('sc2-corr-value').textContent=co.value+'%';$('sc2-signal-value').textContent=dv.toFixed(1);
@@ -568,7 +568,7 @@ function initConfounder(){
     s+=`<text class="ml-t" x="335" y="246" text-anchor="middle">BMI link where the model is used</text><text class="ml-t" x="600" y="20" text-anchor="end">AUC</text></g>`;
     s+=`<line x1="${X(link)}" x2="${X(link)}" y1="30" y2="190" stroke="${COL.fg}" stroke-width="1" opacity=".5"/>`;
     for(const [k,,c] of M)s+=`<polyline points="${r.links.map((l,i)=>X(l).toFixed(1)+','+Y(r.curves[k][i]).toFixed(1)).join(' ')}" fill="none" stroke="${c}" stroke-width="${k==='bmi'?1.5:2.5}"${k==='bmi'?' stroke-dasharray="6 4"':''}/>`;
-    for(const [k,,c] of M)s+=`<circle cx="${X(link).toFixed(1)}" cy="${Y(r[k].here).toFixed(1)}" r="5" fill="${c}" stroke="#070908" stroke-width="1.5"/>`;
+    for(const [k,,c] of M)s+=`<circle cx="${X(link).toFixed(1)}" cy="${Y(r[k].here).toFixed(1)}" r="5" fill="${c}" stroke="#071122" stroke-width="1.5"/>`;
     $('cf-plot').innerHTML=s;
     const row=(l,v,cls)=>`<div class="ml-bar is-current"><span>${l}</span><div class="ml-bar__track"><b class="${cls}" style="width:${(clamp(v,0,1)*100).toFixed(1)}%"></b></div><strong>${f(v)}</strong></div>`;
     $('cf-bars').innerHTML='<p class="ml-bars__group">AUC at the selected link, bars start at 0</p>'+M.map(([k,l,,cls])=>row(l,r[k].here,cls)).join('');
@@ -578,7 +578,7 @@ function initConfounder(){
     c+=`<text class="ml-t" x="160" y="249" text-anchor="middle">stated risk, %</text><text class="ml-t" x="40" y="12" text-anchor="start">actual risk, %</text></g>`;
     c+=`<line x1="${P(0)}" y1="${Q(0)}" x2="${P(1)}" y2="${Q(1)}" stroke="${COL.blue}" stroke-width="2.5"/>`;
     for(const [k,col] of [['plain',COL.red],['study',COL.amber]])c+=`<polyline points="${r.cal[k].pts.map(p=>P(p[0]).toFixed(1)+','+Q(p[1]).toFixed(1)).join(' ')}" fill="none" stroke="${col}" stroke-width="2.5"/>`;
-    c+=`<line x1="${P(0.5)}" x2="${P(0.5)}" y1="${Q(0.5)}" y2="${Q(r.cal.study.at50)}" stroke="${COL.amber}" stroke-dasharray="3 3"/><circle cx="${P(0.5)}" cy="${Q(r.cal.study.at50)}" r="5" fill="${COL.amber}" stroke="#070908" stroke-width="1.5"/>`;
+    c+=`<line x1="${P(0.5)}" x2="${P(0.5)}" y1="${Q(0.5)}" y2="${Q(r.cal.study.at50)}" stroke="${COL.amber}" stroke-dasharray="3 3"/><circle cx="${P(0.5)}" cy="${Q(r.cal.study.at50)}" r="5" fill="${COL.amber}" stroke="#071122" stroke-width="1.5"/>`;
     $('cf-cal').innerHTML=c;
     const p=r.patient,gap=r.signal.here-r.study.here,where=link===0?'Where BMI is unrelated to the disease':link===1?'Where the BMI link is the same as in the study':'Where the BMI link is '+linkWord(link);
     $('cf-detail').textContent=(gap>0.005?where+', adding BMI with the study prior scores '+f(r.study.here)+', below the '+f(r.signal.here)+' of the signal evidence alone'+(r.study.here<0.5?' and below a coin flip':'')+'.':where+', adding BMI with the study prior scores '+f(r.study.here)+' against '+f(r.signal.here)+' for the signal evidence alone.')+

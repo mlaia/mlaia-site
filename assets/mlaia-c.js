@@ -26,9 +26,9 @@ const NT=16384,noise=new Float32Array(NT);
 (()=>{let s=20250417;const rnd=()=>(s=(s*1664525+1013904223)>>>0)/4294967296;
   for(let i=0;i<NT;i++)noise[i]=Math.sqrt(-2*Math.log(rnd()+1e-9))*Math.cos(TAU*rnd());})();
 function nz(u){const i=Math.floor(u),f=u-i,a=noise[((i%NT)+NT)%NT],b=noise[(((i+1)%NT)+NT)%NT];return a+(b-a)*f;}
-function colors(el){return{a:cssVar(el,'--c-amber','#ffb547'),b:cssVar(el,'--c-blue','#71d4ff'),bg:cssVar(el,'--c-bg-3','#070908'),grid:'#1d2220',fg:cssVar(el,'--c-fg','#eceee9')};}
+function colors(el){return{a:cssVar(el,'--c-amber','#66d9f0'),b:cssVar(el,'--c-blue','#7aa2ff'),bg:cssVar(el,'--c-bg-3','#071122'),grid:'#1d2220',fg:cssVar(el,'--c-fg','#f4f6fb')};}
 /* In the light reading variant the instrument screens stay dark, so traces keep the bright data colours. */
-function screenColors(el){const c=colors(el);if(document.body.classList.contains('c-reading')){c.a='#ffb547';c.b='#71d4ff';}return c;}
+function screenColors(el){const c=colors(el);if(document.body.classList.contains('c-reading')){c.a='#66d9f0';c.b='#7aa2ff';}return c;}
 
 /* ---------- scheduler: one rAF loop for every visible instrument ---------- */
 function tick(now){
@@ -188,7 +188,7 @@ function Scope(box){
     const yc=H*0.5,amp=H*0.3;
     const trace=(arr,col,lw,alpha)=>{ctx.globalAlpha=alpha;ctx.strokeStyle=col;ctx.lineWidth=lw*d;ctx.lineJoin='round';ctx.beginPath();
       for(let i=0;i<arr.length;i++){const X=i/(arr.length-1)*W,Y=yc-arr[i]*amp;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y);}ctx.stroke();ctx.globalAlpha=1;};
-    ctx.strokeStyle='rgba(236,238,233,.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,yc);ctx.lineTo(W,yc);ctx.stroke();
+    ctx.strokeStyle='rgba(244,246,251,.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,yc);ctx.lineTo(W,yc);ctx.stroke();
     trace(raw,c.a,4,.12);trace(raw,c.a,1.1,.85);
     trace(out,c.b,7,.14);trace(out,c.b,2.2,1);
     // exact expected readouts for the current settings
