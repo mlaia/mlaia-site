@@ -187,12 +187,17 @@ function drift(n,rate,margin){
 // An early-warning score with a given AUC, used at the threshold that reaches the target sensitivity.
 // Each patient is scored k times in a 12-hour shift; 2% of patient-shifts contain a real event, which
 // is present at one of those scores.
+// Decision curve: for a calibrated model the rule "alert when the risk is at least pt" puts the score
+// threshold where the posterior equals pt. Net benefit per 1,000 scores =
+// (TPR*prev - FPR*(1-prev)*pt/(1-pt))*1000, with prev = 2% / k per score.
 const AL={EVENT:0.02,HOURS:12,SHIFTS:7};
 function alerts(aucv,sens,P,k){
   const d=Math.SQRT2*PhiInv(aucv),t=d-PhiInv(sens),fpr=1-Phi(t),p=AL.EVENT/k,per=P*k*(p*sens+(1-p)*fpr),real=P*AL.EVENT*sens;
   // one nurse, seven shifts: every score of every patient
   const r=rng(4242),ticks=[];for(let s=0;s<AL.SHIFTS;s++)for(let q=0;q<P;q++)for(let j=0;j<k;j++){const ev=r.uni()<p,al=r.uni()<(ev?sens:fpr),h=(j+r.uni())*AL.HOURS/k;if(al)ticks.push({s,h,real:ev});}
-  return{perShift:per,realPerShift:real,oneIn:per/real,minutes:AL.HOURS*60/per,fpr,ppv:real/per,missed:1-sens,ticks};
+  const po=p/(1-p),oddsT=po*Math.exp(d*t-d*d/2),pt=oddsT/(1+oddsT);
+  const nbAt=q=>{const w=q/(1-q),u=Math.log(w/po)/d+d/2;return{model:((1-Phi(u-d))*p-(1-Phi(u))*(1-p)*w)*1000,all:(p-(1-p)*w)*1000};};
+  return{perShift:per,realPerShift:real,oneIn:per/real,minutes:AL.HOURS*60/per,fpr,ppv:real/per,missed:1-sens,ticks,prev:p,pt,worth:1/oddsT,nbAt};
 }
 
 /* ---------- 15 Confounder shift: prior and evidence ---------- */
@@ -546,7 +551,24 @@ function initAlerts(){
     s+='</g>';
     for(const q of r.ticks)if(!q.real)s+=`<line x1="${X(q.h).toFixed(1)}" x2="${X(q.h).toFixed(1)}" y1="${Y(q.s)-8}" y2="${Y(q.s)+8}" stroke="${COL.amber}" stroke-width="2" opacity=".8"/>`;
     for(const q of r.ticks)if(q.real)s+=`<line x1="${X(q.h).toFixed(1)}" x2="${X(q.h).toFixed(1)}" y1="${Y(q.s)-10}" y2="${Y(q.s)+10}" stroke="${COL.green}" stroke-width="4"/>`;
-    $('al-plot').innerHTML=s;};
+    $('al-plot').innerHTML=s;
+    // decision curve: net benefit per 1,000 scores against the threshold probability, log x-axis
+    if(!$('al-nb'))return;
+    const T0=0.0002,T1=0.05,LX=v=>70+Math.log(v/T0)/Math.log(T1/T0)*530,top=r.prev*1000*1.08,bot=-top*0.3,NY=v=>190-(v-bot)/(top-bot)*160;
+    const now=r.nbAt(r.pt),f2=v=>Math.abs(v)>=10?v.toFixed(1):v.toFixed(2),ptTxt=(r.pt*100>=10?String(Math.round(r.pt*100)):(r.pt*100).toPrecision(2))+'%';
+    const worth=r.worth>=10?Math.round(r.worth).toLocaleString('en-US'):r.worth.toFixed(1),inside=r.pt>=T0&&r.pt<=T1;
+    $('al-nb-detail').textContent='At this threshold, a risk of '+ptTxt+' per score, one real catch has to be worth about '+worth+' false alerts. Net benefit per 1,000 scores: '+f2(now.model)+' for alerting by the model, '+f2(now.all)+' for alerting on every score, 0 for never alerting.'+(inside?'':' This threshold is '+(r.pt<T0?'below 0.02%':'above 5%')+', outside the range of the chart.');
+    let c=`<title id="al-nb-title">Decision curve for the alert</title><desc id="al-nb-desc">Net benefit per 1,000 scores against threshold probability from 0.02 to 5 percent, log scale. At the current threshold, ${ptTxt}: alert by the model ${f2(now.model)}, alert on every score ${f2(now.all)}, never alert 0.</desc><defs><clipPath id="al-nb-clip"><rect x="70" y="29" width="530" height="162"/></clipPath></defs><g aria-hidden="true" ${MONO} fill="${COL.muted}">`;
+    const st=[20,10,5,2,1,0.5].find(v=>v<=top);
+    for(const v of [0,st/2,st])c+=`<line x1="70" x2="600" y1="${NY(v).toFixed(1)}" y2="${NY(v).toFixed(1)}" stroke="${COL.rule}"/><text class="ml-t" x="62" y="${(NY(v)+4).toFixed(1)}" text-anchor="end">${v}</text>`;
+    for(const [v,l] of [[0.0002,'0.02%'],[0.001,'0.1%'],[0.005,'0.5%'],[0.02,'2%'],[0.05,'5%']])c+=`<line x1="${LX(v).toFixed(1)}" x2="${LX(v).toFixed(1)}" y1="190" y2="196" stroke="${COL.rule}"/><text class="ml-t" x="${LX(v).toFixed(1)}" y="214" text-anchor="middle">${l}</text>`;
+    c+=`<text class="ml-t" x="335" y="246" text-anchor="middle">threshold probability, log scale</text><text class="ml-t" x="62" y="16" text-anchor="start">net benefit per 1,000 scores</text>`;
+    if(!inside)c+=`<text class="ml-t" x="${r.pt<T0?78:592}" y="46" text-anchor="${r.pt<T0?'start':'end'}">${r.pt<T0?'← current threshold '+ptTxt:'current threshold '+ptTxt+' →'}</text>`;
+    c+='</g>';
+    const curve=k=>{const a=[];for(let i=0;i<=120;i++){const q=T0*Math.pow(T1/T0,i/120);a.push(LX(q).toFixed(1)+','+NY(Math.max(r.nbAt(q)[k],bot*3)).toFixed(1));}return a.join(' ');};
+    c+=`<g clip-path="url(#al-nb-clip)"><polyline points="${curve('all')}" fill="none" stroke="${COL.amber}" stroke-width="2"/><line x1="70" x2="600" y1="${NY(0).toFixed(1)}" y2="${NY(0).toFixed(1)}" stroke="${COL.muted}" stroke-width="2"/><polyline points="${curve('model')}" fill="none" stroke="${COL.blue}" stroke-width="2.5"/></g>`;
+    if(inside)c+=`<line x1="${LX(r.pt).toFixed(1)}" x2="${LX(r.pt).toFixed(1)}" y1="30" y2="190" stroke="${COL.fg}" stroke-dasharray="3 4" opacity=".7"/><circle cx="${LX(r.pt).toFixed(1)}" cy="${NY(now.model).toFixed(1)}" r="5" fill="${COL.blue}" stroke="#071122" stroke-width="2"/>`;
+    $('al-nb').innerHTML=c;};
   const go=scheduler(run);[au,se,pt,sc].forEach(e=>e.addEventListener('input',go));
   $('reset-alerts').addEventListener('click',()=>{au.value=90;se.value=90;pt.value=6;sc.value=5;run();});
   run();
