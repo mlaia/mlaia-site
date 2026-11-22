@@ -557,7 +557,7 @@ function initAlerts(){
     const T0=0.0002,T1=0.05,LX=v=>70+Math.log(v/T0)/Math.log(T1/T0)*530,top=r.prev*1000*1.08,bot=-top*0.3,NY=v=>190-(v-bot)/(top-bot)*160;
     const now=r.nbAt(r.pt),f2=v=>Math.abs(v)>=10?v.toFixed(1):v.toFixed(2),ptTxt=(r.pt*100>=10?String(Math.round(r.pt*100)):(r.pt*100).toPrecision(2))+'%';
     const worth=r.worth>=10?Math.round(r.worth).toLocaleString('en-US'):r.worth.toFixed(1),inside=r.pt>=T0&&r.pt<=T1;
-    $('al-nb-detail').textContent='At this threshold, a risk of '+ptTxt+' per score, one real catch has to be worth about '+worth+' false alerts. Net benefit per 1,000 scores: '+f2(now.model)+' for alerting by the model, '+f2(now.all)+' for alerting on every score, 0 for never alerting.'+(inside?'':' This threshold is '+(r.pt<T0?'below 0.02%':'above 5%')+', outside the range of the chart.');
+    $('al-nb-detail').textContent='At this threshold, a risk of '+ptTxt+' per score, one real catch has to be worth about '+worth+' false alerts.'+(inside?'':' It is off the chart’s scale.');
     let c=`<title id="al-nb-title">Decision curve for the alert</title><desc id="al-nb-desc">Net benefit per 1,000 scores against threshold probability from 0.02 to 5 percent, log scale. At the current threshold, ${ptTxt}: alert by the model ${f2(now.model)}, alert on every score ${f2(now.all)}, never alert 0.</desc><defs><clipPath id="al-nb-clip"><rect x="70" y="29" width="530" height="162"/></clipPath></defs><g aria-hidden="true" ${MONO} fill="${COL.muted}">`;
     const st=[20,10,5,2,1,0.5].find(v=>v<=top);
     for(const v of [0,st/2,st])c+=`<line x1="70" x2="600" y1="${NY(v).toFixed(1)}" y2="${NY(v).toFixed(1)}" stroke="${COL.rule}"/><text class="ml-t" x="62" y="${(NY(v)+4).toFixed(1)}" text-anchor="end">${v}</text>`;
