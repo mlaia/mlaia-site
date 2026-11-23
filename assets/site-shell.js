@@ -29,7 +29,7 @@
  // GA4 runs on every page under Consent Mode v2 (assets/ga-consent.js), so they load right away and Google applies the visitor's choice.
  {if(!window._mlaiaEvents){window._mlaiaEvents=true;const s=document.createElement('script');s.src='/assets/analytics-events.js';s.defer=true;document.body.append(s);}}
  // Ultrabot site chat: one script from talk.mlaia.com adds the "Ask us" button; the chat frame loads only when opened.
- if(!document.querySelector('script[src*="talk.mlaia.com/widget.js"]')){const chat=document.createElement('script');chat.src='https://talk.mlaia.com/widget.js';chat.dataset.brand='mlaia';chat.defer=true;document.body.append(chat);}
+ if(!document.querySelector('script[src*="talk.mlaia.com/widget.js"]')){const chat=document.createElement('script');chat.src='https://talk.mlaia.com/widget.js';chat.dataset.brand='mlaia';window.mlTrack=window.mlTrack||function(n,p){if(typeof window.gtag==='function')window.gtag('event',n,p||{});};chat.dataset.track='mlTrack';chat.defer=true;document.body.append(chat);}
  function language(){const he=document.documentElement.lang==='he';document.querySelectorAll('.site-quick-nav [data-en],.site-consent [data-en]').forEach(el=>{el.textContent=he?el.dataset.he:el.dataset.en;});if(consent)consent.dir=he?'rtl':'ltr';}
  language();new MutationObserver(language).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
  document.querySelectorAll('.site-inquiry').forEach(form=>form.addEventListener('submit',async e=>{
