@@ -330,7 +330,7 @@ SECTIONS = {
         + '<p class="ml-verdict" id="ab-verdict" role="status"></p><p class="lab-small" id="ab-groups"></p>'
         '<p class="cl-cap">Who received the campaign in the observational data</p>'
         + svg("ab-plot", 240, "Share of customers who received the campaign, by prior propensity")
-        + '<p class="lab-legend"><span class="ml-key ml-k-amber">Amber: observational targeting</span><span class="lab-key lab-key--out cl-k-dash">Blue dashed: randomised test, 50% in every band</span></p>',
+        + '<p class="lab-legend"><span class="ml-key ml-k-amber">Cyan: observational targeting</span><span class="lab-key lab-key--out cl-k-dash">Blue dashed: randomised test, 50% in every band</span></p>',
         p["business"], p["method"]),
     "uplift": lambda p: section(
         p,
@@ -341,7 +341,7 @@ SECTIONS = {
         '<p class="lab-small">Both scores are fitted on a randomised pilot of 20,000 customers and applied to 20,000 others. Untick the box to make the offer work better the higher the risk.</p>',
         '<div class="lab-plot-heading"><h3>Extra customers retained</h3><span>20,000 synthetic customers ranked</span></div>'
         + svg("up-plot", 285, "Extra customers retained against share of customers who get the offer")
-        + '<p class="lab-legend"><span class="lab-key lab-key--out">Blue: ranked by uplift</span><span class="lab-key lab-key--raw">Amber: ranked by churn risk</span>'
+        + '<p class="lab-legend"><span class="lab-key lab-key--out">Blue: ranked by uplift</span><span class="lab-key lab-key--raw">Cyan: ranked by churn risk</span>'
           '<span class="lab-key lab-key--ref cl-k-muted">Grey dashed: offers at random</span><span class="lab-key lab-key--ref">White dashed: your budget</span></p>'
         + readouts([("Offers sent", "up-offers"), ("Retained: uplift ranking", "up-uplift"), ("Retained: churn-risk ranking", "up-risk"),
                     ("Retained: random", "up-random"), ("Per 100 offers: uplift", "up-per-uplift"), ("Per 100 offers: churn risk", "up-per-risk")])
@@ -357,7 +357,7 @@ SECTIONS = {
         '<p class="lab-small">At zero extra trend the regions move in parallel apart from noise. Any other value breaks the parallel-trends assumption. Try a true effect of zero.</p>',
         '<div class="lab-plot-heading"><h3>Weekly orders in two regions</h3><span>36 weeks · launch after week 24</span></div>'
         + svg("dd-plot", 285, "Weekly orders in the launch region and the comparison region")
-        + '<p class="lab-legend"><span class="lab-key lab-key--out">Blue: launch region</span><span class="lab-key lab-key--raw">Amber: comparison region</span>'
+        + '<p class="lab-legend"><span class="lab-key lab-key--out">Blue: launch region</span><span class="lab-key lab-key--raw">Cyan: comparison region</span>'
           '<span class="lab-key lab-key--ref">White dashed: launch region without the launch, as the method assumes</span></p>'
         + readouts([("True effect, orders / week", "dd-true"), ("Difference-in-differences", "dd-did"), ("Before and after only", "dd-ba"),
                     ("Placebo on pre-launch weeks", "dd-placebo"), ("Pre-launch gap trend / week", "dd-slope"), ("Error of the estimate", "dd-error")])

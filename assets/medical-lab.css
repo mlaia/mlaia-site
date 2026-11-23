@@ -17,6 +17,7 @@
 .ml-check input:focus-visible{outline:3px solid var(--c-focus);outline-offset:2px}
 
 /* legend swatches: filled blocks and a dashed outline */
+.lab-plot-heading.ml-plot-next{margin-top:32px}
 .ml-key{display:inline-flex;align-items:center;gap:8px}
 .ml-key::before{content:"";flex:none;width:12px;height:12px;background:currentColor}
 .ml-key--line::before{height:0;width:18px;border-top:2px dashed currentColor;background:none}
