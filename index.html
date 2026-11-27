@@ -10,7 +10,6 @@
 <meta name="description" content="Specialist AI consulting for audio and acoustics, medical data, bookings, revenue, churn and demand forecasting. Led by Dr. Yochai Edlitz.">
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="applied AI scientists, audio AI, signal processing, acoustics, medical AI, clinical AI validation, demand forecasting, causal inference, Israel">
-<meta name="description" lang="he" content="המלאיה מדעני נתונים: מדעני AI יישומי לאודיו ואקוסטיקה, AI רפואי וקליני, וחיזוי וניתוח סיבתי. כל מודל נמדד לפני שהוא נפרס.">
 <meta name="keywords" lang="he" content="המלאיה, מדעני נתונים, בינה מלאכותית, למידת מכונה, AI ישראל, חיזוי מכירות, חיזוי ביקוש, ניתוח סיבתי, עיבוד אותות, פיתוח אלגוריתמים, אודיו, אקוסטיקה, AI רפואי, מידע רפואי, דאטה סיינס, למידה עמוקה, deep learning">
 <link rel="canonical" href="https://www.mlaia.com/">
 <link rel="alternate" hreflang="en" href="https://www.mlaia.com/">
@@ -1158,6 +1157,9 @@ function setLang(lang){
   const htmlEl=document.documentElement;
   htmlEl.lang=lang;
   htmlEl.dir=isHe?'rtl':'ltr';
+  // One description tag (Bing flags two); the language switch sets its text
+  const metaDesc=document.querySelector('meta[name="description"]');
+  if(metaDesc)metaDesc.setAttribute('content',isHe?'המלאיה מדעני נתונים: מדעני AI יישומי לאודיו ואקוסטיקה, AI רפואי וקליני, וחיזוי וניתוח סיבתי. כל מודל נמדד לפני שהוא נפרס.':'Specialist AI consulting for audio and acoustics, medical data, bookings, revenue, churn and demand forecasting. Led by Dr. Yochai Edlitz.');
   // Reset horizontal scroll position — prevents RTL Android Chrome from
   // initialising scrollLeft at the document's right edge, which shifts
   // all content to appear in the right half of the screen.
